@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,follow">
+  <meta name="description" content="Rank My Prop public approved reviews API documentation.">
+  <title>Public Reviews API | Rank My Prop</title>
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{color-scheme:dark;--bg:#05040b;--panel:#0e0c18;--line:rgba(151,132,215,.2);--muted:#aaa5ba;--accent:#8063ff}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% 0,rgba(93,58,199,.16),transparent 34%),var(--bg);color:#f7f4ff;font-family:"Plus Jakarta Sans",sans-serif;line-height:1.65}
+    main{width:min(980px,calc(100% - 32px));margin:0 auto;padding:48px 0 80px}.back{color:#b9aaff;text-decoration:none;font-weight:700}.hero{padding:42px 0 24px}.eyebrow{color:#ad9cff;font-size:12px;font-weight:800;letter-spacing:.13em;text-transform:uppercase}h1{margin:8px 0 14px;font-size:clamp(36px,7vw,64px);line-height:1.05;letter-spacing:-.04em}h2{margin:0 0 10px;font-size:22px}p{color:var(--muted)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.card{margin-top:16px;padding:22px;border:1px solid var(--line);border-radius:16px;background:rgba(14,12,24,.82)}code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}code{color:#d9d1ff}pre{overflow:auto;margin:14px 0 0;padding:16px;border:1px solid rgba(151,132,215,.14);border-radius:12px;background:#07060c;color:#ded8f5;font-size:13px;white-space:pre-wrap}.params{width:100%;border-collapse:collapse}.params th,.params td{padding:10px;text-align:left;border-bottom:1px solid rgba(151,132,215,.12);vertical-align:top}.params th{color:#fff}.params td{color:var(--muted)}.tester{display:flex;gap:10px;flex-wrap:wrap}.tester input{min-width:240px;flex:1;padding:12px;border:1px solid var(--line);border-radius:10px;background:#080711;color:#fff}.tester button{padding:12px 18px;border:0;border-radius:10px;background:linear-gradient(135deg,#6a54ff,#8868ff);color:#fff;font-weight:800;cursor:pointer}.notice{padding:13px;border:1px solid rgba(104,211,145,.22);border-radius:12px;background:rgba(50,140,90,.08);color:#bde7ca}@media(max-width:700px){main{width:min(100% - 24px,980px);padding-top:28px}.grid{grid-template-columns:1fr}.card{padding:17px}.params{display:block;overflow:auto}.tester input{min-width:100%}}
+  </style>
+<script id="rmp-ssr-bootstrap">window.__RMP_SSR_BOOTSTRAP={"id":"page-review-api","heading":"Approved Reviews API","paragraph":"Rank My Prop public approved reviews API documentation.","seoTitle":"Public Reviews API | Rank My Prop","seoDescription":"Rank My Prop public approved reviews API documentation.","canonical":"https://www.rankmyprop.in/review-api","robots":"index, follow, max-image-preview:large, max-snippet:-1","__stableSsrHero":true};</script>
+<script defer src="/route-content-runtime.js"></script>
+</head>
+<body>
+  <main>
+    <a class="back" href="/">← Rank My Prop</a>
+    <header class="hero">
+      <div class="eyebrow">Developer API · Version 1.0</div>
+      <h1>Approved Reviews API</h1>
+      <p>Display Rank My Prop reviews on a prop firm's website. The API only returns reviews that have been approved or published by Rank My Prop moderation.</p>
+    </header>
+
+    <div class="notice">No API key is required for public approved reviews. Cross-origin browser requests are supported. Please retain visible “Reviews by Rank My Prop” attribution with a link to the source review page.</div>
+
+    <section class="card">
+      <h2>Endpoints</h2>
+      <p><code>GET https://www.rankmyprop.in/api/reviews</code></p>
+      <p><code>GET https://www.rankmyprop.in/api/reviews/finotive-funding</code></p>
+      <p>The firm-specific path is recommended when embedding reviews on a firm's own website.</p>
+    </section>
+
+    <div class="grid">
+      <section class="card">
+        <h2>Query parameters</h2>
+        <table class="params">
+          <tr><th>firm</th><td>Firm slug, such as <code>finotive-funding</code></td></tr>
+          <tr><th>page</th><td>Page number; default 1</td></tr>
+          <tr><th>limit</th><td>1–100 reviews; default 20</td></tr>
+          <tr><th>rating</th><td>Exact rounded rating from 1–5</td></tr>
+          <tr><th>minRating</th><td>Minimum rating from 1–5</td></tr>
+          <tr><th>sort</th><td><code>newest</code>, <code>oldest</code>, <code>highest</code>, or <code>lowest</code></td></tr>
+        </table>
+      </section>
+      <section class="card">
+        <h2>JavaScript example</h2>
+        <pre>const response = await fetch(
+  "https://www.rankmyprop.in/api/reviews/finotive-funding?limit=6&minRating=4"
+);
+const data = await response.json();
+
+for (const review of data.reviews) {
+  console.log(review.reviewer.name, review.rating, review.text);
+}</pre>
+      </section>
+    </div>
+
+    <section class="card">
+      <h2>Test the live API</h2>
+      <div class="tester">
+        <input id="firmSlug" value="finotive-funding" aria-label="Firm slug">
+        <button id="testApi" type="button">Load approved reviews</button>
+      </div>
+      <pre id="apiResult">Choose a firm slug and test the endpoint.</pre>
+    </section>
+
+    <section class="card">
+      <h2>Response fields</h2>
+      <p>Every response includes firm metadata, aggregate rating statistics, pagination, approved review content, public proof availability, source links, and attribution details. Private user IDs, email addresses, moderation notes, reward data, and rejected or pending reviews are never returned.</p>
+    </section>
+  </main>
+  <script>
+    const result = document.getElementById("apiResult");
+    document.getElementById("testApi").addEventListener("click", async () => {
+      const slug = document.getElementById("firmSlug").value.toLowerCase().trim().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"");
+      if (!slug) return;
+      result.textContent = "Loading…";
+      try {
+        const response = await fetch(`/api/reviews/${encodeURIComponent(slug)}?limit=3`);
+        const data = await response.json();
+        result.textContent = JSON.stringify(data, null, 2);
+      } catch {
+        result.textContent = "The API could not be reached. Please try again.";
+      }
+    });
+  </script>
+</body>
+</html>

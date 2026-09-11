@@ -1,0 +1,12 @@
+node_modules
+dist
+*.tsbuildinfo
+.DS_Store
+supabase/.temp
+.env
+.env.*
+!.env.example
+rmp-runtime-env.json
+npm-debug.log*
+.vercel
+.env*

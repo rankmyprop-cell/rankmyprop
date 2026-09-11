@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+<meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                                                                                                                                                                  <meta property="og:image:height" content="630" />
+                                                                                                                                                        <meta property="og:image:width" content="1200" />
+<meta name="twitter:image" content="https://www.rankmyprop.in/assets/og-default-1200x630.webp" />
+<meta property="og:image" content="https://www.rankmyprop.in/assets/og-default-1200x630.webp" />
+<meta name="theme-color" content="#0a0b12" />
+                                                                                                                                                                                                                                                                                                                                                                                                <meta name="robots" content="noindex, nofollow" />
+  <title>Recent Activity | Rank My Prop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/dashboard-layout.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-dot"></span><b>RMP Admin</b></div>
+      <div class="menu-group-title">Admin Modules</div>
+      <a class="side-link" href="/dashboard-admin">Admin Home</a>
+      <a class="side-link" href="/admin-clients">Client Access</a>
+      <a class="side-link" href="/admin-moderation">Moderation</a>
+      <a class="side-link" href="/admin-purchases">Purchases</a>
+      <a class="side-link" href="/admin-announcements">Announcement Hub</a>
+      <a class="side-link" href="/admin-community">Community Posts</a>
+      <a class="side-link" href="/admin-giveaways">Giveaways CMS</a>
+      <a class="side-link" href="/admin-events">Upcoming Events</a>
+      <a class="side-link" href="/admin-offers">Offers Control</a>
+      <a class="side-link" href="/admin-filters">Filters Control</a>
+      <a class="side-link" href="/admin-propnews">Prop News CMS</a>
+      <a class="side-link" href="/admin-trading-guides">Trading Guides CMS</a>
+      <a class="side-link" href="/admin-funding-strategies">Funding Strategies CMS</a>
+      <a class="side-link" href="/admin-trading-psychology">Trading Psychology CMS</a>
+      <a class="side-link" href="/admin-beginner-tutorials">Beginner Tutorials CMS</a>
+      <a class="side-link active" href="/admin-activity">Recent Activity</a>
+      <a class="side-link" href="/admin-newsletter">Newsletter</a>
+      <a class="side-link" href="#" id="logoutBtn">Log out</a>
+    </aside>
+
+    <main class="main">
+      <header class="top">
+        <div>
+          <h3>Recent Activity</h3>
+          <div class="welcome">Signup, inactive users, purchases, referrals, discount usage, and payout requests in one feed.</div>
+        </div>
+        <div class="top-actions"><span class="chip" id="adminEmail">loading...</span></div>
+      </header>
+
+      <div class="chip" id="notice" style="display:none;"></div>
+
+      <section class="cards">
+        <article class="card"><h3>New Signups (30d)</h3><div class="metric-value" id="statSignups">0</div></article>
+        <article class="card"><h3>Inactive Users</h3><div class="metric-value" id="statInactive">0</div></article>
+        <article class="card"><h3>Purchases (30d)</h3><div class="metric-value" id="statPurchases">0</div></article>
+        <article class="card"><h3>Referrals (30d)</h3><div class="metric-value" id="statReferrals">0</div></article>
+        <article class="card"><h3>Payout Requests (30d)</h3><div class="metric-value" id="statPayouts">0</div></article>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><h3>Inactive Users</h3></div>
+        <div class="top-actions" style="justify-content:flex-start;gap:8px;flex-wrap:wrap;margin-bottom:10px">
+          <span class="chip" style="opacity:.9;">No login for</span>
+          <select id="inactiveDays" style="max-width:220px">
+            <option value="7">7+ days</option>
+            <option value="15">15+ days</option>
+            <option value="30" selected>30+ days</option>
+            <option value="60">60+ days</option>
+          </select>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>User</th><th>UID</th><th>Last Active</th><th>Inactive Days</th></tr></thead>
+            <tbody id="inactiveBody"><tr><td colspan="4" class="empty">Loading users...</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><h3>Recent Activity Feed</h3></div>
+        <div class="top-actions" style="justify-content:flex-start;gap:8px;flex-wrap:wrap;margin-bottom:10px">
+          <input id="searchInput" placeholder="Search user/email/firm/code..." style="max-width:280px" />
+          <select id="typeSelect" style="max-width:220px">
+            <option value="all">All types</option>
+            <option value="signup">Signup</option>
+            <option value="login">Login Activity</option>
+            <option value="purchase">Purchase</option>
+            <option value="discount">Discount Used</option>
+            <option value="referral">Referral</option>
+            <option value="payout">Payout Request</option>
+            <option value="claim">Claim</option>
+          </select>
+          <select id="rangeSelect" style="max-width:220px">
+            <option value="7">Last 7 days</option>
+            <option value="30" selected>Last 30 days</option>
+            <option value="90">Last 90 days</option>
+            <option value="all">All time</option>
+          </select>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Date</th><th>Type</th><th>User</th><th>Details</th><th>Status</th></tr></thead>
+            <tbody id="activityBody"><tr><td colspan="5" class="empty">Loading activity...</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module">
+    import { db } from "./dashboard-common.js";
+    import { bindLogout, enforceAdmin, showNotice } from "./admin-common.js";
+    import { collection, doc, getDoc, getDocs, limit, query } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+    bindLogout("logoutBtn");
+
+    const notice = document.getElementById("notice");
+    let currentAdmin = null;
+    const inactiveBody = document.getElementById("inactiveBody");
+    const activityBody = document.getElementById("activityBody");
+    const inactiveDays = document.getElementById("inactiveDays");
+    const searchInput = document.getElementById("searchInput");
+    const typeSelect = document.getElementById("typeSelect");
+    const rangeSelect = document.getElementById("rangeSelect");
+    const MAX_ROWS = 500;
+    const USER_WITHDRAW_FIELD = "withdrawalRequestsMap";
+
+    const s = {
+      users: [],
+      purchases: [],
+      referrals: [],
+      cashback: [],
+      withdrawals: [],
+      claims: [],
+      events: []
+    };
+
+    function tsMs(v) {
+      if (!v) return 0;
+      if (typeof v === "number") return v;
+      if (v?.toDate) return v.toDate().getTime();
+      if (typeof v?.seconds === "number") return v.seconds * 1000;
+      const d = Date.parse(v);
+      return Number.isFinite(d) ? d : 0;
+    }
+
+    function fmtDate(v) {
+      const ms = tsMs(v);
+      if (!ms) return "-";
+      return new Date(ms).toISOString().slice(0, 19).replace("T", " ");
+    }
+
+    function daysSince(v) {
+      const ms = tsMs(v);
+      if (!ms) return 9999;
+      return Math.max(0, Math.floor((Date.now() - ms) / 86400000));
+    }
+
+    function money(v) {
+      const n = Number(v || 0);
+      return Number.isFinite(n) ? `$${n.toFixed(2)}` : "$0.00";
+    }
+
+    function userMap() {
+      const m = new Map();
+      s.users.forEach((u) => m.set(String(u.id || ""), u));
+      return m;
+    }
+
+    function userLabel(uid, email = "") {
+      const u = userMap().get(String(uid || ""));
+      const nm = [u?.firstName, u?.lastName].filter(Boolean).join(" ").trim();
+      const em = String(email || u?.email || "").trim();
+      return nm || em || String(uid || "-");
+    }
+
+    function rowTime(row = {}) {
+      return row.updatedAt || row.createdAt || null;
+    }
+
+    function inRange(ts, range) {
+      if (range === "all") return true;
+      const d = Number(range || 0);
+      if (!d) return true;
+      const ms = tsMs(ts);
+      if (!ms) return false;
+      return (Date.now() - ms) <= d * 86400000;
+    }
+
+    function pushEvent(type, ts, user, details, status = "-") {
+      const t = tsMs(ts);
+      if (!t) return;
+      s.events.push({ type, ts: t, user: String(user || "-").trim() || "-", details: String(details || "-").trim(), status: String(status || "-").trim() || "-" });
+    }
+
+    function buildEvents() {
+      s.events = [];
+
+      s.users.forEach((u) => {
+        const lastLogin = u.lastLoginAt || u.updatedAt || u.createdAt;
+        pushEvent("signup", u.createdAt, userLabel(u.id, u.email), "New user signup", "Created");
+        pushEvent("login", lastLogin, userLabel(u.id, u.email), "Latest login/activity", `${daysSince(lastLogin)}d ago`);
+      });
+
+      s.purchases.forEach((p) => {
+        const actor = userLabel(p.uid, p.userEmail);
+        const firm = p.firmName || p.firm || "-";
+        pushEvent("purchase", rowTime(p), actor, `${firm} • ${money(p.amount)}`, p.status || "Approved");
+        const code = p.discountCode || p.couponCode || p.promoCode || p.appliedCode || p.code || "";
+        if (String(code).trim()) {
+          pushEvent("discount", rowTime(p), actor, `${firm} • Code ${String(code).trim()}`, p.status || "Used");
+        }
+      });
+
+      s.referrals.forEach((r) => {
+        const actor = userLabel(r.uid, "");
+        const who = r.referredEmail || r.referredUid || "-";
+        pushEvent("referral", rowTime(r), actor, `Referred ${who}`, r.status || "Pending");
+      });
+
+      s.cashback.forEach((r) => {
+        const actor = userLabel(r.uid, "");
+        const amt = money(r.amount);
+        pushEvent("payout", rowTime(r), actor, `${amt} • ${r.method || "Cashback"}`, r.status || "Pending");
+      });
+
+      s.withdrawals.forEach((r) => {
+        const actor = userLabel(r.uid, r.email);
+        const amt = money(r.amount);
+        pushEvent("payout", rowTime(r), actor, `${amt} • ${r.method || "Withdrawal"}`, r.status || "Pending");
+      });
+
+      s.claims.forEach((r) => {
+        const actor = userLabel(r.uid, r.userEmail);
+        const firm = r.firmName || r.firm || "-";
+        pushEvent("claim", rowTime(r), actor, `${firm} • ${money(r.paymentAmount || r.purchaseAmount || 0)}`, r.status || "Pending");
+      });
+
+      s.events.sort((a, b) => b.ts - a.ts);
+    }
+
+    function renderInactive() {
+      const lim = Number(inactiveDays.value || 30);
+      const rows = s.users
+        .map((u) => ({
+          uid: u.id || "-",
+          user: userLabel(u.id, u.email),
+          last: u.lastLoginAt || u.updatedAt || u.createdAt,
+          days: daysSince(u.lastLoginAt || u.updatedAt || u.createdAt)
+        }))
+        .filter((r) => r.days >= lim)
+        .sort((a, b) => b.days - a.days);
+
+      document.getElementById("statInactive").textContent = String(rows.length);
+      inactiveBody.innerHTML = rows.length ? rows.map((r) => `
+        <tr>
+          <td>${r.user}</td>
+          <td>${r.uid}</td>
+          <td>${fmtDate(r.last)}</td>
+          <td>${r.days}</td>
+        </tr>
+      `).join("") : '<tr><td colspan="4" class="empty">No inactive users in selected range.</td></tr>';
+    }
+
+    function renderActivity() {
+      const q = String(searchInput.value || "").trim().toLowerCase();
+      const t = String(typeSelect.value || "all");
+      const rg = String(rangeSelect.value || "30");
+      let rows = s.events.filter((e) => inRange(e.ts, rg));
+      if (t !== "all") rows = rows.filter((e) => e.type === t);
+      if (q) rows = rows.filter((e) => `${e.user} ${e.details} ${e.status}`.toLowerCase().includes(q));
+
+      activityBody.innerHTML = rows.length ? rows.map((e) => `
+        <tr>
+          <td>${fmtDate(e.ts)}</td>
+          <td style="text-transform:capitalize">${e.type.replace("_", " ")}</td>
+          <td>${e.user}</td>
+          <td>${e.details}</td>
+          <td>${e.status}</td>
+        </tr>
+      `).join("") : '<tr><td colspan="5" class="empty">No activity found.</td></tr>';
+    }
+
+    function renderStats() {
+      const in30 = (v) => inRange(v, "30");
+      const signups = s.users.filter((u) => in30(u.createdAt)).length;
+      const purchases = s.purchases.filter((p) => in30(rowTime(p))).length;
+      const refs = s.referrals.filter((r) => in30(rowTime(r))).length;
+      const payouts = s.cashback.filter((r) => in30(rowTime(r))).length + s.withdrawals.filter((r) => in30(rowTime(r))).length;
+      document.getElementById("statSignups").textContent = String(signups);
+      document.getElementById("statPurchases").textContent = String(purchases);
+      document.getElementById("statReferrals").textContent = String(refs);
+      document.getElementById("statPayouts").textContent = String(payouts);
+    }
+
+    async function load(name) {
+      try {
+        const snap = await getDocs(query(collection(db, name), limit(MAX_ROWS)));
+        const rows = [];
+        snap.forEach((d) => rows.push({ id: d.id, ...d.data() }));
+        return rows;
+      } catch {
+        return [];
+      }
+    }
+
+    async function loadShadowWithdrawals(users = []) {
+      const out = [];
+      const seen = new Set();
+      const rowSeen = new Set();
+      const list = [...users];
+      if (currentAdmin?.uid) list.push({ id: currentAdmin.uid, email: currentAdmin.email || "" });
+      await Promise.all(list.map(async (u) => {
+        const uid = String(u.id || u.uid || "").trim();
+        if (!uid) return;
+        if (seen.has(uid)) return;
+        seen.add(uid);
+        const pushRows = (map) => {
+          if (!map || typeof map !== "object") return;
+          Object.entries(map).forEach(([id, row]) => {
+            const k = `${uid}::${id}`;
+            if (rowSeen.has(k)) return;
+            rowSeen.add(k);
+            out.push({ id, uid, email: String(row?.email || u.email || "").trim(), ...(row || {}) });
+          });
+        };
+        pushRows(u?.[USER_WITHDRAW_FIELD]);
+        try {
+          const userSnap = await getDoc(doc(db, "users", uid));
+          if (userSnap.exists()) pushRows(userSnap.data()?.[USER_WITHDRAW_FIELD]);
+        } catch {}
+        try {
+          const snap = await getDoc(doc(db, uid, "profile"));
+          if (snap.exists()) pushRows(snap.data()?.[USER_WITHDRAW_FIELD]);
+        } catch {}
+      }));
+      return out;
+    }
+
+    async function boot() {
+      const [users, purchases, referrals, cashback, withdrawals, accountClaims, claims, claimRequests] = await Promise.all([
+        load("users"),
+        load("purchases"),
+        load("referralClaims"),
+        load("cashbackRequests"),
+        load("withdrawalRequests"),
+        load("accountClaims"),
+        load("claims"),
+        load("claimRequests")
+      ]);
+      const shadowWithdrawals = await loadShadowWithdrawals(users);
+
+      s.users = users;
+      s.purchases = purchases;
+      s.referrals = referrals;
+      s.cashback = cashback;
+      s.withdrawals = [...withdrawals, ...shadowWithdrawals];
+      s.claims = [...accountClaims, ...claims, ...claimRequests];
+
+      buildEvents();
+      renderStats();
+      renderInactive();
+      renderActivity();
+    }
+
+    inactiveDays.addEventListener("change", renderInactive);
+    searchInput.addEventListener("input", renderActivity);
+    typeSelect.addEventListener("change", renderActivity);
+    rangeSelect.addEventListener("change", renderActivity);
+
+    enforceAdmin(async (user) => {
+      currentAdmin = user;
+      document.getElementById("adminEmail").textContent = user.email || "Admin";
+      try {
+        await boot();
+      } catch (err) {
+        showNotice(notice, err?.message || "Failed to load activity data.", "error");
+      }
+    });
+  </script>
+<script defer src="admin-shell.js"></script>
+  <script type="module" src="/site-performance.js"></script>
+</body>
+</html>

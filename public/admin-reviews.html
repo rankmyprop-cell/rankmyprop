@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+<meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+                                                                                                                                                                  <meta property="og:image:height" content="630" />
+                                                                                                                                                        <meta property="og:image:width" content="1200" />
+<meta name="twitter:image" content="https://www.rankmyprop.in/assets/og-default-1200x630.webp" />
+<meta property="og:image" content="https://www.rankmyprop.in/assets/og-default-1200x630.webp" />
+<meta name="description" content="Review Admin | Rank My Prop on Rank My Prop platform.">
+<meta name="theme-color" content="#0a0b12" />
+                                                                                                                                                                                                                                                                                                                                                                                                <meta name="robots" content="noindex, nofollow" />
+  <title>Review Admin | Rank My Prop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght%40300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/dashboard-layout.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-dot"></span><b>RMP Admin</b></div>
+      <div class="menu-group-title">Admin Modules</div>
+      <a class="side-link" href="/dashboard-admin">Admin Home</a>
+      <a class="side-link" href="/admin-clients">Client Access</a>
+      <a class="side-link" href="/admin-moderation">Moderation</a>
+      <a class="side-link active" href="/admin-reviews">Reviews Hub</a>
+      <a class="side-link" href="/admin-purchases">Purchases</a>
+      <a class="side-link" href="/admin-announcements">Announcement Hub</a>
+      <a class="side-link" href="/admin-community">Community Posts</a>
+      <a class="side-link" href="/admin-giveaways">Giveaways CMS</a>
+      <a class="side-link" href="/admin-events">Upcoming Events</a>
+      <a class="side-link" href="/admin-offers">Offers Control</a>
+      <a class="side-link" href="/admin-firm-details">Firm Detail CMS</a>
+      <a class="side-link" href="/admin-filters">Filters Control</a>
+      <a class="side-link" href="/admin-propnews">Prop News CMS</a>
+      <a class="side-link" href="/admin-trading-guides">Trading Guides CMS</a>
+      <a class="side-link" href="/admin-funding-strategies">Funding Strategies CMS</a>
+      <a class="side-link" href="/admin-trading-psychology">Trading Psychology CMS</a>
+      <a class="side-link" href="/admin-beginner-tutorials">Beginner Tutorials CMS</a>
+      <a class="side-link" href="/admin-faqs">FAQ CMS</a>
+      <a class="side-link" href="#" id="logoutBtn">Log out</a>
+    </aside>
+
+    <main class="main">
+      <header class="top"><div><h3>Reviews Hub</h3><div class="welcome">Filter reviews by firm and moderate with proof view.</div></div><div class="top-actions"><span class="chip" id="adminEmail">loading...</span></div></header>
+      <div class="chip" id="notice" style="display:none;"></div>
+
+      <section class="panel">
+        <div class="panel-head"><h3>Filters</h3></div>
+        <div class="form-grid">
+          <div class="field"><label>Firm</label><select id="firmFilter"><option value="all">All Firms</option></select></div>
+          <div class="field"><label>Status</label><select id="statusFilter"><option value="all">All</option><option value="Pending">Pending</option><option value="Approved">Approved</option><option value="Rejected">Rejected</option></select></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><h3>Public Review API</h3><a class="btn" href="/review-api" target="_blank" rel="noopener">API Documentation</a></div>
+        <div class="welcome">Share approved reviews with a firm. The URL updates with the selected firm filter; pending and rejected reviews are never returned.</div>
+        <div class="top-actions" style="margin-top:12px;align-items:center">
+          <input id="reviewApiUrl" readonly value="https://www.rankmyprop.in/api/reviews" style="flex:1;min-width:260px" aria-label="Public review API URL" />
+          <button class="btn-primary" id="copyReviewApiUrl" type="button">Copy API URL</button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><h3>All Reviews</h3></div>
+        <div class="table-wrap"><table><thead><tr><th>Date</th><th>UID</th><th>Firm</th><th>Program</th><th>Rating</th><th>Status</th><th>Proof</th><th>Action</th></tr></thead><tbody id="reviewsBody"><tr><td colspan="8" class="empty">Loading...</td></tr></tbody></table></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><h3>Review Details</h3></div>
+        <div id="detailBox" class="announce-list"><div class="empty">Select a review row.</div></div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module">
+    import { db, toDate } from "./dashboard-common.js";
+    import { bindLogout, enforceAdmin, showNotice } from "./admin-common.js";
+    import { isReviewLiveStatus, isReviewPendingStatus, notifyPointsCredited, notifyReviewDeleted, notifyReviewLive, notifyReviewPending } from "./email-notify-client.js";
+    import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, limit, query, serverTimestamp, setDoc, updateDoc, where } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+    bindLogout("logoutBtn");
+    const notice = document.getElementById("notice");
+    const firmFilter = document.getElementById("firmFilter");
+    const statusFilter = document.getElementById("statusFilter");
+    const reviewsBody = document.getElementById("reviewsBody");
+    const detailBox = document.getElementById("detailBox");
+    const reviewApiUrl = document.getElementById("reviewApiUrl");
+    const copyReviewApiUrl = document.getElementById("copyReviewApiUrl");
+    const MAX_REVIEWS = 700;
+
+    let allRows = [];
+
+    function tsMs(v) {
+      if (!v) return 0;
+      if (typeof v.toMillis === "function") return v.toMillis();
+      if (typeof v.seconds === "number") return v.seconds * 1000;
+      const d = new Date(v);
+      return Number.isNaN(d.getTime()) ? 0 : d.getTime();
+    }
+
+    function esc(v = "") {
+      return String(v).replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m]));
+    }
+
+    function normalizePublicAssetUrl(raw = "") {
+      let url = String(raw || "").trim();
+      if (!url) return "";
+      url = url.replace(/^https?:\/\/rankmyprop\.in\/(https?:\/.*)$/i, "$1");
+      if (/^\/+https?:/i.test(url)) url = url.replace(/^\/+/, "");
+      if (/^https?:\/(?!\/)/i.test(url)) url = url.replace(/^([a-z]+):\/(?!\/)/i, "$1://");
+      if (/^\/\//.test(url)) url = `https:${url}`;
+      if (/^res\.cloudinary\.com\//i.test(url)) url = `https://${url}`;
+      return url;
+    }
+
+    function norm(v = "") {
+      return String(v || "").trim().toLowerCase();
+    }
+    function slugify(v = "") {
+      return String(v || "").toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+    }
+
+    function emailKey(v = "") {
+      return String(v || "").trim().toLowerCase();
+    }
+
+    function pickReviewEmail(row = {}) {
+      return (
+        row?.email ||
+        row?.userEmail ||
+        row?.reviewerEmail ||
+        row?.authorEmail ||
+        ""
+      );
+    }
+
+    async function resolveUserEmail(uid = "", fallbackEmail = "") {
+      const fallback = emailKey(fallbackEmail || "");
+      const id = String(uid || "").trim();
+      if (!id) return fallback;
+      try {
+        const snap = await getDoc(doc(db, "users", id));
+        if (snap.exists()) {
+          const live = emailKey(snap.data()?.email || "");
+          if (live) return live;
+        }
+      } catch {}
+      try {
+        const snap = await getDoc(doc(db, id, "profile"));
+        if (snap.exists()) {
+          const shadow = emailKey(snap.data()?.email || "");
+          if (shadow) return shadow;
+        }
+      } catch {}
+      return fallback;
+    }
+
+    function sorted(rows = []) {
+      return [...rows].sort((a, b) => tsMs(b.createdAt) - tsMs(a.createdAt));
+    }
+
+    async function addPoints(uid, points, reason) {
+      const userRef = doc(db, "users", uid);
+      const userSnap = await getDoc(userRef);
+      const u = userSnap.exists() ? userSnap.data() : {};
+      const curr = Number(u.cashpoints || u.cashpointsDisplay || 0);
+      const next = curr + Number(points || 0);
+      await setDoc(userRef, { cashpoints: next, cashpointsDisplay: String(next), updatedAt: serverTimestamp() }, { merge: true });
+      const rewardRef = await addDoc(collection(db, "rewardLogs"), { uid, points, reason, createdAt: serverTimestamp() });
+      const userEmail = await resolveUserEmail(uid, u.email || "");
+      if (userEmail) {
+        await notifyPointsCredited({
+          uid,
+          userEmail,
+          points: Number(points || 0),
+          reason,
+          newCashpoints: next,
+          rewardLogId: String(rewardRef?.id || "").trim()
+        });
+      }
+    }
+
+    async function setBanState(uid = "", email = "", banned = true) {
+      const id = String(uid || "").trim();
+      const emFromArg = emailKey(email || "");
+      let em = emFromArg;
+      if (id) {
+        const userRef = doc(db, "users", id);
+        const snap = await getDoc(userRef);
+        if (snap.exists()) {
+          const u = snap.data() || {};
+          em = em || emailKey(u.email || "");
+          await setDoc(userRef, { banned, bannedAt: banned ? serverTimestamp() : null, updatedAt: serverTimestamp() }, { merge: true });
+        }
+      }
+      if (em) {
+        await setDoc(doc(db, "bannedEmails", em), { uid: id, email: em, active: banned, updatedAt: serverTimestamp(), bannedAt: banned ? serverTimestamp() : null }, { merge: true });
+      }
+    }
+
+    async function pullReviewsByFirm(firmSlug = "", firmName = "") {
+      const rows = [];
+      const slug = slugify(firmSlug || "");
+      const name = String(firmName || "").trim();
+      if (slug) {
+        try {
+          const snap = await getDocs(query(collection(db, "reviews"), where("firmSlug", "==", slug), limit(1200)));
+          snap.forEach((d) => rows.push({ id: d.id, ...d.data() }));
+        } catch (_) {}
+      }
+      if (name) {
+        try {
+          const snap = await getDocs(query(collection(db, "reviews"), where("firm", "==", name), limit(1200)));
+          snap.forEach((d) => rows.push({ id: d.id, ...d.data() }));
+        } catch (_) {}
+        try {
+          const snap = await getDocs(query(collection(db, "reviews"), where("firmName", "==", name), limit(1200)));
+          snap.forEach((d) => rows.push({ id: d.id, ...d.data() }));
+        } catch (_) {}
+      }
+      const uniq = new Map();
+      rows.forEach((r) => { if (r?.id) uniq.set(r.id, r); });
+      return Array.from(uniq.values());
+    }
+
+    async function resolveFirmDocRef(firmSlug = "", firmName = "") {
+      const slug = slugify(firmSlug || "");
+      const name = String(firmName || "").trim();
+      const colRef = collection(db, "firms");
+      const hasName = (snap) => snap?.exists() && String(snap.data()?.name || "").trim().length > 0;
+
+      if (slug) {
+        const directRef = doc(db, "firms", slug);
+        const directSnap = await getDoc(directRef);
+        if (hasName(directSnap)) return directRef;
+
+        try {
+          const bySlugSnap = await getDocs(query(colRef, where("slug", "==", slug), limit(10)));
+          const first = (bySlugSnap.docs || []).find((d) => hasName(d));
+          if (first) return first.ref;
+        } catch (_) {}
+
+        try {
+          const byPathSnap = await getDocs(query(colRef, where("detailsLink", "==", `/${slug}`), limit(10)));
+          const first = (byPathSnap.docs || []).find((d) => hasName(d));
+          if (first) return first.ref;
+        } catch (_) {}
+      }
+
+      if (name) {
+        try {
+          const byNameSnap = await getDocs(query(colRef, where("name", "==", name), limit(10)));
+          const first = (byNameSnap.docs || []).find((d) => hasName(d));
+          if (first) return first.ref;
+        } catch (_) {}
+      }
+
+      return null;
+    }
+
+    async function recomputeFirmRatingStats(row = {}) {
+      const firmName = String(row.firm || row.firmName || "").trim();
+      const firmSlug = slugify(row.firmSlug || row.slug || firmName);
+      if (!firmSlug && !firmName) return;
+      const srcRows = await pullReviewsByFirm(firmSlug, firmName);
+      const approved = srcRows.filter((r) => {
+        const st = String(r.status || "").trim().toLowerCase();
+        return st === "approved" || st === "published" || st === "publish";
+      });
+      const autoReviewCount = approved.length;
+      const autoAverageRating = autoReviewCount
+        ? Number((approved.reduce((s, r) => s + Number(r.rating || 0), 0) / autoReviewCount).toFixed(2))
+        : 0;
+
+      const statsRef = doc(db, "firmRatingStats", firmSlug || slugify(firmName));
+      const statsSnap = await getDoc(statsRef);
+      const stats = statsSnap.exists() ? (statsSnap.data() || {}) : {};
+      const useManualOverride = Boolean(stats.useManualOverride);
+      const manualAverageRating = Number(stats.manualAverageRating || 0);
+      const manualReviewCount = Number(stats.manualReviewCount || 0);
+      const averageRating = useManualOverride ? manualAverageRating : autoAverageRating;
+      const reviewCount = useManualOverride ? manualReviewCount : autoReviewCount;
+
+      await setDoc(statsRef, {
+        firmSlug: firmSlug || slugify(firmName),
+        firmName: firmName || String(stats.firmName || "").trim(),
+        useManualOverride,
+        manualAverageRating,
+        manualReviewCount,
+        autoAverageRating,
+        autoReviewCount,
+        averageRating,
+        reviewCount,
+        updatedAt: serverTimestamp(),
+        ...(statsSnap.exists() ? {} : { createdAt: serverTimestamp() })
+      }, { merge: true });
+
+      const firmRef = await resolveFirmDocRef(firmSlug, firmName);
+      if (firmRef) {
+        await setDoc(firmRef, {
+          score: averageRating,
+          reviewCount,
+          updatedAt: serverTimestamp()
+        }, { merge: true });
+      }
+    }
+
+    async function awardReviewPoints(row = {}, reviewId = "") {
+      const uid = String(row.uid || "").trim();
+      if (!uid || !reviewId || row.reviewPointsAwarded) return;
+      const firstActionRef = doc(db, "rewardActions", `${uid}_REVIEW_FIRST_APPROVED_50`);
+      const firstActionSnap = await getDoc(firstActionRef);
+      const points = firstActionSnap.exists() ? 20 : 50;
+      if (!firstActionSnap.exists()) {
+        await setDoc(firstActionRef, { uid, type: "REVIEW_FIRST_APPROVED", points: 50, createdAt: serverTimestamp() }, { merge: true });
+      }
+      await addPoints(uid, points, points === 50 ? "review_first_approved_50" : "review_approved_20");
+      await updateDoc(doc(db, "reviews", reviewId), {
+        reviewPointsAwarded: true,
+        reviewPointsAdded: points,
+        reviewPointsAwardedAt: serverTimestamp(),
+        updatedAt: serverTimestamp()
+      });
+    }
+
+    function fillFirmFilter(rows = []) {
+      const firms = [...new Set(rows.map((r) => String(r.firm || r.firmName || "").trim()).filter(Boolean))].sort((a, b) => a.localeCompare(b));
+      firmFilter.innerHTML = `<option value="all">All Firms</option>${firms.map((f) => `<option value="${esc(f)}">${esc(f)}</option>`).join("")}`;
+      syncReviewApiUrl();
+    }
+
+    function syncReviewApiUrl() {
+      const selected = String(firmFilter.value || "all");
+      reviewApiUrl.value = selected === "all"
+        ? "https://www.rankmyprop.in/api/reviews?limit=20"
+        : `https://www.rankmyprop.in/api/reviews/${encodeURIComponent(slugify(selected))}?limit=20`;
+    }
+
+    function filteredRows() {
+      const firm = firmFilter.value;
+      const status = statusFilter.value;
+      return allRows.filter((r) => {
+        const firmOk = firm === "all" || String(r.firm || r.firmName || "") === firm;
+        const st = String(r.status || "Pending");
+        const statusOk = status === "all" || st === status;
+        return firmOk && statusOk;
+      });
+    }
+
+    function detailHtml(r = {}) {
+      const links = Array.isArray(r.proofUrls) ? r.proofUrls.filter(Boolean) : [];
+      const aspects = r.aspectRatings && typeof r.aspectRatings === "object" ? r.aspectRatings : {};
+      const pros = Array.isArray(r.pros) ? r.pros.join(", ") : String(r.pros || "").trim();
+      const cons = Array.isArray(r.cons) ? r.cons.join(", ") : String(r.cons || "").trim();
+      return `
+        <article class="announce-item"><h3>Firm</h3><p>${esc(r.firm || r.firmName || "-")}</p></article>
+        <article class="announce-item"><h3>Firm Slug</h3><p>${esc(r.firmSlug || "-")}</p></article>
+        <article class="announce-item"><h3>Program</h3><p>${esc(r.program || "-")}</p></article>
+        <article class="announce-item"><h3>Account Size</h3><p>${esc(r.accountSize || "-")}</p></article>
+        <article class="announce-item"><h3>Payout Count</h3><p>${esc(r.payoutCount ?? "-")}</p></article>
+        <article class="announce-item"><h3>Funding Period</h3><p>${esc(r.fundingPeriod || "-")}</p></article>
+        <article class="announce-item"><h3>Rating</h3><p>${esc(r.rating || 0)}/5</p></article>
+        <article class="announce-item"><h3>Aspect Ratings</h3><p>CS: ${esc(aspects.cs ?? "-")} | TC: ${esc(aspects.tc ?? "-")} | PP: ${esc(aspects.pp ?? "-")} | OE: ${esc(aspects.oe ?? "-")}</p></article>
+        <article class="announce-item"><h3>Recommend</h3><p>${r.recommend === true ? "Yes" : r.recommend === false ? "No" : "-"}</p></article>
+        <article class="announce-item"><h3>Status</h3><p>${esc(r.status || "Pending")}</p></article>
+        <article class="announce-item"><h3>UID</h3><p>${esc(r.uid || "-")}</p></article>
+        <article class="announce-item"><h3>Email</h3><p>${esc(r.email || "-")}</p></article>
+        <article class="announce-item"><h3>Created</h3><p>${esc(toDate(r.createdAt))}</p></article>
+        <article class="announce-item"><h3>Pros</h3><p>${esc(pros || "-")}</p></article>
+        <article class="announce-item"><h3>Cons</h3><p>${esc(cons || "-")}</p></article>
+        <article class="announce-item"><h3>Review</h3><p>${esc(r.reviewText || r.review || r.text || "-")}</p></article>
+        ${links.length ? `<article class="announce-item"><h3>Proof</h3><p>${links.map((u, i) => `<a href="${esc(normalizePublicAssetUrl(u))}" target="_blank" rel="noopener">Proof ${i + 1}</a>`).join(" • ")}</p></article>` : ""}
+      `;
+    }
+
+    function actionCell(r = {}) {
+      const uid = String(r.uid || "").trim();
+      const st = String(r.status || "Pending");
+      const em = String(r.email || "").trim();
+      return `
+        <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+          <select class="admin-status" data-id="${esc(r.id)}"><option value="">Update</option><option value="Pending" ${st === "Pending" ? "selected" : ""}>Pending</option><option value="Approved" ${st === "Approved" ? "selected" : ""}>Approved</option><option value="Rejected" ${st === "Rejected" ? "selected" : ""}>Rejected</option></select>
+          <button class="btn view-btn" data-view-id="${esc(r.id)}">View</button>
+          <button class="btn del-btn" data-del-id="${esc(r.id)}">Delete</button>
+          ${(uid || em) ? `<button class="btn ban-btn" data-ban-uid="${esc(uid)}" data-ban-email="${esc(em)}">Ban Email</button>` : ""}
+        </div>
+      `;
+    }
+
+    function renderTable() {
+      const rows = filteredRows();
+      reviewsBody.innerHTML = rows.length ? rows.map((r) => {
+        const proof = Array.isArray(r.proofUrls) && r.proofUrls.length ? `<a href="${esc(normalizePublicAssetUrl(r.proofUrls[0]))}" target="_blank" rel="noopener">View</a>` : "-";
+        return `<tr>
+          <td>${toDate(r.createdAt)}</td>
+          <td>${esc(r.uid || "-")}</td>
+          <td>${esc(r.firm || r.firmName || "-")}</td>
+          <td>${esc(r.program || "-")}</td>
+          <td>${esc(r.rating || 0)}/5</td>
+          <td>${esc(r.status || "Pending")}</td>
+          <td>${proof}</td>
+          <td>${actionCell(r)}</td>
+        </tr>`;
+      }).join("") : '<tr><td colspan="8" class="empty">No records.</td></tr>';
+    }
+    
+    reviewsBody.addEventListener("click", async (e) => {
+      const viewBtn = e.target.closest(".view-btn");
+      if (viewBtn) {
+        const id = viewBtn.dataset.viewId || "";
+        const row = allRows.find((x) => x.id === id);
+        if (!row) return;
+        detailBox.innerHTML = detailHtml(row);
+        return;
+      }
+      const delBtn = e.target.closest(".del-btn");
+      if (delBtn) {
+        const id = delBtn.dataset.delId || "";
+        if (!id || !confirm("Delete this review?")) return;
+        const row = allRows.find((x) => x.id === id) || {};
+        await deleteDoc(doc(db, "reviews", id));
+        const userEmail = await resolveUserEmail(row.uid || "", pickReviewEmail(row));
+        if (userEmail) {
+          await notifyReviewDeleted({
+            uid: String(row.uid || "").trim(),
+            userEmail,
+            reviewId: id,
+            firm: String(row.firm || row.firmName || "").trim() || "Unknown Firm",
+            rating: Number(row.rating || 0) || 0,
+            deletedBy: document.getElementById("adminEmail")?.textContent || "Admin"
+          });
+        }
+        await recomputeFirmRatingStats(row);
+        showNotice(notice, "Review deleted.");
+        await loadReviews();
+        return;
+      }
+      const banBtn = e.target.closest(".ban-btn");
+      if (!banBtn) return;
+      const uid = banBtn.dataset.banUid || "";
+      const em = banBtn.dataset.banEmail || "";
+      if (!uid && !em) return;
+      await setBanState(uid, em, true);
+      showNotice(notice, "Email banned.");
+    });
+
+    reviewsBody.addEventListener("change", async (e) => {
+      const s = e.target.closest(".admin-status");
+      if (!s) return;
+      const id = s.dataset.id || "";
+      const next = s.value || "";
+      if (!id || !next) return;
+      const moderationActionAt = new Date().toISOString();
+      await updateDoc(doc(db, "reviews", id), { status: next, updatedAt: serverTimestamp() });
+      const row = allRows.find((x) => x.id === id) || {};
+      const userEmail = await resolveUserEmail(row.uid || "", pickReviewEmail(row));
+      if (userEmail) {
+        const payload = {
+          uid: String(row.uid || "").trim(),
+          userEmail,
+          reviewId: id,
+          status: next,
+          firm: String(row.firm || row.firmName || "").trim() || "Unknown Firm",
+          rating: Number(row.rating || 0) || 0,
+                displayName: String(row.userName || row.reviewerName || row.authorName || row.displayName || row.name || "").trim(),
+                moderatedBy: document.getElementById("adminEmail")?.textContent || "Admin",
+          moderationActionAt
+        };
+        if (isReviewLiveStatus(next)) await notifyReviewLive(payload);
+        else if (isReviewPendingStatus(next)) await notifyReviewPending(payload);
+      }
+      if (next === "Approved") await awardReviewPoints(row, id);
+      await recomputeFirmRatingStats(row);
+      showNotice(notice, `Review status updated: ${next}`);
+      await loadReviews();
+    });
+
+    async function loadReviews() {
+      const snap = await getDocs(query(collection(db, "reviews"), limit(MAX_REVIEWS)));
+      const rows = [];
+      snap.forEach((d) => rows.push({ id: d.id, ...d.data() }));
+      allRows = sorted(rows);
+      fillFirmFilter(allRows);
+      renderTable();
+    }
+
+    firmFilter.addEventListener("change", () => { renderTable(); syncReviewApiUrl(); });
+    statusFilter.addEventListener("change", renderTable);
+    copyReviewApiUrl.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(reviewApiUrl.value);
+        showNotice(notice, "Public review API URL copied.");
+      } catch {
+        reviewApiUrl.select();
+        document.execCommand("copy");
+        showNotice(notice, "Public review API URL copied.");
+      }
+    });
+
+    enforceAdmin(async (user) => {
+      document.getElementById("adminEmail").textContent = user.email || "Admin";
+      await loadReviews();
+    });
+  </script>
+  <script defer src="admin-richtext.js"></script>
+<script defer src="admin-shell.js"></script>
+  <script type="module" src="/site-performance.js"></script>
+</body>
+</html>

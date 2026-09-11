@@ -1,0 +1,69 @@
+{
+  "capturedAt": "2026-08-24",
+  "record": "atlas-funded",
+  "purpose": "Undo snapshot before replacing Atlas Funded challenge rules from the eight supplied PDFs.",
+  "scope": "Only visibility, evaluationPrograms, challengesPanelData, and rulesPanelData were targeted. Identity, logo, review profile, SEO, ratings, and other firm fields were preserved.",
+  "visibility": {
+    "active": true,
+    "publishState": "published",
+    "showFirmProfile": true,
+    "showHomeTable": true,
+    "showListed": true,
+    "showBestGlobal": false,
+    "showRules": true,
+    "showReviews": true,
+    "showOffers": true
+  },
+  "evaluationPrograms": [
+    {"program":"Instant Funding","phase1":"-","phase2":"-","target":"-","allocation":"$400,000","split":"Up To 100%","features":[]},
+    {"program":"1 Step","phase1":"10%","phase2":"-","target":"10%","allocation":"$400,000","split":"Up To 100%","features":[]},
+    {"program":"2 Step","phase1":"9%","phase2":"5%","target":"9% / 5%","allocation":"$400,000","split":"Up To 100%","features":[]},
+    {"program":"3 Step","phase1":"6%","phase2":"6%","target":"6% / 6% / 6%","allocation":"$200,000","split":"Up To 100%","features":[]},
+    {"program":"Pay Later","phase1":"10%","phase2":"-","target":"10%","allocation":"$400,000","split":"Up To 100%","features":[]}
+  ],
+  "challengeStats": [
+    {"value":"$400K","label":"Max Allocation"},
+    {"value":"14 Days","label":"First Payout"},
+    {"value":"100%","label":"Profit Split"},
+    {"value":"24/7","label":"Support"}
+  ],
+  "rulesPanelData": {
+    "sections": {
+      "risk": {"title":"General Rules","desc":"Traders must respect daily and maximum drawdown limits.","notice":"Risk limits vary depending on account model.","items":["Maximum Drawdown Applies","Daily Drawdown Applies","Hard Breach Rule Active","Risk Management Required"],"rules":[{"title":"Rule title","text":"Rule detail"}]},
+      "trading": {"title":"Trading Rules","desc":"Atlas Funded provides a flexible trading environment while enforcing responsible risk management.","notice":"Rules may change. Always review the latest Atlas Funded rulebook.","items":["News Trading Allowed","Weekend Holding Allowed","Expert Advisors Allowed","Automated Strategies Allowed","Multiple Accounts Allowed","Scaling Plan Available","KYC Required Before Funding"],"rules":[{"title":"No prohibited arbitrage","text":"Latency/arbitrage exploitation strategies are not allowed."},{"title":"Respect risk limits","text":"Daily and overall drawdown limits must always be respected."}]},
+      "general": {"title":"General Rules","desc":"Atlas Funded general account rules.","notice":"Rules may be updated. Please review regularly.","rules":[{"title":"Single user policy","text":"Each account must be traded only by the registered trader."},{"title":"Accurate KYC details","text":"Provide correct personal details for verification and payouts."},{"title":"Rule compliance required","text":"Any material violation can result in account termination."}]},
+      "section-1": {"title":"Section 1","desc":"Atlas Funded section rules.","notice":"Rules may be updated.","rules":[{"title":"Rule title","text":"Rule detail"}]}
+    },
+    "programRules": {
+      "1-step-pro": {
+        "program":"1-Step Pro",
+        "slug":"1-step-pro",
+        "title":"1-Step Pro Challenge Rules",
+        "desc":"Rules for the 1-Step Pro account model.",
+        "notice":"",
+        "rules":[
+          {"title":"Trading Period","text":"Unlimited trading period for both Step 1 and Funded stages."},
+          {"title":"Minimum Trading Days","text":"Minimum 4 trading days are required in Step 1 and Funded. Each qualifying trading day must generate at least 1% profit."},
+          {"title":"Profit Target","text":"Step 1 profit target is 9%. There is no profit target in the Funded stage."},
+          {"title":"Maximum Overall Loss","text":"Maximum overall loss is 6% in both Step 1 and Funded."},
+          {"title":"Maximum Daily Loss","text":"Maximum daily loss is 3% in both Step 1 and Funded."},
+          {"title":"Expert Advisors","text":"Expert Advisors are allowed in both Step 1 and Funded."},
+          {"title":"Profit Split","text":"Funded traders receive a 100% profit split by default as specified in the 1-Step Pro rules."},
+          {"title":"Evaluation Profit","text":"Evaluation profit is 15%, paid on the 3rd Reward."},
+          {"title":"Refundable Fee","text":"The refundable fee is refunded on the 4th Reward."},
+          {"title":"Default First Reward","text":"The first reward is available after 30 days."},
+          {"title":"Subsequent Rewards","text":"After the first reward, subsequent rewards are available every 30 days."},
+          {"title":"Bi-Weekly Reward Add-On","text":"The Bi-Weekly Reward add-on costs +10%. With this add-on, the first reward is after 30 days and each subsequent reward is every 14 days."},
+          {"title":"Weekly Reward Add-On","text":"The Weekly Reward add-on costs +20%. With this add-on, the first reward is after 21 days and each subsequent reward is every 7 days."},
+          {"title":"100% Profit Split Add-On","text":"The 100% Profit Split add-on has a +20% cost increase."},
+          {"title":"No Minimum Trading Days Add-On","text":"The No Minimum Trading Days add-on has a +20% cost increase."},
+          {"title":"Free Retry Add-On","text":"The Free Retry add-on has a +25% cost increase."},
+          {"title":"Available Add-Ons","text":"Available add-ons are Weekly Reward (+20%), Bi-Weekly Reward (+10%), 100% Profit Split (+20%), No Minimum Trading Days (+20%), and Free Retry (+25%)."}
+        ]
+      }
+    },
+    "modelSlugs":["1-step-pro"],
+    "violations":["Account termination","Forfeiture of payouts/profits","Disqualification from future programs"],
+    "importantNote":{"buttonText":"Download Full Rules (PDF)","text":"Read all rules before placing trades on your challenge or funded account."}
+  }
+}

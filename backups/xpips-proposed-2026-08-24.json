@@ -1,0 +1,26 @@
+{
+  "preparedAt": "2026-08-24",
+  "record": "xpips",
+  "mode": "rules-and-reviews-only",
+  "visibility": {
+    "showFirmProfile": false,
+    "showHomeTable": false,
+    "showListed": false,
+    "showBestGlobal": false,
+    "showRules": true,
+    "showReviews": true,
+    "showOffers": false,
+    "active": true,
+    "publishState": "published"
+  },
+  "sourceFiles": [
+    "/Users/theforexclue/Downloads/XPIPS 1-Step & 2-Step  & Instant  (1).pdf",
+    "/Users/theforexclue/Downloads/XPIPS Research (1).xlsx"
+  ],
+  "programs": [
+    "1-Step Evaluation",
+    "2-Step Evaluation",
+    "Instant Funded"
+  ],
+  "editorPolicy": "The PDF is authoritative for the three model-specific rulebooks. Workbook-only firm-wide rules are included without overriding PDF values. Research instructions, nil placeholders, conflicting summary ratings, and unsupported claims are not published as facts. Missing model values are shown as Not mentioned."
+}

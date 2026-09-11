@@ -1,0 +1,26 @@
+{
+  "preparedAt": "2026-08-24",
+  "record": "funding-pips",
+  "mode": "rules-and-reviews-only",
+  "visibility": {
+    "showFirmProfile": false,
+    "showHomeTable": false,
+    "showListed": false,
+    "showBestGlobal": false,
+    "showRules": true,
+    "showReviews": true,
+    "showOffers": false,
+    "active": true,
+    "publishState": "published"
+  },
+  "sourceFiles": [
+    "/Users/theforexclue/Downloads/FundingPIPS 2STEPSTANDARD.pdf",
+    "/Users/theforexclue/Downloads/FundingPIPS 2STEPPRO.pdf",
+    "/Users/theforexclue/Downloads/FundingPIPS 2STEPFLEX.pdf",
+    "/Users/theforexclue/Downloads/FundingPIPS 1STEP RULES.pdf",
+    "/Users/theforexclue/Downloads/FundingPIPS 1KINSTANTGIVEWAY.pdf",
+    "/Users/theforexclue/Downloads/FundingPIPS ZERORULES.pdf"
+  ],
+  "programs": ["2-Step Standard", "2-Step Pro", "2-Step Flex", "1-Step", "1K Instant Giveaway", "FundingPips Zero"],
+  "editorPolicy": "Only facts stated in the supplied PDFs are published. Missing firm-level details are marked Not mentioned, the blank final page of the 1-Step PDF is ignored, and no unsupported claims are added."
+}

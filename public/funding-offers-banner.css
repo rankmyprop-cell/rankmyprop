@@ -1,0 +1,22 @@
+.rmp-offer-banner-section{position:relative;width:100%;padding:22px 28px 72px;background:#080612;font-family:"Plus Jakarta Sans",sans-serif}
+.rmp-offer-banner-section--home{margin-top:-72px}
+.rmp-offer-banner{position:relative;display:flex;align-items:center;justify-content:space-between;gap:34px;width:min(1310px,100%);min-height:144px;margin:0 auto;padding:25px 32px 25px 36px;overflow:hidden;border:1px solid rgba(173,144,255,.56);border-radius:20px;color:#fff;background:radial-gradient(circle at 78% 45%,rgba(164,130,255,.28),transparent 20rem),linear-gradient(105deg,#1b124b 0%,#35218c 50%,#6444e6 100%);box-shadow:0 22px 58px rgba(66,35,161,.3),inset 0 1px 0 rgba(255,255,255,.13)}
+.rmp-offer-banner::before{position:absolute;inset:0;background:linear-gradient(110deg,transparent 25%,rgba(255,255,255,.07) 48%,transparent 66%);content:"";pointer-events:none;transform:translateX(-70%);animation:rmp-offer-shine 7s ease-in-out infinite}
+@keyframes rmp-offer-shine{0%,62%{transform:translateX(-75%)}85%,100%{transform:translateX(75%)}}
+.rmp-offer-banner-copy{position:relative;z-index:1;display:flex;align-items:center;gap:22px;min-width:0}
+.rmp-offer-trophy{display:grid;place-items:center;width:66px;height:66px;flex:none;color:#d9cdff}
+.rmp-offer-trophy svg{width:60px;height:60px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 13px rgba(184,153,255,.42))}
+.rmp-offer-banner h2{margin:0;color:#fff;font-size:clamp(26px,2.3vw,36px);font-weight:800;line-height:1.12;letter-spacing:-.045em}
+.rmp-offer-banner p{margin:8px 0 0;color:#f1edff;font-size:14px;font-weight:500;line-height:1.5}
+.rmp-offer-banner-actions{position:relative;z-index:1;display:flex;align-items:center;gap:16px;flex:none}
+.rmp-offer-code{display:flex;align-items:center;gap:10px;min-height:58px;padding:7px 8px 7px 18px;border:1px solid rgba(255,255,255,.84);border-radius:15px;background:rgba(14,8,42,.42);box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
+.rmp-offer-code>span{color:#c8b7ff;font-size:17px}.rmp-offer-code strong{white-space:nowrap;color:#fff;font-size:14px;font-weight:800}
+.rmp-offer-code button{display:flex;align-items:center;gap:8px;min-width:84px;height:40px;padding:0 13px;border:1px solid rgba(255,255,255,.22);border-radius:10px;color:#fff;background:rgba(143,104,255,.3);cursor:pointer;font-size:11px;transition:background .2s ease,transform .2s ease}
+.rmp-offer-code button:hover{background:rgba(167,136,255,.46);transform:translateY(-1px)}
+.rmp-offer-code button i{position:relative;width:14px;height:16px;border:1.5px solid currentColor;border-radius:3px}.rmp-offer-code button i::before{position:absolute;top:-4px;left:-4px;width:11px;height:13px;border:1.5px solid currentColor;border-radius:3px;content:""}
+.rmp-offer-banner-actions>a{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-width:190px;min-height:58px;padding:0 24px;border:1px solid rgba(255,255,255,.3);border-radius:15px;color:#27134f;background:linear-gradient(180deg,#fff,#dcd2ff);box-shadow:0 0 30px rgba(220,207,255,.55),inset 0 1px 0 #fff;font-size:14px;font-weight:800;text-decoration:none;transition:transform .2s ease,box-shadow .2s ease}
+.rmp-offer-banner-actions>a:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(225,213,255,.72),0 12px 30px rgba(38,16,92,.28)}
+.rmp-offer-banner-actions>a span{font-size:19px}
+@media(max-width:980px){.rmp-offer-banner{align-items:flex-start;flex-direction:column;padding:28px}.rmp-offer-banner-actions{width:100%}.rmp-offer-banner-actions>a{margin-left:auto}}
+@media(max-width:650px){.rmp-offer-banner-section{padding:16px 14px 58px}.rmp-offer-banner-section--home{margin-top:-52px}.rmp-offer-banner{gap:24px;padding:24px 20px;border-radius:18px}.rmp-offer-banner-copy{align-items:flex-start;gap:14px}.rmp-offer-trophy{width:45px;height:45px}.rmp-offer-trophy svg{width:44px;height:44px}.rmp-offer-banner h2{font-size:27px}.rmp-offer-banner p{font-size:12.5px}.rmp-offer-banner-actions{align-items:stretch;flex-direction:column}.rmp-offer-code{justify-content:space-between;width:100%}.rmp-offer-banner-actions>a{width:100%;margin:0}}
+@media(prefers-reduced-motion:reduce){.rmp-offer-banner::before{animation:none}}

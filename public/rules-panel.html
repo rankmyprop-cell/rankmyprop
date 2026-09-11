@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght%40300;400;500;600;700;800&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+                                                                                                                                                                                                                                                                                                                                                                                                  <meta property="og:image:height" content="630" />
+                                                                                                                                                        <meta property="og:image:width" content="1200" />
+<meta name="twitter:image" content="https://www.rankmyprop.in/assets/og-default-1200x630.webp" />
+<meta property="og:image" content="https://www.rankmyprop.in/assets/og-default-1200x630.webp" />
+                                                                                                                                                              <meta name="robots" content="noindex, nofollow" /><title>Rules</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    min-height: 100%;
+    background: #0d0d10;
+    color: #d0d0e0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 13px;
+    display: flex;
+    overflow: hidden;
+  }
+
+  .sidebar {
+    width: 170px;
+    min-width: 170px;
+    height: 100vh;
+    background: #111114;
+    border-right: 1px solid #1c1c22;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 9px 16px;
+    cursor: pointer;
+    color: #6a6a88;
+    font-size: 12.5px;
+    border-left: 2px solid transparent;
+    transition: all .12s;
+    user-select: none;
+    white-space: nowrap;
+  }
+  .nav-item:hover { color: #b0b0cc; background: #17171e; }
+  .nav-item.active {
+    color: #e0e0f8;
+    border-left: 2px solid #7c5cbf;
+    background: #1a1828;
+  }
+  .nav-item svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+  .sidebar-help {
+    margin: 12px 10px 14px;
+    background: #17151f;
+    border: 1px solid #252036;
+    border-radius: 9px;
+    padding: 12px;
+  }
+  .help-title {
+    display: flex; align-items: center; gap: 7px;
+    font-size: 12px; font-weight: 600; color: #c0c0d8; margin-bottom: 5px;
+  }
+  .help-title svg { width: 13px; height: 13px; color: #7a6ab8; }
+  .sidebar-help p { font-size: 11px; color: #6a6a84; line-height: 1.5; margin-bottom: 9px; }
+  .btn-support {
+    width: 100%;
+    border: 1px solid #3a2e68;
+    background: transparent;
+    color: #a090d8;
+    padding: 6px 10px;
+    border-radius: 7px;
+    font-size: 11.5px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 5px;
+    transition: background .12s;
+  }
+  .btn-support:hover { background: #22184a; }
+
+  .main {
+    flex: 1;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 24px 22px 24px 20px;
+  }
+
+  .page-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 3px;
+    line-height: 1.2;
+  }
+  .page-subtitle {
+    font-size: 12px;
+    color: #555568;
+    margin-bottom: 18px;
+  }
+
+  .categories-card {
+    background: #111114;
+    border: 1px solid #1c1c22;
+    border-radius: 10px;
+    padding: 16px 16px 16px;
+    margin-bottom: 14px;
+  }
+  .categories-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #9090aa;
+    margin-bottom: 11px;
+  }
+  .category-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+  }
+  .cat-btn {
+    background: #0d0d11;
+    border: 1px solid #1e1e28;
+    border-radius: 8px;
+    padding: 13px 12px 11px;
+    cursor: pointer;
+    text-align: left;
+    transition: border-color .12s, background .12s;
+  }
+  .cat-btn:hover { border-color: #4a3a90; background: #141220; }
+  .cat-btn.active { border-color: #6a4ab8; background: #141220; }
+  .cat-icon { margin-bottom: 9px; }
+  .cat-icon svg { width: 16px; height: 16px; display: block; }
+  .cat-name { font-size: 12.5px; font-weight: 600; color: #d8d8f0; margin-bottom: 3px; line-height: 1.3; }
+  .cat-desc { font-size: 11px; color: #545468; line-height: 1.35; }
+
+  .c-purple { color: #8b6cd8; }
+  .c-green  { color: #3db87a; }
+  .c-yellow { color: #d4b830; }
+  .c-red    { color: #d04848; }
+  .c-blue   { color: #4878c8; }
+
+  .bottom-row {
+    display: grid;
+    grid-template-columns: 1fr 220px;
+    gap: 14px;
+    align-items: start;
+  }
+
+  .content-card {
+    background: #111114;
+    border: 1px solid #1c1c22;
+    border-radius: 10px;
+    padding: 18px 18px 14px;
+  }
+  .section-header {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 3px;
+  }
+  .section-header svg { width: 17px; height: 17px; }
+  .section-header h2 { font-size: 14.5px; font-weight: 700; color: #ffffff; }
+  .section-desc { font-size: 11.5px; color: #4a4a62; margin-bottom: 14px; }
+
+  .rule-item {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 11px 0;
+    border-bottom: 1px solid #18181f;
+  }
+  .rule-item:last-of-type { border-bottom: none; }
+  .rule-num {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: #1a1a24; border: 1px solid #28283a;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; color: #7878a0;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .rule-body strong {
+    display: block;
+    font-size: 12.5px; font-weight: 600; color: #d8d8f0;
+    margin-bottom: 3px;
+  }
+  .rule-body p { font-size: 11.5px; color: #505068; line-height: 1.5; }
+
+  .notice-bar {
+    margin-top: 12px;
+    background: #14101e;
+    border: 1px solid #2a1e48;
+    border-radius: 7px;
+    padding: 9px 13px;
+    display: flex; align-items: center; gap: 9px;
+    font-size: 11.5px; color: #7a5ab8;
+  }
+  .notice-bar svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+  .right-col { display: flex; flex-direction: column; gap: 12px; }
+
+  .side-card {
+    background: #111114;
+    border: 1px solid #1c1c22;
+    border-radius: 10px;
+    padding: 15px;
+  }
+  .side-card-title {
+    display: flex; align-items: center; gap: 7px;
+    margin-bottom: 7px;
+  }
+  .side-card-title svg { width: 15px; height: 15px; }
+  .side-card-title span { font-size: 13px; font-weight: 700; }
+
+  .violation-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .violation-list li {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; color: #b8b8cc;
+  }
+  .violation-list li::before {
+    content: '';
+    width: 5px; height: 5px; border-radius: 50%;
+    background: #c84040; flex-shrink: 0;
+  }
+
+  .btn-download {
+    width: 100%;
+    background: #111114;
+    border: 1px solid #242430;
+    border-radius: 7px;
+    padding: 9px 12px;
+    color: #b0b0cc;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 7px;
+    transition: border-color .12s, background .12s;
+  }
+  .btn-download:hover { border-color: #5040a0; background: #161424; }
+  .btn-download svg { width: 13px; height: 13px; color: #7a5ab8; }
+
+  .section-content { display: none; }
+  .section-content.active { display: block; }
+
+  :root{
+    --bg:#05040b;
+    --card-bg:#0a0b14;
+    --card-border:#1a1c2e;
+    --accent:#7a74ff;
+    --accent-2:#5b55ff;
+    --accent-soft:#a39cff;
+    --text:#ffffff;
+    --muted:#94a3b8;
+    --soft:#7f8bb2;
+  }
+  html, body{
+    background:var(--bg)!important;
+    scrollbar-width:none;
+    -ms-overflow-style:none;
+  }
+  html::-webkit-scrollbar, body::-webkit-scrollbar,
+  .sidebar::-webkit-scrollbar, .main::-webkit-scrollbar{width:0;height:0;display:none;}
+  .sidebar,.categories-card,.content-card,.side-card{background:var(--card-bg)!important;border-color:var(--card-border)!important;}
+  .sidebar{border-right-color:var(--card-border)!important;}
+  .page-title{color:var(--text)!important;}
+  .page-subtitle,.section-desc,.cat-desc,.sidebar-help p{color:var(--soft)!important;}
+  .categories-label,.rule-body p,.violation-list li,.btn-download{color:var(--muted)!important;}
+  .nav-item.active{border-left-color:var(--accent)!important;background:#151726!important;color:#e9edff!important;}
+  .cat-btn.active{border-color:var(--accent)!important;background:#151726!important;}
+  .notice-bar{border-color:#2a3160!important;color:#9ea7cb!important;background:#141728!important;}
+  .btn-support{border-color:#2a3160!important;color:#c0c7ea!important;background:#151726!important;}
+  .btn-support:hover,.btn-download:hover{border-color:var(--accent)!important;}
+  .btn-download svg,.help-title svg,.notice-bar svg{color:var(--accent-soft)!important;}
+  .c-purple,.c-green,.c-yellow,.c-red,.c-blue{color:var(--accent-soft)!important;}
+  .side-card-title svg,.side-card-title span{color:var(--accent-soft)!important;}
+  .side-card p{color:var(--soft)!important;font-size:12.5px!important;line-height:1.6!important;}
+  .page-subtitle{font-size:13px!important;}
+  .nav-item{font-size:13.5px!important;}
+  .categories-label{font-size:13px!important;}
+  .cat-name{font-size:13.5px!important;}
+  .cat-desc{font-size:12px!important;}
+  .section-header h2{font-size:16px!important;}
+  .section-desc{font-size:12.5px!important;}
+  .rule-body strong{font-size:13.5px!important;}
+  .rule-body p{font-size:12.5px!important;line-height:1.6!important;}
+  .rule-num{font-size:12px!important;}
+  .violation-list li{font-size:12.5px!important;}
+  .sidebar{display:none!important;}
+  html,body{display:block!important;}
+  .main{height:auto!important;overflow:visible!important;padding:20px 16px!important;}
+  .categories-card,.content-card,.side-card{border:0!important;}
+</style>
+<script id="rmp-ssr-bootstrap">window.__RMP_SSR_BOOTSTRAP={"id":"page-rules-panel","heading":"","paragraph":"","seoTitle":"Rules","seoDescription":"","canonical":"https://www.rankmyprop.in/rules-panel","robots":"index, follow, max-image-preview:large, max-snippet:-1","__stableSsrHero":true};</script>
+<script defer src="/route-content-runtime.js"></script>
+</head>
+<body>
+<aside class="sidebar">
+  <nav style="padding-top:8px;">
+    <div class="nav-item active" data-section="general"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>General Rules</div>
+    <div class="nav-item" data-section="trading"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>Trading Rules</div>
+    <div class="nav-item" data-section="risk"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Risk Management</div>
+    <div class="nav-item" data-section="prohibited"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>Prohibited Activities</div>
+    <div class="nav-item" data-section="news"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>News Trading</div>
+    <div class="nav-item" data-section="ea"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M20 12h2M2 12h2M19.07 19.07l-1.41-1.41M6.34 6.34L4.93 4.93M12 20v2M12 2v2"/></svg>Expert Advisors</div>
+    <div class="nav-item" data-section="copy"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copy Trading</div>
+    <div class="nav-item" data-section="payout"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Payout Rules</div>
+    <div class="nav-item" data-section="other"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg>Other Rules</div>
+  </nav>
+  <div style="flex:1;"></div>
+  <div class="sidebar-help">
+    <div class="help-title"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Need Help?</div>
+    <p>If you have any questions, our support team is here to help.</p>
+    <button class="btn-support" onclick="alert('Opening support...')">Contact Support →</button>
+  </div>
+</aside>
+<main class="main">
+  <div class="page-title">Rules</div>
+  <div class="page-subtitle">Read and understand all the rules before starting your challenge.</div>
+  <div class="categories-card">
+    <div class="categories-label">Rule Categories</div>
+    <div class="category-grid">
+      <button class="cat-btn active" data-section="general"><div class="cat-icon c-purple"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="cat-name">General Rules</div><div class="cat-desc">Basic rules and account requirements</div></button>
+      <button class="cat-btn" data-section="trading"><div class="cat-icon c-green"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div><div class="cat-name">Trading Rules</div><div class="cat-desc">Trading guidelines and restrictions</div></button>
+      <button class="cat-btn" data-section="risk"><div class="cat-icon c-yellow"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="cat-name">Risk Management</div><div class="cat-desc">Risk parameters and limitations</div></button>
+      <button class="cat-btn" data-section="prohibited"><div class="cat-icon c-red"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg></div><div class="cat-name">Prohibited Activities</div><div class="cat-desc">What is not allowed on our platform</div></button>
+      <button class="cat-btn" data-section="news"><div class="cat-icon c-blue"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div class="cat-name">News Trading</div><div class="cat-desc">News trading rules and restrictions</div></button>
+    </div>
+  </div>
+  <div class="bottom-row">
+    <div>
+      <div id="section-general" class="section-content active"><div class="content-card"><div class="section-header"><svg class="c-purple" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><h2>General Rules</h2></div><div class="section-desc">Important rules you must follow to successfully pass the challenge.</div><div class="rule-item"><div class="rule-num">1</div><div class="rule-body"><strong>Provide accurate information during registration.</strong><p>All information provided during registration must be true and accurate. We reserve the right to verify your identity and details.</p></div></div><div class="rule-item"><div class="rule-num">2</div><div class="rule-body"><strong>One account per trader.</strong><p>Multiple accounts are not allowed. Any additional accounts found will result in disqualification of all accounts.</p></div></div><div class="rule-item"><div class="rule-num">3</div><div class="rule-body"><strong>Complete the evaluation within the given time limit.</strong><p>You must complete all challenge phases within the specified time limit. Extensions are not provided.</p></div></div><div class="rule-item"><div class="rule-num">4</div><div class="rule-body"><strong>Follow all trading rules and risk management guidelines.</strong><p>Your account must comply with all trading rules, risk management parameters, and restrictions outlined in our rules.</p></div></div><div class="rule-item"><div class="rule-num">5</div><div class="rule-body"><strong>Violating rules may result in account termination.</strong><p>Any violation of our rules may result in immediate account termination and forfeiture of funds.</p></div></div><div class="notice-bar"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>These rules are subject to change. Please review regularly.</div></div></div>
+      <div id="section-trading" class="section-content"><div class="content-card"><div class="section-header"><svg class="c-green" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg><h2>Trading Rules</h2></div><div class="section-desc">Trading guidelines and restrictions for all challenge accounts.</div><div class="rule-item"><div class="rule-num">1</div><div class="rule-body"><strong>No holding positions over the weekend.</strong><p>All positions must be closed before market close on Friday. Holding trades over the weekend is strictly prohibited.</p></div></div><div class="rule-item"><div class="rule-num">2</div><div class="rule-body"><strong>Minimum trading days requirement.</strong><p>You must trade on a minimum number of days as specified in your challenge plan to qualify for evaluation.</p></div></div><div class="rule-item"><div class="rule-num">3</div><div class="rule-body"><strong>Use only approved trading instruments.</strong><p>Only instruments listed in our approved trading list may be used. Trading unlisted instruments is not permitted.</p></div></div><div class="notice-bar"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>These rules are subject to change. Please review regularly.</div></div></div>
+      <div id="section-risk" class="section-content"><div class="content-card"><div class="section-header"><svg class="c-yellow" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><h2>Risk Management</h2></div><div class="section-desc">Risk parameters and limitations you must adhere to at all times.</div><div class="rule-item"><div class="rule-num">1</div><div class="rule-body"><strong>Maximum daily loss limit.</strong><p>You must not exceed the maximum daily drawdown limit as specified in your challenge plan. Breaching this results in immediate failure.</p></div></div><div class="rule-item"><div class="rule-num">2</div><div class="rule-body"><strong>Overall maximum drawdown.</strong><p>The total account drawdown must never exceed the overall maximum loss limit at any point during the challenge.</p></div></div><div class="rule-item"><div class="rule-num">3</div><div class="rule-body"><strong>Position sizing limits apply.</strong><p>Each trade must adhere to the maximum lot size and risk per trade requirements outlined in your challenge details.</p></div></div><div class="notice-bar"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>These rules are subject to change. Please review regularly.</div></div></div>
+      <div id="section-prohibited" class="section-content"><div class="content-card"><div class="section-header"><svg class="c-red" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg><h2>Prohibited Activities</h2></div><div class="section-desc">Activities that are strictly not allowed on our platform.</div><div class="rule-item"><div class="rule-num">1</div><div class="rule-body"><strong>No high-frequency or latency arbitrage trading.</strong><p>Strategies that exploit latency or price feed differences are not permitted under any circumstances.</p></div></div><div class="rule-item"><div class="rule-num">2</div><div class="rule-body"><strong>No use of third-party signal services.</strong><p>Purchasing or subscribing to external signal providers to pass the challenge is prohibited.</p></div></div><div class="rule-item"><div class="rule-num">3</div><div class="rule-body"><strong>No account sharing or group trading.</strong><p>The account must be traded solely by the registered account holder. Sharing access is a violation.</p></div></div><div class="notice-bar"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>These rules are subject to change. Please review regularly.</div></div></div>
+      <div id="section-news" class="section-content"><div class="content-card"><div class="section-header"><svg class="c-blue" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><h2>News Trading</h2></div><div class="section-desc">Rules governing trading around major economic news events.</div><div class="rule-item"><div class="rule-num">1</div><div class="rule-body"><strong>No trading 2 minutes before/after high-impact news.</strong><p>Opening or closing positions within 2 minutes of a high-impact news event is prohibited to prevent exploitation of volatility.</p></div></div><div class="rule-item"><div class="rule-num">2</div><div class="rule-body"><strong>Follow the economic calendar restrictions.</strong><p>Refer to our approved economic calendar for restricted periods. Trading during blackout windows will result in trade invalidation.</p></div></div><div class="notice-bar"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>These rules are subject to change. Please review regularly.</div></div></div>
+      <div id="section-ea" class="section-content"><div class="content-card"><div class="section-header"><svg class="c-purple" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M20 12h2M2 12h2M19.07 19.07l-1.41-1.41M6.34 6.34L4.93 4.93M12 20v2M12 2v2"/></svg><h2>Expert Advisors</h2></div><div class="section-desc">Rules regarding the use of automated trading systems.</div><div class="rule-item"><div class="rule-num">1</div><div class="rule-body"><strong>EAs must comply with all platform rules.</strong><p>Any automated trading system used must adhere to all trading and risk management rules without exception.</p></div></div><div class="rule-item"><div class="rule-num">2</div><div class="rule-body"><strong>No tick scalping EAs allowed.</strong><p>Expert Advisors that use tick scalping or ultra-short strategies exploiting spread are prohibited.</p></div></div><div class="notice-bar"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>These rules are subject to change. Please review regularly.</div></div></div>
+      <div id="section-copy" class="section-content"><div class="content-card"><div class="section-header"><svg class="c-purple" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg><h2>Copy Trading</h2></div><div class="section-desc">Rules around copying or mirroring trades from other accounts.</div><div class="rule-item"><div class="rule-num">1</div><div class="rule-body"><strong>Copy trading between own accounts is prohibited.</strong><p>Using copy trading software to mirror trades from one personal account to another is not allowed.</p></div></div><div class="rule-item"><div class="rule-num">2</div><div class="rule-body"><strong>Third-party copy services are not permitted.</strong><p>Subscribing to any external copy trading platform to trade your challenge account is strictly forbidden.</p></div></div><div class="notice-bar"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>These rules are subject to change. Please review regularly.</div></div></div>
+      <div id="section-payout" class="section-content"><div class="content-card"><div class="section-header"><svg class="c-green" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><h2>Payout Rules</h2></div><div class="section-desc">Requirements and conditions for receiving your profit payouts.</div><div class="rule-item"><div class="rule-num">1</div><div class="rule-body"><strong>Minimum payout threshold must be reached.</strong><p>Payouts are only processed once the minimum profit threshold defined in your plan has been achieved.</p></div></div><div class="rule-item"><div class="rule-num">2</div><div class="rule-body"><strong>Payout requests are processed within 5 business days.</strong><p>Once a valid payout request is submitted, processing takes up to 5 business days.</p></div></div><div class="notice-bar"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>These rules are subject to change. Please review regularly.</div></div></div>
+      <div id="section-other" class="section-content"><div class="content-card"><div class="section-header"><svg class="c-purple" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg><h2>Other Rules</h2></div><div class="section-desc">Additional rules and policies that apply to all accounts.</div><div class="rule-item"><div class="rule-num">1</div><div class="rule-body"><strong>Chargebacks will result in permanent bans.</strong><p>Initiating a chargeback for any payment made to us will result in immediate and permanent account termination.</p></div></div><div class="rule-item"><div class="rule-num">2</div><div class="rule-body"><strong>Rules are subject to change without prior notice.</strong><p>We reserve the right to update or modify these rules at any time. It is your responsibility to stay informed.</p></div></div><div class="notice-bar"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>These rules are subject to change. Please review regularly.</div></div></div>
+    </div>
+    <div class="right-col">
+      <div class="side-card"><div class="side-card-title"><svg style="color:#c84040" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span style="color:#d05050;">Rule Violations</span></div><p style="font-size:11.5px;color:#555568;margin-bottom:10px;">Violating any of our rules may result in:</p><ul class="violation-list"><li>Account termination</li><li>Forfeiture of all funds</li><li>Disqualification from future challenges</li><li>Legal action if necessary</li></ul></div>
+      <div class="side-card"><div class="side-card-title"><svg style="color:#4878c8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span style="color:#4878c8;">Important Note</span></div><p style="font-size:11.5px;color:#555568;line-height:1.55;margin-bottom:12px;">It is your responsibility to read, understand, and follow all the rules. We recommend reviewing these rules regularly as they may be updated from time to time.</p><button class="btn-download" onclick="alert('Downloading Full Rules PDF...')"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download Full Rules (PDF)</button></div>
+    </div>
+  </div>
+</main>
+<script>
+  let rulesCmsLoaded = false;
+  let rulesCmsLoading = false;
+
+  function esc(v='') {
+    return String(v).replace(/[&<>"']/g, (m) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
+  }
+
+  function inferFirmContext(ctx = {}) {
+    const out = {
+      firmId: String(ctx.firmId || "").trim(),
+      firmSlug: String(ctx.firmSlug || "").trim().toLowerCase()
+    };
+    if (out.firmId || out.firmSlug) return out;
+    try {
+      const q = new URLSearchParams(window.location.search);
+      out.firmId = String(q.get("firmId") || "").trim();
+      out.firmSlug = String(q.get("slug") || q.get("firmSlug") || "").trim().toLowerCase();
+      if (out.firmId || out.firmSlug) return out;
+    } catch (_) {}
+    try {
+      if (!document.referrer) return out;
+      const u = new URL(document.referrer);
+      out.firmId = String(u.searchParams.get("firmId") || "").trim();
+      out.firmSlug = String(u.searchParams.get("slug") || "").trim().toLowerCase();
+      if (out.firmId || out.firmSlug) return out;
+      const file = String(u.pathname.split("/").pop() || "").toLowerCase();
+      if (file.endsWith("detail.html")) out.firmSlug = file.replace("detail.html", "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+      else if (file.endsWith("detail") && file !== "firm-detail") out.firmSlug = file.replace(/detail$/, "");
+    } catch (_) {}
+    return out;
+  }
+
+  async function fetchRulesFromCms(ctx = {}) {
+    if (rulesCmsLoaded || rulesCmsLoading) return;
+    const { firmId, firmSlug } = inferFirmContext(ctx);
+    if (!firmId && !firmSlug) return;
+    rulesCmsLoading = true;
+    try {
+      const [{ getApp, getApps, initializeApp }, fire, cfg] = await Promise.all([
+        import("https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js"),
+        import("https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js"),
+        import("./firebase-config.js")
+      ]);
+      const app = getApps().length ? getApp() : initializeApp(cfg.firebaseConfig);
+      const db = fire.getFirestore(app);
+      let row = null;
+      if (firmId) {
+        const snap = await fire.getDoc(fire.doc(db, "firms", firmId));
+        if (snap.exists()) row = { id: snap.id, ...snap.data() };
+      }
+      if (!row) {
+        const snap = await fire.getDocs(fire.collection(db, "firms"));
+        const rows = [];
+        snap.forEach((d) => rows.push({ id: d.id, ...d.data() }));
+        row = rows.find((r) => String(r.slug || "").toLowerCase() === firmSlug)
+          || rows.find((r) => String(r.id || "").toLowerCase() === firmSlug);
+      }
+      if (row?.rulesPanelData && typeof row.rulesPanelData === "object") {
+        applyPanelData({ rulesPanelData: row.rulesPanelData });
+        rulesCmsLoaded = true;
+      }
+    } catch (_) {
+    } finally {
+      rulesCmsLoading = false;
+    }
+  }
+
+  function renderRuleSection(sectionEl, sectionData) {
+    if (!sectionEl || !sectionData) return;
+    const card = sectionEl.querySelector('.content-card');
+    if (!card) return;
+    const title = String(sectionData.title || '').trim() || 'Rules';
+    const desc = String(sectionData.desc || '').trim();
+    const notice = String(sectionData.notice || '').trim();
+    const rules = Array.isArray(sectionData.rules) ? sectionData.rules : [];
+    const rulesHtml = rules.map((r, i) => `
+      <div class="rule-item">
+        <div class="rule-num">${i + 1}</div>
+        <div class="rule-body"><strong>${esc(r?.title || '')}</strong><p>${esc(r?.text || '')}</p></div>
+      </div>
+    `).join('');
+    card.innerHTML = `
+      <div class="section-header"><h2>${esc(title)}</h2></div>
+      <div class="section-desc">${esc(desc)}</div>
+      ${rulesHtml}
+      ${notice ? `<div class="notice-bar">${esc(notice)}</div>` : ''}
+    `;
+  }
+
+  function applyPanelData(payload = {}) {
+    const src = payload?.rulesPanelData;
+    if (!src || typeof src !== 'object') return;
+    const sections = src.sections && typeof src.sections === 'object' ? src.sections : {};
+    Object.keys(sections).forEach((key) => {
+      const el = document.getElementById(`section-${key}`);
+      renderRuleSection(el, sections[key]);
+    });
+
+    if (Array.isArray(src.violations)) {
+      const list = document.querySelector('.violation-list');
+      if (list) list.innerHTML = src.violations.map((x) => `<li>${esc(x)}</li>`).join('');
+    }
+
+    if (src.importantNote && typeof src.importantNote === 'object') {
+      const card = document.querySelectorAll('.side-card')[1];
+      if (card) {
+        const p = card.querySelector('p');
+        const btn = card.querySelector('.btn-download');
+        if (p && src.importantNote.text) p.textContent = String(src.importantNote.text);
+        if (btn && src.importantNote.buttonText) btn.textContent = String(src.importantNote.buttonText);
+      }
+    }
+    notifyParentFrameHeight();
+    rulesCmsLoaded = true;
+  }
+
+  function switchSection(name) {
+    document.querySelectorAll('.nav-item').forEach(el => el.classList.toggle('active', el.dataset.section === name));
+    document.querySelectorAll('.cat-btn').forEach(el => el.classList.toggle('active', el.dataset.section === name));
+    document.querySelectorAll('.section-content').forEach(el => el.classList.toggle('active', el.id === 'section-' + name));
+    notifyParentFrameHeight();
+  }
+  document.querySelectorAll('.nav-item, .cat-btn').forEach(el => el.addEventListener('click', () => switchSection(el.dataset.section)));
+
+  function notifyParentFrameHeight() {
+    const root = document.querySelector('.main');
+    const h = Math.max(0, Math.ceil(root ? root.getBoundingClientRect().height : 0));
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({ type: 'rmp:frameHeight', panel: 'rules', height: h }, '*');
+    }
+  }
+
+  window.addEventListener('message', (event) => {
+    if (!event.data) return;
+    if (event.data.type === 'rmp:getHeight') notifyParentFrameHeight();
+    if (event.data.type === 'rmp:firmPanelData') {
+      const payload = event.data.data || {};
+      applyPanelData(payload);
+      if (!payload?.rulesPanelData) {
+        fetchRulesFromCms({ firmId: event.data.firmId, firmSlug: event.data.firmSlug });
+      }
+    }
+  });
+  window.addEventListener('resize', notifyParentFrameHeight);
+  window.addEventListener('load', () => {
+    setTimeout(notifyParentFrameHeight, 30);
+    fetchRulesFromCms();
+  });
+  setTimeout(notifyParentFrameHeight, 80);
+</script>
+<script type="module" src="/site-performance.js"></script>
+</body>
+</html>

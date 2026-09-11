@@ -1,0 +1,242 @@
+.traders-love-section {
+  position: relative;
+  padding: 88px 24px 104px;
+  overflow: hidden;
+  color: #101827;
+  background:
+    radial-gradient(circle at 50% 22%, rgba(112, 71, 230, .18), transparent 34rem),
+    #080319;
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.traders-love-shell {
+  width: min(1210px, 100%);
+  margin: 0 auto;
+}
+
+.traders-love-shell > h2 {
+  margin: 0 0 64px;
+  color: #fff;
+  font-size: clamp(37px, 3.65vw, 56px);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -.055em;
+  text-align: center;
+}
+
+.traders-love-shell > h2 span {
+  color: #8b63ff;
+}
+
+.traders-love-shell > h2 i {
+  display: inline-block;
+  margin-left: 5px;
+  font-style: normal;
+  transform: translateY(3px);
+}
+
+.traders-love-shell > h2 .love-heart svg {
+  width: .78em;
+  height: .72em;
+  overflow: visible;
+  fill: #8b63ff;
+  filter: drop-shadow(0 0 8px rgba(139, 99, 255, .72));
+}
+
+.love-white-grid,
+.love-blue-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.love-white-card {
+  min-height: 214px;
+  padding: 29px 28px 25px;
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, .08);
+}
+
+.love-white-icon {
+  display: block;
+  width: 38px;
+  height: 38px;
+  color: #050609;
+}
+
+.love-white-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.love-white-card h3 {
+  margin: 20px 0 0;
+  color: #101827;
+  font-size: 21px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -.035em;
+}
+
+.love-white-card p {
+  margin: 10px 0 0;
+  color: #536074;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.55;
+}
+
+.love-white-card.is-green .love-white-icon,
+.love-white-card.is-green h3,
+.love-white-card.is-green p {
+  color: #7657f6;
+}
+
+.love-blue-grid {
+  margin-top: 20px;
+}
+
+.love-blue-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 160px;
+  padding: 28px;
+  border-radius: 22px;
+  color: #fff;
+  background: linear-gradient(155deg, #825fff 0%, #6542dd 45%, #382078 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.16), 0 17px 38px rgba(66, 30, 145, .27);
+}
+
+.love-blue-card h3 {
+  margin: 0;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -.035em;
+}
+
+.love-blue-card p {
+  max-width: 270px;
+  margin: 11px 0 0;
+  color: rgba(255,255,255,.94);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.48;
+}
+
+.love-blue-icon {
+  display: block;
+  width: 48px;
+  min-width: 48px;
+  color: #fff;
+}
+
+.love-blue-icon svg {
+  width: 100%;
+  height: auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.love-blue-card:last-child .love-blue-icon svg {
+  fill: currentColor;
+  stroke: none;
+}
+
+.love-guarantee {
+  position: relative;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 340px;
+  overflow: hidden;
+  min-height: 188px;
+  margin-top: 24px;
+  padding: 20px 48px;
+  border-radius: 22px;
+  background: #fff;
+}
+
+.love-guarantee-copy {
+  justify-self: center;
+  text-align: center;
+}
+
+.love-guarantee-copy h3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 0;
+  color: #7657f6;
+  font-size: clamp(30px, 3vw, 43px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -.045em;
+}
+
+.love-guarantee-copy h3 span {
+  display: grid;
+  place-items: center;
+  width: 31px;
+  height: 31px;
+  border-radius: 50%;
+  color: #fff;
+  background: #7657f6;
+  font-size: 19px;
+  letter-spacing: 0;
+}
+
+.love-guarantee-copy p {
+  margin: 21px 0 0;
+  color: #101010;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.love-guarantee-graphic {
+  align-self: end;
+  width: 300px;
+  height: 190px;
+  margin-bottom: -26px;
+  fill: #fff;
+  stroke: #7657f6;
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.love-guarantee-graphic ellipse {
+  fill: rgba(118, 87, 246, .06);
+  stroke-width: 4;
+}
+
+@media (max-width: 900px) {
+  .love-white-grid,
+  .love-blue-grid { grid-template-columns: 1fr; }
+  .love-white-card { min-height: 0; }
+  .love-guarantee { grid-template-columns: 1fr 250px; padding-left: 28px; }
+  .love-guarantee-graphic { width: 250px; }
+}
+
+@media (max-width: 620px) {
+  .traders-love-section { padding: 70px 14px 76px; }
+  .traders-love-shell > h2 { margin-bottom: 42px; font-size: 37px; }
+  .love-white-card,
+  .love-blue-card { border-radius: 18px; padding: 22px; }
+  .love-guarantee { grid-template-columns: 1fr; padding: 34px 20px 0; border-radius: 18px; }
+  .love-guarantee-copy h3 { align-items: center; flex-direction: column; font-size: 32px; }
+  .love-guarantee-copy p { margin-top: 14px; font-size: 13px; }
+  .love-guarantee-graphic { justify-self: center; width: 235px; margin: 10px 0 -24px; }
+}

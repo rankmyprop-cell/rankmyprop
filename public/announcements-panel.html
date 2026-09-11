@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght%40300;400;500;600;700;800&display=swap" rel="stylesheet">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+                                                                                                                                                                                                                                                                                                                                                                                                  <meta property="og:image:height" content="630" />
+                                                                                                                                                        <meta property="og:image:width" content="1200" />
+<meta name="twitter:image" content="https://www.rankmyprop.in/assets/og-default-1200x630.webp" />
+<meta property="og:image" content="https://www.rankmyprop.in/assets/og-default-1200x630.webp" />
+                                                                                                                                                              <meta name="robots" content="noindex, nofollow" /><title>Announcements</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html,body{
+    background: #0d0d0d;
+    color: #e0e0e0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px;
+    min-height: auto;
+    display: block;
+    overflow: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  html::-webkit-scrollbar,body::-webkit-scrollbar{width:0;height:0;display:none}
+  .main {
+    display: grid;
+    grid-template-columns: 540px 1fr;
+    align-items: start;
+  }
+
+  .left-panel {
+    padding: 28px 24px 0;
+    border-right: 1px solid #1e1e1e;
+    display: flex;
+    flex-direction: column;
+  }
+  .title-row { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
+  .icon-box { width: 46px; height: 46px; background: #1e1a2e; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 22px; }
+  .left-panel h1 { font-size: 34px; font-weight: 700; color: #fff; letter-spacing: -0.5px; }
+  .subtitle { font-size: 13px; color: #777; line-height: 1.5; margin-bottom: 22px; max-width: 340px; }
+
+  .filter-tabs { display: flex; gap: 8px; margin-bottom: 18px; flex-wrap: wrap; }
+  .f-tab { padding: 7px 16px; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; border: 1px solid #2a2a2a; background: transparent; color: #aaa; transition: all 0.15s; }
+  .f-tab:hover { background: #1a1a1a; color: #fff; }
+  .f-tab.active { background: #7c3aed; border-color: #7c3aed; color: #fff; }
+
+  .ann-list { flex: 0 0 auto; }
+  .ann-item { display: flex; align-items: center; gap: 14px; padding: 16px 14px; border-radius: 12px; cursor: pointer; border: 1px solid transparent; transition: background 0.15s; margin-bottom: 4px; }
+  .ann-item:hover { background: #161616; }
+  .ann-item.active { background: #13101e; border-color: #3730a3; }
+  .ann-icon { width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+  .ann-icon.purple { background: #1e1a2e; }
+  .ann-icon.green  { background: #0f1e12; }
+  .ann-icon.orange { background: #1e160a; }
+  .ann-icon.blue   { background: #0a1420; }
+  .ann-icon.gold   { background: #1e1a0a; }
+  .ann-icon.gray   { background: #151515; }
+  .ann-content { flex: 1; min-width: 0; }
+  .ann-content h4 { font-size: 13px; font-weight: 600; color: #e8e8e8; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ann-content p  { font-size: 12px; color: #666; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ann-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 5px; flex-shrink: 0; }
+  .tag { font-size: 11px; font-weight: 600; padding: 2px 9px; border-radius: 5px; }
+  .tag.payouts { background: #1e1a2e; color: #a78bfa; }
+  .tag.updates { background: #0f1e12; color: #4ade80; }
+  .tag.system  { background: #1e160a; color: #fb923c; }
+  .tag.events  { background: #1a1a2e; color: #818cf8; }
+  .ann-time  { font-size: 11px; color: #555; }
+  .ann-arrow { color: #444; font-size: 16px; }
+
+  .load-more { text-align: center; padding: 16px; margin-top: 4px; color: #a78bfa; font-size: 13px; font-weight: 500; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; border-top: 1px solid #1a1a1a; }
+  .load-more:hover { color: #c4b5fd; }
+
+  .right-panel { display: flex; flex-direction: column; overflow: visible; max-height: none; }
+  .right-panel::-webkit-scrollbar{width:0;height:0;display:none}
+
+  .hero { border-bottom: 1px solid #1e1e1e; padding: 32px 36px 40px; position: relative; overflow: hidden; min-height: 220px; display: flex; align-items: center; gap: 20px; transition: background 0.4s; }
+  .hero-bg-dots { position: absolute; inset: 0; background-image: radial-gradient(circle,#ffffff0a 1px,transparent 1px); background-size: 28px 28px; }
+  .hero-content { flex: 1; position: relative; z-index: 1; }
+  .new-badge { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 5px; display: inline-block; margin-bottom: 14px; letter-spacing: 0.5px; color: #fff; }
+  .hero-content h2 { font-size: 26px; font-weight: 700; color: #fff; margin-bottom: 10px; }
+  .hero-content p  { font-size: 13px; color: #aaa; margin-bottom: 22px; max-width: 320px; line-height: 1.5; }
+  .hero-btn { border: none; border-radius: 8px; padding: 10px 20px; font-size: 13px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; color: #fff; transition: opacity 0.15s; }
+  .hero-btn:hover { opacity: 0.85; }
+  .hero-image { position: relative; z-index: 1; flex-shrink: 0; user-select: none; }
+  .carousel-dots { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 2; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #444; cursor: pointer; transition: all 0.2s; }
+  .dot.active { background: #a78bfa; width: 20px; border-radius: 4px; }
+
+  .detail-panel { padding: 28px 32px; }
+  .detail-anim { animation: fadeIn 0.25s ease; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+
+  .detail-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+  .detail-tag  { font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 5px; }
+  .detail-date { font-size: 12px; color: #555; }
+  .detail-date span { color: #888; }
+
+  .detail-header { display: flex; align-items: center; gap: 18px; margin-bottom: 16px; }
+  .detail-icon   { width: 58px; height: 58px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 28px; flex-shrink: 0; }
+  .detail-header h2 { font-size: 22px; font-weight: 700; color: #fff; line-height: 1.3; }
+  .detail-desc { font-size: 13px; color: #888; line-height: 1.6; margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid #1e1e1e; }
+
+  .section-block { margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid #1e1e1e; }
+  .section-block:last-child { border-bottom: none; margin-bottom: 0; }
+  .section-title { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 12px; }
+  .s-icon { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+
+  .bullet-list { list-style: none; }
+  .bullet-list li { font-size: 13px; color: #888; padding: 4px 0 4px 16px; position: relative; line-height: 1.5; }
+  .bullet-list li::before { content: '•'; position: absolute; left: 0; color: #555; }
+
+  .action-btn { border: none; border-radius: 8px; padding: 10px 20px; font-size: 13px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; color: #fff; background: #7c3aed; margin-top: 14px; transition: background 0.15s; }
+  .action-btn:hover { background: #6d28d9; }
+
+  .info-card { background: #0f0f1a; border: 1px solid #2a2a3a; border-radius: 12px; padding: 18px 20px; display: flex; align-items: center; gap: 16px; margin-top: 16px; }
+  .info-card-left { flex: 1; }
+  .info-card-title { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; color: #a78bfa; margin-bottom: 8px; }
+  .info-card p { font-size: 12px; color: #666; line-height: 1.5; }
+  .cert-preview { width: 68px; height: 72px; background: #1a1a2a; border-radius: 8px; border: 1px solid #2a2a3a; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 30px; }
+  .cert-formats { font-size: 11px; color: #888; white-space: nowrap; }
+  .cert-formats strong { display: block; color: #aaa; font-size: 12px; margin-bottom: 2px; }
+
+  .thank-you { font-size: 13px; color: #888; padding: 12px 32px 24px; border-top: 1px solid #1a1a1a; }
+
+  .notif-bar { background: #0f0f18; border-top: 1px solid #1e1e1e; padding: 16px 28px; display: flex; align-items: center; gap: 16px; }
+  .notif-icon-wrap { width: 42px; height: 42px; background: #1e1a2e; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .notif-text h4 { font-size: 13px; font-weight: 600; color: #e0e0e0; margin-bottom: 2px; }
+  .notif-text p  { font-size: 12px; color: #666; }
+  .notif-btn { margin-left: auto; background: #7c3aed; color: #fff; border: none; border-radius: 8px; padding: 11px 22px; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; white-space: nowrap; transition: background 0.15s; }
+  .notif-btn:hover { background: #6d28d9; }
+  .cs-pop{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:1200}
+  .cs-pop.open{display:flex}
+  .cs-card{width:min(92vw,340px);background:#11131f;border:1px solid #2a2a3a;border-radius:12px;padding:18px 16px 14px;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,.55)}
+  .cs-card h4{margin:0 0 6px;color:#fff;font-size:18px}
+  .cs-card p{margin:0 0 14px;color:#9ca3af;font-size:13px;line-height:1.45}
+  .cs-card button{border:none;background:#7c3aed;color:#fff;border-radius:8px;padding:9px 16px;font-weight:600;cursor:pointer}
+
+  @media (max-width: 1080px) {
+    .main{grid-template-columns:1fr}
+    .left-panel{border-right:none;border-bottom:1px solid #1e1e1e;padding-bottom:16px}
+    .right-panel{max-height:none}
+  }
+</style>
+<script id="rmp-ssr-bootstrap">window.__RMP_SSR_BOOTSTRAP={"id":"page-announcements-panel","heading":"Announcements","paragraph":"","seoTitle":"Announcements","seoDescription":"","canonical":"https://www.rankmyprop.in/announcements-panel","robots":"index, follow, max-image-preview:large, max-snippet:-1","__stableSsrHero":true};</script>
+<script defer src="/route-content-runtime.js"></script>
+</head>
+<body>
+
+<div class="main">
+  <div class="left-panel">
+    <div class="title-row">
+      <div class="icon-box">📢</div>
+      <h1>Announcements</h1>
+    </div>
+    <p class="subtitle">Stay updated with the latest news, updates and important announcements from our platform.</p>
+
+    <div class="filter-tabs">
+      <div class="f-tab active" onclick="filterTab(this,'all')">All</div>
+      <div class="f-tab" onclick="filterTab(this,'updates')">Updates</div>
+      <div class="f-tab" onclick="filterTab(this,'payouts')">Payouts</div>
+      <div class="f-tab" onclick="filterTab(this,'system')">System</div>
+      <div class="f-tab" onclick="filterTab(this,'events')">Events</div>
+    </div>
+
+    <div class="ann-list">
+      <div class="ann-item active" data-cat="payouts" data-id="0" onclick="selectItem(this)">
+        <div class="ann-icon purple">💸</div>
+        <div class="ann-content"><h4>May Payouts Completed Successfully</h4><p>Payouts for May cycle have been processed.</p></div>
+        <div class="ann-meta"><span class="tag payouts">Payouts</span><span class="ann-time">2h ago</span></div>
+        <span class="ann-arrow">›</span>
+      </div>
+      <div class="ann-item" data-cat="updates" data-id="1" onclick="selectItem(this)">
+        <div class="ann-icon green">🔄</div>
+        <div class="ann-content"><h4>New 2-Step Challenge Now Live</h4><p>Take on the improved 2-Step challenge with better rules.</p></div>
+        <div class="ann-meta"><span class="tag updates">Updates</span><span class="ann-time">1d ago</span></div>
+        <span class="ann-arrow">›</span>
+      </div>
+      <div class="ann-item" data-cat="system" data-id="2" onclick="selectItem(this)">
+        <div class="ann-icon orange">🔧</div>
+        <div class="ann-content"><h4>Scheduled Maintenance Notice</h4><p>Platform will be under maintenance this weekend.</p></div>
+        <div class="ann-meta"><span class="tag system">System</span><span class="ann-time">2d ago</span></div>
+        <span class="ann-arrow">›</span>
+      </div>
+      <div class="ann-item" data-cat="updates" data-id="3" onclick="selectItem(this)">
+        <div class="ann-icon blue">📋</div>
+        <div class="ann-content"><h4>Instant Funding Rules Updated</h4><p>Please review the updated rules before starting.</p></div>
+        <div class="ann-meta"><span class="tag updates">Updates</span><span class="ann-time">3d ago</span></div>
+        <span class="ann-arrow">›</span>
+      </div>
+      <div class="ann-item" data-cat="payouts" data-id="4" onclick="selectItem(this)">
+        <div class="ann-icon purple">💰</div>
+        <div class="ann-content"><h4>April Payouts Are Live</h4><p>Check your dashboard for payout details.</p></div>
+        <div class="ann-meta"><span class="tag payouts">Payouts</span><span class="ann-time">7d ago</span></div>
+        <span class="ann-arrow">›</span>
+      </div>
+      <div class="ann-item" data-cat="events" data-id="5" onclick="selectItem(this)">
+        <div class="ann-icon gold">🏆</div>
+        <div class="ann-content"><h4>Trading Contest – Win $5,000</h4><p>Join the trading contest and stand a chance to win!</p></div>
+        <div class="ann-meta"><span class="tag events">Events</span><span class="ann-time">8d ago</span></div>
+        <span class="ann-arrow">›</span>
+      </div>
+      <div class="ann-item" data-cat="system" data-id="6" onclick="selectItem(this)">
+        <div class="ann-icon gray">🖥️</div>
+        <div class="ann-content"><h4>Server Upgrade Completed</h4><p>Better performance and faster execution for all.</p></div>
+        <div class="ann-meta"><span class="tag system">System</span><span class="ann-time">10d ago</span></div>
+        <span class="ann-arrow">›</span>
+      </div>
+    </div>
+
+    <div class="load-more">Load more <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+  </div>
+
+  <div class="right-panel">
+    <div class="hero" id="hero"></div>
+    <div class="detail-panel" id="detailPanel"></div>
+    <p class="thank-you" id="thankYou"></p>
+  </div>
+</div>
+
+<div class="notif-bar">
+  <div class="notif-icon-wrap">
+    <svg width="18" height="18" fill="none" stroke="#a78bfa" stroke-width="2" viewBox="0 0 24 24">
+      <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+    </svg>
+  </div>
+  <div class="notif-text"><h4>Enable Notifications</h4><p>Never miss an important update. Enable push notifications now.</p></div>
+  <button class="notif-btn">Enable Notifications <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</div>
+<div id="csPop" class="cs-pop" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="cs-card">
+    <h4>Coming Soon</h4>
+    <p>Push notifications feature will be enabled soon.</p>
+    <button type="button" id="csPopClose">OK</button>
+  </div>
+</div>
+
+<script>
+let data = [
+  {
+    cat:'payouts', tagLabel:'Payouts', tagBg:'#1e1a2e', tagColor:'#a78bfa',
+    date:'May 20, 2024', time:'2:30 PM', icon:'💸', iconBg:'#1e1a2e',
+    title:'May Payouts Completed Successfully 🎉',
+    desc:'We are happy to announce that all payouts for the May cycle have been processed successfully.',
+    heroBg:'linear-gradient(135deg,#1a1040 0%,#0f0a2a 50%,#12103a 100%)',
+    badgeBg:'#7c3aed', badgeText:'NEW',
+    heroTitle:'Payouts Are Live! 🎉',
+    heroDesc:"We've processed payouts for May cycle. Check your dashboard and upload your payout certificate to get featured.",
+    btnLabel:'View Payouts', btnBg:'#7c3aed',
+    heroEmoji:'👜',
+    heroExtra:'<span style="position:absolute;bottom:0;left:10px;font-size:50px;">🪙</span><span style="position:absolute;bottom:8px;right:0;font-size:36px;">✅</span>',
+    sections:[
+      { icon:'✅', iconBg:'#14291a', title:"What's New?", type:'bullets', items:['Payouts for all eligible traders have been processed.','You can now upload your payout certificate and share your success.','Top payout proofs will be featured on our platform!'] },
+      { icon:'⬆️', iconBg:'#1e1a2e', title:'Upload Your Payout Certificate', type:'upload', desc:'Show the community your success by uploading your payout proof.', btnLabel:'Upload Now →', infoTitle:'How to Upload?', infoText:'Go to the Payouts section, click on the respective payout, and upload your certificate with a comment.' }
+    ],
+    thanks:'Thank you for being a part of our amazing trading community. Keep trading, keep winning! 💪'
+  },
+  {
+    cat:'updates', tagLabel:'Updates', tagBg:'#0f1e12', tagColor:'#4ade80',
+    date:'May 19, 2024', time:'10:00 AM', icon:'🔄', iconBg:'#0f1e12',
+    title:'New 2-Step Challenge Now Live 🚀',
+    desc:'We have launched the improved 2-Step Challenge with better rules, higher rewards, and a smoother evaluation process.',
+    heroBg:'linear-gradient(135deg,#0a1e10 0%,#071208 50%,#0d1e12 100%)',
+    badgeBg:'#16a34a', badgeText:'UPDATE',
+    heroTitle:'New 2-Step Challenge 🚀',
+    heroDesc:'Take on the revamped 2-Step Challenge. Better rules, better rewards — start your funded journey today.',
+    btnLabel:'Start Challenge', btnBg:'#16a34a',
+    heroEmoji:'🎯',
+    heroExtra:'<span style="position:absolute;bottom:0;right:0;font-size:42px;">🏅</span>',
+    sections:[
+      { icon:'✅', iconBg:'#14291a', title:"What's Changed?", type:'bullets', items:['Phase 1 now requires an 8% profit target instead of 10%.','Maximum daily loss limit raised to 5% for more flexibility.','New dashboard gives live progress tracking during the challenge.','Faster evaluation — results within 24 hours of completion.'] },
+      { icon:'📋', iconBg:'#0a1420', title:'Challenge Rules Summary', type:'bullets', items:['Phase 1 — 8% profit target, 5% daily loss, 10% max drawdown.','Phase 2 — 5% profit target, same risk rules.','Minimum 5 trading days per phase.','All major instruments supported — Forex, Indices, Crypto, Metals.'] }
+    ],
+    thanks:'Ready to prove your skills? Start the new 2-Step Challenge today and get funded! 🎯'
+  },
+  {
+    cat:'system', tagLabel:'System', tagBg:'#1e160a', tagColor:'#fb923c',
+    date:'May 18, 2024', time:'9:00 AM', icon:'🔧', iconBg:'#1e160a',
+    title:'Scheduled Maintenance Notice ⚠️',
+    desc:'Our platform will undergo scheduled maintenance this weekend. Please plan your trades accordingly and close positions beforehand.',
+    heroBg:'linear-gradient(135deg,#1e100a 0%,#110800 50%,#1a0f00 100%)',
+    badgeBg:'#ea580c', badgeText:'NOTICE',
+    heroTitle:'Scheduled Maintenance ⚠️',
+    heroDesc:'Platform maintenance scheduled for this Saturday 11 PM – Sunday 3 AM UTC. Save your work before then.',
+    btnLabel:'View Schedule', btnBg:'#ea580c',
+    heroEmoji:'🛠️',
+    heroExtra:'<span style="position:absolute;bottom:0;right:0;font-size:42px;">⏰</span>',
+    sections:[
+      { icon:'⏰', iconBg:'#1e160a', title:'Maintenance Window', type:'bullets', items:['Date: Saturday, May 24, 2024','Time: 11:00 PM – 3:00 AM UTC (approx. 4 hours)','Affected: Trading platform, Dashboard, Payouts section.','Read-only access will be available during maintenance.'] },
+      { icon:'📋', iconBg:'#1e160a', title:'What to Expect', type:'bullets', items:['Open positions will remain safe — no trades will be auto-closed.','New order placement will be disabled during this window.','All data will be preserved and intact after maintenance.','We will post a live status update on our announcements page.'] }
+    ],
+    thanks:'We apologize for any inconvenience. Our team works hard to keep the platform fast and reliable. 🙏'
+  },
+  {
+    cat:'updates', tagLabel:'Updates', tagBg:'#0f1e12', tagColor:'#4ade80',
+    date:'May 17, 2024', time:'3:00 PM', icon:'📋', iconBg:'#0a1420',
+    title:'Instant Funding Rules Updated 📋',
+    desc:'We have updated the Instant Funding rules to provide greater clarity and fairness for all traders. Please review before starting.',
+    heroBg:'linear-gradient(135deg,#0a0e22 0%,#060812 50%,#0a0e22 100%)',
+    badgeBg:'#4f46e5', badgeText:'UPDATE',
+    heroTitle:'Instant Funding Updated 📋',
+    heroDesc:'New rules are now in effect for Instant Funding accounts. Please read carefully before placing any trades.',
+    btnLabel:'Read Rules', btnBg:'#4f46e5',
+    heroEmoji:'📑',
+    heroExtra:'<span style="position:absolute;bottom:0;right:0;font-size:42px;">✍️</span>',
+    sections:[
+      { icon:'🔵', iconBg:'#0a1420', title:'Key Rule Changes', type:'bullets', items:['Maximum daily loss updated to 3% of account balance.','News trading is now permitted with a 2-minute buffer window.','Weekend holding is allowed for all account sizes.','Profit split increased from 80% to 85% for consistent traders.'] },
+      { icon:'⚠️', iconBg:'#1e160a', title:'Important Reminders', type:'bullets', items:['All existing accounts will transition to the new rules automatically.','Violations of the daily loss limit will result in account suspension.','Contact support if you have questions about the rule changes.','Full rule document available in the Trading Conditions section.'] }
+    ],
+    thanks:'Thank you for staying compliant and trading responsibly. Happy trading! 📈'
+  },
+  {
+    cat:'payouts', tagLabel:'Payouts', tagBg:'#1e1a2e', tagColor:'#a78bfa',
+    date:'May 13, 2024', time:'1:00 PM', icon:'💰', iconBg:'#1e1a2e',
+    title:'April Payouts Are Live 💰',
+    desc:'All April cycle payouts have been processed and are now available. Check your dashboard for full details and payout amounts.',
+    heroBg:'linear-gradient(135deg,#1a1040 0%,#0f0a2a 50%,#12103a 100%)',
+    badgeBg:'#7c3aed', badgeText:'PAYOUTS',
+    heroTitle:'April Payouts Are Live! 💰',
+    heroDesc:'Check your payout dashboard to view your April earnings and download your payout certificate.',
+    btnLabel:'View Payouts', btnBg:'#7c3aed',
+    heroEmoji:'💵',
+    heroExtra:'<span style="position:absolute;bottom:0;right:0;font-size:42px;">🎉</span>',
+    sections:[
+      { icon:'✅', iconBg:'#14291a', title:'Payout Details', type:'bullets', items:['All eligible traders for the April cycle have been paid.','Total payouts processed: over $2.1 million.','Payout certificates are available for download in your dashboard.','Average processing time was under 12 hours this cycle.'] },
+      { icon:'⬆️', iconBg:'#1e1a2e', title:'Share Your Success', type:'upload', desc:'Upload your April payout certificate and get featured in our community hall of fame.', btnLabel:'Upload Certificate →', infoTitle:'How to Upload?', infoText:'Go to Payouts → select your payout → click Upload Certificate and add a comment.' }
+    ],
+    thanks:'Congratulations to all funded traders! Keep trading, keep growing! 💪'
+  },
+  {
+    cat:'events', tagLabel:'Events', tagBg:'#1a1a2e', tagColor:'#818cf8',
+    date:'May 12, 2024', time:'12:00 PM', icon:'🏆', iconBg:'#1e1a0a',
+    title:'Trading Contest – Win $5,000 🏆',
+    desc:'Join our biggest trading contest yet! The top trader at the end of the contest period wins $5,000 in cash plus a funded account upgrade.',
+    heroBg:'linear-gradient(135deg,#1a1400 0%,#120e00 50%,#1a1600 100%)',
+    badgeBg:'#ca8a04', badgeText:'EVENT',
+    heroTitle:'Trading Contest 🏆',
+    heroDesc:'Compete against the best traders. Top the leaderboard and win $5,000 cash + account upgrade. Contest ends May 31.',
+    btnLabel:'Join Contest', btnBg:'#ca8a04',
+    heroEmoji:'🥇',
+    heroExtra:'<span style="position:absolute;bottom:0;right:0;font-size:42px;">🎖️</span>',
+    sections:[
+      { icon:'🏆', iconBg:'#1e1a0a', title:'Contest Prizes', type:'bullets', items:['🥇 1st Place — $5,000 cash + $200K funded account upgrade.','🥈 2nd Place — $2,000 cash + $100K funded account upgrade.','🥉 3rd Place — $1,000 cash + $50K funded account upgrade.','Places 4–10 receive exclusive merchandise and fee waivers.'] },
+      { icon:'📋', iconBg:'#1e1a0a', title:'Contest Rules', type:'bullets', items:['Contest runs from May 13 – May 31, 2024.','Open to all active funded account holders.','Rankings based on percentage return, not absolute profit.','Normal risk rules apply — no rule violations allowed.'] }
+    ],
+    thanks:'May the best trader win! Good luck to everyone participating. 🚀'
+  },
+  {
+    cat:'system', tagLabel:'System', tagBg:'#1e160a', tagColor:'#fb923c',
+    date:'May 10, 2024', time:'8:00 AM', icon:'🖥️', iconBg:'#151515',
+    title:'Server Upgrade Completed ✅',
+    desc:'We have successfully completed our infrastructure upgrade. The platform is now faster, more stable, and built for growth.',
+    heroBg:'linear-gradient(135deg,#081208 0%,#040a04 50%,#081208 100%)',
+    badgeBg:'#16a34a', badgeText:'DONE',
+    heroTitle:'Server Upgrade Complete ✅',
+    heroDesc:'Our servers have been upgraded. Expect faster execution, lower latency, and improved platform stability for all.',
+    btnLabel:'Read More', btnBg:'#16a34a',
+    heroEmoji:'⚡',
+    heroExtra:'<span style="position:absolute;bottom:0;right:0;font-size:42px;">🚀</span>',
+    sections:[
+      { icon:'⚡', iconBg:'#0a1a0a', title:'Improvements Made', type:'bullets', items:['Server response time reduced by 60% across all regions.','Trade execution latency dropped to under 5ms average.','New redundancy systems — 99.99% uptime guaranteed.','Database upgraded for faster chart loading and order history.'] },
+      { icon:'🌍', iconBg:'#0a1a0a', title:'New Infrastructure', type:'bullets', items:['Added 3 new server nodes in Europe, Asia, and North America.','All data is now replicated across multiple geographic zones.','Automatic failover ensures zero downtime during incidents.','Platform security hardened with new DDoS protection layer.'] }
+    ],
+    thanks:'Thank you for your patience during our maintenance window. The best is yet to come! ⚡'
+  }
+];
+
+function renderHero(a) {
+  const hero = document.getElementById('hero');
+  hero.style.background = a.heroBg;
+  hero.innerHTML = `
+    <div class="hero-bg-dots"></div>
+    <div class="hero-content">
+      <div class="new-badge" style="background:${a.badgeBg}">${a.badgeText}</div>
+      <h2>${a.heroTitle}</h2>
+      <p>${a.heroDesc}</p>
+    </div>
+    <div class="hero-image">
+      <div style="position:relative;width:160px;height:140px;display:flex;align-items:center;justify-content:center;">
+        <span style="font-size:90px;filter:drop-shadow(0 8px 24px rgba(0,0,0,0.5));">${a.heroEmoji}</span>
+        ${a.heroExtra}
+      </div>
+    </div>
+    <div class="carousel-dots">
+      <div class="dot active"></div><div class="dot"></div><div class="dot"></div>
+    </div>`;
+}
+
+function renderSection(s) {
+  const iconEl = `<div class="s-icon" style="background:${s.iconBg}">${s.icon}</div>`;
+  if (s.type === 'bullets') {
+    return `<div class="section-block">
+      <div class="section-title">${iconEl} ${s.title}</div>
+      <ul class="bullet-list">${s.items.map(i=>`<li>${i}</li>`).join('')}</ul>
+    </div>`;
+  }
+  if (s.type === 'upload') {
+    return `<div class="section-block">
+      <div class="section-title">${iconEl} ${s.title}</div>
+      <p style="font-size:13px;color:#888;margin-bottom:14px;line-height:1.5;">${s.desc}</p>
+      <button class="action-btn">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+        </svg>
+        ${s.btnLabel}
+      </button>
+      <div class="info-card">
+        <div class="info-card-left">
+          <div class="info-card-title">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            ${s.infoTitle}
+          </div>
+          <p>${s.infoText}</p>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;flex-shrink:0;">
+          <div class="cert-preview">📄</div>
+          <div class="cert-formats"><strong>Supported formats:</strong>JPG, PNG, PDF (Max. 5MB)</div>
+        </div>
+      </div>
+    </div>`;
+  }
+  return '';
+}
+
+function renderDetail(a) {
+  const dp = document.getElementById('detailPanel');
+  dp.innerHTML = `
+    <div class="detail-top">
+      <span class="detail-tag" style="background:${a.tagBg};color:${a.tagColor}">${a.tagLabel}</span>
+      <span class="detail-date">${a.date} &nbsp;•&nbsp; <span>${a.time}</span></span>
+    </div>
+    <div class="detail-header">
+      <div class="detail-icon" style="background:${a.iconBg}">${a.icon}</div>
+      <h2>${a.title}</h2>
+    </div>
+    <p class="detail-desc">${a.desc}</p>
+    ${a.sections.map(renderSection).join('')}`;
+  dp.classList.remove('detail-anim');
+  void dp.offsetWidth;
+  dp.classList.add('detail-anim');
+  document.getElementById('thankYou').textContent = a.thanks;
+  document.querySelector('.right-panel').scrollTop = 0;
+}
+
+function selectItem(el) {
+  document.querySelectorAll('.ann-item').forEach(i => i.classList.remove('active'));
+  el.classList.add('active');
+  const a = data[parseInt(el.dataset.id)];
+  if (!a) return;
+  renderHero(a);
+  renderDetail(a);
+  notifyParentFrameHeight();
+}
+
+function filterTab(el, cat) {
+  document.querySelectorAll('.f-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.ann-item').forEach(item => {
+    item.style.display = (cat === 'all' || item.dataset.cat === cat) ? 'flex' : 'none';
+  });
+  notifyParentFrameHeight();
+}
+
+function showComingSoon() {
+  const pop = document.getElementById('csPop');
+  if (!pop) return;
+  pop.classList.add('open');
+  pop.setAttribute('aria-hidden', 'false');
+}
+
+function hideComingSoon() {
+  const pop = document.getElementById('csPop');
+  if (!pop) return;
+  pop.classList.remove('open');
+  pop.setAttribute('aria-hidden', 'true');
+}
+
+function escapeHtml(v = '') {
+  return String(v).replace(/[&<>"']/g, (m) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
+}
+
+function iconClass(cat = '') {
+  const c = String(cat || '').toLowerCase();
+  if (c === 'payouts') return 'purple';
+  if (c === 'updates') return 'green';
+  if (c === 'system') return 'orange';
+  if (c === 'events') return 'gold';
+  return 'gray';
+}
+
+function normalizeAnnouncement(row = {}, i = 0) {
+  return {
+    cat: String(row.cat || 'updates'),
+    tagLabel: String(row.tagLabel || 'Updates'),
+    tagBg: String(row.tagBg || '#0f1e12'),
+    tagColor: String(row.tagColor || '#4ade80'),
+    date: String(row.date || ''),
+    time: String(row.time || ''),
+    icon: String(row.icon || '📢'),
+    iconBg: String(row.iconBg || '#0a1420'),
+    title: String(row.title || `Announcement ${i + 1}`),
+    desc: String(row.desc || ''),
+    heroBg: String(row.heroBg || 'linear-gradient(135deg,#1a1040 0%,#0f0a2a 50%,#12103a 100%)'),
+    badgeBg: String(row.badgeBg || '#7c3aed'),
+    badgeText: String(row.badgeText || 'NEW'),
+    heroTitle: String(row.heroTitle || row.title || ''),
+    heroDesc: String(row.heroDesc || row.desc || ''),
+    btnLabel: String(row.btnLabel || 'Read More'),
+    btnBg: String(row.btnBg || '#7c3aed'),
+    heroEmoji: String(row.heroEmoji || '📢'),
+    heroExtra: String(row.heroExtra || ''),
+    sections: Array.isArray(row.sections) ? row.sections : [],
+    thanks: String(row.thanks || '')
+  };
+}
+
+function renderAnnouncementList() {
+  const list = document.querySelector('.ann-list');
+  if (!list) return;
+  list.innerHTML = data.map((a, i) => {
+    const title = a.title || '';
+    const desc = a.desc || '';
+    const timeText = a.time || '';
+    const cat = a.cat || 'updates';
+    const tag = a.tagLabel || cat;
+    const icon = a.icon || '📢';
+    return `<div class=\"ann-item ${i === 0 ? 'active' : ''}\" data-cat=\"${escapeHtml(cat)}\" data-id=\"${i}\" onclick=\"selectItem(this)\">
+      <div class=\"ann-icon ${iconClass(cat)}\">${escapeHtml(icon)}</div>
+      <div class=\"ann-content\"><h4>${escapeHtml(title)}</h4><p>${escapeHtml(desc)}</p></div>
+      <div class=\"ann-meta\"><span class=\"tag ${escapeHtml(cat)}\">${escapeHtml(tag)}</span><span class=\"ann-time\">${escapeHtml(timeText)}</span></div>
+      <span class=\"ann-arrow\">›</span>
+    </div>`;
+  }).join('');
+}
+
+function applyPanelData(payload = {}) {
+  const src = payload?.announcementsPanelData;
+  const list = Array.isArray(src?.items) ? src.items : (Array.isArray(src) ? src : []);
+  if (!list.length) return;
+  data = list.map(normalizeAnnouncement);
+  renderAnnouncementList();
+  const first = document.querySelector('.ann-item');
+  if (first) selectItem(first);
+}
+
+function notifyParentFrameHeight() {
+  const main = document.querySelector('.main');
+  const notif = document.querySelector('.notif-bar');
+  const h = Math.max(
+    0,
+    Math.ceil((main ? main.scrollHeight : 0) + (notif ? notif.scrollHeight : 0))
+  );
+  if (window.parent && window.parent !== window) {
+    window.parent.postMessage({ type: 'rmp:frameHeight', panel: 'announcements', height: h }, '*');
+  }
+}
+
+window.addEventListener('message', (event) => {
+  if (!event.data) return;
+  if (event.data.type === 'rmp:getHeight') notifyParentFrameHeight();
+  if (event.data.type === 'rmp:firmPanelData') applyPanelData(event.data.data || {});
+});
+window.addEventListener('resize', notifyParentFrameHeight);
+window.addEventListener('load', () => setTimeout(notifyParentFrameHeight, 30));
+document.querySelector('.notif-btn')?.addEventListener('click', (e) => { e.preventDefault(); showComingSoon(); });
+document.getElementById('csPopClose')?.addEventListener('click', hideComingSoon);
+document.getElementById('csPop')?.addEventListener('click', (e) => { if (e.target?.id === 'csPop') hideComingSoon(); });
+
+renderAnnouncementList();
+renderHero(data[0]);
+renderDetail(data[0]);
+setTimeout(notifyParentFrameHeight, 80);
+</script>
+<script type="module" src="/site-performance.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+{
+  "capturedAt": "2026-08-24",
+  "record": "equity-edge",
+  "existsBeforeChange": false,
+  "checkedSlugs": ["equity-edge", "equityedge"],
+  "restoreAction": "Delete the equity-edge documents created in firms, firmReviewProfiles, and firmRatingStats."
+}

@@ -1,0 +1,117 @@
+{
+  "version": 1,
+  "fields": [
+    "payoutCycle",
+    "newsTrading",
+    "minTradingDays",
+    "timeLimit",
+    "startingPrice",
+    "eaAllowed"
+  ],
+  "firms": {
+    "aquafunded": {
+      "payoutCycle": "14 Days",
+      "newsTrading": "Allowed",
+      "minTradingDays": "",
+      "timeLimit": "",
+      "startingPrice": "",
+      "eaAllowed": ""
+    },
+    "directfundingtrader": {
+      "payoutCycle": "",
+      "newsTrading": "",
+      "minTradingDays": "",
+      "timeLimit": "",
+      "startingPrice": "",
+      "eaAllowed": ""
+    },
+    "finotivefunding": {
+      "payoutCycle": "",
+      "newsTrading": "",
+      "minTradingDays": "",
+      "timeLimit": "",
+      "startingPrice": "",
+      "eaAllowed": ""
+    },
+    "fundedfun": {
+      "payoutCycle": "",
+      "newsTrading": "",
+      "minTradingDays": "",
+      "timeLimit": "",
+      "startingPrice": "",
+      "eaAllowed": ""
+    },
+    "fundednext": {
+      "payoutCycle": "",
+      "newsTrading": "",
+      "minTradingDays": "",
+      "timeLimit": "",
+      "startingPrice": "",
+      "eaAllowed": ""
+    },
+    "funderpro": {
+      "payoutCycle": "",
+      "newsTrading": "",
+      "minTradingDays": "",
+      "timeLimit": "",
+      "startingPrice": "",
+      "eaAllowed": ""
+    },
+    "fx2funding": {
+      "payoutCycle": "",
+      "newsTrading": "",
+      "minTradingDays": "",
+      "timeLimit": "",
+      "startingPrice": "",
+      "eaAllowed": ""
+    },
+    "fxify": {
+      "payoutCycle": "",
+      "newsTrading": "",
+      "minTradingDays": "",
+      "timeLimit": "",
+      "startingPrice": "",
+      "eaAllowed": ""
+    },
+    "goatfundedtrader": {
+      "payoutCycle": "",
+      "newsTrading": "",
+      "minTradingDays": "",
+      "timeLimit": "",
+      "startingPrice": "",
+      "eaAllowed": ""
+    },
+    "qtfunded": {
+      "payoutCycle": "",
+      "newsTrading": "",
+      "minTradingDays": "",
+      "timeLimit": "",
+      "startingPrice": "",
+      "eaAllowed": ""
+    },
+    "swayfunded": {
+      "payoutCycle": "",
+      "newsTrading": "",
+      "minTradingDays": "",
+      "timeLimit": "",
+      "startingPrice": "",
+      "eaAllowed": ""
+    },
+    "toponetrader": {
+      "payoutCycle": "",
+      "newsTrading": "",
+      "minTradingDays": "",
+      "timeLimit": "",
+      "startingPrice": "",
+      "eaAllowed": ""
+    },
+    "wefund": {
+      "payoutCycle": "",
+      "newsTrading": "",
+      "minTradingDays": "",
+      "timeLimit": "",
+      "startingPrice": "",
+      "eaAllowed": ""
+    }
+  }
+}

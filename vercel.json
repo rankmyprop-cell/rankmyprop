@@ -1,0 +1,371 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "vite",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "cleanUrls": true,
+  "functions": {
+    "api/*.js": {
+      "maxDuration": 20
+    }
+  },
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "rankmyprop.in"
+        }
+      ],
+      "destination": "https://www.rankmyprop.in/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/discount",
+      "destination": "/offers",
+      "permanent": true
+    },
+    {
+      "source": "/sitemap-challenge-rules.xml",
+      "destination": "/sitemaps/challenge-rules.xml",
+      "permanent": true
+    },
+    {
+      "source": "/propfirmrule",
+      "destination": "/prop-firm-rules",
+      "permanent": true
+    },
+    {
+      "source": "/prop-firms/:slug/rules",
+      "destination": "/firm-rules?firm=:slug",
+      "permanent": true
+    },
+    {
+      "source": "/firm-reviews",
+      "has": [
+        {
+          "type": "query",
+          "key": "slug",
+          "value": "(?<firm>.+)"
+        }
+      ],
+      "destination": "/prop-firms/:firm/reviews",
+      "permanent": true
+    },
+    {
+      "source": "/firm-reviews",
+      "destination": "/reviews",
+      "permanent": true
+    },
+    {
+      "source": "/compare-prop-firms",
+      "destination": "/compare",
+      "permanent": true
+    },
+    {
+      "source": "/prop-firms/traderscale",
+      "destination": "/prop-firms/trader-scale",
+      "permanent": true
+    },
+    {
+      "source": "/prop-firms/blueberryfunded",
+      "destination": "/prop-firms/blueberry-funded",
+      "permanent": true
+    },
+    {
+      "source": "/prop-firms/swayfunded",
+      "destination": "/prop-firms/sway-funded",
+      "permanent": true
+    },
+    {
+      "source": "/prop-firms/toponetrader",
+      "destination": "/prop-firms/top-one-trader",
+      "permanent": true
+    },
+    {
+      "source": "/prop-firms/goatfundedtrader",
+      "destination": "/prop-firms/goat-funded-trader",
+      "permanent": true
+    },
+    {
+      "source": "/prop-firms/wefund",
+      "destination": "/prop-firms/we-fund",
+      "permanent": true
+    },
+    {
+      "source": "/prop-firms/qtfunded",
+      "destination": "/prop-firms/qt-funded",
+      "permanent": true
+    },
+    {
+      "source": "/prop-firms/finotivefunding",
+      "destination": "/prop-firms/finotive-funding",
+      "permanent": true
+    },
+    {
+      "source": "/prop-firms/aquafunded",
+      "destination": "/prop-firms/aqua-funded",
+      "permanent": true
+    },
+    {
+      "source": "/prop-firms/fx2funding",
+      "destination": "/prop-firms/fx2-funding",
+      "permanent": true
+    },
+    {
+      "source": "/traderscaledetail",
+      "destination": "/prop-firms/trader-scale",
+      "permanent": true
+    },
+    {
+      "source": "/blueberrydetail",
+      "destination": "/prop-firms/blueberry-funded",
+      "permanent": true
+    },
+    {
+      "source": "/blueberryfundeddetail",
+      "destination": "/prop-firms/blueberry-funded",
+      "permanent": true
+    },
+    {
+      "source": "/swayfundeddetail",
+      "destination": "/prop-firms/sway-funded",
+      "permanent": true
+    },
+    {
+      "source": "/toponetraderdetail",
+      "destination": "/prop-firms/top-one-trader",
+      "permanent": true
+    },
+    {
+      "source": "/goatfundedtraderdetail",
+      "destination": "/prop-firms/goat-funded-trader",
+      "permanent": true
+    },
+    {
+      "source": "/wefunddetail",
+      "destination": "/prop-firms/we-fund",
+      "permanent": true
+    },
+    {
+      "source": "/qtfundeddetail",
+      "destination": "/prop-firms/qt-funded",
+      "permanent": true
+    },
+    {
+      "source": "/finotivefundingdetail",
+      "destination": "/prop-firms/finotive-funding",
+      "permanent": true
+    },
+    {
+      "source": "/funderprodetail",
+      "destination": "/prop-firms/funderpro",
+      "permanent": true
+    },
+    {
+      "source": "/fxifydetail",
+      "destination": "/prop-firms/fxify",
+      "permanent": true
+    },
+    {
+      "source": "/aquafundeddetail",
+      "destination": "/prop-firms/aqua-funded",
+      "permanent": true
+    },
+    {
+      "source": "/fx2fundingdetail",
+      "destination": "/prop-firms/fx2-funding",
+      "permanent": true
+    },
+    {
+      "source": "/fundednextdetail",
+      "destination": "/prop-firms/fundednext",
+      "permanent": true
+    },
+    {
+      "source": "/blog-post-:id(\\d+)",
+      "destination": "/blog/blog-post-:id",
+      "permanent": true
+    },
+    {
+      "source": "/traderscalediscount",
+      "destination": "/offers/trader-scale",
+      "permanent": true
+    },
+    {
+      "source": "/blueberryfundeddiscount",
+      "destination": "/offers/blueberry-funded",
+      "permanent": true
+    },
+    {
+      "source": "/swayfundeddiscount",
+      "destination": "/offers/sway-funded",
+      "permanent": true
+    },
+    {
+      "source": "/toponetraderdiscount",
+      "destination": "/offers/top-one-trader",
+      "permanent": true
+    },
+    {
+      "source": "/goatfundedtraderdiscount",
+      "destination": "/offers/goat-funded-trader",
+      "permanent": true
+    },
+    {
+      "source": "/wefunddiscount",
+      "destination": "/offers/we-fund",
+      "permanent": true
+    },
+    {
+      "source": "/qtfundeddiscount",
+      "destination": "/offers/qt-funded",
+      "permanent": true
+    },
+    {
+      "source": "/fxifydiscount",
+      "destination": "/offers/fxify",
+      "permanent": true
+    },
+    {
+      "source": "/finotivefundingdiscount",
+      "destination": "/offers/finotive-funding",
+      "permanent": true
+    },
+    {
+      "source": "/funderprodiscount",
+      "destination": "/offers/funderpro",
+      "permanent": true
+    },
+    {
+      "source": "/aquafundeddiscount",
+      "destination": "/offers/aqua-funded",
+      "permanent": true
+    },
+    {
+      "source": "/fx2fundingdiscount",
+      "destination": "/offers/fx2-funding",
+      "permanent": true
+    },
+    {
+      "source": "/fundednextdiscount",
+      "destination": "/offers/fundednext",
+      "permanent": true
+    },
+    {
+      "source": "/privacypolicy",
+      "destination": "/privacy-policy",
+      "permanent": true
+    },
+    {
+      "source": "/termsofservice",
+      "destination": "/terms",
+      "permanent": true
+    },
+    {
+      "source": "/cookiespolicy",
+      "destination": "/cookies-policy",
+      "permanent": true
+    },
+    {
+      "source": "/cookie-policy",
+      "destination": "/cookies-policy",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/reviews/:firm",
+      "destination": "/api/public-page-content?resource=reviews&firm=:firm"
+    },
+    {
+      "source": "/api/reviews",
+      "destination": "/api/public-page-content?resource=reviews"
+    },
+    {
+      "source": "/__/auth/:path*",
+      "destination": "https://rank-my-prop.firebaseapp.com/__/auth/:path*"
+    },
+    {
+      "source": "/api/support-refresh",
+      "destination": "/api/support-session?action=refresh"
+    },
+    {
+      "source": "/operations-console",
+      "destination": "/operations-console.html"
+    },
+    {
+      "source": "/review-api",
+      "destination": "/review-api.html"
+    },
+    {
+      "source": "/compare",
+      "destination": "/compare.html"
+    },
+    {
+      "source": "/offers/:firm",
+      "destination": "/offers/:firm.html"
+    },
+    {
+      "source": "/prop-firms/:slug/reviews",
+      "destination": "/prop-firms/:slug/reviews.html"
+    },
+    {
+      "source": "/prop-firm-rules/:firm/:program",
+      "destination": "/prop-firm-rules/:firm/:program.html"
+    },
+    {
+      "source": "/prop-firm-rules/:firm",
+      "destination": "/prop-firm-rules/:firm.html"
+    },
+    {
+      "source": "/firm-rules",
+      "destination": "/firm-rules.html"
+    },
+    {
+      "source": "/compare/:comparison",
+      "destination": "/compare/:comparison.html"
+    },
+    {
+      "source": "/reviews",
+      "destination": "/reviews.html"
+    },
+    {
+      "source": "/firm-reviews",
+      "destination": "/firm-reviews.html"
+    },
+    {
+      "source": "/broker-coming-soon",
+      "destination": "/broker-coming-soon.html"
+    },
+    {
+      "source": "/:page(prop-news|prop-news-post|content-post|trading-guides|funding-strategies|trading-psychology|beginner-tutorials|giveaways|giveaway|listedprop|bestprop|beginner-friendly-firms|highest-rated-firms|best-instant-funding-firms|best-futures-prop-firms|best-hft-prop-firms|best-prop-firms-2026|cheapest-prop-firms|fast-payout-prop-firms|most-trusted-prop-firms|prop-firm-rules|firm-rules|aquafundeddetail|blueberrydetail|blueberryfundeddetail|blueguardiandetail|directfundingtraderdetail|finotivefundingdetail|firm-detail|fundednextdetail|funderprodetail|fx2fundingdetail|fxifydetail|goatfundedtraderdetail|instantfundingdetail|qtfundeddetail|swayfundeddetail|theproptradedetail|toponetraderdetail|traderscaledetail|wefunddetail|about|contact|legal|disclaimer|privacy-policy|terms|cookies-policy)",
+      "destination": "/:page.html"
+    },
+    {
+      "source": "/blog/blog-post-:id(\\d+)",
+      "destination": "/blog/blog-post-:id.html"
+    },
+    {
+      "source": "/:section(trading-guides|funding-strategies|trading-psychology|beginner-tutorials)/:slug",
+      "destination": "/:section/:slug.html"
+    },
+    {
+      "source": "/news/:slug",
+      "destination": "/news/:slug.html"
+    },
+    {
+      "source": "/prop-firms/:slug/:view(challenges|rules|spreads|announcements)",
+      "destination": "/firm-detail.html?slug=:slug&view=:view"
+    },
+    {
+      "source": "/prop-firms/:slug",
+      "destination": "/prop-firms/:slug.html"
+    },
+    {
+      "source": "/((?!api/|assets/|.*\\.[a-zA-Z0-9]+$).*)",
+      "destination": "/404.html"
+    }
+  ]
+}

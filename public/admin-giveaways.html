@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+<meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                                                                                                                                                                  <meta property="og:image:height" content="630" />
+                                                                                                                                                        <meta property="og:image:width" content="1200" />
+<meta name="twitter:image" content="https://www.rankmyprop.in/assets/og-default-1200x630.webp" />
+<meta property="og:image" content="https://www.rankmyprop.in/assets/og-default-1200x630.webp" />
+<meta name="description" content="Giveaways CMS | Rank My Prop" />
+<meta name="theme-color" content="#0a0b12" />
+                                                                                                                                                                                                                                                                                                                                                                                                <meta name="robots" content="noindex, nofollow" />
+  <title>Giveaways CMS | Rank My Prop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/dashboard-layout.css" />
+  <style>
+    .builder-list{display:flex;flex-direction:column;gap:8px}
+    .builder-row{display:grid;grid-template-columns:1.6fr 1fr auto auto;gap:8px;align-items:center}
+    .builder-row.winner{grid-template-columns:1fr .7fr .9fr 1.2fr 1.2fr auto}
+    .builder-row input{height:38px}
+    .chk{display:inline-flex;align-items:center;gap:6px;color:#b8c0de;font-size:12px}
+    .chk input{width:16px;height:16px}
+    .hint{font-size:12px;color:#97a1c7;margin-top:4px}
+    @media (max-width: 1100px){
+      .builder-row{grid-template-columns:1fr}
+      .builder-row.winner{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-dot"></span><b>RMP Admin</b></div>
+      <div class="menu-group-title">Admin Modules</div>
+      <a class="side-link" href="/dashboard-admin">Admin Home</a>
+      <a class="side-link" href="/admin-clients">Client Access</a>
+      <a class="side-link" href="/admin-moderation">Moderation</a>
+      <a class="side-link" href="/admin-purchases">Purchases</a>
+      <a class="side-link" href="/admin-announcements">Announcement Hub</a>
+      <a class="side-link" href="/admin-community">Community Posts</a>
+      <a class="side-link active" href="/admin-giveaways">Giveaways CMS</a>
+      <a class="side-link" href="/admin-events">Upcoming Events</a>
+      <a class="side-link" href="/admin-offers">Offers Control</a>
+      <a class="side-link" href="/admin-firm-details">Firm Detail CMS</a>
+      <a class="side-link" href="/admin-filters">Filters Control</a>
+      <a class="side-link" href="/admin-propnews">Prop News CMS</a>
+      <a class="side-link" href="/admin-trading-guides">Trading Guides CMS</a>
+      <a class="side-link" href="/admin-funding-strategies">Funding Strategies CMS</a>
+      <a class="side-link" href="/admin-trading-psychology">Trading Psychology CMS</a>
+      <a class="side-link" href="/admin-beginner-tutorials">Beginner Tutorials CMS</a>
+      <a class="side-link" href="/admin-faqs">FAQ CMS</a>
+      <a class="side-link" href="#" id="logoutBtn">Log out</a>
+    </aside>
+
+    <main class="main">
+      <header class="top">
+        <div>
+          <h3>Giveaways CMS</h3>
+          <div class="welcome">Create, edit, delete, and control active giveaway content.</div>
+        </div>
+        <div class="top-actions"><span class="chip" id="adminEmail">loading...</span></div>
+      </header>
+      <div class="chip" id="notice" style="display:none;"></div>
+
+      <section class="panel">
+        <div class="panel-head"><h3>Giveaway (Create / Edit)</h3></div>
+        <form id="form" class="form-grid">
+          <input type="hidden" name="docId" />
+
+          <div class="field"><label>Title</label><input name="title" required /></div>
+          <div class="field"><label>Badge Label</label><input name="badgeLabel" value="Giveaway" /></div>
+          <div class="field full"><label>Subtitle</label><textarea name="subtitle" required></textarea></div>
+
+          <div class="field"><label>Status</label><select name="status"><option value="active">active</option><option value="scheduled">scheduled</option><option value="ended">ended</option><option value="draft">draft</option></select></div>
+          <div class="field"><label>Total Winners</label><input name="totalWinners" type="number" min="0" value="3" /></div>
+
+          <div class="field"><label>Start Date (UTC)</label><input name="startDate" type="datetime-local" /></div>
+          <div class="field"><label>End Date (UTC)</label><input name="endDate" type="datetime-local" /></div>
+          <div class="field"><label>Announcement Date (UTC)</label><input name="announcementDate" type="datetime-local" /></div>
+          <div class="field"><label>CTA Label</label><input name="ctaLabel" value="Join Now and Get a Chance to Win" /></div>
+          <div class="field full"><label>CTA URL</label><input name="ctaUrl" placeholder="https://..." /></div>
+
+          <div class="field"><label>Prize Count</label><input name="prizeCount" type="number" min="1" value="3" /></div>
+          <div class="field"><label>Prize Amount</label><input name="prizeAmount" type="number" min="0" value="10000" /></div>
+          <div class="field"><label>Prize Currency</label><input name="prizeCurrency" value="USD" /></div>
+          <div class="field"><label>Prize Provider</label><input name="prizeProvider" value="Rank My Prop" /></div>
+          <div class="field"><label>Prize Icon Text</label><input name="prizeIconText" value="GW" /></div>
+          <div class="field"><label>Prize Icon URL</label><input name="prizeIconUrl" placeholder="https://..." /></div>
+          <div class="field full"><label>Prize Description</label><textarea name="prizeDescription"></textarea></div>
+
+          <div class="field"><label>Fair Notice Title</label><input name="fairTitle" value="Fair and Transparent" /></div>
+          <div class="field"><label>Important Notice Title</label><input name="importantTitle" value="Important" /></div>
+          <div class="field"><label>Fair Notice Description</label><textarea name="fairDesc"></textarea></div>
+          <div class="field"><label>Important Notice Description</label><textarea name="importantDesc"></textarea></div>
+
+          <div class="field"><label>Heading: What You Can Win</label><input name="headingWin" value="What You Can Win" /></div>
+          <div class="field"><label>Heading: How To Enter</label><input name="headingEnter" value="How to Enter" /></div>
+          <div class="field"><label>Heading: Giveaway Details</label><input name="headingDetails" value="Giveaway Details" /></div>
+          <div class="field"><label>Heading: Entry Progress</label><input name="headingProgress" value="Entry Progress" /></div>
+          <div class="field"><label>Heading: Previous Winners</label><input name="headingWinners" value="Previous Winners" /></div>
+          <div class="field"><label>Previous Winners Subtext</label><input name="headingWinnersNote" value="Congrats to our recent winners." /></div>
+          <div class="field"><label>View All Winners Text</label><input name="viewAllText" value="View All Winners" /></div>
+
+          <div class="full panel">
+            <div class="panel-head"><h3>How To Enter Rules</h3><button class="btn" id="addRuleBtn" type="button">Add Rule</button></div>
+            <div id="rulesList" class="builder-list"></div>
+            <div class="hint">Rule text supports inline link format: [Instagram](https://instagram.com/rankmyprop.hq)</div>
+          </div>
+
+          <div class="full panel">
+            <div class="panel-head"><h3>Entry Progress Items</h3><button class="btn" id="addEntryBtn" type="button">Add Entry Step</button></div>
+            <div id="entriesList" class="builder-list"></div>
+            <div class="hint">You can add direct step link in Link field.</div>
+          </div>
+
+          <div class="full panel">
+            <div class="panel-head"><h3>Winners (Preview + View All Popup)</h3><button class="btn" id="addWinnerBtn" type="button">Add Winner</button></div>
+            <div id="winnersList" class="builder-list"></div>
+            <div class="hint">Avatar URL and profile URL are optional but supported.</div>
+          </div>
+
+          <div class="full top-actions">
+            <button class="btn-primary" id="submitBtn" type="submit">Save Giveaway</button>
+            <button class="btn" id="cancelBtn" type="button" style="display:none;">Cancel Edit</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><h3>All Giveaways</h3></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Title</th><th>Status</th><th>End Date</th><th>Updated</th><th>Action</th></tr></thead>
+            <tbody id="tbody"><tr><td colspan="5" class="empty">No giveaways yet.</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module">
+    import { db } from "./dashboard-common.js";
+    import { bindLogout, enforceAdmin, showNotice } from "./admin-common.js";
+    import { addDoc, collection, deleteDoc, doc, getDocs, serverTimestamp, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+    const COLLECTION = "giveaways";
+    const ALT_COLLECTION = "pageCopy";
+    const ALT_PREFIX = "giveaway__";
+    const ALT_ACTIVE_DOC = `${ALT_PREFIX}active`;
+    const FALLBACK_ID = "gw_001";
+    const FALLBACK_ROW = {
+      id: FALLBACK_ID,
+      title: "Exclusive Trading Giveaway",
+      subtitle: "We're giving back to our trading community with an exclusive giveaway.",
+      badgeLabel: "Giveaway",
+      status: "active",
+      totalWinners: 3,
+      dates: {
+        startDate: "2026-05-01T00:00:00Z",
+        endDate: "2026-05-20T23:59:00Z",
+        announcementDate: "2026-05-22T00:00:00Z"
+      },
+      cta: {
+        label: "Join Now and Get a Chance to Win",
+        url: "https://instagram.com/rankmyprop.hq"
+      },
+      prize: {
+        count: 3,
+        amount: 10000,
+        currency: "USD",
+        provider: "Rank My Prop",
+        description: "Three lucky traders will each receive a fully funded $10,000 evaluation account from Rank My Prop.",
+        iconText: "GW",
+        iconUrl: ""
+      },
+      notices: {
+        fairPlay: { title: "Fair and Transparent", description: "Winners will be picked randomly and announced publicly." },
+        important: { title: "Important", description: "Fake accounts, spam, and incomplete entries will be disqualified." }
+      },
+      rules: [
+        { id: "r1", text: "Follow @rankmyprop.hq on Instagram", required: true, link: "https://instagram.com/rankmyprop.hq" },
+        { id: "r2", text: "Like this post", required: true, link: "https://instagram.com/rankmyprop.hq" },
+        { id: "r3", text: "Tag 2 trading buddies in the comments", required: true, link: "https://instagram.com/rankmyprop.hq" },
+        { id: "r4", text: "Share this post to your story and mention us", required: true, link: "https://instagram.com/rankmyprop.hq" },
+        { id: "r5", text: "Make sure your profile is public", required: true }
+      ],
+      entrySteps: [
+        { id: "s1", label: "Follow on Instagram", completed: true, link: "https://instagram.com/rankmyprop.hq" },
+        { id: "s2", label: "Like this post", completed: true, link: "https://instagram.com/rankmyprop.hq" },
+        { id: "s3", label: "Tag 2 friends", completed: true, link: "https://instagram.com/rankmyprop.hq" },
+        { id: "s4", label: "Share to your story", completed: false, link: "https://instagram.com/rankmyprop.hq" },
+        { id: "s5", label: "Profile must be public", completed: false }
+      ],
+      winners: [
+        { id: "w1", username: "@trader_aman", amount: 10000, date: "2026-04-01" },
+        { id: "w2", username: "@market_maverick", amount: 10000, date: "2026-04-01" },
+        { id: "w3", username: "@pips_hunter", amount: 10000, date: "2026-04-01" }
+      ],
+      sectionTitles: {
+        whatYouCanWin: "What You Can Win",
+        howToEnter: "How to Enter",
+        details: "Giveaway Details",
+        entryProgress: "Entry Progress",
+        previousWinners: "Previous Winners",
+        previousWinnersNote: "Congrats to our recent winners.",
+        viewAllWinners: "View All Winners"
+      },
+      __virtual: true,
+      __store: "alt",
+      __altDocId: `${ALT_PREFIX}${FALLBACK_ID}`
+    };
+    const form = document.getElementById("form");
+    const tbody = document.getElementById("tbody");
+    const submitBtn = document.getElementById("submitBtn");
+    const cancelBtn = document.getElementById("cancelBtn");
+    const notice = document.getElementById("notice");
+    const rulesList = document.getElementById("rulesList");
+    const entriesList = document.getElementById("entriesList");
+    const winnersList = document.getElementById("winnersList");
+
+    let rows = [];
+
+    bindLogout("logoutBtn");
+
+    const el = (n) => form.elements.namedItem(n);
+    const toNum = (v, d = 0) => {
+      const n = Number(v);
+      return Number.isFinite(n) ? n : d;
+    };
+    const slugId = (v = "") => String(v || "").toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+    const altDocIdFromId = (id = "") => `${ALT_PREFIX}${slugId(id) || Date.now()}`;
+
+    function giveawayId(id, payload = {}) {
+      const direct = String(id || payload?.id || "").trim();
+      if (direct) return direct;
+      return slugId(payload?.title || "") || String(Date.now());
+    }
+
+    function toAltStoredPayload(id, payload) {
+      const gwId = giveawayId(id, payload);
+      const full = {
+        ...payload,
+        id: gwId
+      };
+      return {
+        type: "giveaway",
+        id: gwId,
+        title: String(payload?.title || ""),
+        status: String(payload?.status || "draft"),
+        giveaway: full,
+        updatedAt: serverTimestamp(),
+        createdAt: serverTimestamp()
+      };
+    }
+
+    function fromAltDoc(docId = "", raw = {}) {
+      const base = { ...(raw || {}) };
+      delete base.giveaway;
+      delete base.type;
+      const src = raw?.giveaway && typeof raw.giveaway === "object" ? { ...base, ...raw.giveaway } : base;
+      const markedGiveaway = String(raw?.type || "").toLowerCase() === "giveaway";
+      const hasPrefix = String(docId || "").startsWith(ALT_PREFIX);
+      if (!markedGiveaway && !hasPrefix) return null;
+      const gwId = String(src?.id || docId.replace(ALT_PREFIX, "") || "").trim();
+      return normalizeRow({ id: gwId, ...src, __store: "alt", __altDocId: docId }, gwId);
+    }
+
+    function toInputDate(iso = "") {
+      const d = new Date(String(iso || ""));
+      if (Number.isNaN(d.getTime())) return "";
+      const local = new Date(d.getTime() - d.getTimezoneOffset() * 60000);
+      return local.toISOString().slice(0, 16);
+    }
+
+    function fromInputDate(v = "") {
+      if (!v) return "";
+      const d = new Date(v);
+      return Number.isNaN(d.getTime()) ? "" : d.toISOString();
+    }
+
+    function addRuleRow(v = {}) {
+      const row = document.createElement("div");
+      row.className = "builder-row";
+      row.innerHTML = `
+        <input data-k="text" placeholder="Text / [Link](https://...)" value="${String(v.text || "").replace(/"/g, "&quot;")}">
+        <input data-k="link" placeholder="Link (optional)" value="${String(v.link || "").replace(/"/g, "&quot;")}">
+        <label class="chk"><input type="checkbox" data-k="required" ${v.required === false ? "" : "checked"}> Required</label>
+        <button class="btn-danger" type="button" data-action="/remove">Remove</button>
+      `;
+      row.querySelector('[data-action="/remove"]').addEventListener("click", () => row.remove());
+      rulesList.appendChild(row);
+    }
+
+    function addEntryRow(v = {}) {
+      const row = document.createElement("div");
+      row.className = "builder-row";
+      row.innerHTML = `
+        <input data-k="label" placeholder="Label / [Link](https://...)" value="${String(v.label || "").replace(/"/g, "&quot;")}">
+        <input data-k="link" placeholder="Link (optional)" value="${String(v.link || "").replace(/"/g, "&quot;")}">
+        <label class="chk"><input type="checkbox" data-k="completed" ${v.completed ? "checked" : ""}> Completed</label>
+        <button class="btn-danger" type="button" data-action="/remove">Remove</button>
+      `;
+      row.querySelector('[data-action="/remove"]').addEventListener("click", () => row.remove());
+      entriesList.appendChild(row);
+    }
+
+    function addWinnerRow(v = {}) {
+      const row = document.createElement("div");
+      row.className = "builder-row winner";
+      row.innerHTML = `
+        <input data-k="username" placeholder="@username" value="${String(v.username || "").replace(/"/g, "&quot;")}">
+        <input data-k="amount" type="number" min="0" placeholder="Amount" value="${String(v.amount || "").replace(/"/g, "&quot;")}">
+        <input data-k="date" type="date" value="${String(v.date || "").slice(0, 10)}">
+        <input data-k="avatarUrl" placeholder="Avatar URL" value="${String(v.avatarUrl || "").replace(/"/g, "&quot;")}">
+        <input data-k="profileUrl" placeholder="Profile URL" value="${String(v.profileUrl || "").replace(/"/g, "&quot;")}">
+        <button class="btn-danger" type="button" data-action="/remove">Remove</button>
+      `;
+      row.querySelector('[data-action="/remove"]').addEventListener("click", () => row.remove());
+      winnersList.appendChild(row);
+    }
+
+    function collectRules() {
+      return [...rulesList.children].map((r, i) => ({
+        id: `r${i + 1}`,
+        text: r.querySelector('[data-k="text"]').value.trim(),
+        link: r.querySelector('[data-k="link"]').value.trim(),
+        required: r.querySelector('[data-k="required"]').checked
+      })).filter((x) => x.text);
+    }
+
+    function collectEntries() {
+      return [...entriesList.children].map((r, i) => ({
+        id: `s${i + 1}`,
+        label: r.querySelector('[data-k="label"]').value.trim(),
+        link: r.querySelector('[data-k="link"]').value.trim(),
+        completed: r.querySelector('[data-k="completed"]').checked
+      })).filter((x) => x.label);
+    }
+
+    function collectWinners() {
+      return [...winnersList.children].map((r, i) => ({
+        id: `w${i + 1}`,
+        username: r.querySelector('[data-k="username"]').value.trim(),
+        amount: toNum(r.querySelector('[data-k="amount"]').value, 0),
+        date: r.querySelector('[data-k="date"]').value || "",
+        avatarUrl: r.querySelector('[data-k="avatarUrl"]').value.trim(),
+        profileUrl: r.querySelector('[data-k="profileUrl"]').value.trim()
+      })).filter((x) => x.username);
+    }
+
+    function resetForm() {
+      form.reset();
+      el("docId").value = "";
+      form.dataset.store = "";
+      form.dataset.altDocId = "";
+      el("badgeLabel").value = "Giveaway";
+      el("status").value = "active";
+      el("totalWinners").value = "3";
+      el("prizeCount").value = "3";
+      el("prizeAmount").value = "10000";
+      el("prizeCurrency").value = "USD";
+      el("prizeProvider").value = "Rank My Prop";
+      el("prizeIconText").value = "GW";
+      el("headingWin").value = "What You Can Win";
+      el("headingEnter").value = "How to Enter";
+      el("headingDetails").value = "Giveaway Details";
+      el("headingProgress").value = "Entry Progress";
+      el("headingWinners").value = "Previous Winners";
+      el("headingWinnersNote").value = "Congrats to our recent winners.";
+      el("viewAllText").value = "View All Winners";
+      el("ctaLabel").value = "Join Now and Get a Chance to Win";
+      submitBtn.textContent = "Save Giveaway";
+      cancelBtn.style.display = "none";
+
+      rulesList.innerHTML = "";
+      entriesList.innerHTML = "";
+      winnersList.innerHTML = "";
+      addRuleRow();
+      addEntryRow();
+      addWinnerRow();
+    }
+
+    function fillForm(row = {}) {
+      el("docId").value = row.id || "";
+      form.dataset.store = row.__store || "primary";
+      form.dataset.altDocId = row.__altDocId || "";
+      el("title").value = row.title || "";
+      el("badgeLabel").value = row.badgeLabel || "Giveaway";
+      el("subtitle").value = row.subtitle || "";
+      el("status").value = row.status || "active";
+      el("totalWinners").value = String(row.totalWinners || "0");
+
+      el("startDate").value = toInputDate(row?.dates?.startDate || "");
+      el("endDate").value = toInputDate(row?.dates?.endDate || "");
+      el("announcementDate").value = toInputDate(row?.dates?.announcementDate || "");
+
+      el("ctaLabel").value = row?.cta?.label || "Join Now and Get a Chance to Win";
+      el("ctaUrl").value = row?.cta?.url || "";
+
+      el("prizeCount").value = String(row?.prize?.count || "1");
+      el("prizeAmount").value = String(row?.prize?.amount || "0");
+      el("prizeCurrency").value = row?.prize?.currency || "USD";
+      el("prizeProvider").value = row?.prize?.provider || "Rank My Prop";
+      el("prizeIconText").value = row?.prize?.iconText || "GW";
+      el("prizeIconUrl").value = row?.prize?.iconUrl || "";
+      el("prizeDescription").value = row?.prize?.description || "";
+
+      el("fairTitle").value = row?.notices?.fairPlay?.title || "Fair and Transparent";
+      el("fairDesc").value = row?.notices?.fairPlay?.description || "";
+      el("importantTitle").value = row?.notices?.important?.title || "Important";
+      el("importantDesc").value = row?.notices?.important?.description || "";
+
+      el("headingWin").value = row?.sectionTitles?.whatYouCanWin || "What You Can Win";
+      el("headingEnter").value = row?.sectionTitles?.howToEnter || "How to Enter";
+      el("headingDetails").value = row?.sectionTitles?.details || "Giveaway Details";
+      el("headingProgress").value = row?.sectionTitles?.entryProgress || "Entry Progress";
+      el("headingWinners").value = row?.sectionTitles?.previousWinners || "Previous Winners";
+      el("headingWinnersNote").value = row?.sectionTitles?.previousWinnersNote || "Congrats to our recent winners.";
+      el("viewAllText").value = row?.sectionTitles?.viewAllWinners || "View All Winners";
+
+      rulesList.innerHTML = "";
+      entriesList.innerHTML = "";
+      winnersList.innerHTML = "";
+
+      (Array.isArray(row.rules) && row.rules.length ? row.rules : [{}]).forEach(addRuleRow);
+      (Array.isArray(row.entrySteps) && row.entrySteps.length ? row.entrySteps : [{}]).forEach(addEntryRow);
+      (Array.isArray(row.winners) && row.winners.length ? row.winners : [{}]).forEach(addWinnerRow);
+
+      submitBtn.textContent = "Update Giveaway";
+      cancelBtn.style.display = "inline-flex";
+      form.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function normalizeRow(raw = {}, id = "") {
+      return {
+        id: raw.id || id,
+        title: raw.title || "",
+        badgeLabel: raw.badgeLabel || "Giveaway",
+        subtitle: raw.subtitle || "",
+        status: raw.status || "active",
+        totalWinners: raw.totalWinners || 0,
+        dates: raw.dates || {},
+        cta: raw.cta || {},
+        prize: raw.prize || {},
+        notices: raw.notices || {},
+        rules: Array.isArray(raw.rules) ? raw.rules : [],
+        entrySteps: Array.isArray(raw.entrySteps) ? raw.entrySteps : [],
+        winners: Array.isArray(raw.winners) ? raw.winners : (Array.isArray(raw.previousWinners) ? raw.previousWinners : []),
+        sectionTitles: raw.sectionTitles || {},
+        updatedAt: raw.updatedAt,
+        createdAt: raw.createdAt,
+        __store: raw.__store || "primary",
+        __altDocId: raw.__altDocId || "",
+        __virtual: Boolean(raw.__virtual)
+      };
+    }
+
+    function ts(row = {}) {
+      return row?.updatedAt?.seconds || row?.createdAt?.seconds || 0;
+    }
+
+    async function loadPrimaryRows() {
+      const out = [];
+      const snap = await getDocs(collection(db, COLLECTION));
+      snap.forEach((d) => out.push(normalizeRow({ id: d.id, ...d.data(), __store: "primary" }, d.id)));
+      return out;
+    }
+
+    async function loadAltRows() {
+      const out = [];
+      const snap = await getDocs(collection(db, ALT_COLLECTION));
+      snap.forEach((d) => {
+        const row = fromAltDoc(d.id, d.data() || {});
+        if (row) out.push(row);
+      });
+      return out;
+    }
+
+    function renderTable() {
+      tbody.innerHTML = rows.length ? rows.map((r) => {
+        const end = String((r.dates || {}).endDate || "").slice(0, 10) || "-";
+        const upd = r.updatedAt?.seconds ? new Date(r.updatedAt.seconds * 1000).toLocaleDateString("en-US") : (r.__virtual ? "Ready to publish" : "-");
+        return `
+          <tr>
+            <td>${r.title || "-"}</td>
+            <td>${r.status || "-"}</td>
+            <td>${end}</td>
+            <td>${upd}</td>
+            <td>
+              <div class="top-actions">
+                <button class="btn" data-edit="${r.id}">Edit</button>
+                <button class="btn" data-active="${r.id}">Set Active</button>
+                ${r.__virtual ? "" : `<button class="btn-danger" data-del="${r.id}">Delete</button>`}
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join("") : '<tr><td colspan="5" class="empty">No giveaways yet.</td></tr>';
+
+      tbody.querySelectorAll("[data-edit]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const row = rows.find((x) => x.id === btn.dataset.edit);
+          if (!row) return;
+          fillForm(row);
+        });
+      });
+
+      tbody.querySelectorAll("[data-active]").forEach((btn) => {
+        btn.addEventListener("click", async () => {
+          const id = btn.dataset.active;
+          if (!id) return;
+          const row = rows.find((x) => x.id === id);
+          if (!row) return;
+          try {
+            if (row.__store === "alt") {
+              for (const r of rows) {
+                if (r.id === id || r.__virtual || r.__store !== "alt") continue;
+                const target = r.__altDocId || altDocIdFromId(r.id);
+                await updateDoc(doc(db, ALT_COLLECTION, target), { status: "ended", "giveaway.status": "ended", updatedAt: serverTimestamp() });
+              }
+              const target = row.__altDocId || altDocIdFromId(id);
+              await setDoc(doc(db, ALT_COLLECTION, target), { type: "giveaway", id, status: "active", giveaway: { id, status: "active" }, updatedAt: serverTimestamp() }, { merge: true });
+              await setDoc(doc(db, ALT_COLLECTION, ALT_ACTIVE_DOC), { type: "giveaway_active", activeId: id, updatedAt: serverTimestamp() }, { merge: true });
+            } else {
+              for (const r of rows) {
+                if (r.id === id || r.__virtual || r.__store !== "primary") continue;
+                if (String(r.status || "") === "active") {
+                  await updateDoc(doc(db, COLLECTION, r.id), { status: "ended", updatedAt: serverTimestamp() });
+                }
+              }
+              await setDoc(doc(db, COLLECTION, id), { status: "active", updatedAt: serverTimestamp() }, { merge: true });
+              await setDoc(doc(db, ALT_COLLECTION, ALT_ACTIVE_DOC), { type: "giveaway_active", activeId: id, updatedAt: serverTimestamp() }, { merge: true });
+            }
+            showNotice(notice, "Active giveaway updated.");
+            await loadList();
+          } catch (err) {
+            showNotice(notice, err?.message || "Failed to set active giveaway.", "error");
+          }
+        });
+      });
+
+      tbody.querySelectorAll("[data-del]").forEach((btn) => {
+        btn.addEventListener("click", async () => {
+          if (!confirm("Delete this giveaway?")) return;
+          const row = rows.find((x) => x.id === btn.dataset.del);
+          if (!row) return;
+          try {
+            if (row.__store === "alt") {
+              await deleteDoc(doc(db, ALT_COLLECTION, row.__altDocId || altDocIdFromId(row.id)));
+            } else {
+              await deleteDoc(doc(db, COLLECTION, row.id));
+            }
+            showNotice(notice, "Giveaway deleted.");
+            await loadList();
+          } catch (err) {
+            showNotice(notice, err?.message || "Failed to delete giveaway.", "error");
+          }
+        });
+      });
+    }
+
+    async function loadList() {
+      rows = [];
+      let primaryErr = null;
+      let altErr = null;
+      try {
+        rows = await loadPrimaryRows();
+      } catch (err) {
+        primaryErr = err;
+      }
+
+      if (!rows.length) {
+        try {
+          rows = await loadAltRows();
+        } catch (err) {
+          altErr = err;
+        }
+      }
+
+      if (!rows.length) {
+        rows = [normalizeRow(FALLBACK_ROW, FALLBACK_ID)];
+      }
+
+      rows.sort((a, b) => ts(b) - ts(a));
+      renderTable();
+
+      if (primaryErr && altErr) {
+        showNotice(notice, (primaryErr?.message || altErr?.message || "Giveaway list load failed."), "error");
+      }
+    }
+
+    document.getElementById("addRuleBtn").addEventListener("click", () => addRuleRow());
+    document.getElementById("addEntryBtn").addEventListener("click", () => addEntryRow());
+    document.getElementById("addWinnerBtn").addEventListener("click", () => addWinnerRow());
+    cancelBtn.addEventListener("click", resetForm);
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const id = el("docId").value.trim();
+
+      const payload = {
+        title: el("title").value.trim(),
+        subtitle: el("subtitle").value.trim(),
+        badgeLabel: el("badgeLabel").value.trim() || "Giveaway",
+        status: el("status").value,
+        totalWinners: toNum(el("totalWinners").value, 0),
+        dates: {
+          startDate: fromInputDate(el("startDate").value),
+          endDate: fromInputDate(el("endDate").value),
+          announcementDate: fromInputDate(el("announcementDate").value)
+        },
+        cta: {
+          label: el("ctaLabel").value.trim() || "Join Now and Get a Chance to Win",
+          url: el("ctaUrl").value.trim()
+        },
+        prize: {
+          count: toNum(el("prizeCount").value, 1),
+          amount: toNum(el("prizeAmount").value, 0),
+          currency: el("prizeCurrency").value.trim() || "USD",
+          provider: el("prizeProvider").value.trim() || "Rank My Prop",
+          description: el("prizeDescription").value.trim(),
+          iconText: el("prizeIconText").value.trim() || "GW",
+          iconUrl: el("prizeIconUrl").value.trim()
+        },
+        notices: {
+          fairPlay: {
+            title: el("fairTitle").value.trim() || "Fair and Transparent",
+            description: el("fairDesc").value.trim()
+          },
+          important: {
+            title: el("importantTitle").value.trim() || "Important",
+            description: el("importantDesc").value.trim()
+          }
+        },
+        sectionTitles: {
+          whatYouCanWin: el("headingWin").value.trim() || "What You Can Win",
+          howToEnter: el("headingEnter").value.trim() || "How to Enter",
+          details: el("headingDetails").value.trim() || "Giveaway Details",
+          entryProgress: el("headingProgress").value.trim() || "Entry Progress",
+          previousWinners: el("headingWinners").value.trim() || "Previous Winners",
+          previousWinnersNote: el("headingWinnersNote").value.trim() || "Congrats to our recent winners.",
+          viewAllWinners: el("viewAllText").value.trim() || "View All Winners"
+        },
+        rules: collectRules(),
+        entrySteps: collectEntries(),
+        winners: collectWinners(),
+        previousWinners: collectWinners(),
+        updatedAt: serverTimestamp()
+      };
+
+      if (!payload.title || !payload.subtitle) {
+        showNotice(notice, "Title and subtitle are required.", "error");
+        return;
+      }
+
+      try {
+        const preferred = String(form.dataset.store || "").toLowerCase();
+        const altDocId = String(form.dataset.altDocId || "").trim();
+        let savedVia = "";
+        let primaryErr = null;
+
+        if (preferred !== "alt") {
+          try {
+            if (id) {
+              await setDoc(doc(db, COLLECTION, id), payload, { merge: true });
+            } else {
+              await addDoc(collection(db, COLLECTION), { ...payload, createdAt: serverTimestamp() });
+            }
+            savedVia = "primary";
+          } catch (err) {
+            primaryErr = err;
+          }
+        }
+
+        if (!savedVia) {
+          const baseId = id || payload.title || Date.now();
+          const target = altDocId || altDocIdFromId(baseId);
+          const gwId = giveawayId(baseId, payload);
+          await setDoc(doc(db, ALT_COLLECTION, target), toAltStoredPayload(gwId, payload), { merge: true });
+          savedVia = "alt";
+          if (String(payload.status || "").toLowerCase() === "active") {
+            await setDoc(doc(db, ALT_COLLECTION, ALT_ACTIVE_DOC), { type: "giveaway_active", activeId: gwId, updatedAt: serverTimestamp() }, { merge: true });
+          }
+        }
+
+        showNotice(notice, id ? "Giveaway updated successfully." : "Giveaway created successfully.");
+        resetForm();
+        await loadList();
+      } catch (err) {
+        showNotice(notice, err?.message || "Failed to save giveaway.", "error");
+      }
+    });
+
+    enforceAdmin(async (user) => {
+      document.getElementById("adminEmail").textContent = user.email || "Admin";
+      resetForm();
+      await loadList();
+    });
+  </script>
+<script defer src="admin-shell.js"></script>
+  <script type="module" src="/site-performance.js"></script>
+</body>
+</html>

@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+<meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                                                                                                                                                                  <meta property="og:image:height" content="630" />
+                                                                                                                                                        <meta property="og:image:width" content="1200" />
+<meta name="twitter:image" content="https://www.rankmyprop.in/assets/og-default-1200x630.webp" />
+<meta property="og:image" content="https://www.rankmyprop.in/assets/og-default-1200x630.webp" />
+<meta name="description" content="FAQ CMS | Rank My Prop" />
+<meta name="theme-color" content="#0a0b12" />
+                                                                                                                                                                                                                                                                                                                                                                                                <meta name="robots" content="noindex, nofollow" />
+  <title>FAQ CMS | Rank My Prop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght%40300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/dashboard-layout.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-dot"></span><b>RMP Admin</b></div>
+      <a class="side-link" href="/dashboard-admin">Admin Home</a>
+      <a class="side-link" href="/admin-clients">Client Access</a>
+      <a class="side-link" href="/admin-moderation">Moderation</a>
+      <a class="side-link" href="/admin-purchases">Purchases</a>
+      <a class="side-link" href="/admin-announcements">Announcement Hub</a>
+      <a class="side-link" href="/admin-community">Community Posts</a>
+      <a class="side-link" href="/admin-giveaways">Giveaways CMS</a>
+      <a class="side-link" href="/admin-events">Upcoming Events</a>
+      <a class="side-link" href="/admin-offers">Offers Control</a>
+      <a class="side-link" href="/admin-firm-details">Firm Detail CMS</a>
+      <a class="side-link" href="/admin-filters">Filters Control</a>
+      <a class="side-link" href="/admin-propnews">Prop News CMS</a>
+      <a class="side-link" href="/admin-trading-guides">Trading Guides CMS</a>
+      <a class="side-link" href="/admin-funding-strategies">Funding Strategies CMS</a>
+      <a class="side-link" href="/admin-trading-psychology">Trading Psychology CMS</a>
+      <a class="side-link" href="/admin-beginner-tutorials">Beginner Tutorials CMS</a>
+      <a class="side-link" href="/admin-firm-details">Firm Detail CMS</a>
+      <a class="side-link" href="/admin-content-cms">Page Copy CMS</a>
+      <a class="side-link active" href="/admin-faqs">FAQ CMS</a>
+      <a class="side-link" href="#" id="logoutBtn">Log out</a>
+    </aside>
+
+    <main class="main">
+      <header class="top">
+        <div><h3>FAQ CMS</h3><div class="welcome">Manage page-wise and type-wise frontend FAQs.</div></div>
+        <div class="top-actions"><span class="chip" id="adminEmail">loading...</span></div>
+      </header>
+
+      <div class="chip" id="notice" style="display:none;"></div>
+
+      <section class="panel">
+        <div class="panel-head"><h3>FAQ Block (Create / Edit)</h3></div>
+        <form id="faqForm" class="form-grid">
+          <input type="hidden" name="docId" />
+
+          <div class="field">
+            <label>Scope</label>
+            <select name="scope" id="scopeSel">
+              <option value="page">Page Specific</option>
+              <option value="type">Type Default</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Page Type</label>
+            <select name="pageType" id="pageTypeSel">
+              <option value="general">General</option>
+              <option value="discount">Discount</option>
+              <option value="firm">Firm Detail</option>
+              <option value="tool">Tool</option>
+              <option value="blog">Blog</option>
+              <option value="legal">Policy</option>
+            </select>
+          </div>
+
+          <div class="field full" id="pageKeyWrap">
+            <label>Page Key</label>
+            <input name="pageKey" id="pageKeyInput" list="pageKeyHints" placeholder="about | bestprop | blog-post-01 | prop-news-post:best-prop-firms-for-beginners-2026" required />
+            <datalist id="pageKeyHints"></datalist>
+          </div>
+
+          <div class="field full" id="firmPageWrap" style="display:none;">
+            <label>Dedicated Firm Page</label>
+            <select id="firmPageSelect">
+              <option value="">Select a firm page...</option>
+            </select>
+            <div class="welcome" style="margin-top:8px">Select firm from dropdown to auto-fill page key and quickly edit that firm's FAQ block.</div>
+          </div>
+
+          <div class="field"><label>FAQ Label</label><input name="label" placeholder="Prop Trading FAQ" /></div>
+          <div class="field"><label>Title Line 1 (Gradient)</label><input name="lead" placeholder="Frequently" /></div>
+          <div class="field"><label>Title Line 2</label><input name="trail" placeholder="asked questions" /></div>
+          <div class="field"><label>Support Card Title</label><input name="supportTitle" placeholder="Still have a question?" /></div>
+
+          <div class="field full"><label>Support Card Text</label><textarea name="supportText" rows="3" placeholder="Can't find the answer..."></textarea></div>
+
+          <div class="field"><label>Support Button Text</label><input name="supportButtonText" placeholder="Send email" /></div>
+          <div class="field"><label>Support Button Link</label><input name="supportButtonLink" placeholder="mailto:rankmyprop@gmail.com" /></div>
+
+          <div class="field full">
+            <label>Custom FAQs</label>
+            <textarea name="faqText" rows="12" placeholder="What is the biggest risk?||Main risk is violating trailing drawdown in volatile sessions.\n\nHow should traders apply this guide?||Use smaller lot sizing, pre-define invalidation, and log every rule-sensitive trade." required></textarea>
+            <div class="welcome" style="margin-top:8px">Add one FAQ per block. Format: <code>Question||Answer</code> and keep one blank line between FAQ blocks.</div>
+          </div>
+
+          <div class="full top-actions">
+            <button class="btn-primary" type="submit">Save FAQ</button>
+            <button class="btn" type="button" id="seedDefaultsBtn">Fill Type Template</button>
+            <button class="btn" type="button" id="cancelBtn" style="display:none;">Cancel Edit</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><h3>Saved FAQ Blocks</h3></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Scope</th><th>Page Key</th><th>Type</th><th>Updated</th><th>Action</th></tr></thead>
+            <tbody id="faqBody"><tr><td colspan="5" class="empty">Loading...</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module">
+    import { collection, deleteDoc, doc, getDocs, onSnapshot, serverTimestamp, setDoc } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+    import { db } from "./dashboard-common.js";
+    import { bindLogout, enforceAdmin, formDataToObj, showNotice } from "./admin-common.js";
+    import { DEFAULT_LISTED_FIRMS, DEFAULT_BEST_FIRMS } from "./firms-data.js";
+
+    const notice = document.getElementById("notice");
+    const faqForm = document.getElementById("faqForm");
+    const faqBody = document.getElementById("faqBody");
+    const cancelBtn = document.getElementById("cancelBtn");
+    const seedDefaultsBtn = document.getElementById("seedDefaultsBtn");
+    const scopeSel = document.getElementById("scopeSel");
+    const pageTypeSel = document.getElementById("pageTypeSel");
+    const pageKeyWrap = document.getElementById("pageKeyWrap");
+    const pageKeyInput = document.getElementById("pageKeyInput");
+    const pageKeyHints = document.getElementById("pageKeyHints");
+    const firmPageWrap = document.getElementById("firmPageWrap");
+    const firmPageSelect = document.getElementById("firmPageSelect");
+
+    let rows = [];
+    let firmPageOptions = [];
+    let stopFirmWatch = null;
+
+    const TYPE_TEMPLATES = {
+      general: {
+        label: "Prop Trading FAQ",
+        lead: "Frequently",
+        trail: "asked questions",
+        supportTitle: "Still have a question?",
+        supportText: "Can't find the answer to your question? Send us an email and we'll get back to you as soon as possible.",
+        supportButtonText: "Send email",
+        supportButtonLink: "mailto:rankmyprop@gmail.com",
+        faqText: "How does Rank My Prop review trading firms?||We compare rules, payout reliability, drawdown structure, and trader usability before ranking firms.\n\nHow are firms ranked on Rank My Prop?||Firms are evaluated on consistency, transparency, support quality, pricing, and payout behavior.\n\nHow does Rank My Prop verify payout proofs?||Our team checks proof format, account context, and consistency before listing proof-backed claims."
+      },
+      discount: {
+        label: "Discount FAQ",
+        lead: "Frequently",
+        trail: "asked questions",
+        supportTitle: "Need a better offer?",
+        supportText: "Share your preferred firm and account size. We'll help you find the best available deal.",
+        supportButtonText: "Request offer",
+        supportButtonLink: "mailto:rankmyprop@gmail.com?subject=Discount%20help",
+        faqText: "Are discount codes verified before listing?||Yes. We verify active status and source before showing offers.\n\nCan discount and cashback be used together?||Some firms allow stacking while others do not. Check each offer's terms before checkout.\n\nShould I choose only by discount?||No. Always compare firm rules, payout history, and support quality with the discount value."
+      },
+      firm: {
+        label: "Firm Detail FAQ",
+        lead: "Frequently",
+        trail: "asked questions",
+        supportTitle: "Need help choosing this firm?",
+        supportText: "Send us your strategy and risk style. We'll help you decide if this firm fits your trading plan.",
+        supportButtonText: "Get guidance",
+        supportButtonLink: "mailto:rankmyprop@gmail.com?subject=Firm%20selection%20help",
+        faqText: "What should I check first on a firm detail page?||Start with drawdown model, payout cycle, consistency limits, and restricted strategies.\n\nIs this firm good for scalping or swing trading?||Check allowed strategy notes and execution constraints on the firm profile.\n\nHow do I compare this firm with others?||Use Listed Prop Firms and Best Prop Firms pages for side-by-side comparisons."
+      },
+      tool: {
+        label: "Tool FAQ",
+        lead: "Frequently",
+        trail: "asked questions",
+        supportTitle: "Need calculator help?",
+        supportText: "Tell us your account size and risk limit. We'll help you use the tool correctly.",
+        supportButtonText: "Ask support",
+        supportButtonLink: "mailto:rankmyprop@gmail.com?subject=Tool%20help",
+        faqText: "Are tool results financial advice?||No. Tools are for planning and education only.\n\nCan I use these tools for any prop firm?||Yes. Enter your firm-specific rule values for better accuracy.\n\nWhy are my numbers different from broker output?||Different spread, commission, and contract specs can change final values."
+      },
+      blog: {
+        label: "Blog FAQ",
+        lead: "Frequently",
+        trail: "asked questions",
+        supportTitle: "Want deeper guidance?",
+        supportText: "Share your trading question and we'll help with practical next steps.",
+        supportButtonText: "Send email",
+        supportButtonLink: "mailto:rankmyprop@gmail.com?subject=Blog%20question",
+        faqText: "What is the biggest risk in this model?||Main risk is violating trailing drawdown during volatile sessions.\n\nHow should traders apply this guide?||Use smaller lot sizing, pre-define invalidation, and log every rule-sensitive trade.\n\nCan these methods work on funded accounts?||Yes, when adapted to your firm's risk and consistency rules."
+      },
+      legal: {
+        label: "Policy FAQ",
+        lead: "Frequently",
+        trail: "asked questions",
+        supportTitle: "Need policy clarification?",
+        supportText: "Contact us and we'll clarify policy language and usage scope.",
+        supportButtonText: "Contact us",
+        supportButtonLink: "mailto:rankmyprop@gmail.com?subject=Policy%20question",
+        faqText: "Is this legal page updated regularly?||Yes. Policy pages are revised when platform rules or compliance requirements change.\n\nWho should I contact for policy questions?||Use the support email shown on this page for official clarification.\n\nCan I request data correction or deletion?||Yes. Submit a request through the listed contact channel."
+      }
+    };
+
+    function toDocId(pageKey = "") {
+      return "page-" + String(pageKey || "index")
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "")
+        .slice(0, 120);
+    }
+
+    function toDateLabel(ts) {
+      if (!ts) return "-";
+      if (ts.toDate) return ts.toDate().toLocaleString();
+      return "-";
+    }
+
+    function slugify(text = "") {
+      return String(text || "")
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+    }
+
+    function slugFromDetailsLink(raw = "") {
+      const txt = String(raw || "").trim();
+      if (!txt) return "";
+      try {
+        const u = new URL(txt, "https://www.rankmyprop.in");
+        const qs = slugify(u.searchParams.get("slug") || u.searchParams.get("firmSlug") || "");
+        if (qs) return qs;
+        const path = String(u.pathname || "").replace(/^\/+/, "").replace(/\/+$/, "").replace(/\.html$/i, "");
+        if (!path || path.toLowerCase() === "firm-detail") return "";
+        if (/^prop-firms\//i.test(path)) {
+          const seg = path.split("/").filter(Boolean);
+          return slugify(seg[1] || "");
+        }
+        return slugify(path.replace(/detail$/i, ""));
+      } catch (_) {
+        const path = txt.replace(/^\/+/, "").replace(/\/+$/, "").split("?")[0].split("#")[0].replace(/\.html$/i, "");
+        if (!path || path.toLowerCase() === "firm-detail") return "";
+        if (/^prop-firms\//i.test(path)) {
+          const seg = path.split("/").filter(Boolean);
+          return slugify(seg[1] || "");
+        }
+        return slugify(path.replace(/detail$/i, ""));
+      }
+    }
+
+    function getFirmPageKey(row = {}) {
+      return slugify(
+        row.slug ||
+        slugFromDetailsLink(row.detailsLink || row.rulesLink || "") ||
+        row.name ||
+        row.firmName ||
+        row.id
+      );
+    }
+
+    function getFirmDisplayName(row = {}, fallback = "") {
+      const name = String(row.name || row.firmName || row.id || fallback || "").trim();
+      return name || "Unnamed Firm";
+    }
+
+    function normalizedFirmKey(value = "") {
+      return String(value || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+    }
+
+    function normalizePageKey(raw = "", pageType = "") {
+      const value = String(raw || "").trim().toLowerCase();
+      if (!value) return "";
+      if (String(pageType || "").toLowerCase() !== "firm") return value;
+      return slugFromDetailsLink(value) || slugify(value);
+    }
+
+    function applyFaqRowToForm(row) {
+      if (!row) return;
+      const scope = row.scope || (String(row.id || "").startsWith("type-") ? "type" : "page");
+      faqForm.elements.namedItem("docId").value = row.id || "";
+      scopeSel.value = scope;
+      pageTypeSel.value = row.pageType || "general";
+      pageKeyInput.value = row.pageKey || "";
+      faqForm.elements.namedItem("label").value = row.label || "";
+      faqForm.elements.namedItem("lead").value = row.lead || "";
+      faqForm.elements.namedItem("trail").value = row.trail || "";
+      faqForm.elements.namedItem("supportTitle").value = row.supportTitle || "";
+      faqForm.elements.namedItem("supportText").value = row.supportText || "";
+      faqForm.elements.namedItem("supportButtonText").value = row.supportButtonText || "";
+      faqForm.elements.namedItem("supportButtonLink").value = row.supportButtonLink || "";
+      faqForm.elements.namedItem("faqText").value = row.faqText || "";
+      updateScopeUi();
+      cancelBtn.style.display = "inline-flex";
+    }
+
+    function findPageFaqRow(pageKey = "", pageType = "") {
+      const key = String(pageKey || "").trim().toLowerCase();
+      if (!key) return null;
+      const wantedType = String(pageType || "").trim().toLowerCase();
+      const keySet = new Set([key]);
+      const keyNorm = normalizedFirmKey(key);
+      const isFirmLookup = !wantedType || wantedType === "firm";
+      if (!wantedType || wantedType === "firm") {
+        keySet.add(`${key}detail`);
+        keySet.add(`${key}detail.html`);
+        keySet.add(`prop-firms/${key}`);
+        keySet.add(`/prop-firms/${key}`);
+      }
+      return rows.find((row) => {
+        const scope = row.scope || (String(row.id || "").startsWith("type-") ? "type" : "page");
+        if (scope !== "page") return false;
+        const rowKey = String(row.pageKey || "").trim().toLowerCase();
+        const matched = keySet.has(rowKey) || (isFirmLookup && normalizedFirmKey(rowKey) === keyNorm);
+        if (!matched) return false;
+        if (!wantedType) return true;
+        return String(row.pageType || "").trim().toLowerCase() === wantedType;
+      }) || null;
+    }
+
+    function syncFirmSelectFromPageKey() {
+      if (!firmPageSelect) return;
+      const key = String(pageKeyInput.value || "").trim().toLowerCase();
+      if (!key) {
+        firmPageSelect.value = "";
+        return;
+      }
+      const keyNorm = normalizedFirmKey(key);
+      const exact = firmPageOptions.find((x) => x.pageKey === key);
+      if (exact) {
+        firmPageSelect.value = exact.pageKey;
+        return;
+      }
+      const alias = firmPageOptions.find((x) => normalizedFirmKey(x.pageKey) === keyNorm);
+      firmPageSelect.value = alias ? alias.pageKey : "";
+    }
+
+    function refreshPageKeyHints() {
+      if (!pageKeyHints) return;
+      const map = new Map();
+      firmPageOptions.forEach((row) => {
+        map.set(row.pageKey, `${row.name} | ${row.href}`);
+      });
+      rows.forEach((row) => {
+        const scope = row.scope || (String(row.id || "").startsWith("type-") ? "type" : "page");
+        if (scope !== "page") return;
+        const key = String(row.pageKey || "").trim().toLowerCase();
+        if (!key || map.has(key)) return;
+        map.set(key, key);
+      });
+      pageKeyHints.innerHTML = Array.from(map.entries())
+        .sort((a, b) => a[0].localeCompare(b[0]))
+        .map(([value, label]) => `<option value="${value}" label="${label.replace(/"/g, "&quot;")}"></option>`)
+        .join("");
+    }
+
+    function hydrateFirmPageOptions(dbRows = []) {
+      const byFirm = new Map();
+      const push = (row, source = "defaults") => {
+        const pageKey = getFirmPageKey(row);
+        if (!pageKey) return;
+        const name = getFirmDisplayName(row, pageKey);
+        const firmKey = normalizedFirmKey(name) || normalizedFirmKey(pageKey);
+        const existing = byFirm.get(firmKey);
+        const next = {
+          pageKey,
+          name,
+          source,
+          href: `/prop-firms/${encodeURIComponent(pageKey)}`
+        };
+        if (!existing) {
+          byFirm.set(firmKey, next);
+          return;
+        }
+        if (existing.source !== "db" && source === "db") {
+          byFirm.set(firmKey, next);
+          return;
+        }
+        if (existing.source === source && name.length > existing.name.length) {
+          byFirm.set(firmKey, next);
+        }
+      };
+
+      DEFAULT_LISTED_FIRMS.forEach((row) => push(row, "defaults"));
+      DEFAULT_BEST_FIRMS.forEach((row) => push(row, "defaults"));
+      dbRows.forEach((row) => push(row, "db"));
+
+      firmPageOptions = Array.from(byFirm.values()).sort((a, b) => a.name.localeCompare(b.name));
+      const options = ['<option value="">Select a firm page...</option>']
+        .concat(firmPageOptions.map((row) => `<option value="${row.pageKey}">${row.name} (${row.pageKey})</option>`));
+      firmPageSelect.innerHTML = options.join("");
+      refreshPageKeyHints();
+      syncFirmSelectFromPageKey();
+    }
+
+    async function loadFirmPageOptions() {
+      const dbRows = [];
+      try {
+        const snap = await getDocs(collection(db, "firms"));
+        snap.forEach((d) => {
+          const data = d.data() || {};
+          dbRows.push({ id: d.id, ...data });
+        });
+      } catch (_) {}
+      hydrateFirmPageOptions(dbRows);
+    }
+
+    function watchFirmPageOptions() {
+      if (stopFirmWatch) return;
+      try {
+        stopFirmWatch = onSnapshot(
+          collection(db, "firms"),
+          (snap) => {
+            const dbRows = [];
+            snap.forEach((d) => {
+              const data = d.data() || {};
+              dbRows.push({ id: d.id, ...data });
+            });
+            hydrateFirmPageOptions(dbRows);
+          },
+          () => {}
+        );
+      } catch (_) {}
+    }
+
+    function updateScopeUi() {
+      const isType = scopeSel.value === "type";
+      const isFirmPage = !isType && pageTypeSel.value === "firm";
+      pageKeyWrap.style.display = isType ? "none" : "block";
+      firmPageWrap.style.display = isFirmPage ? "block" : "none";
+      pageKeyInput.required = !isType;
+      if (isType) pageKeyInput.value = "";
+      if (isType || !isFirmPage) firmPageSelect.value = "";
+      syncFirmSelectFromPageKey();
+    }
+
+    function fillTemplate(type) {
+      const t = TYPE_TEMPLATES[type] || TYPE_TEMPLATES.general;
+      faqForm.elements.namedItem("label").value = t.label;
+      faqForm.elements.namedItem("lead").value = t.lead;
+      faqForm.elements.namedItem("trail").value = t.trail;
+      faqForm.elements.namedItem("supportTitle").value = t.supportTitle;
+      faqForm.elements.namedItem("supportText").value = t.supportText;
+      faqForm.elements.namedItem("supportButtonText").value = t.supportButtonText;
+      faqForm.elements.namedItem("supportButtonLink").value = t.supportButtonLink;
+      faqForm.elements.namedItem("faqText").value = t.faqText;
+      faqForm.elements.namedItem("faqText").dispatchEvent(new Event("input", { bubbles: true }));
+    }
+
+    function resetForm() {
+      faqForm.reset();
+      faqForm.elements.namedItem("docId").value = "";
+      scopeSel.value = "page";
+      pageTypeSel.value = "general";
+      updateScopeUi();
+      fillTemplate("general");
+      cancelBtn.style.display = "none";
+    }
+
+    async function loadFaqs() {
+      const snap = await getDocs(collection(db, "pageFaqs"));
+      rows = [];
+      snap.forEach((d) => rows.push({ id: d.id, ...d.data() }));
+      rows.sort((a, b) => (b.updatedAt?.seconds || b.createdAt?.seconds || 0) - (a.updatedAt?.seconds || a.createdAt?.seconds || 0));
+      refreshPageKeyHints();
+
+      faqBody.innerHTML = rows.length ? rows.map((r) => {
+        const scope = r.scope || (r.id.startsWith("type-") ? "type" : "page");
+        return `
+          <tr>
+            <td>${scope === "type" ? "Type Default" : "Page"}</td>
+            <td>${scope === "type" ? "-" : (r.pageKey || "-")}</td>
+            <td>${r.pageType || "general"}</td>
+            <td>${toDateLabel(r.updatedAt || r.createdAt)}</td>
+            <td>
+              <div class="top-actions">
+                <button class="btn" type="button" data-edit="${r.id}">Edit</button>
+                <button class="btn-danger" type="button" data-del="${r.id}">Delete</button>
+              </div>
+            </td>
+          </tr>`;
+      }).join("") : '<tr><td colspan="5" class="empty">No FAQ blocks yet.</td></tr>';
+
+      faqBody.querySelectorAll("[data-edit]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const row = rows.find((x) => x.id === btn.dataset.edit);
+          if (!row) return;
+          applyFaqRowToForm(row);
+          faqForm.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      });
+
+      faqBody.querySelectorAll("[data-del]").forEach((btn) => {
+        btn.addEventListener("click", async () => {
+          if (!confirm("Delete this FAQ block?")) return;
+          await deleteDoc(doc(db, "pageFaqs", btn.dataset.del));
+          showNotice(notice, "FAQ block deleted.");
+          await loadFaqs();
+        });
+      });
+    }
+
+    function hasValidFaq(text) {
+      return String(text || "").split(/\n\s*\n/g).some((b) => {
+        const row = b.trim();
+        if (!row) return false;
+        const parts = row.split("||");
+        if (parts.length < 2) return false;
+        const q = String(parts.shift() || "").trim();
+        const a = String(parts.join("||") || "").trim();
+        return Boolean(q && a);
+      });
+    }
+
+    faqForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const data = formDataToObj(faqForm);
+      const scope = String(data.scope || "page");
+      const pageType = String(data.pageType || "general");
+      const pageKey = normalizePageKey(data.pageKey || "", pageType);
+
+      if (scope === "page" && !pageKey) {
+        showNotice(notice, "Page key is required for page scope.", "error");
+        return;
+      }
+
+      if (!hasValidFaq(data.faqText)) {
+        showNotice(notice, "Add FAQs in Question||Answer format.", "error");
+        return;
+      }
+
+      const docId = String(data.docId || "").trim() || (scope === "type" ? `type-${pageType}` : toDocId(pageKey));
+
+      const payload = {
+        scope,
+        pageType,
+        pageKey: scope === "type" ? "" : pageKey,
+        label: String(data.label || "").trim(),
+        lead: String(data.lead || "").trim(),
+        trail: String(data.trail || "").trim(),
+        supportTitle: String(data.supportTitle || "").trim(),
+        supportText: String(data.supportText || "").trim(),
+        supportButtonText: String(data.supportButtonText || "").trim(),
+        supportButtonLink: String(data.supportButtonLink || "").trim(),
+        faqText: String(data.faqText || "").trim(),
+        updatedAt: serverTimestamp()
+      };
+
+      await setDoc(doc(db, "pageFaqs", docId), {
+        ...payload,
+        createdAt: serverTimestamp()
+      }, { merge: true });
+
+      showNotice(notice, "FAQ block saved.");
+      resetForm();
+      await loadFaqs();
+    });
+
+    scopeSel.addEventListener("change", () => {
+      updateScopeUi();
+      if (scopeSel.value === "type") cancelBtn.style.display = faqForm.elements.namedItem("docId").value ? "inline-flex" : "none";
+    });
+    pageTypeSel.addEventListener("change", () => {
+      updateScopeUi();
+      if (!faqForm.elements.namedItem("docId").value) fillTemplate(pageTypeSel.value);
+      if (pageTypeSel.value === "firm" && scopeSel.value === "page") syncFirmSelectFromPageKey();
+    });
+    pageKeyInput.addEventListener("input", () => {
+      syncFirmSelectFromPageKey();
+    });
+    firmPageSelect.addEventListener("change", () => {
+      const selected = normalizePageKey(firmPageSelect.value, "firm");
+      pageTypeSel.value = "firm";
+      scopeSel.value = "page";
+      pageKeyInput.value = selected;
+      updateScopeUi();
+      if (!selected) return;
+      const existing = findPageFaqRow(selected, "firm") || findPageFaqRow(selected);
+      if (existing) {
+        applyFaqRowToForm(existing);
+        showNotice(notice, `Loaded saved FAQ for ${selected}.`);
+        return;
+      }
+      faqForm.elements.namedItem("docId").value = "";
+      fillTemplate("firm");
+      pageKeyInput.value = selected;
+      cancelBtn.style.display = "none";
+      showNotice(notice, `No saved FAQ found for ${selected}. Add and save new block.`);
+    });
+
+    seedDefaultsBtn.addEventListener("click", () => {
+      fillTemplate(pageTypeSel.value);
+      showNotice(notice, "Type template loaded.");
+    });
+
+    cancelBtn.addEventListener("click", resetForm);
+
+    bindLogout("logoutBtn");
+    enforceAdmin(async (user) => {
+      document.getElementById("adminEmail").textContent = user.email || "Admin";
+      await loadFirmPageOptions();
+      watchFirmPageOptions();
+      resetForm();
+      await loadFaqs();
+    });
+  </script>
+
+  <script defer src="admin-richtext.js"></script>
+<script defer src="admin-shell.js"></script>
+  <script type="module" src="/site-performance.js"></script>
+</body>
+</html>

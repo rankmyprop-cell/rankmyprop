@@ -1,0 +1,168 @@
+:is(
+  main > h1,
+  main header > h1,
+  main section > header > h1,
+  .page-hero h1,
+  .hero h1,
+  .post-title,
+  .intro-title,
+  .rmp-page-title,
+  .header-title,
+  h2.section-title
+) {
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-size: clamp(36px, 3.35vw, 54px) !important;
+  font-weight: 800 !important;
+  line-height: 1.08 !important;
+  letter-spacing: -.052em !important;
+}
+
+:is(
+  main > h1,
+  main header > h1,
+  main section > header > h1,
+  .page-hero h1,
+  .hero h1,
+  .post-title,
+  .intro-title,
+  .rmp-page-title,
+  .header-title,
+  h2.section-title
+) {
+  display: inline-block !important;
+  padding-bottom: .13em !important;
+  color: transparent !important;
+  background: linear-gradient(90deg, #fff 0%, #f7f4ff 42%, #c8bbff 70%, #8b63ff 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-box-decoration-break: clone !important;
+  box-decoration-break: clone !important;
+}
+
+@media(max-width:640px){:is(main > h1,main header > h1,main section > header > h1,.page-hero h1,.hero h1,.post-title,.intro-title,.rmp-page-title,.header-title,h2.section-title){font-size:36px!important}}
+
+/* Shared Offers-style page introductions. Keep section/card headings unchanged. */
+:is(
+  main > h1,
+  main header > h1,
+  main section > header > h1,
+  .offers-hero h1,
+  .compare-hero h1,
+  .rules-hero h1,
+  .company-hero h1,
+  .about-v2-hero h1,
+  .home-hero-bg h1,
+  .review-page-heading h1,
+  .dedicated-review-intro h1,
+  .main > h1,
+  .page-hero h1,
+  .hero-head h1,
+  .hero-head .h1,
+  .post-title,
+  .intro-title,
+  .rmp-page-title
+) {
+  display: block !important;
+  max-width: 1120px !important;
+  margin-right: auto !important;
+  margin-left: auto !important;
+  padding-bottom: 0 !important;
+  color: transparent !important;
+  background: linear-gradient(92deg, #fff 0%, #d4ccff 24%, #846aff 75%, #b09eff 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-size: clamp(38px, 5.4vw, 62px) !important;
+  font-weight: 600 !important;
+  line-height: 1.04 !important;
+  letter-spacing: -.04em !important;
+  text-align: center !important;
+  text-wrap: balance;
+  text-shadow: none !important;
+}
+
+:is(
+  .offers-hero-copy,
+  .compare-hero,
+  .rules-hero,
+  .company-hero,
+  .about-v2-hero,
+  .home-hero-bg,
+  .review-page-heading > div,
+  .dedicated-review-intro,
+  .page-hero,
+  .hero-head,
+  .heading-block
+) > p,
+:is(.rules-hero-copy, .intro-sub, .home-hero-bg .hero-copy) {
+  max-width: 850px !important;
+  margin: 16px auto 0 !important;
+  color: #f0eff9 !important;
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  line-height: 1.62 !important;
+  text-align: center !important;
+  text-wrap: balance;
+  text-shadow: none !important;
+}
+
+@media(max-width:760px) {
+  :is(
+    main > h1,
+    main header > h1,
+    main section > header > h1,
+    .offers-hero h1,
+    .compare-hero h1,
+    .rules-hero h1,
+    .company-hero h1,
+    .about-v2-hero h1,
+    .home-hero-bg h1,
+    .review-page-heading h1,
+    .dedicated-review-intro h1,
+    .main > h1,
+    .page-hero h1,
+    .hero-head h1,
+    .hero-head .h1,
+    .post-title,
+    .intro-title,
+    .rmp-page-title
+  ) {
+    font-size: clamp(34px, 9vw, 52px) !important;
+    line-height: 1.03 !important;
+  }
+
+  :is(
+    .offers-hero-copy,
+    .compare-hero,
+    .rules-hero,
+    .company-hero,
+    .about-v2-hero,
+    .home-hero-bg,
+    .review-page-heading > div,
+    .dedicated-review-intro,
+    .page-hero,
+    .hero-head,
+    .heading-block
+  ) > p,
+  :is(.rules-hero-copy, .intro-sub, .home-hero-bg .hero-copy) {
+    max-width: 92vw !important;
+    margin-top: 12px !important;
+    font-size: 16px !important;
+    line-height: 1.55 !important;
+  }
+}
+
+/* Article titles need a more compact reading layout than marketing page heroes. */
+.post-title {
+  max-width: 940px !important;
+  font-size: clamp(34px, 4.2vw, 50px) !important;
+}
+
+@media(max-width:760px) {
+  .post-title {
+    max-width: 100% !important;
+    font-size: clamp(28px, 8vw, 38px) !important;
+    overflow-wrap: anywhere;
+  }
+}

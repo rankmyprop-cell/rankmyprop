@@ -1,0 +1,1894 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="/site-shell.css" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<script>document.documentElement.classList.add("tj-auth-pending");</script>
+
+  
+  <meta name="theme-color" content="#05040b">
+<!-- RMP SEO START -->
+  <meta name="description" content="Use Rank My Prop trade journal to log entries, exits, mistakes, screenshots, and session notes. Improve consistency and pass prop firm challenges faster.">
+  <meta name="keywords" content="prop firms, best prop firms, funded trading account, prop firm rules, prop firm payout, drawdown rules, prop trading challenge, forex prop firm, futures prop firm, rank my prop, trade journal, trading performance tracker, prop challenge journal">
+  <meta name="author" content="Rank My Prop Editorial Team">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="canonical" href="https://www.rankmyprop.in/tradejournal">
+<meta property="og:type" content="website">
+  <meta property="og:site_name" content="Rank My Prop">
+  
+  <meta property="og:locale" content="en_IN">
+<meta property="og:title" content="Trade Journal - Track Prop Challenge Trades | Rank My Prop">
+  <meta property="og:description" content="Use Rank My Prop trade journal to log entries, exits, mistakes, screenshots, and session notes. Improve consistency and pass prop firm challenges faster.">
+  <meta property="og:url" content="https://www.rankmyprop.in/tradejournal">
+                                                                                                                                                              <meta property="og:image:height" content="630" />
+                                                                                                                                                        <meta property="og:image:width" content="1200" />
+<meta property="og:image" content="https://www.rankmyprop.in/assets/Rank%20My%20Prop%20Logo%201.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Trade Journal - Track Prop Challenge Trades | Rank My Prop">
+  <meta name="twitter:description" content="Use Rank My Prop trade journal to log entries, exits, mistakes, screenshots, and session notes. Improve consistency and pass prop firm challenges faster.">
+  <meta name="twitter:image" content="https://www.rankmyprop.in/assets/Rank%20My%20Prop%20Logo%201.webp">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Rank My Prop","url":"https://www.rankmyprop.in/","publisher":{"@type":"Organization","name":"Rank My Prop","logo":{"@type":"ImageObject","url":"https://www.rankmyprop.in/assets/Rank%20My%20Prop%20Logo%201.webp"}}}</script>
+  <!-- RMP SEO END -->
+
+<title>Trade Journal - Track Prop Challenge Trades | Rank My Prop</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght%40300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<style>
+:root{
+  --bg-page:#05040b;
+  --bg-card:#0c0b14;
+  --bg-card-soft:#11101c;
+
+  --purple:#7a74ff;
+  --purple-soft:#9a95ff;
+  --purple-light:rgba(120,110,255,0.18);
+
+  --text-main:#e5e7eb;
+  --text-muted:#9ca3af;
+  --border-soft:rgba(120,110,255,0.28);
+  --shadow-soft:0 18px 45px rgba(0,0,0,0.6);
+  --radius-lg:18px;
+  --radius-md:14px;
+}
+
+*{box-sizing:border-box;}
+html,body{
+  margin:0;
+  padding:0;
+  height:100%;
+  font-family:'Plus Jakarta Sans',sans-serif;
+}
+
+body{
+  background:
+    radial-gradient(circle at 20% 10%, rgba(120,110,255,0.08), transparent 40%),
+    radial-gradient(circle at 80% 20%, rgba(120,110,255,0.10), transparent 45%),
+    #05040b;
+  color:var(--text-main);
+}
+
+/* TOP NAV */
+.header-inner{
+  max-width:1200px;
+  margin:0 auto;
+  padding:18px;
+  position:relative;
+}
+
+.header-chip{
+  padding:6px 12px;
+  border-radius:999px;
+  background:rgba(120,110,255,0.12);
+  color:#c7c5ff;
+  font-size:11px;
+  font-weight:500;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  box-shadow:0 10px 26px rgba(120,110,255,0.25);
+  border:1px solid rgba(120,110,255,0.35);
+}
+
+.header-chip-dot{
+  width:6px;
+  height:6px;
+  border-radius:999px;
+  background:#22c55e;
+}
+
+.wrap{
+  max-width:1200px;
+  margin:0 auto;
+  padding:18px 18px 40px;
+}
+
+/* HERO */
+.hero{
+  margin-top:14px;
+  margin-bottom:26px;
+  border-radius:26px;
+  background:
+    radial-gradient(circle at 0% 0%,rgba(120,110,255,0.14) 0,transparent 55%),
+    radial-gradient(circle at 100% 0%,rgba(120,110,255,0.18) 0,transparent 55%),
+    linear-gradient(180deg,#0b0a14,#07060d);
+  padding:32px 26px 32px;
+  color:var(--text-main);
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(120,110,255,0.35);
+  box-shadow:0 30px 70px rgba(0,0,0,0.7);
+}
+
+.hero-inner{
+  position:relative;
+  z-index:1;
+  display:flex;
+  flex-wrap:wrap;
+  gap:26px;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.hero-left{max-width:520px;}
+
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:5px 11px;
+  border-radius:999px;
+  background:rgba(120,110,255,0.12);
+  border:1px solid rgba(120,110,255,0.35);
+  font-size:11px;
+  color:#c7c5ff;
+  margin-bottom:12px;
+}
+
+.eyebrow-pill{
+  padding:2px 8px;
+  border-radius:999px;
+  background:rgba(120,110,255,0.18);
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:0.12em;
+  color:var(--purple);
+}
+
+.hero h1{
+  font-size:32px;
+  line-height:1.12;
+  margin:0 0 8px;
+  letter-spacing:-0.015em;
+  color:#ffffff;
+}
+
+.hero h1 span{
+  background:linear-gradient(135deg,#b6b3ff,#7a74ff);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.hero-sub{
+  font-size:13px;
+  max-width:400px;
+  color:var(--text-muted);
+}
+
+.hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:16px;
+}
+
+.btn{
+  padding:10px 18px;
+  border:none;
+  border-radius:999px;
+  font-weight:600;
+  font-size:13px;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  white-space:nowrap;
+  text-decoration:none;
+}
+
+.btn.primary{
+  background:linear-gradient(135deg,var(--purple-soft),var(--purple));
+  color:#ffffff;
+  box-shadow:0 18px 40px rgba(120,110,255,0.65);
+}
+
+.btn.ghost{
+  background:#0c0b14;
+  border:1px solid rgba(120,110,255,0.35);
+  color:#c7c5ff;
+}
+
+.hero-right{min-width:240px;max-width:330px;}
+
+.hero-stat-card{
+  background:rgba(15,14,25,0.75);
+  border-radius:22px;
+  padding:16px 16px 14px;
+  border:1px solid rgba(120,110,255,0.45);
+  backdrop-filter:blur(18px);
+  box-shadow:0 16px 40px rgba(120,110,255,0.25);
+}
+
+.hero-stat-title{
+  font-size:11px;
+  color:#9ca3af;
+  margin-bottom:6px;
+}
+
+.hero-stat-main span:nth-child(1){
+  font-size:22px;
+  font-weight:600;
+  color:#ffffff;
+}
+
+.hero-pill{
+  padding:4px 8px;
+  font-size:10px;
+  border-radius:999px;
+  background:rgba(120,110,255,0.14);
+  color:#c7c5ff;
+}
+
+/* CARDS */
+.section-heading{
+  margin:6px 3px 14px;
+  font-size:16px;
+  font-weight:600;
+  color:#ffffff;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.section-heading span.badge{
+  padding:3px 8px;
+  border-radius:999px;
+  background:rgba(120,110,255,0.18);
+  color:#c7c5ff;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:0.12em;
+  font-weight:600;
+}
+
+.card{
+  background:var(--bg-card);
+  border-radius:var(--radius-lg);
+  padding:24px 24px 20px;
+  border:1px solid rgba(120,110,255,0.35);
+  box-shadow:var(--shadow-soft);
+  margin-bottom:20px;
+}
+
+.card-soft{
+  background:var(--bg-card-soft);
+}
+
+.grid-2{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:18px;
+}
+.grid-2 > div{padding:0 3px;}
+
+label{
+  font-size:11px;
+  color:var(--text-muted);
+  display:block;
+  margin-bottom:5px;
+  font-weight:500;
+}
+
+input,select,textarea{
+  width:100%;
+  padding:10px 12px;
+  border-radius:var(--radius-md);
+  border:1px solid rgba(120,110,255,0.35);
+  background:#07060d;
+  color:#ffffff;
+  font-size:13px;
+}
+
+input::placeholder,textarea::placeholder{color:#6b7280;}
+
+input:focus,select:focus,textarea:focus{
+  outline:none;
+  border-color:var(--purple);
+  box-shadow:0 0 0 1px rgba(120,110,255,0.45);
+}
+
+.form-row-title{
+  margin-top:18px;
+  font-size:13px;
+  font-weight:600;
+  color:#ffffff;
+}
+
+.actions-row{
+  margin-top:18px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+/* EXPORT BUTTONS */
+.exports{
+  margin:4px 0 18px;
+  display:flex;
+  justify-content:flex-end;
+  flex-wrap:wrap;
+  gap:10px;
+}
+/* MAKE SELECTS SAME HEIGHT AS INPUTS */
+
+input,
+select,
+textarea{
+  width:100%;
+  padding:13px 18px;
+  min-height:48px;              /* FORCE SAME HEIGHT */
+  border-radius:var(--radius-md);
+  border:1px solid rgba(120,110,255,0.35);
+  background:#07060d;
+  color:#ffffff;
+  font-size:13px;
+  line-height:1.4;
+  appearance:none;              /* normalize select height */
+  text-indent:0;
+}
+
+/* FIX SELECT DROPDOWN ARROW ALIGNMENT */
+select{
+  background-image:
+    linear-gradient(45deg, transparent 50%, #c7c5ff 50%),
+    linear-gradient(135deg, #c7c5ff 50%, transparent 50%);
+  background-position:
+    calc(100% - 20px) 50%,
+    calc(100% - 14px) 50%;
+  background-size:6px 6px, 6px 6px;
+  background-repeat:no-repeat;
+  padding-right:40px;           /* space for arrow */
+}
+
+/* Better alignment for date/time/file controls */
+input[type="date"],
+input[type="time"],
+select{
+  padding-left:18px !important;
+}
+
+input[type="number"],
+input[type="text"],
+textarea{
+  padding-left:18px !important;
+}
+
+textarea{
+  min-height:58px;
+  padding-top:14px;
+}
+
+input[type="date"]::-webkit-datetime-edit,
+input[type="time"]::-webkit-datetime-edit{
+  padding-left:2px;
+}
+
+input[type="file"]{
+  min-height:48px;
+  padding:8px 12px;
+  display:flex;
+  align-items:center;
+}
+
+input[type="file"]::file-selector-button{
+  margin-right:10px;
+  padding:6px 10px;
+  border-radius:8px;
+  border:1px solid rgba(120,110,255,0.35);
+  background:rgba(255,255,255,0.06);
+  color:#fff;
+  cursor:pointer;
+}
+
+/* PLACEHOLDER COLOR */
+input::placeholder,
+textarea::placeholder{
+  color:#6b7280;
+}
+
+.exports .btn{
+  border-radius:999px;
+  font-size:12px;
+  padding:8px 13px;
+  background:#0c0b14;
+  border:1px solid rgba(120,110,255,0.35);
+  color:#c7c5ff;
+}
+
+.exports .btn.primary{
+  background:linear-gradient(135deg,var(--purple-soft),var(--purple));
+  color:#ffffff;
+  border:none;
+  box-shadow:0 16px 38px rgba(120,110,255,0.7);
+}
+
+/* TABLE */
+.table-wrapper{overflow-x:auto;}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:6px;
+  min-width:800px;
+}
+
+th,td{
+  padding:9px 8px;
+  font-size:11px;
+  text-align:left;
+}
+
+th{
+  color:#c7c5ff;
+  border-bottom:1px solid rgba(120,110,255,0.25);
+  background:#0c0b14;
+  position:sticky;
+  top:0;
+}
+
+td{
+  color:#9ca3af;
+  border-bottom:1px solid rgba(120,110,255,0.18);
+}
+
+tr:nth-child(even) td{background:#0f0e18;}
+tr:hover td{background:#171628;color:#ffffff;}
+
+.download-small{
+  background:linear-gradient(135deg,var(--purple-soft),var(--purple));
+  border:none;
+  color:#ffffff;
+  padding:5px 9px;
+  border-radius:999px;
+  cursor:pointer;
+  font-size:11px;
+  font-weight:500;
+  box-shadow:0 10px 22px rgba(120,110,255,0.65);
+}
+
+.img-thumb{
+  width:54px;
+  height:36px;
+  object-fit:cover;
+  border-radius:10px;
+  box-shadow:0 7px 14px rgba(0,0,0,0.8);
+}
+
+/* Glass Navbar */
+.glass{background:rgba(15,14,28,.75);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.08);border-radius:10px;position:relative;z-index:50}
+.nav-item{padding:6px 14px;border-radius:8px;transition:.2s;color:#d1d5db;cursor:pointer;white-space:nowrap}
+.nav-item.active,.nav-item:hover{background:rgba(120,110,255,.18);box-shadow:0 0 12px rgba(120,110,255,.45);color:#fff}
+.dropdown{position:absolute;top:140%;left:0;min-width:220px;background:rgba(18,16,32,.95);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:12px;opacity:0;transform:translateY(10px);pointer-events:none;transition:.25s;box-shadow:0 25px 50px rgba(0,0,0,.6);z-index:9999}
+.dropdown a{display:block;padding:12px 16px;border-radius:10px;color:#e5e7eb;font-size:14px}
+.dropdown a:hover{background:rgba(120,110,255,.18);color:#fff}
+.has-dropdown.open .dropdown{opacity:1;transform:translateY(0);pointer-events:auto}
+.glow-btn{background:linear-gradient(180deg,#7a74ff,#5b55ff);border-radius:10px;color:#fff}
+.mobile-menu{position:absolute;top:100%;left:0;right:0;background:rgba(15,14,28,.95);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:16px;display:none;flex-direction:column;gap:12px;z-index:999}
+.mobile-menu.open{display:flex}
+.tj-login-ov{position:fixed;inset:0;background:rgba(5,4,11,.82);backdrop-filter:blur(12px);display:none;align-items:center;justify-content:center;padding:16px;z-index:99999}
+.tj-login-ov.open{display:flex}
+.tj-login-pop{width:min(420px,100%);background:#0d0c16;border:1px solid rgba(120,110,255,.35);border-radius:20px;padding:22px;box-shadow:0 24px 60px rgba(0,0,0,.55)}
+.tj-login-pop h3{margin:0 0 10px;font-size:25px;color:#fff}
+.tj-login-pop p{margin:0 0 20px;font-size:15px;color:#aaa6b7;line-height:1.7}
+.tj-login-actions{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap}
+.tj-login-btn{display:inline-flex;align-items:center;justify-content:center;padding:11px 18px;border-radius:999px;border:1px solid rgba(120,110,255,.35);background:#0c0b14;color:#c7c5ff;font:inherit;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none}
+.tj-login-btn.pri{background:linear-gradient(135deg,var(--purple-soft),var(--purple));border:none;color:#fff;box-shadow:0 18px 40px rgba(120,110,255,0.45)}
+html.tj-auth-pending .wrap{display:none;pointer-events:none}
+html.tj-auth-required .wrap{filter:blur(10px);opacity:.3;pointer-events:none;user-select:none}
+.tj-loading-shell{display:none}
+html.tj-auth-pending .tj-loading-shell{
+  display:grid;
+  width:min(1320px,calc(100% - 40px));
+  margin:26px auto 76px;
+  gap:14px;
+}
+.tj-loading-status{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  color:#8e899f;
+  font-size:12px;
+  font-weight:600;
+}
+.tj-loading-status i{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#8d7cff;
+  box-shadow:0 0 14px rgba(141,124,255,.8);
+}
+.tj-skeleton-block{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(145deg,rgba(22,20,38,.96),rgba(10,9,17,.98));
+  border:1px solid rgba(159,146,255,.14);
+  box-shadow:0 18px 48px rgba(0,0,0,.18);
+}
+.tj-skeleton-block::after,
+.tj-skeleton-line::after,
+.tj-skeleton-chip::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  transform:translateX(-110%);
+  background:linear-gradient(100deg,transparent 24%,rgba(167,154,255,.12) 48%,transparent 72%);
+  animation:tj-skeleton-shimmer 1.35s ease-in-out infinite;
+}
+.tj-skeleton-hero{
+  min-height:276px;
+  display:grid;
+  grid-template-columns:1.45fr .55fr;
+  align-items:center;
+  gap:70px;
+  padding:38px 46px;
+  border-radius:30px;
+}
+.tj-skeleton-copy{display:grid;gap:14px}
+.tj-skeleton-line{
+  position:relative;
+  overflow:hidden;
+  height:13px;
+  border-radius:999px;
+  background:rgba(255,255,255,.055);
+}
+.tj-skeleton-line.eyebrow{width:210px;height:25px;margin:0}
+.tj-skeleton-line.title{width:min(620px,92%);height:48px;border-radius:12px}
+.tj-skeleton-line.title-short{width:min(430px,70%);height:48px;border-radius:12px}
+.tj-skeleton-line.copy{width:min(560px,86%);height:15px}
+.tj-skeleton-actions{display:flex;gap:10px;margin-top:8px}
+.tj-skeleton-chip{
+  position:relative;
+  overflow:hidden;
+  width:152px;
+  height:44px;
+  border-radius:12px;
+  background:rgba(137,117,255,.12);
+}
+.tj-skeleton-chip.secondary{width:190px;background:rgba(255,255,255,.04)}
+.tj-skeleton-side{
+  min-height:190px;
+  border-radius:21px;
+  background:rgba(6,5,13,.45);
+  border:1px solid rgba(159,146,255,.14);
+}
+.tj-skeleton-metrics{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:12px;
+}
+.tj-skeleton-metric{height:132px;border-radius:18px}
+.tj-skeleton-panels{
+  display:grid;
+  grid-template-columns:1.65fr .75fr;
+  gap:12px;
+}
+.tj-skeleton-chart,.tj-skeleton-insights{height:360px;border-radius:20px}
+.tj-skeleton-form{height:420px;border-radius:22px}
+@keyframes tj-skeleton-shimmer{
+  100%{transform:translateX(110%)}
+}
+@media (prefers-reduced-motion:reduce){
+  .tj-skeleton-block::after,
+  .tj-skeleton-line::after,
+  .tj-skeleton-chip::after{animation:none}
+}
+body.embed-mode nav.glass,
+body.embed-mode header,
+body.embed-mode footer{display:none!important}
+body.embed-mode{background:#05040b}
+body.embed-mode .wrap{max-width:none;padding:8px 12px 24px}
+body.embed-mode .hero{margin-top:0}
+body.embed-mode .card,
+body.embed-mode .card-soft{box-shadow:none}
+body.embed-mode #journalForm,
+body.embed-mode .card{
+  border-left:none;
+  border-right:none;
+  border-radius:0;
+}
+
+/* TRADE JOURNAL — SAAS WORKSPACE */
+:root{
+  --tj-surface:#0d0c16;
+  --tj-surface-raised:#12111e;
+  --tj-surface-soft:#0a0912;
+  --tj-line:rgba(170,164,255,.16);
+  --tj-line-strong:rgba(142,132,255,.34);
+  --tj-muted:#918fa5;
+  --tj-text:#f5f3ff;
+  --tj-accent:#8877ff;
+}
+
+.wrap{
+  width:min(1320px,calc(100% - 40px));
+  max-width:none;
+  padding:26px 0 76px;
+}
+
+.hero{
+  isolation:isolate;
+  margin:0 0 18px;
+  min-height:276px;
+  padding:38px 46px;
+  border-radius:30px;
+  background:
+    linear-gradient(115deg,rgba(32,27,68,.96),rgba(11,9,22,.97) 56%,rgba(19,14,45,.95)),
+    #0b0915;
+  border:1px solid rgba(147,132,255,.34);
+  box-shadow:0 28px 80px rgba(0,0,0,.38),inset 0 1px rgba(255,255,255,.04);
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  opacity:.18;
+  background-image:
+    linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+  background-size:46px 46px;
+  mask-image:linear-gradient(90deg,#000,transparent 72%);
+}
+
+.hero-orb{
+  position:absolute;
+  pointer-events:none;
+  border-radius:50%;
+  filter:blur(2px);
+  z-index:-1;
+}
+
+.hero-orb-one{
+  width:400px;
+  height:400px;
+  right:-100px;
+  top:-230px;
+  background:radial-gradient(circle,rgba(126,106,255,.34),transparent 68%);
+}
+
+.hero-orb-two{
+  width:260px;
+  height:260px;
+  left:34%;
+  bottom:-200px;
+  background:radial-gradient(circle,rgba(101,81,255,.2),transparent 70%);
+}
+
+.hero-inner{
+  display:grid;
+  grid-template-columns:minmax(0,1.35fr) minmax(290px,.65fr);
+  gap:48px;
+  align-items:center;
+}
+
+.hero-left{max-width:700px}
+
+.eyebrow{
+  gap:9px;
+  margin:0 0 18px;
+  padding:7px 12px;
+  border-color:rgba(164,153,255,.25);
+  background:rgba(125,108,255,.09);
+  color:#c9c4ea;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+}
+
+.eyebrow-dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#8d7cff;
+  box-shadow:0 0 14px #8d7cff;
+}
+
+.hero h2{
+  max-width:680px;
+  margin:0;
+  color:#fff;
+  font-size:clamp(34px,3.7vw,52px);
+  line-height:1.02;
+  letter-spacing:-.055em;
+  font-weight:600;
+}
+
+.hero h2 span{
+  color:transparent;
+  background:linear-gradient(110deg,#d9d4ff 4%,#8b78ff 75%);
+  -webkit-background-clip:text;
+  background-clip:text;
+}
+
+.hero-copy{
+  max-width:610px;
+  margin-top:18px;
+  color:#a9a6b9;
+  font-size:15px;
+  line-height:1.75;
+}
+
+.hero-actions{margin-top:22px;gap:12px}
+
+.btn{
+  min-height:44px;
+  justify-content:center;
+  padding:0 18px;
+  border-radius:12px;
+  font-family:inherit;
+  font-size:14px;
+  font-weight:600;
+  transition:transform .2s ease,border-color .2s ease,background .2s ease,box-shadow .2s ease;
+}
+
+.btn:hover{transform:translateY(-1px)}
+
+.btn.primary{
+  background:linear-gradient(135deg,#9a8cff,#6f59f7);
+  box-shadow:0 14px 32px rgba(107,82,244,.3),inset 0 1px rgba(255,255,255,.25);
+}
+
+.btn.ghost{
+  background:rgba(255,255,255,.035);
+  border:1px solid rgba(174,164,255,.25);
+  color:#dedaff;
+}
+
+.btn.ghost:hover{background:rgba(132,112,255,.1);border-color:rgba(174,164,255,.5)}
+.btn-icon{font-size:18px;font-weight:400;line-height:1}
+
+.hero-right{
+  width:100%;
+  min-width:0;
+  max-width:350px;
+  justify-self:end;
+}
+
+.hero-stat-card{
+  padding:22px;
+  border-radius:22px;
+  background:linear-gradient(145deg,rgba(24,21,44,.94),rgba(10,9,18,.92));
+  border:1px solid rgba(156,143,255,.28);
+  box-shadow:0 22px 55px rgba(0,0,0,.3),inset 0 1px rgba(255,255,255,.04);
+  backdrop-filter:blur(18px);
+}
+
+.workspace-status-head{
+  display:flex;
+  align-items:center;
+  gap:13px;
+}
+
+.workspace-status-head > div:last-child{display:grid;gap:3px}
+.workspace-status-head strong{font-size:16px;color:#fff;font-weight:600}
+
+.workspace-mark{
+  width:42px;
+  height:42px;
+  display:grid;
+  place-items:center;
+  border-radius:13px;
+  color:#b5aaff;
+  background:linear-gradient(145deg,rgba(139,121,255,.24),rgba(113,93,240,.09));
+  border:1px solid rgba(155,142,255,.25);
+}
+
+.workspace-mark svg,.metric-icon svg{
+  width:21px;
+  height:21px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+.hero-stat-title{
+  margin:0;
+  color:#8f8ca1;
+  font-size:12px;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+}
+
+.sync-status{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin:19px 0;
+  padding:10px 12px;
+  border-radius:11px;
+  background:rgba(39,199,124,.07);
+  border:1px solid rgba(39,199,124,.16);
+  color:#65dfa3;
+  font-size:13px;
+  font-weight:600;
+}
+
+.sync-status > span{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#3fdb91;
+  box-shadow:0 0 12px rgba(63,219,145,.8);
+}
+
+.sync-status.is-warning{
+  background:rgba(251,191,36,.065);
+  border-color:rgba(251,191,36,.15);
+}
+
+.sync-status.is-warning > span{
+  background:#fbbf24;
+  box-shadow:0 0 12px rgba(251,191,36,.65);
+}
+
+.hero-feature-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.hero-feature-grid > div{
+  display:grid;
+  gap:4px;
+  padding:11px 12px;
+  border-radius:11px;
+  background:rgba(255,255,255,.025);
+  border:1px solid rgba(255,255,255,.06);
+}
+
+.hero-feature-grid strong{font-size:13px;color:#e7e3ff;font-weight:600}
+.hero-feature-grid span{font-size:11px;color:#8f8b9d}
+
+.journal-metrics{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:12px;
+  margin:0 0 18px;
+}
+
+.metric-card{
+  min-height:132px;
+  display:grid;
+  grid-template-columns:auto 1fr;
+  grid-template-rows:1fr auto;
+  gap:10px 13px;
+  padding:20px;
+  border-radius:18px;
+  background:linear-gradient(145deg,rgba(18,17,29,.96),rgba(10,9,17,.96));
+  border:1px solid var(--tj-line);
+  box-shadow:0 12px 35px rgba(0,0,0,.18),inset 0 1px rgba(255,255,255,.025);
+}
+
+.metric-card > div{display:grid;gap:3px}
+.metric-card > div span{color:#9995a9;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.07em}
+.metric-card strong{color:#fff;font-size:28px;line-height:1.1;font-weight:600;letter-spacing:-.04em}
+.metric-card small{grid-column:1/-1;color:#817d8d;font-size:12px}
+
+.metric-icon{
+  width:38px;
+  height:38px;
+  display:grid;
+  place-items:center;
+  border-radius:12px;
+}
+
+.metric-icon-purple{color:#b2a7ff;background:rgba(129,108,255,.13)}
+.metric-icon-green{color:#57d89a;background:rgba(56,202,132,.1)}
+.metric-icon-blue{color:#67b8ff;background:rgba(70,161,255,.1)}
+.metric-icon-amber{color:#f2ba63;background:rgba(242,174,70,.1)}
+
+.analytics-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.65fr) minmax(320px,.75fr);
+  gap:12px;
+  margin-bottom:18px;
+}
+
+.analytics-card{
+  min-width:0;
+  padding:24px;
+  border-radius:20px;
+  background:linear-gradient(145deg,rgba(18,17,29,.98),rgba(9,8,15,.98));
+  border:1px solid var(--tj-line);
+  box-shadow:0 18px 48px rgba(0,0,0,.2),inset 0 1px rgba(255,255,255,.025);
+}
+
+.analytics-heading{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.analytics-heading h3{
+  margin:5px 0 5px;
+  color:#fff;
+  font-size:21px;
+  line-height:1.2;
+  font-weight:600;
+  letter-spacing:-.025em;
+}
+
+.analytics-heading p{
+  margin:0;
+  color:#817d8f;
+  font-size:12px;
+  line-height:1.55;
+}
+
+.chart-range{
+  flex:0 0 auto;
+  display:inline-flex;
+  padding:4px;
+  border-radius:11px;
+  background:#08070e;
+  border:1px solid rgba(255,255,255,.07);
+}
+
+.chart-range button{
+  min-height:31px;
+  padding:0 11px;
+  border:0;
+  border-radius:8px;
+  background:transparent;
+  color:#777384;
+  font:600 11px/1 'Plus Jakarta Sans',sans-serif;
+  cursor:pointer;
+}
+
+.chart-range button.active{
+  background:rgba(130,108,255,.16);
+  color:#d9d3ff;
+  box-shadow:inset 0 0 0 1px rgba(151,137,255,.17);
+}
+
+.chart-summary{
+  display:flex;
+  gap:34px;
+  margin:25px 0 10px;
+}
+
+.chart-summary > div{display:grid;gap:4px}
+.chart-summary span{color:#777384;font-size:11px}
+.chart-summary strong{color:#fff;font-size:21px;font-weight:600;letter-spacing:-.03em}
+.chart-summary strong.is-positive{color:#5fdda0}
+.chart-summary strong.is-negative{color:#ff849b}
+
+.profitability-chart{
+  position:relative;
+  min-height:224px;
+  display:grid;
+  grid-template-columns:repeat(var(--chart-columns,7),minmax(44px,1fr));
+  align-items:end;
+  gap:12px;
+  padding:20px 10px 0;
+  border-radius:15px;
+  background:
+    linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),
+    rgba(3,3,8,.26);
+  background-size:100% 25%;
+  border:1px solid rgba(255,255,255,.045);
+  overflow-x:auto;
+}
+
+.chart-column{
+  min-width:44px;
+  height:198px;
+  display:grid;
+  grid-template-rows:1fr 25px;
+  gap:8px;
+}
+
+.chart-bars{
+  min-height:0;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  gap:5px;
+}
+
+.chart-bar{
+  position:relative;
+  width:min(15px,42%);
+  min-height:4px;
+  border-radius:6px 6px 3px 3px;
+  transition:height .35s ease;
+}
+
+.chart-bar.win{
+  background:linear-gradient(180deg,#9d8dff,#6855e8);
+  box-shadow:0 7px 18px rgba(104,85,232,.22);
+}
+
+.chart-bar.loss{background:linear-gradient(180deg,#f17c95,#9d4055)}
+.chart-label{overflow:hidden;color:#716e7e;font-size:10px;text-align:center;white-space:nowrap;text-overflow:ellipsis}
+
+.chart-empty{
+  grid-column:1/-1;
+  align-self:center;
+  justify-self:center;
+  max-width:280px;
+  color:#777384;
+  font-size:12px;
+  line-height:1.6;
+  text-align:center;
+}
+
+.chart-legend{
+  display:flex;
+  justify-content:flex-end;
+  gap:18px;
+  margin-top:13px;
+  color:#777384;
+  font-size:10px;
+}
+
+.chart-legend span{display:flex;align-items:center;gap:6px}
+.chart-legend i{width:8px;height:8px;border-radius:3px}
+.legend-win{background:#8975ff}
+.legend-loss{background:#d65f78}
+
+.period-snapshots{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin:22px 0;
+}
+
+.period-snapshots > div{
+  min-width:0;
+  display:grid;
+  gap:6px;
+  padding:13px 10px;
+  border-radius:12px;
+  background:rgba(126,105,255,.055);
+  border:1px solid rgba(151,137,255,.1);
+}
+
+.period-snapshots span{color:#777384;font-size:10px}
+.period-snapshots strong{color:#e7e2ff;font-size:12px;font-weight:600;white-space:nowrap}
+
+.insight-list{
+  display:grid;
+  gap:0;
+  border-top:1px solid rgba(255,255,255,.06);
+}
+
+.insight-list > div{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  padding:14px 2px;
+  border-bottom:1px solid rgba(255,255,255,.055);
+}
+
+.insight-list span{color:#8b8798;font-size:12px}
+.insight-list strong{color:#f0edff;font-size:13px;font-weight:600;text-align:right}
+
+#journalForm,.trade-log-card{
+  padding:0;
+  overflow:hidden;
+  border-radius:22px;
+  background:linear-gradient(145deg,rgba(17,16,27,.98),rgba(10,9,17,.98));
+  border:1px solid var(--tj-line);
+  box-shadow:0 22px 65px rgba(0,0,0,.25),inset 0 1px rgba(255,255,255,.025);
+}
+
+#journalForm{margin-bottom:18px}
+
+.panel-heading,.trade-log-heading{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  padding:25px 28px;
+  border-bottom:1px solid rgba(255,255,255,.065);
+  background:linear-gradient(90deg,rgba(129,108,255,.06),transparent 56%);
+}
+
+.panel-heading h3,.trade-log-heading h3{
+  margin:4px 0 5px;
+  color:#fff;
+  font-size:26px;
+  font-weight:600;
+  letter-spacing:-.025em;
+}
+
+.panel-heading p,.trade-log-heading p{
+  margin:0;
+  color:#777486;
+  font-size:14px;
+  line-height:1.5;
+}
+
+.panel-kicker{
+  color:#9b8fff;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+
+.panel-security{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 11px;
+  color:#9692a8;
+  font-size:12px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.07);
+  background:rgba(255,255,255,.025);
+}
+
+.panel-security span{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#40d58e;
+  box-shadow:0 0 10px rgba(64,213,142,.55);
+}
+
+.form-sections{padding:0 28px}
+
+.form-section{
+  display:grid;
+  grid-template-columns:230px minmax(0,1fr);
+  gap:32px;
+  padding:28px 0;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.form-section-title{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+}
+
+.form-section-title h4{
+  margin:0 0 7px;
+  color:#eae7f6;
+  font-size:17px;
+  font-weight:600;
+}
+
+.form-section-title p{
+  margin:0;
+  color:#8b8798;
+  font-size:13px;
+  line-height:1.55;
+}
+
+.field-grid{display:grid;gap:18px 14px}
+.field-grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.field-grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.field{min-width:0}
+
+.field label{
+  min-height:19px;
+  margin:0 0 7px;
+  color:#aaa6b9;
+  font-size:13px;
+  font-weight:600;
+}
+
+.field label span{
+  color:#777384;
+  font-size:11px;
+  font-weight:500;
+}
+
+.field input,.field select,.field textarea{
+  min-height:52px;
+  padding:13px 15px!important;
+  border-radius:11px;
+  border:1px solid rgba(161,151,225,.17);
+  background:rgba(4,4,10,.72);
+  color:#f4f1ff;
+  font-family:inherit;
+  font-size:14px;
+  transition:border-color .18s ease,box-shadow .18s ease,background .18s ease;
+}
+
+.field input:hover,.field select:hover,.field textarea:hover{
+  border-color:rgba(156,144,255,.3);
+  background:rgba(7,6,15,.9);
+}
+
+.field input:focus,.field select:focus,.field textarea:focus{
+  border-color:#7768e9;
+  box-shadow:0 0 0 3px rgba(119,104,233,.1);
+  background:#07060e;
+}
+
+.field input::placeholder,.field textarea::placeholder{color:#777283;font-size:13px}
+.field textarea{min-height:124px;resize:vertical;line-height:1.65}
+.field-upload{grid-column:1/-1}
+
+.field input[type="file"]{
+  min-height:64px;
+  padding:8px!important;
+  border-style:dashed;
+  color:#777486;
+}
+
+.field input[type="file"]::file-selector-button{
+  height:44px;
+  margin-right:12px;
+  padding:0 14px;
+  border-radius:9px;
+  border:1px solid rgba(151,137,255,.22);
+  background:rgba(126,105,255,.1);
+  color:#d7d1ff;
+  font-family:inherit;
+  font-size:12px;
+  font-weight:600;
+}
+
+.form-actions{
+  justify-content:flex-end;
+  align-items:center;
+  margin:0;
+  padding:20px 28px;
+  background:rgba(3,3,8,.28);
+}
+
+.save-hint{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-right:auto;
+  color:#777486;
+  font-size:12px;
+}
+
+.save-hint span{
+  width:20px;
+  height:20px;
+  display:grid;
+  place-items:center;
+  color:#59d99a;
+  border-radius:50%;
+  background:rgba(59,210,144,.08);
+}
+
+.trade-log-card{margin:0}
+
+.trade-log-heading .exports{
+  margin:0;
+  flex-wrap:nowrap;
+}
+
+.history-toolbar{
+  display:grid;
+  grid-template-columns:minmax(240px,1fr) 160px 150px;
+  gap:10px;
+  padding:16px 18px;
+  border-bottom:1px solid rgba(255,255,255,.055);
+  background:rgba(4,4,9,.22);
+}
+
+.history-search{
+  position:relative;
+  display:flex;
+  align-items:center;
+  margin:0;
+}
+
+.history-search > span{
+  position:absolute;
+  left:14px;
+  z-index:1;
+  color:#817d90;
+  font-size:19px;
+}
+
+.history-toolbar input,.history-toolbar select{
+  min-height:42px;
+  width:100%;
+  padding:0 13px;
+  border-radius:10px;
+  border:1px solid rgba(151,140,221,.14);
+  background:#08070e;
+  color:#d9d5e7;
+  font:500 12px/1 'Plus Jakarta Sans',sans-serif;
+}
+
+.history-toolbar input{padding-left:40px}
+.history-toolbar input::placeholder{color:#716d7e}
+
+.row-actions{display:flex;align-items:center;gap:6px}
+.row-pdf{
+  padding:6px 9px;
+  border-radius:8px;
+  border:1px solid rgba(139,119,255,.18);
+  background:rgba(126,105,255,.08);
+  color:#bcb3ff;
+  font:600 11px/1 'Plus Jakarta Sans',sans-serif;
+  cursor:pointer;
+}
+
+.exports .btn{
+  min-height:38px;
+  padding:0 13px;
+  border-radius:10px;
+  background:rgba(255,255,255,.025);
+  border:1px solid rgba(151,140,221,.16);
+  color:#aaa4c8;
+  box-shadow:none;
+  font-size:12px;
+}
+
+.exports .btn.primary{
+  background:linear-gradient(135deg,#8d7cff,#6855e8);
+  border:0;
+  box-shadow:0 10px 25px rgba(101,81,231,.24);
+}
+
+.table-wrapper{
+  overflow:auto;
+  padding:0 18px 18px;
+}
+
+table{
+  min-width:1040px;
+  margin:0;
+  border-collapse:separate;
+  border-spacing:0;
+}
+
+th,td{padding:15px 12px;font-size:12px}
+
+th{
+  top:0;
+  z-index:1;
+  color:#817d91;
+  background:#0d0c15;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+}
+
+td{
+  color:#aaa6b8;
+  background:transparent!important;
+  border-bottom:1px solid rgba(255,255,255,.045);
+}
+
+tr:hover td{color:#f2efff;background:rgba(132,111,255,.035)!important}
+td:nth-child(13){max-width:190px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+.result-pill{
+  display:inline-flex;
+  align-items:center;
+  min-width:42px;
+  justify-content:center;
+  padding:5px 8px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+  background:rgba(255,255,255,.045);
+  color:#aaa6b8;
+}
+
+.result-win{background:rgba(64,213,142,.09);color:#5fdda0}
+.result-loss{background:rgba(255,92,120,.08);color:#ff849b}
+.result-be{background:rgba(99,171,255,.09);color:#72b8ff}
+.amount-cell.is-positive,#journalNetPnl.is-positive{color:#5fdda0}
+.amount-cell.is-negative,#journalNetPnl.is-negative{color:#ff849b}
+
+.download-small{
+  padding:6px 10px;
+  border-radius:8px;
+  background:rgba(255,92,120,.07);
+  border:1px solid rgba(255,92,120,.16);
+  color:#ff889e;
+  box-shadow:none;
+  font-size:11px;
+  font-weight:600;
+}
+
+.tj-login-pop{
+  padding:26px;
+  border-radius:22px;
+  background:linear-gradient(145deg,#151323,#0b0a12);
+  border-color:rgba(148,135,255,.28);
+}
+
+body.embed-mode .wrap{width:100%;padding:8px 12px 24px}
+body.embed-mode .hero{min-height:auto;padding:28px;border-radius:20px}
+body.embed-mode .hero h2{font-size:36px}
+
+@media (max-width:1050px){
+  .hero{padding:34px}
+  .hero-inner{grid-template-columns:minmax(0,1.2fr) minmax(260px,.8fr);gap:32px}
+  .journal-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .analytics-grid{grid-template-columns:1fr}
+  .tj-skeleton-panels{grid-template-columns:1fr}
+  .form-section{grid-template-columns:1fr;gap:20px}
+}
+
+@media (max-width:760px){
+  .wrap{width:min(100% - 24px,1320px);padding:16px 0 52px}
+  html.tj-auth-pending .tj-loading-shell{width:min(100% - 24px,1320px);margin:16px auto 52px}
+  .tj-skeleton-hero{min-height:360px;grid-template-columns:1fr;padding:28px 22px;gap:24px}
+  .tj-skeleton-side{min-height:120px}
+  .tj-skeleton-metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .hero{min-height:auto;padding:30px 22px;border-radius:22px}
+  .hero-inner{grid-template-columns:1fr;gap:28px}
+  .hero h2{font-size:clamp(34px,10vw,48px)}
+  .hero-copy{font-size:13px}
+  .hero-right{max-width:none;justify-self:stretch}
+  .journal-metrics{gap:8px}
+  .metric-card{min-height:116px;padding:15px;gap:8px 10px}
+  .metric-card strong{font-size:20px}
+  .panel-heading,.trade-log-heading{align-items:flex-start;flex-direction:column;padding:21px 18px}
+  .analytics-heading{flex-direction:column}
+  .chart-range{width:100%;display:grid;grid-template-columns:repeat(3,1fr)}
+  .profitability-chart{grid-template-columns:repeat(var(--chart-columns,7),minmax(40px,1fr));gap:8px}
+  .history-toolbar{grid-template-columns:1fr 1fr}
+  .history-search{grid-column:1/-1}
+  .panel-security{align-self:flex-start}
+  .form-sections{padding:0 18px}
+  .form-section{padding:24px 0}
+  .field-grid-3,.field-grid-2{grid-template-columns:1fr}
+  .field-upload{grid-column:auto}
+  .form-actions{padding:18px;gap:9px}
+  .save-hint{width:100%;margin:0 0 4px}
+  .form-actions .btn{flex:1}
+  .trade-log-heading .exports{width:100%;display:grid;grid-template-columns:repeat(3,1fr)}
+  .table-wrapper{padding:0 8px 12px}
+}
+
+@media (max-width:460px){
+  .journal-metrics{grid-template-columns:1fr 1fr}
+  .tj-skeleton-actions{display:grid;grid-template-columns:1fr}
+  .tj-skeleton-chip,.tj-skeleton-chip.secondary{width:100%}
+  .metric-card{grid-template-columns:1fr}
+  .metric-icon{width:34px;height:34px}
+  .metric-card small{display:none}
+  .hero-actions{display:grid;grid-template-columns:1fr}
+  .hero-actions .btn{width:100%}
+  .analytics-card{padding:19px 15px}
+  .period-snapshots{grid-template-columns:1fr}
+  .period-snapshots > div{display:flex;justify-content:space-between;align-items:center}
+  .history-toolbar{grid-template-columns:1fr}
+  .history-search{grid-column:auto}
+}
+
+</style>
+  <style id="rmp-global-reset">html,body{margin:0;padding:0;overflow-x:hidden;}</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- RMP CORE SCHEMA START -->
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","@id":"https://www.rankmyprop.in/#organization","name":"Rank My Prop","url":"https://www.rankmyprop.in/","logo":{"@type":"ImageObject","url":"https://www.rankmyprop.in/assets/Rank%20My%20Prop%20Logo%201.webp"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","@id":"https://www.rankmyprop.in/#website","url":"https://www.rankmyprop.in/","name":"Rank My Prop","publisher":{"@id":"https://www.rankmyprop.in/#organization"},"potentialAction":{"@type":"SearchAction","target":"https://www.rankmyprop.in/search?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","@id":"https://www.rankmyprop.in/#primary-sitelinks","name":"Rank My Prop primary prop firm research pages","itemListElement":[{"@type":"ListItem","position":1,"name":"Compare Prop Firms","url":"https://www.rankmyprop.in/listedprop"},{"@type":"ListItem","position":2,"name":"Prop Firm Discounts","url":"https://www.rankmyprop.in/offers"},{"@type":"ListItem","position":3,"name":"Prop Firm Rules","url":"https://www.rankmyprop.in/propfirmrule"},{"@type":"ListItem","position":4,"name":"Payout Proofs","url":"https://www.rankmyprop.in/payout-proofs"},{"@type":"ListItem","position":5,"name":"Best Prop Firms","url":"https://www.rankmyprop.in/bestprop"}]}</script>
+<!-- RMP CORE SCHEMA END -->
+<link id="rmpHomeHeaderStyles" rel="stylesheet" href="/home-header-shell.css">
+<link id="rmpHomeFooterStyles" rel="stylesheet" href="/home-footer-shell.css">
+<link id="rmpSiteTypographyStyles" rel="stylesheet" href="/site-typography.css">
+<link rel="stylesheet" href="/site-heading-theme.css" data-rmp-heading-theme="1">
+<link rel="stylesheet" href="/global-footer.css" data-rmp-global-footer-css="1">
+<script id="rmp-ssr-bootstrap">window.__RMP_SSR_BOOTSTRAP={"id":"page-tradejournal","heading":"","paragraph":"Use Rank My Prop trade journal to log entries, exits, mistakes, screenshots, and session notes. Improve consistency and pass prop firm challenges faster.","seoTitle":"Trade Journal - Track Prop Challenge Trades | Rank My Prop","seoDescription":"Use Rank My Prop trade journal to log entries, exits, mistakes, screenshots, and session notes. Improve consistency and pass prop firm challenges faster.","canonical":"https://www.rankmyprop.in/tradejournal","robots":"index, follow, max-image-preview:large, max-snippet:-1","__stableSsrHero":true};</script>
+<script defer src="/route-content-runtime.js"></script>
+</head>
+
+<body>
+
+<div class="tj-loading-shell" id="journalLoadingSkeleton" role="status" aria-label="Loading your trade journal">
+  <div class="tj-loading-status"><i aria-hidden="true"></i><span>Loading your private journal...</span></div>
+  <section class="tj-skeleton-block tj-skeleton-hero" aria-hidden="true">
+    <div class="tj-skeleton-copy">
+      <div class="tj-skeleton-line eyebrow"></div>
+      <div class="tj-skeleton-line title"></div>
+      <div class="tj-skeleton-line title-short"></div>
+      <div class="tj-skeleton-line copy"></div>
+      <div class="tj-skeleton-actions">
+        <div class="tj-skeleton-chip"></div>
+        <div class="tj-skeleton-chip secondary"></div>
+      </div>
+    </div>
+    <div class="tj-skeleton-side"></div>
+  </section>
+  <div class="tj-skeleton-metrics" aria-hidden="true">
+    <div class="tj-skeleton-block tj-skeleton-metric"></div>
+    <div class="tj-skeleton-block tj-skeleton-metric"></div>
+    <div class="tj-skeleton-block tj-skeleton-metric"></div>
+    <div class="tj-skeleton-block tj-skeleton-metric"></div>
+  </div>
+  <div class="tj-skeleton-panels" aria-hidden="true">
+    <div class="tj-skeleton-block tj-skeleton-chart"></div>
+    <div class="tj-skeleton-block tj-skeleton-insights"></div>
+  </div>
+  <div class="tj-skeleton-block tj-skeleton-form" aria-hidden="true"></div>
+</div>
+
+<div class="wrap">
+  <section class="hero" aria-labelledby="journalWorkspaceTitle">
+    <span class="hero-orb hero-orb-one" aria-hidden="true"></span>
+    <span class="hero-orb hero-orb-two" aria-hidden="true"></span>
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="eyebrow">
+          <span class="eyebrow-dot" aria-hidden="true"></span>
+          <span>Trader performance workspace</span>
+        </div>
+        <h2 id="journalWorkspaceTitle">Turn every trade into a <span>repeatable edge.</span></h2>
+        <div class="hero-copy">Capture the setup, execution, outcome and psychology behind every position in one focused trading workspace.</div>
+        <div class="hero-actions">
+          <a href="#journalForm" class="btn primary" id="heroAddTradeBtn">
+            <span class="btn-icon" aria-hidden="true">+</span>
+            Log a new trade
+          </a>
+          <button type="button" class="btn ghost" id="exportPdfAllBtn">
+            Download full journal PDF
+          </button>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-stat-card">
+          <div class="workspace-status-head">
+            <div class="workspace-mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M5 19V9m7 10V5m7 14v-7M3 19h18"/></svg>
+            </div>
+            <div>
+              <span class="hero-stat-title">Journal workspace</span>
+              <strong>Performance hub</strong>
+            </div>
+          </div>
+          <div class="sync-status" id="tradeJournalSyncStatus">
+            <span aria-hidden="true"></span>
+            Checking secure sync
+          </div>
+          <div class="hero-feature-grid">
+            <div><strong>Cloud</strong><span>Account sync</span></div>
+            <div><strong>Multi-format</strong><span>Smart exports</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="journal-metrics" aria-label="Journal performance overview">
+    <article class="metric-card">
+      <span class="metric-icon metric-icon-purple" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M6 19V9m6 10V5m6 14v-7"/></svg>
+      </span>
+      <div><span>Total trades</span><strong id="journalTotalTrades">0</strong></div>
+      <small>Journal entries</small>
+    </article>
+    <article class="metric-card">
+      <span class="metric-icon metric-icon-green" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="m5 13 4 4L19 7"/></svg>
+      </span>
+      <div><span>Win rate</span><strong id="journalWinRate">—</strong></div>
+      <small>Closed outcomes</small>
+    </article>
+    <article class="metric-card">
+      <span class="metric-icon metric-icon-blue" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M12 3v18m4-14.5c0-1.4-1.8-2.5-4-2.5S8 5.1 8 6.5 9.8 9 12 9s4 1.1 4 2.5S14.2 14 12 14s-4 1.1-4 2.5S9.8 19 12 19s4-1.1 4-2.5"/></svg>
+      </span>
+      <div><span>Net P&amp;L</span><strong id="journalNetPnl">$0</strong></div>
+      <small>Recorded results</small>
+    </article>
+    <article class="metric-card">
+      <span class="metric-icon metric-icon-amber" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M12 3v4m0 10v4M3 12h4m10 0h4M5.6 5.6l2.8 2.8m7.2 7.2 2.8 2.8m0-12.8-2.8 2.8m-7.2 7.2-2.8 2.8"/><circle cx="12" cy="12" r="3"/></svg>
+      </span>
+      <div><span>Avg. confidence</span><strong id="journalAvgConfidence">—</strong></div>
+      <small>Decision quality</small>
+    </article>
+  </section>
+
+  <section class="analytics-grid" aria-label="Trading performance analytics">
+    <article class="analytics-card chart-card">
+      <div class="analytics-heading">
+        <div>
+          <span class="panel-kicker">Profitability trend</span>
+          <h3>Winning trade activity</h3>
+          <p>Compare profitable and losing trades across your selected period.</p>
+        </div>
+        <div class="chart-range" role="group" aria-label="Chart period">
+          <button type="button" class="active" data-chart-range="day">Daily</button>
+          <button type="button" data-chart-range="week">Weekly</button>
+          <button type="button" data-chart-range="month">Monthly</button>
+        </div>
+      </div>
+      <div class="chart-summary">
+        <div><span>Profitable trades</span><strong id="chartProfitableTrades">0</strong></div>
+        <div><span>Period net P&amp;L</span><strong id="chartPeriodPnl">$0</strong></div>
+      </div>
+      <div class="profitability-chart" id="profitabilityChart" aria-label="Profitability bar chart"></div>
+      <div class="chart-legend" aria-hidden="true">
+        <span><i class="legend-win"></i>Profitable</span>
+        <span><i class="legend-loss"></i>Losing</span>
+      </div>
+    </article>
+
+    <aside class="analytics-card insights-card">
+      <div class="analytics-heading">
+        <div>
+          <span class="panel-kicker">Journal intelligence</span>
+          <h3>Performance pulse</h3>
+          <p>Useful signals calculated from your saved trades.</p>
+        </div>
+      </div>
+      <div class="period-snapshots">
+        <div><span>Today</span><strong id="profitableToday">0 wins</strong></div>
+        <div><span>This week</span><strong id="profitableWeek">0 wins</strong></div>
+        <div><span>This month</span><strong id="profitableMonth">0 wins</strong></div>
+      </div>
+      <div class="insight-list">
+        <div><span>Best session</span><strong id="journalBestSession">—</strong></div>
+        <div><span>Profit factor</span><strong id="journalProfitFactor">—</strong></div>
+        <div><span>Average winner</span><strong id="journalAverageWin">$0</strong></div>
+        <div><span>Mistake rate</span><strong id="journalMistakeRate">—</strong></div>
+      </div>
+    </aside>
+  </section>
+
+  <div class="card card-soft" id="journalForm">
+    <div class="panel-heading">
+      <div>
+        <span class="panel-kicker">New journal entry</span>
+        <h3>Log your trade</h3>
+        <p>Record the complete decision, not only the final result.</p>
+      </div>
+      <div class="panel-security">
+        <span aria-hidden="true"></span>
+        Private to your account
+      </div>
+    </div>
+
+    <div class="form-sections">
+      <section class="form-section">
+        <div class="form-section-title">
+          <div><h4>Trade execution</h4><p>When, where and what you traded.</p></div>
+        </div>
+        <div class="field-grid field-grid-3">
+          <div class="field"><label for="date">Trade date</label><input id="date" type="date" required></div>
+          <div class="field"><label for="time">Entry time</label><input id="time" type="time"></div>
+          <div class="field"><label for="session">Session</label><select id="session"><option>London</option><option>New York</option><option>Tokyo</option><option>Sydney</option><option>Other</option></select></div>
+          <div class="field"><label for="pair">Market / pair</label><input id="pair" placeholder="e.g. EURUSD" required></div>
+          <div class="field"><label for="direction">Direction</label><select id="direction"><option>Long</option><option>Short</option></select></div>
+          <div class="field"><label for="lots">Position size</label><input id="lots" type="number" step="0.01" value="1"></div>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <div class="form-section-title">
+          <div><h4>Risk &amp; outcome</h4><p>Measure the plan against the result.</p></div>
+        </div>
+        <div class="field-grid field-grid-3">
+          <div class="field"><label for="entry">Entry price</label><input id="entry" inputmode="decimal" placeholder="0.00000"></div>
+          <div class="field"><label for="sl">Stop loss</label><input id="sl" inputmode="decimal" placeholder="0.00000"></div>
+          <div class="field"><label for="tp">Take profit</label><input id="tp" inputmode="decimal" placeholder="0.00000"></div>
+          <div class="field"><label for="result">Result</label><select id="result"><option>Win</option><option>Loss</option><option>BE</option></select></div>
+          <div class="field"><label for="amount">P&amp;L amount ($)</label><input id="amount" type="number" placeholder="0.00"></div>
+          <div class="field"><label for="confidence">Confidence (%)</label><input id="confidence" type="number" min="0" max="100" value="50"></div>
+        </div>
+      </section>
+
+      <section class="form-section form-section-review">
+        <div class="form-section-title">
+          <div><h4>Review &amp; psychology</h4><p>Capture the context that makes the trade useful later.</p></div>
+        </div>
+        <div class="field-grid field-grid-2">
+          <div class="field"><label for="market">Market condition / entry reason</label><textarea id="market" placeholder="What made this setup valid?"></textarea></div>
+          <div class="field"><label for="reasonExit">Reason for exit</label><textarea id="reasonExit" placeholder="Why and how did you close?"></textarea></div>
+          <div class="field"><label for="mistakes">Execution review</label><select id="mistakes"><option>No</option><option>Yes - Emotional</option><option>Yes - Execution</option><option>Yes - Plan</option></select></div>
+          <div class="field"><label for="notes">Journal notes</label><textarea id="notes" placeholder="Lessons, emotions and next action"></textarea></div>
+          <div class="field field-upload">
+            <label for="setupImage">Setup screenshot <span>Optional · Max 5 MB</span></label>
+            <input type="file" id="setupImage" accept="image/*">
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="actions-row form-actions">
+      <div class="save-hint"><span aria-hidden="true">✓</span> Saved securely to your account</div>
+      <button class="btn ghost" id="resetBtn" type="button">Clear form</button>
+      <button class="btn primary" id="addTradeBtn">
+        <span class="btn-icon" aria-hidden="true">+</span>
+        Save trade
+      </button>
+    </div>
+  </div>
+
+  <section class="card trade-log-card">
+    <div class="trade-log-heading">
+      <div>
+        <span class="panel-kicker">Performance archive</span>
+        <h3>Trade history</h3>
+        <p>Review your execution patterns and export the complete record.</p>
+      </div>
+      <div class="exports">
+        <button class="btn" id="exportCsvBtn">CSV</button>
+        <button class="btn" id="exportExcelBtn">Excel</button>
+        <button class="btn primary" id="exportPdfAllBtn_bottom">Export PDF</button>
+      </div>
+    </div>
+    <div class="history-toolbar">
+      <label class="history-search" for="tradeSearch">
+        <span aria-hidden="true">⌕</span>
+        <input id="tradeSearch" type="search" placeholder="Search pair, session or notes">
+      </label>
+      <select id="tradeResultFilter" aria-label="Filter by result">
+        <option value="all">All results</option>
+        <option value="win">Profitable</option>
+        <option value="loss">Losing</option>
+        <option value="be">Break-even</option>
+      </select>
+      <select id="tradePeriodFilter" aria-label="Filter by period">
+        <option value="all">All time</option>
+        <option value="day">Today</option>
+        <option value="week">This week</option>
+        <option value="month">This month</option>
+      </select>
+    </div>
+    <div class="table-wrapper">
+      <table id="tradesTable">
+        <thead>
+          <tr>
+            <th>Date</th><th>Session</th><th>Time</th><th>Pair</th><th>Dir</th>
+            <th>Lots</th><th>TP</th><th>SL</th><th>Entry</th><th>Conf</th>
+            <th>Result</th><th>Amount</th><th>Notes</th><th>Image</th><th>Actions</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+</div>
+
+<div class="tj-login-ov" id="loginPromptOverlay">
+  <div class="tj-login-pop">
+    <h3>Your private trading workspace</h3>
+    <p>Log in to access your saved trades, add new journal entries, sync them with your dashboard, and export your performance history.</p>
+    <div class="tj-login-actions">
+      <a class="tj-login-btn" href="/" target="_top">Back to home</a>
+      <button class="tj-login-btn pri" id="loginPromptGo" type="button">Login</button>
+    </div>
+  </div>
+</div>
+
+
+<script type="module" src="trade-journal-app.js"></script>
+<script type="module">
+  if (new URLSearchParams(window.location.search).get("embed") !== "1") {
+    const loadModule = (src) => new Promise((resolve, reject) => {
+      const script = document.createElement("script");
+      script.type = "module";
+      script.src = src;
+      script.addEventListener("load", resolve, { once: true });
+      script.addEventListener("error", reject, { once: true });
+      document.body.appendChild(script);
+    });
+
+    await loadModule("rmp-nav.js");
+    await loadModule("content-cms-runtime.js");
+    await loadModule("site-animations.js");
+    await loadModule("site-auth-header.js");
+    await loadModule("site-performance.js");
+  }
+</script>
+</body>
+</html>
+
+
+

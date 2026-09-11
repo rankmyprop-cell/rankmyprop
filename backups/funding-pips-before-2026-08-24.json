@@ -1,0 +1,7 @@
+{
+  "capturedAt": "2026-08-24",
+  "record": "funding-pips",
+  "existsBeforeChange": false,
+  "checkedSlugs": ["funding-pips", "fundingpips"],
+  "restoreAction": "Delete the funding-pips documents created in firms, firmReviewProfiles, and firmRatingStats."
+}

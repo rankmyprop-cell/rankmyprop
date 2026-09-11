@@ -1,0 +1,40 @@
+{
+  "preparedAt": "2026-08-24",
+  "record": "atlas-funded",
+  "mode": "rules-and-reviews-only",
+  "preserve": ["existing logo", "firm identity", "review profile", "SEO", "ratings", "all non-targeted fields"],
+  "visibility": {
+    "showFirmProfile": false,
+    "showHomeTable": false,
+    "showListed": false,
+    "showBestGlobal": false,
+    "bestRegions": {},
+    "bestCategories": {},
+    "showRules": true,
+    "showReviews": true,
+    "showOffers": false,
+    "active": true,
+    "publishState": "published"
+  },
+  "sourceFiles": [
+    "/Users/theforexclue/Downloads/ATLAS FUNDED 1STEP PRO.pdf",
+    "/Users/theforexclue/Downloads/ATLAS FUNDED 1STEP.pdf",
+    "/Users/theforexclue/Downloads/ATLAS FUNDED 2STEP PRO.pdf",
+    "/Users/theforexclue/Downloads/ATLAS FUNDED 2STEP.pdf",
+    "/Users/theforexclue/Downloads/ATLAS FUNDED 3STEP.pdf",
+    "/Users/theforexclue/Downloads/ATLAS FUNDED INSTAN ZERO.pdf",
+    "/Users/theforexclue/Downloads/ATLAS FUNDED instant.pdf",
+    "/Users/theforexclue/Downloads/Atlas_Funded_Pay_After_Pass_Rules_Professional.pdf"
+  ],
+  "programs": [
+    {"program":"1-Step Pro","phase1":"9%","phase2":"Not applicable","target":"9%","allocation":"Not mentioned","split":"Funded table: 100%*; 100% add-on also listed","ruleCount":13},
+    {"program":"1-Step Standard","phase1":"11%","phase2":"Not applicable","target":"11%","allocation":"Not mentioned","split":"80% default; 100% add-on available","ruleCount":12},
+    {"program":"2-Step Pro","phase1":"8%","phase2":"5%","target":"8% / 5%","allocation":"Not mentioned","split":"Funded table: 100%*; 95% add-on also listed","ruleCount":15},
+    {"program":"2-Step Standard","phase1":"9%","phase2":"5%","target":"9% / 5%","allocation":"Not mentioned","split":"Funded table: 100%*; 100% add-on also listed","ruleCount":11},
+    {"program":"3-Step","phase1":"6%","phase2":"6%","target":"6% each phase","allocation":"Not mentioned","split":"Funded table: 100%*; 100% add-on also listed","ruleCount":11},
+    {"program":"Instant Funded Zero","phase1":"Not applicable","phase2":"Not applicable","target":"Not applicable","allocation":"Not mentioned","split":"80% default; 100% add-on available","ruleCount":13},
+    {"program":"Instant Funded","phase1":"Not applicable","phase2":"Not applicable","target":"Not applicable","allocation":"Not mentioned","split":"80% default; 100% add-on available","ruleCount":14},
+    {"program":"Pay After Pass Professional","phase1":"3%","phase2":"Not applicable","target":"3%","allocation":"Not mentioned","split":"80% default; optional 100% at checkout","ruleCount":13}
+  ],
+  "editorPolicy": "No unsupported facts were added. Missing values use Not mentioned or Not applicable as appropriate. Source conflicts are displayed without inference."
+}

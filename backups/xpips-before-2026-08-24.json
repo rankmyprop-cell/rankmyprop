@@ -1,0 +1,7 @@
+{
+  "capturedAt": "2026-08-24",
+  "record": "xpips",
+  "existsBeforeChange": false,
+  "checkedSlugs": ["xpips", "x-pips"],
+  "restoreAction": "Delete the xpips documents created in firms, firmReviewProfiles, and firmRatingStats."
+}

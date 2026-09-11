@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+<meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+                                                                                                                                                                  <meta property="og:image:height" content="630" />
+                                                                                                                                                        <meta property="og:image:width" content="1200" />
+<meta name="twitter:image" content="https://www.rankmyprop.in/assets/og-default-1200x630.webp" />
+<meta property="og:image" content="https://www.rankmyprop.in/assets/og-default-1200x630.webp" />
+<meta name="description" content="Trading Guides CMS | Rank My Prop on Rank My Prop platform.">
+<meta name="theme-color" content="#0a0b12" />
+                                                                                                                                                                                                                                                                                                                                                                                                <meta name="robots" content="noindex, nofollow" />
+  <title>Trading Guides CMS | Rank My Prop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght%40300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/dashboard-layout.css" />
+
+  <style id="rmpBlogAdminTableFix">
+    .posts-table{min-width:1040px;table-layout:fixed}
+    .posts-table th:first-child,.posts-table td:first-child{width:31%;min-width:0;white-space:normal;overflow-wrap:anywhere}
+    .posts-table th:last-child,.posts-table td:last-child{position:sticky;right:0;z-index:2;min-width:430px;background:#11101a;box-shadow:-12px 0 22px rgba(5,4,11,.45)}
+    .posts-table th:last-child{z-index:3;background:#171620}
+    .posts-table .post-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:flex-start}
+    .posts-table .post-actions .btn,.posts-table .post-actions .btn-danger{white-space:nowrap}
+    .paragraph-image-upload{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:9px 12px;align-items:center;margin-top:10px;padding:10px;border:1px solid rgba(122,116,255,.16);border-radius:10px;background:rgba(122,116,255,.035)}
+    .paragraph-image-upload input[type="file"]{grid-column:1/-1;min-width:0;max-width:100%;padding:7px 9px;border:1px solid rgba(122,116,255,.22);border-radius:8px;background:#0d0c16;color:#cbd0e5}
+    .paragraph-image-upload .btn{min-height:36px;padding:0 14px;white-space:nowrap}
+    .paragraph-image-upload small{min-width:0;color:#aaa4bc;font-size:12px;line-height:1.4}
+    @media(max-width:900px){.posts-table{min-width:980px}.posts-table th:first-child,.posts-table td:first-child{width:280px;min-width:280px}}
+    @media(max-width:560px){.paragraph-image-upload{grid-template-columns:1fr}.paragraph-image-upload .btn{width:100%}}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-dot"></span><b>RMP Admin</b></div>
+      <a class="side-link" href="/dashboard-admin">Admin Home</a>
+      <a class="side-link" href="/admin-clients">Client Access</a>
+      <a class="side-link" href="/admin-moderation">Moderation</a>
+      <a class="side-link" href="/admin-purchases">Purchases</a>
+      <a class="side-link" href="/admin-announcements">Announcement Hub</a>
+      <a class="side-link" href="/admin-community">Community Posts</a>
+      <a class="side-link" href="/admin-giveaways">Giveaways CMS</a>
+      <a class="side-link" href="/admin-events">Upcoming Events</a>
+      <a class="side-link" href="/admin-offers">Offers Control</a>
+      <a class="side-link" href="/admin-firms">Firm Listings</a>
+      <a class="side-link" href="/admin-filters">Filters Control</a>
+      <a class="side-link" href="/admin-propnews">Prop News CMS</a>
+      <a class="side-link active" href="/admin-trading-guides">Trading Guides CMS</a>
+      <a class="side-link" href="/admin-funding-strategies">Funding Strategies CMS</a>
+      <a class="side-link" href="/admin-trading-psychology">Trading Psychology CMS</a>
+      <a class="side-link" href="/admin-beginner-tutorials">Beginner Tutorials CMS</a>
+      <a class="side-link" href="/admin-faqs">FAQ CMS</a>
+      <a class="side-link" href="#" id="logoutBtn">Log out</a>
+    </aside>
+
+    <main class="main">
+      <header class="top">
+        <div>
+          <h3>Trading Guides CMS</h3>
+          <div class="welcome">Create SEO blogs and manage Watch Now videos from one panel.</div>
+          <div id="adminVersion" style="font-size:12px;margin-top:6px;color:#9aa2bf">Version: unknown</div>
+        </div>
+        <div class="top-actions"><span class="chip" id="adminEmail">loading...</span></div>
+      </header>
+
+      <div class="chip" id="notice" style="display:none;"></div>
+
+      <section class="panel">
+        <div class="panel-head"><h3>Blog Post (Create / Edit)</h3></div>
+        <form id="postForm" class="form-grid editor-grid">
+          <input type="hidden" name="docId" />
+
+          <div class="editor-col editor-left">
+            <div class="field"><label>Title</label><input name="title" required /></div>
+            <div class="field"><label>Slug</label><input name="slug" placeholder="best-prop-firms-for-beginners-2026" required /></div>
+            <input type="hidden" name="coverImage" />
+            <div class="field two-up">
+              <div><label>Category</label><input name="category" placeholder="Trading Guides" /></div>
+              <div><label>Read Time (min)</label><input name="readTime" type="number" min="1" value="35" /></div>
+            </div>
+
+            <div class="field"><label>Publish Date</label><input name="publishedAt" type="date" /></div>
+
+            <div class="panel" style="padding:12px;margin-top:8px">
+              <label style="display:block;margin-bottom:8px">Thumbnail (Cloudinary)</label>
+              <div id="thumbPreview" style="width:100%;height:140px;border-radius:10px;background:rgba(0,0,0,.35);display:grid;place-items:center;color:#9aa2bf;overflow:hidden;border:1px dashed rgba(255,255,255,.04)">
+                <span id="thumbPreviewText">No thumbnail uploaded yet.</span>
+                <img fetchpriority="high" loading="eager" decoding="async" id="thumbPreviewImg" src="" alt="thumb" style="max-width:100%;max-height:100%;display:none;object-fit:cover" />
+              </div>
+              <div class="top-actions" style="margin-top:8px;justify-content:flex-start;gap:8px">
+                <input id="postThumbFile2" type="file" accept="image/*" class="btn" style="padding:8px 10px;max-width:220px" />
+                <button class="btn" id="uploadPostThumbBtn2" type="button">Upload Thumb</button>
+                <input name="thumbUrl" placeholder="https://..." style="flex:1" />
+              </div>
+              <div class="welcome" style="margin-top:6px">Thumbnail uploads to Cloudinary and appears in article cards.</div>
+            </div>
+
+            <div class="field" style="margin-top:12px"><label>Excerpt (short summary)</label><textarea name="excerpt" rows="3" required></textarea></div>
+
+            <div class="panel" style="margin-top:12px;padding:12px">
+              <h4 style="margin:0 0 10px">Paragraphs (editor)</h4>
+              <div class="field"><label>Subheading 1 (optional H3)</label><input name="subheading1" placeholder="Optional heading shown above paragraph 1" /></div>
+              <div class="field"><label>Paragraph 1 (lead)</label><textarea name="paragraph1" rows="4" required></textarea><input type="hidden" name="paragraphImage1" /><div class="paragraph-image-upload"><input type="file" accept="image/*" data-paragraph-image-file="1" /><button class="btn" type="button" data-upload-paragraph-image="1">Upload image</button><small data-paragraph-image-status="1">Optional — shown below paragraph 1.</small></div></div>
+              <div class="field"><label>Subheading 2 (optional H3)</label><input name="subheading2" placeholder="Optional heading shown above paragraph 2" /></div>
+              <div class="field"><label>Paragraph 2</label><textarea name="paragraph2" rows="4"></textarea><input type="hidden" name="paragraphImage2" /><div class="paragraph-image-upload"><input type="file" accept="image/*" data-paragraph-image-file="2" /><button class="btn" type="button" data-upload-paragraph-image="2">Upload image</button><small data-paragraph-image-status="2">Optional — shown below paragraph 2.</small></div></div>
+              <div class="field"><label>Subheading 3 (optional H3)</label><input name="subheading3" placeholder="Optional heading shown above paragraph 3" /></div>
+              <div class="field"><label>Paragraph 3</label><textarea name="paragraph3" rows="4"></textarea><input type="hidden" name="paragraphImage3" /><div class="paragraph-image-upload"><input type="file" accept="image/*" data-paragraph-image-file="3" /><button class="btn" type="button" data-upload-paragraph-image="3">Upload image</button><small data-paragraph-image-status="3">Optional — shown below paragraph 3.</small></div></div>
+              <div class="field"><label>Subheading 4 (optional H3)</label><input name="subheading4" placeholder="Optional heading shown above paragraph 4" /></div>
+              <div class="field"><label>Paragraph 4</label><textarea name="paragraph4" rows="4"></textarea><input type="hidden" name="paragraphImage4" /><div class="paragraph-image-upload"><input type="file" accept="image/*" data-paragraph-image-file="4" /><button class="btn" type="button" data-upload-paragraph-image="4">Upload image</button><small data-paragraph-image-status="4">Optional — shown below paragraph 4.</small></div></div>
+              <div class="field"><label>Subheading 5 (optional H3)</label><input name="subheading5" placeholder="Optional heading shown above paragraph 5" /></div>
+              <div class="field"><label>Paragraph 5</label><textarea name="paragraph5" rows="4"></textarea><input type="hidden" name="paragraphImage5" /><div class="paragraph-image-upload"><input type="file" accept="image/*" data-paragraph-image-file="5" /><button class="btn" type="button" data-upload-paragraph-image="5">Upload image</button><small data-paragraph-image-status="5">Optional — shown below paragraph 5.</small></div></div>
+              <div class="field"><label>Subheading 6 (optional H3)</label><input name="subheading6" placeholder="Optional heading shown above paragraph 6" /></div>
+              <div class="field"><label>Paragraph 6</label><textarea name="paragraph6" rows="4"></textarea><input type="hidden" name="paragraphImage6" /><div class="paragraph-image-upload"><input type="file" accept="image/*" data-paragraph-image-file="6" /><button class="btn" type="button" data-upload-paragraph-image="6">Upload image</button><small data-paragraph-image-status="6">Optional — shown below paragraph 6.</small></div></div>
+            </div>
+
+            <div class="full top-actions" style="margin-top:14px">
+              <button class="btn-primary" type="submit" id="savePostBtn">Save Post</button>
+              <button class="btn" type="button" id="importLegacyBtn">Import Legacy 30 Blogs</button>
+              <button class="btn" type="button" id="cancelPostBtn" style="display:none;">Cancel Edit</button>
+            </div>
+          </div>
+
+          <aside class="editor-col editor-right">
+            <div class="field"><label>SEO Title</label><input name="seoTitle" /></div>
+            <div class="field"><label>SEO Description</label><textarea name="seoDescription" rows="3"></textarea></div>
+            <div class="field two-up">
+              <div><label>Reviewed By</label><select name="reviewedBy"><option value="auto">Automatic by category</option><option value="zeeshan">Zeeshan</option><option value="imran">Imran</option><option value="none">None</option></select></div>
+              <div><label>Verified By</label><select name="verifiedBy"><option value="none">None</option><option value="auto">Automatic by category</option><option value="zeeshan">Zeeshan</option><option value="imran">Imran</option></select></div>
+            </div>
+            <div class="field two-up">
+              <div><label>Status</label><select name="status"><option value="draft">Draft</option><option value="published">Published</option></select></div>
+              <div><label>Placement</label><select name="placement"><option value="trending-main">Trending Main</option><option value="trending-side">Trending Side</option><option value="editor">Editor's Picks</option></select></div>
+            </div>
+            <div class="field two-up">
+              <div><label>Order</label><input name="order" type="number" min="0" value="0" /></div>
+              <div><label style="display:flex;gap:8px;align-items:center"><input type="checkbox" name="featured" /> Featured</label></div>
+            </div>
+            <div class="field"><label style="display:flex;gap:8px;align-items:center"><input type="checkbox" name="active" checked /> Active</label></div>
+
+            <div class="panel" style="margin-top:12px;padding:12px">
+              <h4 style="margin:0 0 10px">Article Tables</h4>
+              <div class="field">
+                <label>Article Tables</label>
+                <div id="tablesBuilder" style="display:flex;flex-direction:column;gap:10px">
+                  <div style="display:flex;justify-content:space-between;align-items:center">
+                    <div style="font-size:13px;color:#cbd3e6">Add one or more tables to insert into the article after a paragraph.</div>
+                    <button class="btn" type="button" id="addTableBtn">Add New Table</button>
+                  </div>
+                  <div id="tablesList"></div>
+                </div>
+                <input type="hidden" name="tablesJson" />
+                <div class="welcome" style="margin-top:6px">Use the builder to add/remove tables. Click Save Post to persist.</div>
+              </div>
+              <div class="field"><label>Keep Reading Article IDs</label><input name="keepReading" placeholder="comma-separated IDs" /></div>
+              <div class="field"><label>Source / Backlink URL</label><input name="sourceUrl" placeholder="https://..." /></div>
+            </div>
+
+            <div class="panel" style="margin-top:12px;padding:12px">
+              <h4 style="margin:0 0 10px">Per-Article FAQ</h4>
+              <div class="field"><label>Blog FAQ (Per Article)</label><textarea name="faqText" rows="6" placeholder="Question||Answer"></textarea></div>
+            </div>
+          </aside>
+        </form>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><h3>All Blog Posts</h3></div>
+        <div class="table-wrap">
+          <table class="posts-table">
+            <thead><tr><th>Title</th><th>Status</th><th>Active</th><th>Featured</th><th>Placement</th><th>Order</th><th>Action</th></tr></thead>
+            <tbody id="postsBody"><tr><td colspan="7" class="empty">Loading posts...</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><h3>Watch Now Videos (Create / Edit)</h3></div>
+        <form id="videoForm" class="form-grid">
+          <input type="hidden" name="docId" />
+          <div class="field"><label>Title</label><input name="title" required /></div>
+          <div class="field"><label>YouTube URL</label><input name="youtubeUrl" placeholder="https://www.youtube.com/watch?v=..." required /></div>
+          <div class="field">
+            <label>Thumbnail URL (optional)</label>
+            <input name="thumbUrl" placeholder="https://..." />
+            <div class="top-actions" style="margin-top:8px;justify-content:flex-start;gap:8px">
+              <input id="videoThumbFile" type="file" accept="image/*" class="btn" style="padding:8px 10px;max-width:220px" />
+              <button class="btn" id="uploadVideoThumbBtn" type="button">Upload</button>
+            </div>
+          </div>
+          <div class="field"><label>Sort Order</label><input name="sortOrder" type="number" min="0" value="0" /></div>
+          <div class="field"><label style="display:flex;gap:8px;align-items:center"><input type="checkbox" name="active" checked /> Active</label></div>
+
+          <div class="full top-actions">
+            <button class="btn-primary" type="submit" id="saveVideoBtn">Save Video</button>
+            <button class="btn" type="button" id="cancelVideoBtn" style="display:none;">Cancel Edit</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><h3>All Videos</h3></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Title</th><th>Order</th><th>Status</th><th>Action</th></tr></thead>
+            <tbody id="videosBody"><tr><td colspan="4" class="empty">Loading videos...</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module">
+    import { addDoc, collection, deleteDoc, doc, getDocs, serverTimestamp, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+    import { db } from "./dashboard-common.js";
+    import { bindLogout, enforceAdmin, formDataToObj, showNotice } from "./admin-common.js";
+
+    const notice = document.getElementById("notice");
+    const postForm = document.getElementById("postForm");
+    const postsBody = document.getElementById("postsBody");
+    const cancelPostBtn = document.getElementById("cancelPostBtn");
+    const importLegacyBtn = document.getElementById("importLegacyBtn");
+
+    const videoForm = document.getElementById("videoForm");
+    const videosBody = document.getElementById("videosBody");
+    const cancelVideoBtn = document.getElementById("cancelVideoBtn");
+    const postCoverFile = document.getElementById("postCoverFile");
+    const uploadPostCoverBtn = document.getElementById("uploadPostCoverBtn");
+    const postThumbFile = document.getElementById("postThumbFile");
+    const uploadPostThumbBtn = document.getElementById("uploadPostThumbBtn");
+    const postThumbFile2 = document.getElementById("postThumbFile2");
+    const uploadPostThumbBtn2 = document.getElementById("uploadPostThumbBtn2");
+    const thumbPreviewImg = document.getElementById("thumbPreviewImg");
+    const thumbPreviewText = document.getElementById("thumbPreviewText");
+    const videoThumbFile = document.getElementById("videoThumbFile");
+    const uploadVideoThumbBtn = document.getElementById("uploadVideoThumbBtn");
+
+    let posts = [];
+    let videos = [];
+    const LEGACY_BLOGS = [
+      { file: "blog-post-01.html", title: "Best Prop Firms for Beginners in 2026", excerpt: "Beginner-focused comparison covering evaluation model, payout reliability, and rule clarity before purchasing any challenge.", readTime: 32 },
+      { file: "blog-post-02.html", title: "How Prop Firm Payout Verification Works", excerpt: "A practical framework to verify real payout signals, proof quality, and processing consistency across top funded firms.", readTime: 39 },
+      { file: "blog-post-03.html", title: "Understanding Daily Drawdown Limits", excerpt: "Learn how daily drawdown works, why it fails traders, and how to manage lot size and session risk in a funded account.", readTime: 46 },
+      { file: "blog-post-04.html", title: "One-Step vs Two-Step Challenge: Which Is Better", excerpt: "Compare one-step and two-step challenge paths by fee structure, risk pressure, and long-term pass probability.", readTime: 53 },
+      { file: "blog-post-05.html", title: "Weekend Holding Rules Explained", excerpt: "Understand weekend hold restrictions, risk events, and position-management choices that affect challenge safety.", readTime: 45 },
+      { file: "blog-post-06.html", title: "Prop Firm Discount Codes: How to Use Safely", excerpt: "Use discount codes correctly without missing terms, invalid campaigns, or checkout conditions that reduce your savings.", readTime: 37 },
+      { file: "blog-post-07.html", title: "Best Prop Firms for Scalping Traders", excerpt: "Scalping-friendly firm analysis based on spread quality, execution speed, and rule flexibility for active intraday setups.", readTime: 38 },
+      { file: "blog-post-08.html", title: "Best Prop Firms for Swing Traders", excerpt: "Swing-trader comparison by hold policy, overnight risk rules, and account conditions built for multi-day trade management.", readTime: 45 },
+      { file: "blog-post-09.html", title: "Profit Split Models Compared", excerpt: "Breakdown of profit split structures and how payout percentages affect real trader expectancy and scaling potential.", readTime: 52 },
+      { file: "blog-post-10.html", title: "News Trading Rules at Top Prop Firms", excerpt: "News-rule guide for CPI/NFP/FOMC windows and practical methods to avoid instant disqualification events.", readTime: 59 },
+      { file: "blog-post-11.html", title: "How to Pass a Prop Firm Evaluation Faster", excerpt: "Execution-focused roadmap to reduce reset risk, improve consistency, and pass evaluations with controlled exposure.", readTime: 33 },
+      { file: "blog-post-12.html", title: "Soft Breach vs Hard Breach Rules", excerpt: "Know the difference between warning-level and fatal breaches so you can protect challenge capital and account status.", readTime: 41 },
+      { file: "blog-post-13.html", title: "How Maximum Loss Rules Impact Position Size", excerpt: "Position-size model linked to max-loss thresholds for better survival and stable risk-per-trade control.", readTime: 49 },
+      { file: "blog-post-14.html", title: "Top Mistakes That Fail Prop Firm Challenges", excerpt: "Common challenge-killing mistakes and a clean process to remove emotional errors from your execution cycle.", readTime: 44 },
+      { file: "blog-post-15.html", title: "How to Build a Funded Account Risk Plan", excerpt: "Step-by-step risk plan format for funded traders, including cap logic, stop discipline, and weekly exposure controls.", readTime: 36 },
+      { file: "blog-post-16.html", title: "Copy Trading Policies Across Prop Firms", excerpt: "Copy-trading policy comparison to avoid restricted behavior and maintain compliance in account scaling phases.", readTime: 40 },
+      { file: "blog-post-17.html", title: "Do Prop Firms Allow Expert Advisors (EAs)?", excerpt: "EA permission guide across firms with practical checks for prohibited automation and strategy restrictions.", readTime: 34 },
+      { file: "blog-post-18.html", title: "Best Funded Account Scaling Plans", excerpt: "How scaling plans differ by firm and which milestones matter for traders targeting bigger allocation safely.", readTime: 47 },
+      { file: "blog-post-19.html", title: "How to Compare Challenge Fees Properly", excerpt: "Challenge fee comparison with hidden-cost awareness, reset probability, and payout-adjusted value logic.", readTime: 29 },
+      { file: "blog-post-20.html", title: "Fastest Payout Prop Firms This Month", excerpt: "Monthly payout-speed benchmark for funded traders prioritizing processing time and payout consistency.", readTime: 31 },
+      { file: "blog-post-21.html", title: "Consistency Rules: What Traders Miss", excerpt: "Consistency-rule breakdown with examples that show how small violations can block growth and payout eligibility.", readTime: 42 },
+      { file: "blog-post-22.html", title: "Broker Spreads and Their Impact on Challenges", excerpt: "Spread and slippage impact analysis for challenge pass rates and realistic execution planning.", readTime: 43 },
+      { file: "blog-post-23.html", title: "How Leverage Affects Challenge Success", excerpt: "Leverage guide for funded traders balancing opportunity with controlled risk and drawdown stability.", readTime: 35 },
+      { file: "blog-post-24.html", title: "Best Prop Firms for Low Drawdown Traders", excerpt: "Low-drawdown firm shortlist for traders who prioritize survivability, strict controls, and clean rule architecture.", readTime: 57 },
+      { file: "blog-post-25.html", title: "Can You Hold Trades Over News Events?", excerpt: "News-hold survival playbook explaining what to avoid and how to structure event-day exposure safely.", readTime: 28 },
+      { file: "blog-post-26.html", title: "Payout Denial Red Flags to Avoid", excerpt: "Red-flag checklist for payout denial prevention, including behavior, logs, and documentation discipline.", readTime: 51 },
+      { file: "blog-post-27.html", title: "Regional Restrictions in Prop Trading", excerpt: "Region-based policy overview to avoid purchase mismatch, unsupported jurisdictions, or onboarding conflicts.", readTime: 30 },
+      { file: "blog-post-28.html", title: "How to Read Prop Firm Terms & Conditions", excerpt: "Terms-and-conditions reading framework to extract practical risk clauses before challenge payment.", readTime: 48 },
+      { file: "blog-post-29.html", title: "Top Trader Habits for Long-Term Funding", excerpt: "Execution habits that improve funded-account longevity, payout repeatability, and stable progression.", readTime: 27 },
+      { file: "blog-post-30.html", title: "2026 Prop Firm Market Outlook", excerpt: "2026 outlook covering model shifts, policy trends, and trader-first selection priorities.", readTime: 60 }
+    ];
+
+    function slugify(text = "") {
+      return String(text).toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+    }
+
+    const CLOUDINARY_CLOUD_NAME = "do04yawk7";
+    const CLOUDINARY_UPLOAD_PRESET = "RANKMYPROP";
+
+    async function uploadToCloudinary(file, { folder } = {}) {
+      const fd = new FormData();
+      fd.append("file", file);
+      fd.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+      if (folder) fd.append("folder", folder);
+
+      const url = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`;
+      const res = await fetch(url, { method: "POST", body: fd });
+      const json = await res.json();
+      if (!res.ok) throw new Error(json?.error?.message || "Cloudinary upload failed");
+      return json;
+    }
+
+    function setBtnLoading(btn, loading, label) {
+      if (!btn) return;
+      btn.disabled = Boolean(loading);
+      btn.textContent = loading ? "Uploading..." : (label || "Upload");
+    }
+
+    function faqDocId(slug = "") {
+      return "page-trading-guides-post-" + String(slug || "")
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "")
+        .slice(0, 120);
+    }
+
+    async function syncPostFaq(payload) {
+      const slug = String(payload.slug || "").trim().toLowerCase();
+      if (!slug) return;
+
+      const id = faqDocId(slug);
+      const faqText = String(payload.faqText || "").trim();
+
+      if (!faqText) {
+        try { await deleteDoc(doc(db, "pageFaqs", id)); } catch (_) {}
+        return;
+      }
+
+      await setDoc(doc(db, "pageFaqs", id), {
+        scope: "page",
+        pageType: "blog",
+        pageKey: `trading-guides-post:${slug}`,
+        label: "Blog FAQ (Per Article)",
+        lead: "Frequently",
+        trail: "asked questions",
+        supportTitle: "Need help with this topic?",
+        supportText: "Share your trading question and we'll help with practical next steps.",
+        supportButtonText: "Send email",
+        supportButtonLink: "mailto:rankmyprop@gmail.com?subject=Blog%20question",
+        faqText,
+        updatedAt: serverTimestamp()
+      }, { merge: true });
+    }
+
+    function resetPostForm() {
+      postForm.reset();
+      postForm.elements.namedItem("docId").value = "";
+      postForm.elements.namedItem("status").value = "draft";
+      postForm.elements.namedItem("placement").value = "trending-main";
+      postForm.elements.namedItem("readTime").value = "35";
+      postForm.elements.namedItem("publishedAt").value = new Date().toISOString().slice(0, 10);
+      postForm.elements.namedItem("order").value = "0";
+      postForm.elements.namedItem("featured").checked = false;
+      postForm.elements.namedItem("active").checked = true;
+      if (postCoverFile) postCoverFile.value = "";
+      if (postThumbFile) postThumbFile.value = "";
+      if (postThumbFile2) postThumbFile2.value = "";
+      cancelPostBtn.style.display = "none";
+    }
+
+    function resetVideoForm() {
+      videoForm.reset();
+      videoForm.elements.namedItem("docId").value = "";
+      videoForm.elements.namedItem("sortOrder").value = "0";
+      videoForm.elements.namedItem("active").checked = true;
+      if (videoThumbFile) videoThumbFile.value = "";
+      cancelVideoBtn.style.display = "none";
+    }
+
+    async function loadPosts() {
+      try {
+        let snap = null;
+        let lastLoadError = null;
+        for (let attempt = 1; attempt <= 2; attempt += 1) {
+          try {
+            snap = await getDocs(collection(db, "tradingGuidesPosts"));
+            break;
+          } catch (err) {
+            lastLoadError = err;
+            if (attempt < 2) await new Promise((resolve) => setTimeout(resolve, 650));
+          }
+        }
+        if (!snap) throw lastLoadError || new Error("Unable to load posts");
+        posts = [];
+        snap.forEach((d) => posts.push({ id: d.id, ...d.data() }));
+      } catch (err) {
+        console.error('loadPosts error', err);
+        postsBody.innerHTML = `<tr><td colspan="7" class="empty">Error loading posts: ${String(err?.message||err)}</td></tr>`;
+        showNotice(notice, 'Failed to load posts. Check console for details.', 'error');
+        return;
+      }
+      posts.sort((a, b) => (b.updatedAt?.seconds || b.createdAt?.seconds || 0) - (a.updatedAt?.seconds || a.createdAt?.seconds || 0));
+
+      postsBody.innerHTML = posts.length ? posts.map((p) => `
+        <tr>
+          <td>${p.title || "-"}</td>
+          <td>${p.status || "draft"}</td>
+          <td>${p.active === false ? "Inactive" : "Active"}</td>
+          <td>${p.featured === true ? "Yes" : "No"}</td>
+          <td>${p.placement || "trending-main"}</td>
+          <td>${Number(p.order || 0)}</td>
+          <td>
+            <div class="top-actions post-actions">
+              <button class="btn" data-edit-post="${p.id}" type="button">Edit</button>
+              <button class="btn" data-publish-post="${p.id}" data-next="${p.status === "published" ? "draft" : "published"}" type="button">${p.status === "published" ? "Unpublish" : "Publish"}</button>
+              <button class="btn" data-toggle-active-post="${p.id}" data-next="${p.active === false ? "1" : "0"}" type="button">${p.active === false ? "Activate" : "Disable"}</button>
+              <button class="btn" data-toggle-featured-post="${p.id}" data-next="${p.featured === true ? "0" : "1"}" type="button">${p.featured === true ? "Unfeature" : "Feature"}</button>
+              <button class="btn-danger" data-del-post="${p.id}" type="button">Delete</button>
+            </div>
+          </td>
+        </tr>`).join("") : '<tr><td colspan="7" class="empty">No posts yet.</td></tr>';
+
+      function populatePostParagraphs(row) {
+        const content = String(row.content || "").trim();
+        const paragraphs = content ? content.split(/\n\s*\n/).map((p) => p.trim()) : [];
+        for (let i = 1; i <= 6; i += 1) {
+          const headingField = postForm.elements.namedItem(`subheading${i}`);
+          if (headingField) headingField.value = String(row[`subheading${i}`] || "").trim();
+
+          const field = postForm.elements.namedItem(`paragraph${i}`);
+          if (!field) continue;
+          field.value = String(row[`paragraph${i}`] || paragraphs[i - 1] || "").trim();
+          const imageField = postForm.elements.namedItem(`paragraphImage${i}`);
+          const imageStatus = document.querySelector(`[data-paragraph-image-status="${i}"]`);
+          if (imageField) imageField.value = String(row[`paragraphImage${i}`] || "").trim();
+          if (imageStatus) imageStatus.textContent = imageField?.value ? "Image uploaded — it will show below this paragraph." : `Optional — shown below paragraph ${i}.`;
+        }
+      }
+
+      postsBody.querySelectorAll("[data-edit-post]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const row = posts.find((x) => x.id === btn.dataset.editPost);
+          if (!row) return;
+          postForm.elements.namedItem("docId").value = row.id;
+          postForm.elements.namedItem("title").value = row.title || "";
+          postForm.elements.namedItem("slug").value = row.slug || "";
+          postForm.elements.namedItem("category").value = row.category || "";
+          postForm.elements.namedItem("readTime").value = Number(row.readTime || 35);
+          postForm.elements.namedItem("publishedAt").value = String(row.publishedAt || "").slice(0, 10);
+          postForm.elements.namedItem("coverImage").value = row.coverImage || "";
+          postForm.elements.namedItem("status").value = row.status || "draft";
+          postForm.elements.namedItem("placement").value = row.placement || "trending-main";
+          postForm.elements.namedItem("order").value = Number(row.order || 0);
+          postForm.elements.namedItem("featured").checked = row.featured === true;
+          postForm.elements.namedItem("active").checked = row.active !== false;
+          postForm.elements.namedItem("excerpt").value = row.excerpt || "";
+          postForm.elements.namedItem("reviewedBy").value = row.reviewedBy || "auto";
+          postForm.elements.namedItem("verifiedBy").value = row.verifiedBy || "none";
+          populatePostParagraphs(row);
+          postForm.elements.namedItem("faqText").value = row.faqText || "";
+          cancelPostBtn.style.display = "inline-flex";
+          postForm.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      });
+
+      postsBody.querySelectorAll("[data-publish-post]").forEach((btn) => {
+        btn.addEventListener("click", async () => {
+          await updateDoc(doc(db, "tradingGuidesPosts", btn.dataset.publishPost), {
+            status: btn.dataset.next,
+            updatedAt: serverTimestamp()
+          });
+          showNotice(notice, `Post ${btn.dataset.next === "published" ? "published" : "unpublished"}.`);
+          await loadPosts();
+        });
+      });
+
+      postsBody.querySelectorAll("[data-toggle-active-post]").forEach((btn) => {
+        btn.addEventListener("click", async () => {
+          await updateDoc(doc(db, "tradingGuidesPosts", btn.dataset.toggleActivePost), {
+            active: btn.dataset.next === "1",
+            updatedAt: serverTimestamp()
+          });
+          showNotice(notice, "Post active status updated.");
+          await loadPosts();
+        });
+      });
+
+      postsBody.querySelectorAll("[data-toggle-featured-post]").forEach((btn) => {
+        btn.addEventListener("click", async () => {
+          await updateDoc(doc(db, "tradingGuidesPosts", btn.dataset.toggleFeaturedPost), {
+            featured: btn.dataset.next === "1",
+            updatedAt: serverTimestamp()
+          });
+          showNotice(notice, "Post featured status updated.");
+          await loadPosts();
+        });
+      });
+
+      postsBody.querySelectorAll("[data-del-post]").forEach((btn) => {
+        btn.addEventListener("click", async () => {
+          if (!confirm("Delete this post?")) return;
+          await deleteDoc(doc(db, "tradingGuidesPosts", btn.dataset.delPost));
+          showNotice(notice, "Post deleted.");
+          await loadPosts();
+        });
+      });
+    }
+
+    async function loadVideos() {
+      const snap = await getDocs(collection(db, "tradingGuidesVideos"));
+      videos = [];
+      snap.forEach((d) => videos.push({ id: d.id, ...d.data() }));
+      videos.sort((a, b) => Number(a.sortOrder || 0) - Number(b.sortOrder || 0));
+
+      videosBody.innerHTML = videos.length ? videos.map((v) => `
+        <tr>
+          <td>${v.title || "-"}</td>
+          <td>${Number(v.sortOrder || 0)}</td>
+          <td>${v.active === false ? "Inactive" : "Active"}</td>
+          <td>
+            <div class="top-actions">
+              <button class="btn" data-edit-video="${v.id}" type="button">Edit</button>
+              <button class="btn" data-toggle-video="${v.id}" data-next="${v.active === false ? "1" : "0"}" type="button">${v.active === false ? "Activate" : "Disable"}</button>
+              <button class="btn-danger" data-del-video="${v.id}" type="button">Delete</button>
+            </div>
+          </td>
+        </tr>`).join("") : '<tr><td colspan="4" class="empty">No videos yet.</td></tr>';
+
+      videosBody.querySelectorAll("[data-edit-video]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const row = videos.find((x) => x.id === btn.dataset.editVideo);
+          if (!row) return;
+          videoForm.elements.namedItem("docId").value = row.id;
+          videoForm.elements.namedItem("title").value = row.title || "";
+          videoForm.elements.namedItem("youtubeUrl").value = row.youtubeUrl || "";
+          videoForm.elements.namedItem("thumbUrl").value = row.thumbUrl || "";
+          videoForm.elements.namedItem("sortOrder").value = Number(row.sortOrder || 0);
+          videoForm.elements.namedItem("active").checked = row.active !== false;
+          cancelVideoBtn.style.display = "inline-flex";
+          videoForm.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      });
+
+      videosBody.querySelectorAll("[data-toggle-video]").forEach((btn) => {
+        btn.addEventListener("click", async () => {
+          await updateDoc(doc(db, "tradingGuidesVideos", btn.dataset.toggleVideo), {
+            active: btn.dataset.next === "1",
+            updatedAt: serverTimestamp()
+          });
+          showNotice(notice, "Video status updated.");
+          await loadVideos();
+        });
+      });
+
+      videosBody.querySelectorAll("[data-del-video]").forEach((btn) => {
+        btn.addEventListener("click", async () => {
+          if (!confirm("Delete this video?")) return;
+          await deleteDoc(doc(db, "tradingGuidesVideos", btn.dataset.delVideo));
+          showNotice(notice, "Video deleted.");
+          await loadVideos();
+        });
+      });
+    }
+
+    postForm.elements.namedItem("title").addEventListener("input", () => {
+      const slugInput = postForm.elements.namedItem("slug");
+      if (!slugInput.value.trim()) slugInput.value = slugify(postForm.elements.namedItem("title").value);
+    });
+
+    document.querySelectorAll("[data-upload-paragraph-image]").forEach((button) => {
+      button.addEventListener("click", async () => {
+        const index = button.dataset.uploadParagraphImage;
+        const file = document.querySelector(`[data-paragraph-image-file="${index}"]`)?.files?.[0];
+        if (!file) return showNotice(notice, "Select an image file first.", "error");
+        setBtnLoading(button, true, "Upload");
+        try {
+          const slug = slugify(postForm.elements.namedItem("slug")?.value || postForm.elements.namedItem("title")?.value || "post");
+          const out = await uploadToCloudinary(file, { folder: `rmp/blog/paragraphs/${slug}` });
+          postForm.elements.namedItem(`paragraphImage${index}`).value = out.secure_url || "";
+          const status = document.querySelector(`[data-paragraph-image-status="${index}"]`);
+          if (status) status.textContent = "Image uploaded — it will show below this paragraph.";
+          showNotice(notice, `Paragraph ${index} image uploaded.`);
+        } catch (err) {
+          showNotice(notice, err?.message || "Image upload failed.", "error");
+        } finally {
+          setBtnLoading(button, false, "Upload image");
+        }
+      });
+    });
+
+    uploadPostCoverBtn?.addEventListener("click", async () => {
+      const file = postCoverFile?.files?.[0];
+      if (!file) {
+        showNotice(notice, "Select an image file first.", "error");
+        return;
+      }
+      setBtnLoading(uploadPostCoverBtn, true, "Upload");
+      try {
+        const slug = slugify(postForm.elements.namedItem("slug")?.value || postForm.elements.namedItem("title")?.value || "post");
+        const out = await uploadToCloudinary(file, { folder: `rmp/blog/covers/${slug}` });
+        postForm.elements.namedItem("coverImage").value = out.secure_url || "";
+        showNotice(notice, "Cover image uploaded to Cloudinary.");
+      } catch (err) {
+        showNotice(notice, err?.message || "Upload failed.", "error");
+      } finally {
+        setBtnLoading(uploadPostCoverBtn, false, "Upload");
+      }
+    });
+
+    uploadPostThumbBtn?.addEventListener("click", async () => {
+      const file = postThumbFile?.files?.[0];
+      if (!file) {
+        showNotice(notice, "Select an image file first.", "error");
+        return;
+      }
+      setBtnLoading(uploadPostThumbBtn, true, "Upload");
+      try {
+        const out = await uploadToCloudinary(file, { folder: `rmp/blog/thumbs` });
+        postForm.elements.namedItem("thumbUrl").value = out.secure_url || "";
+        showNotice(notice, "Thumbnail uploaded to Cloudinary.");
+      } catch (err) {
+        showNotice(notice, err?.message || "Upload failed.", "error");
+      } finally {
+        setBtnLoading(uploadPostThumbBtn, false, "Upload Thumb");
+      }
+    });
+
+    // New thumb upload handler (editor right-column)
+    uploadPostThumbBtn2?.addEventListener("click", async () => {
+      const file = postThumbFile2?.files?.[0];
+      if (!file) {
+        showNotice(notice, "Select an image file first.", "error");
+        return;
+      }
+      setBtnLoading(uploadPostThumbBtn2, true, "Upload");
+      try {
+        const out = await uploadToCloudinary(file, { folder: `rmp/blog/thumbs` });
+        if (postForm) postForm.elements.namedItem("thumbUrl").value = out.secure_url || "";
+        if (thumbPreviewImg) {
+          thumbPreviewImg.src = out.secure_url || "";
+          thumbPreviewImg.style.display = out.secure_url ? 'block' : 'none';
+        }
+        if (thumbPreviewText) thumbPreviewText.style.display = 'none';
+        showNotice(notice, "Thumbnail uploaded to Cloudinary.");
+      } catch (err) {
+        showNotice(notice, err?.message || "Upload failed.", "error");
+      } finally {
+        setBtnLoading(uploadPostThumbBtn2, false, "Upload Thumb");
+      }
+    });
+
+    // preview when thumbUrl input changes
+    (function(){
+      try{
+        const thumbInput = postForm?.elements?.namedItem('thumbUrl');
+        if(!thumbInput) return;
+        thumbInput.addEventListener('input', function(){
+          const v = String(this.value||'').trim();
+          if(thumbPreviewImg) thumbPreviewImg.src = v;
+          if(thumbPreviewImg) thumbPreviewImg.style.display = v ? 'block' : 'none';
+          if(thumbPreviewText) thumbPreviewText.style.display = v ? 'none' : 'block';
+        });
+      }catch(e){}
+    })();
+
+    // Tables builder UI
+    (function(){
+      const addBtn = document.getElementById('addTableBtn');
+      const list = document.getElementById('tablesList');
+      
+      if (!addBtn || !list) {
+        console.error('Table builder elements not found');
+        return;
+      }
+
+      function createCard(t = {}){
+        const wrapper = document.createElement('div');
+        wrapper.className = 'table-card';
+        wrapper.style = 'border:1px solid rgba(255,255,255,.03);padding:10px;border-radius:8px;display:flex;flex-direction:column;gap:8px;background:rgba(0,0,0,.2)';
+        wrapper.innerHTML = `
+          <div style="display:flex;gap:8px;justify-content:space-between;align-items:center">
+            <strong style="font-size:13px">${t.title ? esc(t.title) : 'Table'}</strong>
+            <div style="display:flex;gap:8px">
+              <button class="btn" type="button" data-action="/toggle">Toggle</button>
+              <button class="btn-danger" type="button" data-action="/remove">Remove</button>
+            </div>
+          </div>
+          <div class="table-body" style="display:none;flex-direction:column;gap:8px">
+            <div style="display:flex;gap:8px"><input name="tableTitle" placeholder="Table title" style="flex:1" value="${t.title ? esc(t.title) : ''}"><select name="tableAfter" style="width:160px">
+              <option value="0">Before content</option>
+              <option value="1">After paragraph 1</option>
+              <option value="2">After paragraph 2</option>
+              <option value="3">After paragraph 3</option>
+              <option value="4">After paragraph 4</option>
+              <option value="5">After paragraph 5</option>
+              <option value="6">After paragraph 6</option>
+            </select></div>
+            <div><input name="tableColumns" placeholder="Columns (pipe-separated)" value="${t.columns?esc(t.columns):''}" style="width:100%"></div>
+            <div><textarea name="tableRows" rows="4" placeholder="One row per line, pipe-separated">${t.rows?esc((Array.isArray(t.rows)?t.rows.join('\n'):t.rows)):''}</textarea></div>
+          </div>
+        `;
+
+        list.appendChild(wrapper);
+
+        const toggle = wrapper.querySelector('[data-action="/toggle"]');
+        const remove = wrapper.querySelector('[data-action="/remove"]');
+        const body = wrapper.querySelector('.table-body');
+        const sel = wrapper.querySelector('[name="tableAfter"]');
+        if(t.afterParagraph) sel.value = String(Number(t.afterParagraph));
+
+        toggle.addEventListener('click', ()=>{ body.style.display = body.style.display === 'none' ? 'flex' : 'none'; });
+        remove.addEventListener('click', ()=>{ wrapper.remove(); });
+        return wrapper;
+      }
+
+      addBtn.addEventListener('click', ()=> createCard({}));
+
+      // helper to escape HTML for initial labels
+      function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+      // when editing an existing post, populate tables
+      function populateTablesFromPost(row) {
+        try{
+          list.innerHTML = '';
+          const arr = Array.isArray(row?.tables) ? row.tables : [];
+          if(!arr.length) return;
+          arr.forEach(t=> createCard(t));
+        }catch(e){console.error('populateTables error', e)}
+      }
+
+      // intercept post edit population to also populate tables
+      const origLoadPosts = loadPosts;
+      loadPosts = async function(){
+        await origLoadPosts();
+        // if form currently editing a doc, populate tables
+        try{
+          const docId = postForm.elements.namedItem('docId').value;
+          if(docId){
+            const row = posts.find(p=>p.id===docId);
+            if(row) populateTablesFromPost(row);
+          }
+        }catch(e){console.error(e)}
+      };
+
+      // when clicking edit from list, also populate the tables
+      const orig = document.querySelector.bind(document);
+      document.addEventListener('click', (ev)=>{
+        const btn = ev.target.closest('[data-edit-post]');
+        if(btn){
+          setTimeout(()=>{
+            const row = posts.find((x) => x.id === btn.dataset.editPost);
+            if(row) populateTablesFromPost(row);
+          }, 120);
+        }
+      });
+    })();
+
+    uploadVideoThumbBtn?.addEventListener("click", async () => {
+      const file = videoThumbFile?.files?.[0];
+      if (!file) {
+        showNotice(notice, "Select an image file first.", "error");
+        return;
+      }
+      setBtnLoading(uploadVideoThumbBtn, true, "Upload");
+      try {
+        const out = await uploadToCloudinary(file, { folder: "rmp/videos/thumbs" });
+        videoForm.elements.namedItem("thumbUrl").value = out.secure_url || "";
+        showNotice(notice, "Thumbnail uploaded to Cloudinary.");
+      } catch (err) {
+        showNotice(notice, err?.message || "Upload failed.", "error");
+      } finally {
+        setBtnLoading(uploadVideoThumbBtn, false, "Upload");
+      }
+    });
+
+    async function importLegacyPosts() {
+      for (let i = 0; i < LEGACY_BLOGS.length; i += 1) {
+        const item = LEGACY_BLOGS[i];
+        const slug = slugify(item.title);
+        let placement = "trending-side";
+        if (i < 2) placement = "trending-main";
+        else if (i >= 6 && i < 9) placement = "editor";
+
+        await setDoc(doc(db, "tradingGuidesPosts", `legacy-${String(i + 1).padStart(2, "0")}`), {
+          title: item.title,
+          slug,
+          category: "Trading Guides",
+          readTime: Number(item.readTime || 35),
+          publishedAt: new Date().toISOString().slice(0, 10),
+          coverImage: "",
+          thumbUrl: "",
+          status: "published",
+          placement,
+          order: i + 1,
+          excerpt: item.excerpt,
+          active: true,
+          featured: false,
+          content: `${item.excerpt}`,
+          sourceLegacyFile: item.file,
+          updatedAt: serverTimestamp(),
+          createdAt: serverTimestamp()
+        }, { merge: true });
+      }
+    }
+
+    importLegacyBtn.addEventListener("click", async () => {
+      if (!confirm("Import all legacy 30 blog posts to Trading Guides CMS? Existing matching slugs will be updated.")) return;
+      importLegacyBtn.disabled = true;
+      try {
+        await importLegacyPosts();
+        showNotice(notice, "Legacy 30 blogs imported successfully.");
+        await loadPosts();
+      } catch (err) {
+        showNotice(notice, err?.message || "Legacy import failed.", "error");
+      } finally {
+        importLegacyBtn.disabled = false;
+      }
+    });
+
+    postForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      // serialize tables builder into hidden input
+      try {
+        const tablesHidden = postForm.elements.namedItem('tablesJson');
+        if (tablesHidden) {
+          const list = document.querySelectorAll('#tablesList .table-card');
+          const arr = Array.from(list).map(card => {
+            return {
+              title: String(card.querySelector('[name="tableTitle"]').value || '').trim(),
+              afterParagraph: Number(card.querySelector('[name="tableAfter"]').value || 0),
+              columns: String(card.querySelector('[name="tableColumns"]').value || '').trim(),
+              rows: String(card.querySelector('[name="tableRows"]').value || '').split(/\n/).map(r=>r.trim()).filter(Boolean)
+            };
+          }).filter(t=>t.title || t.columns || (t.rows && t.rows.length));
+          tablesHidden.value = JSON.stringify(arr);
+        }
+      } catch (err) {
+        console.error('tables serialize error', err);
+      }
+
+      const data = formDataToObj(postForm);
+
+      // combine paragraph1..paragraph6 into content (skip empty), while saving optional H3 subheadings separately.
+      const paragraphs = [];
+      const paragraphSubheadings = {};
+      const paragraphFields = {};
+      const paragraphImageFields = {};
+      for (let i = 1; i <= 6; i++) {
+        paragraphSubheadings[`subheading${i}`] = String(data[`subheading${i}`] || "").trim();
+        const p = String(data[`paragraph${i}`] || "").trim();
+        paragraphFields[`paragraph${i}`] = p;
+        paragraphImageFields[`paragraphImage${i}`] = String(data[`paragraphImage${i}`] || "").trim();
+        if (p) paragraphs.push(p);
+      }
+      const combinedContent = paragraphs.join("\n\n");
+
+      // parse tables JSON if present
+      let tables = [];
+      if (data.tablesJson) {
+        try {
+          const parsed = JSON.parse(String(data.tablesJson));
+          if (Array.isArray(parsed)) tables = parsed;
+          else throw new Error('not-array');
+        } catch (err) {
+          showNotice(notice, "Tables JSON is invalid. Provide an array of tables.", "error");
+          return;
+        }
+      }
+
+      const payload = {
+        title: String(data.title || "").trim(),
+        slug: slugify(data.slug || data.title),
+        category: String(data.category || "Trading Guides").trim(),
+        readTime: Number(data.readTime || 35),
+        publishedAt: String(data.publishedAt || "").trim(),
+        coverImage: String(data.thumbUrl || data.coverImage || "").trim(),
+        thumbUrl: String(data.thumbUrl || "").trim(),
+        status: String(data.status || "draft"),
+        placement: String(data.placement || "trending-main"),
+        order: Number(data.order || 0),
+        featured: postForm.elements.namedItem("featured").checked,
+        active: postForm.elements.namedItem("active").checked,
+        excerpt: String(data.excerpt || "").trim(),
+        reviewedBy: String(data.reviewedBy || "auto").trim(),
+        verifiedBy: String(data.verifiedBy || "none").trim(),
+        content: combinedContent,
+        ...paragraphFields,
+        ...paragraphSubheadings,
+        ...paragraphImageFields,
+        faqText: String(data.faqText || "").trim(),
+        seoTitle: String(data.seoTitle || "").trim(),
+        seoDescription: String(data.seoDescription || "").trim(),
+        keepReading: String(data.keepReading || "").trim(),
+        sourceUrl: String(data.sourceUrl || "").trim(),
+        tables: tables,
+        updatedAt: serverTimestamp()
+      };
+
+      if (!payload.title || !payload.slug || !payload.excerpt || !payload.content) {
+        showNotice(notice, "Title, slug, excerpt and content are required.", "error");
+        return;
+      }
+
+      const docId = String(data.docId || "").trim();
+      if (docId) {
+        await setDoc(doc(db, "tradingGuidesPosts", docId), payload, { merge: true });
+        showNotice(notice, "Post updated.");
+      } else {
+        await addDoc(collection(db, "tradingGuidesPosts"), { ...payload, createdAt: serverTimestamp() });
+        showNotice(notice, "Post added.");
+      }
+
+      await syncPostFaq(payload);
+
+      resetPostForm();
+      await loadPosts();
+    });
+
+    videoForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const data = formDataToObj(videoForm);
+      const payload = {
+        title: String(data.title || "").trim(),
+        youtubeUrl: String(data.youtubeUrl || "").trim(),
+        thumbUrl: String(data.thumbUrl || "").trim(),
+        sortOrder: Number(data.sortOrder || 0),
+        active: videoForm.elements.namedItem("active").checked,
+        updatedAt: serverTimestamp()
+      };
+
+      if (!payload.title || !payload.youtubeUrl) {
+        showNotice(notice, "Video title and URL are required.", "error");
+        return;
+      }
+
+      const docId = String(data.docId || "").trim();
+      if (docId) {
+        await setDoc(doc(db, "tradingGuidesVideos", docId), payload, { merge: true });
+        showNotice(notice, "Video updated.");
+      } else {
+        await addDoc(collection(db, "tradingGuidesVideos"), { ...payload, createdAt: serverTimestamp() });
+        showNotice(notice, "Video added.");
+      }
+
+      resetVideoForm();
+      await loadVideos();
+    });
+
+    cancelPostBtn.addEventListener("click", resetPostForm);
+    cancelVideoBtn.addEventListener("click", resetVideoForm);
+
+    bindLogout("logoutBtn");
+    // show a quick admin file stamp so you can confirm the updated file is being served
+    try{ const vEl = document.getElementById('adminVersion'); if(vEl) vEl.textContent = 'Admin file loaded: ' + new Date().toLocaleString(); }catch(e){}
+
+    enforceAdmin(async (user) => {
+      document.getElementById("adminEmail").textContent = user.email || "Admin";
+      resetPostForm();
+      resetVideoForm();
+      await Promise.all([loadPosts(), loadVideos()]);
+    });
+  </script>
+  <script defer src="admin-richtext.js"></script>
+<script defer src="admin-shell.js"></script>
+  <script type="module" src="/site-performance.js"></script>
+</body>
+</html>

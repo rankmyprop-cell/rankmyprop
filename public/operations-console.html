@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#0a0b12" />
+  <title>Operations Console | Rank My Prop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/dashboard-layout.css" />
+  <link rel="stylesheet" href="/operations-console.css" />
+<script id="rmp-ssr-bootstrap">window.__RMP_SSR_BOOTSTRAP={"id":"page-operations-console","heading":"","paragraph":"","seoTitle":"Operations Console | Rank My Prop","seoDescription":"","canonical":"https://www.rankmyprop.in/operations-console","robots":"index, follow, max-image-preview:large, max-snippet:-1","__stableSsrHero":true};</script>
+<script defer src="/route-content-runtime.js"></script>
+</head>
+<body>
+  <div class="app preview-app">
+    <aside class="sidebar preview-sidebar" aria-label="Admin modules">
+      <div class="brand"><span class="brand-dot"></span><b>RMP Admin</b></div>
+      <div class="menu-group-title">Admin Modules</div>
+      <nav id="adminNav">
+        <a class="side-link active" href="#admin-home" data-view="admin-home">Admin Home</a>
+        <a class="side-link" href="#support-access" data-view="support-access">Support Access</a>
+        <a class="side-link" href="#client-access" data-view="client-access">Client Access <span class="badge" id="clientCountBadge">12,842</span></a>
+        <a class="side-link" href="#moderation" data-view="moderation">Moderation <span class="badge">90</span></a>
+        <a class="side-link" href="#reviews" data-view="reviews">Reviews Hub <span class="badge">63</span></a>
+        <a class="side-link" href="#purchases" data-view="purchases">Purchases</a>
+        <a class="side-link" href="#announcements" data-view="announcements">Announcement Hub</a>
+        <a class="side-link" href="#community" data-view="community">Community Posts</a>
+        <a class="side-link" href="#giveaways" data-view="giveaways">Giveaways CMS</a>
+        <a class="side-link" href="#events" data-view="events">Upcoming Events</a>
+        <a class="side-link" href="#offers" data-view="offers">Offers Control</a>
+        <a class="side-link" href="#filters" data-view="filters">Filters Control</a>
+        <a class="side-link" href="#prop-news" data-view="prop-news">Prop News CMS</a>
+        <a class="side-link" href="#trading-guides" data-view="trading-guides">Trading Guides CMS</a>
+        <a class="side-link" href="#funding-strategies" data-view="funding-strategies">Funding Strategies CMS</a>
+        <a class="side-link" href="#trading-psychology" data-view="trading-psychology">Trading Psychology CMS</a>
+        <a class="side-link" href="#beginner-tutorials" data-view="beginner-tutorials">Beginner Tutorials CMS</a>
+        <a class="side-link" href="#activity" data-view="activity">Recent Activity</a>
+        <a class="side-link" href="#newsletter" data-view="newsletter">Newsletter</a>
+        <a class="side-link" href="#firm-details" data-view="firm-details">Firm Detail CMS</a>
+        <a class="side-link" href="#page-copy" data-view="page-copy">Page Copy CMS</a>
+        <a class="side-link" href="#client-dashboard" data-view="client-dashboard">Back to Client Dashboard</a>
+        <a class="side-link" href="#logout" data-view="logout" id="logoutBtn">Log out</a>
+      </nav>
+    </aside>
+
+    <main class="main preview-main">
+      <header class="top preview-top">
+        <div>
+          <h3 id="pageTitle">Admin Home</h3>
+          <div class="welcome" id="pageSubtitle">Full client monitoring and content control panel.</div>
+        </div>
+        <div class="top-actions">
+          <button class="icon-button" id="globalSearchButton" type="button" aria-label="Search admin modules">⌕</button>
+          <span class="chip" id="adminEmail">shubhamsingh@rankmyprop.in</span>
+        </div>
+      </header>
+      <div id="adminView" aria-live="polite"></div>
+    </main>
+  </div>
+
+  <div class="toast" id="adminToast" role="status" aria-live="polite"></div>
+  <dialog class="client-dialog" id="clientDialog" aria-labelledby="clientDialogTitle">
+    <form method="dialog" class="dialog-shell" id="clientForm">
+      <header class="dialog-head">
+        <div><span>CLIENT RECORD</span><h2 id="clientDialogTitle">Client Profile</h2></div>
+        <button class="dialog-close" value="cancel" aria-label="Close">×</button>
+      </header>
+      <div id="clientDialogBody"></div>
+    </form>
+  </dialog>
+  <dialog class="client-dialog record-dialog" id="recordDialog" aria-labelledby="recordDialogTitle">
+    <form method="dialog" class="dialog-shell" id="recordForm">
+      <header class="dialog-head">
+        <div><span id="recordDialogKicker">ADMIN RECORD</span><h2 id="recordDialogTitle">Record Details</h2></div>
+        <button class="dialog-close" value="cancel" aria-label="Close">×</button>
+      </header>
+      <div id="recordDialogBody"></div>
+    </form>
+  </dialog>
+
+  <script type="module" src="/operations-console.js"></script>
+</body>
+</html>

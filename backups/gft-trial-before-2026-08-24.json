@@ -1,0 +1,88 @@
+{
+  "record": "firms/goat-funded-trader",
+  "capturedAt": "2026-08-24",
+  "purpose": "Targeted pre-edit backup for the Goat Funded Trader PDF trial listing",
+  "fields": {
+    "platforms": ["MT5", "Match Trader", "cTrader", "TradeLocker", "Volumetrica FX"],
+    "paymentMethods": ["Visa", "PayPal", "Bitcoin", "Mastercard", "American Express", "Skrill", "Crypto", "Google Pay", "Apple Pay", "Korapay", "Astropay", "IMPS"],
+    "keyMetrics": [],
+    "cardMetrics": {
+      "payoutCycle": "",
+      "minTradingDays": "",
+      "newsTrading": "",
+      "eaAllowed": "",
+      "startingPrice": "",
+      "timeLimit": ""
+    },
+    "tradingConditions": [
+      {"label": "Daily Drawdown", "value": "3% - 4%"},
+      {"label": "Maximum Drawdown", "value": "6% - 10%"},
+      {"label": "Leverage", "value": "Up to 1:100"},
+      {"label": "Weekend Holding", "value": "Allowed"}
+    ],
+    "firmDetails": [
+      {"label": "Company Name", "value": "Goat Funded Trader"},
+      {"label": "Headquarters", "value": "Hong Kong"},
+      {"label": "Founded", "value": "2023"},
+      {"label": "Platform", "value": "MT5, Match Trader, cTrader"},
+      {"label": "CEO", "value": "Edoardo Dalla Torre"}
+    ],
+    "leverageRows": [
+      {"instrument": "Energy", "c1": "1:10", "c2": "1:20", "c3": "1:20", "c4": "1:20"},
+      {"instrument": "Forex", "c1": "1:50", "c2": "1:100", "c3": "1:100", "c4": "1:100"},
+      {"instrument": "Indices", "c1": "1:10", "c2": "1:20", "c3": "1:20", "c4": "1:20"},
+      {"instrument": "Stocks", "c1": "1:5", "c2": "1:5", "c3": "1:5", "c4": "1:5"},
+      {"instrument": "Metals", "c1": "1:10", "c2": "1:20", "c3": "1:20", "c4": "1:20"},
+      {"instrument": "Other Commodities", "c1": "1:10", "c2": "1:20", "c3": "1:20", "c4": "1:20"},
+      {"instrument": "Crypto", "c1": "1:2", "c2": "1:2", "c3": "1:2", "c4": "1:2"}
+    ],
+    "commissions": [
+      {"instrument": "Energy", "c1": "1:10", "c2": "1:20", "c3": "1:20", "c4": "1:20"},
+      {"instrument": "Forex", "c1": "1:50", "c2": "1:100", "c3": "1:100", "c4": "1:100"},
+      {"instrument": "Indices", "c1": "1:10", "c2": "1:20", "c3": "1:20", "c4": "1:20"},
+      {"instrument": "Stocks", "c1": "1:5", "c2": "1:5", "c3": "1:5", "c4": "1:5"},
+      {"instrument": "Metals", "c1": "1:10", "c2": "1:20", "c3": "1:20", "c4": "1:20"},
+      {"instrument": "Other Commodities", "c1": "1:10", "c2": "1:20", "c3": "1:20", "c4": "1:20"},
+      {"instrument": "Crypto", "c1": "1:2", "c2": "1:2", "c3": "1:2", "c4": "1:2"}
+    ],
+    "evaluationPrograms": [
+      {"title": "Energy", "lines": ["No Commission"]},
+      {"title": "Forex", "lines": ["$5 per lot"]},
+      {"title": "Indices", "lines": ["No Commission"]},
+      {"title": "Stocks", "lines": ["No Commission"]},
+      {"title": "Metals", "lines": ["$5 per lot"]},
+      {"title": "Other Commodities", "lines": ["No Commission"]},
+      {"title": "Crypto", "lines": ["No Commission"]}
+    ],
+    "challengesPanelData": {
+      "stats": [
+        {"value": "14 Days", "label": "Payout Cycle"},
+        {"value": "$400K", "label": "Max Allocation"},
+        {"value": "100%", "label": "Profit Split"}
+      ],
+      "programs": [
+        {"program": "1-Step GOAT", "phase1": "10%", "phase2": "-", "target": "10%", "allocation": "$200,000", "split": "80%-100%", "features": ["4% daily loss", "6% max drawdown", "Bi-weekly payouts"]},
+        {"program": "2-Step GOAT", "phase1": "8%", "phase2": "6%", "target": "8%", "allocation": "$150,000", "split": "80%-100%", "features": ["4% daily loss", "10% max drawdown", "3 profitable trading days"]},
+        {"program": "3-Step GOAT", "phase1": "6%", "phase2": "6%", "target": "6%", "allocation": "$200,000", "split": "80%-100%", "features": ["Unlimited time", "Bi-weekly payouts", "News trading allowed"]},
+        {"program": "Instant GOAT", "phase1": "None", "phase2": "-", "target": "None", "allocation": "$400,000", "split": "80%-100%", "features": ["Instant funding", "15% consistency rule", "Max loss per trade rule"]},
+        {"program": "Instant PRO", "phase1": "None", "phase2": "-", "target": "None", "allocation": "$400,000", "split": "80%-100%", "features": ["20% consistency rule", "On-demand payout add-on", "Instant access"]}
+      ]
+    },
+    "rulesPanelData": {
+      "sections": {
+        "general": {
+          "title": "General Rules",
+          "desc": "Main trading rules and payout conditions for Goat Funded Trader.",
+          "rules": [
+            {"title": "News Trading", "text": "Allowed with 1% profit cap around high-impact news events."},
+            {"title": "Expert Advisors", "text": "Allowed except third-party EAs, HFT systems, and Gold Arbitrage EAs."},
+            {"title": "Copy Trading", "text": "Strictly prohibited across all account stages."},
+            {"title": "Weekend Holding", "text": "Allowed with weekend gap profit restrictions on funded accounts."},
+            {"title": "Inactivity Rule", "text": "Accounts inactive for 30 consecutive days are breached."}
+          ]
+        }
+      }
+    },
+    "stats": []
+  }
+}

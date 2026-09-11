@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght%40300;400;500;600;700;800&display=swap" rel="stylesheet">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+                                                                                                                                                                                                                                                                                                                                                                                                  <meta property="og:image:height" content="630" />
+                                                                                                                                                        <meta property="og:image:width" content="1200" />
+<meta name="twitter:image" content="https://www.rankmyprop.in/assets/og-default-1200x630.webp" />
+<meta property="og:image" content="https://www.rankmyprop.in/assets/og-default-1200x630.webp" />
+                                                                                                                                                              <meta name="robots" content="noindex, nofollow" /><title>Spreads Dashboard</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--bg:#05040b;--card:#0a0b14;--border:#1a1c2e;--accent:#7a74ff;--accent-2:#5b55ff;--accent-soft:#a39cff;--text:#e6e8f4;--muted:#7f8bb2;--ok:#4ade80}
+  html,body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:14px;min-height:0;height:auto;padding:16px 12px;overflow:visible;scrollbar-width:none;-ms-overflow-style:none}
+  html::-webkit-scrollbar,body::-webkit-scrollbar{width:0;height:0;display:none}
+
+  .top-header{display:flex;align-items:flex-start;gap:24px;margin-bottom:24px}
+  .title-block{flex:1}
+  .title-row{display:flex;align-items:center;gap:14px;margin-bottom:8px}
+  .icon-box{width:44px;height:44px;background:#151726;border-radius:10px;display:flex;align-items:center;justify-content:center;border:1px solid #23263d}
+  .icon-box svg{color:var(--accent-soft)}
+  .title-block h1{font-size:32px;font-weight:700;color:#fff;letter-spacing:-.5px}
+  .title-block p{font-size:13px;color:var(--muted);max-width:420px}
+
+  .live-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 22px;min-width:280px;display:flex;align-items:center;gap:16px}
+  .live-card-icon{width:40px;height:40px;background:#151726;border:1px solid #23263d;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .live-card-icon svg{color:var(--accent-soft)}
+  .live-card-info .live-title-row{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+  .live-card-info h3{font-size:14px;font-weight:600;color:#fff}
+  .live-badge{background:#14291a;color:var(--ok);font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px;display:flex;align-items:center;gap:4px}
+  .live-dot{width:6px;height:6px;background:var(--ok);border-radius:50%;animation:pulse 1.5s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+  .live-card-info p{font-size:12px;color:#8088aa;line-height:1.4}
+
+  .promo-card{background:#101323;border:1px solid #2a3160;border-radius:14px;padding:18px 22px;min-width:260px;position:relative;overflow:hidden}
+  .promo-card h3{font-size:14px;font-weight:700;color:var(--accent-soft);margin-bottom:6px}
+  .promo-card p{font-size:12px;color:var(--muted);line-height:1.5;padding-right:40px}
+  .promo-btn{position:absolute;bottom:18px;right:18px;width:32px;height:32px;background:linear-gradient(90deg,var(--accent),var(--accent-2));border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;border:none}
+  .promo-btn svg{color:#fff}
+
+  .category-bar{display:flex;align-items:center;gap:0;margin-bottom:16px}
+  .cat-tab{background:var(--card);border:1px solid var(--border);padding:10px 22px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;transition:background .15s;white-space:nowrap}
+  .cat-tab:first-child{border-radius:10px 0 0 10px}
+  .cat-tab:last-child{border-radius:0 10px 10px 0}
+  .cat-tab+.cat-tab{border-left:none}
+  .cat-tab.active{background:#151726;border-color:var(--accent);position:relative}
+  .cat-tab.active::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:2px;background:var(--accent)}
+  .cat-tab .cat-name{font-size:13px;font-weight:500;color:#cfd3e6}
+  .cat-tab.active .cat-name{color:#fff}
+  .cat-tab .cat-count{font-size:11px;color:#636f97}
+  .cat-tab.active .cat-count{color:var(--accent-soft)}
+
+  .download-btn{margin-left:auto;background:#151726;border:1px solid #23263d;border-radius:8px;color:var(--accent-soft);font-size:13px;font-weight:500;padding:9px 18px;display:flex;align-items:center;gap:7px;cursor:pointer;white-space:nowrap;transition:background .15s}
+  .download-btn:hover{background:#1c2034}
+
+  .table-card{background:var(--card);border:0;border-radius:16px;overflow:hidden}
+  .account-tabs{display:flex;align-items:center;justify-content:flex-end;border-bottom:1px solid var(--border);padding:12px 20px}
+
+  .search-wrap{margin-left:auto;position:relative}
+  .search-wrap input{background:#151726;border:1px solid #23263d;border-radius:8px;color:#cfd3e6;font-size:13px;padding:8px 12px 8px 34px;outline:none;width:220px}
+  .search-wrap input::placeholder{color:#67739b}
+  .search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:#67739b}
+
+  table{width:100%;border-collapse:collapse}
+  thead th{padding:12px 16px;text-align:left;font-size:12px;font-weight:500;color:#6d7aa5;border-bottom:1px solid var(--border);white-space:nowrap;cursor:pointer;user-select:none}
+  thead th .th-inner{display:flex;align-items:center;gap:5px}
+  thead th .sort-icon{color:#55608a;font-size:10px}
+  tbody tr{border-bottom:1px solid #171a2c;transition:background .12s}
+  tbody tr:last-child{border-bottom:none}
+  tbody tr:hover{background:#121628}
+  tbody td{padding:14px 16px;font-size:13px;color:#d4d9ec}
+
+  .instrument-cell{display:flex;align-items:center;gap:10px}
+  .inst-flag{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;overflow:hidden;background:#1e1e1e}
+  .inst-name{font-weight:600;color:#f2f5ff;font-size:13px}
+  .cat-link{color:var(--accent-soft);font-weight:500;text-decoration:none}
+  .cat-link:hover{text-decoration:underline}
+  .avg-spread{color:var(--ok);font-weight:600}
+  .updated-cell{display:flex;align-items:center;gap:6px;color:#7b86ad;font-size:12px}
+  .updated-dot{width:6px;height:6px;background:var(--ok);border-radius:50%}
+
+  .table-footer{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-top:1px solid var(--border);background:#080a13}
+  .note-left{display:flex;align-items:flex-start;gap:10px}
+  .note-icon{color:var(--accent-soft);margin-top:1px;flex-shrink:0}
+  .note-label{font-size:12px;font-weight:600;color:var(--accent-soft);margin-right:10px}
+  .note-text{font-size:12px;color:#7f8bb2;line-height:1.5}
+  .view-link{font-size:12px;color:var(--accent-soft);text-decoration:none;white-space:nowrap;display:flex;align-items:center;gap:4px}
+  .view-link:hover{text-decoration:underline}
+
+  @media(max-width:1200px){
+    .top-header{flex-direction:column}
+    .live-card,.promo-card{width:100%}
+    .category-bar{overflow:auto}
+  }
+</style>
+<script id="rmp-ssr-bootstrap">window.__RMP_SSR_BOOTSTRAP={"id":"page-spreads-panel","heading":"Spreads","paragraph":"","seoTitle":"Spreads Dashboard","seoDescription":"","canonical":"https://www.rankmyprop.in/spreads-panel","robots":"index, follow, max-image-preview:large, max-snippet:-1","__stableSsrHero":true};</script>
+<script defer src="/route-content-runtime.js"></script>
+</head>
+<body>
+<div class="top-header">
+  <div class="title-block">
+    <div class="title-row">
+      <div class="icon-box"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+      <h1>Spreads</h1>
+    </div>
+    <p>View live spreads across all instruments. Spreads may vary based on market conditions and account type.</p>
+  </div>
+
+  <div class="live-card">
+    <div class="live-card-icon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+    <div class="live-card-info">
+      <div class="live-title-row"><h3>Live Market Spreads</h3><span class="live-badge"><span class="live-dot"></span> Live</span></div>
+      <p>Spreads update in real-time. Data provided<br>by our liquidity providers.</p>
+    </div>
+  </div>
+
+  <div class="promo-card">
+    <h3>Raw Spreads. Transparent Pricing.</h3>
+    <p>We offer competitive spreads with no hidden fees. See our commission structure in the Payouts section.</p>
+    <button class="promo-btn"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+  </div>
+</div>
+
+<div class="category-bar">
+  <button class="cat-tab active" data-cat="all"><span class="cat-name">All Instruments</span><span class="cat-count">All</span></button>
+  <button class="cat-tab" data-cat="forex"><span class="cat-name">Forex</span><span class="cat-count">42</span></button>
+  <button class="cat-tab" data-cat="indices"><span class="cat-name">Indices</span><span class="cat-count">15</span></button>
+  <button class="cat-tab" data-cat="commodities"><span class="cat-name">Commodities</span><span class="cat-count">8</span></button>
+  <button class="cat-tab" data-cat="crypto"><span class="cat-name">Crypto</span><span class="cat-count">12</span></button>
+  <button class="cat-tab" data-cat="energies"><span class="cat-name">Energies</span><span class="cat-count">5</span></button>
+  <button class="cat-tab" data-cat="metals"><span class="cat-name">Metals</span><span class="cat-count">7</span></button>
+  <button class="download-btn" type="button"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download</button>
+</div>
+
+<div class="table-card">
+  <div class="account-tabs">
+    <div class="search-wrap">
+      <svg class="search-icon" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="spreadSearch" placeholder="Search instrument..."/>
+    </div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th><div class="th-inner">Instrument <span class="sort-icon">⇅</span></div></th>
+        <th><div class="th-inner">Category <span class="sort-icon">⇅</span></div></th>
+        <th style="text-align:right"><div class="th-inner" style="justify-content:flex-end">Minimum Spread <span class="sort-icon">⇅</span></div></th>
+        <th style="text-align:right"><div class="th-inner" style="justify-content:flex-end">Average Spread <span class="sort-icon">⇅</span></div></th>
+        <th style="text-align:right"><div class="th-inner" style="justify-content:flex-end">Maximum Spread <span class="sort-icon">⇅</span></div></th>
+        <th><div class="th-inner">Unit <span class="sort-icon">⇅</span></div></th>
+        <th><div class="th-inner">Updated <span class="sort-icon">⇅</span></div></th>
+      </tr>
+    </thead>
+    <tbody id="spreadRows"></tbody>
+  </table>
+
+  <div class="table-footer">
+    <div class="note-left">
+      <svg class="note-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <div>
+        <span class="note-label">Important Note</span>
+        <p class="note-text">Spreads are variable and may widen during high volatility, news events, or market open/close.<br>The data shown above is for reference only.</p>
+      </div>
+    </div>
+    <a class="view-link" href="#">View Full Trading Conditions <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  </div>
+</div>
+
+<script>
+let SPREADS = [
+  {symbol:'EUR/USD',flag:'🇺🇸',category:'forex',unit:'Pips',std:[0.1,0.2,0.5],raw:[0.0,0.1,0.3]},
+  {symbol:'GBP/USD',flag:'🇬🇧',category:'forex',unit:'Pips',std:[0.3,0.5,0.9],raw:[0.1,0.3,0.6]},
+  {symbol:'USD/JPY',flag:'🇯🇵',category:'forex',unit:'Pips',std:[0.2,0.3,0.6],raw:[0.1,0.2,0.4]},
+  {symbol:'XAU/USD',flag:'🥇',category:'metals',unit:'USD',std:[0.3,0.6,1.2],raw:[0.2,0.4,0.9]},
+  {symbol:'WTI Crude',flag:'🛢️',category:'energies',unit:'USD',std:[0.03,0.05,0.10],raw:[0.02,0.04,0.08]},
+  {symbol:'BTC/USD',flag:'₿',category:'crypto',unit:'USD',std:[15,25.3,45],raw:[12,20.1,34]},
+  {symbol:'ETH/USD',flag:'Ξ',category:'crypto',unit:'USD',std:[1.2,1.8,3.5],raw:[0.9,1.5,2.8]},
+  {symbol:'US 500',flag:'500',category:'indices',unit:'Points',std:[0.4,0.6,1.2],raw:[0.3,0.5,0.9]},
+  {symbol:'Germany 40',flag:'🇩🇪',category:'indices',unit:'Points',std:[0.8,1.2,2.2],raw:[0.6,1.0,1.8]},
+  {symbol:'Apple (AAPL)',flag:'',category:'commodities',unit:'USD',std:[0.01,0.02,0.05],raw:[0.01,0.02,0.04]}
+];
+
+let activeCategory = 'all';
+let sortField = 'symbol';
+let sortDir = 1;
+
+function numFmt(v){
+  if (v >= 10) return Number(v).toFixed(2);
+  if (v >= 1) return Number(v).toFixed(2);
+  if (v >= 0.1) return Number(v).toFixed(2).replace(/0$/, '');
+  return Number(v).toFixed(2);
+}
+
+function categoryLabel(c){
+  const m = {forex:'Forex',indices:'Indices',commodities:'Commodities',crypto:'Crypto',energies:'Energies',metals:'Metals'};
+  return m[c] || c;
+}
+
+function sortRows(rows){
+  const idx = {min:0,avg:1,max:2};
+  return rows.slice().sort((a,b)=>{
+    if (sortField === 'symbol' || sortField === 'category' || sortField === 'unit') {
+      return String(a[sortField]).localeCompare(String(b[sortField])) * sortDir;
+    }
+    if (sortField in idx) {
+      const ai = a.std[idx[sortField]];
+      const bi = b.std[idx[sortField]];
+      return (ai - bi) * sortDir;
+    }
+    return 0;
+  });
+}
+
+function renderRows(){
+  const q = document.getElementById('spreadSearch').value.toLowerCase().trim();
+  const tbody = document.getElementById('spreadRows');
+  const base = SPREADS.filter(r => (activeCategory === 'all' || r.category === activeCategory) && (!q || r.symbol.toLowerCase().includes(q)));
+  const rows = sortRows(base);
+  tbody.innerHTML = rows.map(r => {
+    const s = r.std;
+    const flagStyle = r.flag === '500' ? 'background:#1e2a1e;font-size:12px;font-weight:700;color:#4ade80;' : '';
+    return `<tr>
+      <td><div class="instrument-cell"><div class="inst-flag" style="${flagStyle}">${r.flag}</div><span class="inst-name">${r.symbol}</span></div></td>
+      <td><a class="cat-link" href="#">${categoryLabel(r.category)}</a></td>
+      <td style="text-align:right">${numFmt(s[0])}</td>
+      <td style="text-align:right"><span class="avg-spread">${numFmt(s[1])}</span></td>
+      <td style="text-align:right">${numFmt(s[2])}</td>
+      <td>${r.unit}</td>
+      <td><div class="updated-cell"><span class="updated-dot"></span>1 sec ago</div></td>
+    </tr>`;
+  }).join('') || '<tr><td colspan="7" style="padding:20px;color:#7f8bb2;text-align:center">No instruments match your filter.</td></tr>';
+  notifyParentFrameHeight();
+}
+
+function normalizeSpreadItem(row = {}) {
+  const std = Array.isArray(row.std) ? row.std : [0, 0, 0];
+  return {
+    symbol: String(row.symbol || ""),
+    flag: String(row.flag || ""),
+    category: String(row.category || "forex").toLowerCase(),
+    unit: String(row.unit || "Pips"),
+    std: [
+      Number(std[0] || 0),
+      Number(std[1] || 0),
+      Number(std[2] || 0)
+    ]
+  };
+}
+
+function applyPanelData(payload = {}) {
+  const src = payload?.spreadsPanelData;
+  const list = Array.isArray(src?.items) ? src.items : (Array.isArray(src) ? src : []);
+  if (!list.length) return;
+  SPREADS = list.map(normalizeSpreadItem).filter((x) => x.symbol);
+  activeCategory = "all";
+  renderRows();
+}
+
+document.querySelectorAll('.cat-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    activeCategory = tab.dataset.cat || 'all';
+    renderRows();
+  });
+});
+
+document.getElementById('spreadSearch').addEventListener('input', renderRows);
+
+document.querySelectorAll('thead th').forEach((th, idx) => {
+  const keyByIdx = ['symbol','category','min','avg','max','unit','updated'];
+  const key = keyByIdx[idx];
+  if (!key || key === 'updated') return;
+  th.addEventListener('click', () => {
+    if (sortField === key) sortDir *= -1;
+    else { sortField = key; sortDir = 1; }
+    renderRows();
+  });
+});
+
+function notifyParentFrameHeight(){
+  const items = Array.from(document.body.children);
+  let maxBottom = 0;
+  const top = document.body.getBoundingClientRect().top;
+  items.forEach((el) => {
+    const r = el.getBoundingClientRect();
+    if (r.bottom > maxBottom) maxBottom = r.bottom;
+  });
+  const style = getComputedStyle(document.body);
+  const pb = parseFloat(style.paddingBottom) || 0;
+  const h = Math.max(0, Math.ceil((maxBottom - top) + pb));
+  if (window.parent && window.parent !== window) window.parent.postMessage({ type:'rmp:frameHeight', panel:'spreads', height:h }, '*');
+}
+window.addEventListener('message', (event)=>{
+  if (!event.data) return;
+  if (event.data.type === 'rmp:getHeight') notifyParentFrameHeight();
+  if (event.data.type === 'rmp:firmPanelData') applyPanelData(event.data.data || {});
+});
+window.addEventListener('resize', notifyParentFrameHeight);
+window.addEventListener('load', () => setTimeout(notifyParentFrameHeight, 30));
+
+renderRows();
+setTimeout(notifyParentFrameHeight, 80);
+</script>
+<script type="module" src="/site-performance.js"></script>
+</body>
+</html>

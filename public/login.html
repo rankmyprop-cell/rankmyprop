@@ -1,0 +1,731 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+<meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+                                                                                                                                                                  <meta property="og:image:height" content="630" />
+                                                                                                                                                        <meta property="og:image:width" content="1200" />
+<meta name="twitter:image" content="https://www.rankmyprop.in/assets/og-default-1200x630.webp" />
+<meta property="og:image" content="https://www.rankmyprop.in/assets/og-default-1200x630.webp" />
+<meta name="description" content="Create Account | Rank My Prop on Rank My Prop platform.">
+                                                                                                                                                                  <meta name="robots" content="noindex, nofollow" />
+<meta name="theme-color" content="#05040b" />
+<title>Create Account | Rank My Prop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght%40300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      font-family:'Plus Jakarta Sans',sans-serif;
+      background: radial-gradient(circle at 14% 0%, #1b1840 0%, #0c0b1f 46%, #05040b 100%);
+      color: #e9ecff;
+    }
+
+    .auth-shell {
+      width: min(1140px, 100%);
+      background: #0f0e1f;
+      border: 1px solid rgba(122, 116, 255, 0.32);
+      border-radius: 28px;
+      box-shadow: 0 22px 54px rgba(0, 0, 0, 0.55);
+      padding: 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      overflow: hidden;
+      transform: translateY(22px) scale(0.985);
+      animation: shellIn .75s cubic-bezier(.22,.61,.36,1) forwards;
+    }
+
+    .left {
+      border-radius: 22px;
+      padding: 24px;
+      min-height: 660px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      color: #ffffff;
+      background:
+        radial-gradient(circle at 22% 58%, rgba(53, 80, 255, 0.85) 0%, rgba(53, 80, 255, 0.4) 38%, rgba(53, 80, 255, 0.1) 68%, transparent 100%),
+        linear-gradient(135deg, #0c1e6e 0%, #2530a8 35%, #6c59ff 70%, #a38bff 100%);
+      transform: translateX(-24px);
+      animation: panelLeftIn .75s cubic-bezier(.22,.61,.36,1) .14s forwards;
+    }
+
+    .star {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      font-size: 38px;
+      line-height: 1;
+      color: #ffffff;
+      text-shadow: 0 0 10px rgba(255,255,255,.35);
+    }
+
+    .left-copy .eyebrow {
+      display: block;
+      font-size: 22px;
+      font-weight: 600;
+      opacity: 0.92;
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+    }
+
+    .left-copy h4 {
+      margin: 0;
+      font-size: 42px;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      max-width: 420px;
+      font-weight: 700;
+    }
+
+    .right {
+      border-radius: 22px;
+      background: #131228;
+      border: 1px solid rgba(255,255,255,.08);
+      padding: 28px 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+      opacity: 0;
+      transform: translateX(16px);
+      animation: rightPanelIn .58s cubic-bezier(.22,.61,.36,1) .12s forwards;
+    }
+
+    .right > * {
+      opacity: 0;
+      transform: translateY(10px);
+      animation: rightItemIn .46s ease forwards;
+    }
+    .right > *:nth-child(1) { animation-delay: .20s; }
+    .right > *:nth-child(2) { animation-delay: .26s; }
+    .right > *:nth-child(3) { animation-delay: .32s; }
+    .right > *:nth-child(4) { animation-delay: .38s; }
+    .right > *:nth-child(5) { animation-delay: .44s; }
+    .right > *:nth-child(6) { animation-delay: .50s; }
+    .right > *:nth-child(7) { animation-delay: .56s; }
+
+    @keyframes shellIn {
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes panelLeftIn {
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes rightPanelIn {
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes rightItemIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .brand-mark {
+      color: #7a74ff;
+      font-size: 44px;
+      line-height: 1;
+      margin-bottom: 4px;
+      font-weight: 800;
+    }
+
+    .right h1 {
+      margin: 0;
+      font-size: 48px;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      color: #f4f6ff;
+    }
+
+    .sub {
+      margin: 12px 0 20px;
+      color: #9aa3c7;
+      line-height: 1.5;
+      font-size: 17px;
+      max-width: 460px;
+    }
+
+    .name-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .field { margin-bottom: 12px; }
+    .field label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #dbe0f7;
+    }
+
+    .input-wrap {
+      height: 50px;
+      border-radius: 11px;
+      border: 1px solid rgba(122, 116, 255, 0.34);
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .input-wrap:focus-within {
+      border-color: #8f88ff;
+      box-shadow: 0 0 0 3px rgba(122,116,255,.14);
+    }
+
+    .input-wrap input {
+      width: 100%;
+      border: none;
+      outline: none;
+      font-size: 15px;
+      color: #f6f7ff;
+      background: transparent;
+    }
+
+    .input-wrap input::placeholder { color: #828aad; }
+
+    .toggle-pass {
+      border: none;
+      background: transparent;
+      color: #9ba3c7;
+      font-size: 18px;
+      cursor: pointer;
+      padding: 0 4px;
+    }
+
+    .primary {
+      margin-top: 6px;
+      width: 100%;
+      height: 50px;
+      border: none;
+      border-radius: 11px;
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+      cursor: pointer;
+      background: linear-gradient(180deg, #7a74ff 0%, #5b55ff 100%);
+      box-shadow: 0 12px 26px rgba(122,116,255,.34);
+    }
+
+    .or {
+      margin: 14px 0 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #8891b4;
+      font-size: 13px;
+      text-transform: lowercase;
+    }
+
+    .or::before,
+    .or::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: rgba(255,255,255,.12);
+    }
+
+    .socials {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      width: min(520px, 100%);
+      margin: 0 auto;
+    }
+
+    .social {
+      height: 42px;
+      border-radius: 10px;
+      border: 1px solid rgba(122, 116, 255, 0.4);
+      background: rgba(122, 116, 255, 0.09);
+      color: #dbe0ff;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .social:hover { border-color: #9d97ff; background: rgba(122,116,255,.16); }
+
+    .switch {
+      margin-top: 14px;
+      text-align: center;
+      color: #8d96ba;
+      font-size: 16px;
+      width: min(520px, 100%);
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .switch a {
+      color: #7a74ff;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .msg {
+      min-height: 22px;
+      margin-top: 8px;
+      font-size: 14px;
+      color: #ff9a9a;
+    }
+
+    .auth-recovery {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .auth-recovery button {
+      min-height: 38px;
+      padding: 8px 14px;
+      border-radius: 9px;
+      border: 1px solid rgba(122,116,255,.48);
+      background: rgba(122,116,255,.12);
+      color: #f4f2ff;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .hidden { display: none !important; }
+
+    @media (max-width: 980px) {
+      .auth-shell { grid-template-columns: 1fr; }
+      .left { min-height: 220px; }
+      .left-copy h4 { font-size: 34px; }
+      .right h1 { font-size: 38px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .auth-shell, .left, .right, .right > * {
+        animation: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+      }
+    }
+    @media (max-width: 620px) {
+      .name-grid { grid-template-columns: 1fr; }
+      .right { padding: 22px 18px; }
+      .right h1 { font-size: 32px; }
+      .sub { font-size: 15px; }
+    }
+  </style>
+</head>
+<body>
+  <section class="auth-shell">
+    <div class="left">
+      <div class="star">✶</div>
+      <div class="left-copy">
+        <span class="eyebrow">Built for RMP Traders</span>
+        <h4>Your Edge, Built With Clarity.</h4>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="brand-mark">✶</div>
+      <h1 id="titleText">Create an account</h1>
+      <p class="sub">Access your rewards, cashback requests, and reviews anytime. Keep your prop trading progress in one place.</p>
+
+      <form id="authForm">
+        <div id="signupFields">
+          <div class="name-grid">
+            <div class="field">
+              <label for="firstName">First Name</label>
+              <div class="input-wrap">
+                <input id="firstName" type="text" placeholder="First name" />
+              </div>
+            </div>
+            <div class="field">
+              <label for="lastName">Last Name</label>
+              <div class="input-wrap">
+                <input id="lastName" type="text" placeholder="Last name" />
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="whatsapp">WhatsApp Number</label>
+            <div class="input-wrap">
+              <input id="whatsapp" type="tel" placeholder="+91XXXXXXXXXX" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="refCode">Referral Code (Optional)</label>
+            <div class="input-wrap">
+              <input id="refCode" type="text" placeholder="Enter referral code" />
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="email">Your email</label>
+          <div class="input-wrap">
+            <input id="email" type="email" placeholder="you@example.com" required />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <div class="input-wrap">
+            <input id="password" type="password" placeholder="••••••••••" required />
+            <button class="toggle-pass" id="togglePass" type="button">◉</button>
+          </div>
+        </div>
+
+        <button class="primary" id="submitBtn" type="submit">Get Started</button>
+      </form>
+
+      <div class="or">or continue with</div>
+
+      <div class="socials">
+        <button class="social" id="googleBtn" type="button">G</button>
+      </div>
+
+      <div class="switch" id="switchWrap">Already have an account? <a href="#" id="switchMode">Sign in</a></div>
+      <div class="msg" id="msg"></div>
+      <div class="auth-recovery hidden" id="authRecovery">
+        <button type="button" id="resetPasswordBtn">Send password reset email</button>
+        <button type="button" id="recoveryGoogleBtn">Continue with Google</button>
+      </div>
+    </div>
+  </section>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+    import {
+      getAuth,
+      onAuthStateChanged,
+      signInWithEmailAndPassword,
+      createUserWithEmailAndPassword,
+      signInWithRedirect,
+      getRedirectResult,
+      GoogleAuthProvider,
+      sendPasswordResetEmail,
+      updateProfile,
+      signOut
+    } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+    import { getFirestore, doc, getDoc, setDoc, serverTimestamp, updateDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+    import { firebaseConfig } from "./firebase-config.js";
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const firstNameEl = document.getElementById("firstName");
+    const lastNameEl = document.getElementById("lastName");
+    const whatsappEl = document.getElementById("whatsapp");
+    const refCodeEl = document.getElementById("refCode");
+    const emailEl = document.getElementById("email");
+    const passEl = document.getElementById("password");
+    const formEl = document.getElementById("authForm");
+    const msgEl = document.getElementById("msg");
+    const submitBtn = document.getElementById("submitBtn");
+    const togglePass = document.getElementById("togglePass");
+    const titleText = document.getElementById("titleText");
+    const signupFields = document.getElementById("signupFields");
+    const switchWrap = document.getElementById("switchWrap");
+
+    const googleBtn = document.getElementById("googleBtn");
+    const authRecovery = document.getElementById("authRecovery");
+    const resetPasswordBtn = document.getElementById("resetPasswordBtn");
+    const recoveryGoogleBtn = document.getElementById("recoveryGoogleBtn");
+    const REF_KEY = "rmp_ref_code";
+    const qs = new URLSearchParams(window.location.search);
+    const refFromUrl = qs.get("ref");
+    const nextFromUrl = qs.get("next");
+    if (refFromUrl) localStorage.setItem(REF_KEY, String(refFromUrl).trim().toUpperCase());
+    if (refCodeEl) refCodeEl.value = String(refFromUrl || localStorage.getItem(REF_KEY) || "").trim().toUpperCase();
+    function safeNext(v = "") {
+      const raw = String(v || "").trim();
+      if (!raw) return "";
+      if (/^https?:\/\//i.test(raw) || raw.startsWith("//") || raw.includes("..")) return "";
+      const cleaned = raw.startsWith("/") ? raw.slice(1) : raw;
+      if (!/^[a-z0-9._\-/?=&%#]+$/i.test(cleaned)) return "";
+      const path = cleaned.split(/[?#]/)[0].toLowerCase();
+      if (!path.endsWith(".html")) return "";
+      if (path === "dashboard.html") return cleaned;
+      if (/^(admin-|dashboard-admin|login|onboarding|my-profile|edit-profile)/i.test(path)) return "";
+      return cleaned;
+    }
+    const redirectAfterAuth = safeNext(nextFromUrl) || "dashboard.html";
+    function goAfterAuth() {
+      window.location.href = redirectAfterAuth;
+    }
+
+    let isSignup = true;
+    let authActionInProgress = false;
+
+    function setAuthBusy(busy, label = "") {
+      authActionInProgress = Boolean(busy);
+      submitBtn.disabled = Boolean(busy);
+      googleBtn.disabled = Boolean(busy);
+      resetPasswordBtn.disabled = Boolean(busy);
+      recoveryGoogleBtn.disabled = Boolean(busy);
+      if (busy && label) submitBtn.textContent = label;
+      if (!busy) submitBtn.textContent = isSignup ? "Get Started" : "Sign In";
+    }
+
+    function pendingRefCode() {
+      const manual = refCodeEl?.value || "";
+      if (String(manual).trim()) return String(manual).trim().toUpperCase();
+      const c = localStorage.getItem(REF_KEY) || "";
+      return String(c).trim().toUpperCase();
+    }
+
+    function clearPendingRef() {
+      localStorage.removeItem(REF_KEY);
+    }
+
+    function authMessage(error) {
+      const code = String(error?.code || "");
+      if (code === "auth/invalid-credential" || code === "auth/wrong-password" || code === "auth/user-not-found") {
+        return "Email or password is incorrect. Reset your password here, or continue with Google if this account was created with Google.";
+      }
+      if (code === "auth/email-already-in-use") {
+        return "This email already has an account. Please sign in instead, or continue with Google if that is how you created it.";
+      }
+      if (code === "auth/popup-closed-by-user") return "Google sign-in was closed before it finished.";
+      if (code === "auth/cancelled-popup-request") return "Another sign-in request interrupted Google login. Reload the page and choose one sign-in method.";
+      if (code === "auth/too-many-requests") return "Too many attempts. Please wait a little and try again.";
+      return error?.message || "Authentication failed. Please try again.";
+    }
+
+    function emailKey(v = "") {
+      return String(v || "").trim().toLowerCase();
+    }
+
+    async function isEmailBanned(email = "", uid = "") {
+      const key = emailKey(email);
+      if (!key) return false;
+      try {
+        const banSnap = await getDoc(doc(db, "bannedEmails", key));
+        if (banSnap.exists() && banSnap.data()?.active !== false) return true;
+      } catch {}
+      if (uid) {
+        try {
+          const userSnap = await getDoc(doc(db, "users", uid));
+          if (userSnap.exists() && userSnap.data()?.banned) return true;
+        } catch {}
+      }
+      return false;
+    }
+
+    function splitName(name) {
+      const parts = String(name || "").trim().split(/\s+/);
+      return {
+        firstName: parts[0] || "",
+        lastName: parts.slice(1).join(" ") || ""
+      };
+    }
+
+    async function ensureUserDoc(user, extras = {}) {
+      if (!user) return;
+      const fullName = extras.fullName || user.displayName || "";
+      const parsed = splitName(fullName);
+      const ref = doc(db, "users", user.uid);
+      const snap = await getDoc(ref);
+      const existing = snap.exists() ? snap.data() : {};
+
+      await setDoc(ref, {
+        email: user.email || existing.email || "",
+        displayName: fullName || existing.displayName || "",
+        firstName: extras.firstName || parsed.firstName || existing.firstName || "",
+        lastName: extras.lastName || parsed.lastName || existing.lastName || "",
+        whatsapp: extras.whatsapp || existing.whatsapp || "",
+        balanceDisplay: existing.balanceDisplay || "$0.00",
+        cashpointsDisplay: existing.cashpointsDisplay || "0",
+        accountsValueDisplay: existing.accountsValueDisplay || "0",
+        cashpoints: Number(existing.cashpoints || 0),
+        lastLoginAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
+        createdAt: existing.createdAt || serverTimestamp()
+      }, { merge: true });
+    }
+
+    async function applyReferralOnSignup(user) {
+      const code = pendingRefCode();
+      if (!user || !code) return;
+      const meRef = doc(db, "users", user.uid);
+      const meSnap = await getDoc(meRef);
+      const me = meSnap.exists() ? meSnap.data() : {};
+      if (me.referredByUid) return;
+
+      const refSnap = await getDocs(query(collection(db, "users"), where("referralCode", "==", code)));
+      if (refSnap.empty) return;
+      const refDoc = refSnap.docs[0];
+      const refUid = refDoc.id;
+      if (!refUid || refUid === user.uid) return;
+
+      await updateDoc(meRef, { referredByUid: refUid, referredByCode: code, updatedAt: serverTimestamp() });
+      await setDoc(doc(db, "referralClaims", `${refUid}_${user.uid}`), {
+        uid: refUid,
+        referredUid: user.uid,
+        referredEmail: user.email || "",
+        relation: "signup_link",
+        status: "Pending",
+        referralPointsAwarded: false,
+        cashbackRewardPaid: false,
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp()
+      }, { merge: true });
+      clearPendingRef();
+    }
+
+    function wireSwitch() {
+      const link = document.getElementById("switchMode");
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        setMode(!isSignup);
+      });
+    }
+
+    function setMode(signupMode) {
+      isSignup = signupMode;
+      titleText.textContent = signupMode ? "Create an account" : "Sign in to your account";
+      submitBtn.textContent = signupMode ? "Get Started" : "Sign In";
+      signupFields.classList.toggle("hidden", !signupMode);
+      authRecovery.classList.add("hidden");
+
+      firstNameEl.required = signupMode;
+      lastNameEl.required = signupMode;
+      whatsappEl.required = signupMode;
+
+      switchWrap.innerHTML = signupMode
+        ? `Already have an account? <a href="#" id="switchMode">Sign in</a>`
+        : `Don’t have an account? <a href="#" id="switchMode">Sign up</a>`;
+      wireSwitch();
+    }
+
+    togglePass.addEventListener("click", () => {
+      passEl.type = passEl.type === "password" ? "text" : "password";
+    });
+
+    onAuthStateChanged(auth, async (user) => {
+      if (user && !authActionInProgress) {
+        const banned = await isEmailBanned(user.email || "", user.uid);
+        if (banned) {
+          await signOut(auth);
+          msgEl.textContent = "This email is banned.";
+          return;
+        }
+        await ensureUserDoc(user, { fullName: user.displayName || "" });
+        const isNewGoogleUser = user?.metadata?.creationTime && user?.metadata?.creationTime === user?.metadata?.lastSignInTime;
+        if (isNewGoogleUser) await applyReferralOnSignup(user);
+        goAfterAuth();
+      }
+    });
+
+    formEl.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (authActionInProgress) return;
+      msgEl.textContent = "";
+      msgEl.style.color = "#ff9a9a";
+      authRecovery.classList.add("hidden");
+      setAuthBusy(true, isSignup ? "Signing up..." : "Signing in...");
+
+      try {
+        let cred;
+        if (isSignup) {
+          const email = emailEl.value.trim();
+          if (await isEmailBanned(email)) throw new Error("This email is banned.");
+          cred = await createUserWithEmailAndPassword(auth, email, passEl.value);
+          const fullName = `${firstNameEl.value.trim()} ${lastNameEl.value.trim()}`.trim();
+          if (fullName) {
+            await updateProfile(cred.user, { displayName: fullName });
+          }
+          await ensureUserDoc(cred.user, {
+            firstName: firstNameEl.value.trim(),
+            lastName: lastNameEl.value.trim(),
+            whatsapp: whatsappEl.value.trim(),
+            fullName
+          });
+          await applyReferralOnSignup(cred.user);
+        } else {
+          cred = await signInWithEmailAndPassword(auth, emailEl.value.trim(), passEl.value);
+          if (await isEmailBanned(cred.user.email || "", cred.user.uid)) {
+            await signOut(auth);
+            throw new Error("This email is banned.");
+          }
+          await ensureUserDoc(cred.user);
+        }
+
+        goAfterAuth();
+      } catch (err) {
+        setAuthBusy(false);
+        msgEl.textContent = authMessage(err);
+        const code = String(err?.code || "");
+        if (!isSignup && ["auth/invalid-credential", "auth/wrong-password", "auth/user-not-found"].includes(code)) {
+          authRecovery.classList.remove("hidden");
+        }
+      }
+    });
+
+    resetPasswordBtn.addEventListener("click", async () => {
+      const email = emailEl.value.trim().toLowerCase();
+      if (!email) {
+        msgEl.textContent = "Enter your email first.";
+        emailEl.focus();
+        return;
+      }
+      resetPasswordBtn.disabled = true;
+      resetPasswordBtn.textContent = "Sending...";
+      try {
+        await sendPasswordResetEmail(auth, email);
+        msgEl.style.color = "#8ff0b3";
+        msgEl.textContent = "Password reset email sent. Open the email, set a password, then sign in here.";
+      } catch (err) {
+        msgEl.style.color = "#ff9a9a";
+        msgEl.textContent = authMessage(err);
+      } finally {
+        resetPasswordBtn.disabled = false;
+        resetPasswordBtn.textContent = "Send password reset email";
+      }
+    });
+
+    recoveryGoogleBtn.addEventListener("click", () => googleBtn.click());
+
+    googleBtn.addEventListener("click", async () => {
+      if (authActionInProgress) return;
+      msgEl.textContent = "";
+      msgEl.style.color = "#ff9a9a";
+      authRecovery.classList.add("hidden");
+      setAuthBusy(true, "Opening Google...");
+      try {
+        const provider = new GoogleAuthProvider();
+        provider.setCustomParameters({ prompt: "select_account" });
+        await signInWithRedirect(auth, provider);
+      } catch (err) {
+        setAuthBusy(false);
+        msgEl.textContent = authMessage(err);
+      }
+    });
+
+    setMode(false);
+    getRedirectResult(auth).catch((err) => {
+      setAuthBusy(false);
+      msgEl.textContent = authMessage(err);
+    });
+  </script>
+  <script type="module" src="site-animations.js"></script>
+  <script type="module" src="site-auth-header.js"></script>
+  <script type="module" src="/site-performance.js"></script>
+</body>
+</html>
+
+

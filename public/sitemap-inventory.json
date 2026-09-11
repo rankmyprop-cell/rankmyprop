@@ -1,0 +1,29 @@
+{
+  "generatedAt": "2026-09-11T17:33:49.149Z",
+  "origin": "https://www.rankmyprop.in",
+  "totalUrls": 196,
+  "activeFirms": 13,
+  "profileFirms": 13,
+  "reviewFirms": 13,
+  "ruleFirms": 13,
+  "comparisonFirms": 13,
+  "activeOffers": 13,
+  "publishedArticles": 30,
+  "cmsArticles": 0,
+  "imagePages": 30,
+  "images": 30,
+  "rulePrograms": 0,
+  "uniqueComparisonPairs": 78,
+  "reverseComparisonAliases": 78,
+  "sitemaps": {
+    "sitemap-pages.xml": 36,
+    "sitemap-articles.xml": 30,
+    "sitemap-firms.xml": 13,
+    "sitemap-reviews.xml": 13,
+    "sitemap-rules.xml": 13,
+    "sitemaps/challenge-rules.xml": 0,
+    "sitemap-offers.xml": 13,
+    "sitemap-compare.xml": 78,
+    "sitemap-images.xml": 30
+  }
+}

@@ -1,0 +1,323 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+<meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                                                                                                                                                                  <meta property="og:image:height" content="630" />
+                                                                                                                                                        <meta property="og:image:width" content="1200" />
+<meta name="twitter:image" content="https://www.rankmyprop.in/assets/og-default-1200x630.webp" />
+<meta property="og:image" content="https://www.rankmyprop.in/assets/og-default-1200x630.webp" />
+<meta name="description" content="Purchases Admin | Rank My Prop" />
+<meta name="theme-color" content="#0a0b12" />
+                                                                                                                                                                                                                                                                                                                                                                                                <meta name="robots" content="noindex, nofollow" />
+  <title>Purchases Admin | Rank My Prop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght%40300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/dashboard-layout.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-dot"></span><b>RMP Admin</b></div>
+      <div class="menu-group-title">Admin Modules</div>
+      <a class="side-link" href="/dashboard-admin">Admin Home</a>
+      <a class="side-link" href="/admin-clients">Client Access</a>
+      <a class="side-link" href="/admin-moderation">Moderation</a>
+      <a class="side-link active" href="/admin-purchases">Purchases</a>
+      <a class="side-link" href="/admin-announcements">Announcement Hub</a>
+      <a class="side-link" href="/admin-community">Community Posts</a>
+      <a class="side-link" href="/admin-giveaways">Giveaways CMS</a>
+      <a class="side-link" href="/admin-events">Upcoming Events</a>
+      <a class="side-link" href="/admin-offers">Offers Control</a>
+      <a class="side-link" href="/admin-firm-details">Firm Detail CMS</a>
+      <a class="side-link" href="/admin-filters">Filters Control</a>
+      <a class="side-link" href="/admin-propnews">Prop News CMS</a>
+      <a class="side-link" href="/admin-trading-guides">Trading Guides CMS</a>
+      <a class="side-link" href="/admin-funding-strategies">Funding Strategies CMS</a>
+      <a class="side-link" href="/admin-trading-psychology">Trading Psychology CMS</a>
+      <a class="side-link" href="/admin-beginner-tutorials">Beginner Tutorials CMS</a>
+      <a class="side-link" href="/admin-firm-details">Firm Detail CMS</a>
+      <a class="side-link" href="/admin-faqs">FAQ CMS</a>
+      <a class="side-link" href="#" id="logoutBtn">Log out</a>
+    </aside>
+
+    <main class="main">
+      <header class="top">
+        <div>
+          <h3>Purchases & Next Bonus</h3>
+          <div class="welcome">Track approved purchases and set next purchase bonus offers per user/purchase.</div>
+        </div>
+        <div class="top-actions"><span class="chip" id="adminEmail">loading...</span></div>
+      </header>
+
+      <div class="chip" id="notice" style="display:none;"></div>
+
+      <section class="panel">
+        <div class="panel-head"><h3>All Purchases</h3></div>
+        <div class="top-actions" style="justify-content:flex-start;margin:0 0 10px;">
+          <span class="chip" style="opacity:.9;">View</span>
+          <select id="rangeSel" class="chip" style="cursor:pointer;">
+            <option value="30" selected>Last 30 days</option>
+            <option value="90">Last 90 days</option>
+            <option value="all">All time</option>
+          </select>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>UID</th>
+                <th>Email</th>
+                <th>Firm</th>
+                <th>Amount</th>
+                <th>Order</th>
+                <th>Bonus</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="purchaseBody"><tr><td colspan="8" class="empty">Loading...</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><h3>Set Next Bonus (Override)</h3></div>
+        <form id="bonusForm" class="form-grid">
+          <input type="hidden" name="purchaseId" />
+          <div class="field full">
+            <label>Selected Purchase</label>
+            <input name="purchaseLabel" disabled placeholder="Click Edit on a purchase row" />
+          </div>
+
+          <div class="field"><label>Next Bonus Code</label><input name="nextBonusCode" placeholder="RMP" /></div>
+          <div class="field"><label>Next Discount %</label><input name="nextBonusDiscountPct" type="number" min="0" step="0.1" placeholder="30" /></div>
+          <div class="field"><label>Next Cashback %</label><input name="nextBonusCashbackPct" type="number" min="0" step="0.1" placeholder="10" /></div>
+          <div class="field"><label>Next Bonus URL</label><input name="nextBonusUrl" placeholder="https://firm.com" /></div>
+
+          <div class="full top-actions">
+            <button class="btn-primary" type="submit" id="saveBtn">Save Override</button>
+            <button class="btn" type="button" id="clearBtn">Clear Override</button>
+          </div>
+          <div class="field full">
+            <small style="color:#9ca3af;">
+              Notes: Saving an override will regenerate the users active bonus for this purchase (bonus gets re-issued if previous one exists).
+            </small>
+          </div>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <script type="module">
+    import { db, toDate } from "./dashboard-common.js";
+    import { bindLogout, enforceAdmin, showNotice, sortByCreatedDesc } from "./admin-common.js";
+    import { addDoc, collection, doc, getDoc, getDocs, limit, orderBy, query, serverTimestamp, updateDoc, where } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+    bindLogout("logoutBtn");
+
+    const notice = document.getElementById("notice");
+    const body = document.getElementById("purchaseBody");
+    const form = document.getElementById("bonusForm");
+    const saveBtn = document.getElementById("saveBtn");
+    const clearBtn = document.getElementById("clearBtn");
+
+    let purchases = [];
+    let loadSeq = 0;
+    const rangeSel = document.getElementById("rangeSel");
+
+    function money(v) {
+      const n = Number(v || 0);
+      return `$${n.toFixed(2)}`;
+    }
+
+    async function expireBonusesForPurchase(uid, sourcePurchaseId) {
+      if (!uid || !sourcePurchaseId) return;
+      const snap = await getDocs(query(
+        collection(db, "bonusOffers"),
+        where("uid", "==", uid),
+        where("sourcePurchaseId", "==", sourcePurchaseId),
+        where("status", "==", "active")
+      ));
+      for (const d of snap.docs) {
+        await updateDoc(doc(db, "bonusOffers", d.id), { status: "expired", expiredAt: serverTimestamp(), updatedAt: serverTimestamp() });
+      }
+    }
+
+    function isWithinDays(ts, days) {
+      if (!days || days === "all") return true;
+      const ms = Number(days) * 24 * 60 * 60 * 1000;
+      const now = Date.now();
+      const dt = ts?.toDate ? ts.toDate() : null;
+      const t = dt ? dt.getTime() : 0;
+      if (!t) return true;
+      return (now - t) <= ms;
+    }
+
+    function getFetchLimit(days) {
+      if (days === "30") return 300;
+      if (days === "90") return 700;
+      return 1400;
+    }
+
+    async function loadPurchases() {
+      const seq = ++loadSeq;
+      body.innerHTML = '<tr><td colspan="8" class="empty">Loading...</td></tr>';
+
+      const days = rangeSel?.value || "30";
+      const qRef = query(
+        collection(db, "purchases"),
+        orderBy("createdAt", "desc"),
+        limit(getFetchLimit(days))
+      );
+      const snap = await getDocs(qRef);
+      const next = [];
+      snap.forEach((d) => next.push({ id: d.id, ...d.data() }));
+      if (seq !== loadSeq) return;
+      purchases = next;
+      const filtered = purchases.filter((p) => isWithinDays(p.createdAt, days));
+      const rows = sortByCreatedDesc(filtered);
+
+      body.innerHTML = rows.length ? rows.map((p) => {
+        const hasOverride = Boolean(p.nextBonusCode || p.nextBonusDiscountPct || p.nextBonusCashbackPct || p.nextBonusUrl);
+        const bonusLabel = hasOverride ? "Override" : (p.bonusGranted ? "Issued" : "None");
+        const firm = p.firmName || p.firm || "-";
+        return `
+          <tr>
+            <td>${toDate(p.createdAt)}</td>
+            <td>${p.uid || "-"}</td>
+            <td>${p.userEmail || "-"}</td>
+            <td>${firm}</td>
+            <td>${money(p.amount)}</td>
+            <td>${p.orderId || p.id}</td>
+            <td>${bonusLabel}</td>
+            <td>
+              <div class="top-actions">
+                <button type="button" class="btn" data-edit="${p.id}">Edit Bonus</button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join("") : '<tr><td colspan="8" class="empty">No purchases yet.</td></tr>';
+
+    }
+
+    body.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-edit]");
+      if (!btn) return;
+      const row = purchases.find((x) => x.id === btn.dataset.edit);
+      if (!row) return;
+      form.elements.namedItem("purchaseId").value = row.id;
+      form.elements.namedItem("purchaseLabel").value = `${row.userEmail || row.uid || "User"} • ${row.firmName || row.firm || "Firm"} • ${row.orderId || row.id}`;
+      form.elements.namedItem("nextBonusCode").value = row.nextBonusCode || "";
+      form.elements.namedItem("nextBonusDiscountPct").value = row.nextBonusDiscountPct || "";
+      form.elements.namedItem("nextBonusCashbackPct").value = row.nextBonusCashbackPct || "";
+      form.elements.namedItem("nextBonusUrl").value = row.nextBonusUrl || "";
+      form.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    rangeSel?.addEventListener("change", loadPurchases);
+
+    clearBtn.addEventListener("click", async () => {
+      const pid = String(form.elements.namedItem("purchaseId").value || "").trim();
+      if (!pid) return;
+      const pRef = doc(db, "purchases", pid);
+      const snap = await getDoc(pRef);
+      if (!snap.exists()) return;
+      const p = snap.data() || {};
+
+      await updateDoc(pRef, {
+        nextBonusCode: "",
+        nextBonusDiscountPct: 0,
+        nextBonusCashbackPct: 0,
+        nextBonusUrl: "",
+        bonusGranted: false,
+        updatedAt: serverTimestamp()
+      });
+      await expireBonusesForPurchase(p.uid, p.orderId || pid);
+      showNotice(notice, "Override cleared. Bonus will regenerate from firm defaults (if set).");
+      form.reset();
+      form.elements.namedItem("purchaseId").value = "";
+      await loadPurchases();
+    });
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const pid = String(form.elements.namedItem("purchaseId").value || "").trim();
+      if (!pid) return showNotice(notice, "Select a purchase first.", "error");
+      saveBtn.disabled = true;
+
+      try {
+        const pRef = doc(db, "purchases", pid);
+        const snap = await getDoc(pRef);
+        if (!snap.exists()) throw new Error("Purchase not found.");
+        const p = snap.data() || {};
+
+        const payload = {
+          nextBonusCode: String(form.elements.namedItem("nextBonusCode").value || "").trim(),
+          nextBonusDiscountPct: Number(form.elements.namedItem("nextBonusDiscountPct").value || 0) || 0,
+          nextBonusCashbackPct: Number(form.elements.namedItem("nextBonusCashbackPct").value || 0) || 0,
+          nextBonusUrl: String(form.elements.namedItem("nextBonusUrl").value || "").trim(),
+          updatedAt: serverTimestamp()
+        };
+
+        await updateDoc(pRef, payload);
+        await expireBonusesForPurchase(p.uid, p.orderId || pid);
+
+        const hasAny = Boolean(payload.nextBonusCode) || payload.nextBonusDiscountPct > 0 || payload.nextBonusCashbackPct > 0;
+        if (hasAny) {
+          const now = Date.now();
+          const expiresAt = new Date(now + 14 * 24 * 60 * 60 * 1000);
+          const titleBits = [];
+          if (payload.nextBonusDiscountPct > 0) titleBits.push(`${payload.nextBonusDiscountPct}% off`);
+          if (payload.nextBonusCashbackPct > 0) titleBits.push(`${payload.nextBonusCashbackPct}% cashback`);
+          const title = titleBits.length ? `${titleBits.join(" + ")} on next purchase` : "Next purchase bonus";
+
+          await addDoc(collection(db, "bonusOffers"), {
+            uid: p.uid,
+            type: "NEXT_PURCHASE",
+            title,
+            code: payload.nextBonusCode || "",
+            discountPct: payload.nextBonusDiscountPct || 0,
+            cashbackPct: payload.nextBonusCashbackPct || 0,
+            url: payload.nextBonusUrl || "",
+            firmName: p.firmName || p.firm || "",
+            status: "active",
+            sourcePurchaseId: (p.orderId || pid),
+            expiresAt,
+            createdAt: serverTimestamp()
+          });
+
+          await updateDoc(pRef, {
+            bonusGranted: true,
+            bonusGrantedAt: serverTimestamp()
+          });
+        } else {
+          await updateDoc(pRef, { bonusGranted: false });
+        }
+
+        showNotice(notice, hasAny ? "Bonus issued to user." : "Override saved (no bonus values set).");
+        await loadPurchases();
+      } catch (err) {
+        showNotice(notice, err?.message || "Save failed.", "error");
+      } finally {
+        saveBtn.disabled = false;
+      }
+    });
+
+    enforceAdmin(async (user) => {
+      document.getElementById("adminEmail").textContent = user.email || "Admin";
+      await loadPurchases();
+    });
+  </script>
+  <script defer src="admin-richtext.js"></script>
+<script defer src="admin-shell.js"></script>
+  <script type="module" src="/site-performance.js"></script>
+</body>
+</html>
+

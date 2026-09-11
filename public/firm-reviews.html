@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#07060d" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+  <meta name="description" content="Read approved prop firm reviews and share your verified trading experience with the Rank My Prop community." />
+  <link rel="canonical" href="https://www.rankmyprop.in/reviews" id="canonicalUrl" />
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/site-shell.css" />
+  <link rel="stylesheet" href="/firm-reviews.css" />
+  <title>Prop Firm Reviews & Trader Ratings | Rank My Prop</title>
+<link id="rmpHomeHeaderStyles" rel="stylesheet" href="/home-header-shell.css">
+<link id="rmpHomeFooterStyles" rel="stylesheet" href="/home-footer-shell.css">
+<link id="rmpSiteTypographyStyles" rel="stylesheet" href="/site-typography.css">
+<link rel="stylesheet" href="/site-heading-theme.css" data-rmp-heading-theme="1">
+<link rel="stylesheet" href="/global-footer.css" data-rmp-global-footer-css="1">
+<script id="rmp-ssr-bootstrap">window.__RMP_SSR_BOOTSTRAP={"id":"firm-reviews-page","heading":"Prop Firm","paragraph":"Read approved prop firm reviews and share your verified trading experience with the Rank My Prop community.","seoTitle":"Prop Firm Reviews & Trader Ratings | Rank My Prop","seoDescription":"Read approved prop firm reviews and share your verified trading experience with the Rank My Prop community.","canonical":"https://www.rankmyprop.in/reviews","robots":"index, follow, max-image-preview:large, max-snippet:-1","__stableSsrHero":true};</script>
+<script defer src="/route-content-runtime.js"></script>
+</head>
+<body>
+  <main class="reviews-page">
+    <header class="dedicated-review-intro">
+      <span class="section-kicker">VERIFIED TRADER FEEDBACK</span>
+      <h2 id="dedicatedReviewTitle">Prop Firm Reviews &amp; Trader Experiences</h2>
+      <p id="dedicatedReviewDescription">Read detailed, approved trader feedback covering accounts, challenges, support, trading conditions and payouts.</p>
+      <small>Last updated: <strong id="dedicatedReviewUpdated">3 August 2026</strong></small>
+    </header>
+
+    <section class="firm-review-bar" aria-label="Firm review summary">
+      <div class="firm-bar-identity">
+        <span class="firm-logo" id="firmLogo" aria-hidden="true">RMP</span>
+        <div class="firm-bar-copy">
+          <h1 id="firmName">Prop Firm</h1>
+          <div class="firm-rating-pill">
+            <strong id="averageRating">0.0</strong>
+            <span class="stars" id="averageStars" aria-hidden="true">☆☆☆☆☆</span>
+            <span id="reviewCount">0 reviews</span>
+          </div>
+        </div>
+      </div>
+      <div class="firm-bar-actions">
+        <a id="buyNowLink" class="primary-button" href="#" target="_blank" rel="noopener">Buy now</a>
+        <a id="firmProfileLink" class="secondary-link" href="/listedprop">View details</a>
+        <button id="openDedicatedReview" class="review-cta-button" type="button">Write a Review</button>
+      </div>
+    </section>
+
+    <section class="reviews-workspace">
+      <div class="reviews-feed">
+        <div class="feed-toolbar">
+          <div>
+            <span class="section-kicker">COMMUNITY REVIEWS</span>
+            <h2 id="communityHeading">What traders are saying</h2>
+          </div>
+          <div class="review-filters">
+            <select id="ratingFilter" aria-label="Filter by rating">
+              <option value="0">All ratings</option>
+              <option value="5">5 stars</option>
+              <option value="4">4 stars</option>
+              <option value="3">3 stars</option>
+              <option value="2">2 stars</option>
+              <option value="1">1 star</option>
+            </select>
+            <select id="sortFilter" aria-label="Sort reviews">
+              <option value="recent">Most recent</option>
+              <option value="highest">Highest rated</option>
+              <option value="lowest">Lowest rated</option>
+            </select>
+          </div>
+        </div>
+        <div id="reviewsList" class="reviews-list" aria-live="polite">
+          <div class="empty-state">Loading approved reviews...</div>
+        </div>
+        <nav id="reviewPagination" class="review-pagination" aria-label="Review pages" hidden></nav>
+      </div>
+
+      <aside class="review-form-card" id="reviewFormCard" hidden>
+        <span class="section-kicker">SHARE YOUR EXPERIENCE</span>
+        <h2>Write an honest review</h2>
+        <p id="formIntro">Your review will be submitted for moderation before it appears publicly.</p>
+        <form id="reviewForm">
+          <fieldset class="rating-picker"><legend>Your rating</legend><div id="ratingPicker" class="rating-picker-buttons" aria-label="Choose a rating"></div></fieldset>
+          <label>Review title<input id="reviewTitle" maxlength="100" required placeholder="Summarise your experience" /></label>
+          <label>Program<select id="reviewProgram"><option>2-Step Challenge</option><option>1-Step Challenge</option><option>Instant Funding</option><option>Funded Account</option><option>Other</option></select></label>
+          <label>Account size <span>(optional)</span><input id="accountSize" maxlength="40" placeholder="e.g. $100,000" /></label>
+          <label>Your review<textarea id="reviewText" minlength="30" maxlength="2000" required placeholder="Tell traders about rules, platform experience, support and payouts."></textarea></label>
+          <label class="recommend-row"><input id="recommendFirm" type="checkbox" checked /><span>I would recommend this firm</span></label>
+          <button id="submitReviewButton" class="primary-button submit-button" type="submit">Submit for Review</button>
+          <div id="formMessage" class="form-message" role="status"></div>
+        </form>
+      </aside>
+    </section>
+
+    <section class="firm-review-faq" aria-labelledby="firmReviewFaqTitle">
+      <header class="firm-review-faq-heading">
+        <span class="section-kicker">REVIEW ANSWER DESK</span>
+        <h2 id="firmReviewFaqTitle">Questions to answer before trusting <em id="firmReviewFaqName">this firm</em> reviews.</h2>
+        <p id="firmReviewFaqLead">Understand how trader reviews, category scores, proof and moderation work before making a decision.</p>
+      </header>
+      <div class="firm-review-faq-layout">
+        <aside class="firm-review-faq-support">
+          <span class="firm-review-faq-mark"><img src="/assets/rankmyprop-header-logo.png" alt="" /></span>
+          <div><small>PERSONAL GUIDANCE</small><h3>Need help understanding the reviews?</h3><p>Tell us the firm, account type and concern. We’ll help you read the feedback with better context.</p></div>
+          <a href="/contact">Ask Rank My Prop <span>→</span></a>
+        </aside>
+        <div class="firm-review-faq-list" id="firmReviewFaqList"></div>
+      </div>
+    </section>
+  </main>
+
+  <div class="dedicated-review-modal" id="dedicatedReviewModal" hidden>
+    <div class="dedicated-review-modal-shell">
+      <iframe id="dedicatedReviewFrame" title="Write a Review" loading="eager"></iframe>
+    </div>
+  </div>
+
+  <div class="login-modal" id="reviewLoginModal" hidden>
+    <div class="login-modal-backdrop" data-close-login-modal></div>
+    <section class="login-modal-card" role="dialog" aria-modal="true" aria-labelledby="reviewLoginTitle">
+      <button class="login-modal-close" type="button" data-close-login-modal aria-label="Close login popup">×</button>
+      <span class="login-modal-icon" aria-hidden="true">★</span><span class="section-kicker">LOGIN REQUIRED</span>
+      <h2 id="reviewLoginTitle">Sign in to write a review</h2>
+      <p>Login keeps reviews connected to real accounts and helps our moderation team reduce spam. Your review will be published only after approval.</p>
+      <div class="login-modal-actions"><a id="reviewLoginLink" class="primary-button" href="/login">Login &amp; Continue</a><button class="secondary-button" type="button" data-close-login-modal>Maybe Later</button></div>
+    </section>
+  </div>
+
+  <script type="module" src="/rmp-nav.js"></script>
+  <script type="module" src="/site-auth-header.js"></script>
+  <script type="module" src="/firm-reviews.js"></script>
+  <script type="module" src="/site-performance.js"></script>
+</body>
+</html>

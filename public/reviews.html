@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#080613" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+  <meta name="description" content="Compare live approved prop firm reviews and ratings, then open each firm's dedicated trader review page." />
+  <link rel="canonical" href="https://www.rankmyprop.in/reviews" />
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/reviews-directory.css" />
+  <link rel="stylesheet" href="/home-faq-shell.css" />
+  <script>if(new URLSearchParams(location.search).get('embeddedReview')==='1')document.documentElement.classList.add('embedded-review-popup')</script>
+  <title>Prop Firm Reviews & Live Trader Ratings | Rank My Prop</title>
+<link id="rmpHomeHeaderStyles" rel="stylesheet" href="/home-header-shell.css">
+<link id="rmpHomeFooterStyles" rel="stylesheet" href="/home-footer-shell.css">
+<link id="rmpSiteTypographyStyles" rel="stylesheet" href="/site-typography.css">
+<link rel="stylesheet" href="/site-heading-theme.css" data-rmp-heading-theme="1">
+<link rel="stylesheet" href="/global-footer.css" data-rmp-global-footer-css="1">
+<script id="rmp-ssr-bootstrap">window.__RMP_SSR_BOOTSTRAP={"id":"firm-reviews-page","heading":"Prop Firm Reviews & Live Trader Ratings","paragraph":"Compare live approved prop firm reviews and ratings, then open each firm","seoTitle":"Prop Firm Reviews & Live Trader Ratings | Rank My Prop","seoDescription":"Compare live approved prop firm reviews and ratings, then open each firm","canonical":"https://www.rankmyprop.in/reviews","robots":"index, follow, max-image-preview:large, max-snippet:-1","__stableSsrHero":true};</script>
+<script defer src="/route-content-runtime.js"></script>
+</head>
+<body class="reviews-directory-page">
+  <main id="mainContent">
+    <header class="review-page-heading">
+      <div><span>PROP FIRM REVIEW DIRECTORY</span><h1 id="reviewsSeoTitle">Prop Firm Reviews &amp; Live Trader Ratings</h1><p id="reviewsSeoDescription">Compare verified prop firm reviews, live community scores, trading-condition ratings, customer care and payout experiences before choosing a funded account.</p><small>Last Updated: <strong id="reviewsLastUpdated">3 August 2026</strong></small></div>
+      <button class="write-review-button" id="openReviewModal" type="button">Write a Review</button>
+    </header>
+
+    <section class="review-directory" aria-labelledby="reviewTableTitle">
+      <h2 class="sr-only" id="reviewTableTitle">Live prop firm review rankings</h2>
+      <div class="review-controls">
+        <label class="directory-search"><span class="sr-only">Search prop firm</span><input id="reviewsSearch" type="search" placeholder="Search prop firm…" autocomplete="off" /><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m16.5 16.5 4 4"></path></svg></label>
+        <label class="control-field"><span>FILTER</span><select id="reviewFilter"><option value="all">All Filters</option><option value="rated">Rated firms only</option><option value="excellent">Excellent 4+</option><option value="new">No reviews yet</option></select></label>
+        <label class="control-field"><span>SORT BY</span><select id="reviewSort"><option value="reviews">Most Reviews</option><option value="rating">Highest Rating</option><option value="name">Firm Name A–Z</option></select></label>
+        <label class="minimum-control"><span>MINIMUM REVIEWS <output id="minimumReviewsValue">0</output></span><input id="minimumReviews" type="range" min="0" max="100" step="1" value="0" /></label>
+      </div>
+      <div class="review-subcontrols">
+        <div class="review-pills" id="reviewPills">
+          <button type="button" class="is-active" data-review-scope="all">All Reviews</button>
+          <button type="button" data-review-scope="funded">Funded Only</button>
+          <button type="button" data-review-scope="paid">Paid Out Only</button>
+        </div>
+        <div class="score-legend"><span><i class="excellent"></i>Excellent</span><span><i class="average"></i>Average</span><span><i class="low"></i>Low</span></div>
+      </div>
+
+      <div class="review-table-shell">
+        <div class="review-table-scroll">
+          <table class="review-table">
+            <thead><tr><th>FIRM</th><th>REVIEWS</th><th>TRADING<br>CONDITIONS</th><th>CUSTOMER<br>CARE</th><th>USER<br>FRIENDLINESS</th><th>PAYOUT<br>PROCESS</th><th>RANK</th><th>ACTIONS</th></tr></thead>
+            <tbody id="reviewTableBody"></tbody>
+          </table>
+        </div>
+        <div id="reviewTableEmpty" class="table-empty" hidden>No listed prop firm matched these filters.</div>
+      </div>
+      <nav class="reviews-pagination" id="reviewsPagination" aria-label="Firm review pages" hidden></nav>
+      <p class="review-table-count" id="reviewsCount" aria-live="polite"></p>
+    </section>
+
+    <section class="faq-section reviews-static-faq" aria-labelledby="reviewsFaqTitle">
+      <div class="faq-shell">
+        <header class="faq-heading"><span>PROP FIRM REVIEW ANSWER DESK</span><h2 id="reviewsFaqTitle">Questions about<br><em>live trader reviews.</em></h2><p>Understand live ratings, moderation, review submissions, proof files and community likes before sharing your experience.</p></header>
+        <div class="faq-layout">
+          <aside class="faq-support"><span class="faq-support-mark" aria-hidden="true"><img src="/assets/rankmyprop-header-logo.png" alt="" /></span><div><small>REVIEW SUPPORT</small><h3>Need help with a review?</h3><p>Share the firm name and the review issue you are checking. Never send passwords or account credentials.</p></div><a href="mailto:rankmyprop@gmail.com?subject=Help with a Rank My Prop review">Contact moderation <span>→</span></a></aside>
+          <div class="faq-list" id="reviewsStaticFaqList">
+            <article class="faq-item is-open"><button type="button" aria-expanded="true"><span class="faq-number">01</span><strong>Where do the live ratings come from?</strong><span class="faq-toggle"><i></i><i></i></span></button><div class="faq-answer"><div><p>Overall and category scores use approved community reviews. Pending, rejected and unpublished feedback does not affect public ratings.</p></div></div></article>
+            <article class="faq-item"><button type="button" aria-expanded="false"><span class="faq-number">02</span><strong>Why must I log in before writing a review?</strong><span class="faq-toggle"><i></i><i></i></span></button><div class="faq-answer"><div><p>Login connects the submission to a real Rank My Prop account and helps moderation reduce duplicate or automated spam.</p></div></div></article>
+            <article class="faq-item"><button type="button" aria-expanded="false"><span class="faq-number">03</span><strong>When does a submitted review become public?</strong><span class="faq-toggle"><i></i><i></i></span></button><div class="faq-answer"><div><p>A new review starts as Pending and appears publicly only after an administrator approves it.</p></div></div></article>
+            <article class="faq-item"><button type="button" aria-expanded="false"><span class="faq-number">04</span><strong>Can I review a firm that is not listed?</strong><span class="faq-toggle"><i></i><i></i></span></button><div class="faq-answer"><div><p>Yes. Choose Other and enter the firm name. It will not enter the public directory until the firm has a published listing.</p></div></div></article>
+            <article class="faq-item"><button type="button" aria-expanded="false"><span class="faq-number">05</span><strong>What does the heart count mean?</strong><span class="faq-toggle"><i></i><i></i></span></button><div class="faq-answer"><div><p>The heart count shows community interest. Each logged-in user can add one live like to a listed firm.</p></div></div></article>
+            <article class="faq-item"><button type="button" aria-expanded="false"><span class="faq-number">06</span><strong>Can live ratings change later?</strong><span class="faq-toggle"><i></i><i></i></span></button><div class="faq-answer"><div><p>Yes. Counts and averages update whenever approved reviews are added or their moderation status changes.</p></div></div></article>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="reviews-footer-placeholder" aria-label="Rank My Prop footer"></footer>
+
+  <div class="review-modal" id="reviewModal" hidden>
+    <div class="review-modal-backdrop" data-close-review></div>
+    <section class="review-modal-panel" role="dialog" aria-modal="true" aria-labelledby="reviewModalTitle">
+      <header class="review-modal-header"><div><h2 id="reviewModalTitle">Write a Review</h2><p>Write a real review. It will appear publicly after admin approval.</p></div><button type="button" data-close-review aria-label="Close review form">×</button></header>
+      <form id="directoryReviewForm">
+        <section class="modal-section overall-section"><h3>Your Overall Rating</h3><p>How would you rate your overall experience with this firm?</p><input id="reviewOverallRating" type="hidden" value="5" /><div class="large-stars" id="overallRatingStars" aria-label="Choose overall rating"></div><strong id="overallRatingLabel">Excellent 5/5</strong></section>
+
+        <section class="modal-section"><h3>Review Details</h3><div class="modal-grid">
+          <label class="full">FIRM NAME
+            <input id="reviewFirm" type="hidden" required />
+            <div class="firm-picker" id="reviewFirmPicker">
+              <div class="firm-picker-control">
+                <span class="firm-picker-logo" id="reviewFirmLogo">RM</span>
+                <input id="reviewFirmSearch" type="search" placeholder="Search and select a firm" autocomplete="off" />
+                <span class="firm-picker-chevron" aria-hidden="true"></span>
+              </div>
+              <div class="firm-picker-menu" id="reviewFirmMenu" role="listbox"></div>
+            </div>
+          </label>
+          <label class="full other-firm-field" id="otherFirmField" hidden>OTHER FIRM NAME<input id="otherFirmName" maxlength="100" placeholder="Enter the prop firm name" /></label>
+          <label>FUNDING PERIOD<input id="reviewFundingPeriod" type="date" /></label>
+          <label>CHALLENGE TYPE<select id="reviewChallengeType" required><option value="">Select challenge type</option><option>1-Step Challenge</option><option>2-Step Challenge</option><option>Instant Funding</option><option>Funded Account</option><option>Other</option></select></label>
+          <label>ACCOUNT SIZE<select id="reviewAccountSize"><option value="">Select account size</option><option>$5,000</option><option>$10,000</option><option>$25,000</option><option>$50,000</option><option>$100,000</option><option>$200,000</option><option>$300,000</option><option>Other</option></select></label>
+          <label>PAYOUT COUNT<input id="reviewPayoutCount" type="number" min="0" max="999" placeholder="Enter payout count" /></label>
+        </div></section>
+
+        <section class="modal-section"><h3>Your Review</h3><div class="modal-grid">
+          <label class="full has-counter">REVIEW TITLE<input id="reviewTitle" maxlength="100" required placeholder="Summarize your experience in a few words" /><small><span id="reviewTitleCount">0</span>/100</small></label>
+          <label class="full has-counter">YOUR REVIEW<textarea id="reviewText" minlength="30" maxlength="2000" required placeholder="Share details about your experience…"></textarea><small><span id="reviewTextCount">0</span>/2000</small></label>
+          <label>WHAT I LIKED<input id="reviewPros" maxlength="300" placeholder="Fast payout, clear rules" /></label>
+          <label>COULD BE BETTER<input id="reviewCons" maxlength="300" placeholder="More payment methods" /></label>
+        </div></section>
+
+        <section class="modal-section"><h3>Rate Key Aspects</h3><p>How would you rate the following aspects?</p><div class="aspect-grid" id="aspectRatings"></div></section>
+
+        <section class="modal-section recommendation-section"><h3 id="recommendationTitle">Would you recommend this firm to other traders?</h3><input id="reviewRecommend" type="hidden" value="yes" /><div><button type="button" class="is-selected" data-recommend="yes"><span>✓</span> Yes, recommend</button><button type="button" data-recommend="no"><span>×</span> No, don’t recommend</button></div></section>
+
+        <section class="modal-section upload-section"><h3>Add Photos</h3><p>Upload screenshots, images or PDF files that support your review.</p><label class="proof-drop"><input id="reviewProofFiles" type="file" accept=".png,.jpg,.jpeg,.webp,.pdf" multiple /><strong>＋</strong><span>Click to upload or add proof files</span><small>PNG, JPG, WEBP or PDF up to 5MB each</small></label><div id="proofFileList" class="proof-file-list">No proof files added.</div></section>
+
+        <footer class="review-modal-footer"><div><span id="monthlyReviewLimit">Reviews are checked before publishing.</span><p>Please keep your review honest and respectful.</p></div><div><button type="button" class="cancel-review" data-close-review>Cancel</button><button type="submit" class="submit-review" id="submitDirectoryReview">Submit Review</button></div></footer>
+        <div id="directoryReviewMessage" class="directory-review-message" role="status"></div>
+      </form>
+    </section>
+  </div>
+
+  <script type="module" src="/reviews-directory.js"></script>
+  <script type="module" src="/rmp-nav.js"></script>
+  <script type="module" src="/site-auth-header.js"></script>
+  <script type="module" src="/site-performance.js"></script>
+</body>
+</html>

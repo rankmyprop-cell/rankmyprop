@@ -1,0 +1,41 @@
+# Rank My Prop
+
+> Rank My Prop is an independent prop-firm research platform for comparing firms, trader reviews, challenge rules, payouts, pricing, discounts, and trading conditions.
+
+## Primary pages
+
+- [Home](https://www.rankmyprop.in/): Prop-firm research, rankings, and platform overview.
+- [Listed Prop Firms](https://www.rankmyprop.in/listedprop): Directory of listed prop firms.
+- [Best Prop Firms](https://www.rankmyprop.in/bestprop): Ranked prop-firm recommendations.
+- [Trader Reviews](https://www.rankmyprop.in/reviews): Approved trader reviews and firm-level ratings.
+- [Offers and Discounts](https://www.rankmyprop.in/offers): Current prop-firm offers and discount codes.
+- [Compare Prop Firms](https://www.rankmyprop.in/compare): Side-by-side firm comparison.
+- [Prop Firm Rules](https://www.rankmyprop.in/prop-firm-rules): Firm and program rule directory.
+- [Trading Guides](https://www.rankmyprop.in/trading-guides): Educational trading guides.
+- [Funding Strategies](https://www.rankmyprop.in/funding-strategies): Prop-firm funding strategies.
+- [Trading Psychology](https://www.rankmyprop.in/trading-psychology): Trading psychology resources.
+- [Calculators](https://www.rankmyprop.in/calculators): Risk and trading calculators.
+- [Prop News](https://www.rankmyprop.in/prop-news): Prop-trading industry news.
+
+## Structured discovery
+
+- [XML sitemap index](https://www.rankmyprop.in/sitemap.xml): Index of public page, firm, review, offer, rule, and comparison sitemaps.
+- [Firm sitemap](https://www.rankmyprop.in/sitemap-firms.xml): Dedicated prop-firm profile pages.
+- [Review sitemap](https://www.rankmyprop.in/sitemap-reviews.xml): Dedicated firm review pages.
+- [Rules sitemap](https://www.rankmyprop.in/sitemap-rules.xml): Dedicated firm rules pages.
+- [Challenge rules sitemap](https://www.rankmyprop.in/sitemaps/challenge-rules.xml): Dedicated 1-step, 2-step, instant-funding and other firm program rule pages for every published firm model.
+- [Offers sitemap](https://www.rankmyprop.in/sitemap-offers.xml): Dedicated offer pages.
+
+## About and policies
+
+- [About](https://www.rankmyprop.in/about): Information about Rank My Prop.
+- [Contact](https://www.rankmyprop.in/contact): Contact the Rank My Prop team.
+- [Disclaimer](https://www.rankmyprop.in/disclaimer): Financial and editorial disclaimer.
+- [Privacy Policy](https://www.rankmyprop.in/privacy-policy): Privacy practices.
+- [Terms](https://www.rankmyprop.in/terms): Terms of service.
+
+## Usage notes
+
+- Treat firm rules, pricing, offers, and payout conditions as time-sensitive and verify them with the prop firm before purchasing.
+- Community reviews are user submissions that appear publicly after moderation.
+- Rank My Prop provides research and educational information, not financial advice.

@@ -1,0 +1,18 @@
+<svg width="760" height="760" viewBox="0 0 760 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="tile" x1="180" y1="160" x2="580" y2="560" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8A7CFF"/>
+      <stop offset="1" stop-color="#5B55FF"/>
+    </linearGradient>
+    <linearGradient id="txt" x1="140" y1="510" x2="620" y2="680" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F8F6FF"/>
+      <stop offset="1" stop-color="#B7AEFF"/>
+    </linearGradient>
+  </defs>
+  <rect width="760" height="760" rx="64" fill="#0B0A16"/>
+  <rect x="160" y="108" width="440" height="360" rx="86" fill="url(#tile)"/>
+  <circle cx="380" cy="198" r="20" fill="#E4DEFF"/>
+  <path d="M272 392V206H368C431 206 470 238 470 294C470 342 438 373 392 382L469 392H419L351 385H326V392H272ZM326 246V342H363C399 342 422 323 422 296C422 268 398 246 363 246H326Z" fill="#F8F7FF"/>
+  <text x="380" y="560" text-anchor="middle" fill="url(#txt)" font-size="88" font-family="Inter, Sora, Poppins, sans-serif" font-weight="700" letter-spacing="-1">Rank My Prop</text>
+  <text x="380" y="628" text-anchor="middle" fill="#A59CD8" font-size="34" font-family="Inter, Sora, Poppins, sans-serif" font-weight="500" letter-spacing="2.2">TRADER-FIRST PROP FIRM PLATFORM</text>
+</svg>

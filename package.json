@@ -1,0 +1,52 @@
+{
+  "name": "rank-my-prop",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "engines": {
+    "node": "22.x"
+  },
+  "scripts": {
+    "env:runtime": "node scripts/generate-runtime-env.cjs",
+    "sitemap:generate": "node scripts/generate-sitemaps.cjs",
+    "seo:evidence": "node scripts/generate-seo-evidence.cjs",
+    "preserve:manifest": "node scripts/generate-dashboard-manifest.cjs",
+    "preserve:verify": "shasum -a 256 -c docs/dashboard-preservation.sha256",
+    "preserve:firms": "shasum -a 256 -c docs/firm-pages-preservation.sha256",
+    "test": "npm run test:route-content && npm run test:reviews-api && npm run test:integration",
+    "test:reviews-api": "node scripts/test-public-reviews-api.cjs",
+    "test:route-content": "node scripts/test-route-content.cjs",
+    "test:integration": "npm run env:runtime && node scripts/verify-integration.cjs && npm run preserve:verify && npm run build",
+    "dev": "npm run env:runtime && concurrently -n web,api -c cyan,magenta \"vite\" \"tsx watch server/index.ts\"",
+    "dev:web": "vite",
+    "dev:api": "tsx watch server/index.ts",
+    "build": "npm run env:runtime && npm run seo:evidence && npm run sitemap:generate && tsc -b && vite build && node scripts/generate-seo-pages.cjs && node scripts/generate-route-bootstrap.cjs && node scripts/verify-seo-output.cjs",
+    "start": "NODE_ENV=production tsx server/index.ts",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.110.0",
+    "@vercel/functions": "^3.9.3",
+    "@vitejs/plugin-react": "latest",
+    "cors": "latest",
+    "express": "latest",
+    "firebase": "^10.12.5",
+    "firebase-admin": "^14.2.0",
+    "react": "latest",
+    "react-dom": "latest",
+    "vite": "latest"
+  },
+  "devDependencies": {
+    "@types/cors": "latest",
+    "@types/express": "latest",
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "concurrently": "latest",
+    "tsx": "latest",
+    "typescript": "latest"
+  },
+  "overrides": {
+    "jose": "5.10.0"
+  }
+}

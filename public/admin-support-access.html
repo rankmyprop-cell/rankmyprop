@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+                                                        <meta property="og:image:height" content="630" />
+                                            <meta property="og:image:width" content="1200" />
+<meta name="twitter:image" content="https://www.rankmyprop.in/assets/og-default-1200x630.webp" />
+<meta property="og:image" content="https://www.rankmyprop.in/assets/og-default-1200x630.webp" />
+                                            <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#0a0b12" />
+  <title>Support Access | Rank My Prop</title>
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+  <link rel="stylesheet" href="/dashboard-layout.css" />
+  <style>
+    .form-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.form-grid .full{grid-column:1/-1}
+    .form-grid input,.row-input{width:100%;padding:10px 11px;border:1px solid rgba(122,116,255,.35);border-radius:8px;background:#0d0e1a;color:#eef0ff}
+    .state{padding:13px;color:#9da6c8}.state.error{color:#ffb4bd}.state.warn{color:#ffd98a}.table-wrap{overflow:auto}.table-wrap table{min-width:940px}
+    .actions{display:flex;gap:6px;align-items:center;flex-wrap:wrap}.actions .row-input{width:190px}.json{max-width:420px;white-space:pre-wrap;word-break:break-word;font-size:12px}
+    @media(max-width:760px){.form-grid{grid-template-columns:1fr}.form-grid .full{grid-column:auto}}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-dot"></span><b>RMP Admin</b></div>
+      <div class="menu-group-title">Admin Modules</div>
+      <a class="side-link" href="/dashboard-admin">Admin Home</a>
+      <a class="side-link active" href="/admin-support-access">Support Access</a>
+      <a class="side-link" href="/support-dashboard">Open Support Dashboard</a>
+      <a class="side-link" href="#" id="logoutBtn">Log out</a>
+    </aside>
+    <main class="main">
+      <header class="top">
+        <div><h3>Support Access</h3><div class="welcome">Create support IDs, manage access, and review pending submissions.</div></div>
+        <div class="top-actions"><button class="btn" id="refreshBtn" type="button">Refresh</button><span class="chip" id="adminEmail">loading…</span></div>
+      </header>
+
+      <section class="panel">
+        <div class="panel-head"><h3>Create Support ID</h3></div>
+        <form id="createForm" class="form-grid">
+          <div><label>Staff name</label><input name="displayName" required /></div>
+          <div><label>Login email</label><input name="email" type="email" autocomplete="off" required /></div>
+          <div><label>Temporary password</label><input name="password" type="password" autocomplete="new-password" minlength="10" required /></div>
+          <div class="full"><button class="btn primary" type="submit">Create Support ID</button><span class="state" id="createState"></span></div>
+        </form>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><h3>Existing Support Accounts</h3></div>
+        <div class="state" id="accountsState">Loading accounts…</div>
+        <div class="table-wrap" id="accountsTable"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><h3>Support Approval Queue</h3></div>
+        <div class="state" id="queueState">Loading submissions…</div>
+        <div class="table-wrap" id="queueTable"></div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module">
+    import { bindLogout, enforceAdmin } from "./admin-common.js";
+
+    bindLogout("logoutBtn");
+    let adminUser = null;
+    let accounts = [];
+    let submissions = [];
+    let loadVersion = 0;
+
+    const esc = (value = "") => String(value ?? "").replace(/[&<>"']/g, (char) => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[char]));
+    const date = (value) => {
+      const d = new Date(value || 0);
+      return Number.isNaN(d.getTime()) ? "-" : d.toLocaleString();
+    };
+
+    async function api(path, options = {}) {
+      const token = await adminUser.getIdToken();
+      const response = await fetch(path, {
+        ...options,
+        cache: "no-store",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}`, ...(options.headers || {}) }
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.error || "Request failed.");
+      return data;
+    }
+
+    function renderAccounts(rows) {
+      const host = document.getElementById("accountsTable");
+      if (!rows.length) { host.innerHTML = ""; return; }
+      host.innerHTML = `<table><thead><tr><th>Staff</th><th>Login Email</th><th>Support ID</th><th>Status</th><th>Created</th><th>CEO Actions</th></tr></thead><tbody>${rows.map((row) => `
+        <tr>
+          <td>${esc(row.display_name)}</td><td>${esc(row.email)}</td><td>${esc(row.user_id)}</td><td>${esc(row.status)}</td><td>${esc(date(row.created_at))}</td>
+          <td><div class="actions">
+            <button class="btn" data-account-status="${esc(row.user_id)}" data-next-status="${row.status === "active" ? "disabled" : "active"}">${row.status === "active" ? "Disable" : "Activate"}</button>
+            <input class="row-input" type="password" minlength="10" placeholder="New password" data-password-input="${esc(row.user_id)}" />
+            <button class="btn" data-password-save="${esc(row.user_id)}">Change password</button>
+          </div></td>
+        </tr>`).join("")}</tbody></table>`;
+    }
+
+    function renderQueue(rows) {
+      const host = document.getElementById("queueTable");
+      if (!rows.length) { host.innerHTML = ""; return; }
+      host.innerHTML = `<table><thead><tr><th>Created</th><th>Staff</th><th>Type</th><th>Target</th><th>Status</th><th>Proposed Changes</th><th>CEO Decision</th></tr></thead><tbody>${rows.map((row) => `
+        <tr>
+          <td>${esc(date(row.created_at))}</td><td>${esc(row.created_by_name)}</td><td>${esc(row.submission_type)}</td><td>${esc(row.target_id)}</td><td>${esc(row.status)}</td>
+          <td class="json">${esc(JSON.stringify(row.proposed_changes || {}, null, 2))}</td>
+          <td>${row.status === "pending" ? `<div class="actions"><button class="btn primary" data-decision-id="${esc(row.id)}" data-decision="approve">Approve</button><button class="btn" data-decision-id="${esc(row.id)}" data-decision="reject">Reject</button></div>` : esc(row.rejection_reason || date(row.reviewed_at))}</td>
+        </tr>`).join("")}</tbody></table>`;
+    }
+
+    async function loadAll(force = false) {
+      const version = ++loadVersion;
+      const accountState = document.getElementById("accountsState");
+      const queueState = document.getElementById("queueState");
+      accountState.className = queueState.className = "state";
+      accountState.textContent = accounts.length ? "Refreshing accounts…" : "Loading accounts…";
+      queueState.textContent = submissions.length ? "Refreshing approval queue…" : "Loading approval queue…";
+      const [accountResult, queueResult] = await Promise.allSettled([api("/api/support-accounts"), api("/api/support-approvals")]);
+      if (version !== loadVersion) return;
+
+      if (accountResult.status === "fulfilled") {
+        const next = accountResult.value.rows || [];
+        if (next.length || !accounts.length) accounts = next;
+        accountState.className = !next.length && accounts.length ? "state warn" : "state";
+        accountState.textContent = !next.length && accounts.length ? "Empty refresh ignored; last loaded accounts remain visible." : accounts.length ? `${accounts.length} support account(s) loaded.` : "No support accounts yet.";
+        renderAccounts(accounts);
+      } else {
+        accountState.className = "state error";
+        accountState.innerHTML = `${esc(accountResult.reason.message)} <button class="btn" data-retry>Retry</button>`;
+        renderAccounts(accounts);
+      }
+
+      if (queueResult.status === "fulfilled") {
+        const next = queueResult.value.rows || [];
+        if (next.length || !submissions.length) submissions = next;
+        queueState.className = !next.length && submissions.length ? "state warn" : "state";
+        queueState.textContent = !next.length && submissions.length ? "Empty refresh ignored; last loaded submissions remain visible." : submissions.length ? `${submissions.length} submission(s) loaded.` : "No support submissions yet.";
+        renderQueue(submissions);
+      } else {
+        queueState.className = "state error";
+        queueState.innerHTML = `${esc(queueResult.reason.message)} <button class="btn" data-retry>Retry</button>`;
+        renderQueue(submissions);
+      }
+    }
+
+    document.getElementById("createForm").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const form = event.currentTarget;
+      const submitButton = form.querySelector('button[type="submit"]');
+      const status = document.getElementById("createState");
+      status.className = "state";
+      status.textContent = "Creating secure support ID…";
+      if (submitButton) submitButton.disabled = true;
+      const values = Object.fromEntries(new FormData(form).entries());
+      try {
+        await api("/api/support-accounts", { method: "POST", body: JSON.stringify({ action: "create", ...values }) });
+        form.reset();
+        status.textContent = "Support ID created.";
+        await loadAll(true);
+      } catch (error) {
+        status.className = "state error";
+        status.textContent = error.message;
+      } finally {
+        if (submitButton) submitButton.disabled = false;
+      }
+    });
+
+    document.addEventListener("click", async (event) => {
+      if (event.target.closest("[data-retry]")) return loadAll(true);
+      const statusButton = event.target.closest("[data-account-status]");
+      if (statusButton) {
+        statusButton.disabled = true;
+        try {
+          await api("/api/support-accounts", { method: "PATCH", body: JSON.stringify({ action:"status", userId:statusButton.dataset.accountStatus, status:statusButton.dataset.nextStatus }) });
+          await loadAll(true);
+        } catch (error) { alert(error.message); statusButton.disabled = false; }
+        return;
+      }
+      const passwordButton = event.target.closest("[data-password-save]");
+      if (passwordButton) {
+        const id = passwordButton.dataset.passwordSave;
+        const input = document.querySelector(`[data-password-input="${CSS.escape(id)}"]`);
+        if (!input?.value || input.value.length < 10) return alert("Password must be at least 10 characters.");
+        passwordButton.disabled = true;
+        try {
+          await api("/api/support-accounts", { method:"PATCH", body:JSON.stringify({ action:"password", userId:id, password:input.value }) });
+          input.value = "";
+          alert("Support password changed.");
+        } catch (error) { alert(error.message); }
+        passwordButton.disabled = false;
+        return;
+      }
+      const decisionButton = event.target.closest("[data-decision-id]");
+      if (decisionButton) {
+        const decision = decisionButton.dataset.decision;
+        const rejectionReason = decision === "reject" ? String(prompt("Rejection reason (optional):") || "") : "";
+        if (decision === "approve" && !confirm("Approve and apply these proposed changes to live data?")) return;
+        decisionButton.disabled = true;
+        try {
+          await api("/api/support-approvals", { method:"PATCH", body:JSON.stringify({ id:decisionButton.dataset.decisionId, decision, rejectionReason }) });
+          await loadAll(true);
+        } catch (error) { alert(error.message); decisionButton.disabled = false; }
+      }
+    });
+
+    document.getElementById("refreshBtn").addEventListener("click", () => loadAll(true));
+
+    enforceAdmin(async (user) => {
+      adminUser = user;
+      document.getElementById("adminEmail").textContent = user.email || "CEO Admin";
+      await loadAll();
+    });
+  </script>
+  <script defer src="admin-shell.js"></script>
+  <script type="module" src="/site-performance.js"></script>
+</body>
+</html>

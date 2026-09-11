@@ -1,0 +1,250 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+<meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+                                                                                                                                                                  <meta property="og:image:height" content="630" />
+                                                                                                                                                        <meta property="og:image:width" content="1200" />
+<meta name="twitter:image" content="https://www.rankmyprop.in/assets/og-default-1200x630.webp" />
+<meta property="og:image" content="https://www.rankmyprop.in/assets/og-default-1200x630.webp" />
+<meta name="description" content="Client Access Admin | Rank My Prop on Rank My Prop platform.">
+<meta name="theme-color" content="#0a0b12" />
+                                                                                                                                                                                                                                                                                                                                                                                                <meta name="robots" content="noindex, nofollow" />
+  <title>Client Access Admin | Rank My Prop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght%40300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/dashboard-layout.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-dot"></span><b>RMP Admin</b></div>
+      <div class="menu-group-title">Admin Modules</div>
+      <a class="side-link" href="/dashboard-admin">Admin Home</a>
+      <a class="side-link active" href="/admin-clients">Client Access</a>
+      <a class="side-link" href="/admin-moderation">Moderation</a>
+      <a class="side-link" href="/admin-reviews">Reviews Hub</a>
+      <a class="side-link" href="/admin-purchases">Purchases</a>
+      <a class="side-link" href="/admin-announcements">Announcement Hub</a>
+      <a class="side-link" href="/admin-community">Community Posts</a>
+      <a class="side-link" href="/admin-giveaways">Giveaways CMS</a>
+      <a class="side-link" href="/admin-events">Upcoming Events</a>
+      <a class="side-link" href="/admin-offers">Offers Control</a>
+      <a class="side-link" href="/admin-firm-details">Firm Detail CMS</a>
+      <a class="side-link" href="/admin-filters">Filters Control</a>
+      <a class="side-link" href="/admin-propnews">Prop News CMS</a>
+      <a class="side-link" href="/admin-trading-guides">Trading Guides CMS</a>
+      <a class="side-link" href="/admin-funding-strategies">Funding Strategies CMS</a>
+      <a class="side-link" href="/admin-trading-psychology">Trading Psychology CMS</a>
+      <a class="side-link" href="/admin-beginner-tutorials">Beginner Tutorials CMS</a>
+      <a class="side-link" href="/admin-firm-details">Firm Detail CMS</a>
+      <a class="side-link" href="/admin-faqs">FAQ CMS</a>
+      <a class="side-link" href="#" id="logoutBtn">Log out</a>
+    </aside>
+
+    <main class="main">
+      <header class="top"><div><h3>Client Access</h3><div class="welcome">Monitor user account activity and edit profile/trend values.</div></div><div class="top-actions"><span class="chip" id="adminEmail">loading...</span></div></header>
+      <div class="chip" id="notice" style="display:none;"></div>
+
+      <section class="panel">
+        <div class="panel-head"><h3>All Clients</h3></div>
+        <div class="table-wrap"><table><thead><tr><th>UID</th><th>Email</th><th>Name</th><th>WhatsApp</th><th>Onboarding</th><th>Action</th></tr></thead><tbody id="usersBody"><tr><td colspan="6" class="empty">Loading users...</td></tr></tbody></table></div>
+      </section>
+
+      <section class="grid-2">
+        <article class="panel">
+          <div class="panel-head"><h3>Edit Client Profile</h3></div>
+          <form id="userForm" class="form-grid">
+            <div class="field full"><label>UID</label><input name="uid" readonly /></div>
+            <div class="field"><label>First Name</label><input name="firstName" /></div>
+            <div class="field"><label>Last Name</label><input name="lastName" /></div>
+            <div class="field"><label>WhatsApp</label><input name="whatsapp" /></div>
+            <div class="field"><label>Email</label><input name="email" /></div>
+            <div class="field"><label>Balance Display</label><input name="balanceDisplay" /></div>
+            <div class="field"><label>Cashpoints Display</label><input name="cashpointsDisplay" /></div>
+            <div class="field"><label>Accounts Value Display</label><input name="accountsValueDisplay" /></div>
+            <div class="field"><label>Trend Cashback</label><input name="trendCashback" /></div>
+            <div class="field"><label>Trend Cashpoints</label><input name="trendCashpoints" /></div>
+            <div class="field"><label>Trend Accounts</label><input name="trendAccounts" /></div>
+            <div class="field"><label>Bonus Text (default)</label><input name="trendBonusText" /></div>
+            <div class="field full"><label>Bonus Text (active)</label><input name="activeBonusText" /></div>
+            <div class="field"><label>Referral Commission %</label><input name="referralCommissionPct" placeholder="e.g. 12.5" /></div>
+            <div class="field"><label>Tier Metric</label><input name="referralTierMetric" placeholder="points or earnings" /></div>
+            <div class="field"><label>Tier Name</label><input name="referralTierName" placeholder="e.g. Pro Partner" /></div>
+            <div class="field"><label>Next Tier Name</label><input name="referralNextTierName" placeholder="e.g. Elite Partner" /></div>
+            <div class="field"><label>Tier Progress Current</label><input name="referralTierProgressCurrent" placeholder="e.g. 680" /></div>
+            <div class="field"><label>Tier Progress Target</label><input name="referralTierProgressTarget" placeholder="e.g. 1000" /></div>
+            <div class="field"><label>Leaderboard Name</label><input name="leaderboardDisplayName" placeholder="Optional display name" /></div>
+            <div class="field"><label>Manual Rank</label><input name="leaderboardManualRank" placeholder="1,2,3..." /></div>
+            <div class="field"><label>Manual Points</label><input name="leaderboardManualPoints" placeholder="Override points" /></div>
+            <div class="field"><label>Manual Referrals</label><input name="leaderboardManualReferrals" placeholder="Override referrals" /></div>
+            <div class="field"><label>Manual Earnings</label><input name="leaderboardManualEarnings" placeholder="Override earnings USD" /></div>
+            <div class="field"><label>Country</label><input name="country" /></div>
+            <div class="field"><label>Address</label><input name="address" /></div>
+            <div class="field"><label>Active Firm</label><input name="activeFirm" /></div>
+            <div class="field"><label>Years In Prop</label><input name="yearsInProp" /></div>
+            <div class="field"><label>Trader Style</label><input name="traderStyle" /></div>
+            <div class="field"><label>Lifetime Payout</label><input name="lifetimePayout" /></div>
+            <div class="field full"><label>Profile Image (Data URL)</label><textarea name="profileImageData"></textarea></div>
+            <div class="full"><button class="btn-primary" type="submit">Save Client Profile</button></div>
+          </form>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head"><h3>Client Activity Snapshot</h3></div>
+          <div class="announce-list" id="activityList"><div class="empty">Select a client to view activity.</div></div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <script type="module">
+    import { db } from "./dashboard-common.js";
+    import { bindLogout, enforceAdmin, formDataToObj, showNotice, sortByCreatedDesc } from "./admin-common.js";
+    import { collection, doc, getDoc, getDocs, limit, query, setDoc, where, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+    const usersBody = document.getElementById("usersBody");
+    const userForm = document.getElementById("userForm");
+    const notice = document.getElementById("notice");
+    const MAX_USERS = 600;
+
+    bindLogout("logoutBtn");
+
+    async function loadUsers() {
+      const snap = await getDocs(query(collection(db, "users"), limit(MAX_USERS)));
+      const rows = [];
+      snap.forEach((d) => rows.push({ id: d.id, ...d.data() }));
+      const data = sortByCreatedDesc(rows);
+
+      usersBody.innerHTML = data.length ? data.map((u) => `
+        <tr>
+          <td>${u.id}</td>
+          <td>${u.email || "-"}</td>
+          <td>${[u.firstName || "", u.lastName || ""].join(" ").trim() || "-"}</td>
+          <td>${u.whatsapp || "-"}</td>
+          <td>${u.onboardingCompleted ? "Complete" : "Pending"}${u.banned ? " • Banned" : ""}</td>
+          <td style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn" data-open="${u.id}">Open</button><button class="btn" data-ban="${u.id}" data-ban-state="${u.banned ? "0" : "1"}">${u.banned ? "Unban" : "Ban"}</button></td>
+        </tr>
+      `).join("") : '<tr><td colspan="6" class="empty">No users found.</td></tr>';
+
+    }
+
+    usersBody.addEventListener("click", async (e) => {
+      const openBtn = e.target.closest("[data-open]");
+      if (openBtn) {
+        await openUser(openBtn.dataset.open || "");
+        return;
+      }
+      const banBtn = e.target.closest("[data-ban]");
+      if (!banBtn) return;
+      const uid = banBtn.dataset.ban || "";
+      const shouldBan = banBtn.dataset.banState === "1";
+      await setBanState(uid, shouldBan);
+      showNotice(notice, shouldBan ? "User banned." : "User unbanned.");
+      await loadUsers();
+    });
+
+    function emailKey(v = "") {
+      return String(v || "").trim().toLowerCase();
+    }
+
+    async function setBanState(uid = "", banned = true) {
+      const id = String(uid || "").trim();
+      if (!id) return;
+      const ref = doc(db, "users", id);
+      const snap = await getDoc(ref);
+      if (!snap.exists()) return;
+      const u = snap.data() || {};
+      const email = emailKey(u.email || "");
+      await setDoc(ref, { banned, bannedAt: banned ? serverTimestamp() : null, updatedAt: serverTimestamp() }, { merge: true });
+      if (email) {
+        await setDoc(doc(db, "bannedEmails", email), { uid: id, email, active: banned, updatedAt: serverTimestamp(), bannedAt: banned ? serverTimestamp() : null }, { merge: true });
+      }
+    }
+
+    async function openUser(uid) {
+      const ref = doc(db, "users", uid);
+      const snap = await getDoc(ref);
+      if (!snap.exists()) {
+        showNotice(notice, "User not found.", "error");
+        return;
+      }
+
+      const u = snap.data();
+      userForm.elements.namedItem("uid").value = uid;
+      ["firstName","lastName","whatsapp","email","balanceDisplay","cashpointsDisplay","accountsValueDisplay","trendCashback","trendCashpoints","trendAccounts","trendBonusText","activeBonusText","referralCommissionPct","referralTierMetric","referralTierName","referralNextTierName","referralTierProgressCurrent","referralTierProgressTarget","leaderboardDisplayName","leaderboardManualRank","leaderboardManualPoints","leaderboardManualReferrals","leaderboardManualEarnings","country","address","activeFirm","yearsInProp","traderStyle","lifetimePayout","profileImageData"].forEach((k) => {
+        if (userForm.elements.namedItem(k)) userForm.elements.namedItem(k).value = u[k] ?? "";
+      });
+
+      const [cashback, reviews, claims, purchases, bonuses, referrals] = await Promise.all([
+        getDocs(query(collection(db, "cashbackRequests"), where("uid", "==", uid), limit(120))),
+        getDocs(query(collection(db, "reviews"), where("uid", "==", uid), limit(120))),
+        getDocs(query(collection(db, "accountClaims"), where("uid", "==", uid), limit(120))),
+        getDocs(query(collection(db, "purchases"), where("uid", "==", uid), limit(120))),
+        getDocs(query(collection(db, "bonusOffers"), where("uid", "==", uid), limit(120))),
+        getDocs(query(collection(db, "referralClaims"), where("uid", "==", uid), limit(120)))
+      ]);
+
+      const activeBonus = [];
+      bonuses.forEach((d) => { const b = d.data(); if (String(b.status || "") === "active") activeBonus.push(b); });
+
+      document.getElementById("activityList").innerHTML = `
+        <article class="announce-item"><h3>Cashback Requests</h3><p>${cashback.size}</p></article>
+        <article class="announce-item"><h3>Reviews</h3><p>${reviews.size}</p></article>
+        <article class="announce-item"><h3>Claims</h3><p>${claims.size}</p></article>
+        <article class="announce-item"><h3>Purchases</h3><p>${purchases.size}</p></article>
+        <article class="announce-item"><h3>Active Bonus Offers</h3><p>${activeBonus.length}</p></article>
+        <article class="announce-item"><h3>Referrals</h3><p>${referrals.size}</p></article>
+      `;
+
+      userForm.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    userForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const data = formDataToObj(userForm);
+      const uid = data.uid;
+      if (!uid) {
+        showNotice(notice, "Select a user first.", "error");
+        return;
+      }
+      delete data.uid;
+      ["referralCommissionPct","referralTierProgressCurrent","referralTierProgressTarget","leaderboardManualRank","leaderboardManualPoints","leaderboardManualReferrals","leaderboardManualEarnings"].forEach((k) => {
+        const raw = String(data[k] || "").trim();
+        if (!raw) {
+          delete data[k];
+          return;
+        }
+        const n = Number(raw);
+        if (Number.isFinite(n)) data[k] = n;
+      });
+      if (data.referralTierMetric) {
+        const m = String(data.referralTierMetric || "").toLowerCase();
+        data.referralTierMetric = m === "earnings" ? "earnings" : "points";
+      }
+
+      await setDoc(doc(db, "users", uid), {
+        ...data,
+        updatedAt: serverTimestamp()
+      }, { merge: true });
+
+      showNotice(notice, "Client profile updated.");
+      await loadUsers();
+    });
+
+    enforceAdmin(async (user) => {
+      document.getElementById("adminEmail").textContent = user.email || "Admin";
+      await loadUsers();
+    });
+  </script>
+  <script defer src="admin-richtext.js"></script>
+<script defer src="admin-shell.js"></script>
+  <script type="module" src="/site-performance.js"></script>
+</body>
+</html>

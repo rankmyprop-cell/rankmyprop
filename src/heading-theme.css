@@ -1,0 +1,66 @@
+:is(
+  .hero-title,
+  .rankings-heading h2,
+  .why-rmp-heading h2,
+  .traders-love-shell > h2,
+  .video-showcase-heading h2,
+  .trust-heading h2,
+  .newsletter-copy h2,
+  .faq-heading h2
+) {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: clamp(36px, 3.35vw, 54px);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -.052em;
+}
+
+:is(
+  .rankings-heading h2,
+  .video-showcase-heading h2,
+  .trust-heading h2,
+  .newsletter-copy h2,
+  .faq-heading h2
+) {
+  display: block;
+  padding-bottom: .13em;
+  color: transparent;
+  background: linear-gradient(90deg, #fff 0%, #f7f4ff 42%, #c8bbff 70%, #8b63ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.rankings-kicker,
+.rankings-heading h2 {
+  display: block;
+}
+
+:is(
+  .video-showcase-heading h2,
+  .trust-heading h2,
+  .newsletter-copy h2,
+  .faq-heading h2
+) em {
+  color: transparent;
+  background: linear-gradient(90deg, #dcd3ff 0%, #ad96ff 52%, #7957f5 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+@media (max-width: 640px) {
+  :is(
+    .hero-title,
+    .rankings-heading h2,
+    .why-rmp-heading h2,
+    .traders-love-shell > h2,
+    .video-showcase-heading h2,
+    .trust-heading h2,
+    .newsletter-copy h2,
+    .faq-heading h2
+  ) {
+    font-size: 36px;
+    line-height: 1.08;
+  }
+}

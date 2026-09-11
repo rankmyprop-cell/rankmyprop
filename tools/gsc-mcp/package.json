@@ -1,0 +1,12 @@
+{
+  "name": "rankmyprop-gsc-mcp",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Private Google Search Console MCP server for Rank My Prop",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.26.0",
+    "google-auth-library": "^10.5.0",
+    "zod": "^3.25.76"
+  }
+}

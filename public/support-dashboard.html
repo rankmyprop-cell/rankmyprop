@@ -1,0 +1,1269 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+                                    <meta property="og:image:height" content="630" />
+                          <meta property="og:image:width" content="1200" />
+<meta name="twitter:image" content="https://www.rankmyprop.in/assets/og-default-1200x630.webp" />
+<meta property="og:image" content="https://www.rankmyprop.in/assets/og-default-1200x630.webp" />
+                          <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#0a0b12" />
+  <title>Support CMS Dashboard | Rank My Prop</title>
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+  <link rel="stylesheet" href="/dashboard-layout.css" />
+  <style>
+    [hidden]{display:none!important}
+    body{background:#070812;color:#eef0ff}
+    .auth-gate{min-height:100vh;display:grid;place-items:center;padding:24px;background:#090a12}
+    .auth-card{width:min(460px,100%);padding:28px;border:1px solid rgba(122,116,255,.35);border-radius:18px;background:#111225}
+    .auth-card h1{margin:0 0 8px}.auth-card p{color:#9da6c8}.auth-card .field{margin:14px 0}.auth-card label{display:block;margin-bottom:7px}
+    input,select,textarea{width:100%;padding:11px 12px;border:1px solid rgba(122,116,255,.38);border-radius:9px;background:#0d0e1a;color:#eef0ff;outline:none}
+    textarea{min-height:130px;resize:vertical;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;line-height:1.5}
+    label{font-weight:800;color:#eef0ff}
+    .panel-view{display:none}.panel-view.active{display:block}
+    .module-shell{display:grid;gap:14px}
+    .module-intro{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+    .module-intro p{margin:6px 0 0;color:#aeb5d5;line-height:1.55}
+    .submission-form{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+    .submission-form .span-2{grid-column:span 2}.submission-form .full{grid-column:1/-1}
+    .form-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+    .state{padding:14px 0;color:#aeb5d5}.state.error{color:#ffb4bd}.state.warn{color:#ffd98a}.state.ok{color:#a5ffce}
+    .table-wrap{overflow:auto;border-top:1px solid rgba(255,255,255,.1);margin-top:8px}
+    .table-wrap table{min-width:980px}.table-wrap button{white-space:nowrap}
+    .small{font-size:12px;color:#9da6c8}.chip.muted{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)}
+    .record-title{font-weight:900;color:#fff}.record-meta{font-size:12px;color:#9da6c8;margin-top:3px}
+    .pending-list{display:grid;gap:10px}
+    .pending-item{padding:12px;border:1px solid rgba(255,255,255,.1);border-radius:10px;background:rgba(255,255,255,.035)}
+    .json-preview{max-width:520px;white-space:pre-wrap;word-break:break-word;font-size:12px;color:#cdd3ef}
+    .field-help{display:block;margin-top:5px;color:#8f96b6;font-size:12px;font-weight:600}
+    .side-link{min-height:34px}
+    .module-section{grid-column:1/-1;border:1px solid rgba(122,116,255,.24);border-radius:14px;background:rgba(255,255,255,.025);padding:14px}
+    .module-section .panel-head{margin-bottom:12px}
+    .section-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+    .field.full{grid-column:1/-1}.field.span-2{grid-column:span 2}
+    .checkbox-label{min-height:42px;display:flex;gap:8px;align-items:center;padding:11px 12px;border:1px solid rgba(122,116,255,.38);border-radius:9px;background:#0d0e1a}
+    .checkbox-label input{width:16px;height:16px;padding:0}
+    .editor-grid{grid-template-columns:1.3fr .7fr}.editor-col{display:grid;gap:12px;align-content:start}
+    @media(max-width:980px){.submission-form{grid-template-columns:1fr}.submission-form .span-2{grid-column:auto}.module-intro{display:block}}
+    @media(max-width:980px){.section-grid,.editor-grid{grid-template-columns:1fr}.field.span-2{grid-column:auto}}
+  </style>
+<script id="rmp-ssr-bootstrap">window.__RMP_SSR_BOOTSTRAP={"id":"page-support-dashboard","heading":"Support Staff Login","paragraph":"","seoTitle":"Support CMS Dashboard | Rank My Prop","seoDescription":"","canonical":"https://www.rankmyprop.in/support-dashboard","robots":"index, follow, max-image-preview:large, max-snippet:-1","__stableSsrHero":true};</script>
+<script defer src="/route-content-runtime.js"></script>
+</head>
+<body>
+  <section class="auth-gate" id="authGate">
+    <form class="auth-card" id="loginForm">
+      <h1>Support Staff Login</h1>
+      <p>Use the credentials created from Support Access in admin.</p>
+      <div class="field"><label for="loginEmail">Login email</label><input id="loginEmail" type="email" autocomplete="username" placeholder="support@example.com" required /></div>
+      <div class="field"><label for="loginPassword">Password</label><input id="loginPassword" type="password" autocomplete="current-password" placeholder="Enter password" required /></div>
+      <button class="btn primary" type="submit">Log in</button>
+      <div class="state" id="loginState" aria-live="polite"></div>
+    </form>
+  </section>
+
+  <div class="app" id="supportApp" hidden>
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-dot"></span><b>RMP Support</b></div>
+      <div class="menu-group-title">Support Workspace</div>
+      <a class="side-link active" href="#overview" data-route="overview">Overview</a>
+      <a class="side-link" href="#prop-firm-listing" data-module="firmDetail">Prop Firm Listing</a>
+      <a class="side-link" href="#giveaways" data-module="giveaways">Giveaways CMS</a>
+      <a class="side-link" href="#upcoming-events" data-module="events">Upcoming Events</a>
+      <a class="side-link" href="#firm-detail-cms" data-module="firmDetail">Firm Detail CMS</a>
+      <a class="side-link" href="#reviews-hub" data-module="reviews">Reviews Hub</a>
+      <a class="side-link" href="#offers-control" data-module="offers">Offers Control</a>
+      <a class="side-link" href="#prop-news" data-module="propNews">Prop News</a>
+      <a class="side-link" href="#trading-guides" data-module="tradingGuides">Trading Guides</a>
+      <a class="side-link" href="#funding-strategies" data-module="fundingStrategies">Funding Strategies</a>
+      <a class="side-link" href="#trading-psychology" data-module="tradingPsychology">Trading Psychology</a>
+      <a class="side-link" href="#beginner-tutorials" data-module="beginnerTutorials">Beginner Tutorials</a>
+      <a class="side-link" href="#purchases" data-module="purchases">Purchases</a>
+      <a class="side-link" href="#submissions" data-route="submissions">My Submissions</a>
+      <a class="side-link" href="#" id="logoutBtn">Log out</a>
+    </aside>
+
+    <main class="main">
+      <header class="top">
+        <div><h3 id="welcomeName">Welcome</h3><div class="welcome" id="workspaceHint">Support edits go to CEO approval before publishing.</div></div>
+        <div class="top-actions"><button class="btn" id="refreshBtn" type="button">Refresh</button><span class="chip" id="roleChip">Support</span></div>
+      </header>
+
+      <section class="panel-view active" id="panel-overview">
+        <section class="cards" id="overviewCards"></section>
+        <div class="panel">
+          <div class="panel-head"><h3>Approval-first CMS</h3></div>
+          <div class="state" id="overviewState">Loading live data...</div>
+          <p class="small">Use the left modules to propose CMS changes. Nothing from support publishes directly; the admin approval queue controls the final live update.</p>
+        </div>
+      </section>
+
+      <section class="panel-view" id="panel-module">
+        <div class="module-shell" id="moduleHost"></div>
+      </section>
+
+      <section class="panel-view" id="panel-submissions">
+        <div class="panel">
+          <div class="panel-head"><h3>My Submitted Changes</h3></div>
+          <div id="submissionsState" class="state">Select this section to load.</div>
+          <div class="pending-list" id="submissionsList"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module">
+    import { auth as firebaseAuth } from "./dashboard-common.js";
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+
+    const tokenKey = "rmp_support_session";
+    const state = new Map();
+    let actor = null;
+    let activeRoute = "overview";
+    let activeModuleKey = "giveaways";
+    let requestSeq = 0;
+    let activeModuleRows = [];
+
+    const commonArticleFields = [
+      { name:"title", label:"Title" },
+      { name:"slug", label:"Slug / URL slug" },
+      { name:"category", label:"Category" },
+      { name:"author", label:"Author" },
+      { name:"status", label:"Status", type:"select", options:["draft","published","active","inactive"] },
+      { name:"featured", label:"Featured", type:"select", options:["","true","false"] },
+      { name:"imageUrl", label:"Image URL" },
+      { name:"tags", label:"Tags", help:"Comma separated", parser:"csv" },
+      { name:"excerpt", label:"Excerpt", type:"textarea", className:"span-2" },
+      { name:"content", label:"Content / body", type:"textarea", className:"full" },
+      { name:"seoTitle", label:"SEO title" },
+      { name:"seoDescription", label:"SEO description", type:"textarea", className:"span-2" }
+    ];
+
+    const MODULES = {
+      giveaways: {
+        label: "Giveaways CMS",
+        description: "Create or update giveaway page content, rules, winners, CTA blocks, dates, and status.",
+        workspace: "giveaways",
+        collections: [{ value:"giveaways", label:"giveaways" }, { value:"pageCopy", label:"pageCopy" }],
+        fields: [
+          { name:"title", label:"Giveaway title" },
+          { name:"slug", label:"Slug" },
+          { name:"badgeLabel", label:"Badge label" },
+          { name:"status", label:"Status", type:"select", options:["draft","active","ended","archived"] },
+          { name:"totalWinners", label:"Total winners", type:"number" },
+          { name:"startDate", label:"Start date" },
+          { name:"endDate", label:"End date" },
+          { name:"ctaText", label:"CTA text" },
+          { name:"ctaUrl", label:"CTA URL" },
+          { name:"subtitle", label:"Subtitle", type:"textarea", className:"span-2" },
+          { name:"prize", label:"Prize details", type:"textarea" },
+          { name:"notices", label:"Notices", type:"textarea" }
+        ],
+        extraPlaceholder: '{"rules":["One entry per user"],"entrySteps":["Follow Rank My Prop","Submit the entry form"],"winners":[],"sectionTitles":{"rules":"Rules"}}'
+      },
+      events: {
+        label: "Upcoming Events",
+        description: "Manage event cards, dates, descriptions, links, and display state.",
+        workspace: "upcomingEvents",
+        collections: [{ value:"upcomingEvents", label:"upcomingEvents" }],
+        fields: [
+          { name:"title", label:"Event title" },
+          { name:"whenLabel", label:"When label" },
+          { name:"eventDate", label:"Event date" },
+          { name:"status", label:"Status", type:"select", options:["draft","active","ended","hidden"] },
+          { name:"link", label:"Event link" },
+          { name:"sortOrder", label:"Sort order", type:"number" },
+          { name:"description", label:"Description", type:"textarea", className:"full" }
+        ],
+        extraPlaceholder: '{"location":"Online","ctaText":"Register","tags":["webinar"]}'
+      },
+      firmDetail: {
+        label: "Firm Detail CMS",
+        description: "Propose changes for firm profile, detail page, review profile, rating stats, rules blocks, and linked offers.",
+        workspace: "firmDetailCms",
+        collections: [
+          { value:"firms", label:"firms" },
+          { value:"firmReviewProfiles", label:"firmReviewProfiles" },
+          { value:"firmRatingStats", label:"firmRatingStats" },
+          { value:"firmReviews", label:"firmReviews" },
+          { value:"offers", label:"offers" }
+        ],
+        fields: [
+          { name:"name", label:"Firm name" },
+          { name:"slug", label:"Firm slug" },
+          { name:"country", label:"Country" },
+          { name:"website", label:"Website URL" },
+          { name:"buyLink", label:"Buy / visit URL" },
+          { name:"logoUrl", label:"Logo URL" },
+          { name:"showListed", label:"Show listed", type:"select", options:["","true","false"] },
+          { name:"showBestGlobal", label:"Show best global", type:"select", options:["","true","false"] },
+          { name:"rating", label:"Rating", type:"number" },
+          { name:"reviewCount", label:"Review count", type:"number" },
+          { name:"promoText", label:"Promo text", type:"textarea" },
+          { name:"overviewShort", label:"Overview short", type:"textarea", className:"span-2" },
+          { name:"overviewLong", label:"Overview long", type:"textarea", className:"full" }
+        ],
+        extraPlaceholder: '{"cardMetrics":{},"teamReviewProfile":{},"rulesPanelData":{},"platforms":[],"paymentMethods":[],"restrictedCountries":[]}'
+      },
+      reviews: {
+        label: "Reviews Hub",
+        description: "Review status and review-content edits are queued for CEO approval.",
+        workspace: "reviews",
+        collections: [{ value:"reviews", label:"reviews" }, { value:"firmRatingStats", label:"firmRatingStats" }],
+        fields: [
+          { name:"firmName", label:"Firm name" },
+          { name:"firmSlug", label:"Firm slug" },
+          { name:"rating", label:"Rating", type:"number" },
+          { name:"status", label:"Status", type:"select", options:["Pending","Approved","Rejected","Hold"] },
+          { name:"title", label:"Review title" },
+          { name:"reviewText", label:"Review text", type:"textarea", className:"full" },
+          { name:"adminNote", label:"Admin note", type:"textarea", className:"span-2" }
+        ],
+        extraPlaceholder: '{"moderationReason":"", "verified":true}'
+      },
+      offers: {
+        label: "Offers Control",
+        description: "Create and update prop firm offers, coupons, affiliate links, discount text, and offer page copy.",
+        workspace: "offers",
+        collections: [{ value:"offers", label:"offers" }],
+        fields: [
+          { name:"firmId", label:"Firm ID" },
+          { name:"firmName", label:"Firm name" },
+          { name:"discount", label:"Discount label" },
+          { name:"discountPct", label:"Discount percent", type:"number" },
+          { name:"code", label:"Code" },
+          { name:"couponCode", label:"Coupon code" },
+          { name:"category", label:"Category" },
+          { name:"active", label:"Active", type:"select", options:["","true","false"] },
+          { name:"exclusive", label:"Exclusive", type:"select", options:["","true","false"] },
+          { name:"sortOrder", label:"Sort order", type:"number" },
+          { name:"link", label:"Affiliate / visit URL" },
+          { name:"description", label:"Description", type:"textarea", className:"full" }
+        ],
+        extraPlaceholder: '{"page":"home","seoTitle":"","seoDescription":"","seoKeywords":[],"heading":""}'
+      },
+      propNews: articleModule("Prop News", "propNewsCms", "propNewsPosts", "propNewsVideos"),
+      tradingGuides: articleModule("Trading Guides", "tradingGuidesCms", "tradingGuidesPosts", "tradingGuidesVideos"),
+      fundingStrategies: articleModule("Funding Strategies", "fundingStrategiesCms", "fundingStrategiesPosts", "fundingStrategiesVideos"),
+      tradingPsychology: articleModule("Trading Psychology", "tradingPsychologyCms", "tradingPsychologyPosts", "tradingPsychologyVideos"),
+      beginnerTutorials: articleModule("Beginner Tutorials", "beginnerTutorialsCms", "beginnerTutorialsPosts", "beginnerTutorialsVideos"),
+      purchases: {
+        label: "Purchases",
+        description: "Review purchase rows and propose next-bonus or purchase-status changes for approval.",
+        workspace: "purchasesCms",
+        collections: [{ value:"purchases", label:"purchases" }, { value:"bonusOffers", label:"bonusOffers" }],
+        fields: [
+          { name:"status", label:"Status", type:"select", options:["pending","approved","rejected","active","expired"] },
+          { name:"firmName", label:"Firm name" },
+          { name:"challengeType", label:"Challenge type" },
+          { name:"accountSize", label:"Account size" },
+          { name:"amount", label:"Amount", type:"number" },
+          { name:"nextBonusCode", label:"Next bonus code" },
+          { name:"nextBonusDiscountPct", label:"Next bonus discount %", type:"number" },
+          { name:"nextBonusCashbackPct", label:"Next bonus cashback %", type:"number" },
+          { name:"nextBonusUrl", label:"Next bonus URL" },
+          { name:"adminNote", label:"Admin note", type:"textarea", className:"full" }
+        ],
+        extraPlaceholder: '{"bonusTerms":"", "expiresAt":""}'
+      }
+    };
+
+    function articleModule(label, workspace, postsCollection, videosCollection) {
+      return {
+        label,
+        description: `Manage ${label.toLowerCase()} posts, videos, FAQs, SEO copy, and publish state.`,
+        articleLike: true,
+        workspace,
+        collections: [
+          { value:postsCollection, label:postsCollection },
+          { value:videosCollection, label:videosCollection },
+          { value:"pageFaqs", label:"pageFaqs" }
+        ],
+        fields: commonArticleFields,
+        extraPlaceholder: '{"videoUrl":"","youtubeId":"","faqItems":[{"question":"","answer":""}],"blocks":[]}'
+      };
+    }
+
+    function fld(name, label, extra = {}) {
+      return { name, label, ...extra };
+    }
+
+    function articleSections() {
+      return [
+        { title:"Blog Post (Create / Edit)", gridClass:"editor-grid", fields:[
+          fld("title","Title"), fld("slug","Slug"),
+          fld("category","Category"), fld("readTime","Read Time (min)", { type:"number" }),
+          fld("thumbUrl","Thumbnail URL (Cloudinary)", { className:"full" }),
+          fld("excerpt","Excerpt (short summary)", { type:"textarea", className:"full" }),
+          fld("subheading1","Subheading 1 (optional H3)"), fld("paragraph1","Paragraph 1 (lead)", { type:"textarea", className:"full" }),
+          fld("subheading2","Subheading 2 (optional H3)"), fld("paragraph2","Paragraph 2", { type:"textarea", className:"full" }),
+          fld("subheading3","Subheading 3 (optional H3)"), fld("paragraph3","Paragraph 3", { type:"textarea", className:"full" }),
+          fld("subheading4","Subheading 4 (optional H3)"), fld("paragraph4","Paragraph 4", { type:"textarea", className:"full" }),
+          fld("subheading5","Subheading 5 (optional H3)"), fld("paragraph5","Paragraph 5", { type:"textarea", className:"full" }),
+          fld("subheading6","Subheading 6 (optional H3)"), fld("paragraph6","Paragraph 6", { type:"textarea", className:"full" }),
+          fld("seoTitle","SEO Title"), fld("seoDescription","SEO Description", { type:"textarea", className:"span-2" }),
+          fld("status","Status", { type:"select", options:["draft","published"] }),
+          fld("placement","Placement", { type:"select", options:["trending-main","trending-side","editor"] }),
+          fld("order","Order", { type:"number" }), fld("featured","Featured", { type:"checkbox" }), fld("active","Active", { type:"checkbox", checked:true }),
+          fld("tables","Article Tables JSON", { type:"textarea", className:"full", parser:"json" }),
+          fld("keepReading","Keep Reading Article IDs"),
+          fld("sourceUrl","Source / Backlink URL"),
+          fld("faqText","Blog FAQ (Per Article)", { type:"textarea", className:"full", help:"Use admin format: Question||Answer" })
+        ]},
+        { title:"Watch Now Videos (Create / Edit)", fields:[
+          fld("title","Title"), fld("youtubeUrl","YouTube URL"), fld("thumbUrl","Thumbnail URL (optional)"),
+          fld("sortOrder","Sort Order", { type:"number" }), fld("active","Active", { type:"checkbox", checked:true })
+        ]},
+        { title:"All Blog Posts / All Videos", hint:"Use the table below to pick an existing document ID. Support changes are queued for CEO approval." }
+      ];
+    }
+
+    function applyAdminShapes() {
+      MODULES.giveaways.formTitle = "Giveaway (Create / Edit)";
+      MODULES.giveaways.listTitle = "All Giveaways";
+      MODULES.giveaways.sections = [
+        { title:"Giveaway (Create / Edit)", fields:[
+          fld("title","Title"), fld("badgeLabel","Badge Label"),
+          fld("subtitle","Subtitle", { type:"textarea", className:"full" }),
+          fld("status","Status", { type:"select", options:["active","scheduled","ended","draft"] }),
+          fld("totalWinners","Total Winners", { type:"number" }),
+          fld("startDate","Start Date (UTC)", { type:"datetime-local", target:"dates.startDate" }),
+          fld("endDate","End Date (UTC)", { type:"datetime-local", target:"dates.endDate" }),
+          fld("announcementDate","Announcement Date (UTC)", { type:"datetime-local", target:"dates.announcementDate" }),
+          fld("ctaLabel","CTA Label", { target:"cta.label" }),
+          fld("ctaUrl","CTA URL", { target:"cta.url", className:"full" }),
+          fld("prizeCount","Prize Count", { type:"number", target:"prize.count" }),
+          fld("prizeAmount","Prize Amount", { type:"number", target:"prize.amount" }),
+          fld("prizeCurrency","Prize Currency", { target:"prize.currency" }),
+          fld("prizeProvider","Prize Provider", { target:"prize.provider" }),
+          fld("prizeIconText","Prize Icon Text", { target:"prize.iconText" }),
+          fld("prizeIconUrl","Prize Icon URL", { target:"prize.iconUrl" }),
+          fld("prizeDescription","Prize Description", { type:"textarea", className:"full", target:"prize.description" }),
+          fld("fairTitle","Fair Notice Title", { target:"notices.fairPlay.title" }),
+          fld("importantTitle","Important Notice Title", { target:"notices.important.title" }),
+          fld("fairDesc","Fair Notice Description", { type:"textarea", target:"notices.fairPlay.description" }),
+          fld("importantDesc","Important Notice Description", { type:"textarea", target:"notices.important.description" }),
+          fld("headingWin","Heading: What You Can Win", { target:"sectionTitles.whatYouCanWin" }),
+          fld("headingEnter","Heading: How To Enter", { target:"sectionTitles.howToEnter" }),
+          fld("headingDetails","Heading: Giveaway Details", { target:"sectionTitles.details" }),
+          fld("headingProgress","Heading: Entry Progress", { target:"sectionTitles.entryProgress" }),
+          fld("headingWinners","Heading: Previous Winners", { target:"sectionTitles.previousWinners" }),
+          fld("headingWinnersNote","Previous Winners Subtext", { target:"sectionTitles.previousWinnersNote" }),
+          fld("viewAllText","View All Winners Text", { target:"sectionTitles.viewAllWinners" })
+        ]},
+        { title:"How To Enter Rules", actionText:"Add Rule", hint:"Paste JSON array. Example: [{\"text\":\"Follow Rank My Prop\",\"link\":\"https://...\",\"required\":true}]", fields:[fld("rules","Rules JSON", { type:"textarea", className:"full", parser:"json" })] },
+        { title:"Entry Progress Items", actionText:"Add Entry Step", hint:"Paste JSON array. Example: [{\"label\":\"Follow Instagram\",\"link\":\"https://...\",\"completed\":false}]", fields:[fld("entrySteps","Entry Steps JSON", { type:"textarea", className:"full", parser:"json" })] },
+        { title:"Winners (Preview + View All Popup)", actionText:"Add Winner", hint:"Paste JSON array. Avatar URL and profile URL are optional.", fields:[fld("winners","Winners JSON", { type:"textarea", className:"full", parser:"json" })] }
+      ];
+
+      MODULES.events.formTitle = "Publish Event";
+      MODULES.events.listTitle = "Published Events";
+      MODULES.events.sections = [{ title:"Upcoming Event", fields:[fld("title","Event Title", { className:"full" }), fld("whenLabel","When Label", { className:"full" })] }];
+
+      MODULES.offers.formTitle = "Add / Edit Offer";
+      MODULES.offers.listTitle = "All Offers";
+      MODULES.offers.sections = [{ title:"Add / Edit Offer", fields:[
+        fld("firmId","Firm ID"), fld("discount","Discount"), fld("code","Code"),
+        fld("category","Category", { type:"select", options:["forex","futures","crypto","all"] }),
+        fld("sortOrder","Sort Order", { type:"number" }),
+        fld("link","Visit URL", { className:"full" }),
+        fld("description","Description", { type:"textarea", className:"full" }),
+        fld("page","Dedicated Page"), fld("active","Active", { type:"checkbox", checked:true }), fld("exclusive","Exclusive", { type:"checkbox" }),
+        fld("seoTitle","SEO Title"), fld("seoDescription","SEO Description", { type:"textarea", className:"full" }),
+        fld("seoKeywords","SEO Keywords"), fld("heading","Page Heading")
+      ]}];
+
+      MODULES.firmDetail.formTitle = "Detail Content";
+      MODULES.firmDetail.listTitle = "Firm Selector / Current Firm Data";
+      MODULES.firmDetail.sections = [
+        { title:"Detail Content", fields:[
+          fld("name","Firm Name"), fld("handle","Handle"), fld("country","Country"), fld("ranking","Ranking", { type:"number" }),
+          fld("website","Website"), fld("buyLink","Buy Link"), fld("detailsLink","Details Link"), fld("rulesLink","Rules Link"), fld("discountPage","Discount Page"), fld("followers","Likes", { type:"number" }),
+          fld("tags","Tags (comma)", { parser:"csv" }), fld("markets","Markets (comma)", { parser:"csv" }),
+          fld("payoutAssurance","Payout Assurance Tick", { type:"checkbox" }), fld("showListed","Show in Listed Props", { type:"checkbox", checked:true }), fld("showBestGlobal","Show in Best Prop (Global)", { type:"checkbox" }),
+          fld("bio","Card Bio", { type:"textarea", className:"full" }),
+          fld("publishState","Publish State", { type:"select", options:["published","draft","unpublished"] }),
+          fld("unpublishUntil","Unpublish Until", { type:"datetime-local" }), fld("active","Active", { type:"checkbox", checked:true }),
+          fld("score","Score", { type:"number" }), fld("trustedBy","Trusted By"), fld("promoText","Promo Text"), fld("reviewCount","Review Count", { type:"number" }),
+          fld("useManualRatingOverride","Manual Rating Override", { type:"checkbox" }), fld("manualRating","Manual Rating", { type:"number" }), fld("manualReviewCount","Manual Review Count", { type:"number" }),
+          fld("detailMeta","Detail Meta Line"), fld("reviewSnippet","Review Snippet", { type:"textarea", className:"full" }),
+          fld("metaCeo","Meta CEO"), fld("metaMarkets","Meta Markets (comma)", { parser:"csv" }), fld("metaFounded","Meta Founded"), fld("metaHeadquarters","Meta Headquarters"),
+          fld("overviewTitle","Overview Title"), fld("overviewLongTitle","Overview Long Title"), fld("overviewShort","Overview Short", { type:"textarea", className:"full" }), fld("overviewLong","Overview Long (paragraphs with blank line)", { type:"textarea", className:"full" }),
+          fld("platforms","Platforms (comma)", { parser:"csv" }), fld("paymentMethods","Payment Methods (comma)", { parser:"csv" }), fld("restrictedCountries","Restricted Countries (comma)", { parser:"csv" }),
+          fld("whyChoose","Why Choose (one per line)", { type:"textarea", className:"full", parser:"lines" }), fld("overview","Overview", { type:"textarea", className:"full" })
+        ]},
+        { title:"Detail JSON Blocks", fields:[
+          fld("performance","Performance JSON", { type:"textarea", className:"full", parser:"json" }),
+          fld("radarMetrics","Radar Metrics JSON (max 5)", { type:"textarea", className:"full", parser:"json" }),
+          fld("stats","Stats JSON", { type:"textarea", className:"full", parser:"json" }),
+          fld("keyMetrics","Key Metrics JSON", { type:"textarea", className:"full", parser:"json" }),
+          fld("cardMetrics","Listing Card Metrics JSON", { type:"textarea", className:"full", parser:"json" }),
+          fld("tradingConditions","Trading Conditions JSON", { type:"textarea", className:"full", parser:"json" }),
+          fld("firmDetails","Firm Details JSON", { type:"textarea", className:"full", parser:"json" }),
+          fld("leverageRows","Leverage Rows JSON", { type:"textarea", className:"full", parser:"json" }),
+          fld("commissions","Commissions JSON", { type:"textarea", className:"full", parser:"json" }),
+          fld("evaluationPrograms","Evaluation Programs JSON", { type:"textarea", className:"full", parser:"json" }),
+          fld("rulesPanelData","Rules Panel JSON", { type:"textarea", className:"full", parser:"json" }),
+          fld("challengesPanelData","Challenges Panel JSON", { type:"textarea", className:"full", parser:"json" }),
+          fld("spreadsPanelData","Spreads Panel JSON", { type:"textarea", className:"full", parser:"json" }),
+          fld("announcementsPanelData","Announcements Panel JSON", { type:"textarea", className:"full", parser:"json" })
+        ]},
+        { title:"Team Review Profile (Dedicated Review Page)", fields:[fld("teamReviewProfile","firmReviewProfiles JSON", { type:"textarea", className:"full", parser:"json", target:"teamReviewProfile" })] }
+      ];
+
+      MODULES.reviews.formTitle = "Filters / Review Details";
+      MODULES.reviews.listTitle = "All Reviews";
+      MODULES.reviews.sections = [
+        { title:"Filters", fields:[fld("firmName","Firm"), fld("status","Status", { type:"select", options:["Pending","Approved","Rejected","Hold"] })] },
+        { title:"Review Details", fields:[fld("firmSlug","Firm Slug"), fld("rating","Rating", { type:"number" }), fld("title","Review Title"), fld("reviewText","Review Text", { type:"textarea", className:"full" }), fld("adminNote","Admin Note", { type:"textarea", className:"full" })] }
+      ];
+
+      MODULES.purchases.formTitle = "Set Next Bonus (Override)";
+      MODULES.purchases.listTitle = "All Purchases";
+      MODULES.purchases.sections = [{ title:"Set Next Bonus (Override)", fields:[
+        fld("purchaseLabel","Selected Purchase", { className:"full" }),
+        fld("status","Status", { type:"select", options:["pending","approved","rejected","active","expired"] }),
+        fld("nextBonusCode","Next Bonus Code"),
+        fld("nextBonusDiscountPct","Next Discount %", { type:"number" }),
+        fld("nextBonusCashbackPct","Next Cashback %", { type:"number" }),
+        fld("nextBonusUrl","Next Bonus URL"),
+        fld("adminNote","Admin Note", { type:"textarea", className:"full" })
+      ]}];
+
+      for (const key of ["propNews", "tradingGuides", "fundingStrategies", "tradingPsychology", "beginnerTutorials"]) {
+        MODULES[key].formTitle = "Blog Post (Create / Edit)";
+        MODULES[key].listTitle = "All Blog Posts / All Videos";
+        MODULES[key].sections = articleSections();
+      }
+    }
+
+    applyAdminShapes();
+
+    const esc = (value = "") => String(value ?? "").replace(/[&<>"']/g, (char) => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[char]));
+    const jsonPlaceholder = (value) => {
+      try { return JSON.stringify(typeof value === "string" ? JSON.parse(value) : value, null, 2); } catch { return String(value || "{}"); }
+    };
+    const TEXTAREA_PLACEHOLDERS = {
+      subtitle: "Short supporting subtitle for this section.\n\nExample: Join this giveaway and complete the steps before the deadline.",
+      excerpt: "Short summary for cards and previews.\n\nExample: A practical breakdown of payout rules, drawdown limits, and who this firm suits.",
+      content: "Write the full body content here.\n\nUse blank lines between paragraphs.",
+      seoDescription: "SEO meta description in 150-160 characters.\n\nExample: Compare this prop firm's pricing, rules, payouts, and trader feedback before buying a challenge.",
+      prize: "Prize details in plain text.\n\nExample: 3 winners will receive a $50,000 challenge account.",
+      prizeDescription: "Explain the giveaway prize clearly.\n\nExample: Winners receive a challenge account after verification and CEO approval.",
+      notices: "One notice per line.\n\nExample:\nOnly one entry per user.\nFake entries may be rejected.",
+      description: "Write the description shown on the page.\n\nExample: Use code RMP to claim the latest verified discount.",
+      reviewText: "Write the full review text.\n\nExample: Payouts were processed on time and the dashboard was easy to use.",
+      adminNote: "Internal note for CEO/admin review.\n\nExample: Updated status after checking submitted proof.",
+      promoText: "Short promo line.\n\nExample: 20% OFF + Cashback",
+      overviewShort: "Short intro shown near the top of the detail page.\n\nExample: Best fit for traders who want flexible rules and fast payouts.",
+      overviewLong: "Long overview content.\n\nUse blank lines between paragraphs.\n\nExample:\nThis firm offers multiple challenge models...\n\nIts rules are best suited for...",
+      bio: "Short card bio.\n\nExample: Best fit for HFT-focused traders.",
+      reviewSnippet: "Short review snippet.\n\nExample: Fast payout process, clean dashboard, and smooth execution.",
+      overview: "Full long-form overview for the dedicated page.\n\nUse blank lines between paragraphs.",
+      whyChoose: "One item per line.\n\nExample:\nHigh profit split up to 95%\nNo minimum trading days\nMultiple platforms",
+      fairDesc: "Fair play notice text.\n\nExample: Entries are reviewed manually before winners are announced.",
+      importantDesc: "Important notice text.\n\nExample: Submit correct account details to avoid prize delays.",
+      faqText: "One FAQ per block using Question||Answer.\n\nExample:\nWhat is the payout cycle?||Most payouts are processed within 14 days.\n\nIs news trading allowed?||Check the firm's live rule page before trading news.",
+      paragraph1: "Lead paragraph.\n\nExample: Start with the main takeaway and who this article is for.",
+      paragraph2: "Second paragraph.\n\nExample: Explain the key rule, workflow, or comparison point.",
+      paragraph3: "Third paragraph.\n\nExample: Add practical details traders should check.",
+      paragraph4: "Fourth paragraph.\n\nExample: Cover risks, limitations, or edge cases.",
+      paragraph5: "Fifth paragraph.\n\nExample: Add examples, scenarios, or decision criteria.",
+      paragraph6: "Closing paragraph.\n\nExample: Summarize the best next action for the reader.",
+      rules: jsonPlaceholder([
+        { text: "Follow Rank My Prop", link: "https://...", required: true },
+        { text: "Submit the entry form", required: true }
+      ]),
+      entrySteps: jsonPlaceholder([
+        { label: "Follow Instagram", link: "https://...", completed: false },
+        { label: "Join Discord", completed: false }
+      ]),
+      winners: jsonPlaceholder([
+        { username: "@trader_one", amount: 100, avatarUrl: "https://...", profileUrl: "https://..." },
+        { username: "@trader_two", amount: 50 }
+      ]),
+      tables: jsonPlaceholder([
+        {
+          title: "Challenge comparison",
+          columns: ["Plan", "Target", "Drawdown"],
+          rows: [
+            ["1-Step", "10%", "6%"],
+            ["2-Step", "8% / 5%", "10%"]
+          ]
+        }
+      ]),
+      performance: jsonPlaceholder({ profitability: 4.6, payouts: 4.5, rules: 4.3, flexibility: 4.2, trust: 4.4 }),
+      radarMetrics: jsonPlaceholder([
+        { label: "Company Background", short: "Background", value: 4.4 },
+        { label: "Payouts", short: "Payouts", value: 4.3 }
+      ]),
+      stats: jsonPlaceholder([
+        { value: "935+", label: "Traders" },
+        { value: "14 Days", label: "First Payout" }
+      ]),
+      keyMetrics: jsonPlaceholder([
+        { label: "Max Allocation", value: "$4,000,000" },
+        { label: "Profit Split", value: "Up to 90%" }
+      ]),
+      cardMetrics: jsonPlaceholder({
+        payoutCycle: "14 Days",
+        minTradingDays: "5 Days",
+        newsTrading: "Allowed",
+        timeLimit: "Unlimited",
+        eaAllowed: "Allowed",
+        startingPrice: "$39"
+      }),
+      tradingConditions: jsonPlaceholder([
+        { label: "Daily Drawdown", value: "3% - 5%" },
+        { label: "Maximum Drawdown", value: "6% - 10%" }
+      ]),
+      firmDetails: jsonPlaceholder([
+        { label: "Company Name", value: "Aqua Funded" },
+        { label: "Headquarters", value: "Dubai, UAE" }
+      ]),
+      leverageRows: jsonPlaceholder([
+        { instrument: "Indices", c1: "1:50", c2: "1:30", c3: "1:100", c4: "Variable" }
+      ]),
+      commissions: jsonPlaceholder([
+        { title: "Indices", lines: ["Standard: No Commission", "Swap Free: No Commission"] }
+      ]),
+      evaluationPrograms: jsonPlaceholder([
+        { program: "1-Step", phase1: "10%", phase2: "-", target: "10%", allocation: "$2,000,000", split: "Up to 90%" }
+      ]),
+      rulesPanelData: jsonPlaceholder({
+        sections: {
+          general: {
+            title: "General Rules",
+            desc: "Important rules",
+            rules: [
+              { title: "Minimum trading days", text: "No minimum trading days required." },
+              { title: "News trading", text: "Allowed unless stated otherwise." }
+            ]
+          }
+        }
+      }),
+      challengesPanelData: jsonPlaceholder({
+        programs: [
+          { program: "1-Step", phase1: "10%", phase2: "-", target: "10%", allocation: "$2,000,000", split: "Up to 90%", features: ["No minimum trading days"] }
+        ],
+        stats: [{ value: "14 Days", label: "First Payout" }]
+      }),
+      spreadsPanelData: jsonPlaceholder({
+        items: [
+          { symbol: "EUR/USD", flag: "US", category: "forex", unit: "Pips", std: [0.1, 0.2, 0.5] }
+        ]
+      }),
+      announcementsPanelData: jsonPlaceholder({
+        items: [
+          { cat: "payouts", tagLabel: "Payouts", title: "May Payouts", desc: "Payouts are live.", heroTitle: "Payouts live", heroDesc: "Latest payout update.", sections: [] }
+        ]
+      }),
+      teamReviewProfile: jsonPlaceholder({
+        ourReviewTitle: "Our Review",
+        pros: ["Fast payouts", "Clear dashboard"],
+        cons: ["Restricted countries apply"],
+        verdict: "Good fit for disciplined traders."
+      })
+    };
+    function textareaPlaceholder(field = {}) {
+      if (TEXTAREA_PLACEHOLDERS[field.name]) return TEXTAREA_PLACEHOLDERS[field.name];
+      if (field.parser === "json") {
+        return jsonPlaceholder({
+          items: [
+            { label: "First item", value: "First value" },
+            { label: "Second item", value: "Second value" }
+          ]
+        });
+      }
+      if (field.parser === "lines") return "One item per line.\n\nExample:\nFirst item\nSecond item\nThird item";
+      if (field.parser === "csv") return "Comma-separated values.\n\nExample: Forex, Futures, Crypto";
+      return `Enter ${String(field.label || "text").toLowerCase()} here.\n\nUse clear text. Add blank lines if you need separate paragraphs.`;
+    }
+    const INPUT_PLACEHOLDERS = {
+      title: "Best Prop Firms for Beginners 2026",
+      slug: "best-prop-firms-for-beginners-2026",
+      category: "Beginner Tutorials",
+      author: "Rank My Prop Editorial Team",
+      imageUrl: "https://example.com/image.webp",
+      readTime: "6",
+      thumbUrl: "https://res.cloudinary.com/.../image.webp",
+      subheading1: "Why this matters",
+      subheading2: "Key rules to check",
+      subheading3: "Payout and pricing",
+      subheading4: "Best fit traders",
+      subheading5: "Common mistakes",
+      subheading6: "Final verdict",
+      seoTitle: "FundedNext Review | Rank My Prop",
+      order: "1",
+      keepReading: "blog-post-01, blog-post-02",
+      sourceUrl: "https://example.com/source",
+      youtubeUrl: "https://www.youtube.com/watch?v=VIDEO_ID",
+      sortOrder: "10",
+      badgeLabel: "Live Giveaway",
+      totalWinners: "3",
+      startDate: "2026-07-10T12:00",
+      endDate: "2026-07-17T23:59",
+      announcementDate: "2026-07-20T12:00",
+      ctaLabel: "Enter Giveaway",
+      ctaUrl: "https://www.rankmyprop.in/giveaway",
+      prizeCount: "3",
+      prizeAmount: "50000",
+      prizeCurrency: "USD",
+      prizeProvider: "FundedNext",
+      prizeIconText: "$50K",
+      prizeIconUrl: "https://example.com/prize-icon.webp",
+      fairTitle: "Fair Play",
+      importantTitle: "Important Notice",
+      headingWin: "What You Can Win",
+      headingEnter: "How To Enter",
+      headingDetails: "Giveaway Details",
+      headingProgress: "Entry Progress",
+      headingWinners: "Previous Winners",
+      headingWinnersNote: "Recent verified winners",
+      viewAllText: "View All Winners",
+      whenLabel: "Friday, 8 PM IST",
+      firmId: "fundednext",
+      firmName: "FundedNext",
+      firmSlug: "fundednext",
+      discount: "20%",
+      discountPct: "20",
+      code: "RMP",
+      couponCode: "RMP",
+      link: "https://fundednext.com",
+      page: "fundednextdiscount",
+      seoKeywords: "fundednext discount, prop firm code",
+      heading: "FundedNext Discount Code",
+      name: "We Fund",
+      handle: "@wefund",
+      country: "Global",
+      ranking: "1",
+      website: "https://wefund.com",
+      buyLink: "https://wefund.com/buy",
+      detailsLink: "/prop-firms/wefund",
+      rulesLink: "/prop-firms/wefund/rules",
+      discountPage: "/offers/wefund",
+      followers: "935",
+      tags: "Forex, HFT",
+      markets: "Forex, Crypto, Indices",
+      publishState: "published",
+      unpublishUntil: "2026-07-10T12:30",
+      score: "4.4",
+      trustedBy: "935+ traders",
+      reviewCount: "1027",
+      manualRating: "4.6",
+      manualReviewCount: "1200",
+      detailMeta: "CEO: Sean Ballation | Forex | Founded 2023 | UAE",
+      metaCeo: "Sean Ballation",
+      metaMarkets: "Forex, Crypto, Indices",
+      metaFounded: "2023",
+      metaHeadquarters: "UAE",
+      overviewTitle: "Aqua Funded Overview",
+      overviewLongTitle: "Detailed Overview",
+      platforms: "MT5, DXTrade, cTrader",
+      paymentMethods: "Crypto, RiseWorks, TC Pay",
+      restrictedCountries: "Bangladesh, Belarus, Malaysia, Russia",
+      rating: "4.5",
+      purchaseLabel: "user@example.com | FundedNext | $100K",
+      challengeType: "Two Step Challenge",
+      accountSize: "$100,000",
+      amount: "499",
+      nextBonusCode: "NEXT10",
+      nextBonusDiscountPct: "10",
+      nextBonusCashbackPct: "5",
+      nextBonusUrl: "https://www.rankmyprop.in/bonus"
+    };
+    function inputPlaceholder(field = {}) {
+      if (INPUT_PLACEHOLDERS[field.name]) return INPUT_PLACEHOLDERS[field.name];
+      if (field.parser === "csv") return "Forex, Futures, Crypto";
+      if (field.type === "number") return "0";
+      if (field.type === "datetime-local") return "2026-07-10T12:30";
+      return `Enter ${String(field.label || "value").toLowerCase()}`;
+    }
+    const text = (row, keys, fallback = "-") => {
+      for (const key of keys) if (row?.[key] !== undefined && row?.[key] !== null && String(row[key]).trim()) return String(row[key]);
+      return fallback;
+    };
+    const date = (value) => {
+      const raw = value?.seconds ? value.seconds * 1000 : value;
+      const d = new Date(raw || 0);
+      return Number.isNaN(d.getTime()) ? "-" : d.toLocaleString();
+    };
+
+    function readStoredSession() {
+      try { return JSON.parse(sessionStorage.getItem(tokenKey) || "{}") || {}; } catch { return {}; }
+    }
+
+    function writeStoredSession(session = {}) {
+      sessionStorage.setItem(tokenKey, JSON.stringify(session));
+    }
+
+    function sessionToken() {
+      return String(readStoredSession().accessToken || "");
+    }
+
+    function supportSessionIsExpiring(session = {}) {
+      const expiresAtMs = Number(session.expiresAt || 0) * 1000;
+      return !expiresAtMs || expiresAtMs <= Date.now() + 90_000;
+    }
+
+    async function refreshSupportSession(session = readStoredSession()) {
+      if (!session.refreshToken) {
+        sessionStorage.removeItem(tokenKey);
+        throw new Error("Support session expired. Please log in again.");
+      }
+      const response = await fetch("/api/support-refresh", {
+        method: "POST",
+        cache: "no-store",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ refreshToken: session.refreshToken })
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || !data.session?.accessToken) {
+        sessionStorage.removeItem(tokenKey);
+        throw new Error(data.error || "Support session expired. Please log in again.");
+      }
+      writeStoredSession(data.session);
+      return data.session.accessToken;
+    }
+
+    async function ceoToken() {
+      const user = firebaseAuth.currentUser;
+      if (!user || String(user.email || "").toLowerCase() !== "rankmyprop@gmail.com") return "";
+      return user.getIdToken();
+    }
+
+    async function authToken() {
+      const session = readStoredSession();
+      if (session.accessToken) {
+        if (supportSessionIsExpiring(session)) return refreshSupportSession(session);
+        return session.accessToken;
+      }
+      return ceoToken();
+    }
+
+    async function api(path, options = {}) {
+      const token = await authToken();
+      if (!token) throw new Error("Authentication required.");
+      const requestOptions = {
+        ...options,
+        cache: "no-store",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}`, ...(options.headers || {}) }
+      };
+      let response = await fetch(path, requestOptions);
+      if (response.status === 401 && readStoredSession().refreshToken) {
+        const nextToken = await refreshSupportSession();
+        response = await fetch(path, {
+          ...options,
+          cache: "no-store",
+          headers: { "Content-Type": "application/json", Authorization: `Bearer ${nextToken}`, ...(options.headers || {}) }
+        });
+      }
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        if (response.status === 401 || response.status === 403) sessionStorage.removeItem(tokenKey);
+        const error = new Error(data.error || "Request failed.");
+        error.status = response.status;
+        throw error;
+      }
+      return data;
+    }
+
+    function showApp(profile) {
+      actor = profile;
+      document.getElementById("authGate").hidden = true;
+      document.getElementById("supportApp").hidden = false;
+      document.getElementById("welcomeName").textContent = `Welcome, ${profile.displayName || "Support Staff"}`;
+      document.getElementById("roleChip").textContent = profile.role === "ceo" ? "CEO Admin" : "Support";
+      loadRoute("overview", true);
+    }
+
+    async function restore() {
+      const token = await authToken();
+      if (!token) return;
+      try {
+        const data = await api("/api/support-session");
+        showApp(data.profile);
+      } catch (error) {
+        if (error.status === 401 || error.status === 403) sessionStorage.removeItem(tokenKey);
+      }
+    }
+
+    document.getElementById("loginForm").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const status = document.getElementById("loginState");
+      status.className = "state";
+      status.textContent = "Signing in...";
+      try {
+        const response = await fetch("/api/support-login", {
+          method: "POST",
+          cache: "no-store",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: document.getElementById("loginEmail").value,
+            password: document.getElementById("loginPassword").value
+          })
+        });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(data.error || "Login failed.");
+        writeStoredSession(data.session);
+        showApp(data.profile);
+      } catch (error) {
+        status.className = "state error";
+        status.textContent = error.message;
+      }
+    });
+
+    document.getElementById("logoutBtn").addEventListener("click", (event) => {
+      event.preventDefault();
+      sessionStorage.removeItem(tokenKey);
+      location.href = actor?.role === "ceo" ? "/dashboard-admin" : "/support-dashboard";
+    });
+
+    document.querySelectorAll("[data-route],[data-module]").forEach((link) => link.addEventListener("click", (event) => {
+      event.preventDefault();
+      document.querySelectorAll("[data-route],[data-module]").forEach((item) => item.classList.toggle("active", item === link));
+      if (link.dataset.module) {
+        activeModuleKey = link.dataset.module;
+        loadRoute("module");
+      } else {
+        loadRoute(link.dataset.route);
+      }
+    }));
+
+    document.getElementById("refreshBtn").addEventListener("click", () => loadRoute(activeRoute, true));
+
+    function showPanel(panelId) {
+      document.querySelectorAll(".panel-view").forEach((panel) => panel.classList.toggle("active", panel.id === panelId));
+    }
+
+    async function loadRoute(route, force = false) {
+      if (!actor) return;
+      activeRoute = route;
+      if (route === "overview") {
+        showPanel("panel-overview");
+        return loadOverview();
+      }
+      if (route === "submissions") {
+        showPanel("panel-submissions");
+        return loadSubmissions(force);
+      }
+      showPanel("panel-module");
+      renderModule(MODULES[activeModuleKey], force);
+    }
+
+    async function loadOverview() {
+      const stateEl = document.getElementById("overviewState");
+      stateEl.className = "state";
+      stateEl.textContent = "Loading exact database counts...";
+      try {
+        const data = await api("/api/support-overview");
+        const counts = data.counts || {};
+        const labels = {
+          firms:"Firms",
+          offers:"Offers",
+          reviews:"Reviews",
+          pendingSubmissions:"Pending approvals"
+        };
+        document.getElementById("overviewCards").innerHTML = Object.entries(labels).map(([key, label]) => `<article class="card"><h3>${esc(label)}</h3><div class="metric-value">${Number(counts[key] || 0)}</div></article>`).join("");
+        stateEl.className = "state ok";
+        stateEl.textContent = "Dashboard is ready. Pick any CMS module from the sidebar.";
+      } catch (error) {
+        stateEl.className = "state error";
+        stateEl.innerHTML = `${esc(error.message)} <button class="btn" type="button" data-retry="overview">Retry</button>`;
+      }
+    }
+
+    function renderModule(mod, force = false) {
+      const host = document.getElementById("moduleHost");
+      host.innerHTML = `
+        <div class="panel">
+          <div class="module-intro">
+            <div>
+              <h2>${esc(mod.label)}</h2>
+              <p>${esc(mod.description)}</p>
+            </div>
+            <span class="chip muted">Approval required</span>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><h3>${esc(mod.formTitle || "Propose CMS Change")}</h3></div>
+          <form class="submission-form" id="cmsForm">
+            <div class="field">
+              <label>Target collection</label>
+              <select name="targetCollection">${mod.collections.map((item) => `<option value="${esc(item.value)}">${esc(item.label)}</option>`).join("")}</select>
+            </div>
+            <div class="field">
+              <label>Document ID</label>
+              <input name="targetId" required placeholder="existing-id-or-new-slug" />
+              <span class="field-help">Use an existing record ID to edit, or a new slug to create.</span>
+            </div>
+            <div class="field">
+              <label>Change note</label>
+              <input name="supportNote" placeholder="Short reason for CEO" />
+            </div>
+            ${renderAdminSections(mod)}
+            <div class="full">
+              <label>Advanced JSON</label>
+              <textarea name="extraJson" placeholder="${esc(jsonPlaceholder(mod.extraPlaceholder || "{}"))}"></textarea>
+              <span class="field-help">Use this for arrays, nested objects, FAQs, rules, winners, page blocks, and any admin-only fields not shown above.</span>
+            </div>
+            <div class="full form-actions">
+              <button class="btn primary" type="submit">Send to CEO Approval</button>
+              <button class="btn" type="button" data-new-record>New Blank Record</button>
+              <button class="btn" type="button" data-clear-form>Clear</button>
+              <span class="state" data-form-state></span>
+            </div>
+          </form>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><h3>${esc(mod.listTitle || `Current ${mod.label} Records`)}</h3></div>
+          <div id="cmsState" class="state">Loading live data...</div>
+          <div class="table-wrap" id="cmsTable"></div>
+        </div>
+      `;
+      document.getElementById("cmsForm").addEventListener("submit", (event) => submitCmsForm(event, mod));
+      host.querySelector("[data-clear-form]").addEventListener("click", () => host.querySelector("form").reset());
+      host.querySelector("[data-new-record]").addEventListener("click", () => {
+        const form = host.querySelector("form");
+        form.reset();
+        form.elements.targetId.focus();
+        setFormState("Enter a new document ID/slug, then fill the section fields. It will still go to CEO approval.", "ok");
+      });
+      loadModuleRows(mod, force);
+    }
+
+    function renderField(field) {
+      const cls = `field ${field.className || ""}`.trim();
+      const type = field.type || "text";
+      const help = field.help ? `<span class="field-help">${esc(field.help)}</span>` : "";
+      if (type === "checkbox") {
+        return `<div class="${esc(cls)}"><label class="checkbox-label"><input name="${esc(field.name)}" type="checkbox" ${field.checked ? "checked" : ""} /> ${esc(field.label)}</label>${help}</div>`;
+      }
+      if (type === "textarea") {
+        return `<div class="${esc(cls)}"><label>${esc(field.label)}</label><textarea name="${esc(field.name)}" placeholder="${esc(textareaPlaceholder(field))}"></textarea>${help}</div>`;
+      }
+      if (type === "select") {
+        return `<div class="${esc(cls)}"><label>${esc(field.label)}</label><select name="${esc(field.name)}">${(field.options || []).map((option) => `<option value="${esc(option)}">${esc(option || "No change")}</option>`).join("")}</select>${help}</div>`;
+      }
+      return `<div class="${esc(cls)}"><label>${esc(field.label)}</label><input name="${esc(field.name)}" type="${esc(type)}" placeholder="${esc(inputPlaceholder(field))}" />${help}</div>`;
+    }
+
+    function renderAdminSections(mod) {
+      const sections = mod.sections || [{ title: mod.formTitle || "Details", fields: mod.fields || [] }];
+      return sections.map((section) => `
+        <div class="module-section ${section.className || ""}">
+          <div class="panel-head"><h3>${esc(section.title)}</h3>${section.actionText ? `<button class="btn" type="button" disabled>${esc(section.actionText)}</button>` : ""}</div>
+          ${section.hint ? `<div class="small" style="margin-bottom:10px">${esc(section.hint)}</div>` : ""}
+          <div class="${section.gridClass || "section-grid"}">${(section.fields || []).map(renderField).join("")}</div>
+        </div>
+      `).join("");
+    }
+
+    function allFields(mod) {
+      if (Array.isArray(mod.sections)) return mod.sections.flatMap((section) => section.fields || []);
+      return mod.fields || [];
+    }
+
+    function normalizeFormValue(value, field) {
+      const raw = String(value ?? "").trim();
+      if (!raw) return undefined;
+      if (field?.parser === "csv") return raw.split(",").map((item) => item.trim()).filter(Boolean);
+      if (field?.parser === "lines") return raw.split(/\n+/).map((item) => item.trim()).filter(Boolean);
+      if (field?.type === "number") {
+        const n = Number(raw);
+        return Number.isFinite(n) ? n : raw;
+      }
+      if (raw === "true") return true;
+      if (raw === "false") return false;
+      return raw;
+    }
+
+    async function submitCmsForm(event, mod) {
+      event.preventDefault();
+      const form = event.currentTarget;
+      const formState = form.querySelector("[data-form-state]");
+      const values = collectFormValues(form);
+      formState.className = "state";
+      formState.textContent = "Queueing change...";
+      try {
+        const proposedChanges = {};
+        for (const field of allFields(mod)) {
+          const value = field.type === "checkbox"
+            ? checkboxValue(form, field.name)
+            : normalizeFormValue(values[field.name], field);
+          if (value !== undefined) setChangeValue(proposedChanges, field.target || field.name, value, field);
+        }
+        applyModuleTransforms(mod, proposedChanges, values, form);
+        if (String(values.supportNote || "").trim()) proposedChanges.supportNote = String(values.supportNote).trim();
+        const extraRaw = String(values.extraJson || "").trim();
+        if (extraRaw) Object.assign(proposedChanges, JSON.parse(extraRaw));
+        if (!Object.keys(proposedChanges).length) throw new Error("Add at least one field or Advanced JSON change.");
+        await api("/api/support-submissions", {
+          method: "POST",
+          body: JSON.stringify({
+            submissionType: "cms_update",
+            targetCollection: values.targetCollection,
+            targetId: values.targetId,
+            proposedChanges
+          })
+        });
+        formState.className = "state ok";
+        formState.textContent = "Queued for CEO approval. Nothing was published directly.";
+        form.reset();
+        state.delete("submissions");
+      } catch (error) {
+        formState.className = "state error";
+        formState.textContent = error instanceof SyntaxError ? "Advanced JSON must be valid JSON." : error.message;
+      }
+    }
+
+    function collectFormValues(form) {
+      const out = {};
+      for (const [key, value] of new FormData(form).entries()) {
+        const next = String(value || "");
+        if (next.trim() || out[key] === undefined) out[key] = next;
+      }
+      return out;
+    }
+
+    function checkboxValue(form, name) {
+      return Array.from(form.querySelectorAll(`input[type="checkbox"][name="${CSS.escape(name)}"]`)).some((input) => input.checked);
+    }
+
+    function setChangeValue(target, path, value, field = {}) {
+      if (field.parser === "json") {
+        value = JSON.parse(String(value || "null"));
+      }
+      if (!path.includes(".")) {
+        target[path] = value;
+        return;
+      }
+      const parts = path.split(".").filter(Boolean);
+      let cursor = target;
+      for (const part of parts.slice(0, -1)) {
+        if (!cursor[part] || typeof cursor[part] !== "object" || Array.isArray(cursor[part])) cursor[part] = {};
+        cursor = cursor[part];
+      }
+      cursor[parts[parts.length - 1]] = value;
+    }
+
+    function applyModuleTransforms(mod, proposedChanges, values) {
+      if (mod.articleLike) {
+        const paragraphs = [];
+        for (let i = 1; i <= 6; i++) {
+          const textValue = String(values[`paragraph${i}`] || "").trim();
+          if (textValue) paragraphs.push(textValue);
+        }
+        if (paragraphs.length) proposedChanges.content = paragraphs.join("\n\n");
+      }
+      if (values.keepReading) {
+        proposedChanges.keepReading = String(values.keepReading).split(",").map((item) => item.trim()).filter(Boolean).join(",");
+      }
+    }
+
+    async function stableLoad(key, url, stateId, render, force = false) {
+      const current = state.get(key) || { rows: [], loaded: false, seq: 0 };
+      if (current.loaded && !force) return render(current.rows);
+      const seq = ++requestSeq;
+      current.seq = seq;
+      state.set(key, current);
+      const stateEl = document.getElementById(stateId);
+      stateEl.className = "state";
+      stateEl.textContent = current.loaded ? "Refreshing live data..." : "Loading live data...";
+      try {
+        const data = await api(url);
+        if (current.seq !== seq) return;
+        const rows = Array.isArray(data.rows) ? data.rows : [];
+        current.rows = rows;
+        current.loaded = true;
+        stateEl.className = "state";
+        stateEl.textContent = rows.length ? `${rows.length} live records loaded.` : "No records found.";
+        render(rows);
+      } catch (error) {
+        if (current.seq !== seq) return;
+        stateEl.className = "state error";
+        stateEl.innerHTML = `${esc(error.message)} <button class="btn" type="button" data-retry="${esc(activeRoute)}">Retry</button>`;
+        if (current.rows.length) render(current.rows);
+      }
+    }
+
+    function loadModuleRows(mod, force = false) {
+      return stableLoad(`module:${mod.workspace}`, `/api/support-workspace?collection=${encodeURIComponent(mod.workspace)}&limit=500`, "cmsState", (rows) => renderRecords(mod, rows), force);
+    }
+
+    function renderRecords(mod, rows) {
+      const tableEl = document.getElementById("cmsTable");
+      activeModuleRows = rows;
+      if (!rows.length) {
+        tableEl.innerHTML = "";
+        return;
+      }
+      tableEl.innerHTML = `
+        <table>
+          <thead><tr><th>Collection</th><th>Record</th><th>Status</th><th>Updated</th><th>Action</th></tr></thead>
+          <tbody>
+            ${rows.map((row, index) => `
+              <tr>
+                <td>${esc(row._workspaceCollection || mod.collections[0].value)}</td>
+                <td><div class="record-title">${esc(text(row, ["title","name","firmName","firm","slug","id"]))}</div><div class="record-meta">${esc(row.id)}</div></td>
+                <td>${esc(text(row, ["status","publishState"], row.active === false ? "inactive" : "active"))}</td>
+                <td>${esc(date(row.updatedAt || row.createdAt || row.created_at))}</td>
+                <td><button class="btn" type="button" data-use-record="${index}" data-record-id="${esc(row.id)}" data-collection="${esc(row._workspaceCollection || mod.collections[0].value)}">Edit / Fill Form</button></td>
+              </tr>
+            `).join("")}
+          </tbody>
+        </table>
+      `;
+    }
+
+    function setFormState(message, tone = "") {
+      const el = document.querySelector("#cmsForm [data-form-state]");
+      if (!el) return;
+      el.className = `state ${tone}`.trim();
+      el.textContent = message;
+    }
+
+    function getByPath(row, path) {
+      if (!row || !path) return undefined;
+      const parts = String(path).split(".").filter(Boolean);
+      let cursor = row;
+      for (const part of parts) {
+        if (cursor == null || typeof cursor !== "object" || !(part in cursor)) return undefined;
+        cursor = cursor[part];
+      }
+      return cursor;
+    }
+
+    function setElementsValue(form, name, value, field = {}) {
+      const elements = Array.from(form.querySelectorAll(`[name="${CSS.escape(name)}"]`));
+      if (!elements.length) return;
+      for (const element of elements) {
+        if (element.type === "checkbox") {
+          element.checked = Boolean(value);
+          continue;
+        }
+        const formatted = formatFieldValue(value, field);
+        if (element.tagName === "SELECT") {
+          const hasOption = Array.from(element.options).some((option) => option.value === String(formatted));
+          if (hasOption) element.value = String(formatted);
+          continue;
+        }
+        element.value = formatted;
+      }
+    }
+
+    function formatFieldValue(value, field = {}) {
+      if (value === undefined || value === null) return "";
+      if (field.type === "datetime-local") return toDateTimeLocal(value);
+      if (field.parser === "json") return JSON.stringify(value, null, 2);
+      if (field.parser === "csv") return Array.isArray(value) ? value.join(", ") : String(value);
+      if (field.parser === "lines") return Array.isArray(value) ? value.join("\n") : String(value);
+      if (typeof value === "object") return JSON.stringify(value, null, 2);
+      return String(value);
+    }
+
+    function toDateTimeLocal(value) {
+      const raw = value?.seconds ? value.seconds * 1000 : value;
+      const dateValue = new Date(raw || 0);
+      if (Number.isNaN(dateValue.getTime())) return "";
+      const pad = (num) => String(num).padStart(2, "0");
+      return `${dateValue.getFullYear()}-${pad(dateValue.getMonth() + 1)}-${pad(dateValue.getDate())}T${pad(dateValue.getHours())}:${pad(dateValue.getMinutes())}`;
+    }
+
+    function getRecordValue(row, field, paragraphCache) {
+      const path = field.target || field.name;
+      let value = getByPath(row, path);
+      if (value !== undefined) return value;
+      if (field.name === "teamReviewProfile" && row._workspaceCollection === "firmReviewProfiles") {
+        const copy = { ...row };
+        delete copy.id;
+        delete copy._workspaceCollection;
+        delete copy.createdAt;
+        delete copy.updatedAt;
+        return copy;
+      }
+      if (field.name === "ctaLabel") return getByPath(row, "cta.label");
+      if (field.name === "ctaUrl") return getByPath(row, "cta.url");
+      if (field.name === "code") return row.couponCode || row.coupon || "";
+      if (field.name === "discount") return row.discount || row.discountPct || "";
+      if (field.name === "thumbUrl") return row.thumbUrl || row.coverImage || row.thumbnailUrl || "";
+      if (field.name === "youtubeUrl") return row.youtubeUrl || row.videoUrl || row.url || "";
+      if (field.name === "score") return row.score ?? row.averageRating;
+      if (field.name === "useManualRatingOverride") return row.useManualOverride;
+      if (field.name === "manualRating") return row.manualRating ?? row.manualAverageRating;
+      if (field.name === "manualReviewCount") return row.manualReviewCount;
+      if (field.name === "metaMarkets") return row.metaMarkets;
+      if (field.name === "tags") return row.tags;
+      if (field.name === "markets") return row.markets;
+      if (field.name === "paymentMethods") return row.paymentMethods;
+      if (field.name === "restrictedCountries") return row.restrictedCountries;
+      if (field.name === "whyChoose") return row.whyChoose;
+      const paragraphMatch = String(field.name).match(/^paragraph([1-6])$/);
+      if (paragraphMatch) return paragraphCache[Number(paragraphMatch[1]) - 1] || "";
+      return undefined;
+    }
+
+    function populateFormFromRecord(mod, row = {}) {
+      const form = document.getElementById("cmsForm");
+      if (!form) return;
+      form.reset();
+      const collectionName = row._workspaceCollection || mod.collections[0]?.value || "";
+      setElementsValue(form, "targetCollection", collectionName);
+      setElementsValue(form, "targetId", row.id || row.slug || "");
+      const paragraphCache = String(row.content || "").split(/\n\s*\n/).map((item) => item.trim()).filter(Boolean).slice(0, 6);
+      for (const field of allFields(mod)) {
+        const value = getRecordValue(row, field, paragraphCache);
+        if (value !== undefined) setElementsValue(form, field.name, value, field);
+      }
+      const rawCopy = { ...row };
+      delete rawCopy.id;
+      delete rawCopy._workspaceCollection;
+      delete rawCopy.createdAt;
+      delete rawCopy.updatedAt;
+      const extra = form.elements.extraJson;
+      if (extra) extra.value = "";
+      setFormState(`Loaded ${collectionName}/${row.id || ""}. Edit fields and send to CEO approval.`, "ok");
+      form.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    async function loadSubmissions(force = false) {
+      return stableLoad("submissions", "/api/support-submissions", "submissionsState", renderSubmissions, force);
+    }
+
+    function renderSubmissions(rows) {
+      const host = document.getElementById("submissionsList");
+      if (!rows.length) {
+        host.innerHTML = "";
+        return;
+      }
+      host.innerHTML = rows.map((row) => `
+        <article class="pending-item">
+          <div class="module-intro">
+            <div>
+              <h3>${esc(row.target_collection || "-")} / ${esc(row.target_id || "-")}</h3>
+              <div class="small">${esc(row.submission_type || "-")} | ${esc(row.status || "-")} | ${esc(date(row.created_at))}</div>
+            </div>
+            <span class="chip muted">${esc(row.status || "pending")}</span>
+          </div>
+          <pre class="json-preview">${esc(JSON.stringify(row.proposed_changes || {}, null, 2))}</pre>
+        </article>
+      `).join("");
+    }
+
+    document.addEventListener("click", (event) => {
+      const retry = event.target.closest("[data-retry]");
+      if (retry) loadRoute(retry.dataset.retry, true);
+      const useButton = event.target.closest("[data-use-record]");
+      if (useButton) {
+        const row = activeModuleRows[Number(useButton.dataset.useRecord || -1)];
+        if (row) populateFormFromRecord(MODULES[activeModuleKey], row);
+      }
+    });
+
+    onAuthStateChanged(firebaseAuth, () => restore());
+    restore();
+  </script>
+<script type="module" src="/site-performance.js"></script>
+</body>
+</html>

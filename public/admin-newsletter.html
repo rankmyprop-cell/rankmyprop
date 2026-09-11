@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+<meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                                                                                                                                                                  <meta property="og:image:height" content="630" />
+                                                                                                                                                        <meta property="og:image:width" content="1200" />
+<meta name="twitter:image" content="https://www.rankmyprop.in/assets/og-default-1200x630.webp" />
+<meta property="og:image" content="https://www.rankmyprop.in/assets/og-default-1200x630.webp" />
+<meta name="theme-color" content="#0a0b12" />
+                                                                                                                                                                                                                                                                                                                                                                                                <meta name="robots" content="noindex, nofollow" />
+  <title>Newsletter Admin | Rank My Prop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght%40300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/dashboard-layout.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-dot"></span><b>RMP Admin</b></div>
+      <a class="side-link" href="/dashboard-admin">Admin Home</a>
+      <a class="side-link" href="/admin-clients">Client Access</a>
+      <a class="side-link" href="/admin-moderation">Moderation</a>
+      <a class="side-link" href="/admin-purchases">Purchases</a>
+      <a class="side-link" href="/admin-announcements">Announcement Hub</a>
+      <a class="side-link" href="/admin-community">Community Posts</a>
+      <a class="side-link" href="/admin-giveaways">Giveaways CMS</a>
+      <a class="side-link" href="/admin-events">Upcoming Events</a>
+      <a class="side-link" href="/admin-offers">Offers Control</a>
+      <a class="side-link" href="/admin-filters">Filters Control</a>
+      <a class="side-link" href="/admin-propnews">Prop News CMS</a>
+      <a class="side-link" href="/admin-trading-guides">Trading Guides CMS</a>
+      <a class="side-link" href="/admin-funding-strategies">Funding Strategies CMS</a>
+      <a class="side-link" href="/admin-trading-psychology">Trading Psychology CMS</a>
+      <a class="side-link" href="/admin-beginner-tutorials">Beginner Tutorials CMS</a>
+      <a class="side-link" href="/admin-activity">Recent Activity</a>
+      <a class="side-link active" href="/admin-newsletter">Newsletter</a>
+      <a class="side-link" href="#" id="logoutBtn">Log out</a>
+    </aside>
+
+    <main class="main">
+      <header class="top">
+        <div>
+          <h3>Newsletter</h3>
+          <div class="welcome">View subscribers and export emails as Copy / CSV / PDF.</div>
+        </div>
+        <div class="top-actions"><span class="chip" id="adminEmail">loading...</span></div>
+      </header>
+
+      <div class="chip" id="notice" style="display:none;"></div>
+
+      <section class="panel">
+        <div class="panel-head"><h3>Subscribers</h3></div>
+        <div class="top-actions" style="justify-content:flex-start;gap:8px;flex-wrap:wrap;margin-bottom:10px">
+          <input id="searchInput" placeholder="Search email..." style="max-width:260px" />
+          <select id="sortSelect" style="max-width:220px">
+            <option value="latest">Latest</option>
+            <option value="oldest">Oldest</option>
+            <option value="email_asc">Email A-Z</option>
+            <option value="email_desc">Email Z-A</option>
+          </select>
+          <button class="btn" id="copyBtn" type="button">Copy Emails</button>
+          <button class="btn" id="csvBtn" type="button">Export CSV</button>
+          <button class="btn" id="pdfBtn" type="button">Export PDF</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Email</th><th>Source</th><th>Status</th><th>Subscribed At</th></tr></thead>
+            <tbody id="rowsBody"><tr><td colspan="4" class="empty">Loading subscribers...</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module">
+    import { bindLogout, enforceAdmin, showNotice } from "./admin-common.js";
+
+    const notice = document.getElementById("notice");
+    const rowsBody = document.getElementById("rowsBody");
+    const searchInput = document.getElementById("searchInput");
+    const sortSelect = document.getElementById("sortSelect");
+    const copyBtn = document.getElementById("copyBtn");
+    const csvBtn = document.getElementById("csvBtn");
+    const pdfBtn = document.getElementById("pdfBtn");
+
+    let rows = [];
+
+    function tsMs(v) {
+      if (!v) return 0;
+      if (v?.toDate) return v.toDate().getTime();
+      if (typeof v?.seconds === "number") return v.seconds * 1000;
+      const n = Date.parse(v);
+      return Number.isFinite(n) ? n : 0;
+    }
+
+    function fmtDate(v) {
+      const ms = tsMs(v);
+      if (!ms) return "-";
+      return new Date(ms).toISOString().slice(0, 19).replace("T", " ");
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "").replace(/[&<>'"]/g, (char) => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;"
+      })[char]);
+    }
+
+    function getVisibleRows() {
+      const q = String(searchInput.value || "").trim().toLowerCase();
+      const mode = String(sortSelect.value || "latest");
+      let out = [...rows];
+      if (q) out = out.filter((r) => String(r.email || "").toLowerCase().includes(q));
+      if (mode === "oldest") out.sort((a, b) => tsMs(a.createdAt) - tsMs(b.createdAt));
+      else if (mode === "email_asc") out.sort((a, b) => String(a.email || "").localeCompare(String(b.email || "")));
+      else if (mode === "email_desc") out.sort((a, b) => String(b.email || "").localeCompare(String(a.email || "")));
+      else out.sort((a, b) => tsMs(b.createdAt) - tsMs(a.createdAt));
+      return out;
+    }
+
+    function render() {
+      const visible = getVisibleRows();
+      rowsBody.innerHTML = visible.length ? visible.map((r) => `
+        <tr>
+          <td>${escapeHtml(r.email || "-")}</td>
+          <td>${escapeHtml(r.source || "-")}</td>
+          <td>${escapeHtml(r.status || "active")}</td>
+          <td>${fmtDate(r.createdAt)}</td>
+        </tr>
+      `).join("") : '<tr><td colspan="4" class="empty">No subscribers found.</td></tr>';
+    }
+
+    async function loadRows(user) {
+      try {
+        const token = await user.getIdToken(true);
+        const response = await fetch("/api/newsletter-subscribe", {
+          headers: { Authorization: `Bearer ${token}` },
+          cache: "no-store"
+        });
+        const payload = await response.json().catch(() => ({}));
+        if (!response.ok || !Array.isArray(payload?.rows)) {
+          throw new Error(payload?.error || "Could not load subscribers.");
+        }
+        rows = payload.rows;
+        render();
+      } catch (error) {
+        rowsBody.innerHTML = '<tr><td colspan="4" class="empty">Could not load subscribers.</td></tr>';
+        showNotice(notice, error?.message || "Could not load subscribers.", "error");
+      }
+    }
+
+    function exportCsv() {
+      const visible = getVisibleRows();
+      const lines = ["email,subscribed_at"];
+      visible.forEach((r) => lines.push(`\"${String(r.email || "").replace(/\"/g, '\"\"')}\",\"${fmtDate(r.createdAt)}\"`));
+      const blob = new Blob([lines.join("\\n")], { type: "text/csv;charset=utf-8;" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "newsletter-subscribers.csv";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(a.href);
+    }
+
+    async function ensureJsPdf() {
+      if (window.jspdf?.jsPDF) return window.jspdf.jsPDF;
+      await new Promise((resolve, reject) => {
+        const s = document.createElement("script");
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js";
+        s.onload = resolve;
+        s.onerror = reject;
+        document.head.appendChild(s);
+      });
+      return window.jspdf?.jsPDF || null;
+    }
+
+    async function exportPdf() {
+      const JsPdf = await ensureJsPdf();
+      if (!JsPdf) {
+        showNotice(notice, "PDF library failed to load.", "error");
+        return;
+      }
+      const doc = new JsPdf({ unit: "pt", format: "a4" });
+      const visible = getVisibleRows();
+      let y = 40;
+      doc.setFontSize(14);
+      doc.text("Newsletter Subscribers", 40, y);
+      y += 22;
+      doc.setFontSize(10);
+      visible.forEach((r, i) => {
+        if (y > 790) {
+          doc.addPage();
+          y = 40;
+        }
+        doc.text(`${i + 1}. ${String(r.email || "-")} | ${fmtDate(r.createdAt)}`, 40, y);
+        y += 14;
+      });
+      doc.save("newsletter-subscribers.pdf");
+    }
+
+    bindLogout("logoutBtn");
+
+    searchInput.addEventListener("input", render);
+    sortSelect.addEventListener("change", render);
+    copyBtn.addEventListener("click", async () => {
+      const emails = getVisibleRows().map((r) => String(r.email || "").trim()).filter(Boolean);
+      if (!emails.length) return showNotice(notice, "No emails to copy.", "error");
+      try {
+        await navigator.clipboard.writeText(emails.join("\\n"));
+        showNotice(notice, "Emails copied.");
+      } catch (_) {
+        showNotice(notice, "Clipboard permission denied.", "error");
+      }
+    });
+    csvBtn.addEventListener("click", exportCsv);
+    pdfBtn.addEventListener("click", exportPdf);
+
+    enforceAdmin(async (user) => {
+      document.getElementById("adminEmail").textContent = user.email || "Admin";
+      await loadRows(user);
+    });
+  </script>
+<script defer src="admin-shell.js"></script>
+  <script type="module" src="/site-performance.js"></script>
+</body>
+</html>

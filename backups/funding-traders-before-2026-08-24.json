@@ -1,0 +1,7 @@
+{
+  "capturedAt": "2026-08-24",
+  "record": "funding-traders",
+  "existsBeforeChange": false,
+  "checkedSlugs": ["funding-traders", "fundingtraders", "funding-trader"],
+  "restoreAction": "Delete the funding-traders documents created in firms, firmReviewProfiles, and firmRatingStats."
+}

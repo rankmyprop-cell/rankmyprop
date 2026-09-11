@@ -1,0 +1,22 @@
+{
+  "preparedAt": "2026-08-24",
+  "record": "funding-traders",
+  "mode": "rules-and-reviews-only",
+  "visibility": {
+    "showFirmProfile": false,
+    "showHomeTable": false,
+    "showListed": false,
+    "showBestGlobal": false,
+    "showRules": true,
+    "showReviews": true,
+    "showOffers": false,
+    "active": true,
+    "publishState": "published"
+  },
+  "sourceFiles": [
+    "/Users/theforexclue/Downloads/Funding Traders 1-Step & 2-Step  & Instant.pdf",
+    "/Users/theforexclue/Downloads/FundingTraders_Research.xlsx"
+  ],
+  "programs": ["1-Step Pro", "2-Step Pro", "Instant Funded"],
+  "editorPolicy": "The PDF is authoritative for model-specific values. Workbook-only details and firm-wide rules are included without overriding the PDF. Nil placeholders, research instructions, unavailable Trustpilot ratings, conflicting summary dates, and unsupported claims are not published as facts. Missing model values are shown as Not mentioned."
+}

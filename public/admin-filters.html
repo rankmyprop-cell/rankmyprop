@@ -1,0 +1,177 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+<meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                                                                                                                                                                  <meta property="og:image:height" content="630" />
+                                                                                                                                                        <meta property="og:image:width" content="1200" />
+<meta name="twitter:image" content="https://www.rankmyprop.in/assets/og-default-1200x630.webp" />
+<meta property="og:image" content="https://www.rankmyprop.in/assets/og-default-1200x630.webp" />
+<meta name="description" content="Filter Options Admin | Rank My Prop" />
+<meta name="theme-color" content="#0a0b12" />
+                                                                                                                                                                                                                                                                                                                                                                                                <meta name="robots" content="noindex, nofollow" />
+  <title>Filter Options Admin | Rank My Prop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght%40300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/dashboard-layout.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-dot"></span><b>RMP Admin</b></div>
+      <div class="menu-group-title">Admin Modules</div>
+      <a class="side-link" href="/dashboard-admin">Admin Home</a>
+      <a class="side-link" href="/admin-clients">Client Access</a>
+      <a class="side-link" href="/admin-moderation">Moderation</a>
+      <a class="side-link" href="/admin-purchases">Purchases</a>
+      <a class="side-link" href="/admin-announcements">Announcement Hub</a>
+      <a class="side-link" href="/admin-community">Community Posts</a>
+      <a class="side-link" href="/admin-giveaways">Giveaways CMS</a>
+      <a class="side-link" href="/admin-events">Upcoming Events</a>
+      <a class="side-link" href="/admin-offers">Offers Control</a>
+      <a class="side-link" href="/admin-firm-details">Firm Detail CMS</a>
+      <a class="side-link active" href="/admin-filters">Filters Control</a>
+      <a class="side-link" href="/admin-propnews">Prop News CMS</a>
+      <a class="side-link" href="/admin-trading-guides">Trading Guides CMS</a>
+      <a class="side-link" href="/admin-funding-strategies">Funding Strategies CMS</a>
+      <a class="side-link" href="/admin-trading-psychology">Trading Psychology CMS</a>
+      <a class="side-link" href="/admin-beginner-tutorials">Beginner Tutorials CMS</a>
+      <a class="side-link" href="/admin-firm-details">Firm Detail CMS</a>
+      <a class="side-link" href="/admin-faqs">FAQ CMS</a>
+      <a class="side-link" href="#" id="logoutBtn">Log out</a>
+    </aside>
+
+    <main class="main">
+      <header class="top">
+        <div>
+          <h3>Filter Options</h3>
+          <div class="welcome">Manage country, tag, and sort filter options for Listed & Best Prop pages.</div>
+        </div>
+        <div class="top-actions"><span class="chip" id="adminEmail">loading...</span></div>
+      </header>
+      <div class="chip" id="notice" style="display:none;"></div>
+
+      <section class="panel">
+        <div class="panel-head"><h3>Listed Props Filters</h3></div>
+        <form id="listedForm" class="form-grid">
+          <div class="field full"><label>Countries (comma)</label><textarea name="countries" placeholder="Global, USA, UK, UAE"></textarea></div>
+          <div class="field full"><label>Tags (comma)</label><textarea name="tags" placeholder="HFT, Non-HFT, Futures, Crypto"></textarea></div>
+          <div class="full top-actions">
+            <button class="btn-primary" type="submit">Save Listed Filters</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><h3>Best Prop Firms Filters</h3></div>
+        <form id="bestForm" class="form-grid">
+          <div class="field full"><label>Countries (comma)</label><textarea name="countries" placeholder="Global, USA, UK, UAE"></textarea></div>
+          <div class="field full"><label>Tags (comma)</label><textarea name="tags" placeholder="HFT, Non-HFT, Futures, Crypto"></textarea></div>
+          <div class="full top-actions">
+            <button class="btn-primary" type="submit">Save Best Filters</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><h3>Sort Options</h3></div>
+        <form id="sortForm" class="form-grid">
+          <div class="field full">
+            <label>Sort Options (one per line: value|label)</label>
+            <textarea name="sortOptions" placeholder="ranking|Sort: Ranking&#10;name|Sort: Name&#10;followers|Sort: Followers"></textarea>
+          </div>
+          <div class="full top-actions">
+            <button class="btn-primary" type="submit">Save Sort Options</button>
+          </div>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <script type="module">
+    import { doc, getDoc, serverTimestamp, setDoc } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+    import { db } from "./dashboard-common.js";
+    import { bindLogout, enforceAdmin, showNotice } from "./admin-common.js";
+
+    const notice = document.getElementById("notice");
+    const listedForm = document.getElementById("listedForm");
+    const bestForm = document.getElementById("bestForm");
+    const sortForm = document.getElementById("sortForm");
+
+    function parseCsv(text = "") {
+      return String(text).split(",").map((x) => x.trim()).filter(Boolean);
+    }
+
+    function parseSortOptions(text = "") {
+      const rows = String(text).split(/\n+/).map((x) => x.trim()).filter(Boolean);
+      const out = [];
+      for (const r of rows) {
+        const [value, label] = r.split("|").map((v) => String(v || "").trim());
+        if (value) out.push({ value, label: label || value });
+      }
+      return out;
+    }
+
+    async function loadFilters() {
+      const snap = await getDoc(doc(db, "firmFilters", "default"));
+      if (!snap.exists()) return;
+      const data = snap.data() || {};
+      listedForm.elements.namedItem("countries").value = (data.listedCountries || []).join(", ");
+      listedForm.elements.namedItem("tags").value = (data.listedTags || []).join(", ");
+      bestForm.elements.namedItem("countries").value = (data.bestCountries || []).join(", ");
+      bestForm.elements.namedItem("tags").value = (data.bestTags || []).join(", ");
+
+      const sortLines = (data.sortOptions || []).map((o) => `${o.value}|${o.label}`).join("\n");
+      sortForm.elements.namedItem("sortOptions").value = sortLines;
+    }
+
+    listedForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const payload = {
+        listedCountries: parseCsv(listedForm.elements.namedItem("countries").value),
+        listedTags: parseCsv(listedForm.elements.namedItem("tags").value),
+        updatedAt: serverTimestamp()
+      };
+      await setDoc(doc(db, "firmFilters", "default"), payload, { merge: true });
+      showNotice(notice, "Listed filters saved.");
+    });
+
+    bestForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const payload = {
+        bestCountries: parseCsv(bestForm.elements.namedItem("countries").value),
+        bestTags: parseCsv(bestForm.elements.namedItem("tags").value),
+        updatedAt: serverTimestamp()
+      };
+      await setDoc(doc(db, "firmFilters", "default"), payload, { merge: true });
+      showNotice(notice, "Best filters saved.");
+    });
+
+    sortForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const payload = {
+        sortOptions: parseSortOptions(sortForm.elements.namedItem("sortOptions").value),
+        updatedAt: serverTimestamp()
+      };
+      await setDoc(doc(db, "firmFilters", "default"), payload, { merge: true });
+      showNotice(notice, "Sort options saved.");
+    });
+
+    bindLogout("logoutBtn");
+    enforceAdmin(async (user) => {
+      document.getElementById("adminEmail").textContent = user.email || "Admin";
+      await loadFilters();
+    });
+  </script>
+  <script defer src="admin-richtext.js"></script>
+<script defer src="admin-shell.js"></script>
+  <script type="module" src="/site-performance.js"></script>
+</body>
+</html>
+
+

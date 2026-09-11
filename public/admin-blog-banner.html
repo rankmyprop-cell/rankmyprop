@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#0a0b12" />
+  <title>Blog Sidebar Banner | Rank My Prop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/dashboard-layout.css" />
+  <style>
+    .banner-panel{max-width:980px}
+    .banner-grid{display:grid;grid-template-columns:minmax(260px,300px) minmax(0,1fr);gap:28px;align-items:start}
+    .banner-preview{width:100%;aspect-ratio:1 / 2;border:1px dashed rgba(130,102,255,.55);border-radius:12px;overflow:hidden;background:rgba(122,116,255,.05);display:grid;place-items:center;color:#aeb5d6}
+    .banner-preview img{display:none;width:100%;height:100%;object-fit:cover}
+    .banner-preview.has-image img{display:block}.banner-preview.has-image span{display:none}
+    .field{display:grid;gap:8px;margin-bottom:16px}.field label{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#b9b4d2}
+    .field input{width:100%;box-sizing:border-box;border:1px solid rgba(130,102,255,.45);border-radius:10px;background:#191729;color:#f7f5ff;padding:12px 14px;font:inherit}
+    .help{margin:0 0 18px;color:#aeb5d6;line-height:1.65}.upload-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    @media(max-width:760px){.banner-grid{grid-template-columns:1fr}.banner-preview{max-width:300px}}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-dot"></span><b>RMP Admin</b></div>
+      <a class="side-link" href="/dashboard-admin">Admin Home</a>
+      <a class="side-link" href="/admin-propnews">Prop News CMS</a>
+      <a class="side-link active" href="/admin-blog-banner">Blog Sidebar Banner</a>
+      <a class="side-link" href="#" id="logoutBtn">Log out</a>
+    </aside>
+
+    <main class="main">
+      <header class="top">
+        <div>
+          <h3>Blog Sidebar Banner</h3>
+          <div class="welcome">One image shown beneath the article headings on every dedicated blog page.</div>
+        </div>
+        <div class="top-actions"><span class="chip" id="adminEmail">loading...</span></div>
+      </header>
+
+      <div class="chip" id="notice" style="display:none"></div>
+
+      <section class="panel banner-panel">
+        <div class="panel-head"><h3>Global Article Banner</h3></div>
+        <p class="help">Upload one vertical image. It will appear on all Prop News, Trading Guides, Funding Strategies, Trading Psychology and Beginner Tutorials article pages. Recommended size: <strong>300 × 600 px</strong>.</p>
+        <div class="banner-grid">
+          <div class="banner-preview" id="bannerPreview"><span>300 × 600 banner preview</span><img id="bannerPreviewImage" alt="Blog sidebar banner preview" /></div>
+          <form id="bannerForm">
+            <div class="field">
+              <label for="bannerFile">Banner image</label>
+              <input id="bannerFile" type="file" accept="image/png,image/jpeg,image/webp" />
+            </div>
+            <div class="upload-row" style="margin-bottom:16px">
+              <button class="btn" id="uploadButton" type="button">Upload Image</button>
+              <span class="welcome">PNG, JPG or WEBP</span>
+            </div>
+            <div class="field">
+              <label for="imageUrl">Image URL</label>
+              <input id="imageUrl" name="imageUrl" placeholder="Upload an image or paste an HTTPS URL" />
+            </div>
+            <div class="field">
+              <label for="targetUrl">Click destination</label>
+              <input id="targetUrl" name="targetUrl" value="/listedprop" placeholder="/listedprop" />
+            </div>
+            <div class="field">
+              <label for="alt">Image description</label>
+              <input id="alt" name="alt" value="Explore Rank My Prop" placeholder="Explore Rank My Prop" />
+            </div>
+            <div class="upload-row">
+              <button class="btn-primary" type="submit">Save Global Banner</button>
+              <button class="btn-danger" id="removeButton" type="button">Remove Banner</button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module">
+    import { doc, getDoc, serverTimestamp, setDoc } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+    import { db } from "./dashboard-common.js";
+    import { bindLogout, enforceAdmin, showNotice } from "./admin-common.js";
+
+    const SETTINGS_COLLECTION = "siteSettings";
+    const SETTINGS_ID = "blogSidebarBanner";
+    const CLOUDINARY_CLOUD_NAME = "do04yawk7";
+    const CLOUDINARY_UPLOAD_PRESET = "RANKMYPROP";
+    const form = document.getElementById("bannerForm");
+    const fileInput = document.getElementById("bannerFile");
+    const uploadButton = document.getElementById("uploadButton");
+    const removeButton = document.getElementById("removeButton");
+    const imageUrl = document.getElementById("imageUrl");
+    const targetUrl = document.getElementById("targetUrl");
+    const alt = document.getElementById("alt");
+    const preview = document.getElementById("bannerPreview");
+    const previewImage = document.getElementById("bannerPreviewImage");
+    const notice = document.getElementById("notice");
+
+    function renderPreview(url) {
+      const value = String(url || "").trim();
+      previewImage.src = value;
+      preview.classList.toggle("has-image", Boolean(value));
+    }
+
+    async function uploadToCloudinary(file) {
+      const body = new FormData();
+      body.append("file", file);
+      body.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+      body.append("folder", "rmp/blog/sidebar-banner");
+      const response = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, { method: "POST", body });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result?.error?.message || "Banner upload failed");
+      return String(result.secure_url || "").trim();
+    }
+
+    async function loadBanner() {
+      const snap = await getDoc(doc(db, SETTINGS_COLLECTION, SETTINGS_ID));
+      const data = snap.exists() ? snap.data() || {} : {};
+      imageUrl.value = String(data.imageUrl || "");
+      targetUrl.value = String(data.targetUrl || "/listedprop");
+      alt.value = String(data.alt || "Explore Rank My Prop");
+      renderPreview(imageUrl.value);
+    }
+
+    imageUrl.addEventListener("input", () => renderPreview(imageUrl.value));
+    uploadButton.addEventListener("click", async () => {
+      const file = fileInput.files?.[0];
+      if (!file) return showNotice(notice, "Select a banner image first.", "error");
+      uploadButton.disabled = true;
+      uploadButton.textContent = "Uploading…";
+      try {
+        imageUrl.value = await uploadToCloudinary(file);
+        renderPreview(imageUrl.value);
+        showNotice(notice, "Banner image uploaded. Save it to publish globally.");
+      } catch (error) {
+        showNotice(notice, error?.message || "Banner upload failed.", "error");
+      } finally {
+        uploadButton.disabled = false;
+        uploadButton.textContent = "Upload Image";
+      }
+    });
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const url = String(imageUrl.value || "").trim();
+      if (!url) return showNotice(notice, "Upload or add an image URL first.", "error");
+      await setDoc(doc(db, SETTINGS_COLLECTION, SETTINGS_ID), {
+        imageUrl: url,
+        targetUrl: String(targetUrl.value || "/listedprop").trim() || "/listedprop",
+        alt: String(alt.value || "Explore Rank My Prop").trim() || "Explore Rank My Prop",
+        updatedAt: serverTimestamp()
+      }, { merge: true });
+      showNotice(notice, "Global blog banner saved and ready on every article page.");
+    });
+
+    removeButton.addEventListener("click", async () => {
+      await setDoc(doc(db, SETTINGS_COLLECTION, SETTINGS_ID), { imageUrl: "", updatedAt: serverTimestamp() }, { merge: true });
+      imageUrl.value = "";
+      renderPreview("");
+      showNotice(notice, "Global blog banner removed.");
+    });
+
+    bindLogout("logoutBtn");
+    enforceAdmin(async (user) => {
+      document.getElementById("adminEmail").textContent = user.email || "Admin";
+      try { await loadBanner(); } catch (error) { showNotice(notice, "Could not load the current banner.", "error"); }
+    });
+  </script>
+  <script defer src="admin-shell.js"></script>
+  <script defer src="dashboard-mobile-nav.js"></script>
+</body>
+</html>

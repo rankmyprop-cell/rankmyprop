@@ -1,0 +1,1964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+<meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                                                                                                                                                                  <meta property="og:image:height" content="630" />
+                                                                                                                                                        <meta property="og:image:width" content="1200" />
+<meta name="twitter:image" content="https://www.rankmyprop.in/assets/og-default-1200x630.webp" />
+<meta property="og:image" content="https://www.rankmyprop.in/assets/og-default-1200x630.webp" />
+<meta name="theme-color" content="#0a0b12" />
+                                                                                                                                                                                                                                                                                                                                                                                                <meta name="robots" content="noindex, nofollow" />
+  <title>Firm Detail CMS | Rank My Prop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght%40300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/dashboard-layout.css" />
+  <script defer src="/admin-firm-structured.js"></script>
+  <style>
+    .toggle-box{
+      border:1px solid rgba(122,116,255,.28);
+      border-radius:12px;
+      background:rgba(122,116,255,.07);
+      padding:12px;
+      display:grid;
+      gap:10px;
+    }
+    .toggle-main-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(180px,1fr));
+      gap:10px;
+    }
+    .toggle-region-grid{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(140px,1fr));
+      gap:10px;
+    }
+    .toggle-item{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      font-size:13px;
+      color:#e6e9ff;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:10px;
+      padding:8px 10px;
+      min-height:40px;
+      font-weight:600;
+    }
+    .toggle-item input{margin:0}
+    .rules-studio{
+      display:grid;
+      gap:16px;
+    }
+    .rules-studio-bar{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .rules-studio-columns{
+      display:grid;
+      grid-template-columns:minmax(300px,360px) minmax(0,1fr);
+      gap:20px;
+      align-items:start;
+    }
+    .rules-studio-column{
+      display:grid;
+      gap:14px;
+      align-content:start;
+      align-items:start;
+      min-width:0;
+    }
+    .rules-studio-column--shared{
+      position:sticky;
+      top:104px;
+    }
+    .rules-studio-column h4{
+      margin:0;
+      font-size:16px;
+      color:#f3efff;
+      letter-spacing:-.02em;
+    }
+    .rules-studio-column p{
+      margin:6px 0 0;
+      color:#9d96af;
+      font-size:12px;
+      line-height:1.6;
+    }
+    .rules-studio-card{
+      border:1px solid rgba(122,116,255,.18);
+      border-radius:16px;
+      background:rgba(122,116,255,.05);
+      padding:14px;
+      display:grid;
+      gap:12px;
+      width:100%;
+      align-self:start;
+      box-sizing:border-box;
+    }
+    .rules-studio-card-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .rules-studio-card-head strong{
+      display:block;
+      color:#f6f4ff;
+      font-size:14px;
+      margin-top:4px;
+    }
+    .rules-studio-card-head small{
+      color:#9f96b6;
+      font-size:11px;
+    }
+    .rules-studio-mini{
+      padding:8px 10px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,.1);
+      background:rgba(255,255,255,.04);
+      color:#f1ecff;
+      font-size:12px;
+      min-width:160px;
+    }
+    .rules-studio-mini::placeholder{color:#7f7895}
+    .rules-studio-note{
+      width:100%;
+      min-height:72px;
+      resize:vertical;
+    }
+    .rules-studio-rules{
+      display:grid;
+      gap:10px;
+    }
+    .rules-studio-rule{
+      display:grid;
+      grid-template-columns:1fr 2fr auto;
+      gap:10px;
+      align-items:start;
+    }
+    .rules-studio-rule .rules-studio-mini{
+      min-width:0;
+      width:100%;
+    }
+    .rules-studio-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+    .rules-save-message{
+      color:#9d96af;
+      font-size:12px;
+      white-space:nowrap;
+    }
+    .center-save-toast{
+      position:fixed;
+      inset:0;
+      z-index:9999;
+      display:none;
+      place-items:center;
+      pointer-events:none;
+    }
+    .center-save-toast.is-visible{
+      display:grid;
+    }
+    .center-save-toast-card{
+      width:164px;
+      min-height:148px;
+      display:grid;
+      place-items:center;
+      align-content:center;
+      gap:10px;
+      padding:18px;
+      border:1px solid rgba(106,255,176,.5);
+      border-radius:16px;
+      background:rgba(11,25,23,.98);
+      box-shadow:0 20px 60px rgba(0,0,0,.48),0 0 0 6px rgba(34,197,94,.08);
+      color:#e4fff0;
+      font-weight:700;
+      font-size:13px;
+      line-height:1.35;
+      text-align:center;
+      transform:scale(.9);
+      opacity:0;
+      transition:opacity .18s ease,transform .18s ease;
+    }
+    .center-save-toast.is-visible .center-save-toast-card{opacity:1;transform:scale(1)}
+    .center-save-toast-check{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:rgba(34,197,94,.14);color:#73f4ae;font-size:21px}
+    .firm-identity-card{display:grid;grid-template-columns:104px minmax(0,1fr) auto;gap:18px;align-items:center;padding:16px;border:1px solid rgba(122,116,255,.28);border-radius:16px;background:rgba(122,116,255,.07)}
+    .firm-logo-preview{display:grid;width:88px;height:88px;place-items:center;overflow:hidden;border:1px solid rgba(255,255,255,.15);border-radius:18px;background:#11101a;color:#a9a3ba;font-size:18px;font-weight:800}
+    .firm-logo-preview img{width:100%;height:100%;object-fit:contain}
+    .firm-identity-copy{display:grid;gap:7px;min-width:0}.firm-identity-copy strong{font-size:18px;color:#f7f5ff}.firm-identity-copy code{width:max-content;max-width:100%;overflow:hidden;text-overflow:ellipsis;padding:6px 9px;border-radius:8px;background:rgba(0,0,0,.28);color:#bdb5ff}.firm-identity-copy small{color:#9d96af;line-height:1.5}
+    .firm-identity-actions{display:grid;gap:9px;min-width:220px}
+    #newFirmFields[hidden]{display:none}.other-firm-fields{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end;padding-top:4px}
+    .rules-studio-actions .btn,
+    .rules-studio-actions .btn-primary,
+    .rules-studio-actions .btn-danger{
+      min-height:40px;
+    }
+    .rules-studio-empty{
+      padding:14px;
+      border:1px dashed rgba(122,116,255,.22);
+      border-radius:14px;
+      color:#9a93ac;
+      background:rgba(255,255,255,.02);
+      font-size:12px;
+      line-height:1.6;
+    }
+    .rules-studio-advanced{
+      border-top:1px solid rgba(255,255,255,.08);
+      padding-top:10px;
+    }
+    .account-rules-toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+    .account-rules-toolbar .btn{padding:6px 13px;border-radius:999px;font-size:12px}
+    .account-rules-toolbar .rules-save-message{margin-left:auto}
+    .account-rules-editor{display:block;width:100%;min-height:360px;resize:vertical;border:1px solid rgba(151,126,255,.38);border-radius:16px;background:#0d0917;color:#d8d4e5;padding:16px;font:500 15px/1.7 Inter,ui-sans-serif,system-ui,sans-serif;outline:none;box-sizing:border-box}
+    .account-rules-editor:focus{border-color:#8c65ff;box-shadow:0 0 0 3px rgba(124,84,255,.16)}
+    .account-rules-editor::placeholder{color:#918a9f;opacity:1}
+    .account-rules-help{margin:12px 0 0;color:#c8c2d5;font-size:13px;line-height:1.55}
+    @media (max-width: 1100px){
+      .toggle-main-grid{grid-template-columns:repeat(2,minmax(160px,1fr))}
+      .toggle-region-grid{grid-template-columns:repeat(2,minmax(140px,1fr))}
+      .rules-studio-columns{grid-template-columns:1fr}
+      .rules-studio-column--shared{position:static}
+    }
+    @media (max-width: 680px){
+      .toggle-main-grid,.toggle-region-grid{grid-template-columns:1fr}
+      .rules-studio-rule{grid-template-columns:1fr}
+      .rules-studio-card-head{flex-direction:column}
+      .account-rules-toolbar .rules-save-message{width:100%;margin-left:0}
+      .firm-identity-card{grid-template-columns:1fr}.firm-identity-actions{min-width:0}.other-firm-fields{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-dot"></span><b>RMP Admin</b></div>
+      <a class="side-link" href="/dashboard-admin">Admin Home</a>
+      <a class="side-link" href="/admin-clients">Client Access</a>
+      <a class="side-link" href="/admin-moderation">Moderation</a>
+      <a class="side-link" href="/admin-purchases">Purchases</a>
+      <a class="side-link" href="/admin-announcements">Announcement Hub</a>
+      <a class="side-link" href="/admin-community">Community Posts</a>
+      <a class="side-link" href="/admin-giveaways">Giveaways CMS</a>
+      <a class="side-link" href="/admin-events">Upcoming Events</a>
+      <a class="side-link" href="/admin-offers">Offers Control</a>
+      <a class="side-link" href="/admin-filters">Filters Control</a>
+      <a class="side-link" href="/admin-propnews">Prop News CMS</a>
+      <a class="side-link" href="/admin-trading-guides">Trading Guides CMS</a>
+      <a class="side-link" href="/admin-funding-strategies">Funding Strategies CMS</a>
+      <a class="side-link" href="/admin-trading-psychology">Trading Psychology CMS</a>
+      <a class="side-link" href="/admin-beginner-tutorials">Beginner Tutorials CMS</a>
+      <a class="side-link active" href="/admin-firm-details">Firm Detail CMS</a>
+      <a class="side-link" href="/admin-content-cms">Page Copy CMS</a>
+      <a class="side-link" href="/admin-faqs">FAQ CMS</a>
+      <a class="side-link" href="#" id="logoutBtn">Log out</a>
+    </aside>
+
+    <main class="main">
+      <header class="top">
+        <div>
+          <h3>Firm Detail CMS</h3>
+          <div class="welcome">Edit full dedicated detail-page content and panel data from one screen.</div>
+        </div>
+        <div class="top-actions"><span class="chip" id="adminEmail">loading...</span></div>
+      </header>
+      <div class="chip" id="notice" style="display:none;"></div>
+
+      <section class="panel">
+        <div class="panel-head"><h3>Prop Firm Identity</h3></div>
+        <div class="form-grid">
+          <div class="field full">
+            <label>Firm (central unique ID)</label>
+            <select id="firmPicker"></select>
+          </div>
+          <div class="other-firm-fields" id="newFirmFields" hidden>
+            <div class="field"><label>New Firm Name</label><input id="newFirmName" placeholder="Sample Funded" /></div>
+            <div class="field"><label>Unique Firm ID</label><input id="newFirmSlug" placeholder="sample-funded" /></div>
+            <div class="field"><button class="btn" id="createFirmBtn" type="button">Create New Firm</button></div>
+          </div>
+          <div class="field full">
+            <div class="firm-identity-card">
+              <span class="firm-logo-preview" id="firmLogoPreview">RMP</span>
+              <div class="firm-identity-copy"><strong id="identityFirmName">Select a firm</strong><code id="identityFirmId">ID: —</code><small>This ID never changes. The uploaded logo is used everywhere this firm ID appears.</small></div>
+              <div class="firm-identity-actions"><input id="identityLogoFile" name="logoFile" form="detailForm" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml" /><button class="btn-primary" id="saveFirmLogoBtn" type="button">Upload & Save Logo</button><button class="btn-danger" id="deleteFirmBtn" type="button">Delete Selected Firm</button></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><h3>Detail Content</h3></div>
+        <form id="detailForm" class="form-grid">
+          <input type="hidden" name="docId" />
+          <input type="hidden" name="docSlug" />
+          <input type="hidden" name="existingLogo" />
+          <input type="hidden" name="existingBanner" />
+
+          <div class="field"><label>Firm Name</label><input name="name" placeholder="We Fund" /></div>
+          <div class="field"><label>Handle</label><input name="handle" placeholder="@wefund" /></div>
+          <div class="field"><label>Country</label><input name="country" placeholder="Global" /></div>
+          <div class="field"><label>Ranking</label><input name="ranking" type="number" min="1" placeholder="1" /></div>
+
+          <div class="field"><label>Website</label><input name="website" placeholder="https://wefund.com" /></div>
+          <div class="field"><label>Buy Link</label><input name="buyLink" placeholder="https://wefund.com/buy" /></div>
+          <div class="field"><label>Details Link</label><input name="detailsLink" placeholder="/wefund" /></div>
+          <div class="field"><label>Rules Link</label><input name="rulesLink" placeholder="/firm-rules?firm=wefund" /></div>
+          <div class="field"><label>Discount Page</label><input name="discountPage" placeholder="/offers/wefund" /></div>
+          <div class="field"><label>Likes</label><input name="followers" type="number" min="0" placeholder="0" /></div>
+
+          <div class="field"><label>Tags (comma)</label><input name="tagsCsv" placeholder="Forex, HFT" /></div>
+          <div class="field"><label>Markets (comma)</label><input name="marketsCsv" placeholder="Forex, Crypto, Indices" /></div>
+          <div class="field full">
+            <label style="margin-bottom:8px;display:block;">Listing Visibility Toggles</label>
+            <div class="toggle-box">
+              <div class="toggle-main-grid">
+                <label class="toggle-item"><input type="checkbox" name="payoutAssurance" /><span>Payout Assurance Tick</span></label>
+                <label class="toggle-item"><input type="checkbox" name="showFirmProfile" checked /><span>Show Dedicated Firm Profile</span></label>
+                <label class="toggle-item"><input type="checkbox" name="showHomeTable" checked /><span>Show on Home Ranking Table</span></label>
+                <label class="toggle-item"><input type="checkbox" name="showListed" checked /><span>Show in Listed Props</span></label>
+                <label class="toggle-item"><input type="checkbox" name="showBestGlobal" /><span>Show in Best Prop (Global)</span></label>
+                <label class="toggle-item"><input type="checkbox" name="showRules" checked /><span>Show on Rules Pages</span></label>
+                <label class="toggle-item"><input type="checkbox" name="showReviews" checked /><span>Show on Reviews Pages</span></label>
+                <label class="toggle-item"><input type="checkbox" name="showOffers" checked /><span>Show on Offers (when an active offer exists)</span></label>
+              </div>
+              <div class="top-actions">
+                <button class="btn" id="rulesReviewsOffersOnlyBtn" type="button">Preset: Rules + Reviews + Offers Only</button>
+              </div>
+              <div>
+                <label style="margin-bottom:8px;display:block;">Best Prop Country Toggles</label>
+                <div id="bestRegionToggles" class="toggle-region-grid"></div>
+              </div>
+              <div>
+                <label style="margin-bottom:8px;display:block;">Best Prop Category Toggles</label>
+                <div id="bestCategoryToggles" class="toggle-region-grid"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="field full"><label>Card Bio</label><textarea name="bio" rows="3" placeholder="Best fit for HFT-focused traders."></textarea></div>
+
+          <div class="field"><label>Publish State</label><select name="publishState"><option value="published">Published</option><option value="draft">Draft</option><option value="unpublished">Unpublished</option></select></div>
+          <div class="field"><label>Unpublish Until</label><input name="unpublishUntil" type="datetime-local" /></div>
+          <div class="field"><label style="display:flex;gap:8px;align-items:center"><input type="checkbox" name="active" checked /> Active</label></div>
+
+          <div class="field"><label>Score</label><input name="score" placeholder="4.4" /></div>
+          <div class="field"><label>Trusted By</label><input name="trustedBy" placeholder="935+ traders" /></div>
+          <div class="field"><label>Promo Text</label><input name="promoText" placeholder="20% OFF + Cashback" /></div>
+          <div class="field"><label>Review Count</label><input name="reviewCount" type="number" min="0" placeholder="1027" /></div>
+          <div class="field"><label style="display:flex;gap:8px;align-items:center"><input type="checkbox" name="useManualRatingOverride" /> Manual Rating Override</label></div>
+          <div class="field"><label>Manual Rating</label><input name="manualRating" type="number" min="0" max="5" step="0.1" placeholder="4.6" /></div>
+          <div class="field"><label>Manual Review Count</label><input name="manualReviewCount" type="number" min="0" placeholder="1200" /></div>
+          <div class="field"><label>Detail Meta Line</label><input name="detailMeta" placeholder="CEO: ... • Forex • Founded ... • UAE" /></div>
+          <div class="field full"><label>Review Snippet</label><textarea name="reviewSnippet" rows="2" placeholder="Fast payout process, clean dashboard and smooth execution..."></textarea></div>
+          <div class="field"><label>Meta CEO</label><input name="metaCeo" placeholder="Sean Ballation" /></div>
+          <div class="field"><label>Meta Markets (comma)</label><input name="metaMarketsCsv" placeholder="Forex, Crypto, Indices" /></div>
+          <div class="field"><label>Meta Founded</label><input name="metaFounded" placeholder="2023" /></div>
+          <div class="field"><label>Meta Headquarters</label><input name="metaHeadquarters" placeholder="UAE" /></div>
+          <div class="field full"><label>Meta Line Preview</label><div id="metaPreview" style="min-height:44px;padding:12px;border:1px solid rgba(122,116,255,.45);border-radius:10px;color:#dfe4ff;background:rgba(122,116,255,.08)">CEO: ... • Forex • Founded ... • UAE</div></div>
+          <div class="field"><label>Banner File Upload</label><input name="bannerFile" type="file" accept="image/*" /></div>
+
+          <div class="field"><label>Overview Title</label><input name="overviewTitle" placeholder="Aqua Funded Overview" /></div>
+          <div class="field"><label>Overview Long Title</label><input name="overviewLongTitle" placeholder="Detailed Overview" /></div>
+          <div class="field full"><label>Overview Short</label><textarea name="overviewShort" rows="3" placeholder="Short intro shown above Show More"></textarea></div>
+          <div class="field full"><label>Overview Long (paragraphs with blank line)</label><textarea name="overviewLong" rows="8" placeholder="Long detailed overview content"></textarea></div>
+
+          <div class="field"><label>Platforms (comma)</label><input name="platformsCsv" placeholder="MT5, DXTrade, cTrader" /></div>
+          <div class="field"><label>Payment Methods (comma)</label><input name="paymentMethodsCsv" placeholder="Crypto, RiseWorks, TC Pay" /></div>
+          <div class="field"><label>Restricted Countries (comma)</label><input name="restrictedCountriesCsv" placeholder="Bangladesh, Belarus, Malaysia, Russia" /></div>
+
+          <div class="field full"><label>Why Choose (one per line)</label><textarea name="whyChooseLines" rows="4" placeholder="High Profit Split up to 95%&#10;No Minimum Trading Days&#10;Multiple Platforms"></textarea></div>
+          <div class="field full"><label>Overview</label><textarea name="overview" rows="5" placeholder="Full long-form firm overview text for this dedicated page."></textarea></div>
+
+          <div class="field full"><label>Performance JSON</label><textarea name="performanceJson" rows="4" placeholder='{"profitability":4.6,"payouts":4.5,"rules":4.3,"flexibility":4.2,"trust":4.4}'></textarea></div>
+          <div class="field full"><label>Radar Metrics JSON (max 5)</label><textarea name="radarMetricsJson" rows="6" placeholder='[{"label":"Company Background","short":"Background","value":4.4},{"label":"Payouts","short":"Payouts","value":4.3}]'></textarea></div>
+          <div class="field full"><label>Stats JSON</label><textarea name="statsJson" rows="4" placeholder='[{"value":"935+","label":"Traders"},{"value":"14 Days","label":"First Payout"}]'></textarea></div>
+          <div class="field full"><label>Key Metrics JSON</label><textarea name="keyMetricsJson" rows="6" placeholder='[{"label":"Max Allocation","value":"$4,000,000"},{"label":"Profit Split","value":"Up to 90%"}]'></textarea></div>
+          <div class="field full"><label>Listing Card Metrics JSON</label><textarea name="cardMetricsJson" rows="6" placeholder='{"payoutCycle":"14 Days","minTradingDays":"5 Days","newsTrading":"Allowed","timeLimit":"Unlimited","eaAllowed":"Allowed","startingPrice":"$39"}'></textarea></div>
+          <div class="field full"><label>Trading Conditions JSON</label><textarea name="tradingConditionsJson" rows="6" placeholder='[{"label":"Daily Drawdown","value":"3% - 5%"},{"label":"Maximum Drawdown","value":"6% - 10%"}]'></textarea></div>
+          <div class="field full"><label>Firm Details JSON</label><textarea name="firmDetailsJson" rows="6" placeholder='[{"label":"Company Name","value":"Aqua Funded"},{"label":"Headquarters","value":"Dubai, UAE"}]'></textarea></div>
+          <div class="field full"><label>Leverage Rows JSON</label><textarea name="leverageRowsJson" rows="6" placeholder='[{"instrument":"Indices","c1":"1:50","c2":"1:30","c3":"1:100","c4":"Variable"}]'></textarea></div>
+          <div class="field full"><label>Commissions JSON</label><textarea name="commissionsJson" rows="6" placeholder='[{"title":"Indices","lines":["Standard: No Commission","Swap Free: No Commission"]}]'></textarea></div>
+          <div class="field full"><label>Evaluation Programs JSON</label><textarea name="evaluationProgramsJson" rows="6" placeholder='[{"program":"1-Step","phase1":"10%","phase2":"-","target":"10%","allocation":"$2,000,000","split":"Up to 90%"}]'></textarea></div>
+          <div class="field full"><label>Challenges Panel JSON</label><textarea name="challengesPanelDataJson" rows="8" placeholder='{"programs":[{"program":"1-Step","phase1":"10%","phase2":"-","target":"10%","allocation":"$2,000,000","split":"Up to 90%","features":["No minimum trading days"]}],"stats":[{"value":"14 Days","label":"First Payout"}]}'></textarea></div>
+          <div class="field full"><label>Spreads Panel JSON</label><textarea name="spreadsPanelDataJson" rows="8" placeholder='{"items":[{"symbol":"EUR/USD","flag":"🇺🇸","category":"forex","unit":"Pips","std":[0.1,0.2,0.5]}]}'></textarea></div>
+          <div class="field full"><label>Announcements Panel JSON</label><textarea name="announcementsPanelDataJson" rows="8" placeholder='{"items":[{"cat":"payouts","tagLabel":"Payouts","title":"May Payouts","desc":"...","heroTitle":"Payouts live","heroDesc":"...","sections":[]}]}'></textarea></div>
+
+          <div class="field full">
+            <label style="margin-bottom:8px;display:block;">Rules Panel JSON</label>
+            <textarea name="rulesPanelDataJson" id="rulesPanelDataJson" rows="10" placeholder='{"sections":{"general":{"title":"General Rules","desc":"Important rules","rules":[{"title":"Rule title","text":"Rule detail"}]}},"programRules":{"1-step":{"program":"1-Step","title":"1-Step Challenge Rules","desc":"Rules specific to this model","rules":[{"title":"Profit target","text":"10%"}]}}}'></textarea>
+          </div>
+
+          <div class="full top-actions">
+            <button class="btn-primary" type="submit">Save Detail Content</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h3>Rules by Account Models</h3>
+          <div class="top-actions">
+            <button class="btn" id="resetRulesStudioBtn" type="button">Reset Rules</button>
+            <button class="btn-primary" id="saveRulesStudioBtn" type="button">Save Rules</button>
+          </div>
+        </div>
+        <div class="rules-studio">
+          <div class="account-rules-toolbar" aria-label="Rule text tools">
+            <button class="btn" type="button" data-rules-format="bold">Bold</button>
+            <button class="btn" type="button" data-rules-format="italic">Italic</button>
+            <button class="btn" type="button" data-rules-format="highlight">Highlight</button>
+            <button class="btn" type="button" data-rules-format="link">Link</button>
+            <button class="btn" type="button" data-rules-action="add-block">Add account block</button>
+            <button class="btn" type="button" data-rules-action="remove-block">Remove account block</button>
+            <span class="rules-save-message" id="rulesSaveMessage">Changes are saved only after you click Save Rules.</span>
+          </div>
+          <textarea id="rulesStudioRoot" class="account-rules-editor" data-no-richtext="1" spellcheck="true" aria-label="Rules by account model" placeholder="Stellar 2-Step&#10;News Trading||Allowed except during high-impact events.&#10;EA's||Allowed with firm-specific limits.&#10;Copy Trading||Restricted to same-owner accounts.&#10;&#10;Stellar 1-Step&#10;News Trading||Restricted on red-folder events.&#10;Holding Rules||Overnight holding allowed on supported symbols."></textarea>
+          <p class="account-rules-help">Add one account block at a time. First line = account model name. Next lines = rules using <strong>Title||Description</strong>. Leave one blank line between account blocks.</p>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><h3>Team Review Profile (Dedicated Review Page)</h3></div>
+        <div class="form-grid">
+          <div class="field full">
+            <label>firmReviewProfiles JSON</label>
+            <textarea id="teamReviewProfileJson" rows="18" placeholder='{"ourReviewTitle":"Our Review","pros":["..."],"cons":["..."]}'></textarea>
+          </div>
+          <div class="full top-actions">
+            <button class="btn" id="resetTeamReviewBtn" type="button">Reset Default JSON</button>
+            <button class="btn-danger" id="deleteTeamReviewBtn" type="button">Delete Team Review Profile</button>
+            <button class="btn-primary" id="saveTeamReviewBtn" type="button">Save Team Review Profile</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <div class="center-save-toast" id="centerSaveToast" role="status" aria-live="polite"><div class="center-save-toast-card"><span class="center-save-toast-check">✓</span><span id="centerSaveToastMessage">Saved successfully.</span></div></div>
+
+  <script type="module">
+    import { collection, deleteDoc, doc, getDoc, getDocs, serverTimestamp, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+    import { db } from "./dashboard-common.js";
+    import { bindLogout, enforceAdmin, formDataToObj, showNotice } from "./admin-common.js";
+    import { OTHER_FIRM_ID, compressFirmLogo, createFirmIdentity, renderFirmIdentityOptions } from "./firm-identity-service.js";
+
+    const BEST_REGIONS = [
+      { key: "india", label: "India" },
+      { key: "nigeria", label: "Nigeria" },
+      { key: "south_africa", label: "South Africa" },
+      { key: "pakistan", label: "Pakistan" },
+      { key: "australia", label: "Australia" },
+      { key: "china", label: "China" },
+      { key: "us", label: "US" },
+      { key: "uk", label: "UK" }
+    ];
+    const BEST_CATEGORIES = [
+      { key: "fast_payout", label: "Fast Payout" },
+      { key: "instant_funding", label: "Instant Funding" },
+      { key: "hft", label: "HFT" },
+      { key: "futures", label: "Futures" },
+      { key: "cheapest", label: "Cheapest" },
+      { key: "trusted", label: "Most Trusted" },
+      { key: "beginner", label: "Beginner Friendly" },
+      { key: "highest_rated", label: "Highest Rated" }
+    ];
+
+    const picker = document.getElementById("firmPicker");
+    const form = document.getElementById("detailForm");
+    const notice = document.getElementById("notice");
+    const createBtn = document.getElementById("createFirmBtn");
+    const deleteBtn = document.getElementById("deleteFirmBtn");
+    const newFirmName = document.getElementById("newFirmName");
+    const newFirmSlug = document.getElementById("newFirmSlug");
+    const newFirmFields = document.getElementById("newFirmFields");
+    const identityLogoFile = document.getElementById("identityLogoFile");
+    const saveFirmLogoBtn = document.getElementById("saveFirmLogoBtn");
+    const firmLogoPreview = document.getElementById("firmLogoPreview");
+    const identityFirmName = document.getElementById("identityFirmName");
+    const identityFirmId = document.getElementById("identityFirmId");
+    const metaPreview = document.getElementById("metaPreview");
+    const regionWrap = document.getElementById("bestRegionToggles");
+    const categoryWrap = document.getElementById("bestCategoryToggles");
+    const rulesReviewsOffersOnlyBtn = document.getElementById("rulesReviewsOffersOnlyBtn");
+    const ruleStudioRoot = document.getElementById("rulesStudioRoot");
+    const ruleStudioEmpty = document.getElementById("rulesStudioEmpty");
+    const addFirmRuleSectionBtn = document.getElementById("addFirmRuleSectionBtn");
+    const addProgramRuleBtn = document.getElementById("addProgramRuleBtn");
+    const resetRulesStudioBtn = document.getElementById("resetRulesStudioBtn");
+    const saveRulesStudioBtn = document.getElementById("saveRulesStudioBtn");
+    const rulesSaveMessage = document.getElementById("rulesSaveMessage");
+    const centerSaveToast = document.getElementById("centerSaveToast");
+    const centerSaveToastMessage = document.getElementById("centerSaveToastMessage");
+    let centerSaveToastTimer = null;
+    let centerSaveToastDismissAfter = 0;
+    const teamReviewProfileJson = document.getElementById("teamReviewProfileJson");
+    const saveTeamReviewBtn = document.getElementById("saveTeamReviewBtn");
+    const deleteTeamReviewBtn = document.getElementById("deleteTeamReviewBtn");
+    const resetTeamReviewBtn = document.getElementById("resetTeamReviewBtn");
+
+    let firms = [];
+    let ratingStatsMap = new Map();
+    const FIRM_CACHE_KEY = "rmp_firm_details_cache_v2";
+    const FIRM_DRAFT_KEY = "rmp_firm_details_drafts_v2";
+    let draftTimer = null;
+    let applyingDraft = false;
+
+    function readStore(key, fallback) {
+      try {
+        const raw = localStorage.getItem(key);
+        if (!raw) return fallback;
+        const parsed = JSON.parse(raw);
+        return parsed && typeof parsed === "object" ? parsed : fallback;
+      } catch (_) {
+        return fallback;
+      }
+    }
+
+    function writeStore(key, value) {
+      try { localStorage.setItem(key, JSON.stringify(value)); } catch (_) {}
+    }
+
+    function getRankValue(row = {}) {
+      const rank = Number(row.ranking);
+      if (Number.isFinite(rank) && rank > 0) return rank;
+      const legacy = Number(row.sortOrder);
+      if (Number.isFinite(legacy) && legacy > 0) return legacy;
+      return 999999;
+    }
+
+    function readFirmCache() {
+      const cached = readStore(FIRM_CACHE_KEY, {});
+      const list = Array.isArray(cached.firms) ? cached.firms : [];
+      const stats = cached.ratingStats && typeof cached.ratingStats === "object" ? cached.ratingStats : {};
+      return { firms: list, ratingStats: stats };
+    }
+
+    function writeFirmCache(nextFirms = [], nextStatsMap = new Map()) {
+      const stats = {};
+      if (nextStatsMap instanceof Map) {
+        nextStatsMap.forEach((v, k) => {
+          if (!k) return;
+          stats[String(k)] = v;
+        });
+      }
+      writeStore(FIRM_CACHE_KEY, {
+        updatedAt: Date.now(),
+        firms: Array.isArray(nextFirms) ? nextFirms : [],
+        ratingStats: stats
+      });
+    }
+
+    function readDraftStore() {
+      const raw = readStore(FIRM_DRAFT_KEY, {});
+      return raw && typeof raw === "object" ? raw : {};
+    }
+
+    function writeDraftStore(v) {
+      writeStore(FIRM_DRAFT_KEY, v && typeof v === "object" ? v : {});
+    }
+
+    function activeFirmId() {
+      return String(form.elements.namedItem("docId")?.value || picker.value || "").trim();
+    }
+
+    function captureFormDraft() {
+      const out = {};
+      Array.from(form.elements || []).forEach((el) => {
+        const name = String(el?.name || "").trim();
+        if (!name || el.type === "file") return;
+        if (el.type === "checkbox") out[name] = Boolean(el.checked);
+        else out[name] = String(el.value || "");
+      });
+      return out;
+    }
+
+    function applyFormDraft(data = {}) {
+      if (!data || typeof data !== "object") return;
+      Array.from(form.elements || []).forEach((el) => {
+        const name = String(el?.name || "").trim();
+        if (!name || !(name in data) || el.type === "file") return;
+        if (el.type === "checkbox") el.checked = Boolean(data[name]);
+        else el.value = String(data[name] ?? "");
+      });
+      updateMetaPreview();
+    }
+
+    function saveDraftNow() {
+      if (applyingDraft) return;
+      const id = activeFirmId();
+      if (!id) return;
+      const drafts = readDraftStore();
+      drafts[id] = { updatedAt: Date.now(), data: captureFormDraft() };
+      writeDraftStore(drafts);
+    }
+
+    function queueDraftSave() {
+      clearTimeout(draftTimer);
+      draftTimer = setTimeout(saveDraftNow, 220);
+    }
+
+    function clearDraft(id = "") {
+      const key = String(id || "").trim();
+      if (!key) return;
+      const drafts = readDraftStore();
+      if (!drafts[key]) return;
+      delete drafts[key];
+      writeDraftStore(drafts);
+    }
+
+    function applyDraftIfExists(id = "") {
+      const key = String(id || "").trim();
+      if (!key) return false;
+      const drafts = readDraftStore();
+      const row = drafts[key];
+      if (!row || !row.data || typeof row.data !== "object") return false;
+      applyingDraft = true;
+      applyFormDraft(row.data);
+      applyingDraft = false;
+      return true;
+    }
+
+    function slugify(text = "") { return String(text).toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, ""); }
+    function slugFromDetailsLink(raw = "") {
+      const txt = String(raw || "").trim();
+      if (!txt) return "";
+      try {
+        const u = new URL(txt, "https://www.rankmyprop.in");
+        const qs = slugify(u.searchParams.get("slug") || "");
+        if (qs) return qs;
+        const path = String(u.pathname || "").replace(/^\/+/, "").replace(/\/+$/, "").replace(/\.html$/i, "");
+        if (!path || path.toLowerCase() === "firm-detail") return "";
+        if (/^prop-firms\//i.test(path)) {
+          const seg = path.split("/").filter(Boolean);
+          return slugify(seg[1] || "");
+        }
+        return slugify(path.replace(/detail$/i, ""));
+      } catch (_) {
+        const path = txt.replace(/^\/+/, "").replace(/\/+$/, "").split("?")[0].split("#")[0].replace(/\.html$/i, "");
+        if (!path || path.toLowerCase() === "firm-detail") return "";
+        if (/^prop-firms\//i.test(path)) {
+          const seg = path.split("/").filter(Boolean);
+          return slugify(seg[1] || "");
+        }
+        return slugify(path.replace(/detail$/i, ""));
+      }
+    }
+    function normalizeDetailsLink(raw = "", slug = "") {
+      const cleanSlug = slugify(slug || "");
+      const txt = String(raw || "").trim();
+      if (!cleanSlug) return txt || "";
+      if (!txt) return `/prop-firms/${cleanSlug}`;
+      if (/^\/?firm-detail(?:\.html)?(?:\?|$)/i.test(txt)) {
+        return `/prop-firms/${cleanSlug}`;
+      }
+      if (/^\/?prop-firms\//i.test(txt)) return txt.startsWith("/") ? txt : `/${txt}`;
+      try {
+        const u = new URL(txt, "https://www.rankmyprop.in");
+        const path = String(u.pathname || "").replace(/\/+$/, "");
+        if (!path || path === "/") return `/prop-firms/${cleanSlug}`;
+        if (/^\/prop-firms\//i.test(path)) return path.startsWith("/") ? path : `/${path}`;
+        if (slugFromDetailsLink(path) === cleanSlug) return `/prop-firms/${cleanSlug}`;
+        return path.startsWith("/") ? path : `/${path}`;
+      } catch (_) {
+        const clean = txt.replace(/^\/+/, "").replace(/\/+$/, "");
+        if (!clean) return `/prop-firms/${cleanSlug}`;
+        if (slugFromDetailsLink(clean) === cleanSlug) return `/prop-firms/${cleanSlug}`;
+        return `/${clean}`;
+      }
+    }
+    function parseCsv(v = "") { return String(v).split(",").map((x) => x.trim()).filter(Boolean); }
+    function parseLines(v = "") { return String(v).split("\n").map((x) => x.trim()).filter(Boolean); }
+    function makeBestRegionFlags(row = {}) {
+      const src = row.bestRegions && typeof row.bestRegions === "object" ? row.bestRegions : {};
+      const out = {};
+      BEST_REGIONS.forEach(({ key }) => { out[key] = Boolean(src[key]); });
+      return out;
+    }
+    function makeBestCategoryFlags(row = {}) {
+      const src = row.bestCategories && typeof row.bestCategories === "object" ? row.bestCategories : {};
+      const out = {};
+      BEST_CATEGORIES.forEach(({ key }) => { out[key] = Boolean(src[key]); });
+      return out;
+    }
+    function fillRegionToggles(flags = {}) {
+      BEST_REGIONS.forEach(({ key }) => {
+        const el = form.elements.namedItem(`bestRegion_${key}`);
+        if (el) el.checked = Boolean(flags[key]);
+      });
+    }
+    function fillCategoryToggles(flags = {}) {
+      BEST_CATEGORIES.forEach(({ key }) => {
+        const el = form.elements.namedItem(`bestCategory_${key}`);
+        if (el) el.checked = Boolean(flags[key]);
+      });
+    }
+    function readRegionToggles() {
+      const out = {};
+      BEST_REGIONS.forEach(({ key }) => {
+        const el = form.elements.namedItem(`bestRegion_${key}`);
+        out[key] = Boolean(el?.checked);
+      });
+      return out;
+    }
+    function readCategoryToggles() {
+      const out = {};
+      BEST_CATEGORIES.forEach(({ key }) => {
+        const el = form.elements.namedItem(`bestCategory_${key}`);
+        out[key] = Boolean(el?.checked);
+      });
+      return out;
+    }
+    function renderRegionToggles() {
+      if (!regionWrap) return;
+      regionWrap.innerHTML = BEST_REGIONS.map(({ key, label }) => `
+        <label class="toggle-item">
+          <input type="checkbox" name="bestRegion_${key}" />
+          <span>${label}</span>
+        </label>
+      `).join("");
+    }
+    function renderCategoryToggles() {
+      if (!categoryWrap) return;
+      categoryWrap.innerHTML = BEST_CATEGORIES.map(({ key, label }) => `
+        <label class="toggle-item">
+          <input type="checkbox" name="bestCategory_${key}" />
+          <span>${label}</span>
+        </label>
+      `).join("");
+    }
+    function fileToDataUrl(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(String(reader.result || ""));
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function parseDateSafe(v = "") {
+      const s = String(v || "").trim();
+      if (!s) return null;
+      const d = new Date(s);
+      return Number.isFinite(d.getTime()) ? d : null;
+    }
+
+    function toLocalInput(iso = "") {
+      const d = parseDateSafe(iso);
+      if (!d) return "";
+      const pad = (n) => String(n).padStart(2, "0");
+      return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+    }
+
+    function toIsoFromLocal(local = "") {
+      const s = String(local || "").trim();
+      if (!s) return "";
+      const d = new Date(s);
+      return Number.isFinite(d.getTime()) ? d.toISOString() : "";
+    }
+
+    function jsonParse(value = "", fallback = null, key = "field") {
+      const txt = String(value || "").trim();
+      if (!txt) return fallback;
+      try { return JSON.parse(txt); } catch { throw new Error(`Invalid JSON: ${key}`); }
+    }
+
+    function setValue(name, value) {
+      const el = form.elements.namedItem(name);
+      if (el) el.value = value;
+    }
+
+    function jsonInputValue(value) {
+      if (Array.isArray(value)) return value.length ? JSON.stringify(value, null, 2) : "";
+      if (value && typeof value === "object") return Object.keys(value).length ? JSON.stringify(value, null, 2) : "";
+      return "";
+    }
+
+    function hasMetricValue(v = "") {
+      const s = String(v ?? "").trim();
+      if (!s) return false;
+      const low = s.toLowerCase();
+      return low !== "-" && low !== "n/a" && low !== "na" && low !== "null";
+    }
+
+    function escapeHtml(value = "") {
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function textOr(value = "", fallback = "") {
+      const out = String(value ?? "").trim();
+      return out || fallback;
+    }
+
+    function defaultRuleRow(title = "", text = "") {
+      return { title: String(title || "").trim(), text: String(text || "").trim() };
+    }
+
+    function defaultRulesSection(title = "General Rules", desc = "", notice = "", rules = []) {
+      return {
+        title: String(title || "").trim() || "General Rules",
+        desc: String(desc || "").trim(),
+        notice: String(notice || "").trim(),
+        rules: Array.isArray(rules) && rules.length ? rules.map((rule) => defaultRuleRow(rule?.title, rule?.text)).filter((rule) => rule.title || rule.text) : [defaultRuleRow("Rule title", "Rule detail")],
+      };
+    }
+
+    function defaultProgramRuleSet(program = {}, firmName = "Firm", index = 1) {
+      const programName = textOr(program.program || program.name || program.title || program.model, `Program ${index}`);
+      const slug = slugify(programName) || `program-${index}`;
+      const rules = [
+        defaultRuleRow("Profit target", textOr(program.target || program.phase1 || program.phaseOneTarget || program.profitTarget, "Publish the exact target for this model.")),
+        defaultRuleRow("Daily loss", textOr(program.dailyLoss || program.dailyDrawdown || program.dailyLossLimit, "Publish the daily loss limit for this model.")),
+        defaultRuleRow("Maximum drawdown", textOr(program.maxDrawdown || program.overallDrawdown || program.maximumLoss, "Publish the maximum drawdown for this model.")),
+        defaultRuleRow("Minimum trading days", textOr(program.minimumDays || program.minTradingDays || program.tradingDays, "Publish the minimum trading days, if any.")),
+        defaultRuleRow("Profit split", textOr(program.split || program.profitSplit || program.payoutSplit, "Publish the split for this model.")),
+        defaultRuleRow("Time limit", textOr(program.timeLimit || program.duration || program.challengeDuration, "Publish the time limit for this model.")),
+      ].filter((rule) => rule.title || rule.text);
+      return {
+        program: programName,
+        slug,
+        title: `${programName} Challenge Rules`,
+        desc: `Rules specific to the ${programName} challenge model for ${firmName}.`,
+        notice: "Update this block whenever the official rulebook changes.",
+        rules,
+      };
+    }
+
+    function blankProgramRuleSet() {
+      return {
+        program: "",
+        slug: "",
+        title: "",
+        desc: "",
+        notice: "",
+        rules: [defaultRuleRow("", "")],
+      };
+    }
+
+    function showCenterSaveToast(message) {
+      if (!centerSaveToast) return;
+      if (centerSaveToastTimer) clearTimeout(centerSaveToastTimer);
+      if (centerSaveToastMessage) centerSaveToastMessage.textContent = String(message || "Saved successfully.");
+      centerSaveToast.classList.add("is-visible");
+      centerSaveToastDismissAfter = Date.now() + 120;
+      centerSaveToastTimer = setTimeout(() => {
+        centerSaveToast.classList.remove("is-visible");
+      }, 2000);
+    }
+
+    function dismissCenterSaveToast() {
+      if (centerSaveToastTimer) clearTimeout(centerSaveToastTimer);
+      centerSaveToast?.classList.remove("is-visible");
+    }
+
+    document.addEventListener("click", () => {
+      if (Date.now() >= centerSaveToastDismissAfter) dismissCenterSaveToast();
+    });
+
+    function defaultRulesPanelData(name = "This Firm", programs = []) {
+      const seededPrograms = Array.isArray(programs) ? programs : [];
+      const programRules = seededPrograms.reduce((acc, program, index) => {
+        const entry = defaultProgramRuleSet(program, name, index + 1);
+        acc[entry.slug] = entry;
+        return acc;
+      }, {});
+      return {
+        sections: {
+          general: defaultRulesSection(
+            "General Rules",
+            `${name} general account rules.`,
+            "Rules may be updated. Please review regularly.",
+            [
+              defaultRuleRow("Single user policy", "Each account must be traded only by the registered trader."),
+              defaultRuleRow("Accurate KYC details", "Provide correct personal details for verification and payouts."),
+              defaultRuleRow("Rule compliance required", "Any material violation can result in account termination."),
+            ],
+          ),
+        },
+        programRules,
+        violations: [
+          "Account termination",
+          "Forfeiture of payouts/profits",
+          "Disqualification from future programs",
+        ],
+        importantNote: {
+          text: "Read all rules before placing trades on your challenge or funded account.",
+          buttonText: "Download Full Rules (PDF)",
+        },
+      };
+    }
+
+    function normalizeRulesPanelData(raw = {}, row = {}) {
+      const source = raw && typeof raw === "object" ? raw : {};
+      const programs = Array.isArray(row.evaluationPrograms) ? row.evaluationPrograms : [];
+      const base = defaultRulesPanelData(row.name || row.docId || "This Firm", programs);
+      const sections = source.sections && typeof source.sections === "object" ? source.sections : base.sections;
+      const programRules = source.programRules && typeof source.programRules === "object" ? source.programRules : base.programRules;
+      const violations = Array.isArray(source.violations) && source.violations.length ? source.violations.map((item) => String(item || "").trim()).filter(Boolean) : base.violations;
+      const importantNote = source.importantNote && typeof source.importantNote === "object"
+        ? {
+            text: String(source.importantNote.text || base.importantNote.text || "").trim(),
+            buttonText: String(source.importantNote.buttonText || base.importantNote.buttonText || "").trim(),
+          }
+        : base.importantNote;
+      const rowSlug = slugify(row.slug || row.name || row.docId || "");
+      const migrationModels = rowSlug === "finotive-funding"
+        ? ["instant-standard", "1-step-challenge", "instant-lite"]
+        : [];
+      const modelSlugs = (Array.isArray(source.modelSlugs) && source.modelSlugs.length
+        ? source.modelSlugs
+        : (migrationModels.length ? migrationModels : Object.keys(programRules)))
+        .map((value) => slugify(value)).filter((value, index, list) => value && list.indexOf(value) === index && programRules[value]);
+      return { sections, programRules, modelSlugs, violations, importantNote };
+    }
+
+    function readRulesSectionCard(card) {
+      const title = String(card.querySelector('[data-rules-field="title"]')?.value || "").trim();
+      const desc = String(card.querySelector('[data-rules-field="desc"]')?.value || "").trim();
+      const notice = String(card.querySelector('[data-rules-field="notice"]')?.value || "").trim();
+      const rules = Array.from(card.querySelectorAll('[data-rule-row]')).map((row) => ({
+        title: String(row.querySelector('[data-rule-field="title"]')?.value || "").trim(),
+        text: String(row.querySelector('[data-rule-field="text"]')?.value || "").trim(),
+      })).filter((rule) => rule.title || rule.text);
+      return defaultRulesSection(title, desc, notice, rules);
+    }
+
+    function readProgramRuleCard(card) {
+      const program = String(card.querySelector('[data-rules-field="program"]')?.value || "").trim();
+      const slug = slugify(String(card.querySelector('[data-rules-field="slug"]')?.value || "").trim() || program);
+      const title = String(card.querySelector('[data-rules-field="title"]')?.value || "").trim();
+      const desc = String(card.querySelector('[data-rules-field="desc"]')?.value || "").trim();
+      const notice = String(card.querySelector('[data-rules-field="notice"]')?.value || "").trim();
+      const rules = Array.from(card.querySelectorAll('[data-rule-row]')).map((row) => ({
+        title: String(row.querySelector('[data-rule-field="title"]')?.value || "").trim(),
+        text: String(row.querySelector('[data-rule-field="text"]')?.value || "").trim(),
+      })).filter((rule) => rule.title || rule.text);
+      if (!program && !slug && !title && !desc && !notice && !rules.length) return null;
+      const resolved = defaultProgramRuleSet({ program: program || slug || "Program", title }, String(form.elements.namedItem("name")?.value || "Firm"), 1);
+      return {
+        program: program || resolved.program,
+        slug: slug || resolved.slug,
+        title: title || resolved.title,
+        desc: desc || resolved.desc,
+        notice: notice || resolved.notice,
+        rules: rules.length ? rules : resolved.rules,
+      };
+    }
+
+    function escapeAttr(value = "") {
+      return escapeHtml(value);
+    }
+
+    function makeRuleRow(rule = {}, groupKey = "", rowIndex = 0) {
+      return `
+        <div class="rules-studio-rule" data-rule-row data-group="${escapeAttr(groupKey)}" data-index="${rowIndex}">
+          <input class="rules-studio-mini" data-rule-field="title" value="${escapeAttr(rule.title || "")}" placeholder="Rule title" />
+          <input class="rules-studio-mini" data-rule-field="text" value="${escapeAttr(rule.text || "")}" placeholder="Rule detail" />
+          <button type="button" class="btn-danger" data-rule-remove>Remove</button>
+        </div>`;
+    }
+
+    function makeSectionCard(sectionKey, section, index) {
+      const rows = Array.isArray(section?.rules) && section.rules.length ? section.rules : [defaultRuleRow("", "")];
+      return `
+        <article class="rules-studio-card" data-card-kind="section" data-card-key="${escapeAttr(sectionKey)}">
+          <div class="rules-studio-card-head">
+            <div>
+              <small>Firm section ${index + 1}</small>
+              <strong>${escapeHtml(section.title || "General Rules")}</strong>
+            </div>
+            <button type="button" class="btn-danger" data-card-remove>Remove</button>
+          </div>
+          <div class="form-grid" style="grid-template-columns:repeat(2,minmax(0,1fr));gap:10px">
+            <div class="field"><label>Title</label><input class="rules-studio-mini" data-rules-field="title" value="${escapeAttr(section.title || "")}" placeholder="General Rules" /></div>
+            <div class="field"><label>Notice</label><input class="rules-studio-mini" data-rules-field="notice" value="${escapeAttr(section.notice || "")}" placeholder="Rules may be updated." /></div>
+            <div class="field full"><label>Description</label><input class="rules-studio-mini" data-rules-field="desc" value="${escapeAttr(section.desc || "")}" placeholder="Important rules for this firm." /></div>
+          </div>
+          <div class="rules-studio-rules">
+            ${rows.map((rule, rowIndex) => makeRuleRow(rule, `section-${sectionKey}`, rowIndex)).join("")}
+          </div>
+          <div class="rules-studio-actions">
+            <button type="button" class="btn" data-rule-add>Add Rule</button>
+          </div>
+        </article>`;
+    }
+
+    function makeProgramCard(programKey, program, index) {
+      const rows = Array.isArray(program?.rules) && program.rules.length ? program.rules : [defaultRuleRow("", "")];
+      return `
+        <article class="rules-studio-card" data-card-kind="program" data-card-key="${escapeAttr(programKey)}">
+          <div class="rules-studio-card-head">
+            <div>
+              <small>Challenge model ${index + 1}</small>
+              <strong>${escapeHtml(program.program || "New challenge model")}</strong>
+            </div>
+            <button type="button" class="btn-danger" data-card-remove>Remove</button>
+          </div>
+          <div class="form-grid" style="grid-template-columns:repeat(2,minmax(0,1fr));gap:10px">
+            <div class="field"><label>Program Name</label><input class="rules-studio-mini" data-rules-field="program" value="${escapeAttr(program.program || "")}" placeholder="1-Step" /></div>
+            <div class="field"><label>Slug</label><input class="rules-studio-mini" data-rules-field="slug" value="${escapeAttr(program.slug || (String(programKey).startsWith("draft-") ? "" : programKey) || "")}" placeholder="1-step" /></div>
+            <div class="field"><label>Title</label><input class="rules-studio-mini" data-rules-field="title" value="${escapeAttr(program.title || "")}" placeholder="1-Step Challenge Rules" /></div>
+            <div class="field"><label>Notice</label><input class="rules-studio-mini" data-rules-field="notice" value="${escapeAttr(program.notice || "")}" placeholder="Update this block when the rulebook changes." /></div>
+            <div class="field full"><label>Description</label><input class="rules-studio-mini" data-rules-field="desc" value="${escapeAttr(program.desc || "")}" placeholder="Rules specific to the 1-Step model." /></div>
+          </div>
+          <div class="rules-studio-rules">
+            ${rows.map((rule, rowIndex) => makeRuleRow(rule, `program-${programKey}`, rowIndex)).join("")}
+          </div>
+          <div class="rules-studio-actions">
+            <button type="button" class="btn" data-rule-add>Add Rule</button>
+          </div>
+        </article>`;
+    }
+
+    function rulesStudioPayload() {
+      if (!ruleStudioRoot) return defaultRulesPanelData();
+      let rawSource = null;
+      try {
+        rawSource = JSON.parse(String(form.elements.namedItem("rulesPanelDataJson")?.value || ""));
+      } catch (_) {}
+      const sourceSnapshot = rawSource && typeof rawSource === "object"
+        ? rawSource
+        : window.__rmpCurrentRulesSource && typeof window.__rmpCurrentRulesSource === "object"
+          ? window.__rmpCurrentRulesSource
+          : defaultRulesPanelData(String(form.elements.namedItem("name")?.value || "This Firm").trim(), Array.isArray(window.__rmpCurrentEvaluationPrograms) ? window.__rmpCurrentEvaluationPrograms : []);
+      const programRules = {};
+      String(ruleStudioRoot.value || "").split(/\n\s*\n+/).map((block) => block.split("\n").map((line) => line.trim()).filter(Boolean)).forEach((lines) => {
+        const program = String(lines.shift() || "").trim();
+        if (!program) return;
+        const rules = lines.map((line) => {
+          const separator = line.indexOf("||");
+          return separator >= 0
+            ? { title: line.slice(0, separator).trim(), text: line.slice(separator + 2).trim() }
+            : { title: "Rule", text: line.trim() };
+        }).filter((rule) => rule.title || rule.text);
+        const slug = slugify(program);
+        if (!slug) return;
+        programRules[slug] = {
+          program,
+          slug,
+          title: `${program} Challenge Rules`,
+          desc: `Rules for the ${program} account model.`,
+          notice: "",
+          rules,
+        };
+      });
+      return {
+        // Preserve legacy shared sections, but publish all editable rules by model.
+        sections: sourceSnapshot.sections || {},
+        programRules: Object.keys(programRules).length ? programRules : sourceSnapshot.programRules,
+        modelSlugs: Object.keys(programRules),
+        violations: sourceSnapshot.violations,
+        importantNote: sourceSnapshot.importantNote,
+      };
+    }
+
+    function syncRulesStudioJson() {
+      const field = form.elements.namedItem("rulesPanelDataJson");
+      if (!field) return;
+      const payload = rulesStudioPayload();
+      field.value = JSON.stringify(payload, null, 2);
+      if (ruleStudioEmpty) ruleStudioEmpty.style.display = ruleStudioRoot?.children?.length ? "none" : "block";
+      return payload;
+    }
+
+    function renderRulesStudio(row = null) {
+      if (!ruleStudioRoot) return;
+      const currentName = String(form.elements.namedItem("name")?.value || row?.name || "This Firm").trim();
+      const source = normalizeRulesPanelData(row?.rulesPanelData || {}, row || {});
+      window.__rmpCurrentRulesSource = source;
+      const programEntries = (source.modelSlugs || []).map((key) => [key, source.programRules?.[key]]).filter(([, program]) => program);
+      const fallbackPrograms = Array.isArray(row?.evaluationPrograms) ? row.evaluationPrograms : [];
+      const programFallback = !programEntries.length && fallbackPrograms.length
+        ? fallbackPrograms.map((program, index) => {
+            const entry = defaultProgramRuleSet(program, currentName || "This Firm", index + 1);
+            return [entry.slug, entry];
+          })
+        : programEntries;
+      ruleStudioRoot.value = programFallback.map(([key, program]) => {
+        const model = String(program?.program || program?.name || key || "").trim();
+        const rows = Array.isArray(program?.rules) ? program.rules : [];
+        return [model, ...rows.map((rule) => `${String(rule?.title || "Rule").trim()}||${String(rule?.text || "").trim()}`)].join("\n");
+      }).filter(Boolean).join("\n\n");
+      syncRulesStudioJson();
+    }
+
+    function resetRulesStudio(row = null) {
+      const fallback = defaultRulesPanelData(String(row?.name || form.elements.namedItem("name")?.value || "This Firm").trim(), Array.isArray(row?.evaluationPrograms) ? row.evaluationPrograms : []);
+      renderRulesStudio({ ...(row || {}), rulesPanelData: fallback });
+      syncRulesStudioJson();
+      queueDraftSave();
+    }
+
+    async function saveRulesStudio() {
+      const id = activeFirmId();
+      if (!id) throw new Error("Choose a firm before saving rules.");
+      syncRulesStudioJson();
+      const row = firms.find((item) => item.id === id) || {};
+      const name = String(form.elements.namedItem("name")?.value || row.name || "This Firm").trim();
+      const evaluationPrograms = jsonParse(
+        form.elements.namedItem("evaluationProgramsJson")?.value,
+        row.evaluationPrograms || [],
+        "evaluationPrograms"
+      );
+      const rulesPanelData = normalizeRulesPanelData(rulesStudioPayload(), {
+        ...row,
+        name,
+        evaluationPrograms
+      });
+      saveRulesStudioBtn.disabled = true;
+      const originalLabel = saveRulesStudioBtn.textContent;
+      saveRulesStudioBtn.textContent = "Saving…";
+      if (rulesSaveMessage) rulesSaveMessage.textContent = "Saving your rules…";
+      try {
+        // Replace the complete rules map. setDoc(..., { merge: true }) recursively
+        // retains deleted section keys, which can leak stale rules into later edits.
+        await updateDoc(doc(db, "firms", id), {
+          rulesPanelData,
+          updatedAt: serverTimestamp()
+        });
+        if (row) row.rulesPanelData = rulesPanelData;
+        window.__rmpCurrentRulesSource = rulesPanelData;
+        const rulesJsonField = form.elements.namedItem("rulesPanelDataJson");
+        if (rulesJsonField) rulesJsonField.value = JSON.stringify(rulesPanelData, null, 2);
+        clearDraft(id);
+        if (rulesSaveMessage) rulesSaveMessage.textContent = "Rules saved and ready for the public rules pages.";
+        showNotice(notice, "Rules saved successfully.");
+        showCenterSaveToast("Rules saved successfully.");
+      } finally {
+        saveRulesStudioBtn.disabled = false;
+        saveRulesStudioBtn.textContent = originalLabel;
+      }
+    }
+
+    function readPair(rows, keys = []) {
+      const list = Array.isArray(rows) ? rows : [];
+      const targets = (Array.isArray(keys) ? keys : [keys]).map((k) => String(k || "").toLowerCase().trim()).filter(Boolean);
+      for (const row of list) {
+        const label = String(row?.label || row?.name || "").toLowerCase().trim();
+        if (!label) continue;
+        if (targets.some((k) => label.includes(k))) {
+          const value = String(row?.value || "").trim();
+          if (hasMetricValue(value)) return value;
+        }
+      }
+      return "";
+    }
+
+    function deriveCardMetrics(row = {}) {
+      const src = row && typeof row.cardMetrics === "object" ? row.cardMetrics : {};
+      const prog = Array.isArray(row?.evaluationPrograms) ? (row.evaluationPrograms[0] || {}) : {};
+      const pick = (...vals) => {
+        for (const v of vals) if (hasMetricValue(v)) return String(v).trim();
+        return "";
+      };
+      return {
+        payoutCycle: pick(src.payoutCycle, readPair(row?.keyMetrics, ["payout cycle", "first payout"]), readPair(row?.firmDetails, ["payout", "payout frequency"]), prog.payoutCycle, prog.firstPayout, prog.payout),
+        minTradingDays: pick(src.minTradingDays, readPair(row?.tradingConditions, ["min trading days", "minimum trading days"]), readPair(row?.firmDetails, ["min trading days", "minimum trading days"]), prog.minTradingDays, prog.minimumTradingDays, prog.minDays),
+        newsTrading: pick(src.newsTrading, readPair(row?.tradingConditions, ["news trading", "news"]), readPair(row?.firmDetails, ["news trading"]), prog.newsTrading, prog.news, prog.newsPolicy),
+        timeLimit: pick(src.timeLimit, readPair(row?.tradingConditions, ["time limit", "maximum days", "max days"]), readPair(row?.firmDetails, ["time limit", "maximum days", "max days"]), prog.timeLimit, prog.maxDays, prog.maximumDays),
+        eaAllowed: pick(src.eaAllowed, readPair(row?.tradingConditions, ["ea allowed", "expert advisor"]), readPair(row?.firmDetails, ["ea allowed", "expert advisor"]), prog.eaAllowed, prog.expertAdvisor, prog.ea),
+        startingPrice: pick(src.startingPrice, readPair(row?.firmDetails, ["starting price", "price", "fee", "challenge fee"]), readPair(row?.keyMetrics, ["starting price", "price", "fee"]), prog.startingPrice, prog.challengeFee, prog.price, prog.fee)
+      };
+    }
+
+    function buildMetaFromFields(source = {}) {
+      const ceo = String(source.metaCeo || source.ceo || "").trim();
+      const markets = Array.isArray(source.metaMarkets)
+        ? source.metaMarkets
+        : parseCsv(source.metaMarketsCsv || "");
+      const founded = String(source.metaFounded || source.founded || "").trim();
+      const hq = String(source.metaHeadquarters || source.headquarters || source.country || "").trim();
+      return [
+        ceo ? `CEO: ${ceo}` : "",
+        markets.join(" • "),
+        founded ? `Founded ${founded}` : "",
+        hq
+      ].filter(Boolean).join(" • ");
+    }
+
+    function defaultReviewItems(name = "Firm") {
+      return [
+        { id: 1, name: "Ali Raza", rating: 5, time: "2 days ago", text: `${name} experience has been smooth and payouts were on time.`, program: "2-Step Challenge", likes: 10, helpful: false },
+        { id: 2, name: "Usman Khan", rating: 4, time: "1 week ago", text: `Good rules and clean dashboard on ${name}.`, program: "Instant Funding", likes: 6, helpful: false }
+      ];
+    }
+
+    function defaultReviewProfile(name = "Firm", slug = "") {
+      return {
+        firmSlug: String(slug || "").trim(),
+        firmName: String(name || "").trim(),
+        pageHeading: `${name} Reviews & Trader Ratings`,
+        pageParagraph: `Read approved ${name} reviews from traders and share your own experience with its rules, support, platforms and payouts.`,
+        communityHeading: `Trader reviews for ${name}`,
+        lastUpdatedLabel: new Date().toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" }),
+        badgeLabel: "Review",
+        ourReviewTitle: "Our Review",
+        ourReviewSubtitle: `Rank My Prop Team's overall rating and feedback for ${name}.`,
+        overallRating: 4.6,
+        overallLabel: "Excellent",
+        overallSub: "Based on our evaluation",
+        verdictHeading: "Rank My Prop Team Verdict",
+        verdictBadge: "👍 Recommended",
+        verdictText: `${name} offers a strong mix of rules clarity, payout reliability, and execution consistency for funded traders.`,
+        verdictDate: new Date().toISOString(),
+        verdictAuthor: "Rank My Prop Team",
+        breakdownHeading: "Detailed Breakdown",
+        breakdown: [
+          { key: "payout", icon: "💳", label: "Payout Process", score: 4.8, text: "Payout flow is consistent and clear for traders." },
+          { key: "support", icon: "🎧", label: "Customer Support", score: 4.5, text: "Support team remains responsive across channels." },
+          { key: "trading", icon: "📈", label: "Trading Conditions", score: 4.5, text: "Conditions are competitive for most strategies." },
+          { key: "rules", icon: "📋", label: "Rules & Transparency", score: 4.7, text: "Rulebook is transparent with clear expectations." },
+          { key: "platform", icon: "🖥️", label: "Platform & Experience", score: 4.5, text: "Dashboard and trading flow are smooth overall." },
+          { key: "value", icon: "💰", label: "Value for Money", score: 4.4, text: "Pricing-to-benefit ratio is fair for active traders." }
+        ],
+        prosHeading: "👍 What We Liked",
+        consHeading: "🔴 What Could Be Better",
+        pros: ["Clear payout process", "Transparent rules", "User-friendly dashboard"],
+        cons: ["Could add more instruments", "Weekend support can improve"],
+        bestForHeading: "Best For",
+        bestForText: `Traders looking for reliable funded account conditions from ${name}.`,
+        notIdealHeading: "Not Ideal For",
+        notIdealText: "Traders needing highly niche instrument coverage.",
+        finalVerdictHeading: "Our Final Verdict",
+        finalVerdictText: `${name} is a reliable choice for traders focused on consistency and rule clarity.`,
+        finalScore: 4.6,
+        finalLabel: "Recommended"
+      };
+    }
+
+    function updateMetaPreview() {
+      if (!metaPreview) return;
+      const manual = String(form.elements.namedItem("detailMeta")?.value || "").trim();
+      if (manual) {
+        metaPreview.textContent = manual;
+        return;
+      }
+      const line = buildMetaFromFields({
+        metaCeo: form.elements.namedItem("metaCeo")?.value || "",
+        metaMarketsCsv: form.elements.namedItem("metaMarketsCsv")?.value || "",
+        metaFounded: form.elements.namedItem("metaFounded")?.value || "",
+        metaHeadquarters: form.elements.namedItem("metaHeadquarters")?.value || ""
+      });
+      metaPreview.textContent = line || "CEO: ... • Forex • Founded ... • UAE";
+    }
+
+    function updateIdentityPreview(row = null) {
+      const isOther = picker.value === OTHER_FIRM_ID || !row;
+      newFirmFields.hidden = !isOther;
+      deleteBtn.disabled = isOther;
+      saveFirmLogoBtn.disabled = isOther;
+      identityFirmName.textContent = isOther ? "Create a new prop firm" : String(row.name || row.id || "Prop Firm");
+      identityFirmId.textContent = `ID: ${isOther ? "generated from the new firm name" : row.id}`;
+      const logo = isOther ? "" : String(row.logo || "").trim();
+      const initials = isOther ? "+" : String(row.name || row.id || "RMP").split(/\s+/).map((part) => part[0]).join("").slice(0, 3).toUpperCase();
+      firmLogoPreview.innerHTML = logo
+        ? `<img src="${logo.replace(/&/g, "&amp;").replace(/"/g, "&quot;")}" alt="${String(row.name || "Firm").replace(/&/g, "&amp;").replace(/"/g, "&quot;")} logo">`
+        : initials;
+    }
+
+    function fillForm(row) {
+      updateIdentityPreview(row);
+      window.__rmpCurrentEvaluationPrograms = Array.isArray(row?.evaluationPrograms) ? row.evaluationPrograms : [];
+      setValue("docId", row.id || "");
+      setValue("docSlug", row.slug || slugFromDetailsLink(row.detailsLink || "") || row.id || "");
+      setValue("name", row.name || "");
+      setValue("handle", row.handle || "");
+      setValue("country", row.country || "Global");
+      const rank = getRankValue(row);
+      setValue("ranking", Number.isFinite(rank) && rank < 999999 ? rank : "");
+      setValue("website", row.website || "");
+      setValue("buyLink", row.buyLink || "");
+      setValue("detailsLink", row.detailsLink || "");
+      setValue("rulesLink", row.rulesLink || "");
+      setValue("discountPage", row.discountPage || "");
+      setValue("followers", Number.isFinite(Number(row.followers)) ? Number(row.followers) : 0);
+      setValue("tagsCsv", Array.isArray(row.tags) ? row.tags.join(", ") : "");
+      setValue("marketsCsv", Array.isArray(row.markets) ? row.markets.join(", ") : "");
+      setValue("bio", row.bio || "");
+      form.elements.namedItem("payoutAssurance").checked = Boolean(row.payoutAssurance);
+      form.elements.namedItem("showFirmProfile").checked = row.showFirmProfile !== false;
+      form.elements.namedItem("showHomeTable").checked = row.showHomeTable !== false;
+      form.elements.namedItem("showListed").checked = row.showListed !== false;
+      form.elements.namedItem("showBestGlobal").checked = Boolean(row.showBestGlobal);
+      form.elements.namedItem("showRules").checked = row.showRules !== false;
+      form.elements.namedItem("showReviews").checked = row.showReviews !== false;
+      form.elements.namedItem("showOffers").checked = row.showOffers !== false;
+      fillRegionToggles(makeBestRegionFlags(row));
+      fillCategoryToggles(makeBestCategoryFlags(row));
+
+      form.elements.namedItem("active").checked = row.active !== false;
+      setValue("publishState", String(row.publishState || "published"));
+      setValue("unpublishUntil", toLocalInput(row.unpublishUntil || ""));
+
+      setValue("score", row.score || "");
+      setValue("trustedBy", row.trustedBy || "");
+      setValue("promoText", row.promoText || "");
+      setValue("reviewCount", row.reviewCount || "");
+      const rStats = ratingStatsMap.get(String(row.id || "").trim()) || {};
+      form.elements.namedItem("useManualRatingOverride").checked = Boolean(rStats.useManualOverride);
+      setValue("manualRating", Number.isFinite(Number(rStats.manualAverageRating)) ? Number(rStats.manualAverageRating) : "");
+      setValue("manualReviewCount", Number.isFinite(Number(rStats.manualReviewCount)) ? Number(rStats.manualReviewCount) : "");
+      setValue("detailMeta", row.detailMeta || "");
+      setValue("reviewSnippet", row.reviewSnippet || "");
+      setValue("metaCeo", row.metaCeo || row.ceo || "");
+      setValue("metaMarketsCsv", Array.isArray(row.metaMarkets) ? row.metaMarkets.join(", ") : "");
+      setValue("metaFounded", row.metaFounded || row.founded || "");
+      setValue("metaHeadquarters", row.metaHeadquarters || row.headquarters || row.country || "");
+      setValue("existingLogo", row.logo || "");
+      setValue("existingBanner", row.banner || "");
+      setValue("overviewTitle", row.overviewTitle || "");
+      setValue("overviewLongTitle", row.overviewLongTitle || "");
+      setValue("overviewShort", row.overviewShort || "");
+      setValue("overviewLong", row.overviewLong || "");
+      setValue("platformsCsv", Array.isArray(row.platforms) ? row.platforms.join(", ") : "");
+      setValue("paymentMethodsCsv", Array.isArray(row.paymentMethods) ? row.paymentMethods.join(", ") : "");
+      setValue("restrictedCountriesCsv", Array.isArray(row.restrictedCountries) ? row.restrictedCountries.join(", ") : "");
+      setValue("whyChooseLines", Array.isArray(row.whyChoose) ? row.whyChoose.join("\n") : "");
+      setValue("overview", row.overview || "");
+
+      setValue("performanceJson", jsonInputValue(row.performance));
+      setValue("radarMetricsJson", jsonInputValue(row.radarMetrics));
+      setValue("statsJson", jsonInputValue(row.stats));
+      setValue("keyMetricsJson", jsonInputValue(row.keyMetrics));
+      setValue("cardMetricsJson", jsonInputValue(deriveCardMetrics(row)));
+      setValue("tradingConditionsJson", jsonInputValue(row.tradingConditions));
+      setValue("firmDetailsJson", jsonInputValue(row.firmDetails));
+      setValue("leverageRowsJson", jsonInputValue(row.leverageRows));
+      setValue("commissionsJson", jsonInputValue(row.commissions));
+      setValue("evaluationProgramsJson", jsonInputValue(row.evaluationPrograms));
+      setValue("rulesPanelDataJson", jsonInputValue(row.rulesPanelData));
+      setValue("challengesPanelDataJson", jsonInputValue(row.challengesPanelData));
+      setValue("spreadsPanelDataJson", jsonInputValue(row.spreadsPanelData));
+      setValue("announcementsPanelDataJson", jsonInputValue(row.announcementsPanelData));
+      updateMetaPreview();
+      renderRulesStudio(row);
+      window.RmpFirmStructuredEditor?.load();
+    }
+
+    async function loadTeamReviewProfile(row = null) {
+      if (!teamReviewProfileJson) return;
+      const active = row || firms.find((x) => x.id === picker.value);
+      if (!active?.id) {
+        teamReviewProfileJson.value = "";
+        return;
+      }
+      const fallback = defaultReviewProfile(active.name || active.id, active.id);
+      let data = null;
+      try {
+        const snap = await getDoc(doc(db, "firmReviewProfiles", active.id));
+        if (snap.exists()) data = snap.data() || null;
+      } catch (_) {}
+      if (!data && active.teamReviewProfile && typeof active.teamReviewProfile === "object") {
+        data = active.teamReviewProfile;
+      }
+      teamReviewProfileJson.value = JSON.stringify({ ...fallback, ...(data || {}) }, null, 2);
+    }
+
+    async function loadFirms(selectedId = "") {
+      let nextFirms = [];
+      let nextStatsMap = new Map();
+      let usedCache = false;
+      let loadError = "";
+
+      try {
+        const [snap, statsSnap] = await Promise.all([
+          getDocs(collection(db, "firms")),
+          getDocs(collection(db, "firmRatingStats"))
+        ]);
+        snap.forEach((d) => nextFirms.push({ id: d.id, ...d.data() }));
+        statsSnap.forEach((d) => nextStatsMap.set(String(d.id || "").trim(), { id: d.id, ...d.data() }));
+        if (nextFirms.length) writeFirmCache(nextFirms, nextStatsMap);
+      } catch (err) {
+        loadError = err?.message || "Backend read failed";
+      }
+
+      if (!nextFirms.length) {
+        const cached = readFirmCache();
+        if (cached.firms.length) {
+          usedCache = true;
+          nextFirms = cached.firms.map((x) => ({ ...x }));
+          nextStatsMap = new Map(Object.entries(cached.ratingStats || {}));
+        }
+      }
+
+      firms = nextFirms;
+      ratingStatsMap = nextStatsMap;
+      firms.sort((a, b) => {
+        const ao = getRankValue(a);
+        const bo = getRankValue(b);
+        if (ao !== bo) return ao - bo;
+        return String(a.name || "").localeCompare(String(b.name || ""));
+      });
+
+      renderFirmIdentityOptions(picker, firms, selectedId, { includeOther: true });
+
+      if (!firms.length) {
+        const cachedDrafts = readDraftStore();
+        if (!Object.keys(cachedDrafts).length) {
+          form.reset();
+          if (teamReviewProfileJson) teamReviewProfileJson.value = "";
+        }
+        picker.value = OTHER_FIRM_ID;
+        updateIdentityPreview(null);
+        showNotice(notice, loadError || "No firms found. Choose Other / New Prop Firm to create one.", loadError ? "error" : "warn");
+        return;
+      }
+
+      if (!picker.value) picker.value = firms[0].id;
+      const active = firms.find((x) => x.id === picker.value) || firms[0];
+      fillForm(active);
+      applyDraftIfExists(active.id);
+      await loadTeamReviewProfile(active);
+      if (usedCache) showNotice(notice, "Live read unavailable. Loaded cached firm data + draft safely.", "warn");
+    }
+
+    picker.addEventListener("change", async () => {
+      saveDraftNow();
+      if (picker.value === OTHER_FIRM_ID) {
+        form.reset();
+        updateIdentityPreview(null);
+        if (teamReviewProfileJson) teamReviewProfileJson.value = "";
+        return;
+      }
+      const row = firms.find((x) => x.id === picker.value);
+      if (!row) return;
+      fillForm(row);
+      applyDraftIfExists(row.id);
+      await loadTeamReviewProfile(row);
+    });
+
+    createBtn.addEventListener("click", async () => {
+      const name = String(newFirmName.value || "").trim();
+      const slug = slugify(newFirmSlug.value || name);
+      if (!name || !slug) {
+        showNotice(notice, "New firm name and slug are required.", "error");
+        return;
+      }
+      const identity = await createFirmIdentity(db, { name, requestedId: slug });
+      const detailsLink = `/prop-firms/${slug}`;
+      const rulesLink = `/firm-rules?firm=${encodeURIComponent(slug)}`;
+      const discountPage = `/offers/${slug}`;
+      const nextRank = identity.ranking;
+      await setDoc(doc(db, "firms", slug), {
+        firmId: slug,
+        name,
+        slug,
+        handle: `@${slug}`,
+        country: "Global",
+        website: "",
+        buyLink: "",
+        detailsLink,
+        rulesLink,
+        discountPage,
+        tags: ["Forex"],
+        markets: ["Forex"],
+        followers: 0,
+        ranking: nextRank,
+        sortOrder: nextRank,
+        bio: `Best fit for ${name} traders.`,
+        payoutAssurance: false,
+        showFirmProfile: true,
+        showHomeTable: true,
+        publishState: "published",
+        active: true,
+        showListed: true,
+        showBestGlobal: false,
+        showRules: true,
+        showReviews: true,
+        showOffers: true,
+        bestRegions: {},
+        bestCategories: {},
+        promoText: "20% OFF + Cashback",
+        reviewCount: 0,
+        cardMetrics: {
+          payoutCycle: "",
+          minTradingDays: "",
+          newsTrading: "",
+          timeLimit: "",
+          eaAllowed: "",
+          startingPrice: ""
+        },
+        teamReviewProfile: defaultReviewProfile(name, slug),
+        rulesPanelData: defaultRulesPanelData(name, []),
+        updatedAt: serverTimestamp()
+      }, { merge: true });
+      await Promise.allSettled([
+        setDoc(doc(db, "firmReviews", slug), {
+          firmId: slug,
+          firmName: name,
+          items: defaultReviewItems(name),
+          createdAt: serverTimestamp(),
+          updatedAt: serverTimestamp()
+        }, { merge: true }),
+        setDoc(doc(db, "firmReviewProfiles", slug), {
+          ...defaultReviewProfile(name, slug),
+          createdAt: serverTimestamp(),
+          updatedAt: serverTimestamp()
+        }, { merge: true }),
+        setDoc(doc(db, "firmRatingStats", slug), {
+          firmSlug: slug,
+          firmName: name,
+          useManualOverride: false,
+          manualAverageRating: 0,
+          manualReviewCount: 0,
+          autoAverageRating: 0,
+          autoReviewCount: 0,
+          averageRating: 0,
+          reviewCount: 0,
+          createdAt: serverTimestamp(),
+          updatedAt: serverTimestamp()
+        }, { merge: true }),
+        setDoc(doc(db, "offers", slug), {
+          firmId: slug,
+          name,
+          slug,
+          code: "RMP",
+          discount: "10%",
+          category: "forex",
+          rating: 4.5,
+          reviews: 0,
+          description: `Use code RMP for discount on ${name}.`,
+          link: "#",
+          page: discountPage,
+          heading: `${name} Discount Code`,
+          seoTitle: `${name} Discount Code | Rank My Prop`,
+          seoDescription: `Get latest verified discount code and offer details for ${name}.`,
+          seoKeywords: `${name} discount, ${name} coupon, prop firm discount`,
+          active: false,
+          exclusive: false,
+          ranking: nextRank,
+          sortOrder: nextRank,
+          createdAt: serverTimestamp(),
+          updatedAt: serverTimestamp()
+        }, { merge: true })
+      ]);
+      showNotice(notice, "New firm created and listed live.");
+      showCenterSaveToast("New firm created successfully.");
+      newFirmName.value = "";
+      newFirmSlug.value = "";
+      await loadFirms(slug);
+    });
+
+    saveFirmLogoBtn.addEventListener("click", async () => {
+      const id = String(picker.value || "").trim();
+      const file = identityLogoFile.files?.[0] || null;
+      if (!id || id === OTHER_FIRM_ID) {
+        showNotice(notice, "Select an existing firm before uploading its logo.", "error");
+        return;
+      }
+      if (!file) {
+        showNotice(notice, "Choose a logo image first.", "error");
+        return;
+      }
+      saveFirmLogoBtn.disabled = true;
+      const originalLabel = saveFirmLogoBtn.textContent;
+      saveFirmLogoBtn.textContent = "Optimizing & saving…";
+      try {
+        const logo = await compressFirmLogo(file);
+        await setDoc(doc(db, "firms", id), { firmId: id, logo, updatedAt: serverTimestamp() }, { merge: true });
+        setValue("existingLogo", logo);
+        identityLogoFile.value = "";
+        showNotice(notice, "Central firm logo saved. Every page using this firm ID will now use this logo.");
+        showCenterSaveToast("Firm logo saved everywhere.");
+        await loadFirms(id);
+      } catch (err) {
+        showNotice(notice, err?.message || "Logo upload failed.", "error");
+      } finally {
+        saveFirmLogoBtn.disabled = false;
+        saveFirmLogoBtn.textContent = originalLabel;
+      }
+    });
+
+    deleteBtn.addEventListener("click", async () => {
+      const id = String(form.elements.namedItem("docId")?.value || picker.value || "").trim();
+      if (!id) return;
+      if (!confirm("Delete selected firm and all its detail data?")) return;
+      await deleteDoc(doc(db, "firms", id));
+      await Promise.allSettled([
+        deleteDoc(doc(db, "firmReviewProfiles", id)),
+        deleteDoc(doc(db, "firmRatingStats", id)),
+        deleteDoc(doc(db, "firmReviews", id)),
+        deleteDoc(doc(db, "offers", id))
+      ]);
+      clearDraft(id);
+      showNotice(notice, "Firm deleted.");
+      await loadFirms();
+    });
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      try {
+        window.RmpFirmStructuredEditor?.sync();
+        syncRulesStudioJson();
+        const data = formDataToObj(form);
+        const id = String(data.docId || picker.value || "").trim();
+        if (!id) throw new Error("Firm not selected");
+        const currentRow = firms.find((x) => x.id === id) || {};
+        const evaluationPrograms = jsonParse(data.evaluationProgramsJson, currentRow.evaluationPrograms || [], "evaluationPrograms");
+        const canonicalSlug = slugify(
+          data.docSlug ||
+          currentRow.slug ||
+          slugFromDetailsLink(data.detailsLink || "") ||
+          slugFromDetailsLink(currentRow.detailsLink || "") ||
+          id ||
+          data.name
+        );
+        if (!canonicalSlug) throw new Error("Firm slug missing");
+        const normalizedDetailsLink = normalizeDetailsLink(data.detailsLink, canonicalSlug);
+        const logoFile = form.elements.namedItem("logoFile")?.files?.[0] || null;
+        const bannerFile = form.elements.namedItem("bannerFile")?.files?.[0] || null;
+        const derivedMetaLine = buildMetaFromFields({
+          metaCeo: data.metaCeo || "",
+          metaMarketsCsv: data.metaMarketsCsv || "",
+          metaFounded: data.metaFounded || "",
+          metaHeadquarters: data.metaHeadquarters || ""
+        });
+        const finalMetaLine = String(data.detailMeta || "").trim() || derivedMetaLine;
+        const bestRegions = readRegionToggles();
+        const bestCategories = readCategoryToggles();
+        const anyBestRegion = Object.values(bestRegions).some(Boolean);
+        const anyBestCategory = Object.values(bestCategories).some(Boolean);
+        const showListed = Boolean(form.elements.namedItem("showListed")?.checked);
+        const showBestGlobal = Boolean(form.elements.namedItem("showBestGlobal")?.checked);
+        const autoAverageRating = Math.max(0, Math.min(5, Number(data.score || 0)));
+        const autoReviewCount = Math.max(0, Number(data.reviewCount || 0));
+        const useManualRatingOverride = Boolean(form.elements.namedItem("useManualRatingOverride")?.checked);
+        const manualAverageRating = Math.max(0, Math.min(5, Number(data.manualRating || 0)));
+        const manualReviewCount = Math.max(0, Number(data.manualReviewCount || 0));
+        const ranking = Math.max(1, Number(data.ranking || currentRow.ranking || currentRow.sortOrder || 1));
+
+        const payload = {
+          firmId: id,
+          name: String(data.name || "").trim(),
+          slug: canonicalSlug,
+          handle: String(data.handle || "").trim(),
+          country: String(data.country || "Global").trim(),
+          ranking,
+          sortOrder: ranking,
+          website: String(data.website || "").trim(),
+          buyLink: String(data.buyLink || "").trim(),
+          detailsLink: normalizedDetailsLink,
+          rulesLink: String(data.rulesLink || `/firm-rules?firm=${encodeURIComponent(canonicalSlug)}`).trim(),
+          discountPage: String(data.discountPage || `/offers/${canonicalSlug}`).trim(),
+          followers: Number(data.followers || 0),
+          tags: parseCsv(data.tagsCsv || ""),
+          markets: parseCsv(data.marketsCsv || ""),
+          bio: String(data.bio || "").trim(),
+          payoutAssurance: Boolean(form.elements.namedItem("payoutAssurance")?.checked),
+          showFirmProfile: Boolean(form.elements.namedItem("showFirmProfile")?.checked),
+          showHomeTable: Boolean(form.elements.namedItem("showHomeTable")?.checked),
+          showListed,
+          showBestGlobal,
+          showRules: Boolean(form.elements.namedItem("showRules")?.checked),
+          showReviews: Boolean(form.elements.namedItem("showReviews")?.checked),
+          showOffers: Boolean(form.elements.namedItem("showOffers")?.checked),
+          bestRegions,
+          bestCategories,
+          listingType: (showBestGlobal || anyBestRegion || anyBestCategory) ? "best" : "listed",
+
+          publishState: String(data.publishState || "published").toLowerCase(),
+          unpublishUntil: toIsoFromLocal(data.unpublishUntil || ""),
+          active: Boolean(form.elements.namedItem("active")?.checked),
+
+          score: autoAverageRating,
+          trustedBy: String(data.trustedBy || "").trim(),
+          promoText: String(data.promoText || "").trim(),
+          reviewCount: autoReviewCount,
+          detailMeta: finalMetaLine,
+          reviewSnippet: String(data.reviewSnippet || "").trim(),
+          metaCeo: String(data.metaCeo || "").trim(),
+          metaMarkets: parseCsv(data.metaMarketsCsv || ""),
+          metaFounded: String(data.metaFounded || "").trim(),
+          metaHeadquarters: String(data.metaHeadquarters || "").trim(),
+          overviewTitle: String(data.overviewTitle || "").trim(),
+          overviewLongTitle: String(data.overviewLongTitle || "").trim(),
+          overviewShort: String(data.overviewShort || "").trim(),
+          overviewLong: String(data.overviewLong || "").trim(),
+          platforms: parseCsv(data.platformsCsv || ""),
+          paymentMethods: parseCsv(data.paymentMethodsCsv || ""),
+          restrictedCountries: parseCsv(data.restrictedCountriesCsv || ""),
+          whyChoose: parseLines(data.whyChooseLines || ""),
+          overview: String(data.overview || "").trim(),
+
+          performance: jsonParse(data.performanceJson, {}, "performance"),
+          radarMetrics: jsonParse(data.radarMetricsJson, [], "radarMetrics"),
+          stats: jsonParse(data.statsJson, [], "stats"),
+          keyMetrics: jsonParse(data.keyMetricsJson, [], "keyMetrics"),
+          cardMetrics: jsonParse(data.cardMetricsJson, deriveCardMetrics({}), "cardMetrics"),
+          tradingConditions: jsonParse(data.tradingConditionsJson, [], "tradingConditions"),
+          firmDetails: jsonParse(data.firmDetailsJson, [], "firmDetails"),
+          leverageRows: jsonParse(data.leverageRowsJson, [], "leverageRows"),
+          commissions: jsonParse(data.commissionsJson, [], "commissions"),
+          evaluationPrograms,
+
+          challengesPanelData: jsonParse(data.challengesPanelDataJson, null, "challengesPanelData"),
+          spreadsPanelData: jsonParse(data.spreadsPanelDataJson, null, "spreadsPanelData"),
+          announcementsPanelData: jsonParse(data.announcementsPanelDataJson, null, "announcementsPanelData"),
+          logo: String(data.existingLogo || "").trim(),
+          banner: String(data.existingBanner || "").trim(),
+          updatedAt: serverTimestamp()
+        };
+
+        if (logoFile) payload.logo = await compressFirmLogo(logoFile);
+        if (bannerFile) payload.banner = await fileToDataUrl(bannerFile);
+
+        if (useManualRatingOverride) {
+          payload.score = manualAverageRating;
+          payload.reviewCount = manualReviewCount;
+        }
+
+        const normalizedRules = jsonParse(data.rulesPanelDataJson, null, "rulesPanelData");
+        payload.rulesPanelData = normalizedRules && typeof normalizedRules === "object"
+          ? normalizeRulesPanelData(normalizedRules, { ...currentRow, name: payload.name, evaluationPrograms })
+          : normalizeRulesPanelData({}, { ...currentRow, name: payload.name, evaluationPrograms });
+        await setDoc(doc(db, "firms", id), payload, { merge: true });
+        await Promise.allSettled([
+          setDoc(doc(db, "firmRatingStats", id), {
+            firmSlug: canonicalSlug,
+            firmName: String(payload.name || "").trim(),
+            useManualOverride: useManualRatingOverride,
+            manualAverageRating,
+            manualReviewCount,
+            autoAverageRating,
+            autoReviewCount,
+            averageRating: useManualRatingOverride ? manualAverageRating : autoAverageRating,
+            reviewCount: useManualRatingOverride ? manualReviewCount : autoReviewCount,
+            updatedAt: serverTimestamp()
+          }, { merge: true }),
+          setDoc(doc(db, "firmReviewProfiles", id), {
+            firmSlug: canonicalSlug,
+            firmName: String(payload.name || "").trim(),
+            updatedAt: serverTimestamp()
+          }, { merge: true }),
+          setDoc(doc(db, "offers", id), {
+            firmId: id,
+            slug: canonicalSlug,
+            name: String(payload.name || "").trim(),
+            ranking,
+            sortOrder: ranking,
+            updatedAt: serverTimestamp()
+          }, { merge: true })
+        ]);
+        showNotice(notice, "Firm detail content saved.");
+        showCenterSaveToast("Firm details saved successfully.");
+        clearDraft(id);
+        await loadFirms(id);
+      } catch (err) {
+        showNotice(notice, err?.message || "Save failed.", "error");
+      }
+    });
+
+    saveTeamReviewBtn?.addEventListener("click", async () => {
+      try {
+        const id = String(form.elements.namedItem("docId")?.value || picker.value || "").trim();
+        if (!id) throw new Error("Firm not selected");
+        const parsed = jsonParse(teamReviewProfileJson.value, {}, "teamReviewProfileJson");
+        const row = firms.find((x) => x.id === picker.value);
+        if (!row) throw new Error("Firm not found");
+        const canonicalSlug = slugify(
+          form.elements.namedItem("docSlug")?.value ||
+          row.slug ||
+          slugFromDetailsLink(row.detailsLink || "") ||
+          id ||
+          row.name
+        );
+        const data = {
+          ...parsed,
+          firmSlug: canonicalSlug,
+          firmName: String(row?.name || parsed.firmName || "").trim()
+        };
+        const payload = {
+          ...data,
+          updatedAt: serverTimestamp()
+        };
+
+        try {
+          await setDoc(doc(db, "firmReviewProfiles", id), payload, { merge: true });
+        } catch (firestoreErr) {
+          if (firestoreErr.code !== "permission-denied") throw firestoreErr;
+        }
+        await setDoc(doc(db, "firms", id), {
+          teamReviewProfile: data,
+          updatedAt: serverTimestamp()
+        }, { merge: true });
+        row.teamReviewProfile = data;
+        showNotice(notice, "Team review profile saved.");
+        showCenterSaveToast("Team review profile saved.");
+        await loadTeamReviewProfile(row);
+      } catch (err) {
+        showNotice(notice, err?.message || "Team review save failed.", "error");
+      }
+    });
+
+    deleteTeamReviewBtn?.addEventListener("click", async () => {
+      try {
+        const id = String(form.elements.namedItem("docId")?.value || picker.value || "").trim();
+        if (!id) throw new Error("Firm not selected");
+        if (!confirm("Delete team review profile for this firm?")) return;
+        try { await deleteDoc(doc(db, "firmReviewProfiles", id)); } catch (_) {}
+        await setDoc(doc(db, "firms", id), {
+          teamReviewProfile: null,
+          updatedAt: serverTimestamp()
+        }, { merge: true });
+        const row = firms.find((x) => x.id === id);
+        if (row) row.teamReviewProfile = null;
+        if (teamReviewProfileJson) teamReviewProfileJson.value = JSON.stringify(defaultReviewProfile(row?.name || id, id), null, 2);
+        showNotice(notice, "Team review profile deleted.");
+      } catch (err) {
+        showNotice(notice, err?.message || "Team review delete failed.", "error");
+      }
+    });
+
+    resetTeamReviewBtn?.addEventListener("click", () => {
+      const id = String(form.elements.namedItem("docId")?.value || picker.value || "").trim();
+      const row = firms.find((x) => x.id === id);
+      if (teamReviewProfileJson) teamReviewProfileJson.value = JSON.stringify(defaultReviewProfile(row?.name || id || "Firm", id), null, 2);
+    });
+
+    addFirmRuleSectionBtn?.addEventListener("click", () => addRulesStudioCard("section"));
+    addProgramRuleBtn?.addEventListener("click", () => addRulesStudioCard("program"));
+    resetRulesStudioBtn?.addEventListener("click", () => {
+      const row = firms.find((x) => x.id === activeFirmId()) || firms[0] || null;
+      resetRulesStudio(row);
+    });
+    document.querySelector(".account-rules-toolbar")?.addEventListener("click", (event) => {
+      const button = event.target.closest("button");
+      if (!button || !ruleStudioRoot) return;
+      const format = button.dataset.rulesFormat;
+      const action = button.dataset.rulesAction;
+      const start = ruleStudioRoot.selectionStart || 0;
+      const end = ruleStudioRoot.selectionEnd || start;
+      const text = ruleStudioRoot.value || "";
+      if (format) {
+        const selected = text.slice(start, end) || "text";
+        const wrappers = { bold: ["**", "**"], italic: ["_", "_"], highlight: ["==", "=="], link: ["[", "](https://)"] };
+        const [before, after] = wrappers[format] || ["", ""];
+        ruleStudioRoot.value = `${text.slice(0, start)}${before}${selected}${after}${text.slice(end)}`;
+        ruleStudioRoot.focus();
+        ruleStudioRoot.setSelectionRange(start + before.length, start + before.length + selected.length);
+      }
+      if (action === "add-block") {
+        ruleStudioRoot.value = `${text}${text.trim() ? "\n\n" : ""}New account model\nRule title||Rule description`;
+        ruleStudioRoot.focus();
+        const position = ruleStudioRoot.value.length - "Rule description".length;
+        ruleStudioRoot.setSelectionRange(position, ruleStudioRoot.value.length);
+      }
+      if (action === "remove-block") {
+        const before = text.slice(0, start);
+        const after = text.slice(end);
+        const blockStart = before.lastIndexOf("\n\n") + (before.lastIndexOf("\n\n") >= 0 ? 2 : 0);
+        const nextBreak = after.indexOf("\n\n");
+        const blockEnd = end + (nextBreak >= 0 ? nextBreak + 2 : after.length);
+        ruleStudioRoot.value = `${text.slice(0, blockStart)}${text.slice(blockEnd)}`.replace(/^\s+|\s+$/g, "");
+        ruleStudioRoot.focus();
+      }
+      syncRulesStudioJson();
+      queueDraftSave();
+      if (rulesSaveMessage) rulesSaveMessage.textContent = "Unsaved changes — click Save Rules to publish them.";
+    });
+    saveRulesStudioBtn?.addEventListener("click", async () => {
+      try {
+        await saveRulesStudio();
+      } catch (err) {
+        if (rulesSaveMessage) rulesSaveMessage.textContent = err?.message || "Rules could not be saved.";
+        showNotice(notice, err?.message || "Rules save failed.", "error");
+      }
+    });
+
+    ruleStudioRoot?.addEventListener("input", () => {
+      syncRulesStudioJson();
+      queueDraftSave();
+      if (rulesSaveMessage) rulesSaveMessage.textContent = "Unsaved changes — click Save Rules to publish them.";
+    });
+    ruleStudioRoot?.addEventListener("paste", (event) => {
+      const pasted = String(event.clipboardData?.getData("text/plain") || "").trim();
+      const looksLikeFullRulebook = /\n\s*\n/.test(pasted) && (pasted.match(/\|\|/g) || []).length >= 2;
+      if (!looksLikeFullRulebook) return;
+      event.preventDefault();
+      ruleStudioRoot.value = pasted;
+      ruleStudioRoot.dispatchEvent(new Event("input", { bubbles: true }));
+      showCenterSaveToast("Account models replaced. Click Save Rules to publish.");
+    });
+    ruleStudioRoot?.addEventListener("change", () => {
+      syncRulesStudioJson();
+      queueDraftSave();
+      if (rulesSaveMessage) rulesSaveMessage.textContent = "Unsaved changes — click Save Rules to publish them.";
+    });
+    ruleStudioRoot?.addEventListener("click", (event) => {
+      const target = event.target.closest("button");
+      if (!target) return;
+      const card = target.closest("[data-card-kind]");
+      if (target.matches("[data-rule-add]") && card) {
+        appendRuleRow(card);
+        syncRulesStudioJson();
+        queueDraftSave();
+        return;
+      }
+      if (target.matches("[data-rule-remove]")) {
+        const row = target.closest("[data-rule-row]");
+        const list = row?.parentElement;
+        row?.remove();
+        if (list && !list.children.length) appendRuleRow(card);
+        syncRulesStudioJson();
+        queueDraftSave();
+        return;
+      }
+      if (target.matches("[data-card-remove]") && card) {
+        card.remove();
+        if (!ruleStudioRoot.querySelector('[data-card-kind="section"]')) addRulesStudioCard("section");
+        if (!ruleStudioRoot.querySelector('[data-card-kind="program"]')) addRulesStudioCard("program");
+        syncRulesStudioJson();
+        queueDraftSave();
+      }
+    });
+
+    renderRegionToggles();
+    fillRegionToggles({});
+    renderCategoryToggles();
+    fillCategoryToggles({});
+
+    rulesReviewsOffersOnlyBtn?.addEventListener("click", () => {
+      form.elements.namedItem("showFirmProfile").checked = false;
+      form.elements.namedItem("showHomeTable").checked = false;
+      form.elements.namedItem("showListed").checked = false;
+      form.elements.namedItem("showBestGlobal").checked = false;
+      form.elements.namedItem("showRules").checked = true;
+      form.elements.namedItem("showReviews").checked = true;
+      form.elements.namedItem("showOffers").checked = true;
+      fillRegionToggles({});
+      fillCategoryToggles({});
+      queueDraftSave();
+      showNotice(notice, "Visibility preset applied. Save Detail Content to publish it.", "warn");
+    });
+
+    bindLogout("logoutBtn");
+    enforceAdmin(async (user) => {
+      document.getElementById("adminEmail").textContent = user.email || "Admin";
+      await loadFirms();
+    });
+
+    ["detailMeta", "metaCeo", "metaMarketsCsv", "metaFounded", "metaHeadquarters"].forEach((name) => {
+      const el = form.elements.namedItem(name);
+      if (!el) return;
+      el.addEventListener("input", updateMetaPreview);
+    });
+    form.addEventListener("input", queueDraftSave);
+    form.addEventListener("change", queueDraftSave);
+  </script>
+  <script defer src="admin-richtext.js"></script>
+<script defer src="admin-shell.js"></script>
+  <script type="module" src="/site-performance.js"></script>
+</body>
+</html>

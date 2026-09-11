@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+<meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                                                                                                                                                                  <meta property="og:image:height" content="630" />
+                                                                                                                                                        <meta property="og:image:width" content="1200" />
+<meta name="twitter:image" content="https://www.rankmyprop.in/assets/og-default-1200x630.webp" />
+<meta property="og:image" content="https://www.rankmyprop.in/assets/og-default-1200x630.webp" />
+<meta name="description" content="Page Headings CMS | Rank My Prop" />
+<meta name="theme-color" content="#0a0b12" />
+                                                                                                                                                                                                                                                                                                                                                                                                <meta name="robots" content="noindex, nofollow" />
+  <title>Page Headings CMS | Rank My Prop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/dashboard-layout.css" />
+  <style>
+    .cms-panel{padding:24px;background:rgba(26,10,28,.86)}
+    .cms-title{margin:0 0 18px;font-size:18px;font-weight:700}
+    .cms-note{padding:18px 20px;border:1px solid rgba(255,255,255,.06);border-radius:18px;background:rgba(10,7,20,.55);color:#d7d0e9;line-height:1.7}
+    .cms-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px 16px;margin-top:18px}
+    .field.full{grid-column:1/-1}
+    .field label{display:block;margin:0 0 10px;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#efe7ff}
+    .field input,.field select,.field textarea{width:100%;border:1px solid rgba(255,255,255,.06);border-radius:16px;background:#0d0917;color:#fff;padding:16px 18px;font:inherit;outline:none;box-shadow:inset 0 0 0 1px rgba(255,255,255,.015)}
+    .field input:focus,.field select:focus,.field textarea:focus{border-color:rgba(127,99,255,.7);box-shadow:0 0 0 3px rgba(127,99,255,.18)}
+    .field textarea{min-height:160px;resize:vertical}
+    .field textarea.sm{min-height:78px}
+    .field input[readonly]{opacity:.78}
+    .tool-row{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 12px}
+    .tool-btn{height:32px;border-radius:999px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);color:#fff;padding:0 14px;font-size:12px;font-weight:700;cursor:pointer}
+    .tool-btn:hover{border-color:rgba(127,99,255,.45);background:rgba(127,99,255,.14)}
+    .select-wrap{position:relative}
+    .select-wrap::after{content:"⌄";position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:18px;color:#d9d0ff;pointer-events:none}
+    .select-wrap select{appearance:none;padding-right:46px}
+    .linked-pages{margin-top:8px;font-size:12px;color:#9aa3c7}
+    .cms-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
+    .cms-actions .btn,.cms-actions .btn-primary,.cms-actions .btn-danger{height:44px;border-radius:999px;padding:0 22px;font-size:14px}
+    .items-head{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+    .items-title{margin:0;font-size:18px;font-weight:700}
+    .items-tools{display:flex;gap:10px;flex-wrap:wrap}
+    .items-tools .btn{height:38px;border-radius:999px;padding:0 18px}
+    .items-search{margin-top:16px}
+    .items-search input{width:100%;height:44px;border-radius:14px;border:1px solid rgba(255,255,255,.06);background:#0d0917;color:#fff;padding:0 16px;font:inherit;outline:none}
+    .items-search input:focus{border-color:rgba(127,99,255,.7);box-shadow:0 0 0 3px rgba(127,99,255,.18)}
+    .item-list{display:flex;flex-direction:column;gap:14px;margin-top:16px;max-height:720px;overflow:auto;padding-right:4px}
+    .item-card{border:1px solid rgba(255,255,255,.06);border-radius:18px;background:#0d0917;padding:18px;cursor:pointer;transition:.16s ease}
+    .item-card:hover,.item-card.active{border-color:rgba(127,99,255,.55);box-shadow:0 0 0 1px rgba(127,99,255,.18),0 14px 28px rgba(0,0,0,.24)}
+    .item-id{font-size:22px;font-weight:700;color:#fff;margin:0 0 12px}
+    .item-json{margin:0;font-size:13px;line-height:1.75;color:#e7dcff;white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+    .empty-state{padding:22px;border:1px dashed rgba(255,255,255,.14);border-radius:16px;color:#aeb5d6}
+    @media (max-width:980px){
+      .cms-grid{grid-template-columns:1fr}
+      .field.full{grid-column:auto}
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-dot"></span><b>RMP Admin</b></div>
+      <a class="side-link active" href="/admin-content-cms">Page Copy CMS</a>
+      <a class="side-link" href="#" id="logoutBtn">Log out</a>
+    </aside>
+
+    <main class="main">
+      <header class="top">
+        <div>
+          <h3>Page Headings & Paragraphs</h3>
+          <div class="welcome">Manage reusable public-page headings and paragraph content from backend.</div>
+        </div>
+        <div class="top-actions"><span class="chip" id="adminEmail">loading...</span></div>
+      </header>
+
+      <div class="chip" id="notice" style="display:none;"></div>
+
+      <section class="panel cms-panel">
+        <h3 class="cms-title">Page Headings & Paragraphs</h3>
+        <div class="cms-note">Dedicated offer pages are added automatically from Offers Control. Each firm can have its own heading, paragraph and updated date here.</div>
+        <form id="cmsForm">
+          <div class="cms-grid">
+            <div class="field">
+              <label for="itemId">Item ID</label>
+              <input id="itemId" name="id" placeholder="home-hero" />
+            </div>
+
+            <div class="field">
+              <label for="pageFile">Page URL / File</label>
+              <input id="pageFile" name="pageFile" placeholder="offers/goat-funded-trader" />
+            </div>
+
+            <div class="linked-pages full" id="linkedPages">Linked pages: index.html</div>
+
+            <div class="field">
+              <label for="label">Label</label>
+              <input id="label" name="label" placeholder="Home Hero" />
+            </div>
+
+            <div class="field">
+              <label for="marketType">Market Scope (Forex / Futures / All)</label>
+              <div class="select-wrap">
+                <select id="marketType" name="marketType">
+                  <option>Forex</option>
+                  <option>Futures</option>
+                  <option>All</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="titlePrimary">Heading Primary</label>
+              <input id="titlePrimary" name="titlePrimary" placeholder="Find Prop Firms That" />
+            </div>
+
+            <div class="field">
+              <label for="titleAccent">Heading Accent</label>
+              <input id="titleAccent" name="titleAccent" placeholder="Actually Pay." />
+            </div>
+
+            <div class="field">
+              <label for="paragraph">Paragraph</label>
+              <div class="tool-row" data-target="paragraph">
+                <button class="tool-btn" type="button" data-format="bold">Bold</button>
+                <button class="tool-btn" type="button" data-format="italic">Italic</button>
+                <button class="tool-btn" type="button" data-format="highlight">Highlight</button>
+                <button class="tool-btn" type="button" data-format="link">Link</button>
+              </div>
+              <textarea id="paragraph" name="paragraph" placeholder="We test, trade, and withdraw before recommending any forex prop firm. No BS. Just real results."></textarea>
+            </div>
+
+            <div class="field">
+              <label for="seoTitle">SEO Browser Title</label>
+              <input id="seoTitle" name="seoTitle" placeholder="Goat Funded Trader Discount Code 2026 | Rank My Prop" />
+            </div>
+
+            <div class="field">
+              <label for="seoDescription">Meta Description</label>
+              <textarea class="sm" id="seoDescription" name="seoDescription" placeholder="Find the latest verified discount code, savings and checkout terms."></textarea>
+            </div>
+
+            <div class="field">
+              <label for="seoKeywords">SEO Keywords</label>
+              <input id="seoKeywords" name="seoKeywords" placeholder="gft discount code, goat funded trader promo code" />
+            </div>
+
+            <div class="field">
+              <label for="lastUpdatedLabel">Last Updated Label (Auto if content changes)</label>
+              <input id="lastUpdatedLabel" name="lastUpdatedLabel" placeholder="May 7, 2026" />
+            </div>
+
+            <div class="field">
+              <label for="testedBy">Tested By (Trust Strip)</label>
+              <input id="testedBy" name="testedBy" />
+            </div>
+
+            <div class="field">
+              <label for="tradersHelped">Traders Helped (Trust Strip)</label>
+              <input id="tradersHelped" name="tradersHelped" />
+            </div>
+
+            <div class="field">
+              <label for="dataSource">Data Source (Trust Cards)</label>
+              <div class="tool-row" data-target="dataSource">
+                <button class="tool-btn" type="button" data-format="bold">Bold</button>
+                <button class="tool-btn" type="button" data-format="italic">Italic</button>
+                <button class="tool-btn" type="button" data-format="highlight">Highlight</button>
+                <button class="tool-btn" type="button" data-format="link">Link</button>
+              </div>
+              <textarea class="sm" id="dataSource" name="dataSource"></textarea>
+            </div>
+
+            <div class="field">
+              <label for="aboutVideoUrl">About Video URL (About Page Only)</label>
+              <input id="aboutVideoUrl" name="aboutVideoUrl" />
+            </div>
+
+            <div class="field">
+              <label for="contactTag">Contact Tag (Contact Page Only)</label>
+              <input id="contactTag" name="contactTag" />
+            </div>
+
+            <div class="field">
+              <label for="emailLabel">Email Label (Contact Page Only)</label>
+              <input id="emailLabel" name="emailLabel" />
+            </div>
+
+            <div class="field">
+              <label for="emailValue">Email Value (Contact Page Only)</label>
+              <input id="emailValue" name="emailValue" />
+            </div>
+
+            <div class="field">
+              <label for="emailHref">Email Href (Contact Page Only)</label>
+              <input id="emailHref" name="emailHref" />
+            </div>
+
+            <div class="field">
+              <label for="phoneLabel">Phone Label (Contact Page Only)</label>
+              <input id="phoneLabel" name="phoneLabel" />
+            </div>
+
+            <div class="field">
+              <label for="phoneValue">Phone Value (Contact Page Only)</label>
+              <input id="phoneValue" name="phoneValue" />
+            </div>
+
+            <div class="field">
+              <label for="phoneHref">Phone Href (Contact Page Only)</label>
+              <input id="phoneHref" name="phoneHref" />
+            </div>
+
+            <div class="field">
+              <label for="locationLabel">Location Label (Contact Page Only)</label>
+              <input id="locationLabel" name="locationLabel" />
+            </div>
+
+            <div class="field">
+              <label for="locationValue">Location Value (Contact Page Only)</label>
+              <input id="locationValue" name="locationValue" />
+            </div>
+
+            <div class="field">
+              <label for="locationHref">Location Href (Contact Page Only)</label>
+              <input id="locationHref" name="locationHref" />
+            </div>
+
+            <div class="field">
+              <label for="contactHelper">Contact Helper (Contact Page Only)</label>
+              <div class="tool-row" data-target="contactHelper">
+                <button class="tool-btn" type="button" data-format="bold">Bold</button>
+                <button class="tool-btn" type="button" data-format="italic">Italic</button>
+                <button class="tool-btn" type="button" data-format="highlight">Highlight</button>
+                <button class="tool-btn" type="button" data-format="link">Link</button>
+              </div>
+              <textarea id="contactHelper" name="contactHelper"></textarea>
+            </div>
+
+            <div class="field">
+              <label for="formButtonText">Form Button Text (Contact Page Only)</label>
+              <input id="formButtonText" name="formButtonText" />
+            </div>
+          </div>
+
+          <div class="cms-actions">
+            <button class="btn-primary" type="submit" id="saveBtn">Save</button>
+            <button class="btn" type="button" id="newBtn">New</button>
+            <button class="btn-danger" type="button" id="deleteBtn">Delete</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel cms-panel">
+        <div class="items-head">
+          <h3 class="items-title">Existing items</h3>
+          <div class="items-tools">
+            <button class="btn" type="button" id="copyBtn">Copy</button>
+            <button class="btn" type="button" id="excelBtn">Export to Excel</button>
+            <button class="btn" type="button" id="pdfBtn">Export to PDF</button>
+          </div>
+        </div>
+        <div class="items-search"><input id="itemSearch" placeholder="Search page headings & paragraphs..." /></div>
+        <div class="item-list" id="itemList"><div class="empty-state">Loading items...</div></div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module">
+    import { collection, deleteDoc, doc, getDoc, getDocs, serverTimestamp, setDoc } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+    import { db, saveUserProfile } from "./dashboard-common.js";
+    import { bindLogout, enforceAdmin, showNotice } from "./admin-common.js";
+
+    const COLL = "pageHeadingsParagraphs";
+    const SEO_COLL = "pageSeoContent";
+    const PAGE_COPY_COLL = "pageCopy";
+    const PUBLIC_CONTENT_COLL = "publicPageContent";
+    const PUBLIC_CACHE_COLL = "publicCache";
+    const USER_CMS_FIELD = "pageHeadingsParagraphsMap";
+    const USER_SEO_FIELD = "pageSeoContentMap";
+    const PREVIEW_KEY = "rmp-page-seo-preview";
+    const PRIVATE_RE = /^(admin-|dashboard(?:-admin)?|login|onboarding|my-profile|edit-profile|bonus)(?:\.html)?$/i;
+    const PAGE_BINDINGS = {
+      "home-hero": ["index.html"],
+      "prop-firm-page": ["bestprop.html"],
+      "compare-page": ["listedprop.html"],
+      "prop-firm-rules-page": ["propfirmrule.html"],
+      "offers-page": ["discount.html"],
+      "announcements-page": ["blog.html"],
+      "firm-reviews-page": ["prop-firm-reviews.html"]
+    };
+    const DEFAULT_ITEMS = [
+      {
+        id: "home-hero",
+        label: "Home Hero",
+        marketType: "Forex",
+        titlePrimary: "Find Prop Firms That",
+        titleAccent: "Actually Pay.",
+        paragraph: "We test, trade, and withdraw before recommending any forex prop firm. No BS. Just real results."
+      },
+      {
+        id: "prop-firm-page",
+        label: "Prop Firm Page",
+        marketType: "Forex",
+        titlePrimary: "Best Prop Firms (2026) -",
+        titleAccent: "Trusted & Verified Firms",
+        paragraph: "Explore top prop trading firms based on rules, payouts, profit split, and real trader experience before choosing a funded challenge."
+      },
+      {
+        id: "compare-page",
+        label: "Compare Page",
+        marketType: "Forex",
+        titlePrimary: "Compare Prop Firms",
+        titleAccent: "Side-by-Side",
+        paragraph: "Select up to 3 prop firms and instantly compare their rules, fees, payouts, and trading conditions all in one place."
+      },
+      {
+        id: "prop-firm-rules-page",
+        label: "Prop Firm Rules Page",
+        marketType: "Forex",
+        titlePrimary: "Prop Firm Rules by Account",
+        titleAccent: "Model",
+        paragraph: "Explore prop firm rules across different account models, including drawdown limits, payout locks, and trading restrictions."
+      },
+      {
+        id: "offers-page",
+        label: "Offers Page",
+        marketType: "Forex",
+        titlePrimary: "Best Prop Firm",
+        titleAccent: "Discount Codes & Offers (2026)",
+        paragraph: "Find the latest prop firm discount codes, exclusive offers, and verified deals to save on challenge fees with better confidence."
+      },
+      {
+        id: "announcements-page",
+        label: "Announcements Page",
+        marketType: "All",
+        titlePrimary: "Latest Prop Firm",
+        titleAccent: "News & Announcements",
+        paragraph: "Stay updated with platform launches, payout changes, new offers, and prop trading announcements that matter to active traders."
+      },
+      {
+        id: "firm-reviews-page",
+        label: "Firm Reviews Page",
+        marketType: "Forex",
+        titlePrimary: "Real Trader",
+        titleAccent: "Reviews & Ratings",
+        paragraph: "Browse verified trader reviews, payout experiences, and rating breakdowns before you trust a prop firm with your challenge fee."
+      }
+    ];
+    const TRACKED = ["label","marketType","titlePrimary","titleAccent","paragraph","seoTitle","seoDescription","seoKeywords","testedBy","tradersHelped","dataSource","aboutVideoUrl","contactTag","emailLabel","emailValue","emailHref","phoneLabel","phoneValue","phoneHref","locationLabel","locationValue","locationHref","contactHelper","formButtonText"];
+
+    const form = document.getElementById("cmsForm");
+    const itemList = document.getElementById("itemList");
+    const itemSearch = document.getElementById("itemSearch");
+    const linkedPages = document.getElementById("linkedPages");
+    const notice = document.getElementById("notice");
+    const saveBtn = document.getElementById("saveBtn");
+    const newBtn = document.getElementById("newBtn");
+    const deleteBtn = document.getElementById("deleteBtn");
+    const copyBtn = document.getElementById("copyBtn");
+    const excelBtn = document.getElementById("excelBtn");
+    const pdfBtn = document.getElementById("pdfBtn");
+    const itemId = document.getElementById("itemId");
+    const pageFile = document.getElementById("pageFile");
+    const label = document.getElementById("label");
+    const state = { items: [], activeId: "", q: "", user: null };
+
+    bindLogout("logoutBtn");
+
+    function slugify(v = "") {
+      return String(v || "").toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+    }
+
+    function routeToPageFile(pathname = "") {
+      const raw = String(pathname || "/").trim().split("?")[0].split("#")[0];
+      const clean = raw.replace(/^https?:\/\/[^/]+/i, "");
+      const parts = clean.split("/").filter(Boolean).map((p) => String(p || "").toLowerCase());
+      if (!parts.length) return "index.html";
+      if (parts[0] === "prop-firms" && parts[1]) {
+        if (parts[2] === "reviews") return "firm-reviews.html";
+        if (parts[2] === "rules") return "firm-detail.html";
+        return "firm-detail.html";
+      }
+      if (parts[0] === "offers" && parts[1]) return `offers-${slugify(parts[1])}.html`;
+      if ((parts[0] === "blog" || parts[0] === "news" || parts[0] === "trading-guides" || parts[0] === "funding-strategies" || parts[0] === "trading-psychology" || parts[0] === "beginner-tutorials") && parts[1]) {
+        return "prop-news-post.html";
+      }
+      if (parts[0] === "tools") {
+        const tool = String(parts[1] || "").toLowerCase();
+        if (tool === "lot-size-calculator") return "lotsizecalculator.html";
+        if (tool === "pip-calculator" || tool === "risk-to-reward-calculator") return "risk-to-reward-calculator.html";
+        if (tool === "profit-split-calculator") return "profit-split-calculator.html";
+        if (tool === "drawdown-calculator") return "drawdown-calculator.html";
+        if (tool === "consistency-rule-calculator") return "consistency-rule-calculator.html";
+      }
+      const last = String(parts[parts.length - 1] || "").toLowerCase();
+      if (!last) return "index.html";
+      return last.endsWith(".html") ? last : `${last}.html`;
+    }
+
+    function normalizePageRef(name = "") {
+      let raw = String(name || "").trim();
+      if (!raw) return "";
+      try { raw = new URL(raw, window.location.origin).pathname; } catch (_) {}
+      raw = raw.split("?")[0].split("#")[0].replace(/^\/+|\/+$/g, "");
+      if (!raw) return "index.html";
+      return raw.toLowerCase();
+    }
+
+    function docIdForPage(name = "") {
+      const page = normalizePageRef(name) || "index.html";
+      return "page-" + String(page).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 120);
+    }
+
+    function stablePublicContentId(page = "", item = {}) {
+      const base = pageBase(page);
+      const route = `/${base}`.replace(/\/+/g, "/");
+      const parts = route.split("/").filter(Boolean);
+      if (base === "index" || base === "home-page") return "home-hero";
+      if (base === "offers" || base === "discount") return "offers-page";
+      if (base === "compare" || base === "listedprop") return "compare-page";
+      if (base === "reviews" || base === "prop-firm-reviews") return "firm-reviews-page";
+      if (base === "prop-firm-rules" || base === "propfirmrule") return "prop-firm-rules-page";
+      if (parts[0] === "prop-firms" && parts[1]) return `firm-review-${String(parts[1]).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "")}`;
+      if (parts[0] === "prop-firm-rules" && parts[1]) {
+        const firm = String(parts[1]).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+        const model = String(parts[2] || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+        return model ? `challenge-model-${firm}-${model}` : `firm-rules-${firm}`;
+      }
+      if (parts[0] === "offers" && parts[1]) return `offer-${String(parts[1]).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "")}`;
+      if (parts.length >= 2 && ["blog", "news", "trading-guides", "funding-strategies", "trading-psychology", "beginner-tutorials"].includes(parts[0])) {
+        return `article-${slugify(parts[0])}-${slugify(parts[1])}`;
+      }
+      return String(item.id || `page-${slugify(base)}`).trim();
+    }
+
+    function publicCanonical(page = "") {
+      const base = pageBase(page);
+      if (base === "index" || base === "home-page") return "https://www.rankmyprop.in/";
+      return `https://www.rankmyprop.in/${base}`;
+    }
+
+    async function publishCacheVersion(ids = []) {
+      const version = String(Date.now());
+      const affectedIds = Array.from(new Set(ids.filter(Boolean)));
+      await Promise.all(affectedIds.map((id) => setDoc(doc(db, PUBLIC_CACHE_COLL, id), { id, version, updatedAt: serverTimestamp() }, { merge: true })));
+      try { affectedIds.forEach((id) => localStorage.setItem(`rmp:public-cache-version:${id}`, version)); } catch (_) {}
+      window.dispatchEvent(new CustomEvent("rankmyprop-public-cache-updated", { detail: { version, ids: affectedIds } }));
+    }
+
+    function pageBase(name = "") {
+      return String(normalizePageRef(name) || "").trim().replace(/^\/+/, "").replace(/\.html$/i, "").toLowerCase();
+    }
+
+    function pageLabel(name = "") {
+      const base = pageBase(name);
+      if (base === "index" || base === "home-page") return "Home";
+      const raw = base.replace(/[-_]+/g, " ").trim();
+      return raw ? raw.replace(/\b\w/g, (m) => m.toUpperCase()) : "Page";
+    }
+
+    function humanDate(date = new Date()) {
+      return new Intl.DateTimeFormat("en-US", { month: "long", day: "numeric", year: "numeric" }).format(date);
+    }
+
+    function isPermErr(err) {
+      return /permission|insufficient/i.test(String(err?.message || ""));
+    }
+
+    function scrollTopNow() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function readPreviewMap() {
+      try {
+        return JSON.parse(localStorage.getItem(PREVIEW_KEY) || "{}") || {};
+      } catch (_) {
+        return {};
+      }
+    }
+
+    function writePreviewMap(map) {
+      try {
+        localStorage.setItem(PREVIEW_KEY, JSON.stringify(map || {}));
+      } catch (_) {}
+    }
+
+    function savePreviewPages(item) {
+      const map = readPreviewMap();
+      const heading = joinHeading(item.titlePrimary, item.titleAccent);
+      (item.linkedPages || []).forEach((page) => {
+        const key = normalizePageRef(page);
+        if (!key) return;
+        map[key] = {
+          heading,
+          paragraph: item.paragraph || "",
+          lastUpdatedLabel: item.lastUpdatedLabel || humanDate(),
+          updatedAt: Date.now()
+        };
+      });
+      writePreviewMap(map);
+    }
+
+    function clearPreviewPages(item) {
+      const map = readPreviewMap();
+      (item.linkedPages || []).forEach((page) => {
+        const key = normalizePageRef(page);
+        if (key) delete map[key];
+      });
+      writePreviewMap(map);
+    }
+
+    function dedupePages(list = []) {
+      return Array.from(new Set((list || []).map((v) => normalizePageRef(v)).filter(Boolean)));
+    }
+
+    function linkedFor(row = {}) {
+      if (row.pageFile) return dedupePages([row.pageFile]);
+      if (Array.isArray(row.linkedPages) && row.linkedPages.length) return dedupePages(row.linkedPages);
+      return dedupePages(PAGE_BINDINGS[String(row.id || "").trim()] || []);
+    }
+
+    function splitHeading(text = "") {
+      const t = String(text || "").trim();
+      if (!t) return { titlePrimary: "", titleAccent: "" };
+      const mid = t.match(/^(.*?)([:\-–]\s+.+)$/);
+      if (mid) return { titlePrimary: String(mid[1] || "").trim(), titleAccent: String(mid[2] || "").replace(/^[:\-–]\s*/, "").trim() };
+      const words = t.split(/\s+/);
+      if (words.length < 4) return { titlePrimary: t, titleAccent: "" };
+      return { titlePrimary: words.slice(0, -2).join(" "), titleAccent: words.slice(-2).join(" ") };
+    }
+
+    function joinHeading(primary = "", accent = "") {
+      return [String(primary || "").trim(), String(accent || "").trim()].filter(Boolean).join(" ").trim();
+    }
+
+    function baseItem(row = {}) {
+      const id = String(row.id || "").trim();
+      const pageFileValue = normalizePageRef(row.pageFile || "");
+      return {
+        id,
+        label: "",
+        marketType: "Forex",
+        titlePrimary: "",
+        titleAccent: "",
+        paragraph: "",
+        seoTitle: "",
+        seoDescription: "",
+        seoKeywords: "",
+        lastUpdatedLabel: "",
+        testedBy: "",
+        tradersHelped: "",
+        dataSource: "",
+        aboutVideoUrl: "",
+        contactTag: "",
+        emailLabel: "",
+        emailValue: "",
+        emailHref: "",
+        phoneLabel: "",
+        phoneValue: "",
+        phoneHref: "",
+        locationLabel: "",
+        locationValue: "",
+        locationHref: "",
+        contactHelper: "",
+        formButtonText: "",
+        deleted: false,
+        ...row,
+        pageFile: pageFileValue || "",
+        linkedPages: linkedFor({ id, ...row, pageFile: pageFileValue || row.pageFile || "" })
+      };
+    }
+
+    function filteredItems() {
+      if (!state.q) return state.items;
+      const q = state.q.toLowerCase();
+      return state.items.filter((item) => {
+        const txt = JSON.stringify(item).toLowerCase();
+        return txt.includes(q);
+      });
+    }
+
+    function updateLinkedPreview() {
+      const curr = readForm(false);
+      const pages = linkedFor(curr);
+      linkedPages.textContent = `Linked pages: ${pages.length ? pages.join(", ") : "No auto-linked page"}`;
+    }
+
+    function fillForm(row, shouldScroll = false) {
+      const item = baseItem(row);
+      for (const [k, v] of Object.entries(item)) {
+        const el = form.elements.namedItem(k);
+        if (el) el.value = Array.isArray(v) ? v.join(", ") : String(v || "");
+      }
+      state.activeId = item.id;
+      updateLinkedPreview();
+      renderItems();
+      if (shouldScroll) scrollTopNow();
+    }
+
+    function resetForm() {
+      fillForm(baseItem({ id: "", label: "", marketType: "Forex", lastUpdatedLabel: humanDate() }), true);
+    }
+
+    function readForm(finalize = true) {
+      const fd = new FormData(form);
+      const row = {};
+      fd.forEach((v, k) => row[k] = String(v || "").trim());
+      row.id = finalize ? slugify(row.id || row.label || row.pageFile) : String(row.id || row.label || row.pageFile || "").trim();
+      row.deleted = false;
+      row.pageFile = normalizePageRef(row.pageFile || "");
+      row.linkedPages = linkedFor(row);
+      if (!row.pageFile && row.linkedPages[0]) row.pageFile = row.linkedPages[0];
+      return baseItem(row);
+    }
+
+    function previewJson(item) {
+      const clean = {};
+      Object.keys(item).forEach((k) => {
+        const v = item[k];
+        if (v === "" || v == null || k === "createdAt" || k === "updatedAt") return;
+        clean[k] = v;
+      });
+      return JSON.stringify(clean);
+    }
+
+    function normText(v = "") {
+      return String(v || "").replace(/\s+/g, " ").trim();
+    }
+
+    function parseHtmlText(raw = "") {
+      const el = document.createElement("div");
+      el.innerHTML = String(raw || "");
+      return normText(el.textContent || "");
+    }
+
+    function marketTypeFor(file = "") {
+      return /futures/i.test(String(file || "")) ? "Futures" : "Forex";
+    }
+
+    function goodHeading(text = "") {
+      const t = normText(text);
+      return /[a-z]/i.test(t) && !/^\d+(\.\d+)?$/.test(t);
+    }
+
+    function titleText(docHtml) {
+      return normText(docHtml.querySelector("title")?.textContent || "").replace(/\s*[\-|–]\s*Rank My Prop\s*$/i, "").replace(/\s*\|\s*Rank My Prop\s*$/i, "");
+    }
+
+    function metaDescText(docHtml) {
+      return normText(docHtml.querySelector('meta[name="description"]')?.getAttribute("content") || "");
+    }
+
+    function pickHeading(docHtml, file = "") {
+      const selectors = [
+        "main h1","section h1",".hero h1","#h",".h1","article h1","h1","main h2","section h2","h2"
+      ];
+      for (const sel of selectors) {
+        const nodes = Array.from(docHtml.querySelectorAll(sel));
+        for (const node of nodes) {
+          const text = parseHtmlText(node.innerHTML || node.textContent || "");
+          if (goodHeading(text)) return text;
+        }
+      }
+      return titleText(docHtml) || pageLabel(file);
+    }
+
+    function pickParagraph(docHtml) {
+      const meta = metaDescText(docHtml);
+      if (meta) return meta;
+      const nodes = Array.from(docHtml.querySelectorAll("main p,.hero p,article p,section p,p"));
+      for (const node of nodes) {
+        const text = parseHtmlText(node.innerHTML || node.textContent || "");
+        if (text.length >= 36 && /[a-z]/i.test(text)) return text;
+      }
+      return "";
+    }
+
+    function pageItemFromHtml(file = "", html = "") {
+      const pageFileName = normalizePageRef(file) || "index.html";
+      const parsed = new DOMParser().parseFromString(String(html || ""), "text/html");
+      const base = stablePublicContentId(pageFileName);
+      const heading = pickHeading(parsed, pageFileName);
+      const split = splitHeading(heading);
+      const paragraph = pickParagraph(parsed);
+      return baseItem({
+        id: base,
+        pageFile: pageFileName,
+        linkedPages: [pageFileName],
+        label: pageLabel(pageFileName),
+        marketType: marketTypeFor(pageFileName),
+        titlePrimary: split.titlePrimary || heading,
+        titleAccent: split.titleAccent || "",
+        paragraph,
+        lastUpdatedLabel: humanDate()
+      });
+    }
+
+    async function readSitemapLocs(sitemapUrl, seen = new Set()) {
+      const abs = new URL(String(sitemapUrl || ""), window.location.origin).toString();
+      if (seen.has(abs)) return [];
+      seen.add(abs);
+      try {
+        const res = await fetch(abs, { cache: "no-store" });
+        if (!res.ok) return [];
+        const xml = await res.text();
+        const docXml = new DOMParser().parseFromString(xml, "application/xml");
+        const root = String(docXml.documentElement?.nodeName || "").toLowerCase();
+        const locs = Array.from(docXml.getElementsByTagName("loc"))
+          .map((n) => String(n.textContent || "").trim())
+          .filter(Boolean);
+        if (root.includes("sitemapindex")) {
+          const out = [];
+          for (const loc of locs) out.push(...await readSitemapLocs(loc, seen));
+          return out;
+        }
+        return locs;
+      } catch (_) {
+        return [];
+      }
+    }
+
+    async function discoverPageFiles() {
+      const pages = new Set();
+      const keep = (file = "") => {
+        const clean = normalizePageRef(file);
+        if (!clean || !/\.html$/i.test(clean)) return;
+        if (PRIVATE_RE.test(clean)) return;
+        pages.add(clean);
+      };
+      const locs = await readSitemapLocs("sitemap.xml");
+      if (!locs.length) {
+        const fallbacks = ["sitemap-pages.xml", "sitemap-posts.xml", "sitemap-firms.xml", "sitemap-offers.xml"];
+        for (const file of fallbacks) {
+          const rows = await readSitemapLocs(file);
+          rows.forEach((loc) => loc && keep(loc));
+        }
+      } else {
+        locs.forEach((loc) => loc && keep(loc));
+      }
+      Object.values(PAGE_BINDINGS).flat().forEach(keep);
+      keep("index.html");
+      return Array.from(pages).sort((a, b) => a.localeCompare(b));
+    }
+
+    async function scanPages(files = []) {
+      const out = [];
+      let done = 0;
+      async function one(file) {
+        try {
+          const res = await fetch(file, { cache: "no-store" });
+          if (!res.ok) return;
+          const html = await res.text();
+          out.push(pageItemFromHtml(file, html));
+        } catch (_) {}
+        done += 1;
+        if (done % 12 === 0 || done === files.length) {
+          itemList.innerHTML = `<div class="empty-state">Scanning pages... ${done}/${files.length}</div>`;
+        }
+      }
+      const limit = 8;
+      for (let i = 0; i < files.length; i += limit) {
+        await Promise.all(files.slice(i, i + limit).map(one));
+      }
+      return out.sort((a, b) => a.label.localeCompare(b.label));
+    }
+
+    async function safeGetDocs(name) {
+      try {
+        const snap = await getDocs(collection(db, name));
+        const rows = [];
+        snap.forEach((d) => rows.push({ id: d.id, ...d.data() }));
+        return rows;
+      } catch (_) {
+        return [];
+      }
+    }
+
+    async function loadShadowMap(field) {
+      const uid = String(state.user?.uid || "").trim();
+      if (!uid) return {};
+      const out = {};
+      try {
+        const snap = await getDoc(doc(db, "users", uid));
+        if (snap.exists()) Object.assign(out, snap.data()?.[field] || {});
+      } catch (_) {}
+      try {
+        const snap = await getDoc(doc(db, uid, "profile"));
+        if (snap.exists()) Object.assign(out, snap.data()?.[field] || {});
+      } catch (_) {}
+      return out;
+    }
+
+    async function saveShadowMap(field, value) {
+      if (!state.user?.uid) return;
+      await saveUserProfile(state.user.uid, {
+        [field]: value,
+        updatedAt: serverTimestamp()
+      }, { merge: true });
+    }
+
+    function mergeSeo(item, seo = {}) {
+      const split = splitHeading(String(seo.heading || ""));
+      return baseItem({
+        ...item,
+        label: seo.label || item.label,
+        marketType: seo.marketType || item.marketType,
+        titlePrimary: seo.titlePrimary || split.titlePrimary || item.titlePrimary,
+        titleAccent: seo.titleAccent || split.titleAccent || item.titleAccent,
+        paragraph: normText(seo.paragraph || "") || item.paragraph,
+        seoTitle: seo.seoTitle || item.seoTitle,
+        seoDescription: seo.seoDescription || item.seoDescription,
+        seoKeywords: seo.seoKeywords || item.seoKeywords,
+        lastUpdatedLabel: seo.lastUpdatedLabel || item.lastUpdatedLabel,
+        testedBy: seo.testedBy || item.testedBy,
+        tradersHelped: seo.tradersHelped || item.tradersHelped,
+        dataSource: seo.dataSource || item.dataSource,
+        aboutVideoUrl: seo.aboutVideoUrl || item.aboutVideoUrl,
+        contactTag: seo.contactTag || item.contactTag,
+        emailLabel: seo.emailLabel || item.emailLabel,
+        emailValue: seo.emailValue || item.emailValue,
+        emailHref: seo.emailHref || item.emailHref,
+        phoneLabel: seo.phoneLabel || item.phoneLabel,
+        phoneValue: seo.phoneValue || item.phoneValue,
+        phoneHref: seo.phoneHref || item.phoneHref,
+        locationLabel: seo.locationLabel || item.locationLabel,
+        locationValue: seo.locationValue || item.locationValue,
+        locationHref: seo.locationHref || item.locationHref,
+        contactHelper: seo.contactHelper || item.contactHelper,
+        formButtonText: seo.formButtonText || item.formButtonText
+      });
+    }
+
+    function renderItems() {
+      const rows = filteredItems();
+      if (!rows.length) {
+        itemList.innerHTML = '<div class="empty-state">No matching items.</div>';
+        return;
+      }
+      itemList.innerHTML = rows.map((item) => `
+        <button class="item-card${item.id === state.activeId ? " active" : ""}" type="button" data-id="${item.id}">
+          <div class="item-id">${item.id}</div>
+          <pre class="item-json">${previewJson(item).replace(/&/g,"&amp;").replace(/</g,"&lt;")}</pre>
+        </button>
+      `).join("");
+    }
+
+    async function loadItems() {
+      itemList.innerHTML = '<div class="empty-state">Loading items...</div>';
+      const [savedRows, seoRows, pageCopyRows, files, shadowSaved, shadowSeo, offerRows] = await Promise.all([
+        safeGetDocs(COLL),
+        safeGetDocs(SEO_COLL),
+        safeGetDocs(PAGE_COPY_COLL),
+        discoverPageFiles(),
+        loadShadowMap(USER_CMS_FIELD),
+        loadShadowMap(USER_SEO_FIELD),
+        safeGetDocs("offers")
+      ]);
+      const scanned = await scanPages(files);
+      const offerPageSeeds = offerRows
+        .filter((row) => row.active !== false)
+        .map((row) => {
+          const slug = slugify(row.slug || row.firmId || row.firmName || row.name || row.id);
+          if (!slug) return null;
+          const fallbackName = slug.replace(/-/g, " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
+          const name = String(row.name || row.firmName || fallbackName).trim();
+          return baseItem({
+            id: `offer-${slug}`,
+            pageFile: `offers/${slug}`,
+            linkedPages: [`offers/${slug}`],
+            label: `${name} Discount Page`,
+            marketType: /futures/i.test(String(row.category || "")) ? "Futures" : "Forex",
+            titlePrimary: name,
+            titleAccent: "Discount Code & Promo Offers",
+            paragraph: String(row.paragraph || `Get the latest ${name} discount code, current promotional savings and verified checkout details.`).trim(),
+            lastUpdatedLabel: String(row.lastUpdatedLabel || humanDate()).trim()
+          });
+        })
+        .filter(Boolean);
+      const savedById = new Map(savedRows.map((row) => [String(row.id || ""), baseItem(row)]));
+      const savedByPublicId = new Map(savedRows.flatMap((row) => {
+        const item = baseItem(row);
+        return linkedFor(item).map((p) => [stablePublicContentId(p, item), item]).filter(([id]) => !!id);
+      }));
+      const seoByPublicId = new Map(seoRows.map((row) => [stablePublicContentId(row.page || row.pagePath || "", row), row]).filter(([id]) => !!id));
+      Object.values(shadowSaved || {}).forEach((row) => {
+        const item = baseItem(row);
+        if (!item.id) return;
+        savedById.set(item.id, item);
+        linkedFor(item).forEach((p) => {
+          const key = normalizePageRef(p);
+          if (key) savedByPublicId.set(stablePublicContentId(key, item), item);
+        });
+      });
+      Object.entries(shadowSeo || {}).forEach(([page, row]) => {
+        const key = normalizePageRef(page);
+        if (key) seoByPublicId.set(stablePublicContentId(key, row || {}), row || {});
+      });
+      const copyByPublicId = new Map(pageCopyRows.map((row) => [stablePublicContentId(row.page || row.pagePath || "", row), row]).filter(([id]) => !!id));
+      const routeSeeds = new Map([...scanned, ...offerPageSeeds].map((row) => [stablePublicContentId(row.pageFile, row), row]));
+      const merged = Array.from(routeSeeds.entries()).map(([publicId, raw]) => {
+        const saved = savedByPublicId.get(publicId) || savedById.get(publicId) || savedById.get(raw.id);
+        const seo = seoByPublicId.get(publicId) || {};
+        const copy = copyByPublicId.get(publicId) || {};
+        let item = mergeSeo(raw, seo);
+        if (copy.page) item = baseItem({ ...item, label: saved?.label || item.label, lastUpdatedLabel: item.lastUpdatedLabel || humanDate() });
+        if (saved) item = baseItem({ ...item, ...saved, pageFile: saved.pageFile || raw.pageFile, linkedPages: linkedFor(saved.pageFile ? saved : { ...saved, pageFile: raw.pageFile }) });
+        return item;
+      });
+      const seen = new Set(merged.map((row) => row.id));
+      const pushUnique = (row) => {
+        const item = baseItem(row);
+        if (!item.id || seen.has(item.id)) return;
+        seen.add(item.id);
+        merged.push(item);
+      };
+      DEFAULT_ITEMS.forEach((seed) => {
+        pushUnique(seed);
+      });
+      savedRows.forEach((row) => {
+        pushUnique(row);
+      });
+      Object.values(shadowSaved || {}).forEach((row) => {
+        pushUnique(row);
+      });
+      state.items = merged
+        .filter((row) => row.deleted !== true)
+        .sort((a, b) => a.label.localeCompare(b.label) || a.id.localeCompare(b.id));
+      if (!state.items.length) {
+        resetForm();
+        itemList.innerHTML = '<div class="empty-state">No items found.</div>';
+        return;
+      }
+      const next = state.items.find((item) => item.id === state.activeId) || state.items[0];
+      fillForm(next);
+    }
+
+    async function mirrorSeo(item) {
+      const shadowMap = await loadShadowMap(USER_SEO_FIELD);
+      const publicIds = [];
+      for (const page of item.linkedPages) {
+        let prev = {};
+        const heading = joinHeading(item.titlePrimary, item.titleAccent);
+        try {
+          const ref = doc(db, SEO_COLL, docIdForPage(page));
+          const snap = await getDoc(ref);
+          prev = snap.exists() ? (snap.data() || {}) : {};
+          const nextPayload = {
+            page,
+            pagePath: `/${page}`,
+            label: item.label,
+            marketType: item.marketType,
+            heading,
+            paragraph: item.paragraph,
+            seoTitle: item.seoTitle,
+            seoDescription: item.seoDescription,
+            seoKeywords: item.seoKeywords,
+            defaultHeading: String(prev.defaultHeading || ""),
+            defaultParagraph: String(prev.defaultParagraph || ""),
+            titlePrimary: item.titlePrimary,
+            titleAccent: item.titleAccent,
+            lastUpdatedLabel: item.lastUpdatedLabel,
+            testedBy: item.testedBy,
+            tradersHelped: item.tradersHelped,
+            dataSource: item.dataSource,
+            aboutVideoUrl: item.aboutVideoUrl,
+            contactTag: item.contactTag,
+            emailLabel: item.emailLabel,
+            emailValue: item.emailValue,
+            emailHref: item.emailHref,
+            phoneLabel: item.phoneLabel,
+            phoneValue: item.phoneValue,
+            phoneHref: item.phoneHref,
+            locationLabel: item.locationLabel,
+            locationValue: item.locationValue,
+            locationHref: item.locationHref,
+            contactHelper: item.contactHelper,
+            formButtonText: item.formButtonText,
+            updatedAt: serverTimestamp(),
+            lastSeenAt: serverTimestamp()
+          };
+          nextPayload.defaultHeading = String(prev.defaultHeading || "");
+          nextPayload.defaultParagraph = String(prev.defaultParagraph || "");
+          await setDoc(ref, nextPayload, { merge: true });
+          await setDoc(doc(db, PUBLIC_CONTENT_COLL, stablePublicContentId(page, item)), {
+            id: stablePublicContentId(page, item),
+            heading,
+            paragraph: item.paragraph,
+            seoTitle: item.seoTitle || heading,
+            seoDescription: item.seoDescription || item.paragraph,
+            canonical: publicCanonical(page),
+            robots: "index, follow, max-image-preview:large, max-snippet:-1",
+            page,
+            updatedAt: serverTimestamp()
+          }, { merge: true });
+          publicIds.push(stablePublicContentId(page, item));
+          delete shadowMap[page];
+        } catch (err) {
+          if (!isPermErr(err)) throw err;
+          shadowMap[page] = {
+            page,
+            pagePath: `/${page}`,
+            label: item.label,
+            marketType: item.marketType,
+            heading,
+            paragraph: item.paragraph,
+            seoTitle: item.seoTitle,
+            seoDescription: item.seoDescription,
+            seoKeywords: item.seoKeywords,
+            defaultHeading: String(prev.defaultHeading || ""),
+            defaultParagraph: String(prev.defaultParagraph || ""),
+            titlePrimary: item.titlePrimary,
+            titleAccent: item.titleAccent,
+            lastUpdatedLabel: item.lastUpdatedLabel,
+            testedBy: item.testedBy,
+            tradersHelped: item.tradersHelped,
+            dataSource: item.dataSource,
+            aboutVideoUrl: item.aboutVideoUrl,
+            contactTag: item.contactTag,
+            emailLabel: item.emailLabel,
+            emailValue: item.emailValue,
+            emailHref: item.emailHref,
+            phoneLabel: item.phoneLabel,
+            phoneValue: item.phoneValue,
+            phoneHref: item.phoneHref,
+            locationLabel: item.locationLabel,
+            locationValue: item.locationValue,
+            locationHref: item.locationHref,
+            contactHelper: item.contactHelper,
+            formButtonText: item.formButtonText,
+            updatedAt: serverTimestamp(),
+            lastSeenAt: serverTimestamp()
+          };
+        }
+      }
+      await saveShadowMap(USER_SEO_FIELD, shadowMap);
+      return publicIds;
+    }
+
+    async function resetSeoMirror(item) {
+      const shadowMap = await loadShadowMap(USER_SEO_FIELD);
+      for (const page of item.linkedPages) {
+        try {
+          await setDoc(doc(db, SEO_COLL, docIdForPage(page)), {
+            heading: "",
+            paragraph: "",
+            seoTitle: "",
+            seoDescription: "",
+            seoKeywords: "",
+            titlePrimary: "",
+            titleAccent: "",
+            updatedAt: serverTimestamp()
+          }, { merge: true });
+        } catch (err) {
+          if (!isPermErr(err)) throw err;
+        }
+        delete shadowMap[page];
+      }
+      await saveShadowMap(USER_SEO_FIELD, shadowMap);
+    }
+
+    async function saveItem() {
+      const next = readForm(true);
+      if (!next.id || !next.label) {
+        showNotice(notice, "Item ID and label are required.", "error");
+        return;
+      }
+      const prev = state.items.find((item) => item.id === state.activeId || item.id === next.id) || null;
+      const changed = !prev || TRACKED.some((k) => String(prev[k] || "") !== String(next[k] || ""));
+      if (!next.lastUpdatedLabel || changed) next.lastUpdatedLabel = humanDate();
+      saveBtn.disabled = true;
+      saveBtn.textContent = "Saving...";
+      try {
+        if (prev && prev.id && prev.id !== next.id) {
+          await resetSeoMirror(prev);
+          clearPreviewPages(prev);
+        }
+        const changedPublicIds = await mirrorSeo(next);
+        const payload = {
+          ...next,
+          createdAt: prev?.createdAt || serverTimestamp(),
+          updatedAt: serverTimestamp()
+        };
+        const shadowMap = await loadShadowMap(USER_CMS_FIELD);
+        if (prev && prev.id && prev.id !== next.id) {
+          try { await deleteDoc(doc(db, COLL, prev.id)); } catch (err) { if (!isPermErr(err)) throw err; }
+          delete shadowMap[prev.id];
+        }
+        try {
+          await setDoc(doc(db, COLL, next.id), payload, { merge: true });
+          delete shadowMap[next.id];
+        } catch (err) {
+          if (!isPermErr(err)) throw err;
+          shadowMap[next.id] = payload;
+        }
+        await saveShadowMap(USER_CMS_FIELD, shadowMap);
+        savePreviewPages(next);
+        try { await publishCacheVersion(changedPublicIds); } catch (_) {}
+        state.activeId = next.id;
+        showNotice(notice, "Saved.");
+        scrollTopNow();
+        await loadItems();
+      } catch (e) {
+        showNotice(notice, e?.message || "Save failed.", "error");
+        scrollTopNow();
+      } finally {
+        saveBtn.disabled = false;
+        saveBtn.textContent = "Save";
+      }
+    }
+
+    async function deleteItem() {
+      const curr = state.items.find((item) => item.id === state.activeId);
+      if (!curr) return;
+      if (!window.confirm(`Delete ${curr.id}?`)) return;
+      deleteBtn.disabled = true;
+      try {
+        const affectedPublicIds = curr.linkedPages.map((page) => stablePublicContentId(page, curr)).filter(Boolean);
+        try {
+          await deleteDoc(doc(db, COLL, curr.id));
+        } catch (err) {
+          if (!isPermErr(err)) throw err;
+        }
+        await resetSeoMirror(curr);
+        const shadowMap = await loadShadowMap(USER_CMS_FIELD);
+        delete shadowMap[curr.id];
+        await saveShadowMap(USER_CMS_FIELD, shadowMap);
+        clearPreviewPages(curr);
+        try { await publishCacheVersion(affectedPublicIds); } catch (_) {}
+        showNotice(notice, "Deleted.");
+        state.activeId = "";
+        scrollTopNow();
+        await loadItems();
+      } catch (e) {
+        showNotice(notice, e?.message || "Delete failed.", "error");
+        scrollTopNow();
+      } finally {
+        deleteBtn.disabled = false;
+      }
+    }
+
+    function copyItems() {
+      const rows = filteredItems();
+      navigator.clipboard.writeText(JSON.stringify(rows, null, 2))
+        .then(() => showNotice(notice, "Copied items."))
+        .catch(() => showNotice(notice, "Copy failed.", "error"));
+    }
+
+    function download(name, type, text) {
+      const blob = new Blob([text], { type });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = name;
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(url), 1200);
+    }
+
+    function exportCsv() {
+      const cols = ["id","label","marketType","titlePrimary","titleAccent","paragraph","lastUpdatedLabel","testedBy","tradersHelped","dataSource","aboutVideoUrl","contactTag","emailLabel","emailValue","emailHref","phoneLabel","phoneValue","phoneHref","locationLabel","locationValue","locationHref","contactHelper","formButtonText","linkedPages"];
+      const rows = filteredItems();
+      const esc = (v = "") => `"${String(Array.isArray(v) ? v.join(", ") : v || "").replace(/"/g, '""')}"`;
+      const csv = [cols.join(","), ...rows.map((row) => cols.map((k) => esc(row[k])).join(","))].join("\n");
+      download("page-headings.csv", "text/csv;charset=utf-8", csv);
+    }
+
+    function exportPdf() {
+      const rows = filteredItems();
+      const win = window.open("", "_blank", "width=1080,height=760");
+      if (!win) {
+        showNotice(notice, "Popup blocked.", "error");
+        return;
+      }
+      win.document.write(`<!doctype html><html><head><title>Page Headings Export</title><style>body{font-family:Arial,sans-serif;padding:24px}pre{white-space:pre-wrap;word-break:break-word;border:1px solid #ddd;border-radius:12px;padding:16px;margin:0 0 16px}</style></head><body><h1>Page Headings Export</h1>${rows.map((row) => `<pre>${previewJson(row).replace(/&/g,"&amp;").replace(/</g,"&lt;")}</pre>`).join("")}</body></html>`);
+      win.document.close();
+      win.focus();
+      setTimeout(() => win.print(), 250);
+    }
+
+    function wrapField(id, mode) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const start = el.selectionStart ?? el.value.length;
+      const end = el.selectionEnd ?? el.value.length;
+      const raw = el.value || "";
+      const pick = raw.slice(start, end) || "text";
+      const map = {
+        bold: [`**`, `**`],
+        italic: [`_`, `_`],
+        highlight: [`[[`, `]]`],
+        link: [`[`, `](https://)`]
+      };
+      const [a, b] = map[mode] || ["", ""];
+      el.value = raw.slice(0, start) + a + pick + b + raw.slice(end);
+      el.focus();
+      el.selectionStart = start + a.length;
+      el.selectionEnd = start + a.length + pick.length;
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      await saveItem();
+    });
+
+    newBtn.addEventListener("click", () => {
+      state.activeId = "";
+      resetForm();
+      renderItems();
+    });
+
+    deleteBtn.addEventListener("click", deleteItem);
+    copyBtn.addEventListener("click", copyItems);
+    excelBtn.addEventListener("click", exportCsv);
+    pdfBtn.addEventListener("click", exportPdf);
+    itemSearch.addEventListener("input", () => {
+      state.q = String(itemSearch.value || "").trim();
+      renderItems();
+    });
+    itemList.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-id]");
+      if (!btn) return;
+      const item = state.items.find((row) => row.id === btn.dataset.id);
+      if (item) fillForm(item, true);
+    });
+    document.querySelectorAll(".tool-row").forEach((row) => {
+      row.addEventListener("click", (e) => {
+        const btn = e.target.closest("[data-format]");
+        if (!btn) return;
+        wrapField(row.dataset.target, btn.dataset.format);
+      });
+    });
+    itemId.addEventListener("input", updateLinkedPreview);
+    label.addEventListener("input", () => {
+      if (!itemId.value.trim()) itemId.value = slugify(label.value || pageFile.value || "");
+      updateLinkedPreview();
+    });
+
+    enforceAdmin(async (user) => {
+      state.user = user;
+      document.getElementById("adminEmail").textContent = user.email || "Admin";
+      resetForm();
+      await loadItems();
+    });
+  </script>
+  <script defer src="admin-shell.js"></script>
+  <script type="module" src="/site-performance.js"></script>
+</body>
+</html>

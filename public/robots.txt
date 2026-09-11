@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /dashboard
+Disallow: /support-dashboard
+Disallow: /login
+Disallow: /signup
+Disallow: /onboarding
+Disallow: /my-profile
+Disallow: /edit-profile
+Disallow: /bonus
+Disallow: /review-panel
+Disallow: /challenges-panel
+Disallow: /announcements-panel
+Disallow: /rules-panel
+
+Sitemap: https://www.rankmyprop.in/sitemap.xml

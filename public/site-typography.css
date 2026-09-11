@@ -1,0 +1,136 @@
+:root {
+  --rmp-heading-solid: #ffffff;
+  --rmp-heading-gradient: linear-gradient(92deg, #ffffff 0%, #d4ccff 24%, #846aff 75%, #b09eff 100%);
+  --rmp-accent-gradient: linear-gradient(92deg, #ffffff 0%, #d4ccff 24%, #846aff 75%, #b09eff 100%);
+  --rmp-intro-copy: #f0eff9;
+  --rmp-heading-font: "Plus Jakarta Sans", "DM Sans", sans-serif;
+}
+
+body {
+  font-family: var(--rmp-heading-font);
+}
+
+body > main > :is(.hero, .hero-head),
+body > main > :is(.wrap, .container) > :is(.hero, .hero-head) {
+  margin-top: 38px !important;
+}
+
+body :is(.hero, .hero-head, .rmp-seo, .detail-seo-copy) :is(h1, h2, .h1),
+body :is(.page-hero, .intro, .heading-block) :is(h1, h2) {
+  color: transparent !important;
+  background: var(--rmp-heading-gradient) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  font-family: var(--rmp-heading-font) !important;
+  display: block !important;
+  max-width: 1120px !important;
+  margin-right: auto !important;
+  margin-left: auto !important;
+  font-size: clamp(38px, 5.4vw, 62px) !important;
+  font-weight: 600 !important;
+  letter-spacing: -.04em !important;
+  line-height: 1.04 !important;
+  text-align: center !important;
+  text-wrap: balance;
+  filter: none !important;
+  opacity: 1 !important;
+  text-shadow: none !important;
+}
+
+body :is(.hero, .hero-head, .rmp-seo, .detail-seo-copy) :is(.grad, em, .rmp-seo-accent),
+body :is(.page-hero, .intro, .heading-block) :is(.grad, em) {
+  color: transparent !important;
+  background: var(--rmp-accent-gradient) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  font-style: normal !important;
+}
+
+body :is(.hero, .hero-head, .rmp-seo, .detail-seo-copy) > p,
+body :is(.hero, .hero-head, .rmp-seo, .detail-seo-copy) :is(.sub, .subtitle, .hero-sub),
+body :is(.page-hero, .intro, .heading-block) > p {
+  color: var(--rmp-intro-copy) !important;
+  font-family: var(--rmp-heading-font) !important;
+  max-width: 850px !important;
+  margin-top: 16px !important;
+  margin-right: auto !important;
+  margin-left: auto !important;
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  line-height: 1.62 !important;
+  text-align: center !important;
+  text-wrap: balance;
+  filter: none !important;
+  opacity: 1 !important;
+  text-shadow: none !important;
+}
+
+body :is(.faq-heading, .section-heading, .rankings-heading, .video-showcase-heading, .trust-heading, .newsletter-copy) > h2 {
+  color: transparent !important;
+  background: var(--rmp-heading-gradient) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  font-family: var(--rmp-heading-font) !important;
+  font-weight: 600 !important;
+  letter-spacing: -.035em !important;
+  line-height: 1.04 !important;
+  text-shadow: none !important;
+}
+
+body :is(.faq-heading, .section-heading, .rankings-heading, .video-showcase-heading, .trust-heading, .newsletter-copy) > h2 em {
+  color: transparent !important;
+  background: var(--rmp-accent-gradient) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  font-style: normal !important;
+}
+
+body :is(.faq-heading, .section-heading, .rankings-heading, .video-showcase-heading, .trust-heading, .newsletter-copy) > p {
+  color: var(--rmp-intro-copy) !important;
+  font-family: var(--rmp-heading-font) !important;
+  font-weight: 600 !important;
+  line-height: 1.58 !important;
+}
+
+body #firmNameHeading,
+body :is(.section-title, .firm-ai-summary-title) {
+  color: var(--rmp-heading-solid) !important;
+  font-family: var(--rmp-heading-font) !important;
+  font-weight: 600 !important;
+  letter-spacing: -.025em !important;
+  text-shadow: none !important;
+}
+
+body .section-title h2,
+body h2.section-title {
+  color: var(--rmp-heading-solid) !important;
+  font-family: var(--rmp-heading-font) !important;
+  font-weight: 600 !important;
+}
+
+@media (max-width: 780px) {
+  body > main > :is(.hero, .hero-head),
+  body > main > :is(.wrap, .container) > :is(.hero, .hero-head) {
+    margin-top: 28px !important;
+  }
+
+  body :is(.hero, .hero-head, .rmp-seo, .detail-seo-copy) :is(h1, h2, .h1),
+  body :is(.page-hero, .intro, .heading-block) :is(h1, h2) {
+    letter-spacing: -.04em !important;
+    line-height: 1.03 !important;
+  }
+
+  body :is(.hero, .hero-head, .rmp-seo, .detail-seo-copy) :is(h1, h2, .h1),
+  body :is(.page-hero, .intro, .heading-block) :is(h1, h2) {
+    font-size: clamp(34px, 9vw, 52px) !important;
+  }
+
+  body :is(.hero, .hero-head, .rmp-seo, .detail-seo-copy) > p,
+  body :is(.hero, .hero-head, .rmp-seo, .detail-seo-copy) :is(.sub, .subtitle, .hero-sub),
+  body :is(.page-hero, .intro, .heading-block) > p {
+    max-width: 92vw !important;
+    margin-top: 12px !important;
+    font-size: 16px !important;
+    line-height: 1.55 !important;
+  }
+}

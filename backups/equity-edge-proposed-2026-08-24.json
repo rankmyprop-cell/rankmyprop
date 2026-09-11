@@ -1,0 +1,26 @@
+{
+  "preparedAt": "2026-08-24",
+  "record": "equity-edge",
+  "mode": "rules-and-reviews-only",
+  "visibility": {
+    "showFirmProfile": false,
+    "showHomeTable": false,
+    "showListed": false,
+    "showBestGlobal": false,
+    "showRules": true,
+    "showReviews": true,
+    "showOffers": false,
+    "active": true,
+    "publishState": "published"
+  },
+  "sourceFiles": ["/Users/theforexclue/Downloads/Equityedge 1-Step & 2-Step.pdf"],
+  "programs": [
+    "1-Step Legacy Evaluation",
+    "1-Step Swift Challenge",
+    "1-Step Flagship Challenge",
+    "2-Step Legacy Challenge",
+    "2-Step Swift Challenge",
+    "2-Step Flagship Challenge"
+  ],
+  "editorPolicy": "Only facts stated in the supplied PDF are published. Reward details are attached only to the two Flagship models where the PDF provides them. Missing firm and model values are shown as Not mentioned."
+}

@@ -1,0 +1,79 @@
+{
+  "firestore": {
+    "rules": "firestore.rules"
+  },
+  "hosting": {
+    "public": "dist",
+    "cleanUrls": true,
+    "trailingSlash": false,
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "/compare/**",
+        "destination": "/compare.html"
+      },
+      {
+        "source": "/prop-firm-rules/**",
+        "destination": "/firm-rules.html"
+      },
+      {
+        "source": "/prop-firms/:slug/reviews",
+        "destination": "/firm-reviews.html"
+      },
+      {
+        "source": "/prop-firms/:slug/rules",
+        "destination": "/firm-rules.html"
+      },
+      {
+        "source": "/prop-firms/:slug/:view",
+        "destination": "/firm-detail.html"
+      },
+      {
+        "source": "/prop-firms/:slug",
+        "destination": "/firm-detail.html"
+      },
+      {
+        "source": "/trading-guides/:slug",
+        "destination": "/prop-news-post.html"
+      },
+      {
+        "source": "/funding-strategies/:slug",
+        "destination": "/prop-news-post.html"
+      },
+      {
+        "source": "/trading-psychology/:slug",
+        "destination": "/prop-news-post.html"
+      },
+      {
+        "source": "/beginner-tutorials/:slug",
+        "destination": "/prop-news-post.html"
+      }
+    ],
+    "redirects": [
+      {
+        "source": "/privacypolicy",
+        "destination": "/privacy-policy",
+        "type": 301
+      },
+      {
+        "source": "/termsofservice",
+        "destination": "/terms",
+        "type": 301
+      },
+      {
+        "source": "/cookiespolicy",
+        "destination": "/cookies-policy",
+        "type": 301
+      },
+      {
+        "source": "/cookie-policy",
+        "destination": "/cookies-policy",
+        "type": 301
+      }
+    ]
+  }
+}

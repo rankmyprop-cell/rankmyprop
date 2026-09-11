@@ -1,0 +1,623 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+<meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+                                                                                                                                                                                                                                              <meta property="og:image:height" content="630" />
+                                                                                                                                                                                                                                    <meta property="og:image:width" content="1200" />
+<meta name="twitter:image" content="https://www.rankmyprop.in/assets/og-default-1200x630.webp" />
+<meta property="og:image" content="https://www.rankmyprop.in/assets/og-default-1200x630.webp" />
+<meta name="description" content="Moderation Admin | Rank My Prop on Rank My Prop platform.">
+<meta name="theme-color" content="#0a0b12" />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <meta name="robots" content="noindex, nofollow" />
+  <title>Moderation Admin | Rank My Prop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght%40300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/dashboard-layout.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-dot"></span><b>RMP Admin</b></div>
+      <div class="menu-group-title">Admin Modules</div>
+      <a class="side-link" href="/dashboard-admin">Admin Home</a>
+      <a class="side-link" href="/admin-clients">Client Access</a>
+      <a class="side-link active" href="/admin-moderation">Moderation</a>
+      <a class="side-link" href="/admin-reviews">Reviews Hub</a>
+      <a class="side-link" href="/admin-purchases">Purchases</a>
+      <a class="side-link" href="/admin-announcements">Announcement Hub</a>
+      <a class="side-link" href="/admin-community">Community Posts</a>
+      <a class="side-link" href="/admin-giveaways">Giveaways CMS</a>
+      <a class="side-link" href="/admin-events">Upcoming Events</a>
+      <a class="side-link" href="/admin-offers">Offers Control</a>
+      <a class="side-link" href="/admin-firm-details">Firm Detail CMS</a>
+      <a class="side-link" href="/admin-filters">Filters Control</a>
+      <a class="side-link" href="/admin-propnews">Prop News CMS</a>
+      <a class="side-link" href="/admin-trading-guides">Trading Guides CMS</a>
+      <a class="side-link" href="/admin-funding-strategies">Funding Strategies CMS</a>
+      <a class="side-link" href="/admin-trading-psychology">Trading Psychology CMS</a>
+      <a class="side-link" href="/admin-beginner-tutorials">Beginner Tutorials CMS</a>
+      <a class="side-link" href="/admin-firm-details">Firm Detail CMS</a>
+      <a class="side-link" href="/admin-faqs">FAQ CMS</a>
+      <a class="side-link" href="#" id="logoutBtn">Log out</a>
+    </aside>
+
+    <main class="main">
+      <header class="top"><div><h3>Moderation Console</h3><div class="welcome">Approve cashback, claims, and reviews.</div></div><div class="top-actions"><span class="chip" id="adminEmail">loading...</span></div></header>
+      <div class="chip" id="notice" style="display:none;"></div>
+
+      <section class="panel">
+        <div class="panel-head"><h3>Cashback Approvals & Payouts</h3></div>
+        <div class="table-wrap"><table><thead><tr><th>Date</th><th>UID</th><th>Amount</th><th>Method</th><th>Status</th><th>Action</th></tr></thead><tbody id="cashbackBody"><tr><td colspan="6" class="empty">Loading...</td></tr></tbody></table></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><h3>Claim Verification</h3></div>
+        <div class="table-wrap"><table><thead><tr><th>Date</th><th>UID</th><th>Firm</th><th>Type</th><th>Size</th><th>Status</th><th>Action</th></tr></thead><tbody id="claimsBody"><tr><td colspan="7" class="empty">Loading...</td></tr></tbody></table></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><h3>Review Moderation</h3></div>
+        <div class="table-wrap"><table><thead><tr><th>Date</th><th>UID</th><th>Firm</th><th>Rating</th><th>Title</th><th>Status</th><th>Action</th></tr></thead><tbody id="reviewsBody"><tr><td colspan="7" class="empty">Loading...</td></tr></tbody></table></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><h3>Referral Claims</h3></div>
+        <div class="table-wrap"><table><thead><tr><th>Date</th><th>Referrer UID</th><th>Referred Email</th><th>Relation</th><th>Status</th><th>Action</th></tr></thead><tbody id="referralsBody"><tr><td colspan="6" class="empty">Loading...</td></tr></tbody></table></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><h3>Withdrawal Requests</h3></div>
+        <div class="table-wrap"><table><thead><tr><th>Date</th><th>UID</th><th>Email</th><th>Amount</th><th>Method</th><th>Status</th><th>Action</th></tr></thead><tbody id="withdrawalsBody"><tr><td colspan="7" class="empty">Loading...</td></tr></tbody></table></div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module">
+    import { db, toDate } from "./dashboard-common.js";
+    import { bindLogout, enforceAdmin, showNotice, sortByCreatedDesc } from "./admin-common.js";
+    import { isReviewLiveStatus, isReviewPendingStatus, notifyPayoutApproved, notifyPayoutRejected, notifyPointsCredited, notifyReviewDeleted, notifyReviewLive, notifyReviewPending } from "./email-notify-client.js";
+    import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, limit, query, serverTimestamp, setDoc, updateDoc, where } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+    bindLogout("logoutBtn");
+    const notice = document.getElementById("notice");
+    let firmIndex = null;
+    let currentAdmin = null;
+    const MAX_ROWS = 500;
+    const USER_WITHDRAW_FIELD = "withdrawalRequestsMap";
+
+    function slugify(text = "") {
+      return String(text).toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+    }
+
+    function escAttr(v = "") {
+      return String(v).replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m]));
+    }
+
+    function normalizePublicAssetUrl(raw = "") {
+      let url = String(raw || "").trim();
+      if (!url) return "";
+      url = url.replace(/^https?:\/\/rankmyprop\.in\/(https?:\/.*)$/i, "$1");
+      if (/^\/+https?:/i.test(url)) url = url.replace(/^\/+/, "");
+      if (/^https?:\/(?!\/)/i.test(url)) url = url.replace(/^([a-z]+):\/(?!\/)/i, "$1://");
+      if (/^\/\//.test(url)) url = `https:${url}`;
+      if (/^res\.cloudinary\.com\//i.test(url)) url = `https://${url}`;
+      return url;
+    }
+
+    async function loadFirmIndex() {
+      if (firmIndex) return firmIndex;
+      const snap = await getDocs(query(collection(db, "firms"), limit(900)));
+      const rows = [];
+      snap.forEach((d) => rows.push({ id: d.id, ...d.data() }));
+      const byName = new Map();
+      const bySlug = new Map();
+      for (const f of rows) {
+        const nm = String(f.name || "").toLowerCase().trim();
+        if (nm) byName.set(nm, f);
+        const sl = String(f.slug || slugify(f.name || "")).toLowerCase().trim();
+        if (sl) bySlug.set(sl, f);
+      }
+      firmIndex = { rows, byName, bySlug };
+      return firmIndex;
+    }
+
+    function normalizeWebsiteUrl(site = "") {
+      const s = String(site || "").trim();
+      if (!s) return "";
+      if (/^https?:\/\//i.test(s)) return s;
+      return `https://${s.replace(/^\/+/, "")}`;
+    }
+
+    async function ensurePurchaseFromClaim(claimId, claimCollection = "accountClaims") {
+      const claimRef = doc(db, claimCollection, claimId);
+      const claimSnap = await getDoc(claimRef);
+      if (!claimSnap.exists()) return { created: false };
+      const claim = claimSnap.data() || {};
+      const uid = String(claim.uid || "").trim();
+      if (!uid) return { created: false };
+
+      const purchaseRef = doc(db, "purchases", claimId);
+      const purchaseSnap = await getDoc(purchaseRef);
+      if (purchaseSnap.exists()) return { created: false };
+
+      const idx = await loadFirmIndex();
+      const firmName = String(claim.firm || "").trim();
+      const firmKey = firmName.toLowerCase();
+      const firmSlug = slugify(firmName);
+      const matched = idx.byName.get(firmKey) || idx.bySlug.get(firmSlug) || null;
+
+      const firmId = matched?.id || "";
+      const firmBuyUrl = String(matched?.buyLink || "").trim() || normalizeWebsiteUrl(matched?.website || "");
+
+      await setDoc(purchaseRef, {
+        uid,
+        userEmail: String(claim.userEmail || "").trim(),
+        firm: firmName,
+        firmName: matched?.name || firmName,
+        firmId,
+        firmSlug: matched?.slug || firmSlug,
+        orderId: String(claim.orderId || claimId),
+        amount: Number(claim.paymentAmount || 0),
+        paymentMode: String(claim.paymentMode || ""),
+        cryptoNetwork: String(claim.cryptoNetwork || ""),
+        transactionId: String(claim.transactionId || ""),
+        purchaseDate: String(claim.purchaseDate || ""),
+        status: "Approved",
+        sourceClaimId: claimId,
+        firmBuyUrl,
+        bonusGranted: false,
+        createdAt: claim.createdAt || serverTimestamp(),
+        updatedAt: serverTimestamp()
+      }, { merge: true });
+
+      await updateDoc(claimRef, { purchaseId: claimId, purchaseCreatedAt: serverTimestamp(), updatedAt: serverTimestamp() });
+      return { created: true };
+    }
+
+    function statusSelect(id, type, uid = "") {
+      const map = {
+        cashbackRequests: ["Pending", "Approved", "Paid", "Rejected"],
+        accountClaims: ["Pending", "Approved", "Rejected"],
+        claims: ["Pending", "Approved", "Rejected"],
+        claimRequests: ["Pending", "Approved", "Rejected"],
+        reviews: ["Pending", "Approved", "Rejected"],
+        referralClaims: ["Pending", "Approved", "Rejected"],
+        withdrawalShadow: ["Pending", "Approved", "Paid", "Rejected", "Cancelled"],
+        withdrawalRequests: ["Pending", "Approved", "Paid", "Rejected", "Cancelled"]
+      };
+      return `<select data-id="${id}" data-type="${type}" data-uid="${uid}" class="admin-status-select"><option value="">Update</option>${map[type].map((s)=>`<option value="${s}">${s}</option>`).join("")}</select>`;
+    }
+
+    function rowActions(id, type, uid = "") {
+      const safeUid = String(uid || "").trim();
+      return `<div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">${statusSelect(id, type, safeUid)}<button class="btn admin-del-btn" data-del-id="${id}" data-del-type="${type}" data-del-uid="${safeUid}">Delete</button>${safeUid ? `<button class="btn admin-ban-btn" data-ban-uid="${safeUid}">Ban</button>` : ""}</div>`;
+    }
+
+    async function loadShadowWithdrawals(users = []) {
+      const out = [];
+      const seen = new Set();
+      const rowSeen = new Set();
+      const list = [...users];
+      if (currentAdmin?.uid) list.push({ id: currentAdmin.uid, email: currentAdmin.email || "" });
+      await Promise.all(list.map(async (u) => {
+        const uid = String(u.id || u.uid || "").trim();
+        if (!uid) return;
+        if (seen.has(uid)) return;
+        seen.add(uid);
+        const pushRows = (map) => {
+          if (!map || typeof map !== "object") return;
+          Object.entries(map).forEach(([shadowId, row]) => {
+            const k = `${uid}::${shadowId}`;
+            if (rowSeen.has(k)) return;
+            rowSeen.add(k);
+            out.push({ id: shadowId, uid, email: String(row?.email || u.email || "").trim(), _col: "withdrawalShadow", ...(row || {}) });
+          });
+        };
+        pushRows(u?.[USER_WITHDRAW_FIELD]);
+        try {
+          const userSnap = await getDoc(doc(db, "users", uid));
+          if (userSnap.exists()) pushRows(userSnap.data()?.[USER_WITHDRAW_FIELD]);
+        } catch {}
+        try {
+          const snap = await getDoc(doc(db, uid, "profile"));
+          if (snap.exists()) pushRows(snap.data()?.[USER_WITHDRAW_FIELD]);
+        } catch {}
+      }));
+      return out;
+    }
+
+    async function updateShadowWithdrawal(uid = "", shadowId = "", patch = {}) {
+      const id = String(uid || "").trim();
+      if (!id || !shadowId) return;
+      for (const ref of [doc(db, "users", id), doc(db, id, "profile")]) {
+        try {
+          const snap = await getDoc(ref);
+          if (!snap.exists()) continue;
+          const data = snap.data() || {};
+          const map = data[USER_WITHDRAW_FIELD] && typeof data[USER_WITHDRAW_FIELD] === "object" ? { ...data[USER_WITHDRAW_FIELD] } : {};
+          if (!map[shadowId]) continue;
+          map[shadowId] = { ...map[shadowId], ...patch, updatedAt: new Date().toISOString() };
+          await setDoc(ref, { [USER_WITHDRAW_FIELD]: map, updatedAt: serverTimestamp() }, { merge: true });
+          return;
+        } catch {}
+      }
+    }
+
+    async function deleteShadowWithdrawal(uid = "", shadowId = "") {
+      const id = String(uid || "").trim();
+      if (!id || !shadowId) return;
+      for (const ref of [doc(db, "users", id), doc(db, id, "profile")]) {
+        try {
+          const snap = await getDoc(ref);
+          if (!snap.exists()) continue;
+          const data = snap.data() || {};
+          const map = data[USER_WITHDRAW_FIELD] && typeof data[USER_WITHDRAW_FIELD] === "object" ? { ...data[USER_WITHDRAW_FIELD] } : {};
+          if (!map[shadowId]) continue;
+          delete map[shadowId];
+          await setDoc(ref, { [USER_WITHDRAW_FIELD]: map, updatedAt: serverTimestamp() }, { merge: true });
+          return;
+        } catch {}
+      }
+    }
+
+    async function addPoints(uid, points, reason) {
+      const userRef = doc(db, "users", uid);
+      const userSnap = await getDoc(userRef);
+      const u = userSnap.exists() ? userSnap.data() : {};
+      const currentPoints = Number(u.cashpoints || u.cashpointsDisplay || 0);
+      const next = currentPoints + Number(points || 0);
+      await setDoc(userRef, { cashpoints: next, cashpointsDisplay: String(next), updatedAt: serverTimestamp() }, { merge: true });
+      const rewardRef = await addDoc(collection(db, "rewardLogs"), { uid, points, reason, createdAt: serverTimestamp() });
+      const userEmail = await resolveUserEmail(uid, u.email || "");
+      if (userEmail) {
+        await notifyPointsCredited({
+          uid,
+          userEmail,
+          points: Number(points || 0),
+          reason,
+          newCashpoints: next,
+          rewardLogId: String(rewardRef?.id || "").trim()
+        });
+      }
+    }
+
+    function emailKey(v = "") {
+      return String(v || "").trim().toLowerCase();
+    }
+
+    function pickRowEmail(row = {}) {
+      return (
+        row?.email ||
+        row?.userEmail ||
+        row?.reviewerEmail ||
+        row?.authorEmail ||
+        ""
+      );
+    }
+
+    async function resolveUserEmail(uid = "", fallbackEmail = "") {
+      const fallback = emailKey(fallbackEmail || "");
+      const id = String(uid || "").trim();
+      if (!id) return fallback;
+      try {
+        const snap = await getDoc(doc(db, "users", id));
+        if (snap.exists()) {
+          const live = emailKey(snap.data()?.email || "");
+          if (live) return live;
+        }
+      } catch {}
+      try {
+        const snap = await getDoc(doc(db, id, "profile"));
+        if (snap.exists()) {
+          const shadow = emailKey(snap.data()?.email || "");
+          if (shadow) return shadow;
+        }
+      } catch {}
+      return fallback;
+    }
+
+    async function setBanState(uid = "", banned = true) {
+      const id = String(uid || "").trim();
+      if (!id) return;
+      const userRef = doc(db, "users", id);
+      const snap = await getDoc(userRef);
+      if (!snap.exists()) return;
+      const u = snap.data() || {};
+      const email = emailKey(u.email || "");
+      await setDoc(userRef, { banned, bannedAt: banned ? serverTimestamp() : null, updatedAt: serverTimestamp() }, { merge: true });
+      if (email) {
+        await setDoc(doc(db, "bannedEmails", email), { uid: id, email, active: banned, updatedAt: serverTimestamp(), bannedAt: banned ? serverTimestamp() : null }, { merge: true });
+      }
+    }
+
+    async function deleteRecord(type, id) {
+      if (!type || !id) return;
+      await deleteDoc(doc(db, type, id));
+    }
+
+    async function applyReferralFlowForClaim(claimId, claimCollection = "accountClaims") {
+      const claimSnap = await getDoc(doc(db, claimCollection, claimId));
+      if (!claimSnap.exists()) return;
+      const claim = claimSnap.data() || {};
+      const email = String(claim.userEmail || "").toLowerCase().trim();
+      const amount = Number(claim.paymentAmount || 0);
+      if (!email || amount <= 0) return;
+
+      const refSnap = await getDocs(query(
+        collection(db, "referralClaims"),
+        where("referredEmail", "==", email),
+        where("status", "==", "Approved"),
+        where("cashbackRewardPaid", "==", false)
+      ));
+      if (refSnap.empty) return;
+
+      for (const d of refSnap.docs) {
+        const row = d.data() || {};
+        let commissionPct = Number(row.referralCommissionPct || 0);
+        if (!(commissionPct > 0) && row.uid) {
+          try {
+            const userSnap = await getDoc(doc(db, "users", String(row.uid)));
+            if (userSnap.exists()) {
+              commissionPct = Number(userSnap.data()?.referralCommissionPct || 0);
+            }
+          } catch {}
+        }
+        if (!(commissionPct > 0)) commissionPct = 5;
+        const rewardAmount = Number((amount * (commissionPct / 100)).toFixed(2));
+        await addDoc(collection(db, "cashbackRequests"), {
+          uid: row.uid || "",
+          amount: rewardAmount,
+          method: "Referral Reward",
+          paymentDetails: "Auto from approved referred claim",
+          note: `${commissionPct}% referral cashback from claim ${claimId}`,
+          status: "Approved",
+          createdAt: serverTimestamp(),
+          referralReward: true,
+          referralCommissionPct: commissionPct
+        });
+        await updateDoc(doc(db, "referralClaims", d.id), {
+          cashbackRewardPaid: true,
+          cashbackRewardAmount: rewardAmount,
+          referralCommissionPct: commissionPct,
+          sourceClaimId: claimId,
+          cashbackRewardPaidAt: serverTimestamp(),
+          updatedAt: serverTimestamp()
+        });
+      }
+    }
+
+    function bindSelects() {
+      document.querySelectorAll(".admin-status-select").forEach((s) => {
+        s.addEventListener("change", async () => {
+          if (!s.value) return;
+          const tableType = s.dataset.type;
+          const recordId = s.dataset.id;
+          const nextStatus = String(s.value || "");
+          const nextStatusLc = nextStatus.toLowerCase();
+          const moderationActionAt = new Date().toISOString();
+          if (tableType === "withdrawalShadow") {
+            await updateShadowWithdrawal(s.dataset.uid || "", recordId, { status: nextStatus });
+            showNotice(notice, `Status updated to ${nextStatus}.`);
+            await loadAll();
+            return;
+          }
+          await updateDoc(doc(db, tableType, recordId), { status: nextStatus, updatedAt: serverTimestamp() });
+
+          let updatedRow = null;
+          if (["cashbackRequests", "withdrawalRequests", "reviews"].includes(tableType)) {
+            try {
+              const snap = await getDoc(doc(db, tableType, recordId));
+              if (snap.exists()) updatedRow = snap.data() || {};
+            } catch {}
+          }
+
+          if (["cashbackRequests", "withdrawalRequests"].includes(tableType) && (nextStatusLc === "approved" || nextStatusLc === "paid")) {
+            const row = updatedRow || {};
+            const uid = String(row.uid || s.dataset.uid || "").trim();
+            const userEmail = await resolveUserEmail(uid, pickRowEmail(row));
+            if (userEmail) {
+              await notifyPayoutApproved({
+                uid,
+                userEmail,
+                requestId: recordId,
+                status: nextStatus,
+                amount: Number(row.amount || 0) || 0,
+                method: String(row.method || row.paymentMode || "").trim() || "Payout",
+                sourceCollection: tableType
+              });
+            }
+          } else if (["cashbackRequests", "withdrawalRequests"].includes(tableType) && (nextStatusLc === "rejected" || nextStatusLc === "cancelled")) {
+            const row = updatedRow || {};
+            const uid = String(row.uid || s.dataset.uid || "").trim();
+            const userEmail = await resolveUserEmail(uid, pickRowEmail(row));
+            if (userEmail) {
+              await notifyPayoutRejected({
+                uid,
+                userEmail,
+                requestId: recordId,
+                status: nextStatus,
+                amount: Number(row.amount || 0) || 0,
+                method: String(row.method || row.paymentMode || "").trim() || "Payout",
+                sourceCollection: tableType
+              });
+            }
+          }
+
+          if (tableType === "reviews") {
+            const row = updatedRow || {};
+            const uid = String(row.uid || s.dataset.uid || "").trim();
+            const userEmail = await resolveUserEmail(uid, pickRowEmail(row));
+            if (userEmail) {
+              const payload = {
+                uid,
+                userEmail,
+                reviewId: recordId,
+                status: nextStatus,
+                firm: String(row.firm || row.firmName || "").trim() || "Unknown Firm",
+                rating: Number(row.rating || 0) || 0,
+                displayName: String(row.userName || row.reviewerName || row.authorName || row.displayName || row.name || "").trim(),
+                moderatedBy: currentAdmin?.email || "Admin",
+                moderationActionAt
+              };
+              if (isReviewLiveStatus(nextStatus)) await notifyReviewLive(payload);
+              else if (isReviewPendingStatus(nextStatus)) await notifyReviewPending(payload);
+            }
+          }
+
+          if (tableType === "referralClaims" && nextStatus === "Approved") {
+            const referralSnap = await getDoc(doc(db, "referralClaims", recordId));
+            if (referralSnap.exists()) {
+              const r = referralSnap.data() || {};
+              if (!r.referralPointsAwarded && r.uid) {
+                await addPoints(r.uid, 50, "referral_approved");
+                await updateDoc(doc(db, "referralClaims", recordId), {
+                  referralPointsAwarded: true,
+                  referralPointsAwardedAt: serverTimestamp()
+                });
+              }
+            }
+          }
+
+          if (tableType === "reviews" && nextStatus === "Approved") {
+            const reviewSnap = updatedRow ? { exists: () => true, data: () => updatedRow } : await getDoc(doc(db, "reviews", recordId));
+            if (reviewSnap.exists()) {
+              const r = reviewSnap.data() || {};
+              const uid = String(r.uid || "").trim();
+              if (uid && !r.reviewPointsAwarded) {
+                const firstActionRef = doc(db, "rewardActions", `${uid}_REVIEW_FIRST_APPROVED_50`);
+                const firstActionSnap = await getDoc(firstActionRef);
+                const points = firstActionSnap.exists() ? 20 : 50;
+                if (!firstActionSnap.exists()) {
+                  await setDoc(firstActionRef, { uid, type: "REVIEW_FIRST_APPROVED", points: 50, createdAt: serverTimestamp() }, { merge: true });
+                }
+                await addPoints(uid, points, points === 50 ? "review_first_approved_50" : "review_approved_20");
+                await updateDoc(doc(db, "reviews", recordId), {
+                  reviewPointsAwarded: true,
+                  reviewPointsAdded: points,
+                  reviewPointsAwardedAt: serverTimestamp(),
+                  updatedAt: serverTimestamp()
+                });
+              }
+            }
+          }
+
+          if (["accountClaims", "claims", "claimRequests"].includes(tableType) && nextStatus === "Approved") {
+            await applyReferralFlowForClaim(recordId, tableType);
+            try {
+              const res = await ensurePurchaseFromClaim(recordId, tableType);
+              if (res.created) showNotice(notice, "Claim approved. Purchase record created.");
+            } catch (e) {
+              showNotice(notice, `Claim approved, but purchase create failed: ${e?.message || e}`, "error");
+            }
+          }
+
+          showNotice(notice, `Status updated to ${nextStatus}.`);
+          await loadAll();
+        });
+      });
+    }
+
+    function bindRowActions() {
+      document.querySelectorAll(".admin-del-btn").forEach((b) => {
+        b.addEventListener("click", async () => {
+          const id = b.dataset.delId || "";
+          const type = b.dataset.delType || "";
+          const uid = b.dataset.delUid || "";
+          if (!id || !type) return;
+          if (!confirm("Delete this record?")) return;
+          if (type === "reviews") {
+            try {
+              const reviewSnap = await getDoc(doc(db, "reviews", id));
+              if (reviewSnap.exists()) {
+                const row = reviewSnap.data() || {};
+                const userEmail = await resolveUserEmail(String(row.uid || uid || "").trim(), pickRowEmail(row));
+                if (userEmail) {
+                  await notifyReviewDeleted({
+                    uid: String(row.uid || uid || "").trim(),
+                    userEmail,
+                    reviewId: id,
+                    firm: String(row.firm || row.firmName || "").trim() || "Unknown Firm",
+                    rating: Number(row.rating || 0) || 0,
+                    deletedBy: currentAdmin?.email || "Admin"
+                  });
+                }
+              }
+            } catch {}
+          }
+          if (type === "withdrawalShadow") await deleteShadowWithdrawal(uid, id);
+          else await deleteRecord(type, id);
+          showNotice(notice, "Record deleted.");
+          await loadAll();
+        });
+      });
+      document.querySelectorAll(".admin-ban-btn").forEach((b) => {
+        b.addEventListener("click", async () => {
+          const uid = b.dataset.banUid || "";
+          if (!uid) return;
+          await setBanState(uid, true);
+          showNotice(notice, "User banned.");
+          await loadAll();
+        });
+      });
+    }
+
+    async function loadAll() {
+      const loadSafe = async (name) => {
+        try {
+          const s = await getDocs(query(collection(db, name), limit(MAX_ROWS)));
+          const rows = [];
+          s.forEach((d) => rows.push({ id: d.id, _col: name, ...d.data() }));
+          return rows;
+        } catch {
+          return [];
+        }
+      };
+      const [usersRows, cashbackRows, accountClaimRows, claimRows, claimRequestRows, reviewsRows, referralsRows, withdrawalsRows] = await Promise.all([
+        loadSafe("users"),
+        loadSafe("cashbackRequests"),
+        loadSafe("accountClaims"),
+        loadSafe("claims"),
+        loadSafe("claimRequests"),
+        loadSafe("reviews"),
+        loadSafe("referralClaims"),
+        loadSafe("withdrawalRequests")
+      ]);
+      const shadowWithdrawals = await loadShadowWithdrawals(usersRows);
+      const cashback = cashbackRows;
+      const claims = [...accountClaimRows, ...claimRows, ...claimRequestRows];
+      const reviews = reviewsRows;
+      const referrals = referralsRows;
+      const withdrawals = [...withdrawalsRows.map((r) => ({ ...r, _col: "withdrawalRequests" })), ...shadowWithdrawals];
+      const payouts = [...cashbackRows.map((r) => ({ ...r, _col: "cashbackRequests" })), ...withdrawals];
+
+      // warm firm index for quick claim->purchase linking
+      try { await loadFirmIndex(); } catch {}
+
+      document.getElementById("cashbackBody").innerHTML = sortByCreatedDesc(payouts).map((r)=>`<tr><td>${toDate(r.createdAt)}</td><td>${r.uid||"-"}</td><td>$${Number(r.amount||0).toFixed(2)}</td><td>${r._col === "cashbackRequests" ? `Cashback${r.method ? ` • ${r.method}` : ""}` : `Withdraw${r.method ? ` • ${r.method}` : ""}`}</td><td>${r.status||"Pending"}</td><td>${rowActions(r.id,r._col||"cashbackRequests",r.uid||"")}</td></tr>`).join("") || '<tr><td colspan="6" class="empty">No records.</td></tr>';
+      document.getElementById("claimsBody").innerHTML = sortByCreatedDesc(claims).map((r)=>`<tr><td>${toDate(r.createdAt)}</td><td>${r.uid||"-"}</td><td>${r.firm||r.firmName||"-"}</td><td>${r.challengeType||"-"}</td><td>${r.accountSize||"-"}</td><td>${r.status||"Pending"}</td><td>${rowActions(r.id,r._col||"accountClaims",r.uid||"")}</td></tr>`).join("") || '<tr><td colspan="7" class="empty">No records.</td></tr>';
+      document.getElementById("reviewsBody").innerHTML = sortByCreatedDesc(reviews).map((r)=>`<tr><td>${toDate(r.createdAt)}</td><td>${r.uid||"-"}</td><td>${r.firm||r.firmName||"-"}</td><td>${r.rating||"-"}/5</td><td>${r.title||r.reviewText||"-"}${Array.isArray(r.proofUrls)&&r.proofUrls.length?`<div><a href="${escAttr(normalizePublicAssetUrl(r.proofUrls[0]))}" target="_blank" rel="noopener">Proof</a></div>`:""}</td><td>${r.status||"Pending"}</td><td>${rowActions(r.id,"reviews",r.uid||"")}</td></tr>`).join("") || '<tr><td colspan="7" class="empty">No records.</td></tr>';
+      document.getElementById("referralsBody").innerHTML = sortByCreatedDesc(referrals).map((r)=>`<tr><td>${toDate(r.createdAt)}</td><td>${r.uid||"-"}</td><td>${r.referredEmail||"-"}</td><td>${r.relation||"-"}</td><td>${r.status||"Pending"}</td><td>${rowActions(r.id,"referralClaims",r.referredUid||"")}</td></tr>`).join("") || '<tr><td colspan="6" class="empty">No records.</td></tr>';
+      document.getElementById("withdrawalsBody").innerHTML = sortByCreatedDesc(withdrawals).map((r)=>`<tr><td>${toDate(r.createdAt)}</td><td>${r.uid||"-"}</td><td>${r.email||"-"}</td><td>$${Number(r.amount||0).toFixed(2)}</td><td>${r.method||"-"}</td><td>${r.status||"Pending"}</td><td>${rowActions(r.id,r._col||"withdrawalRequests",r.uid||"")}</td></tr>`).join("") || '<tr><td colspan="7" class="empty">No records.</td></tr>';
+
+      bindSelects();
+      bindRowActions();
+    }
+
+    enforceAdmin(async (user) => {
+      currentAdmin = user;
+      document.getElementById("adminEmail").textContent = user.email || "Admin";
+      await loadAll();
+    });
+  </script>
+  <script defer src="admin-richtext.js"></script>
+<script defer src="admin-shell.js"></script>
+  <script type="module" src="/site-performance.js"></script>
+</body>
+</html>

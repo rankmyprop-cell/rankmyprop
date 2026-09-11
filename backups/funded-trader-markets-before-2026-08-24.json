@@ -1,0 +1,7 @@
+{
+  "capturedAt": "2026-08-24",
+  "record": "funded-trader-markets",
+  "existsBeforeChange": false,
+  "purpose": "Undo marker before creating Funded Trader Markets as a rules-and-reviews-only record.",
+  "undo": "Delete the firms/funded-trader-markets document and its matching firmRatingStats and firmReviewProfiles documents. No previous record needs restoration."
+}

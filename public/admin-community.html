@@ -1,0 +1,177 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+<meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+                                                                                                                                                                  <meta property="og:image:height" content="630" />
+                                                                                                                                                        <meta property="og:image:width" content="1200" />
+<meta name="twitter:image" content="https://www.rankmyprop.in/assets/og-default-1200x630.webp" />
+<meta property="og:image" content="https://www.rankmyprop.in/assets/og-default-1200x630.webp" />
+<meta name="description" content="Community Posts Admin | Rank My Prop on Rank My Prop platform.">
+<meta name="theme-color" content="#0a0b12" />
+                                                                                                                                                                                                                                                                                                                                                                                                <meta name="robots" content="noindex, nofollow" />
+  <title>Community Posts Admin | Rank My Prop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght%40300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/dashboard-layout.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-dot"></span><b>RMP Admin</b></div>
+      <div class="menu-group-title">Admin Modules</div>
+      <a class="side-link" href="/dashboard-admin">Admin Home</a>
+      <a class="side-link" href="/admin-clients">Client Access</a>
+      <a class="side-link" href="/admin-moderation">Moderation</a>
+      <a class="side-link" href="/admin-purchases">Purchases</a>
+      <a class="side-link" href="/admin-announcements">Announcement Hub</a>
+      <a class="side-link active" href="/admin-community">Community Posts</a>
+      <a class="side-link" href="/admin-giveaways">Giveaways CMS</a>
+      <a class="side-link" href="/admin-events">Upcoming Events</a>
+      <a class="side-link" href="/admin-offers">Offers Control</a>
+      <a class="side-link" href="/admin-firm-details">Firm Detail CMS</a>
+      <a class="side-link" href="/admin-filters">Filters Control</a>
+      <a class="side-link" href="/admin-propnews">Prop News CMS</a>
+      <a class="side-link" href="/admin-trading-guides">Trading Guides CMS</a>
+      <a class="side-link" href="/admin-funding-strategies">Funding Strategies CMS</a>
+      <a class="side-link" href="/admin-trading-psychology">Trading Psychology CMS</a>
+      <a class="side-link" href="/admin-beginner-tutorials">Beginner Tutorials CMS</a>
+      <a class="side-link" href="/admin-firm-details">Firm Detail CMS</a>
+      <a class="side-link" href="/admin-faqs">FAQ CMS</a>
+      <a class="side-link" href="#" id="logoutBtn">Log out</a>
+    </aside>
+
+    <main class="main">
+      <header class="top"><div><h3>Community Posts</h3><div class="welcome">Publish and manage community updates/winners.</div></div><div class="top-actions"><span class="chip" id="adminEmail">loading...</span></div></header>
+      <div class="chip" id="notice" style="display:none;"></div>
+
+      <section class="panel">
+        <form id="form" class="form-grid">
+          <input type="hidden" name="docId" />
+          <div class="field"><label>Tag</label><input name="tag" placeholder="Winner" required /></div>
+          <div class="field"><label>Date Label</label><input name="dateLabel" placeholder="Today" required /></div>
+          <div class="field full"><label>Title</label><input name="title" required /></div>
+          <div class="field full"><label>Body</label><textarea name="body" required></textarea></div>
+          <div class="full top-actions">
+            <button class="btn-primary" id="submitBtn" type="submit">Publish Community Post</button>
+            <button class="btn" id="cancelBtn" type="button" style="display:none;">Cancel Edit</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><h3>Published Community Posts</h3></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Title</th><th>Tag</th><th>Date Label</th><th>Action</th></tr></thead>
+            <tbody id="tbody"><tr><td colspan="4" class="empty">No posts.</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module">
+    import { db } from "./dashboard-common.js";
+    import { bindLogout, enforceAdmin, formDataToObj, showNotice, sortByCreatedDesc } from "./admin-common.js";
+    import { addDoc, collection, deleteDoc, doc, getDocs, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+    const COLLECTION = "communityAnnouncements";
+    const form = document.getElementById("form");
+    const tbody = document.getElementById("tbody");
+    const submitBtn = document.getElementById("submitBtn");
+    const cancelBtn = document.getElementById("cancelBtn");
+    const notice = document.getElementById("notice");
+
+    bindLogout("logoutBtn");
+
+    function resetForm() {
+      form.reset();
+      form.elements.namedItem("docId").value = "";
+      submitBtn.textContent = "Publish Community Post";
+      cancelBtn.style.display = "none";
+    }
+
+    async function loadList() {
+      const snap = await getDocs(collection(db, COLLECTION));
+      const rows = [];
+      snap.forEach((d) => rows.push({ id: d.id, ...d.data() }));
+      const data = sortByCreatedDesc(rows);
+
+      tbody.innerHTML = data.length ? data.map((r) => `
+        <tr>
+          <td>${r.title || "-"}</td>
+          <td>${r.tag || "-"}</td>
+          <td>${r.dateLabel || "-"}</td>
+          <td>
+            <div class="top-actions">
+              <button class="btn" data-edit="${r.id}">Edit</button>
+              <button class="btn-danger" data-del="${r.id}">Delete</button>
+            </div>
+          </td>
+        </tr>
+      `).join("") : '<tr><td colspan="4" class="empty">No posts.</td></tr>';
+
+      tbody.querySelectorAll("[data-edit]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const row = data.find((x) => x.id === btn.dataset.edit);
+          if (!row) return;
+          form.elements.namedItem("docId").value = row.id;
+          form.elements.namedItem("tag").value = row.tag || "";
+          form.elements.namedItem("dateLabel").value = row.dateLabel || "";
+          form.elements.namedItem("title").value = row.title || "";
+          form.elements.namedItem("body").value = row.body || "";
+          submitBtn.textContent = "Update Community Post";
+          cancelBtn.style.display = "inline-flex";
+          form.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      });
+
+      tbody.querySelectorAll("[data-del]").forEach((btn) => {
+        btn.addEventListener("click", async () => {
+          if (!confirm("Delete this post?")) return;
+          await deleteDoc(doc(db, COLLECTION, btn.dataset.del));
+          showNotice(notice, "Community post deleted.");
+          await loadList();
+        });
+      });
+    }
+
+    cancelBtn.addEventListener("click", resetForm);
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const data = formDataToObj(form);
+      const id = data.docId;
+      delete data.docId;
+
+      if (id) {
+        await setDoc(doc(db, COLLECTION, id), { ...data, updatedAt: serverTimestamp() }, { merge: true });
+        showNotice(notice, "Community post updated successfully.");
+      } else {
+        await addDoc(collection(db, COLLECTION), { ...data, createdAt: serverTimestamp() });
+        showNotice(notice, "Community post published successfully.");
+      }
+
+      resetForm();
+      await loadList();
+    });
+
+    enforceAdmin(async (user) => {
+      document.getElementById("adminEmail").textContent = user.email || "Admin";
+      await loadList();
+    });
+  </script>
+  <script defer src="admin-richtext.js"></script>
+<script defer src="admin-shell.js"></script>
+  <script type="module" src="/site-performance.js"></script>
+</body>
+</html>
+
+

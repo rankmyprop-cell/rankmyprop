@@ -1,0 +1,30 @@
+<svg width="1200" height="320" viewBox="0 0 1200 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g1" x1="120" y1="70" x2="120" y2="250" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8A7CFF"/>
+      <stop offset="1" stop-color="#5B55FF"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="238" y1="88" x2="1068" y2="238" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F6F4FF"/>
+      <stop offset="0.55" stop-color="#CBC4FF"/>
+      <stop offset="1" stop-color="#A79BFF"/>
+    </linearGradient>
+    <filter id="glow" x="0" y="0" width="260" height="320" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="320" rx="30" fill="#0B0A16"/>
+
+  <g filter="url(#glow)">
+    <rect x="70" y="62" width="118" height="196" rx="28" fill="url(#g1)"/>
+    <circle cx="129" cy="113" r="9" fill="#DAD5FF"/>
+    <path d="M102 214L102 106H132C155 106 169 118 169 138C169 155 158 166 142 170L170 214H145L121 173H119V214H102ZM119 122V156H131C143 156 151 149 151 139C151 129 144 122 131 122H119Z" fill="#F5F3FF"/>
+  </g>
+
+  <text x="236" y="202" fill="url(#g2)" font-size="108" font-family="Inter, Sora, Poppins, sans-serif" font-weight="700" letter-spacing="-1.5">Rank My Prop</text>
+</svg>

@@ -1,0 +1,137 @@
+{
+  "record": "firms/goat-funded-trader",
+  "source": "GFT 1-Step & 2-Step & 3-Step & Instant.pdf",
+  "scope": "Only rule, challenge, platform, payout, leverage, and corresponding required display fields; identity, routing, offer, rating, SEO, logo, ranking, and publication fields are preserved.",
+  "fields": {
+    "platforms": ["cTrader", "TradeLocker", "MatchTrader", "Volumetrica", "MetaTrader 5"],
+    "paymentMethods": ["Rise", "Crypto", "Skrill", "Bank Transfer"],
+    "keyMetrics": [
+      {"label": "Published Models", "value": "7"},
+      {"label": "Profit Split", "value": "80%-90%; 100% add-on"},
+      {"label": "Payout Cycle", "value": "10 or 14 days; GOAT first reward may be on demand"},
+      {"label": "Minimum Withdrawal", "value": "$100"},
+      {"label": "Daily Profit Cap", "value": "$3,000 on funded accounts"},
+      {"label": "Payout Processing", "value": "Up to 2 business days after verification"}
+    ],
+    "cardMetrics": {
+      "payoutCycle": "10-14 Days",
+      "minTradingDays": "0-6 Days",
+      "newsTrading": "Allowed (1% cap)",
+      "timeLimit": "Unlimited",
+      "eaAllowed": "Not mentioned",
+      "startingPrice": "Not mentioned"
+    },
+    "tradingConditions": [
+      {"label": "Daily Loss Limit", "value": "3%-5%, model/phase dependent"},
+      {"label": "Maximum Loss", "value": "5%-10%, model dependent"},
+      {"label": "Drawdown Type", "value": "Static on challenges; trailing on instant models"},
+      {"label": "Minimum Trading Days", "value": "0-6 days, model/phase dependent"},
+      {"label": "Time Limit", "value": "Unlimited"},
+      {"label": "News Trading", "value": "Allowed; 1% profit cap within ±5 minutes of high-impact news"},
+      {"label": "Weekend/Overnight Holding", "value": "Allowed"},
+      {"label": "Consistency Rule", "value": "None on evaluations; 15% on Instant GOAT/HERO; none on Premium"}
+    ],
+    "firmDetails": [
+      {"label": "Company Name", "value": "Goat Funded Trader"},
+      {"label": "Challenge Models", "value": "1-Step GOAT, 2-Step GOAT, 2-Step Standard, 3-Step Standard, Instant GOAT, Instant HERO, Instant Premium"},
+      {"label": "Platforms", "value": "cTrader, TradeLocker, MatchTrader, Volumetrica, MetaTrader 5"},
+      {"label": "Payout Methods", "value": "Rise, Crypto, Skrill, Bank Transfer"},
+      {"label": "Minimum Withdrawal", "value": "$100"},
+      {"label": "Daily Profit Cap", "value": "$3,000 on funded accounts; excess is deducted without account breach"},
+      {"label": "Pending Requests", "value": "Only one payout request may be pending; partial withdrawals are not allowed"},
+      {"label": "Payout Processing", "value": "Up to 2 business days after verification"},
+      {"label": "Pricing", "value": "Not mentioned"},
+      {"label": "Account Sizes", "value": "Not mentioned"},
+      {"label": "Maximum Allocation", "value": "Not mentioned"},
+      {"label": "Refundable Fee", "value": "Not mentioned"},
+      {"label": "EA Rules", "value": "Not mentioned"},
+      {"label": "Copy Trading", "value": "Not mentioned"},
+      {"label": "Restricted Countries", "value": "Not mentioned"}
+    ],
+    "leverageRows": [
+      {"instrument": "Forex", "c1": "Eval 1:100", "c2": "Funded 1:50", "c3": "Instant 1:50", "c4": "Not mentioned"},
+      {"instrument": "Indices / Commodities", "c1": "Eval 1:20", "c2": "Funded 1:10", "c3": "Instant 1:10", "c4": "Not mentioned"},
+      {"instrument": "Crypto", "c1": "Eval 1:2", "c2": "Funded 1:2", "c3": "Instant 1:2", "c4": "Not mentioned"}
+    ],
+    "commissions": [
+      {"title": "All markets", "lines": ["Not mentioned in the supplied PDF"]}
+    ],
+    "restrictedCountries": ["Not mentioned"],
+    "evaluationPrograms": [
+      {"program": "1-Step GOAT", "phase1": "10%", "phase2": "Not applicable", "target": "10%", "allocation": "Not mentioned", "split": "80%; 100% add-on", "features": ["Challenge: 4% daily loss (3% for accounts purchased from 1 Aug 2026)", "6% static maximum loss", "3 minimum trading days", "Funded: $3,000 daily profit cap", "Bi-weekly payouts"]},
+      {"program": "2-Step GOAT", "phase1": "8%", "phase2": "6%", "target": "8% / 6%", "allocation": "Not mentioned", "split": "Not mentioned; 100% add-on available", "features": ["4% daily loss", "10% static maximum loss", "3 minimum trading days", "First reward on demand once eligible; later rewards bi-weekly"]},
+      {"program": "2-Step Standard", "phase1": "10%", "phase2": "5%", "target": "10% / 5%", "allocation": "Not mentioned", "split": "Not mentioned; 100% add-on available", "features": ["5% daily loss", "10% static maximum loss", "3 minimum trading days", "Bi-weekly payouts"]},
+      {"program": "3-Step Standard", "phase1": "6%", "phase2": "6%", "target": "6% each phase", "allocation": "Not mentioned", "split": "80%; 100% add-on", "features": ["Phase 3 target: 6%", "4% daily loss", "8% static maximum loss", "No minimum trading days in evaluation", "Bi-weekly payouts"]},
+      {"program": "Instant GOAT", "phase1": "Not applicable", "phase2": "Not applicable", "target": "Not mentioned", "allocation": "Not mentioned", "split": "80%; 100% add-on", "features": ["5 valid trading days", "3% trailing daily loss", "6% trailing maximum loss", "15% consistency rule", "Bi-weekly payouts"]},
+      {"program": "Instant HERO", "phase1": "Not applicable", "phase2": "Not applicable", "target": "Not mentioned", "allocation": "Not mentioned", "split": "90%; 100% add-on", "features": ["6 valid trading days at 0.5% profit each", "3% trailing daily loss", "5% trailing maximum loss", "15% consistency rule", "Bi-weekly payouts"]},
+      {"program": "Instant Premium", "phase1": "Not applicable", "phase2": "Not applicable", "target": "Not mentioned", "allocation": "Not mentioned", "split": "80%; 100% add-on", "features": ["5 valid trading days at 0.5% profit each", "3% trailing daily loss", "6% trailing EOD maximum loss", "No consistency rule", "Payout every 10 days"]}
+    ],
+    "challengesPanelData": {
+      "stats": [
+        {"value": "7", "label": "Published Models"},
+        {"value": "$100", "label": "Minimum Withdrawal"},
+        {"value": "$3,000", "label": "Daily Profit Cap"}
+      ],
+      "programs": [
+        {"program": "1-Step GOAT", "phase1": "10%", "phase2": "Not applicable", "target": "10%", "allocation": "Not mentioned", "split": "80%; 100% add-on", "features": ["4% / 3% daily loss by purchase date", "6% static maximum loss", "3 minimum days", "Unlimited time"]},
+        {"program": "2-Step GOAT", "phase1": "8%", "phase2": "6%", "target": "8% / 6%", "allocation": "Not mentioned", "split": "Not mentioned; 100% add-on", "features": ["4% daily loss", "10% static maximum loss", "3 minimum days", "Unlimited time"]},
+        {"program": "2-Step Standard", "phase1": "10%", "phase2": "5%", "target": "10% / 5%", "allocation": "Not mentioned", "split": "Not mentioned; 100% add-on", "features": ["5% daily loss", "10% static maximum loss", "3 minimum days", "Unlimited time"]},
+        {"program": "3-Step Standard", "phase1": "6%", "phase2": "6%", "target": "6% each phase", "allocation": "Not mentioned", "split": "80%; 100% add-on", "features": ["Phase 3: 6% target", "4% daily loss", "8% static maximum loss", "No minimum evaluation days"]},
+        {"program": "Instant GOAT", "phase1": "Not applicable", "phase2": "Not applicable", "target": "Not mentioned", "allocation": "Not mentioned", "split": "80%; 100% add-on", "features": ["5 valid days", "3% trailing daily loss", "6% trailing maximum loss", "15% consistency"]},
+        {"program": "Instant HERO", "phase1": "Not applicable", "phase2": "Not applicable", "target": "Not mentioned", "allocation": "Not mentioned", "split": "90%; 100% add-on", "features": ["6 valid days", "3% trailing daily loss", "5% trailing maximum loss", "15% consistency"]},
+        {"program": "Instant Premium", "phase1": "Not applicable", "phase2": "Not applicable", "target": "Not mentioned", "allocation": "Not mentioned", "split": "80%; 100% add-on", "features": ["5 valid days", "3% trailing daily loss", "6% trailing EOD maximum loss", "10-day payout cycle"]}
+      ]
+    },
+    "rulesPanelData": {
+      "sections": {
+        "general": {
+          "title": "General Rules",
+          "desc": "Rules explicitly stated in the supplied Goat Funded Trader PDF.",
+          "notice": "Purchase-date changes are preserved exactly where the PDF specifies them.",
+          "rules": [
+            {"title": "News trading", "text": "Allowed. A trade opened or closed within 5 minutes before or after a high-impact release may generate a maximum profit of 1% of the account's initial balance."},
+            {"title": "Weekend and overnight holding", "text": "Allowed."},
+            {"title": "Daily profit cap", "text": "$3,000 on funded accounts. Excess profit is deducted but does not cause an account breach."},
+            {"title": "Minimum withdrawal", "text": "$100."},
+            {"title": "Rise payouts", "text": "No payout limit; supports bank, crypto, or local withdrawals after setup and KYC."},
+            {"title": "Crypto payouts", "text": "Up to $3,000 per payout; Veriff verification is required."},
+            {"title": "Skrill payouts", "text": "Up to $5,000 per payout; the account and KYC names must match."},
+            {"title": "Bank transfer payouts", "text": "Up to $10,000 per payout; available in Kenya, South Africa, Egypt, Nigeria, Côte d’Ivoire, Tanzania, Cameroon, and Ghana."},
+            {"title": "Payout requests", "text": "Only one request may be pending at a time; partial withdrawals are not allowed; processing takes up to 2 business days after verification."},
+            {"title": "Optional add-on", "text": "100% profit split is available at checkout."},
+            {"title": "EA rules", "text": "Not mentioned."},
+            {"title": "Copy trading", "text": "Not mentioned."},
+            {"title": "Commissions", "text": "Not mentioned."},
+            {"title": "Restricted countries", "text": "Not mentioned."}
+          ]
+        }
+      },
+      "programRules": {
+        "1-step-goat": {"program": "1-Step GOAT", "slug": "1-step-goat", "title": "1-Step GOAT Rules", "desc": "Challenge, funded, payout, and leverage rules.", "notice": "Daily-loss and funded minimum-day changes depend on purchase date.", "rules": [
+          {"title": "Evaluation phases", "text": "1"}, {"title": "Profit target", "text": "10%"}, {"title": "Challenge daily loss", "text": "4%; 3% for accounts purchased from 1 August 2026"}, {"title": "Maximum drawdown", "text": "6% static"}, {"title": "Challenge minimum trading days", "text": "3 days"}, {"title": "Funded minimum trading days", "text": "3 days per payout; 4 days for accounts purchased from 27 July 2026"}, {"title": "Time limit", "text": "Unlimited"}, {"title": "Consistency rule", "text": "None"}, {"title": "Challenge daily profit cap", "text": "No limit"}, {"title": "Funded daily profit cap", "text": "$3,000"}, {"title": "Profit split", "text": "80%; optional 100% add-on"}, {"title": "Payout cycle", "text": "Bi-weekly (every 14 days)"}, {"title": "Initial two payout caps", "text": "6% of initial account size or $10,000, whichever is lower; removed after the second successful payout"}, {"title": "On-demand first reward add-on", "text": "40% split after 3 funded-account trading days"}, {"title": "Evaluation leverage", "text": "Forex 1:100; Indices/Commodities 1:20; Crypto 1:2"}, {"title": "Funded leverage", "text": "Forex 1:50; Indices/Commodities 1:10; Crypto 1:2"}
+        ]},
+        "2-step-goat": {"program": "2-Step GOAT", "slug": "2-step-goat", "title": "2-Step GOAT Rules", "desc": "Phase 1, Phase 2, funded, payout, and leverage rules.", "notice": "Funded minimum-day change depends on purchase date.", "rules": [
+          {"title": "Phase 1 profit target", "text": "8%"}, {"title": "Phase 2 profit target", "text": "6%"}, {"title": "Daily loss", "text": "4% in both evaluation phases and funded account"}, {"title": "Maximum drawdown", "text": "10% static"}, {"title": "Evaluation minimum trading days", "text": "3 days per phase"}, {"title": "Funded minimum trading days", "text": "3 days per payout; 4 days for accounts purchased from 25 July 2026"}, {"title": "Time limit", "text": "Unlimited"}, {"title": "Consistency rule", "text": "None"}, {"title": "Profit split", "text": "Not mentioned; optional 100% add-on"}, {"title": "Payout cycle", "text": "First reward on demand once eligible; later rewards bi-weekly"}, {"title": "Daily profit cap", "text": "$3,000 on funded account"}, {"title": "On-demand first reward add-on", "text": "40% split after 3 funded-account trading days"}, {"title": "Evaluation leverage", "text": "Forex 1:100; Indices/Commodities 1:20; Crypto 1:2"}, {"title": "Funded leverage", "text": "Forex 1:50; Indices/Commodities 1:10; Crypto 1:2"}
+        ]},
+        "2-step-standard": {"program": "2-Step Standard", "slug": "2-step-standard", "title": "2-Step Standard Rules", "desc": "Phase 1, Phase 2, funded, payout, and leverage rules.", "notice": "Funded minimum-day change depends on purchase date.", "rules": [
+          {"title": "Phase 1 profit target", "text": "10%"}, {"title": "Phase 2 profit target", "text": "5%"}, {"title": "Daily loss", "text": "5% in both evaluation phases and funded account"}, {"title": "Maximum drawdown", "text": "10% static"}, {"title": "Evaluation minimum trading days", "text": "3 days per phase"}, {"title": "Funded minimum trading days", "text": "3 days per payout; 4 days for accounts purchased from 25 July 2026"}, {"title": "Time limit", "text": "Unlimited"}, {"title": "Consistency rule", "text": "None"}, {"title": "Profit split", "text": "Not mentioned; optional 100% add-on"}, {"title": "Payout cycle", "text": "Bi-weekly (every 14 days)"}, {"title": "Daily profit cap", "text": "$3,000 on funded account"}, {"title": "On-demand first reward add-on", "text": "40% split after 3 funded-account trading days"}, {"title": "Evaluation leverage", "text": "Forex 1:100; Indices/Commodities 1:20; Crypto 1:2"}, {"title": "Funded leverage", "text": "Forex 1:50; Indices/Commodities 1:10; Crypto 1:2"}
+        ]},
+        "3-step-standard": {"program": "3-Step Standard", "slug": "3-step-standard", "title": "3-Step Standard Rules", "desc": "Three evaluation phases, funded, payout, and leverage rules.", "notice": "Funded minimum-day change depends on purchase date.", "rules": [
+          {"title": "Profit target", "text": "6% in Phase 1, Phase 2, and Phase 3"}, {"title": "Daily loss", "text": "4% in all evaluation phases and funded account"}, {"title": "Maximum drawdown", "text": "8% static"}, {"title": "Evaluation minimum trading days", "text": "None"}, {"title": "Funded minimum trading days", "text": "3 days per payout; 4 days for accounts purchased from 27 July 2026"}, {"title": "Time limit", "text": "Unlimited"}, {"title": "Consistency rule", "text": "None"}, {"title": "Profit split", "text": "80%; optional 100% add-on"}, {"title": "Payout cycle", "text": "Bi-weekly (every 14 days)"}, {"title": "Daily profit cap", "text": "$3,000 on funded account"}, {"title": "On-demand first reward add-on", "text": "40% split after 3 funded-account trading days"}, {"title": "Evaluation leverage", "text": "Forex 1:100; Indices/Commodities 1:20; Crypto 1:2"}, {"title": "Funded leverage", "text": "Forex 1:50; Indices/Commodities 1:10; Crypto 1:2"}
+        ]},
+        "instant-goat": {"program": "Instant GOAT", "slug": "instant-goat", "title": "Instant GOAT Rules", "desc": "Instant-account risk, payout, and leverage rules.", "notice": "Valid days need not be consecutive and each must generate at least 0.5% of initial balance.", "rules": [
+          {"title": "Profit target", "text": "Not mentioned"}, {"title": "Minimum trading days", "text": "5 valid trading days"}, {"title": "Daily loss", "text": "3% trailing"}, {"title": "Maximum drawdown", "text": "6% trailing"}, {"title": "Consistency rule", "text": "15%"}, {"title": "Drawdown reset after payout", "text": "Yes"}, {"title": "Time limit", "text": "Unlimited"}, {"title": "Safety cushion", "text": "No separate cushion; buffer is the gap between current equity and the trailing limits"}, {"title": "Profit split", "text": "80%; optional 100% add-on"}, {"title": "Payout cycle", "text": "Bi-weekly (every 14 days)"}, {"title": "Daily profit cap", "text": "$3,000"}, {"title": "Leverage", "text": "Forex 1:50; Indices/Commodities 1:10; Crypto 1:2"}
+        ]},
+        "instant-hero": {"program": "Instant HERO", "slug": "instant-hero", "title": "Instant HERO Rules", "desc": "Instant-account risk, payout, and leverage rules.", "notice": "The PDF states 6 valid trading days, while its payout-eligibility paragraph says at least 5; both statements are retained.", "rules": [
+          {"title": "Profit target", "text": "Not mentioned"}, {"title": "Minimum trading days", "text": "6 valid trading days at 0.5% profit each"}, {"title": "Payout eligibility paragraph", "text": "The PDF separately states at least 5 valid trading days before requesting a reward"}, {"title": "Daily loss", "text": "3% trailing"}, {"title": "Maximum drawdown", "text": "5% trailing"}, {"title": "Consistency rule", "text": "15%"}, {"title": "Drawdown reset after payout", "text": "Yes"}, {"title": "Time limit", "text": "Unlimited"}, {"title": "Safety cushion", "text": "No separate cushion; the PDF wording references a 3% daily and 6% overall trailing buffer"}, {"title": "Profit split", "text": "90%; optional 100% add-on"}, {"title": "Payout cycle", "text": "Bi-weekly (every 14 days)"}, {"title": "Daily profit cap", "text": "$3,000"}, {"title": "Leverage", "text": "Forex 1:50; Indices/Commodities 1:10; Crypto 1:2"}
+        ]},
+        "instant-premium": {"program": "Instant Premium", "slug": "instant-premium", "title": "Instant Premium Rules", "desc": "Instant-account risk, payout, and leverage rules.", "notice": "Valid days need not be consecutive and each must generate at least 0.5% of initial balance.", "rules": [
+          {"title": "Profit target", "text": "Not mentioned"}, {"title": "Minimum trading days", "text": "5 valid trading days at 0.5% profit each"}, {"title": "Daily loss", "text": "3% trailing"}, {"title": "Maximum drawdown", "text": "6% trailing EOD"}, {"title": "Consistency rule", "text": "None"}, {"title": "Drawdown reset after payout", "text": "Yes"}, {"title": "Time limit", "text": "Unlimited"}, {"title": "Safety cushion", "text": "No separate cushion; buffer is the gap between current equity and the trailing limits"}, {"title": "Profit split", "text": "80%; optional 100% add-on"}, {"title": "Payout cycle", "text": "Every 10 days"}, {"title": "Daily profit cap", "text": "$3,000"}, {"title": "Leverage", "text": "Forex 1:50; Indices/Commodities 1:10; Crypto 1:2"}
+        ]}
+      },
+      "modelSlugs": ["1-step-goat", "2-step-goat", "2-step-standard", "3-step-standard", "instant-goat", "instant-hero", "instant-premium"],
+      "violations": ["Not mentioned in the supplied PDF"],
+      "importantNote": {"text": "Rules are transcribed from the supplied PDF; conflicting wording is preserved rather than guessed.", "buttonText": "Review supplied PDF"}
+    }
+  }
+}

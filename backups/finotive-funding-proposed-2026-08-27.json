@@ -1,0 +1,22 @@
+{
+  "preparedAt": "2026-08-27",
+  "record": "finotive-funding",
+  "mode": "complete-firm-data-replacement",
+  "preserved": ["Community review documents", "Computed community rating statistics", "Listing rank and public visibility"],
+  "replaced": ["Firm profile data", "Company metadata", "Challenge models", "Rules", "Payout data", "Trading conditions", "Offers", "Team review profile"],
+  "sourceFiles": [
+    "/Users/theforexclue/Downloads/finotive funding_Research.xlsx",
+    "/Users/theforexclue/Downloads/Finotive funding 1-Step & 2-Step  & Instant .pdf"
+  ],
+  "programs": ["1-Step Challenge", "1-Step Pro", "2-Step Challenge", "2-Step Pro", "Instant Funding Standard", "Instant Funding Lite"],
+  "visibility": {
+    "showFirmProfile": true,
+    "showHomeTable": true,
+    "showListed": true,
+    "showBestGlobal": true,
+    "showRules": true,
+    "showReviews": true,
+    "showOffers": true
+  },
+  "missingValuePolicy": "Use Not mentioned. Do not publish source-file labels or research instructions as public copy."
+}

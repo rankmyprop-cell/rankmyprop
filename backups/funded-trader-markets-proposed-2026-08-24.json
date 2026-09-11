@@ -1,0 +1,28 @@
+{
+  "preparedAt": "2026-08-24",
+  "record": "funded-trader-markets",
+  "mode": "rules-and-reviews-only",
+  "visibility": {
+    "showFirmProfile": false,
+    "showHomeTable": false,
+    "showListed": false,
+    "showBestGlobal": false,
+    "showRules": true,
+    "showReviews": true,
+    "showOffers": false,
+    "active": true,
+    "publishState": "published"
+  },
+  "sourceFiles": [
+    "/Users/theforexclue/Downloads/FTM 1-Step & 2-Step  & Instant .pdf",
+    "/Users/theforexclue/Downloads/FTM_Research.xlsx"
+  ],
+  "programs": [
+    "1-Step Nitro Evaluation",
+    "2-Step Plus Evaluation",
+    "Instant Funding Standard",
+    "Instant Funding Pro",
+    "Instant Funding Plus"
+  ],
+  "editorPolicy": "PDF model values are authoritative for the five challenge blocks. Workbook-only firm-wide rules are included without overriding model-specific PDF values. Research instructions, placeholders, unavailable ratings, and unsupported claims are not published. Missing source values are shown as Not mentioned."
+}

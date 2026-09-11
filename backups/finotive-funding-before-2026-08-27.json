@@ -1,0 +1,814 @@
+{
+  "capturedAt": "2026-08-27",
+  "record": "finotive-funding",
+  "restoreAction": "Replace firms/finotive-funding with the firm object below. Preserve community reviews and rating statistics.",
+  "firm": {
+    "id": "finotive-funding",
+    "publishState": "published",
+    "country": "Global",
+    "rulePage": "firm-rule-detail.html?slug=finotive-funding",
+    "slug": "finotive-funding",
+    "website": "finotivefunding.com",
+    "verified": false,
+    "active": true,
+    "banner": "https://dummyimage.com/600x200/0b0b12/7c5cff&text=Finotive",
+    "handle": "@finotivefunding",
+    "offerPage": "discount.html?slug=finotive-funding",
+    "tags": [
+      "Forex"
+    ],
+    "markets": [
+      "Forex"
+    ],
+    "buyLink": "https://finotivefunding.com",
+    "showListed": true,
+    "reviewPage": "firm-detail.html?slug=finotive-funding",
+    "payoutAssurance": false,
+    "bestCategories": {
+      "instant_funding": true,
+      "highest_rated": false,
+      "beginner": true,
+      "trusted": false,
+      "cheapest": false,
+      "hft": false,
+      "futures": false,
+      "fast_payout": false
+    },
+    "rulesLink": "https://rankmyprop.in/propfirmrule",
+    "bio": "Flexible scaling with weekly payouts.",
+    "listingType": "best",
+    "firmDetails": [
+      {
+        "label": "Company Name",
+        "value": "Finotive Funding"
+      },
+      {
+        "label": "Headquarters",
+        "value": "United Arab Emirates"
+      },
+      {
+        "label": "Founded",
+        "value": "2021"
+      },
+      {
+        "label": "CEO",
+        "value": "Oliver Newland"
+      },
+      {
+        "label": "Broker",
+        "value": "Finotive Markets LLC"
+      }
+    ],
+    "overviewLongTitle": "Detailed Overview",
+    "detailMeta": "CEO: Oliver Newland • Forex • Founded Apr 2021 • UAE",
+    "discountPage": "https://rankmyprop.in/discount",
+    "promoText": "25% OFF",
+    "stats": [
+      {
+        "value": "3k+",
+        "label": "Traders"
+      },
+      {
+        "value": "Weekly",
+        "label": "Payouts"
+      },
+      {
+        "value": "100%",
+        "label": "Profit Split"
+      },
+      {
+        "value": "2021",
+        "label": "Founded"
+      }
+    ],
+    "commissions": [
+      {
+        "title": "Stocks",
+        "lines": [
+          "$0"
+        ]
+      },
+      {
+        "title": "Crypto",
+        "lines": [
+          "0.06% for Challenge/Instant",
+          "0.045% for Pro"
+        ]
+      },
+      {
+        "title": "FX",
+        "lines": [
+          "$5/lot for Challenge/Instant",
+          "$4/lot for Pro"
+        ]
+      },
+      {
+        "title": "Metals",
+        "lines": [
+          "$6/lot for Challenge/Instant",
+          "$5/lot for Pro"
+        ]
+      },
+      {
+        "title": "Indices",
+        "lines": [
+          "$0"
+        ]
+      },
+      {
+        "title": "Energy",
+        "lines": [
+          "$6/lot for all account types"
+        ]
+      }
+    ],
+    "paymentMethods": [
+      "Crypto",
+      "Apple Pay",
+      "Credit/Debit Card",
+      "Google Pay",
+      "PayPal",
+      "Finotive Pay",
+      "SEPA",
+      "IBAN",
+      "Revolut"
+    ],
+    "logo": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAIAAADajyQQAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAE1GlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSfvu78nIGlkPSdXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQnPz4KPHg6eG1wbWV0YSB4bWxuczp4PSdhZG9iZTpuczptZXRhLyc+CjxyZGY6UkRGIHhtbG5zOnJkZj0naHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyc+CgogPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9JycKICB4bWxuczpBdHRyaWI9J2h0dHA6Ly9ucy5hdHRyaWJ1dGlvbi5jb20vYWRzLzEuMC8nPgogIDxBdHRyaWI6QWRzPgogICA8cmRmOlNlcT4KICAgIDxyZGY6bGkgcmRmOnBhcnNlVHlwZT0nUmVzb3VyY2UnPgogICAgIDxBdHRyaWI6Q3JlYXRlZD4yMDI1LTExLTA3PC9BdHRyaWI6Q3JlYXRlZD4KICAgICA8QXR0cmliOkV4dElkPmIwNThkMGRiLTRlYzAtNDNhMy1iZmQ3LTI0ZDQ2YmFkNWJjODwvQXR0cmliOkV4dElkPgogICAgIDxBdHRyaWI6RmJJZD41MjUyNjU5MTQxNzk1ODA8L0F0dHJpYjpGYklkPgogICAgIDxBdHRyaWI6VG91Y2hUeXBlPjI8L0F0dHJpYjpUb3VjaFR5cGU+CiAgICA8L3JkZjpsaT4KICAgPC9yZGY6U2VxPgogIDwvQXR0cmliOkFkcz4KIDwvcmRmOkRlc2NyaXB0aW9uPgoKIDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PScnCiAgeG1sbnM6ZGM9J2h0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvJz4KICA8ZGM6dGl0bGU+CiAgIDxyZGY6QWx0PgogICAgPHJkZjpsaSB4bWw6bGFuZz0neC1kZWZhdWx0Jz5VbnRpdGxlZCBkZXNpZ24gLSAxPC9yZGY6bGk+CiAgIDwvcmRmOkFsdD4KICA8L2RjOnRpdGxlPgogPC9yZGY6RGVzY3JpcHRpb24+CgogPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9JycKICB4bWxuczpwZGY9J2h0dHA6Ly9ucy5hZG9iZS5jb20vcGRmLzEuMy8nPgogIDxwZGY6QXV0aG9yPkVOVEVSVEFJTk1FTlQgV0lUSCBST0FTVDwvcGRmOkF1dGhvcj4KIDwvcmRmOkRlc2NyaXB0aW9uPgoKIDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PScnCiAgeG1sbnM6eG1wPSdodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvJz4KICA8eG1wOkNyZWF0b3JUb29sPkNhbnZhIChSZW5kZXJlcikgZG9jPURBRzNfaDJBRHNFIHVzZXI9VUFHUGg1WGo0SXcgYnJhbmQ9RGlsbG9uIFp5bGVuJiMzOTtzIENsYXNzIHRlbXBsYXRlPTwveG1wOkNyZWF0b3JUb29sPgogPC9yZGY6RGVzY3JpcHRpb24+CjwvcmRmOlJERj4KPC94OnhtcG1ldGE+Cjw/eHBhY2tldCBlbmQ9J3InPz7omSVuAAAJm0lEQVR4nO2ba1CbVRrHn/NecoMQkoYkvCFJbWu3XZWSJoCWUNYdR3fa2a2648zuOuPOro7d2mkXaksptZS6KiVAEel42X5wx2pddS/1MmtdP+gKCLUQsFpqW2gFQt4AuRRaSMJ7Ofshdpd1XG2TN1gY/t+SyZk8v/d/znOe5+QEiRjDfBTxfQeQKi2AzTVRM1+g7ysKiTQzW8xbxxbA5poWwOaaFsDmmuYtGPXdH/kmYQCYneoZocTKhkTAMMCUyE0JfKpLFQSQQcpkiExg7DWDYcAihtcCZ14NnE6pZwiAIIgaa7E9zZDAA0xwKl6YvtQ2OVKizlEQiTzOqxDycZdPXvKH+Vhi4xMAQwAYAahJ+bM3/JiRqdC1z0j8XQU3xviNUN/G8/9McIUl7BgAIAAKIRkirwkMAwS56JlYOD/NQCPi/40VQCQgYSiAWU73GHCAizzm/fj+c+/+OXg2JgoYUrVMZw8MAw7zsSpv++GxXgx464UPXwue47CYIrZZAsOAx7jIrqG2N4JnNxlXHV76k7w0/WNDba8EzkRT49tsgGHAIT62x9v+0ljvA1k37bPcWqRmmhffjhFRPtDSPRVIxbaRcrB4tqgc+vgvwbObjHm7zU4lQQX5yKHRzyPi9P1ZK1coMhECyU1LLRgGHOQjOwZbjoz1PmTIfTznVi2luMRPV3uPvzBy8jdZN+3LKcyk5FFRaLnkmxQ5CfFSCIYBB/lo5WDb30LnNpnydjIOJUkFuMjuofbXg2ceMeVVMPlqUjYpcPVs131n3n5u5LOIdOst8X3s24UBj3KRisHWo+G+R0x5FYwznZSN87Fq7/GXxk5tNK2qMheoSVlUFA6w3U1+TwalqPOdQAAbDbekkRJElRLH4tkingM3GlZVMvlqUhbmonu87a8Gv3jYlLv7ilduX2cj2/VT7dL3V9xTnJFT7e14fvSziCgkH4P0YHGvygdb3gr1bcm272QcaSQd4CJV3o6Xx3ofNNxcZf5qXTWwnma/Z4NuaY2laIlcs8dcaJWrG3ydH00MJx+GxGAY4yAf3TXU9srY6YcMuVXmQg0lv8jHqr3HDwd6HzTk7jEXZJCySYGr9XU2sl3rMpcesJWYaNU0Ft4bHxiITbgyzHlpWclHIuUaw4BH+UjlUNs74f5tjGN7tkNOkCPc1F5vx1+DZ39nXHVlBvINrKeJ7bpXt/wpyxotJb8kTL8w8vkBtnN95g21VpeRVib/G5BkYPE6cMdAy9Fw36OMo4LJpxExzk9XezsOj/VuMdl3mwvUJB0R+Xq28xnWs0F3Y63VpacVUZFv9n/65PDxn2mXNdlKjDIlAgRJ50ZpwDBAgIvuGGz9x8Xz27IdpSY7DQQ7PVnt7Tga7i/LdmzPXq0m6UmBc7NdB9nuexYtr7EULaIVlwXuGX9Pk99zt27ZfovrCpUEShYs/mDHuKmygY/eDZ8vYxzbslcrCWqcj1V5O44ETpdmOyoYZzpJR0UhTrVBt6zGUpRFK6cEvtHf3eDrXK9d0mQryaIlowJJHAtwUzsGW94J929nnGUmu5KgRqan9g63vxXqi3uVTtKXBa6e7XqG9dyrW+62unS0IiLwjf7uRl/Xeu0St9UlLRUknxUn+OntAy1vhs6XZTvKTKtVJD3Ox/Z42/80dvq3xlsqGGcmJccYGllPE+tZl7mkxlq0iFbEROHpkZ56tutO7eJ6a3GOLF1aKkgeDAHICRIAx7AgAgYAhBBNEADAif/NbTRBIkAcxvG3EACNCAJQTBTE1JzjkXurq2dGeTXCAP+65O2aHH3YcLOeVrrU5lE+8uLo51EsFqQbM0hZQZppUuSOBE+HhJgz3agiqdUqg5ygXg6c6o9OFKkZDSl3phmUBHUk8MUX0XBBeraGks00DQM+FQm9He7/pX7lDXLN7J1SzZSWUjxhWcNh8Xl/D4lQJZOfRSufsKzhAT/r70EAVebCDEpWarKLgOuGT2CEG20lRlq1yZALAPu87eXQcnDxjwy0irh+kgcCQAA6SuG2FiOA5/2fihjKGUcGKasyF2KMXwr0koioYBxaSrHVlIcx1LMnyhHptroMtGqj4RYR43q2c/OXH9ZZXYtlGURSRzjSgcWFALSUfL/VBQAH/R4CoMpcaKJVNZYiAtBBf7eAxb05hWpSVpptJxC4h08IWHzaVqKnlZtNqwiE9gy1IYCDi283UEpJ2CSrPOK+1ViKAOCPIycx4HLGmUnJ9+YUCoBfHD1FIlTJFGgo2e9NdgHjet8JChG1FpdRpnrYcDMA1Pk6t3z5QZ212CZXJx+PlLUiAlhEK/dbihBAM9tDIqKCcRpo1VM5awDDoZGTAKiScWooeanJjhA0+LoAcIOtRE8qNhlzRcCPe49TiDhgW5tFKZMMRuLqHgHoaOVTlqL79Muf8/e4fV2TAqejFU9Ybrtv0YrnRnr2+zonBU5JUg/of2hVaN4O9X8wPoQRKBC5Qbt0hVJ77OKF1glf8pFI30HHfXNbXBjjJtaDAcoZh55WPW65VQDx0OhnCNCv9D/4w/AnQ9GJUsZ5V6YNAwT4SM3wJ2cioc2mvLsybckvspQcDcR9c1vXCoCbWY8ckaXZeUZa5ba6RCw2+z1Hw/0DsfFd5oId2Q45QY5xkfLB1r+Hzm025VUy+ekkfR21LV8TAlhEK+qsa0lADWwnD2KZya6jFE9aihAQxy5eqMq5bbMxV0aQLDe1a7D1aKhvi8kePxpBANdL2/KNQgBZtLLWWsxh8YCvkwDYyeRny9JqrUU/1914h8YiQ0SAi1YMtr4Z6ttqspczznSSlmqHTiEYACAAPa1ssK2lEdHMdiNAW015elq1TmsDgOHpyxWDbcfGv3yUcT5qWp0mHRWkGgy+8k1Vay3mAbuHP8EAOxknASjMR8sHW98K9e80F2wz2dNIStryPuVg8J88aS0WMW5mPRRCd2uX7RvueP/iwE5z/hUqiduW2QADAARgoFX1trXlCNX5Ol8PnjsbDVcw+aWpoYLZBEMARlpZby3mRfG98cHHzIVbTKtUREqoYNbArgjpaaXbVvyLydE7NBYlIWW2+JoSB8MAnIhjonitA/WU8k6NDQBi33aUjZPsrBMAwwAYA57gY7/uPyYnErgpAnAV3fooNyUAShguMcfQSoVuvcaW4HdenTLlmpXKzCw6wTIfzazKrn7GR0UhJvKJfeU1KY2kKXS1LchMdxMEuz4vic0MKMHkgQCSu1+Scs3b+4oLYHNNC2BzTQtgc03zFux/Nuj59G/NeevYAthc078B1B8G6FgqNvIAAAAASUVORK5CYII=",
+    "tradingConditions": [
+      {
+        "label": "Daily Drawdown",
+        "value": "3% - 4.5%"
+      },
+      {
+        "label": "Maximum Drawdown",
+        "value": "7% - 9%"
+      },
+      {
+        "label": "Minimum Payout",
+        "value": "$10"
+      },
+      {
+        "label": "Weekend Holding",
+        "value": "Allowed On Evaluation"
+      }
+    ],
+    "metaMarkets": [
+      "Forex",
+      "Crypto",
+      "Stocks",
+      "Metals",
+      "Indices",
+      "Energy"
+    ],
+    "reviewSnippet": "Finotive Funding offers multiple funding models, scaling opportunities, and fast payout systems for active traders.",
+    "whyChoose": [
+      "Weekly Payouts",
+      "Scaling Up To $5.4M+",
+      "Instant Funding Available",
+      "Up To 100% Profit Split",
+      "Multiple Funding Models",
+      "Fast Payout Processing",
+      "Supports MT5",
+      "EA Trading Allowed"
+    ],
+    "overview": "Finotive Funding is a proprietary trading firm headquartered in the United Arab Emirates and officially established in April 2021. Over the years, the company has become recognized within the prop trading industry for offering scalable funding programs, flexible trading models, and trader-focused payout systems. The firm is designed to help retail traders access large amounts of simulated capital while maintaining disciplined risk management practices.\n\nThe company offers several funding models including Instant Funding, Instant Lite, 1-Step Challenges, 2-Step Challenges, and Finotive Pro accounts. These models are designed to accommodate traders with different experience levels, trading styles, and risk preferences. Unlike many traditional prop firms that focus only on evaluation-based funding, Finotive Funding also provides direct funding models for traders seeking immediate access to capital.\n\nOne of the biggest strengths of Finotive Funding is its advanced scaling program. The firm uses structured 12-week scaling cycles where traders can increase their account allocation by 30% and their profit split by 5% after each successful cycle. Traders can eventually scale beyond $5.4 million in total allocation within a few successful cycles. This scaling system makes the firm attractive to professional traders looking for long-term growth opportunities.\n\nThe company supports two major trading platforms including MetaTrader 5 (MT5) and Match Trader. MT5 remains one of the most widely used platforms for Forex and CFD trading because of its advanced charting, automated trading support, and broad market access. Match Trader provides a modern web-based trading experience with fast execution and a clean interface suitable for modern traders.\n\nFinotive Funding allows traders to access multiple asset classes including Forex, Cryptocurrencies, Stocks, Metals, Indices, and Energy products. This broad instrument selection helps traders diversify strategies and participate across different global market conditions. Forex traders can access leverage up to 1:100 on specific programs, while Metals, Indices, and Energy products are generally offered with moderate leverage levels for controlled exposure.\n\nThe firm provides multiple payout structures depending on the account type. One of the most attractive features is the payout-on-demand system available after traders become eligible. The first payout can be requested on demand, while future payouts are generally processed weekly across most funding programs. Instant Funding Lite accounts use biweekly payout cycles. The minimum withdrawal amount is only $10, making the payout process accessible even for smaller funded traders.\n\nAll payouts are processed through Finotive Pay accounts. Traders can withdraw funds through multiple payment methods including Cryptocurrency transfers, Revolut RevTag, and International Wire Transfers. The company also supports several payment methods for purchasing evaluations including Apple Pay, Credit and Debit Cards, Crypto, Google Pay, PayPal, Finotive Pay, SEPA, IBAN transfers, and Revolut.\n\nFinotive Funding is also known for supporting several trading styles that many prop firms restrict. Overnight holding is allowed across evaluation-based accounts, although Instant Funding Standard and Instant Lite programs require additional add-ons for weekend holding. Traders are also allowed to use Expert Advisors (EAs) and copy trading tools under certain conditions.\n\nThe company maintains strict policies regarding prohibited trading behavior. High-Frequency Trading (HFT), latency arbitrage, news straddling, and spread exploitation strategies are strictly prohibited. The firm actively monitors trading behavior to ensure traders are using realistic and sustainable risk management practices rather than exploiting technical inefficiencies.\n\nOne important risk management feature at Finotive Funding is the Instant Funding drawdown threshold system. Floating drawdown warnings begin at 1%, while reaching 1.5% floating drawdown results in a strike. Accumulating five strikes leads to account breach. This system is designed to discourage excessive risk-taking and encourage responsible trading behavior.\n\nThe company also enforces notional volume rules. Notional volume measures the total exposure of trades regardless of stop-loss placement. Consistently breaching notional volume limits may be treated as gambling behavior and can lead to warnings, soft breaches, payout reductions, or hard account violations. Each account size has its own specific notional volume limits.\n\nFinotive Funding prohibits gambling-style trading practices such as martingale systems, grid strategies, aggressive loss-chasing behavior, and excessive one-directional trading. The company also monitors stop-loss and take-profit usage. Accounts where more than 50% of trades show no interaction with stop-loss or take-profit levels may be flagged for unrealistic risk management behavior.\n\nAnother important rule concerns high-frequency scalping and micro-duration trades. If more than 50% of total trades are closed in under two minutes or if more than 30% of profits are generated from trades held less than two minutes, the account may be flagged for prohibited HFT-style activity.\n\nLow-liquidity trading and spread exploitation are also prohibited. Traders who consistently open or close trades during low-liquidity hours between 22:00 and 02:00 UTC while generating excessive profits during that period may face rule violations.\n\nThe company requires traders to maintain strategy consistency after becoming funded. Traders are not allowed to significantly change trading styles or risk approaches once they move from challenge phases into funded stages. This policy helps ensure consistent trading performance and reduces excessive speculative behavior.\n\nFinotive Funding also includes consistency requirements for Finotive Pro accounts. Traders must maintain weekly trading activity and volume within 25% of their average challenge behavior during funded stages. Additionally, Finotive Pro traders must achieve quarterly profit targets every 90 days to maintain upgraded conditions and profit splits.\n\nFrom a pricing perspective, Finotive Funding is considered competitive within the prop trading industry. Entry-level challenge accounts start at relatively affordable pricing, while scaling opportunities allow successful traders to access significantly larger capital allocations over time.\n\nThe company has built a reputation for providing responsive customer support, fast payouts, modern dashboard systems, and scalable opportunities for traders seeking long-term growth. Its combination of funding flexibility, payout frequency, scaling potential, and professional risk management policies makes it attractive to both beginner and experienced traders.\n\nOverall, Finotive Funding is well-suited for traders looking for scalable proprietary trading opportunities with weekly payouts, multiple funding models, strong platform support, and realistic long-term growth potential.",
+    "overviewTitle": "Finotive Funding Overview",
+    "spreadsPanelData": {
+      "items": [
+        {
+          "symbol": "EUR/USD",
+          "flag": "eu",
+          "category": "forex",
+          "unit": "Pips",
+          "std": [
+            0.2,
+            0.5,
+            1
+          ]
+        },
+        {
+          "symbol": "XAU/USD",
+          "flag": "us",
+          "category": "metals",
+          "unit": "Pips",
+          "std": [
+            1.5,
+            2,
+            3
+          ]
+        },
+        {
+          "symbol": "BTC/USD",
+          "flag": "us",
+          "category": "crypto",
+          "unit": "Pips",
+          "std": [
+            15,
+            25,
+            35
+          ]
+        }
+      ]
+    },
+    "leverageRows": [
+      {
+        "instrument": "Stocks",
+        "c1": "1:2",
+        "c2": "1:4",
+        "c3": "1:5",
+        "c4": "n/a"
+      },
+      {
+        "instrument": "Crypto",
+        "c1": "1:1",
+        "c2": "1:2",
+        "c3": "1:2",
+        "c4": "n/a"
+      },
+      {
+        "instrument": "FX",
+        "c1": "1:33",
+        "c2": "1:50",
+        "c3": "1:100",
+        "c4": "n/a"
+      },
+      {
+        "instrument": "Metals",
+        "c1": "1:5",
+        "c2": "1:10",
+        "c3": "1:20",
+        "c4": "n/a"
+      },
+      {
+        "instrument": "Indices",
+        "c1": "1:5",
+        "c2": "1:5",
+        "c3": "1:10",
+        "c4": "n/a"
+      },
+      {
+        "instrument": "Energy",
+        "c1": "1:5",
+        "c2": "1:10",
+        "c3": "1:20",
+        "c4": "n/a"
+      }
+    ],
+    "metaFounded": "2021",
+    "showBestGlobal": true,
+    "unpublishUntil": "",
+    "restrictedCountries": [
+      "Iran",
+      "North Korea",
+      "Palestinian Territory"
+    ],
+    "overviewLong": "Finotive Funding is a proprietary trading firm headquartered in the United Arab Emirates and officially established in April 2021. Over the years, the company has become recognized within the prop trading industry for offering scalable funding programs, flexible trading models, and trader-focused payout systems. The firm is designed to help retail traders access large amounts of simulated capital while maintaining disciplined risk management practices.\n\nThe company offers several funding models including Instant Funding, Instant Lite, 1-Step Challenges, 2-Step Challenges, and Finotive Pro accounts. These models are designed to accommodate traders with different experience levels, trading styles, and risk preferences. Unlike many traditional prop firms that focus only on evaluation-based funding, Finotive Funding also provides direct funding models for traders seeking immediate access to capital.\n\nOne of the biggest strengths of Finotive Funding is its advanced scaling program. The firm uses structured 12-week scaling cycles where traders can increase their account allocation by 30% and their profit split by 5% after each successful cycle. Traders can eventually scale beyond $5.4 million in total allocation within a few successful cycles. This scaling system makes the firm attractive to professional traders looking for long-term growth opportunities.\n\nThe company supports two major trading platforms including MetaTrader 5 (MT5) and Match Trader. MT5 remains one of the most widely used platforms for Forex and CFD trading because of its advanced charting, automated trading support, and broad market access. Match Trader provides a modern web-based trading experience with fast execution and a clean interface suitable for modern traders.\n\nFinotive Funding allows traders to access multiple asset classes including Forex, Cryptocurrencies, Stocks, Metals, Indices, and Energy products. This broad instrument selection helps traders diversify strategies and participate across different global market conditions. Forex traders can access leverage up to 1:100 on specific programs, while Metals, Indices, and Energy products are generally offered with moderate leverage levels for controlled exposure.\n\nThe firm provides multiple payout structures depending on the account type. One of the most attractive features is the payout-on-demand system available after traders become eligible. The first payout can be requested on demand, while future payouts are generally processed weekly across most funding programs. Instant Funding Lite accounts use biweekly payout cycles. The minimum withdrawal amount is only $10, making the payout process accessible even for smaller funded traders.\n\nAll payouts are processed through Finotive Pay accounts. Traders can withdraw funds through multiple payment methods including Cryptocurrency transfers, Revolut RevTag, and International Wire Transfers. The company also supports several payment methods for purchasing evaluations including Apple Pay, Credit and Debit Cards, Crypto, Google Pay, PayPal, Finotive Pay, SEPA, IBAN transfers, and Revolut.\n\nFinotive Funding is also known for supporting several trading styles that many prop firms restrict. Overnight holding is allowed across evaluation-based accounts, although Instant Funding Standard and Instant Lite programs require additional add-ons for weekend holding. Traders are also allowed to use Expert Advisors (EAs) and copy trading tools under certain conditions.\n\nThe company maintains strict policies regarding prohibited trading behavior. High-Frequency Trading (HFT), latency arbitrage, news straddling, and spread exploitation strategies are strictly prohibited. The firm actively monitors trading behavior to ensure traders are using realistic and sustainable risk management practices rather than exploiting technical inefficiencies.\n\nOne important risk management feature at Finotive Funding is the Instant Funding drawdown threshold system. Floating drawdown warnings begin at 1%, while reaching 1.5% floating drawdown results in a strike. Accumulating five strikes leads to account breach. This system is designed to discourage excessive risk-taking and encourage responsible trading behavior.\n\nThe company also enforces notional volume rules. Notional volume measures the total exposure of trades regardless of stop-loss placement. Consistently breaching notional volume limits may be treated as gambling behavior and can lead to warnings, soft breaches, payout reductions, or hard account violations. Each account size has its own specific notional volume limits.\n\nFinotive Funding prohibits gambling-style trading practices such as martingale systems, grid strategies, aggressive loss-chasing behavior, and excessive one-directional trading. The company also monitors stop-loss and take-profit usage. Accounts where more than 50% of trades show no interaction with stop-loss or take-profit levels may be flagged for unrealistic risk management behavior.\n\nAnother important rule concerns high-frequency scalping and micro-duration trades. If more than 50% of total trades are closed in under two minutes or if more than 30% of profits are generated from trades held less than two minutes, the account may be flagged for prohibited HFT-style activity.\n\nLow-liquidity trading and spread exploitation are also prohibited. Traders who consistently open or close trades during low-liquidity hours between 22:00 and 02:00 UTC while generating excessive profits during that period may face rule violations.\n\nThe company requires traders to maintain strategy consistency after becoming funded. Traders are not allowed to significantly change trading styles or risk approaches once they move from challenge phases into funded stages. This policy helps ensure consistent trading performance and reduces excessive speculative behavior.\n\nFinotive Funding also includes consistency requirements for Finotive Pro accounts. Traders must maintain weekly trading activity and volume within 25% of their average challenge behavior during funded stages. Additionally, Finotive Pro traders must achieve quarterly profit targets every 90 days to maintain upgraded conditions and profit splits.\n\nFrom a pricing perspective, Finotive Funding is considered competitive within the prop trading industry. Entry-level challenge accounts start at relatively affordable pricing, while scaling opportunities allow successful traders to access significantly larger capital allocations over time.\n\nThe company has built a reputation for providing responsive customer support, fast payouts, modern dashboard systems, and scalable opportunities for traders seeking long-term growth. Its combination of funding flexibility, payout frequency, scaling potential, and professional risk management policies makes it attractive to both beginner and experienced traders.\n\nOverall, Finotive Funding is well-suited for traders looking for scalable proprietary trading opportunities with weekly payouts, multiple funding models, strong platform support, and realistic long-term growth potential.",
+    "overviewShort": "Finotive Funding is a UAE-based proprietary trading firm established in 2021 that provides traders with Instant Funding, 1-Step, and 2-Step evaluation programs. The firm is known for its scaling opportunities, weekly payouts, and flexible trading environment. Traders can access Forex, Crypto, Stocks, Metals, Indices, and Energy markets using MT5 and Match Trader platforms.\n\nOne of Finotive Funding’s strongest features is its scaling model, allowing traders to grow accounts significantly over structured 12-week cycles. The firm also supports overnight holding, copy trading, and Expert Advisors under specific conditions.\n\nFinotive Funding is suitable for traders looking for scalable funding opportunities, fast payouts, and flexible challenge structures combined with competitive trading conditions and professional risk management systems.",
+    "keyMetrics": [
+      {
+        "label": "Max Allocation",
+        "value": "$5.4M+"
+      },
+      {
+        "label": "Profit Split",
+        "value": "Up to 100%"
+      },
+      {
+        "label": "Payout Cycle",
+        "value": "Weekly"
+      },
+      {
+        "label": "News Trading",
+        "value": "Restricted"
+      },
+      {
+        "label": "Min Trading Days",
+        "value": "None"
+      },
+      {
+        "label": "Time Limit",
+        "value": "Unlimited"
+      },
+      {
+        "label": "Starting Price",
+        "value": "$21"
+      },
+      {
+        "label": "EA Allowed",
+        "value": "Yes"
+      }
+    ],
+    "sortOrder": 6,
+    "announcementsPanelData": {
+      "items": [
+        {
+          "cat": "payouts",
+          "tagLabel": "Payouts",
+          "title": "Weekly Payout System",
+          "desc": "Finotive Funding supports weekly payouts after the first on-demand payout.",
+          "heroTitle": "Fast Withdrawals",
+          "heroDesc": "Minimum withdrawal amount starts from $10.",
+          "sections": []
+        },
+        {
+          "cat": "scaling",
+          "tagLabel": "Scaling",
+          "title": "Scaling Program",
+          "desc": "Scale accounts every 12 weeks with up to 30% balance increase.",
+          "heroTitle": "Scale To $5.4M+",
+          "heroDesc": "Increase allocation and profit split after successful cycles.",
+          "sections": []
+        }
+      ]
+    },
+    "metaCeo": "Oliver Newland",
+    "bestRegions": {
+      "south_africa": false,
+      "china": false,
+      "nigeria": false,
+      "uk": false,
+      "pakistan": false,
+      "australia": false,
+      "us": false,
+      "india": true
+    },
+    "metaHeadquarters": "UAE",
+    "trustedBy": "3k+ traders",
+    "teamReviewProfile": {
+      "breakdown": [
+        {
+          "key": "payout",
+          "icon": "💳",
+          "label": "Payout Process",
+          "score": 4.8,
+          "text": "Payout flow is consistent and clear for traders."
+        },
+        {
+          "key": "support",
+          "icon": "🎧",
+          "label": "Customer Support",
+          "score": 4.5,
+          "text": "Support team remains responsive across channels."
+        },
+        {
+          "key": "trading",
+          "icon": "📈",
+          "label": "Trading Conditions",
+          "score": 4.5,
+          "text": "Conditions are competitive for most strategies."
+        },
+        {
+          "key": "rules",
+          "icon": "📋",
+          "label": "Rules & Transparency",
+          "score": 4.7,
+          "text": "Rulebook is transparent with clear expectations."
+        },
+        {
+          "key": "platform",
+          "icon": "🖥️",
+          "label": "Platform & Experience",
+          "score": 4.5,
+          "text": "Dashboard and trading flow are smooth overall."
+        },
+        {
+          "key": "value",
+          "icon": "💰",
+          "label": "Value for Money",
+          "score": 4.4,
+          "text": "Pricing-to-benefit ratio is fair for active traders."
+        }
+      ],
+      "badgeLabel": "Review",
+      "prosHeading": "👍 What We Liked",
+      "verdictAuthor": "Rank My Prop Team",
+      "bestForText": "Traders looking for reliable funded account conditions from Finotive Funding.",
+      "finalVerdictHeading": "Our Final Verdict",
+      "pros": [
+        "Clear payout process",
+        "Transparent rules",
+        "User-friendly dashboard"
+      ],
+      "bestForHeading": "Best For",
+      "verdictDate": "2026-05-13T09:29:39.806Z",
+      "overallLabel": "Excellent",
+      "overallSub": "Based on our evaluation",
+      "verdictText": "Finotive Funding offers a strong mix of rules clarity, payout reliability, and execution consistency for funded traders.",
+      "cons": [
+        "Could add more instruments",
+        "Weekend support can improve"
+      ],
+      "firmSlug": "finotive-funding",
+      "updatedAt": {
+        "seconds": 1778664580,
+        "nanoseconds": 936000000
+      },
+      "finalScore": 4.6,
+      "overallRating": 4.6,
+      "finalLabel": "Recommended",
+      "consHeading": "🔴 What Could Be Better",
+      "breakdownHeading": "Detailed Breakdown",
+      "ourReviewTitle": "Our Review",
+      "finalVerdictText": "Finotive Funding is a reliable choice for traders focused on consistency and rule clarity.",
+      "notIdealHeading": "Not Ideal For",
+      "verdictHeading": "Rank My Prop Team Verdict",
+      "verdictBadge": "👍 Recommended",
+      "ourReviewSubtitle": "Rank My Prop Team's overall rating and feedback for Finotive Funding.",
+      "firmName": "Finotive Funding",
+      "notIdealText": "Traders needing highly niche instrument coverage."
+    },
+    "challengesPanelData": {
+      "stats": [
+        {
+          "label": "Traders",
+          "value": "3k+"
+        },
+        {
+          "label": "Payouts",
+          "value": "Weekly"
+        },
+        {
+          "label": "Profit Split",
+          "value": "100%"
+        },
+        {
+          "label": "Founded",
+          "value": "2021"
+        }
+      ],
+      "programs": [
+        {
+          "program": "Instant Standard",
+          "phase1": "None",
+          "phase2": "-",
+          "target": "None",
+          "allocation": "$500,000",
+          "split": "Up to 75%",
+          "features": []
+        },
+        {
+          "program": "Instant Lite",
+          "phase1": "None",
+          "phase2": "-",
+          "target": "None",
+          "allocation": "$500,000",
+          "split": "Up to 70%",
+          "features": []
+        },
+        {
+          "program": "1-Step Challenge",
+          "phase1": "10%",
+          "phase2": "-",
+          "target": "10%",
+          "allocation": "$500,000",
+          "split": "Up to 80%",
+          "features": []
+        },
+        {
+          "program": "2-Step Challenge",
+          "phase1": "7.5%",
+          "phase2": "5%",
+          "target": "7.5%",
+          "allocation": "$500,000",
+          "split": "Up to 80%",
+          "features": []
+        },
+        {
+          "program": "Finotive Pro",
+          "phase1": "10%",
+          "phase2": "10%",
+          "target": "10%",
+          "allocation": "$500,000",
+          "split": "Up to 100%",
+          "features": []
+        }
+      ]
+    },
+    "performance": {
+      "payouts": "4.4",
+      "profitability": "4.3",
+      "trust": "4.1",
+      "flexibility": "4.2",
+      "rules": "4"
+    },
+    "radarMetrics": [
+      {
+        "label": "Company Background",
+        "short": "Background",
+        "value": "4.2"
+      },
+      {
+        "label": "Payouts",
+        "short": "Payouts",
+        "value": "4.4"
+      },
+      {
+        "label": "Rules",
+        "short": "Rules",
+        "value": "4"
+      },
+      {
+        "label": "Platforms",
+        "short": "Platforms",
+        "value": "4.1"
+      },
+      {
+        "label": "Scaling",
+        "short": "Scaling",
+        "value": "4.7"
+      }
+    ],
+    "evaluationPrograms": [
+      {
+        "program": "Instant Standard",
+        "phase1": "None",
+        "phase2": "-",
+        "target": "None",
+        "allocation": "$500,000",
+        "split": "Up to 75%",
+        "features": []
+      },
+      {
+        "program": "Instant Lite",
+        "phase1": "None",
+        "phase2": "-",
+        "target": "None",
+        "allocation": "$500,000",
+        "split": "Up to 70%",
+        "features": []
+      },
+      {
+        "program": "1-Step Challenge",
+        "phase1": "10%",
+        "phase2": "-",
+        "target": "10%",
+        "allocation": "$500,000",
+        "split": "Up to 80%",
+        "features": []
+      },
+      {
+        "program": "2-Step Challenge",
+        "phase1": "7.5%",
+        "phase2": "5%",
+        "target": "7.5%",
+        "allocation": "$500,000",
+        "split": "Up to 80%",
+        "features": []
+      },
+      {
+        "program": "Finotive Pro",
+        "phase1": "10%",
+        "phase2": "10%",
+        "target": "10%",
+        "allocation": "$500,000",
+        "split": "Up to 100%",
+        "features": []
+      }
+    ],
+    "cardMetrics": {
+      "payoutCycle": "Weekly",
+      "timeLimit": "",
+      "newsTrading": "",
+      "eaAllowed": "",
+      "minTradingDays": "",
+      "startingPrice": "$21"
+    },
+    "detailsLink": "/finotivefundingdetail.html",
+    "ranking": 6,
+    "platforms": [
+      "MT5",
+      "Match-Trader"
+    ],
+    "name": "Finotive Funding",
+    "followers": 691,
+    "score": 5,
+    "reviewCount": 3,
+    "rulesPanelData": {
+      "importantNote": {
+        "buttonText": "Download Full Rules (PDF)",
+        "text": "Read all rules before placing trades on your challenge or funded account."
+      },
+      "violations": [
+        "Account termination",
+        "Forfeiture of payouts/profits",
+        "Disqualification from future programs"
+      ],
+      "sections": {
+        "general": {
+          "rules": [
+            {
+              "title": "Single user policy",
+              "text": "Each account must be traded only by the registered trader."
+            },
+            {
+              "title": "Accurate KYC details",
+              "text": "Provide correct personal details for verification and payouts."
+            },
+            {
+              "title": "Rule compliance required",
+              "text": "Any material violation can result in account termination."
+            }
+          ],
+          "title": "General Rules",
+          "desc": "Finotive Funding general account rules.",
+          "notice": "Rules may be updated. Please review regularly."
+        }
+      },
+      "programRules": {
+        "instant-standard": {
+          "rules": [
+            {
+              "title": "Profit target",
+              "text": "None"
+            },
+            {
+              "title": "Daily loss",
+              "text": "Publish the daily loss limit for this model."
+            },
+            {
+              "title": "Maximum drawdown",
+              "text": "Publish the maximum drawdown for this model."
+            },
+            {
+              "title": "Minimum trading days",
+              "text": "Publish the minimum trading days, if any."
+            },
+            {
+              "title": "Profit split",
+              "text": "Up to 75%"
+            },
+            {
+              "title": "Time limit",
+              "text": "Publish the time limit for this model."
+            }
+          ],
+          "title": "Instant Standard Challenge Rules",
+          "slug": "instant-standard",
+          "program": "Instant Standard",
+          "desc": "Rules for the Instant Standard account model.",
+          "notice": ""
+        },
+        "2-step-challenge": {
+          "rules": [
+            {
+              "title": "Profit target",
+              "text": "7.5%"
+            },
+            {
+              "title": "Daily loss",
+              "text": "Publish the daily loss limit for this model."
+            },
+            {
+              "title": "Maximum drawdown",
+              "text": "Publish the maximum drawdown for this model."
+            },
+            {
+              "title": "Minimum trading days",
+              "text": "Publish the minimum trading days, if any."
+            },
+            {
+              "title": "Profit split",
+              "text": "Up to 80%"
+            },
+            {
+              "title": "Time limit",
+              "text": "Publish the time limit for this model."
+            }
+          ],
+          "program": "2-Step Challenge",
+          "title": "2-Step Challenge Challenge Rules",
+          "slug": "2-step-challenge",
+          "desc": "Rules for the 2-Step Challenge account model.",
+          "notice": ""
+        },
+        "instant-lite": {
+          "program": "Instant Lite",
+          "title": "Instant Lite Challenge Rules",
+          "slug": "instant-lite",
+          "rules": [
+            {
+              "title": "Profit target",
+              "text": "None"
+            },
+            {
+              "title": "Daily loss",
+              "text": "Publish the daily loss limit for this model."
+            },
+            {
+              "title": "Maximum drawdown",
+              "text": "Publish the maximum drawdown for this model."
+            },
+            {
+              "title": "Minimum trading days",
+              "text": "Publish the minimum trading days, if any."
+            },
+            {
+              "title": "Profit split",
+              "text": "Up to 70%"
+            },
+            {
+              "title": "Time limit",
+              "text": "Publi"
+            }
+          ],
+          "desc": "Rules for the Instant Lite account model.",
+          "notice": ""
+        },
+        "finotive-pro": {
+          "rules": [
+            {
+              "title": "Profit target",
+              "text": "10%"
+            },
+            {
+              "title": "Daily loss",
+              "text": "Publish the daily loss limit for this model."
+            },
+            {
+              "title": "Maximum drawdown",
+              "text": "Publish the maximum drawdown for this model."
+            },
+            {
+              "title": "Minimum trading days",
+              "text": "Publish the minimum trading days, if any."
+            },
+            {
+              "title": "Profit split",
+              "text": "Up to 100%"
+            },
+            {
+              "title": "Time limit",
+              "text": "Publish the time limit for this model."
+            }
+          ],
+          "program": "Finotive Pro",
+          "title": "Finotive Pro Challenge Rules",
+          "slug": "finotive-pro",
+          "desc": "Rules for the Finotive Pro account model.",
+          "notice": ""
+        },
+        "1-step-challenge": {
+          "program": "1-Step Challenge",
+          "title": "1-Step Challenge Challenge Rules",
+          "slug": "1-step-challenge",
+          "desc": "Rules for the 1-Step Challenge account model.",
+          "notice": "",
+          "rules": [
+            {
+              "title": "Profit target",
+              "text": "10%"
+            },
+            {
+              "title": "Daily loss",
+              "text": "Publish the daily loss limit for this model."
+            },
+            {
+              "title": "Maximum drawdown",
+              "text": "Publish the maximum drawdown for this model."
+            },
+            {
+              "title": "Minimum trading days",
+              "text": "Publish the minimum trading days, if any."
+            },
+            {
+              "title": "Profit split",
+              "text": "Up to 80%"
+            },
+            {
+              "title": "Time limit",
+              "text": "Publish the time limit for this model."
+            },
+            {
+              "title": "Profit target",
+              "text": "10%"
+            },
+            {
+              "title": "Daily loss",
+              "text": "Publish the daily loss limit for this model."
+            },
+            {
+              "title": "Maximum drawdown",
+              "text": "Publish the maximum drawdown for this model."
+            },
+            {
+              "title": "Minimum trading days",
+              "text": "Publish the minimum trading days, if any."
+            },
+            {
+              "title": "Profit split",
+              "text": "Up to 100%"
+            },
+            {
+              "title": "Time limit",
+              "text": "Publish the time limit for this mode"
+            }
+          ]
+        }
+      }
+    },
+    "updatedAt": {
+      "_seconds": 1787414391,
+      "_nanoseconds": 6000000
+    }
+  }
+}

@@ -1,0 +1,2806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <base href="/">
+  <meta name="theme-color" content="#05040b">
+<meta id="metaDesc" name="description" content="Compare prop firm reviews, payout rules, pricing, and trading conditions on Rank My Prop.">
+  <link id="canonicalLink" rel="canonical" href="https://www.rankmyprop.in/firm-detail">
+    <meta property="og:title" content="Aqua Funded | Rank My Prop" />
+  <meta id="ogDesc" property="og:description" content="Compare prop firm reviews, payout rules, pricing, and trading conditions on Rank My Prop.">
+  <meta id="ogUrl" property="og:url" content="https://www.rankmyprop.in/firm-detail">
+                                                                                                                                                                <meta property="og:image:height" content="630" />
+                                                                                                                                                        <meta property="og:image:width" content="1200" />
+<meta property="og:image" content="https://www.rankmyprop.in/assets/og-default-1200x630.webp" />
+<meta property="og:type" content="website">
+  <meta property="og:site_name" content="Rank My Prop">
+  <meta property="og:locale" content="en_IN">
+  <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://www.rankmyprop.in/assets/og-default-1200x630.webp" />
+  <meta name="twitter:title" content="Aqua Funded | Rank My Prop" />
+  <meta id="twitterDesc" name="twitter:description" content="Compare prop firm reviews, payout rules, pricing, and trading conditions on Rank My Prop.">
+  <title>Aqua Funded | Rank My Prop</title>
+  <script type="application/ld+json" id="detailWebPageSchema">{"@context":"https://schema.org","@type":"WebPage","name":"Aqua Funded | Exact Clone","url":"https://www.rankmyprop.in/firm-detail","description":"Compare prop firm reviews, payout rules, pricing, and trading conditions on Rank My Prop."}</script>
+  <script type="application/ld+json" id="detailBreadcrumbSchema">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.rankmyprop.in/"},{"@type":"ListItem","position":2,"name":"Compare Prop Firms","item":"https://www.rankmyprop.in/listedprop"},{"@type":"ListItem","position":3,"name":"Prop Firm Review","item":"https://www.rankmyprop.in/firm-detail"}]}</script>
+  <script>
+    (function () {
+      const parts = String(location.pathname || "/").split("/").filter(Boolean);
+      const tabs = new Set(["overview", "rules", "challenges", "reviews", "spreads", "announcements"]);
+      const last = String(parts[parts.length - 1] || "").toLowerCase();
+      let slug = "";
+      let view = "overview";
+      if (parts[0] === "prop-firms" && parts[1]) {
+        slug = String(parts[1] || "").trim().toLowerCase();
+        if (parts.length >= 3 && tabs.has(String(parts[2] || "").toLowerCase())) view = String(parts[2] || "").toLowerCase();
+      } else if (last === "firm-detail.html" || last === "firm-detail") {
+        const u = new URL(location.href);
+        slug = String(u.searchParams.get("slug") || u.searchParams.get("firmSlug") || "").trim().toLowerCase();
+        view = String(u.searchParams.get("tab") || u.searchParams.get("view") || "overview").trim().toLowerCase() || "overview";
+      } else if (last.endsWith("detail.html") || (last.endsWith("detail") && last !== "firm-detail")) {
+        slug = last.endsWith("detail.html") ? last.replace("detail.html", "") : last.replace(/detail$/, "");
+      } else if (parts.length >= 2 && tabs.has(last)) {
+        slug = String(parts[parts.length - 2] || "").trim().toLowerCase();
+        view = last;
+      }
+      if (!slug) return;
+      const firm = slug.split("-").filter(Boolean).map((x) => x.charAt(0).toUpperCase() + x.slice(1)).join(" ") || "Prop Firm";
+      const map = {
+        overview: {
+          title: `${firm} Review, Rules, Challenges & Payout | Rank My Prop`,
+          desc: `Explore ${firm} payout history, rules, challenge models, trader reviews, fees, and platform details on Rank My Prop.`
+        },
+        rules: {
+          title: `${firm} Rules, Drawdown & Restrictions | Rank My Prop`,
+          desc: `Read ${firm} rules, drawdown limits, consistency requirements, allowed strategies, and trading restrictions before buying a challenge.`
+        },
+        challenges: {
+          title: `${firm} Challenges, Fees & Account Sizes | Rank My Prop`,
+          desc: `Compare ${firm} challenge types, pricing, account sizes, profit targets, scaling options, and funding models on Rank My Prop.`
+        },
+        reviews: {
+          title: `${firm} Reviews & Trader Ratings | Rank My Prop`,
+          desc: `See ${firm} reviews, trader ratings, payout feedback, dashboard experience, and user sentiment before choosing this prop firm.`
+        },
+        spreads: {
+          title: `${firm} Spreads & Pricing | Rank My Prop`,
+          desc: `Check ${firm} spread notes, pricing structure, and trading cost visibility on Rank My Prop.`
+        },
+        announcements: {
+          title: `${firm} News & Announcements | Rank My Prop`,
+          desc: `Track ${firm} updates, promotions, policy changes, and platform announcements on Rank My Prop.`
+        }
+      };
+      const seo = map[view] || map.overview;
+      const canonical = `https://www.rankmyprop.in/prop-firms/${slug}${view === "overview" ? "" : `/${view}`}`;
+      document.title = seo.title;
+      const set = (id, attr, value) => { const el = document.getElementById(id); if (el) el.setAttribute(attr, value); };
+      set("metaDesc", "content", seo.desc);
+      set("canonicalLink", "href", canonical);
+      set("ogTitle", "content", seo.title);
+      set("ogDesc", "content", seo.desc);
+      set("ogUrl", "content", canonical);
+      set("twitterTitle", "content", seo.title);
+      set("twitterDesc", "content", seo.desc);
+      const web = document.getElementById("detailWebPageSchema");
+      if (web) web.textContent = JSON.stringify({ "@context": "https://schema.org", "@type": "WebPage", name: seo.title, url: canonical, description: seo.desc });
+      const crumbs = [
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.rankmyprop.in/" },
+        { "@type": "ListItem", position: 2, name: "Compare Prop Firms", item: "https://www.rankmyprop.in/listedprop" },
+        { "@type": "ListItem", position: 3, name: firm, item: `https://www.rankmyprop.in/prop-firms/${slug}` }
+      ];
+      if (view !== "overview") crumbs.push({ "@type": "ListItem", position: 4, name: view.charAt(0).toUpperCase() + view.slice(1), item: canonical });
+      const bc = document.getElementById("detailBreadcrumbSchema");
+      if (bc) bc.textContent = JSON.stringify({ "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: crumbs });
+    })();
+  </script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght%40300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/site-shell.css" />
+  <script src="/firm-first-paint.js"></script>
+<style>
+    :root {
+      --bg: #030409;
+      --card-bg: #0a0b14;
+      --card-border: #1a1c2e;
+      --accent: #6148ff;
+      --accent-glow: rgba(97, 72, 255, 0.4);
+      --text-primary: #ffffff;
+      --text-secondary: #94a3b8;
+      --purple-muted: #8b5cf6;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      background-color: var(--bg);
+      color: var(--text-primary);
+      font-family:'Plus Jakarta Sans',sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    .glass{
+      background:rgba(15,14,28,.75);
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:10px;
+      position:relative;
+      z-index:50;
+      font-family:'Plus Jakarta Sans',sans-serif;
+    }
+
+    .nav-item{
+      padding:6px 14px;
+      border-radius:8px;
+      transition:.2s;
+      color:#d1d5db;
+      cursor:pointer;
+      white-space:nowrap;
+      text-decoration:none;
+      display:inline-block;
+    }
+
+    .nav-item.active,
+    .nav-item:hover{
+      background:rgba(120,110,255,.18);
+      box-shadow:0 0 12px rgba(120,110,255,.45);
+      color:#fff;
+    }
+
+    .dropdown{
+      position:absolute;
+      top:140%;
+      left:0;
+      min-width:220px;
+      background:rgba(18,16,32,.95);
+      backdrop-filter:blur(18px);
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:14px;
+      padding:12px;
+      opacity:0;
+      transform:translateY(10px);
+      pointer-events:none;
+      transition:.25s;
+      box-shadow:0 25px 50px rgba(0,0,0,.6);
+      z-index:9999;
+    }
+
+    .dropdown a{
+      display:block;
+      padding:12px 16px;
+      border-radius:10px;
+      color:#e5e7eb;
+      font-size:14px;
+      text-decoration:none;
+      font-family:'Plus Jakarta Sans',sans-serif;
+    }
+
+    .dropdown a:hover{
+      background:rgba(120,110,255,.18);
+      color:#fff;
+    }
+
+    .has-dropdown.open .dropdown{
+      opacity:1;
+      transform:translateY(0);
+      pointer-events:auto;
+    }
+
+    .glow-btn{
+      background:linear-gradient(180deg,#7a74ff,#5b55ff);
+      border-radius:10px;
+      color:#fff;
+      text-decoration:none;
+      font-family:'Plus Jakarta Sans',sans-serif;
+    }
+
+    .mobile-menu{
+      position:absolute;
+      top:100%;
+      left:0;
+      right:0;
+      background:rgba(15,14,28,.95);
+      backdrop-filter:blur(18px);
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:12px;
+      padding:16px;
+      display:none;
+      flex-direction:column;
+      gap:12px;
+      z-index:999;
+    }
+
+    .mobile-menu.open{display:flex;}
+
+    .dashboard-wrapper {
+      max-width: 1320px;
+      width: 100%;
+      margin: 40px auto 0;
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 24px;
+      position: relative;
+      min-height: 980px;
+    }
+
+    .header-section {
+      grid-column: 1 / -1;
+      background: linear-gradient(145deg, #0f111a, #070811);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 18px 24px;
+      min-height: 104px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .detail-seo-copy{
+      grid-column:1 / -1;
+      margin:0 0 14px;
+      text-align:center;
+    }
+    .detail-seo-copy h2{
+      margin:0;
+      color:#f5f7ff;
+      font-size:clamp(36px,5.4vw,62px);
+      line-height:1.06;
+      letter-spacing:-.03em;
+      font-weight:500;
+      max-width:1240px;
+      margin-left:auto;
+      margin-right:auto;
+      text-wrap:balance;
+    }
+    .detail-seo-accent{
+      background:linear-gradient(180deg,#c4b5fd 0%,#6366f1 100%);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      text-shadow:none;
+    }
+    .detail-seo-copy p{
+      margin:14px 0 0;
+      color:#aeb7d8;
+      font-size:clamp(13px,1.1vw,18px);
+      line-height:1.5;
+      max-width:920px;
+      margin-left:auto;
+      margin-right:auto;
+      text-wrap:balance;
+    }
+    .header-actions{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      flex-shrink:0;
+    }
+    .header-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px 20px;
+      border-radius:8px;
+      text-decoration:none;
+      white-space:nowrap;
+    }
+    .header-btn.secondary{background:transparent;border:1px solid #2d304d;color:#fff;}
+    .header-btn.primary{background:var(--accent);border:1px solid var(--accent);color:#fff;}
+
+    .brand-block { display: flex; gap: 16px; align-items: center; }
+    .logo-box {
+      width: 50px;
+      height: 50px;
+      border-radius: 8px;
+      background: #fff;
+      color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 20px;
+      overflow: hidden;
+      position: relative;
+    }
+    .logo-box img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .logo-box span{display:none;}
+    .page-loader{
+      position:absolute;
+      inset:0;
+      z-index:50;
+      padding:0;
+      background:#05040b;
+      border-radius:16px;
+      transition:opacity .35s ease, visibility .35s ease;
+    }
+    .page-loader.hide{opacity:0;visibility:hidden;pointer-events:none;}
+    .loader-shell{display:grid;gap:24px}
+    .loader-card{
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:16px;
+      background:linear-gradient(145deg,#0f111a,#070811);
+      box-shadow:0 18px 34px rgba(0,0,0,.35);
+      overflow:hidden;
+    }
+    .sk{
+      background:linear-gradient(100deg,rgba(255,255,255,.05) 0%,rgba(255,255,255,.17) 45%,rgba(255,255,255,.05) 90%);
+      background-size:220% 100%;
+      animation:rmpShimmer 1.18s linear infinite;
+      border-radius:10px;
+    }
+    .loader-line{height:14px}
+    .loader-line.sm{height:10px}
+    .loader-pill{height:12px;border-radius:99px}
+    .loader-btn{height:42px;width:170px;border-radius:10px}
+    .loader-avatar{width:52px;height:52px;border-radius:10px}
+    .loader-header{padding:18px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .loader-header-left{display:flex;align-items:center;gap:12px;min-width:0;flex:1}
+    .loader-header-actions{display:flex;gap:12px;flex-shrink:0}
+    .loader-tabs{border-bottom:1px solid rgba(255,255,255,.08);padding:0 0 12px}
+    .loader-tabs-row{display:flex;gap:24px;padding:0 4px}
+    .loader-main-grid{display:grid;grid-template-columns:1fr 340px;gap:24px}
+    .loader-main-left{display:grid;gap:24px}
+    .loader-top-row{display:grid;grid-template-columns:260px 1fr;gap:24px}
+    .loader-score{padding:24px;display:grid;gap:12px;align-content:start}
+    .loader-radar{padding:24px;display:grid;gap:12px}
+    .loader-radar-box{height:400px;border-radius:14px;border:1px solid rgba(255,255,255,.06);padding:14px}
+    .loader-bars{display:grid;gap:10px}
+    .loader-overview{padding:24px;display:grid;gap:14px}
+    .loader-side{display:grid;gap:24px}
+    .loader-side-card{height:84px}
+    .loader-side-card.lg{height:108px}
+    @keyframes rmpShimmer{0%{background-position:220% 0}100%{background-position:-120% 0}}
+    @media (max-width: 1100px){.loader-main-grid{grid-template-columns:1fr}.loader-side{grid-template-columns:1fr}}
+    @media (max-width: 900px){.loader-top-row{grid-template-columns:1fr}}
+
+    .top-stats-row {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .glass-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .radar-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .radar-wrap {
+      width: 100%;
+      max-width: 420px;
+      position: relative;
+      border-radius: 16px;
+      border: none;
+      background:
+        radial-gradient(circle at 50% 35%, rgba(107, 79, 255, 0.22), rgba(8, 12, 34, 0) 58%),
+        linear-gradient(180deg, rgba(16, 18, 39, 0.94), rgba(10, 12, 30, 0.94));
+      box-shadow: 0 18px 34px rgba(0, 0, 0, 0.45);
+      padding: 10px 12px 6px;
+    }
+
+    .radar-svg { width: 100%; height: auto; display: block; }
+    .radar-grid-level { fill: none; stroke: rgba(102, 116, 170, 0.24); stroke-width: 1; }
+    .radar-axis-line { stroke: rgba(97, 112, 165, 0.2); stroke-width: 1; }
+    .radar-axis-label { fill: #d4d9f3; font-size: 13px; font-family:'Plus Jakarta Sans',sans-serif; }
+    .radar-tick-label { fill: #727ea8; font-size: 11px; font-family:'Plus Jakarta Sans',sans-serif; }
+    .radar-plot {
+      fill: url(#radarFill);
+      stroke: #7d6cff;
+      stroke-width: 2.4;
+      filter: drop-shadow(0 0 11px rgba(124, 98, 255, 0.45));
+    }
+    .radar-point { fill: #0c0f24; stroke: #8f7fff; stroke-width: 2; }
+    .radar-point,
+    .radar-plot,
+    .radar-axis-label { cursor: crosshair; }
+    .radar-score {
+      fill: #f8f9ff;
+      font-size: 34px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      font-family:'Plus Jakarta Sans',sans-serif;
+    }
+    .radar-tip {
+      position: absolute;
+      z-index: 8;
+      min-width: 120px;
+      max-width: 220px;
+      padding: 7px 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(146, 128, 255, 0.55);
+      background: rgba(9, 12, 30, 0.92);
+      color: #eef1ff;
+      font-family:'Plus Jakarta Sans',sans-serif;
+      font-size: 12px;
+      line-height: 1.35;
+      pointer-events: none;
+      transform: translate(-50%, -115%);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+      white-space: nowrap;
+    }
+    .radar-tip[hidden] { display: none; }
+
+    .radar-bars { width: 100%; margin-top: 14px; display: grid; gap: 10px; }
+    .radar-bar-row {
+      display: grid;
+      grid-template-columns: 124px 1fr 36px;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-family:'Plus Jakarta Sans',sans-serif;
+    }
+    .radar-bar-label {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .radar-bar-track {
+      position: relative;
+      height: 8px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #121736, #0f1432);
+      border: 1px solid #2a3160;
+      overflow: hidden;
+    }
+    .radar-bar-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #5f5cff, #9b79ff);
+      box-shadow: 0 0 12px rgba(120, 103, 255, 0.55);
+      width: 0;
+      transition: width 0.25s ease;
+    }
+    .radar-bar-input {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      margin: 0;
+      width: 100%;
+      cursor: pointer;
+    }
+    .radar-bar-value {
+      text-align: right;
+      color: #e8ebff;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .main-col { display: flex; flex-direction: column; }
+    .section-title { margin-top: 0; font-size: 18px; margin-bottom: 16px; }
+
+    .data-table { width: 100%; border-collapse: collapse; }
+    .data-table tr { border-bottom: 1px solid #161827; }
+    .data-table td { padding: 14px 8px; font-size: 13px; color: var(--text-secondary); }
+    .data-table td:last-child { color: white; text-align: right; font-weight: 500; }
+
+    .restricted-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    .country-pill {
+      background: #0d0f1a;
+      border: 1px solid #1e213a;
+      border-radius: 8px;
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+    }
+
+    .expand-section {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+      opacity: 0;
+    }
+
+    .expand-section.active {
+      max-height: 1000px;
+      opacity: 1;
+      margin-top: 12px;
+    }
+
+    .btn-purple {
+      background: var(--accent);
+      box-shadow: 0 0 15px var(--accent-glow);
+      border: none;
+      color: white;
+      padding: 14px;
+      border-radius: 8px;
+      width: 100%;
+      cursor: pointer;
+      font-weight: 600;
+      margin-top: 15px;
+    }
+    .score-card {
+      text-align: center;
+      margin-bottom: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+    .review-panel {
+      margin-top: auto;
+      padding-top: 16px;
+      border-top: 1px solid rgba(58, 66, 117, 0.55);
+      text-align: left;
+    }
+    .review-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+      font-family:'Plus Jakarta Sans',sans-serif;
+    }
+    .review-title {
+      color: #f2f4ff;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+    .review-chip {
+      font-size: 11px;
+      color: #d6d0ff;
+      border: 1px solid rgba(122, 106, 255, 0.5);
+      background: rgba(96, 85, 202, 0.2);
+      border-radius: 999px;
+      padding: 3px 8px;
+      font-family:'Plus Jakarta Sans',sans-serif;
+    }
+    .review-snippet {
+      margin: 0;
+      color: #9da7cf;
+      font-size: 12px;
+      line-height: 1.5;
+      font-family:'Plus Jakarta Sans',sans-serif;
+    }
+    .review-btn {
+      margin-top: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid rgba(124, 107, 255, 0.62);
+      background: rgba(83, 72, 181, 0.2);
+      color: #f1ecff;
+      text-decoration: none;
+      padding: 10px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      font-family:'Plus Jakarta Sans',sans-serif;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+    .review-btn:hover {
+      background: rgba(108, 94, 235, 0.35);
+      border-color: rgba(152, 133, 255, 0.9);
+    }
+    .score-stars{display:flex;justify-content:center;align-items:center;gap:4px;margin-bottom:10px;width:100%;}
+    .score-stars svg{width:18px;height:18px}
+
+    .detail-nav-bar {
+      grid-column: 1 / -1;
+      display: flex;
+      gap: 25px;
+      border-bottom: 1px solid var(--card-border);
+      padding: 0;
+      font-size: 14px;
+      margin-bottom: 14px;
+      align-items: flex-end;
+      min-height: 44px;
+    }
+
+    .detail-nav-item { color: var(--text-secondary); cursor: pointer; padding:0 0 12px; transition: border-color .18s ease; text-decoration:none; display:inline-flex; align-items:center; border-bottom:2px solid transparent; }
+    .detail-nav-item.active { color: var(--accent); border-bottom-color: var(--accent); }
+    .detail-nav-badge { background: #4c1d95; color: white; font-size: 10px; padding: 2px 6px; border-radius: 4px; margin-left: 5px; }
+
+    .tag-group { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .tag { background: #151726; border: 1px solid #23263d; padding: 6px 14px; border-radius: 6px; font-size: 12px; color: var(--text-secondary); }
+
+    .firm-ai-summary-card {
+      position: relative;
+      overflow: hidden;
+      padding: 18px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(26,16,48,.96) 0%, rgba(18,13,37,.98) 100%);
+      border: 1px solid rgba(124, 58, 237, 0.78);
+      box-shadow: inset 0 0 0 1px rgba(46,26,90,.95), 0 18px 36px rgba(0,0,0,.28);
+      margin-bottom: 25px;
+      font-family:'Plus Jakarta Sans',sans-serif;
+    }
+    .firm-ai-summary-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #7c3aed, #a855f7);
+      color: #fff;
+      font-size: 12px;
+      line-height: 1;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+    .firm-ai-summary-title {
+      margin: 0 0 10px;
+      color: #f1eaff;
+      font-size: 20px;
+      line-height: 1.25;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .firm-ai-summary-body-wrap {
+      position: relative;
+      overflow: hidden;
+      transition: max-height .58s cubic-bezier(.22,.61,.24,1);
+    }
+    .firm-ai-summary-body {
+      margin: 0;
+      color: #a89cc8;
+      font-size: 14px;
+      line-height: 1.75;
+    }
+    .firm-ai-summary-fade {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 28px;
+      background: linear-gradient(to bottom, rgba(18,13,37,0), rgba(18,13,37,.62));
+      pointer-events: none;
+      transition: opacity .24s ease;
+    }
+    .firm-ai-summary-toggle {
+      margin: 12px 0 0;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: #8b5cf6;
+      font: 700 13px/1.2 'Plus Jakarta Sans',sans-serif;
+      cursor: pointer;
+    }
+    .firm-ai-summary-vote {
+      margin-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      color: #c8bee7;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .firm-ai-summary-vote-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .firm-ai-summary-vote-btn {
+      border: 1px solid rgba(139,92,246,.62);
+      background: rgba(20,16,38,.78);
+      color: #efeaff;
+      border-radius: 9px;
+      padding: 9px 13px;
+      cursor: pointer;
+      font: 700 12px/1 'Plus Jakarta Sans',sans-serif;
+      transition: background .18s ease, border-color .18s ease, transform .18s ease;
+    }
+    .firm-ai-summary-vote-btn:hover,
+    .firm-ai-summary-vote-btn.active {
+      background: rgba(124,58,237,.34);
+      border-color: rgba(168,85,247,.9);
+      transform: translateY(-1px);
+    }
+
+    .detail-rules-panel,
+    .detail-challenges-panel,
+    .detail-reviews-panel,
+    .detail-spreads-panel,
+    .detail-announcements-panel {
+      grid-column: 1 / -1;
+      display: none;
+      margin-top: 0;
+    }
+    .detail-rules-panel.active,
+    .detail-challenges-panel.active,
+    .detail-reviews-panel.active,
+    .detail-spreads-panel.active,
+    .detail-announcements-panel.active {
+      display: block;
+    }
+    .detail-panel-shell {
+      border-radius: 16px;
+      border: 1px solid #1c1c22;
+      overflow: hidden;
+      background: #0d0d10;
+      box-shadow: 0 20px 44px rgba(0, 0, 0, 0.42);
+    }
+    .detail-panel-frame {
+      width: 100%;
+      min-height: 320px;
+      height: 320px;
+      border: 0;
+      display: block;
+      background: #0d0d10;
+    }
+    .detail-panel-shell.review-panel-shell {
+      border: 0;
+      box-shadow: none;
+      background: transparent;
+    }
+    .detail-panel-shell.review-panel-shell .detail-panel-frame {
+      background: transparent;
+    }
+    .detail-panel-shell.spreads-panel-shell {
+      border: 0;
+      box-shadow: none;
+      background: transparent;
+    }
+    .detail-panel-shell.spreads-panel-shell .detail-panel-frame {
+      background: transparent;
+    }
+    .detail-spreads-panel.is-soon .detail-panel-frame { display: none; }
+    .detail-spreads-soon {
+      display: none;
+      border: 1px solid #252946;
+      border-radius: 14px;
+      background: linear-gradient(180deg, rgba(17,21,40,.9), rgba(14,18,34,.9));
+      padding: 26px;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 320px;
+    }
+    .detail-spreads-panel.is-soon .detail-spreads-soon { display: flex; }
+    .detail-spreads-soon h3 {
+      margin: 0 0 8px;
+      font-size: 24px;
+      color: #e7e9ff;
+    }
+    .detail-spreads-soon p {
+      margin: 0;
+      color: #a7add4;
+      font-size: 14px;
+      line-height: 1.7;
+      max-width: 680px;
+    }
+    .detail-panel-shell.rules-panel-shell {
+      border: 0;
+      box-shadow: none;
+      background: transparent;
+    }
+    .detail-panel-shell.rules-panel-shell .detail-panel-frame {
+      background: transparent;
+    }
+    .detail-panel-shell.challenges-panel-shell {
+      border: 0;
+      box-shadow: none;
+      background: transparent;
+    }
+    .detail-panel-shell.challenges-panel-shell .detail-panel-frame {
+      background: transparent;
+    }
+    .detail-reviews-frame { height: 320px; }
+    .detail-challenges-frame { height: 320px; }
+    .detail-spreads-frame { height: 320px; }
+    .detail-announcements-frame { height: 320px; }
+    .detail-overview-hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 1100px) {
+      .dashboard-wrapper { grid-template-columns: 1fr; }
+      .top-stats-row { grid-template-columns: 1fr; }
+      .header-section { flex-direction: column; align-items: flex-start; gap: 14px; }
+      .header-actions{width:100%;}
+      .header-btn{flex:1 1 auto;}
+    }
+
+    @media (max-width: 720px) {
+      body { padding: 0; }
+      .dashboard-wrapper { margin-top: 24px; gap: 16px; }
+      .glass-card { padding: 16px; margin-bottom: 16px; }
+      .detail-nav-bar { overflow-x: auto; gap: 14px; }
+      .restricted-grid { grid-template-columns: 1fr; }
+      .radar-wrap { max-width: 100%; padding: 8px; }
+      .radar-bar-row { grid-template-columns: 96px 1fr 34px; gap: 8px; }
+      .radar-axis-label { font-size: 11px; }
+      .radar-score { font-size: 30px; }
+      .review-panel { padding-top: 12px; }
+      .detail-panel-frame { height: 320px; }
+      .detail-reviews-frame { height: 320px; }
+      .detail-challenges-frame { height: 320px; }
+      .detail-spreads-frame { height: 320px; }
+      .detail-announcements-frame { height: 320px; }
+      .detail-seo-copy h2{font-size:clamp(30px,9vw,52px)}
+      .detail-seo-copy p{font-size:13px}
+    }
+  </style>
+  <style id="rmpNavPrehide">nav.glass{visibility:hidden}nav.glass.rmp-nav-ready{visibility:visible}</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- RMP CORE SCHEMA START -->
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","@id":"https://www.rankmyprop.in/#organization","name":"Rank My Prop","url":"https://www.rankmyprop.in/","logo":{"@type":"ImageObject","url":"https://www.rankmyprop.in/assets/Rank%20My%20Prop%20Logo%201.webp"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","@id":"https://www.rankmyprop.in/#website","url":"https://www.rankmyprop.in/","name":"Rank My Prop","publisher":{"@id":"https://www.rankmyprop.in/#organization"},"potentialAction":{"@type":"SearchAction","target":"https://www.rankmyprop.in/search?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","@id":"https://www.rankmyprop.in/#primary-sitelinks","name":"Rank My Prop primary prop firm research pages","itemListElement":[{"@type":"ListItem","position":1,"name":"Compare Prop Firms","url":"https://www.rankmyprop.in/listedprop"},{"@type":"ListItem","position":2,"name":"Prop Firm Discounts","url":"https://www.rankmyprop.in/offers"},{"@type":"ListItem","position":3,"name":"Prop Firm Rules","url":"https://www.rankmyprop.in/propfirmrule"},{"@type":"ListItem","position":4,"name":"Payout Proofs","url":"https://www.rankmyprop.in/payout-proofs"},{"@type":"ListItem","position":5,"name":"Best Prop Firms","url":"https://www.rankmyprop.in/bestprop"}]}</script>
+<!-- RMP CORE SCHEMA END -->
+<link id="rmpHomeHeaderStyles" rel="stylesheet" href="/home-header-shell.css">
+<link id="rmpHomeFooterStyles" rel="stylesheet" href="/home-footer-shell.css">
+<link id="rmpSiteTypographyStyles" rel="stylesheet" href="/site-typography.css">
+<link rel="stylesheet" href="/site-heading-theme.css" data-rmp-heading-theme="1">
+<link rel="stylesheet" href="/global-footer.css" data-rmp-global-footer-css="1">
+<script id="rmp-ssr-bootstrap">window.__RMP_SSR_BOOTSTRAP={"id":"page-firm-detail","heading":"Aqua Funded","paragraph":"Compare prop firm reviews, payout rules, pricing, and trading conditions on Rank My Prop.","seoTitle":"Aqua Funded | Rank My Prop","seoDescription":"Compare prop firm reviews, payout rules, pricing, and trading conditions on Rank My Prop.","canonical":"https://www.rankmyprop.in/firm-detail","robots":"index, follow, max-image-preview:large, max-snippet:-1","__stableSsrHero":true};</script>
+<script defer src="/route-content-runtime.js"></script>
+</head>
+<body class="relative">
+<nav class="glass max-w-[1320px] mx-auto mt-6 px-6 py-4 flex items-center justify-between">
+  <div class="flex items-center gap-2"><img fetchpriority="high" loading="eager" decoding="async" src="assets/Rank%20My%20Prop%20Logo%201.webp" alt="Rank My Prop" class="w-8 h-8 rounded-lg object-cover"/><span class="text-lg font-semibold">Rank My Prop</span></div>
+
+  <ul class="hidden md:flex items-center gap-3 text-sm">
+  <li><a href="/" class="nav-item active">Home</a></li>
+
+  <li><a href="/listedprop" class="nav-item">Listed Props</a></li>
+  <li><a href="/bestprop" class="nav-item">Best Prop Firms</a></li>
+  <li><a href="/offers" class="nav-item">Discount Code</a></li>
+  <li><a href="/blog" class="nav-item">Prop News</a></li>
+
+  <li class="relative has-dropdown">
+    <span class="nav-item" id="featuresBtn">Calculators ▾</span>
+    <div class="dropdown" id="featuresDropdown">
+      <a href="/lotsizecalculator">Lot Size Calculator</a>
+      <a href="/lossrecoveryplanner">Loss Recovery Calculator</a>
+      <a href="/ruletranslator">Rule Explainer</a>
+      <a href="/tradejournal">Trade Journal</a>
+    </div>
+  </li>
+
+  
+
+  
+</ul>
+
+<button id="hamburger" class="md:hidden text-white text-2xl">☰</button>
+
+<a href="/login" class="hidden md:inline glow-btn text-sm font-medium px-5 py-2">
+  Login
+</a>
+
+<div id="mobileMenu" class="mobile-menu">
+  <a href="/" class="nav-item active">Home</a>
+  <a href="/listedprop" class="nav-item">Listed Props</a>
+  <a href="/bestprop" class="nav-item">Best Prop Firms</a>
+  <a href="/offers" class="nav-item">Discount Code</a>
+  <a href="/blog" class="nav-item">Prop News</a>
+  <a href="/lotsizecalculator" class="nav-item">Lot Size Calculator</a>
+  <a href="/lossrecoveryplanner" class="nav-item">Loss Recovery Calculator</a>
+  <a href="/ruletranslator" class="nav-item">Rule Explainer</a>
+  <a href="/tradejournal" class="nav-item">Trade Journal</a>
+
+  <a href="/login" class="glow-btn text-sm font-medium px-5 py-2 mt-2">
+  Login
+</a>
+</div>
+
+</nav>
+
+<div class="dashboard-wrapper">
+    <div id="firmPageLoader" class="page-loader">
+        <div class="loader-shell">
+            <div class="loader-card loader-header">
+                <div class="loader-header-left">
+                    <div class="loader-avatar sk"></div>
+                    <div style="flex:1;display:grid;gap:10px;">
+                        <div class="loader-line sk" style="width:180px;"></div>
+                        <div class="loader-line sm sk" style="width:120px;"></div>
+                    </div>
+                </div>
+                <div class="loader-header-actions">
+                    <div class="loader-btn sk"></div>
+                    <div class="loader-btn sk"></div>
+                </div>
+            </div>
+
+            <div class="loader-tabs">
+                <div class="loader-tabs-row">
+                    <div class="loader-pill sk" style="width:72px;"></div>
+                    <div class="loader-pill sk" style="width:88px;"></div>
+                    <div class="loader-pill sk" style="width:56px;"></div>
+                    <div class="loader-pill sk" style="width:72px;"></div>
+                    <div class="loader-pill sk" style="width:66px;"></div>
+                    <div class="loader-pill sk" style="width:120px;"></div>
+                </div>
+            </div>
+
+            <div class="loader-main-grid">
+                <div class="loader-main-left">
+                    <div class="loader-top-row">
+                        <div class="loader-card loader-score">
+                            <div class="loader-line sk" style="width:90px;height:58px;"></div>
+                            <div class="loader-line sk" style="width:82px;"></div>
+                            <div class="loader-line sm sk" style="width:144px;"></div>
+                            <div class="loader-line sk" style="width:100%;height:46px;"></div>
+                            <div class="loader-line sk" style="width:100%;height:46px;"></div>
+                            <div class="loader-line sk" style="width:100%;height:52px;"></div>
+                        </div>
+                        <div class="loader-card loader-radar">
+                            <div class="loader-line sk" style="width:190px;"></div>
+                            <div class="loader-radar-box">
+                                <div class="sk" style="width:100%;height:100%;border-radius:12px;"></div>
+                            </div>
+                            <div class="loader-bars">
+                                <div class="loader-line sm sk" style="width:100%;"></div>
+                                <div class="loader-line sm sk" style="width:100%;"></div>
+                                <div class="loader-line sm sk" style="width:100%;"></div>
+                                <div class="loader-line sm sk" style="width:100%;"></div>
+                                <div class="loader-line sm sk" style="width:100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="loader-card loader-overview">
+                        <div class="loader-line sk" style="width:220px;"></div>
+                        <div class="loader-line sm sk" style="width:100%;"></div>
+                        <div class="loader-line sm sk" style="width:76%;"></div>
+                    </div>
+                </div>
+                <div class="loader-side">
+                    <div class="loader-card loader-side-card lg sk"></div>
+                    <div class="loader-card loader-side-card lg sk"></div>
+                    <div class="loader-card loader-side-card lg sk"></div>
+                    <div class="loader-card loader-side-card lg sk"></div>
+                    <div class="loader-card loader-side-card lg sk"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="detail-seo-copy">
+        <h2 id="detailSeoHeading">Aqua Funded Review 2026: Fees, Rules, Payout &amp; Discount Code</h2>
+        <p id="detailSeoParagraph">Read our complete Aqua Funded review covering challenge fees, drawdown rules, payout proof, profit split, trading platforms, account types, and the latest discount code for traders in 2026.</p>
+    </section>
+    <!-- Header -->
+    <header class="header-section">
+        <div class="brand-block">
+            <div class="logo-box">
+                <img fetchpriority="low" loading="lazy" decoding="async" id="firmLogoImage" alt="Firm Logo" hidden />
+                <span id="firmLogoInitials">AF</span>
+            </div>
+            <div>
+                <h1 id="firmNameHeading" style="margin:0;font-size:32px;line-height:1.15;">Aqua Funded</h1>
+                <div id="firmMetaLine" style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">
+                    CEO: Sean Ballation • Forex • Crypto • Indices • Founded 2023 • UAE
+                </div>
+            </div>
+        </div>
+        <div class="header-actions">
+            <a id="firmLeaveReviewBtn" class="header-btn secondary" href="#detailReviewsPanel">Leave a Review</a>
+            <a id="firmAddCompareBtn" class="header-btn primary" href="/compare">Add to Compare</a>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="detail-nav-bar">
+        <a class="detail-nav-item active" data-view="overview" href="/prop-firms/aqua-funded">Overview</a>
+        <a class="detail-nav-item" data-view="challenges" href="/prop-firms/aqua-funded/challenges">Challenges <span class="detail-nav-badge" style="background:#1e213a">2</span></a>
+        <a class="detail-nav-item" data-view="rules" href="/prop-firms/aqua-funded/rules">Rules</a>
+        <a id="detailReviewsNavLink" class="detail-nav-item" data-view="reviews" href="/prop-firms/aqua-funded/reviews">Reviews <span id="detailReviewsBadge" class="detail-nav-badge">0</span></a>
+        <a class="detail-nav-item" data-view="spreads" href="/prop-firms/aqua-funded/spreads">Spreads</a>
+        <a class="detail-nav-item" data-view="announcements" href="/prop-firms/aqua-funded/announcements">Announcements <span class="detail-nav-badge">New</span></a>
+    </nav>
+
+    <!-- Main Content Left -->
+    <div id="detailOverviewMain" class="main-col">
+        <div class="top-stats-row">
+            <div class="glass-card score-card">
+                <div id="firmScoreValue" style="color:var(--purple-muted); font-size: 52px; margin: 10px 0; font-weight:700;">4.4</div>
+                <div id="firmScoreStars" class="score-stars"></div>
+                <div id="firmTrustedText" style="font-size: 12px; color: var(--text-secondary); margin-bottom: 25px;">Trusted by 935+ traders</div>
+                <div style="background:#0d0f1a; border: 1px solid #1e213a; padding: 12px; border-radius: 8px; display:flex; justify-content:space-between; margin-bottom: 10px;">
+                    <span style="font-weight: 600;">RMP</span>
+                    <span style="color: var(--accent); font-weight: 600; cursor: pointer;">Copy</span>
+                </div>
+                <div style="background:#0d0f1a; border: 1px solid #1e213a; padding: 12px; border-radius: 8px; margin-bottom: 10px; font-size:12px; color:var(--text-secondary);" id="firmPromoText">20% OFF + Cashback</div>
+                <a id="firmBuyNowBtn" class="btn-purple" href="#" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;">Buy Now</a>
+                <div class="review-panel">
+                    <div class="review-head">
+                        <span class="review-title">Trader Reviews</span>
+                        <span id="overviewReviewChip" class="review-chip">0</span>
+                    </div>
+                    <p id="firmReviewSnippet" class="review-snippet">“Fast payout process, clean dashboard and smooth execution. Good overall prop experience.”</p>
+                    <a class="review-btn" href="#detailReviewsPanel">Write Review</a>
+                </div>
+            </div>
+
+            <div class="glass-card radar-container" style="margin-bottom: 0;">
+                <span style="color: var(--text-secondary); font-size: 12px; margin-bottom: 15px;">Firm Performance Overview</span>
+                <div class="radar-wrap">
+                    <svg id="firmRadar" class="radar-svg" viewBox="0 0 360 350">
+                        <defs>
+                            <linearGradient id="radarFill" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="rgba(139,108,255,0.42)"></stop>
+                                <stop offset="100%" stop-color="rgba(102,79,219,0.14)"></stop>
+                            </linearGradient>
+                        </defs>
+                        <g id="radarGridLayer"></g>
+                        <g id="radarAxisLayer"></g>
+                        <g id="radarPlotLayer"></g>
+                        <text id="radarCenterScore" class="radar-score" x="180" y="188" text-anchor="middle">4.4</text>
+                    </svg>
+                    <div id="radarTip" class="radar-tip" hidden></div>
+                </div>
+                <div id="radarBars" class="radar-bars"></div>
+            </div>
+        </div>
+
+        <div class="glass-card">
+            <h3 id="firmOverviewTitle" class="section-title">Aqua Funded Overview</h3>
+            <p id="firmOverviewShort" style="font-size: 14px; color: var(--text-secondary); line-height: 1.6; margin: 0;">
+                AquaFunded is a leading proprietary trading firm built for traders who value high-performance technology, competitive profit shares, and a sustainable trading environment...
+            </p>
+            <div style="color: var(--accent); font-size: 13px; margin-top: 15px; cursor: pointer;" onclick="toggleMainExpand()">Show More ⌵</div>
+            <div id="mainExpand" class="expand-section">
+                <h4 id="firmOverviewLongTitle" style="margin: 20px 0 10px 0; font-size: 15px;">Detailed Overview</h4>
+                <div id="firmOverviewLongContent" style="font-size: 13px; color: var(--text-secondary); line-height: 1.85;">
+                    <p style="margin:0 0 14px 0;">No detailed overview added yet.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="glass-card">
+            <h3 class="section-title">Firm Details</h3>
+            <table class="data-table" id="firmDetailsTable"></table>
+        </div>
+
+        <div class="glass-card">
+            <h3 class="section-title">Leverage &amp; Spreads</h3>
+            <table class="data-table" id="firmLeverageTable"></table>
+        </div>
+
+        <div class="glass-card">
+            <h3 class="section-title">Commissions</h3>
+            <div id="firmCommissionsGrid" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;"></div>
+        </div>
+    </div>
+
+    <!-- Sidebar Right -->
+    <div id="detailOverviewSide" class="sidebar">
+        <div class="glass-card">
+            <h4 style="margin:0 0 15px 0">Platforms</h4>
+            <div id="firmPlatforms" class="tag-group"></div>
+        </div>
+
+        <article
+            id="firmAiSummaryCard"
+            class="firm-ai-summary-card"
+            data-ai-summary="firm-detail"
+            data-llm-readable="true"
+            itemscope
+            itemtype="https://schema.org/Article"
+        >
+            <span class="firm-ai-summary-badge">AI Summary</span>
+            <h3 id="firmAiSummaryTitle" class="firm-ai-summary-title" itemprop="headline">Firm AI Summary</h3>
+            <div id="firmAiSummaryBodyWrap" class="firm-ai-summary-body-wrap" data-expanded="false">
+                <p id="firmAiSummaryBody" class="firm-ai-summary-body" itemprop="description"></p>
+                <span id="firmAiSummaryFade" class="firm-ai-summary-fade" aria-hidden="true"></span>
+            </div>
+            <button id="firmAiSummaryToggle" class="firm-ai-summary-toggle" type="button">Show More</button>
+            <div class="firm-ai-summary-vote">
+                <span>Was this summary helpful?</span>
+                <div class="firm-ai-summary-vote-actions">
+                    <button type="button" class="firm-ai-summary-vote-btn" data-ai-vote="up">Helpful</button>
+                    <button type="button" class="firm-ai-summary-vote-btn" data-ai-vote="down">Not helpful</button>
+                </div>
+            </div>
+        </article>
+
+        <div class="glass-card">
+            <h4 style="margin:0 0 10px 0">Key Metrics</h4>
+            <table id="firmKeyMetricsTable" class="data-table"></table>
+        </div>
+
+        <div class="glass-card">
+            <h4 style="margin:0 0 10px 0">Trading Conditions</h4>
+            <table id="firmTradingConditionsTable" class="data-table"></table>
+        </div>
+
+        <div class="glass-card">
+            <h4 style="margin:0">Restricted Countries</h4>
+            <div id="firmRestrictedCountries" class="restricted-grid"></div>
+        </div>
+
+        <div class="glass-card">
+            <h4 id="firmWhyChooseTitle" style="margin:0 0 15px 0">Why Choose Aqua Funded?</h4>
+            <div id="firmWhyChooseList" style="font-size: 13px; color: var(--text-secondary); line-height: 2.2;"></div>
+        </div>
+    </div>
+    <div id="detailChallengesPanel" class="detail-challenges-panel" aria-hidden="true">
+        <div class="detail-panel-shell challenges-panel-shell">
+            <iframe loading="lazy" class="detail-panel-frame detail-challenges-frame" src="/challenges-panel.html" title="Prop Firm Challenges" scrolling="no"></iframe>
+        </div>
+    </div>
+    <div id="detailReviewsPanel" class="detail-reviews-panel" aria-hidden="true">
+        <div class="detail-panel-shell review-panel-shell">
+            <iframe loading="lazy" class="detail-panel-frame detail-reviews-frame" src="/review-panel.html" title="Prop Firm Reviews" scrolling="no"></iframe>
+        </div>
+    </div>
+    <div id="detailSpreadsPanel" class="detail-spreads-panel" aria-hidden="true">
+        <div class="detail-panel-shell spreads-panel-shell">
+            <iframe loading="lazy" class="detail-panel-frame detail-spreads-frame" src="/spreads-panel.html" title="Prop Firm Spreads" scrolling="no"></iframe>
+            <div class="detail-spreads-soon">
+              <div>
+                <h3>Spreads Module Coming Soon</h3>
+                <p>The spreads section layout is saved and will be connected with live instrument data in the next rollout.</p>
+              </div>
+            </div>
+        </div>
+    </div>
+    <div id="detailAnnouncementsPanel" class="detail-announcements-panel" aria-hidden="true">
+        <div class="detail-panel-shell">
+            <iframe loading="lazy" class="detail-panel-frame detail-announcements-frame" src="/announcements-panel.html" title="Prop Firm Announcements" scrolling="no"></iframe>
+        </div>
+    </div>
+</div>
+<footer>
+  <section class="rmp-footer-shell">
+    <style>
+      .rmp-footer-shell{position:relative;width:100%;padding:28px 0 48px;background:radial-gradient(ellipse at center, rgba(120,110,255,.10) 0%, rgba(5,4,11,.95) 62%, #05040b 100%);overflow:hidden}
+      .rmp-footer-fade{position:absolute;bottom:0;left:0;width:100%;height:180px;background:linear-gradient(180deg, rgba(5,4,11,0) 0%, rgba(5,4,11,.72) 70%, rgba(5,4,11,.95) 100%);pointer-events:none;z-index:1}
+      .rmp-footer-brand-bg{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);width:min(1320px,calc(100% - 8px));text-align:center;font-size:clamp(110px,9vw,160px);font-weight:900;line-height:.84;letter-spacing:-.02em;white-space:nowrap;overflow:hidden;pointer-events:none;user-select:none;z-index:0;color:transparent;background:linear-gradient(to top,rgba(5,4,11,.92) 0%,rgba(120,110,255,.24) 46%,rgba(120,110,255,.14) 100%);-webkit-background-clip:text;background-clip:text}
+      .rmp-footer-card{position:relative;z-index:2;max-width:1320px;margin:0 auto;background:rgba(255,255,255,.035);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.08);border-radius:22px;padding:28px 24px 20px;box-shadow:0 24px 54px rgba(0,0,0,.58)}
+      .rmp-footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:24px}
+      .rmp-brand-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+      .rmp-brand-icon{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px solid rgba(122,116,255,.45);background:rgba(122,116,255,.08)}.rmp-brand-icon img{width:100%;height:100%;object-fit:cover}
+      .rmp-brand-title{font-size:23px;font-weight:500;line-height:1;color:#fff}
+      .rmp-brand-copy{font-size:14px;color:#9ca3af;line-height:1.65;max-width:360px;margin:0}
+      .rmp-links-grid{display:contents}
+      .rmp-col-title{font-size:14px;font-weight:600;color:#fff;margin:0 0 10px}
+      .rmp-col-links{display:flex;flex-direction:column;gap:8px}
+      .rmp-col-links a{font-size:13px;color:#9ca3af;text-decoration:none;line-height:1.35}
+      .rmp-col-links a:hover{color:#d7dbef}
+      .rmp-divider{height:1px;background:rgba(255,255,255,.08);margin:20px 0 12px}
+      .rmp-footer-bottom{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+      .rmp-copy{font-size:12px;color:#9ca3af}
+      .rmp-bottom-links{display:flex;gap:16px}
+      .rmp-bottom-links a{font-size:12px;color:#9ca3af;text-decoration:none}
+      @media (max-width: 980px){
+        .rmp-footer-brand-bg{font-size:84px}
+        .rmp-footer-top{grid-template-columns:1fr;gap:20px}
+        .rmp-brand-copy{max-width:none;font-size:14px}
+        .rmp-links-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+        .rmp-col-title{font-size:15px}.rmp-col-links a{font-size:13px}
+      }
+      @media (max-width: 640px){
+        .rmp-footer-shell{padding:28px 0 52px}
+        .rmp-footer-card{padding:20px 16px 16px;border-radius:18px}
+        .rmp-footer-brand-bg{font-size:56px;bottom:8px;opacity:.45}
+        .rmp-brand-title{font-size:20px}
+        .rmp-brand-copy{font-size:12px;line-height:1.6}
+        .rmp-links-grid{grid-template-columns:1fr;gap:14px}
+        .rmp-col-title{font-size:14px;margin-bottom:8px}
+        .rmp-col-links a{font-size:13px}
+        .rmp-copy,.rmp-bottom-links a{font-size:12px}
+      }
+    </style>
+
+    <div class="rmp-footer-fade"></div>
+    <div class="rmp-footer-brand-bg">RANK MY PROP</div>
+
+    <div class="rmp-footer-card">
+      <div class="rmp-footer-top">
+        <div>
+          <div class="rmp-brand-head">
+            <div class="rmp-brand-icon"><img fetchpriority="high" loading="eager" decoding="async" src="assets/Rank%20My%20Prop%20Logo%201.webp" alt="Rank My Prop"></div>
+            <div class="rmp-brand-title">Rank My Prop</div>
+          </div>
+          <p class="rmp-brand-copy">Rank My Prop helps traders compare prop firms, payout rules, and challenges in one clear platform — everything you need to choose the right firm.</p>
+        </div>
+
+        <div class="rmp-links-grid">
+          <div>
+            <h4 class="rmp-col-title">Product</h4>
+            <div class="rmp-col-links">
+              <a href="/">Home</a>
+              <a href="/listedprop">Listed Prop Firms</a>
+              <a href="/bestprop">Best Prop Firms</a>
+              <a href="/offers">Discount Code</a>
+              <a href="/propfirmrule">Prop Firm Rules</a>
+              <a href="/blog">Prop News</a>
+              <a href="/lotsizecalculator">Lot Size Calculator</a>
+              <a href="/lossrecoveryplanner">Loss Recovery Calculator</a>
+              <a href="/ruletranslator">Rule Explainer</a>
+              <a href="/tradejournal">Trade Journal</a>
+            </div>
+          </div>
+          <div>
+            <h4 class="rmp-col-title">Legal</h4>
+            <div class="rmp-col-links">
+              <a href="/disclaimer">Disclaimer</a>
+              <a href="/privacypolicy">Privacy Policy</a>
+              <a href="/termsofservice">Terms Of Service</a>
+              <a href="/legal">Legal</a>
+            </div>
+          </div>
+          <div>
+            <h4 class="rmp-col-title">Company</h4>
+            <div class="rmp-col-links">
+              <a href="/about">About</a>
+              <a href="/carrer">Careers</a>
+              <a href="/contact">Contact</a>
+              <a href="/partner">Partners</a>
+              <a href="/faq">FAQ</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rmp-divider"></div>
+      <div class="rmp-footer-bottom">
+        <div class="rmp-copy">© <script>document.write(new Date().getFullYear())</script> Rank My Prop. All rights reserved.</div>
+        <div class="rmp-bottom-links">
+          <a href="/login">Login</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</footer>
+<script>
+  const featuresBtn = document.getElementById("featuresBtn");
+  const dropdownWrap = featuresBtn ? featuresBtn.closest(".has-dropdown") : null;
+  const hamburger = document.getElementById("hamburger");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  if (featuresBtn && dropdownWrap) {
+    featuresBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      dropdownWrap.classList.toggle("open");
+    });
+  }
+
+  document.addEventListener("click", () => {
+    if (dropdownWrap) dropdownWrap.classList.remove("open");
+    if (mobileMenu) mobileMenu.classList.remove("open");
+  });
+
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener("click", (e) => {
+      e.stopPropagation();
+      mobileMenu.classList.toggle("open");
+    });
+    mobileMenu.addEventListener("click", (e) => e.stopPropagation());
+  }
+
+  function toggleMainExpand() {
+    const section = document.getElementById('mainExpand');
+    section.classList.toggle('active');
+  }
+
+  (function initDetailViewTabs(){
+    const navItems = Array.from(document.querySelectorAll('.detail-nav-item'));
+    const overviewMain = document.getElementById('detailOverviewMain');
+    const overviewSide = document.getElementById('detailOverviewSide');
+    const challengesPanel = document.getElementById('detailChallengesPanel');
+    const reviewsPanel = document.getElementById('detailReviewsPanel');
+    const spreadsPanel = document.getElementById('detailSpreadsPanel');
+    const announcementsPanel = document.getElementById('detailAnnouncementsPanel');
+    if (!navItems.length || !overviewMain || !overviewSide || !challengesPanel || !reviewsPanel || !spreadsPanel || !announcementsPanel) return;
+
+    const VALID_VIEWS = new Set(['overview', 'challenges', 'rules', 'reviews', 'spreads', 'announcements']);
+    spreadsPanel.classList.add('is-soon');
+
+    const slugifyRoute = (text = '') => String(text || '').toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+    const normalizeView = (view = '') => {
+      const next = String(view || '').trim().toLowerCase();
+      return VALID_VIEWS.has(next) ? next : 'overview';
+    };
+    const readRoute = (href = window.location.href) => {
+      let url;
+      try { url = new URL(href, window.location.origin); } catch (_) { url = new URL(window.location.href); }
+      const qSlug = slugifyRoute(url.searchParams.get('slug') || url.searchParams.get('firmSlug') || '');
+      const qView = normalizeView(url.searchParams.get('tab') || url.searchParams.get('view') || '');
+      const parts = String(url.pathname || '/').split('/').filter(Boolean);
+      const last = String(parts[parts.length - 1] || '').toLowerCase();
+      if (parts[0] === 'prop-firms' && parts[1]) {
+        const maybeView = parts[2] && VALID_VIEWS.has(String(parts[2]).toLowerCase()) ? String(parts[2]).toLowerCase() : 'overview';
+        return { slug: slugifyRoute(parts[1] || ''), view: normalizeView(maybeView) };
+      }
+      if (last === 'firm-detail.html' || last === 'firm-detail') {
+        return { slug: qSlug, view: qView };
+      }
+      if (last.endsWith('detail.html')) {
+        return { slug: slugifyRoute(last.replace('detail.html', '')), view: qView };
+      }
+      if (parts.length >= 2 && VALID_VIEWS.has(last)) {
+        return { slug: slugifyRoute(parts[parts.length - 2] || ''), view: normalizeView(last) };
+      }
+      return { slug: qSlug, view: qView };
+    };
+    const buildPath = (slug = '', view = 'overview') => {
+      const cleanSlug = slugifyRoute(slug);
+      const cleanView = normalizeView(view);
+      if (!cleanSlug) return '/firm-detail';
+      return cleanView === 'overview' ? `/prop-firms/${cleanSlug}` : `/prop-firms/${cleanSlug}/${cleanView}`;
+    };
+    const buildDedicatedReviewUrl = (slug = '') => {
+      const cleanSlug = slugifyRoute(slug);
+      return cleanSlug ? `/prop-firms/${encodeURIComponent(cleanSlug)}/reviews` : '/reviews';
+    };
+    const buildDedicatedRulesUrl = (slug = '') => {
+      const cleanSlug = slugifyRoute(slug);
+      return cleanSlug ? `/firm-rules?firm=${encodeURIComponent(cleanSlug)}` : '/prop-firm-rules';
+    };
+    const syncTabLinks = (slug = '') => {
+      const cleanSlug = slugifyRoute(slug || document.body?.dataset?.firmSlug || window.__rmpCurrentFirmSlug || '');
+      if (!cleanSlug) return;
+      document.body.dataset.firmSlug = cleanSlug;
+      window.__rmpCurrentFirmSlug = cleanSlug;
+      navItems.forEach((item) => {
+        const rawView = String(item.getAttribute('data-view') || '').trim().toLowerCase();
+        const view = normalizeView(rawView);
+        item.setAttribute('href', rawView === 'rules' ? buildDedicatedRulesUrl(cleanSlug) : (view === 'reviews' ? buildDedicatedReviewUrl(cleanSlug) : buildPath(cleanSlug, view)));
+      });
+      const reviewPath = buildDedicatedReviewUrl(cleanSlug);
+      const reviewNav = document.getElementById('detailReviewsNavLink');
+      if (reviewNav) reviewNav.setAttribute('href', reviewPath);
+      const leaveBtn = document.getElementById('firmLeaveReviewBtn');
+      if (leaveBtn) leaveBtn.setAttribute('href', reviewPath);
+      document.querySelectorAll('a.review-btn').forEach((el) => el.setAttribute('href', reviewPath));
+    };
+
+    const setView = (view, opts = {}) => {
+      const nextView = normalizeView(view);
+      const route = readRoute();
+      const activeSlug = slugifyRoute(opts.slug || route.slug || window.__rmpCurrentFirmSlug || document.body?.dataset?.firmSlug || '');
+      if (activeSlug) syncTabLinks(activeSlug);
+      if (nextView === 'rules' && activeSlug) {
+        window.location.replace(buildDedicatedRulesUrl(activeSlug));
+        return;
+      }
+      navItems.forEach((item) => {
+        const v = item.getAttribute('data-view');
+        item.classList.toggle('active', Boolean(v) && v === nextView);
+        item.setAttribute('aria-current', v === nextView ? 'page' : 'false');
+      });
+      const showChallenges = nextView === 'challenges';
+      const showReviews = nextView === 'reviews';
+      const showSpreads = nextView === 'spreads';
+      const showAnnouncements = nextView === 'announcements';
+      const hideOverview = showChallenges || showReviews || showSpreads || showAnnouncements;
+      overviewMain.classList.toggle('detail-overview-hidden', hideOverview);
+      overviewSide.classList.toggle('detail-overview-hidden', hideOverview);
+      challengesPanel.classList.toggle('active', showChallenges);
+      reviewsPanel.classList.toggle('active', showReviews);
+      spreadsPanel.classList.toggle('active', showSpreads);
+      announcementsPanel.classList.toggle('active', showAnnouncements);
+      challengesPanel.setAttribute('aria-hidden', showChallenges ? 'false' : 'true');
+      reviewsPanel.setAttribute('aria-hidden', showReviews ? 'false' : 'true');
+      spreadsPanel.setAttribute('aria-hidden', showSpreads ? 'false' : 'true');
+      announcementsPanel.setAttribute('aria-hidden', showAnnouncements ? 'false' : 'true');
+      if (opts.push && activeSlug) history.pushState({ slug: activeSlug, view: nextView }, '', buildPath(activeSlug, nextView));
+      if (typeof window.__applyFirmSeoForView === 'function') window.__applyFirmSeoForView(nextView);
+      window.__rmpCurrentView = nextView;
+    };
+
+    window.__parseRmpFirmRoute = readRoute;
+    window.__buildRmpFirmPath = buildPath;
+    window.__setRmpFirmTabView = setView;
+    window.__syncRmpFirmTabLinks = syncTabLinks;
+
+    navItems.forEach((item) => {
+      item.addEventListener('click', (e) => {
+        const view = item.getAttribute('data-view');
+        const slug = slugifyRoute(document.body?.dataset?.firmSlug || window.__rmpCurrentFirmSlug || '');
+        if (!view || !slug) return;
+        if (view === 'rules') return;
+        e.preventDefault();
+        setView(view, { push: true, slug });
+      });
+    });
+
+    window.addEventListener('popstate', () => {
+      const next = readRoute();
+      const currentSlug = slugifyRoute(document.body?.dataset?.firmSlug || window.__rmpCurrentFirmSlug || '');
+      if (next.slug && currentSlug && next.slug !== currentSlug) {
+        if (typeof window.__reloadRmpFirmDetail === 'function') window.__reloadRmpFirmDetail();
+        return;
+      }
+      setView(next.view || 'overview', { slug: next.slug || currentSlug });
+    });
+
+    const firstRoute = readRoute();
+    setView(firstRoute.view || 'overview', { slug: firstRoute.slug });
+  })();
+
+  (function initDetailPanelHeights(){
+    const frames = Array.from(document.querySelectorAll('.detail-panel-frame'));
+    if (!frames.length) return;
+    const reviewsBadge = document.getElementById('detailReviewsBadge');
+    const overviewChip = document.getElementById('overviewReviewChip');
+
+    const setFrameHeight = (frame, h) => {
+      if (!frame || !Number.isFinite(h)) return;
+      const next = Math.max(0, Math.ceil(h));
+      const cur = parseFloat(frame.style.height) || 0;
+      if (!next || Math.abs(cur - next) <= 2) return;
+      frame.style.height = `${next}px`;
+    };
+    const setReviewCount = (count) => {
+      if (!Number.isFinite(count) || count < 0) return;
+      if (reviewsBadge) reviewsBadge.textContent = String(count);
+      if (overviewChip) overviewChip.textContent = String(count);
+    };
+
+    const requestHeight = (frame) => {
+      try {
+        frame.contentWindow.postMessage({ type: 'rmp:getHeight' }, '*');
+      } catch (_) {}
+    };
+    const sendPanelData = (frame) => {
+      try {
+        frame.contentWindow.postMessage({
+          type: 'rmp:firmPanelData',
+          data: window.__rmpPanelData || {},
+          firmId: window.__rmpFirmContext?.firmId || "",
+          firmSlug: window.__rmpFirmContext?.firmSlug || ""
+        }, '*');
+      } catch (_) {}
+    };
+    const pushPanelData = () => {
+      frames.forEach((frame) => {
+        sendPanelData(frame);
+      });
+    };
+    window.__pushRmpPanelData = pushPanelData;
+
+    window.addEventListener('message', (event) => {
+      const data = event && event.data;
+      if (!data) return;
+      if (data.type === 'rmp:frameHeight' && Number.isFinite(data.height)) {
+        const sourceFrame = frames.find((f) => f.contentWindow === event.source);
+        if (sourceFrame) setFrameHeight(sourceFrame, data.height);
+      }
+      if (data.type === 'rmp:reviewCount' && Number.isFinite(data.count)) {
+        setReviewCount(data.count);
+      }
+    });
+
+    frames.forEach((frame) => {
+      frame.addEventListener('load', () => {
+        requestHeight(frame);
+        setTimeout(() => requestHeight(frame), 120);
+        sendPanelData(frame);
+        setTimeout(() => sendPanelData(frame), 120);
+      });
+      requestHeight(frame);
+      sendPanelData(frame);
+    });
+  })();
+
+  (function initPremiumRadar(){
+    const svg = document.getElementById('firmRadar');
+    const gridLayer = document.getElementById('radarGridLayer');
+    const axisLayer = document.getElementById('radarAxisLayer');
+    const plotLayer = document.getElementById('radarPlotLayer');
+    const centerScore = document.getElementById('radarCenterScore');
+    const bars = document.getElementById('radarBars');
+    const radarWrap = svg ? svg.closest('.radar-wrap') : null;
+    const tip = document.getElementById('radarTip');
+    if (!svg || !gridLayer || !axisLayer || !plotLayer || !centerScore || !bars || !radarWrap || !tip) return;
+
+    const ns = "http://www.w3.org/2000/svg";
+    const cfg = { cx: 180, cy: 176, max: 5, levels: 5, radius: 128 };
+    const defaultMetrics = [
+      { label: 'Company Background', short: 'Background', value: 4.4 },
+      { label: 'Payouts', short: 'Payouts', value: 4.3 },
+      { label: 'Challenge Rules', short: 'Rules', value: 4.2 },
+      { label: 'User Ratings', short: 'Ratings', value: 4.4 },
+      { label: 'RMP', short: 'RMP', value: 4.1 }
+    ];
+    const metrics = defaultMetrics.map((m) => ({ ...m }));
+
+    const clamp = (n, min, max) => Math.min(max, Math.max(min, n));
+    const pointAt = (i, radius) => {
+      const angle = (-Math.PI / 2) + ((Math.PI * 2 * i) / metrics.length);
+      return {
+        x: cfg.cx + (Math.cos(angle) * radius),
+        y: cfg.cy + (Math.sin(angle) * radius)
+      };
+    };
+    const toPoints = (radiusFn) => metrics.map((_, i) => {
+      const p = pointAt(i, radiusFn(i));
+      return `${p.x.toFixed(2)},${p.y.toFixed(2)}`;
+    }).join(' ');
+    const valueOut = (n) => `${n.toFixed(1)}/5`;
+    const showTip = (evt, text) => {
+      const rect = radarWrap.getBoundingClientRect();
+      const x = evt.clientX - rect.left;
+      const y = evt.clientY - rect.top;
+      tip.textContent = text;
+      tip.hidden = false;
+      const px = Math.max(58, Math.min(rect.width - 58, x));
+      const py = Math.max(34, y);
+      tip.style.left = `${px}px`;
+      tip.style.top = `${py}px`;
+    };
+    const hideTip = () => { tip.hidden = true; };
+
+    const normalizeMetrics = (incoming) => {
+      if (!Array.isArray(incoming) || !incoming.length) return defaultMetrics.map((m) => ({ ...m }));
+      const next = [];
+      for (let i = 0; i < defaultMetrics.length; i++) {
+        const base = defaultMetrics[i];
+        const row = incoming[i] || {};
+        const parsed = Number(row.value);
+        next.push({
+          label: String(row.label || base.label || "").trim() || base.label,
+          short: String(row.short || row.label || base.short || "").trim() || base.short,
+          value: Number.isFinite(parsed) ? clamp(parsed, 0, cfg.max) : base.value
+        });
+      }
+      return next;
+    };
+
+    const renderBars = () => {
+      bars.innerHTML = metrics.map((m, i) => `
+        <div class="radar-bar-row" data-metric-index="${i}">
+          <span class="radar-bar-label">${m.short}</span>
+          <label class="radar-bar-track">
+            <span class="radar-bar-fill"></span>
+            <input class="radar-bar-input" type="range" min="0" max="${cfg.max}" step="0.1" value="${m.value.toFixed(1)}" aria-label="${m.label}">
+          </label>
+          <b class="radar-bar-value">${m.value.toFixed(1)}</b>
+        </div>
+      `).join('');
+    };
+
+    const drawFrame = () => {
+      gridLayer.innerHTML = '';
+      axisLayer.innerHTML = '';
+      for (let i = 1; i <= cfg.levels; i++) {
+        const ring = document.createElementNS(ns, 'polygon');
+        ring.setAttribute('points', toPoints(() => (cfg.radius * i) / cfg.levels));
+        ring.setAttribute('class', 'radar-grid-level');
+        gridLayer.appendChild(ring);
+      }
+
+      for (let i = 0; i < metrics.length; i++) {
+        const end = pointAt(i, cfg.radius);
+        const line = document.createElementNS(ns, 'line');
+        line.setAttribute('x1', cfg.cx);
+        line.setAttribute('y1', cfg.cy);
+        line.setAttribute('x2', end.x);
+        line.setAttribute('y2', end.y);
+        line.setAttribute('class', 'radar-axis-line');
+        axisLayer.appendChild(line);
+
+        const labelPoint = pointAt(i, cfg.radius + 22);
+        const label = document.createElementNS(ns, 'text');
+        label.setAttribute('x', labelPoint.x);
+        label.setAttribute('y', labelPoint.y);
+        label.setAttribute('class', 'radar-axis-label');
+        label.textContent = metrics[i].label;
+        label.setAttribute('text-anchor', 'middle');
+        label.setAttribute('dominant-baseline', labelPoint.y < cfg.cy ? 'auto' : 'hanging');
+        label.addEventListener('mouseenter', (e) => showTip(e, `${metrics[i].label}: ${valueOut(metrics[i].value)}`));
+        label.addEventListener('mousemove', (e) => showTip(e, `${metrics[i].label}: ${valueOut(metrics[i].value)}`));
+        label.addEventListener('mouseleave', hideTip);
+        axisLayer.appendChild(label);
+      }
+
+      for (let i = 1; i <= cfg.levels; i++) {
+        const tick = document.createElementNS(ns, 'text');
+        tick.setAttribute('x', cfg.cx);
+        tick.setAttribute('y', cfg.cy - ((cfg.radius * i) / cfg.levels) + 4);
+        tick.setAttribute('text-anchor', 'middle');
+        tick.setAttribute('class', 'radar-tick-label');
+        tick.textContent = String((cfg.max / cfg.levels) * i);
+        axisLayer.appendChild(tick);
+      }
+    };
+
+    const updateRadar = () => {
+      plotLayer.innerHTML = '';
+      const plot = document.createElementNS(ns, 'polygon');
+      plot.setAttribute('points', toPoints((i) => (cfg.radius * clamp(metrics[i].value, 0, cfg.max)) / cfg.max));
+      plot.setAttribute('class', 'radar-plot');
+      plot.addEventListener('mouseenter', (e) => showTip(e, `Overall Score: ${centerScore.textContent}/5`));
+      plot.addEventListener('mousemove', (e) => showTip(e, `Overall Score: ${centerScore.textContent}/5`));
+      plot.addEventListener('mouseleave', hideTip);
+      plotLayer.appendChild(plot);
+
+      metrics.forEach((m, i) => {
+        const p = pointAt(i, (cfg.radius * clamp(m.value, 0, cfg.max)) / cfg.max);
+        const dot = document.createElementNS(ns, 'circle');
+        dot.setAttribute('cx', p.x);
+        dot.setAttribute('cy', p.y);
+        dot.setAttribute('r', 4.5);
+        dot.setAttribute('class', 'radar-point');
+        dot.addEventListener('mouseenter', (e) => showTip(e, `${m.label}: ${valueOut(m.value)}`));
+        dot.addEventListener('mousemove', (e) => showTip(e, `${m.label}: ${valueOut(m.value)}`));
+        dot.addEventListener('mouseleave', hideTip);
+        plotLayer.appendChild(dot);
+      });
+
+      const avgFiveScale = metrics.reduce((sum, m) => sum + m.value, 0) / metrics.length;
+      centerScore.textContent = avgFiveScale.toFixed(1);
+
+      bars.querySelectorAll('.radar-bar-row').forEach((row, i) => {
+        const val = clamp(metrics[i].value, 0, cfg.max);
+        const fill = row.querySelector('.radar-bar-fill');
+        const text = row.querySelector('.radar-bar-value');
+        const input = row.querySelector('.radar-bar-input');
+        if (fill) fill.style.width = `${(val / cfg.max) * 100}%`;
+        if (text) text.textContent = val.toFixed(1);
+        if (input) input.value = val.toFixed(1);
+      });
+    };
+
+    const applyIncomingMetrics = (incoming) => {
+      const next = normalizeMetrics(incoming);
+      metrics.splice(0, metrics.length, ...next);
+      renderBars();
+      drawFrame();
+      updateRadar();
+    };
+
+    bars.addEventListener('input', (e) => {
+      const t = e.target;
+      if (!(t instanceof HTMLInputElement) || !t.classList.contains('radar-bar-input')) return;
+      const row = t.closest('.radar-bar-row');
+      if (!row) return;
+      const idx = Number(row.getAttribute('data-metric-index'));
+      if (!Number.isFinite(idx) || !metrics[idx]) return;
+      metrics[idx].value = clamp(parseFloat(t.value) || 0, 0, cfg.max);
+      updateRadar();
+    });
+    svg.addEventListener('mouseleave', hideTip);
+    radarWrap.addEventListener('mouseleave', hideTip);
+    window.__updateFirmRadar = applyIncomingMetrics;
+
+    applyIncomingMetrics(defaultMetrics);
+  })();
+</script>
+
+<script type="module">
+  import { initializeApp, getApp, getApps } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+  import { collection, doc, getDoc, getDocs, getFirestore, limit, query, where } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+  import { firebaseConfig } from "./firebase-config.js";
+  import { withFirmFieldOverrides } from "./firm-field-overrides.js";
+  import { DEFAULT_LISTED_FIRMS, DEFAULT_BEST_FIRMS } from "./firms-data.js";
+
+  const PAGE_MIN_LOADER_MS = 0;
+  const PAGE_MAX_LOADER_MS = 1800;
+  const FALLBACK_LOGO = "assets/Rank%20My%20Prop%20Logo%201.webp";
+  const pageLoadStartedAt = Date.now();
+  const VALID_DETAIL_VIEWS = new Set(["overview", "challenges", "rules", "reviews", "spreads", "announcements"]);
+  const normalizeDetailView = (v = "") => {
+    const next = String(v || "").trim().toLowerCase();
+    return VALID_DETAIL_VIEWS.has(next) ? next : "overview";
+  };
+  const normalizeDetailSlug = (v = "") => slugify(v);
+  let detailLoadToken = 0;
+  let lastFirmLookupKey = "";
+  const toList = (v) => Array.isArray(v) ? v.map((x) => String(x || "").trim()).filter(Boolean) : typeof v === "string" ? v.split(/[,\n|]+/).map((x) => x.trim()).filter(Boolean) : [];
+  const toPlatforms = (row = {}) => { const allowed = new Set(["mt4","metatrader4","mt5","metatrader5","ctrader","matchtrader","tradelocker","dxtrade"]); return [row.platforms, row.tradingPlatforms, row.platform, row.supportedPlatforms].flatMap(toList).filter((name, index, all) => { const key = String(name).toLowerCase().replace(/[^a-z0-9]/g, ""); return allowed.has(key) && all.findIndex((item) => String(item).toLowerCase().replace(/[^a-z0-9]/g, "") === key) === index; }); };
+  const toPairs = (v, fallback = null) => { const source = v && (Array.isArray(v) ? v.length : typeof v === "object" ? Object.keys(v).length : 0) ? v : fallback; if (Array.isArray(source)) return source; if (source && typeof source === "object") return Object.entries(source).map(([label, value]) => ({ label: String(label).replace(/([a-z])([A-Z])/g, (m, a, b) => a + " " + b).replace(/^./, (c) => c.toUpperCase()), value: String(value ?? "-") })); return []; };
+  const slugify = (text = "") => String(text || "").toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+  const byId = (id) => document.getElementById(id);
+  const setText = (id, value) => { const el = byId(id); if (el) el.textContent = String(value ?? ""); };
+  const setHtml = (id, value) => { const el = byId(id); if (el) el.innerHTML = String(value ?? ""); };
+  const escapeHtml = (v = "") => String(v).replace(/[&<>"']/g, (m) => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[m]));
+  const toUrl = (value = "") => {
+    const v = String(value || "").trim();
+    if (!v) return "#";
+    return /^https?:\/\//i.test(v) ? v : `https://${v}`;
+  };
+  const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  const minLoaderWait = () => wait(Math.max(0, PAGE_MIN_LOADER_MS - (Date.now() - pageLoadStartedAt)));
+  const uniq = (list = []) => Array.from(new Set(list.filter(Boolean)));
+  const compactSlug = (value = "") => slugify(value).replace(/-/g, "");
+  const slugMatches = (a = "", b = "") => {
+    const left = slugify(a);
+    const right = slugify(b);
+    if (!left || !right) return false;
+    return left === right || compactSlug(left) === compactSlug(right);
+  };
+  const hasSlugMatch = (keys = [], wanted = []) => keys.some((key) => wanted.some((item) => slugMatches(key, item)));
+  function keysFromDetailsLink(raw = "") {
+    const txt = String(raw || "").trim();
+    if (!txt) return [];
+    try {
+      const u = new URL(txt, location.origin);
+      const out = [];
+      const qSlug = slugify(u.searchParams.get("slug") || u.searchParams.get("firmSlug") || "");
+      if (qSlug) out.push(qSlug);
+      const path = String(u.pathname || "").replace(/^\/+/, "").replace(/\/+$/, "").replace(/\.html$/i, "");
+      if (path && path.toLowerCase() !== "firm-detail") out.push(slugify(path.replace(/detail$/i, "")));
+      return out.filter(Boolean);
+    } catch (_) {
+      const clean = txt.replace(/^\/+/, "").replace(/\/+$/, "").split("?")[0].split("#")[0].replace(/\.html$/i, "");
+      if (!clean || clean.toLowerCase() === "firm-detail") return [];
+      return [slugify(clean.replace(/detail$/i, ""))].filter(Boolean);
+    }
+  }
+  function rowSlugKeys(row = {}) {
+    return uniq([
+      slugify(row?.slug || ""),
+      slugify(row?.id || ""),
+      slugify(row?.name || ""),
+      ...keysFromDetailsLink(row?.detailsLink || "")
+    ]);
+  }
+  function fallbackFirmByLookup(lookup = {}) {
+    const slugKeys = uniq([
+      slugify(lookup.routeSlug || ""),
+      slugify(lookup.wantedSlug || ""),
+      slugify(lookup.fileSlug || ""),
+      slugify(lookup.requestedSlug || "")
+    ]).filter(Boolean);
+    if (!slugKeys.length) return null;
+    const rows = [
+      ...(Array.isArray(DEFAULT_LISTED_FIRMS) ? DEFAULT_LISTED_FIRMS : []),
+      ...(Array.isArray(DEFAULT_BEST_FIRMS) ? DEFAULT_BEST_FIRMS : [])
+    ];
+    const seen = new Set();
+    for (const rawRow of rows) {
+      const row = rawRow && typeof rawRow === "object" ? rawRow : null;
+      if (!row) continue;
+      const stableId = slugify(row?.id || row?.slug || row?.name || "") || "";
+      if (stableId && seen.has(stableId)) continue;
+      if (stableId) seen.add(stableId);
+      const keys = rowSlugKeys(row);
+      if (!hasSlugMatch(keys, slugKeys)) continue;
+      return {
+        id: String(row?.id || stableId || "fallback-firm").trim(),
+        ...row,
+        slug: String(row?.slug || stableId || keys[0] || "").trim()
+      };
+    }
+    return null;
+  }
+  function togglePageLoader(show) {
+    const el = byId("firmPageLoader");
+    if (!el) return;
+    el.classList.toggle("hide", !show);
+  }
+  let scoreStarUid = 0;
+  function scoreStarSvg(kind, color = "#7a74ff") {
+    if (kind === "full") {
+      return `<svg viewBox="0 0 24 24" fill="${color}" stroke="${color}" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`;
+    }
+    if (kind === "half") {
+      const id = `rmpScoreHalf_${scoreStarUid++}`;
+      return `<svg viewBox="0 0 24 24"><defs><clipPath id="${id}"><rect x="0" y="0" width="12" height="24"/></clipPath></defs><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="none" stroke="#2a2a42" stroke-width="1.5"/><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="${color}" clip-path="url(#${id})"/></svg>`;
+    }
+    return `<svg viewBox="0 0 24 24" fill="none" stroke="#2a2a42" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`;
+  }
+  function renderScoreStars(score) {
+    const el = byId("firmScoreStars");
+    if (!el) return;
+    const val = Math.max(0, Math.min(5, Number(score) || 0));
+    let html = "";
+    for (let i = 1; i <= 5; i += 1) {
+      const d = val - (i - 1);
+      html += scoreStarSvg(d >= 0.75 ? "full" : d >= 0.25 ? "half" : "empty");
+    }
+    el.innerHTML = html;
+  }
+
+  function reviewSummaryFromRows(rows = []) {
+    const ok = new Set(["approved", "published", "publish"]);
+    const list = Array.isArray(rows)
+      ? rows.filter((r) => ok.has(String(r?.status || "approved").trim().toLowerCase()))
+      : [];
+    const count = list.length;
+    const avg = count ? (list.reduce((sum, r) => sum + Math.max(0, Math.min(5, Number(r?.rating) || 0)), 0) / count) : 0;
+    const people = new Set(
+      list.map((r) => String(
+        r?.uid ||
+        r?.userUid ||
+        r?.userId ||
+        r?.reviewerUid ||
+        r?.email ||
+        r?.userEmail ||
+        r?.reviewerEmail ||
+        r?.name ||
+        r?.userName ||
+        r?.id ||
+        ""
+      ).trim()).filter(Boolean)
+    ).size || count;
+    return { count, avg, traders: people };
+  }
+
+  function applyLiveReviewStats(row = {}, summary = null) {
+    const stats = summary && summary.count >= 0 ? summary : (row?.reviewSummary && row.reviewSummary.count >= 0 ? row.reviewSummary : null);
+    const score = stats && stats.count ? stats.avg : Math.max(0, Math.min(5, Number(row?.score || 0)));
+    setText("firmScoreValue", score.toFixed(1));
+    renderScoreStars(score);
+    const count = stats && Number.isFinite(stats.count) ? Math.max(0, Math.round(stats.count)) : Math.max(0, Number(row?.reviewCount || 0));
+    const traders = stats && Number.isFinite(stats.traders) ? Math.max(0, Math.round(stats.traders)) : 0;
+    if (count > 0) {
+      setText("detailReviewsBadge", count);
+      setText("overviewReviewChip", count);
+    }
+    if (traders > 0) {
+      setText("firmTrustedText", `Trusted by ${traders.toLocaleString()} trader${traders === 1 ? "" : "s"}`);
+      return;
+    }
+    if (count > 0) {
+      setText("firmTrustedText", `Trusted by ${count.toLocaleString()} trader${count === 1 ? "" : "s"}`);
+      return;
+    }
+    setText("firmTrustedText", String(row?.trustedBy || "Trusted by traders"));
+  }
+
+  function getRouteState(href = location.href) {
+    if (typeof window.__parseRmpFirmRoute === "function") {
+      const parsed = window.__parseRmpFirmRoute(href);
+      return {
+        slug: normalizeDetailSlug(parsed?.slug || ""),
+        view: normalizeDetailView(parsed?.view || "overview")
+      };
+    }
+    let url;
+    try { url = new URL(href, location.origin); } catch (_) { url = new URL(location.href); }
+    const qSlug = normalizeDetailSlug(url.searchParams.get("slug") || url.searchParams.get("firmSlug") || "");
+    const qView = normalizeDetailView(url.searchParams.get("tab") || url.searchParams.get("view") || "");
+    const parts = String(url.pathname || "/").split("/").filter(Boolean);
+    const last = String(parts[parts.length - 1] || "").toLowerCase();
+    if (parts[0] === "prop-firms" && parts[1]) {
+      const v = parts[2] && VALID_DETAIL_VIEWS.has(String(parts[2]).toLowerCase()) ? String(parts[2]).toLowerCase() : "overview";
+      return { slug: normalizeDetailSlug(parts[1] || ""), view: normalizeDetailView(v) };
+    }
+    if (last === "firm-detail.html" || last === "firm-detail") return { slug: qSlug, view: qView };
+    if (last.endsWith("detail.html")) return { slug: normalizeDetailSlug(last.replace("detail.html", "")), view: qView };
+    if (parts.length >= 2 && VALID_DETAIL_VIEWS.has(last)) {
+      return { slug: normalizeDetailSlug(parts[parts.length - 2] || ""), view: normalizeDetailView(last) };
+    }
+    return { slug: qSlug, view: qView };
+  }
+
+  function getDetailSlug() {
+    return String(getRouteState().slug || "").trim().toLowerCase();
+  }
+
+  function getDetailView() {
+    return String(getRouteState().view || "overview").trim().toLowerCase() || "overview";
+  }
+
+  function buildFirmPath(slug = "", view = "overview") {
+    if (typeof window.__buildRmpFirmPath === "function") return window.__buildRmpFirmPath(slug, view);
+    const cleanSlug = slugify(slug);
+    const cleanView = String(view || "overview").trim().toLowerCase();
+    if (!cleanSlug) return "/firm-detail";
+    return cleanView === "overview" ? `/prop-firms/${cleanSlug}` : `/prop-firms/${cleanSlug}/${cleanView}`;
+  }
+
+  function buildFirmRouteUrl(slug = "", view = "overview") {
+    const path = buildFirmPath(slug, view);
+    return /^https?:\/\//i.test(path) ? path : `${location.origin}${path}`;
+  }
+
+  function seoForView(name, slug, view) {
+    const cleanName = String(name || "Prop Firm").trim() || "Prop Firm";
+    const cleanSlug = slugify(slug || cleanName);
+    const currentView = String(view || "overview").trim().toLowerCase();
+    const base = {
+      overview: {
+        h1: cleanName,
+        title: `${cleanName} Review, Rules, Challenges & Payout | Rank My Prop`,
+        desc: `Explore ${cleanName} payout history, rules, challenge models, trader reviews, fees, and platform details on Rank My Prop.`,
+        crumb: cleanName
+      },
+      rules: {
+        h1: `${cleanName} Rules`,
+        title: `${cleanName} Rules, Drawdown & Restrictions | Rank My Prop`,
+        desc: `Read ${cleanName} rules, drawdown limits, consistency requirements, allowed strategies, and trading restrictions before buying a challenge.`,
+        crumb: "Rules"
+      },
+      challenges: {
+        h1: `${cleanName} Challenges`,
+        title: `${cleanName} Challenges, Fees & Account Sizes | Rank My Prop`,
+        desc: `Compare ${cleanName} challenge types, pricing, account sizes, profit targets, scaling options, and funding models on Rank My Prop.`,
+        crumb: "Challenges"
+      },
+      reviews: {
+        h1: `${cleanName} Reviews`,
+        title: `${cleanName} Reviews & Trader Ratings | Rank My Prop`,
+        desc: `See ${cleanName} reviews, trader ratings, payout feedback, dashboard experience, and user sentiment before choosing this prop firm.`,
+        crumb: "Reviews"
+      },
+      spreads: {
+        h1: `${cleanName} Spreads`,
+        title: `${cleanName} Spreads & Pricing | Rank My Prop`,
+        desc: `Check ${cleanName} spread notes, pricing structure, and trading cost visibility on Rank My Prop.`,
+        crumb: "Spreads"
+      },
+      announcements: {
+        h1: `${cleanName} Announcements`,
+        title: `${cleanName} News & Announcements | Rank My Prop`,
+        desc: `Track ${cleanName} updates, promotions, policy changes, and platform announcements on Rank My Prop.`,
+        crumb: "Announcements"
+      }
+    }[currentView] || null;
+    const fallback = base || {
+      h1: cleanName,
+      title: `${cleanName} Review | Rank My Prop`,
+      desc: `Explore ${cleanName} on Rank My Prop.`,
+      crumb: cleanName
+    };
+    return {
+      ...fallback,
+      canonical: buildFirmRouteUrl(cleanSlug, currentView)
+    };
+  }
+
+  function detailPageHeading(name = "") {
+    const firm = String(name || "Prop Firm").trim() || "Prop Firm";
+    return `${firm} Review 2026: Fees, Rules, Payout & Discount Code`;
+  }
+
+  function detailPageParagraph(name = "") {
+    const firm = String(name || "Prop Firm").trim() || "Prop Firm";
+    return `Read our complete ${firm} review covering challenge fees, drawdown rules, payout proof, profit split, trading platforms, account types, and the latest discount code for traders in 2026.`;
+  }
+
+  function detailHeadingWithAccent(text = "") {
+    const words = String(text || "").trim().split(/\s+/).filter(Boolean);
+    if (!words.length) return "";
+    const tail = Math.min(4, words.length);
+    const splitAt = Math.max(1, words.length - tail);
+    const lead = escapeHtml(words.slice(0, splitAt).join(" "));
+    const accent = escapeHtml(words.slice(splitAt).join(" "));
+    return `${lead} <span class="detail-seo-accent">${accent}</span>`;
+  }
+
+  function absUrl(v = "") {
+    const s = String(v || "").trim();
+    if (!s) return "";
+    if (/^https?:\/\//i.test(s)) return s;
+    if (s.startsWith("/")) return `${location.origin}${s}`;
+    return `${location.origin}/${s.replace(/^\.?\//, "")}`;
+  }
+
+  function setJsonLd(id, data) {
+    const el = byId(id);
+    if (el) el.textContent = JSON.stringify(data);
+  }
+
+  function syncPanelFrames(slug = "") {
+    const cleanSlug = slugify(slug);
+    if (!cleanSlug) return;
+    const firmName = String(window.__rmpFirmContext?.firmName || "").trim();
+    [
+      [".detail-panel-frame[src$='rules-panel.html']", "/rules-panel.html", "rules"],
+      [".detail-challenges-frame", "/challenges-panel.html", "challenges"],
+      [".detail-reviews-frame", "/review-panel.html", "reviews"],
+      [".detail-spreads-frame", "/spreads-panel.html", "spreads"],
+      [".detail-announcements-frame", "/announcements-panel.html", "announcements"]
+    ].forEach(([selector, file, panel]) => {
+      const frame = document.querySelector(selector);
+      if (!frame) return;
+      const next = `${file}?firmSlug=${encodeURIComponent(cleanSlug)}&firmName=${encodeURIComponent(firmName)}&panel=${encodeURIComponent(panel)}`;
+      if (frame.getAttribute("src") !== next) frame.setAttribute("src", next);
+    });
+  }
+
+  async function fetchFirstRow(qry) {
+    const snap = await getDocs(qry);
+    const docs = snap.docs || [];
+    const firstNamed = docs.find((d) => String(d.data()?.name || "").trim());
+    const first = firstNamed || null;
+    return first ? { id: first.id, ...first.data() } : null;
+  }
+
+  async function fetchFirmByLookup(db, lookup = {}) {
+    const col = collection(db, "firms");
+    const hasName = (row) => String(row?.name || "").trim().length > 0;
+    const keysFromDetailsLink = (raw = "") => {
+      const txt = String(raw || "").trim();
+      if (!txt) return [];
+      try {
+        const u = new URL(txt, location.origin);
+        const out = [];
+        const qSlug = slugify(u.searchParams.get("slug") || u.searchParams.get("firmSlug") || "");
+        if (qSlug) out.push(qSlug);
+        const path = String(u.pathname || "").replace(/^\/+/, "").replace(/\/+$/, "").replace(/\.html$/i, "");
+        if (path && path.toLowerCase() !== "firm-detail") out.push(slugify(path.replace(/detail$/i, "")));
+        return out.filter(Boolean);
+      } catch (_) {
+        const clean = txt.replace(/^\/+/, "").replace(/\/+$/, "").split("?")[0].split("#")[0].replace(/\.html$/i, "");
+        if (!clean || clean.toLowerCase() === "firm-detail") return [];
+        return [slugify(clean.replace(/detail$/i, ""))].filter(Boolean);
+      }
+    };
+    const rowSlugKeys = (row = {}) => uniq([
+      slugify(row?.slug || ""),
+      slugify(row?.id || ""),
+      slugify(row?.name || ""),
+      ...keysFromDetailsLink(row?.detailsLink || "")
+    ]);
+    const wantedId = String(lookup.wantedId || "").trim();
+    if (wantedId) {
+      try {
+        const idSnap = await getDoc(doc(db, "firms", wantedId));
+        if (idSnap.exists()) {
+          const row = { id: idSnap.id, ...idSnap.data() };
+          if (hasName(row)) return row;
+        }
+      } catch (_) {}
+    }
+
+    const slugKeys = uniq([
+      slugify(lookup.routeSlug || ""),
+      slugify(lookup.wantedSlug || ""),
+      slugify(lookup.fileSlug || "")
+    ]);
+
+    for (const key of slugKeys) {
+      try {
+        const directSnap = await getDoc(doc(db, "firms", key));
+        if (directSnap.exists()) {
+          const row = { id: directSnap.id, ...directSnap.data() };
+          if (hasName(row)) return row;
+        }
+      } catch (_) {}
+
+      try {
+        const bySlug = await fetchFirstRow(query(col, where("slug", "==", key), limit(1)));
+        if (bySlug && hasName(bySlug)) return bySlug;
+      } catch (_) {}
+
+      try {
+        const byPath = await fetchFirstRow(query(col, where("detailsLink", "==", `/${key}`), limit(1)));
+        if (byPath && hasName(byPath)) return byPath;
+      } catch (_) {}
+
+      try {
+        const byLegacy = await fetchFirstRow(query(col, where("detailsLink", "==", `firm-detail.html?slug=${key}`), limit(1)));
+        if (byLegacy && hasName(byLegacy)) return byLegacy;
+      } catch (_) {}
+    }
+
+    if (slugKeys.length) {
+      try {
+        const all = await getDocs(query(col, limit(800)));
+        for (const d of all.docs || []) {
+          const row = { id: d.id, ...d.data() };
+          if (!hasName(row)) continue;
+          const keys = rowSlugKeys(row);
+          if (hasSlugMatch(keys, slugKeys)) return row;
+        }
+      } catch (_) {}
+    }
+
+    if (slugKeys.length) {
+      const fallbackRows = [...(Array.isArray(DEFAULT_LISTED_FIRMS) ? DEFAULT_LISTED_FIRMS : []), ...(Array.isArray(DEFAULT_BEST_FIRMS) ? DEFAULT_BEST_FIRMS : [])];
+      const seen = new Set();
+      for (const rawRow of fallbackRows) {
+        const row = rawRow && typeof rawRow === "object" ? rawRow : null;
+        if (!row) continue;
+        const stableId = slugify(row?.id || row?.slug || row?.name || "") || "";
+        if (stableId && seen.has(stableId)) continue;
+        if (stableId) seen.add(stableId);
+        const keys = rowSlugKeys(row);
+        if (!hasSlugMatch(keys, slugKeys)) continue;
+        return {
+          id: String(row?.id || stableId || "fallback-firm").trim(),
+          ...row,
+          slug: String(row?.slug || stableId).trim()
+        };
+      }
+    }
+
+    return null;
+  }
+
+  async function fetchLiveReviewSummary(db, row = {}) {
+    const firmName = String(row?.name || "").trim();
+    const detailsSlug = (() => {
+      const raw = String(row?.detailsLink || "").trim();
+      if (!raw) return "";
+      const clean = raw.split("?")[0].split("#")[0].replace(/^\/+/, "");
+      if (!clean) return "";
+      if (clean.endsWith(".html")) return slugify(clean.replace(".html", "").replace("detail", ""));
+      return slugify(clean);
+    })();
+    const slugKeys = uniq([
+      slugify(row?.slug || ""),
+      slugify(row?.id || ""),
+      slugify(firmName),
+      detailsSlug,
+      slugify(getDetailSlug() || "")
+    ]);
+    const sts = ["Approved","approved","Published","published","Publish","publish"];
+    const slugSet = new Set(slugKeys.filter(Boolean));
+    const nameSet = new Set([firmName.toLowerCase()].filter(Boolean));
+    const rows = [];
+    const pull = async (qry) => {
+      const snap = await getDocs(qry);
+      snap.forEach((d) => rows.push({ id: d.id, ...d.data() }));
+    };
+    for (const slug of slugKeys) {
+      if (!slug) continue;
+      for (const s of sts) {
+        try { await pull(query(collection(db, "reviews"), where("firmSlug", "==", slug), where("status", "==", s), limit(400))); } catch (_) {}
+      }
+      if (rows.length) break;
+    }
+    if (!rows.length && firmName) {
+      for (const fld of ["firm", "firmName"]) {
+        for (const s of sts) {
+          try { await pull(query(collection(db, "reviews"), where(fld, "==", firmName), where("status", "==", s), limit(400))); } catch (_) {}
+        }
+        if (rows.length) break;
+      }
+    }
+    if (!rows.length) {
+      for (const s of sts) {
+        try { await pull(query(collection(db, "reviews"), where("status", "==", s), limit(2500))); } catch (_) {}
+      }
+    }
+    const isForFirm = (r = {}) => {
+      const slugs = [
+        slugify(r.firmSlug || ""),
+        slugify(r.slug || ""),
+        slugify(r.firmName || ""),
+        slugify(r.firm || ""),
+        slugify(r.name || "")
+      ].filter(Boolean);
+      for (const x of slugs) if (Array.from(slugSet).some((wanted) => slugMatches(x, wanted))) return true;
+      const names = [
+        String(r.firmName || "").trim().toLowerCase(),
+        String(r.firm || "").trim().toLowerCase(),
+        String(r.name || "").trim().toLowerCase()
+      ].filter(Boolean);
+      for (const x of names) if (nameSet.has(x)) return true;
+      return false;
+    };
+    const deduped = Array.from(new Map(rows.filter((r) => isForFirm(r)).map((r) => [String(r.id || `${r.uid || ""}_${r.createdAt?.seconds || r.createdAt || ""}`), r])).values());
+    const summary = reviewSummaryFromRows(deduped);
+    return summary.count ? summary : null;
+  }
+
+  function renderPairsTable(id, rows) {
+    const table = byId(id);
+    if (!table) return;
+    table.innerHTML = (Array.isArray(rows) ? rows : []).map((row) => {
+      const rawLabel = String(row?.label || row?.name || "-");
+      const rawValue = String(row?.value || "-");
+      const label = escapeHtml(rawLabel);
+      const value = escapeHtml(rawValue);
+      const valueHtml = /headquarters|country/i.test(rawLabel) ? `${countryFlagMarkup(rawValue)}${value}` : value;
+      return `<tr><td>${label}</td><td style="text-align:right;color:white;font-weight:500;">${valueHtml}</td></tr>`;
+    }).join("");
+  }
+
+  function renderLeverageTable(rows) {
+    const table = byId("firmLeverageTable");
+    if (!table) return;
+    const list = Array.isArray(rows) ? rows : [];
+    const head = `<tr><td style="font-weight:600;color:#cdd4e8">Instruments</td><td style="text-align:center;color:#cdd4e8">1:50</td><td style="text-align:center;color:#cdd4e8">1:30</td><td style="text-align:center;color:#cdd4e8">1:100</td><td style="text-align:right;color:#cdd4e8">Variable</td></tr>`;
+    table.innerHTML = head + list.map((row) => `
+      <tr>
+        <td>${String(row?.instrument || "-")}</td>
+        <td style="text-align:center">${String(row?.c1 || "-")}</td>
+        <td style="text-align:center">${String(row?.c2 || "-")}</td>
+        <td style="text-align:center">${String(row?.c3 || "-")}</td>
+        <td>${String(row?.c4 || "-")}</td>
+      </tr>`).join("");
+  }
+
+  function renderCommissions(rows) {
+    const wrap = byId("firmCommissionsGrid");
+    if (!wrap) return;
+    const list = Array.isArray(rows) ? rows : [];
+    wrap.innerHTML = list.map((row) => `
+      <div style="background:#0d0f1a;border:1px solid #1e213a;border-radius:10px;padding:10px;">
+        <div style="font-size:13px;font-weight:700;margin-bottom:6px;">${String(row?.title || "-")}</div>
+        <div style="font-size:11px;color:var(--text-secondary);line-height:1.45;">
+          ${toList(row?.lines).map((line) => `${String(line)}<br>`).join("")}
+        </div>
+      </div>`).join("");
+  }
+
+  function renderPlatforms(list) {
+    const wrap = byId("firmPlatforms");
+    if (!wrap) return;
+    wrap.innerHTML = toList(list).map((name) => `<span class="tag">${name}</span>`).join("");
+  }
+
+  function summaryList(value) {
+    if (Array.isArray(value)) return value.map((x) => String(x || "").trim()).filter(Boolean);
+    return String(value || "").split(/[,;|\n]+/).map((x) => x.trim()).filter(Boolean);
+  }
+
+  function findPairValue(rows, patterns = []) {
+    const list = Array.isArray(rows) ? rows : [];
+    for (const row of list) {
+      const label = String(row?.label || row?.name || "");
+      if (patterns.some((pattern) => pattern.test(label))) return String(row?.value || "").trim();
+    }
+    return "";
+  }
+
+  function renderAiSummary(row = {}) {
+    const card = byId("firmAiSummaryCard");
+    const titleEl = byId("firmAiSummaryTitle");
+    const bodyEl = byId("firmAiSummaryBody");
+    const wrap = byId("firmAiSummaryBodyWrap");
+    const fade = byId("firmAiSummaryFade");
+    const toggle = byId("firmAiSummaryToggle");
+    if (!card || !titleEl || !bodyEl || !wrap || !toggle) return;
+
+    const name = String(row?.name || "Prop Firm").trim() || "Prop Firm";
+    const firmId = slugify(row?.id || row?.slug || name) || "firm";
+    const platforms = summaryList(row?.platforms).join(", ") || "popular trading platforms";
+    const steps = summaryList(row?.steps || row?.programTypes || row?.challengeTypes || row?.challenges).join(", ") || "multiple";
+    const accountSize = String(row?.accountSize || row?.maxAllocation || findPairValue(row?.keyMetrics, [/allocation/i, /account/i, /funding/i]) || "various sizes").trim();
+    const payoutTiming = String(row?.payoutCycle || findPairValue(row?.keyMetrics, [/payout/i]) || "available payout schedules").trim();
+    const title = String(row?.viewAiSummaryTitle || `${name} Firm AI Summary`).trim();
+    const body = String(row?.viewAiSummaryBody || `${name} offers ${steps} challenge models with account sizes from ${accountSize}. Supported platforms include ${platforms}. Payout timing follows ${payoutTiming}. Key rules include daily drawdown, max drawdown, EA policy, news trading, copy trading, and consistency requirements.`).trim();
+
+    titleEl.textContent = title;
+    bodyEl.textContent = body;
+    const collapsedHeight = 50;
+    wrap.dataset.expanded = "false";
+    wrap.style.maxHeight = `${collapsedHeight}px`;
+    toggle.textContent = "Show More";
+    if (fade) fade.style.opacity = "1";
+
+    requestAnimationFrame(() => {
+      const fullHeight = bodyEl.scrollHeight;
+      const needsToggle = fullHeight > collapsedHeight + 6;
+      toggle.hidden = !needsToggle;
+      if (fade) fade.hidden = !needsToggle;
+      wrap.style.maxHeight = needsToggle ? `${collapsedHeight}px` : "none";
+    });
+
+    toggle.onclick = () => {
+      const isExpanded = wrap.dataset.expanded === "true";
+      wrap.dataset.expanded = isExpanded ? "false" : "true";
+      wrap.style.maxHeight = isExpanded ? `${collapsedHeight}px` : `${bodyEl.scrollHeight}px`;
+      toggle.textContent = isExpanded ? "Show More" : "Show Less";
+      if (fade) fade.style.opacity = isExpanded ? "1" : "0";
+      if (isExpanded) card.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    };
+
+    const cacheKey = `firm-ai-summary-vote-${firmId}`;
+    const buttons = Array.from(card.querySelectorAll("[data-ai-vote]"));
+    const applyVote = (vote) => buttons.forEach((btn) => btn.classList.toggle("active", btn.dataset.aiVote === vote));
+    let vote = "";
+    try { vote = localStorage.getItem(cacheKey) || ""; } catch (_) {}
+    applyVote(vote);
+    buttons.forEach((btn) => {
+      btn.onclick = () => {
+        const next = vote === btn.dataset.aiVote ? "" : btn.dataset.aiVote;
+        vote = next;
+        try { localStorage.setItem(cacheKey, vote); } catch (_) {}
+        applyVote(vote);
+      };
+    });
+  }
+
+  const COUNTRY_TO_ISO = {
+    australia: "AU",
+    bangladesh: "BD",
+    belarus: "BY",
+    belize: "BZ",
+    capeverde: "CV",
+    "cape_verde": "CV",
+    chad: "TD",
+    china: "CN",
+    cuba: "CU",
+    grenada: "GD",
+    india: "IN",
+    iran: "IR",
+    malaysia: "MY",
+    myanmar: "MM",
+    nigeria: "NG",
+    "northkorea": "KP",
+    "north_korea": "KP",
+    pakistan: "PK",
+    russia: "RU",
+    "southafrica": "ZA",
+    "south_africa": "ZA",
+    sudan: "SD",
+    syria: "SY",
+    tuvalu: "TV",
+    uk: "GB",
+    "unitedkingdom": "GB",
+    "united_kingdom": "GB",
+    us: "US",
+    usa: "US",
+    uae: "AE",
+    "unitedarabemirates": "AE",
+    "united_arab_emirates": "AE",
+    emirates: "AE",
+    dubai: "AE",
+    canada: "CA",
+    germany: "DE",
+    france: "FR",
+    spain: "ES",
+    italy: "IT",
+    netherlands: "NL",
+    switzerland: "CH",
+    sweden: "SE",
+    norway: "NO",
+    denmark: "DK",
+    singapore: "SG",
+    japan: "JP",
+    hongkong: "HK",
+    "hong_kong": "HK",
+    newzealand: "NZ",
+    "new_zealand": "NZ",
+    "unitedstates": "US",
+    "united_states": "US"
+  };
+
+  function toCountryKey(name = "") {
+    return String(name || "").toLowerCase().trim().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "");
+  }
+
+  function isoToFlag(iso = "") {
+    const up = String(iso || "").toUpperCase();
+    if (!/^[A-Z]{2}$/.test(up)) return "🌐";
+    return String.fromCodePoint(...up.split("").map((c) => 127397 + c.charCodeAt(0)));
+  }
+
+  function countryToFlag(name = "") {
+    const key = toCountryKey(name);
+    const iso = COUNTRY_TO_ISO[key] || COUNTRY_TO_ISO[key.replaceAll("_", "")] || "";
+    return isoToFlag(iso);
+  }
+
+  function countryNameFromText(text = "") {
+    const src = String(text || "").trim();
+    if (!src) return "";
+    const noParens = src.replace(/\([^)]*\)/g, "").trim();
+    if (!noParens) return "";
+    const parts = noParens.split(",").map((x) => x.trim()).filter(Boolean);
+    if (parts.length > 1) return parts[parts.length - 1];
+    return parts[0] || noParens;
+  }
+
+  function countryFlagMarkup(text = "") {
+    const country = countryNameFromText(text);
+    if (!country || /^global$/i.test(country)) return "";
+    const key = toCountryKey(country);
+    const iso = COUNTRY_TO_ISO[key] || COUNTRY_TO_ISO[key.replaceAll("_", "")] || "";
+    if (iso) {
+      const src = `https://flagcdn.com/w40/${iso.toLowerCase()}.png`;
+      return `<img fetchpriority="high" src="${src}" alt="${escapeHtml(country)} flag" loading="lazy" decoding="async" style="width:16px;height:12px;object-fit:cover;border-radius:2px;margin-right:6px;vertical-align:-1px;box-shadow:0 0 0 1px rgba(255,255,255,.2)">`;
+    }
+    const emoji = countryToFlag(country);
+    return emoji && emoji !== "🌐" ? `<span style="margin-right:6px">${emoji}</span>` : "";
+  }
+
+  function renderRestrictedCountries(list) {
+    const wrap = byId("firmRestrictedCountries");
+    if (!wrap) return;
+    wrap.innerHTML = toList(list).map((name) => `<div class="country-pill"><span>${countryToFlag(name)}</span> ${name}</div>`).join("");
+  }
+
+  function renderWhyChoose(list) {
+    const wrap = byId("firmWhyChooseList");
+    if (!wrap) return;
+    wrap.innerHTML = toList(list).map((line) => `<div style="display:flex; align-items:center; gap:10px;"><span style="color:var(--accent)">✓</span> ${line}</div>`).join("");
+  }
+
+  function renderLongOverview(text) {
+    const wrap = byId("firmOverviewLongContent");
+    if (!wrap) return;
+    const chunks = String(text || "").split(/\n\s*\n/).map((x) => x.trim()).filter(Boolean);
+    wrap.innerHTML = chunks.map((chunk) => `<p style="margin:0 0 14px 0;">${chunk}</p>`).join("");
+  }
+
+  function performanceToRadarMetrics(row) {
+    if (Array.isArray(row?.radarMetrics) && row.radarMetrics.length) return row.radarMetrics;
+    const p = row?.performance || {};
+    const map = [
+      { key: "profitability", label: "Company Background", short: "Background" },
+      { key: "payouts", label: "Payouts", short: "Payouts" },
+      { key: "rules", label: "Challenge Rules", short: "Rules" },
+      { key: "flexibility", label: "User Ratings", short: "Ratings" },
+      { key: "trust", label: "RMP", short: "RMP" }
+    ];
+    return map.map((m) => {
+      const raw = Number(p[m.key]);
+      const scaled = Number.isFinite(raw) ? raw : 4;
+      return { label: m.label, short: m.short, value: Math.max(0, Math.min(5, scaled)) };
+    });
+  }
+
+  function applyFirmData(row) {
+    const name = String(row?.name || "Firm");
+    const slug = String(row?.slug || getDetailSlug() || slugify(name)).trim().toLowerCase();
+    const view = getDetailView();
+    const seo = seoForView(name, slug, view);
+    const logoEl = byId("firmLogoImage");
+    if (logoEl) {
+      logoEl.src = String(row?.logo || "").trim() || FALLBACK_LOGO;
+      logoEl.hidden = false;
+      logoEl.onerror = () => {
+        logoEl.onerror = null;
+        logoEl.src = FALLBACK_LOGO;
+      };
+    }
+    const mainHeading = detailPageHeading(name);
+    const mainParagraph = detailPageParagraph(name);
+    setText("firmNameHeading", name);
+    setHtml("detailSeoHeading", detailHeadingWithAccent(mainHeading));
+    setText("detailSeoParagraph", mainParagraph);
+    const metaMarkets = toList(row?.metaMarkets).length ? toList(row?.metaMarkets) : toList(row?.markets);
+    const hqText = String(row?.metaHeadquarters || row?.headquarters || row?.country || "").trim();
+    const metaLine = String(row?.detailMeta || "").trim();
+    if (metaLine) {
+      setText("firmMetaLine", metaLine);
+    } else {
+      const parts = [];
+      if (row?.metaCeo || row?.ceo) parts.push(escapeHtml(`CEO: ${row?.metaCeo || row?.ceo}`));
+      if (metaMarkets.length) parts.push(escapeHtml(metaMarkets.join(" • ")));
+      if (row?.metaFounded || row?.founded) parts.push(escapeHtml(`Founded ${row?.metaFounded || row?.founded}`));
+      if (hqText) parts.push(`${countryFlagMarkup(hqText)}${escapeHtml(hqText)}`);
+      setHtml("firmMetaLine", parts.join(" • "));
+    }
+
+    const buyUrl = toUrl(row?.buyLink || row?.website || "");
+    const compareSlug = slugify(row?.slug || row?.id || name);
+    const rulesNav = document.querySelector('.detail-nav-item[data-view="rules"]');
+    const reviewsNav = document.querySelector('.detail-nav-item[data-view="reviews"]');
+    if (rulesNav) rulesNav.hidden = row?.showRules === false;
+    if (reviewsNav) reviewsNav.hidden = row?.showReviews === false;
+    const leaveReviewBtn = byId("firmLeaveReviewBtn");
+    if (leaveReviewBtn) leaveReviewBtn.hidden = row?.showReviews === false;
+    const compareHref = compareSlug ? `/compare?firms=${encodeURIComponent(compareSlug)}` : "/compare";
+    const compareBtn = byId("firmAddCompareBtn");
+    if (compareBtn) {
+      compareBtn.href = compareHref;
+      compareBtn.textContent = "Add to Compare";
+      compareBtn.onclick = (event) => {
+        event.preventDefault();
+        try {
+          const saved = JSON.parse(localStorage.getItem("rmpCompareFirms") || "[]");
+          const list = Array.isArray(saved) ? saved.filter(Boolean) : [];
+          const next = [compareSlug, ...list.filter((item) => item !== compareSlug)].filter(Boolean).slice(0, 4);
+          localStorage.setItem("rmpCompareFirms", JSON.stringify(next));
+        } catch (_) {}
+        compareBtn.textContent = "Added to Compare";
+        window.location.href = compareHref;
+      };
+    }
+    const buyBtn = byId("firmBuyNowBtn");
+    if (buyBtn) buyBtn.href = buyUrl;
+
+    applyLiveReviewStats(row);
+    setText("firmPromoText", String(row?.promoText || "20% OFF + Cashback"));
+    setText("firmReviewSnippet", String(row?.reviewSnippet || "Fast payout process, clean dashboard and smooth execution. Good overall prop experience."));
+
+    const overviewTitle = String(row?.overviewTitle || `${name} Overview`);
+    setText("firmOverviewTitle", overviewTitle);
+    setText("firmOverviewShort", String(row?.overviewShort || row?.bio || ""));
+    setText("firmOverviewLongTitle", String(row?.overviewLongTitle || "Detailed Overview"));
+    renderLongOverview(String(row?.overviewLong || row?.overview || row?.bio || ""));
+
+    renderPairsTable("firmDetailsTable", Array.isArray(row?.firmDetails) ? row.firmDetails : []);
+    renderLeverageTable(Array.isArray(row?.leverageRows) ? row.leverageRows : []);
+    renderCommissions(Array.isArray(row?.commissions) ? row.commissions : []);
+    renderPlatforms(toPlatforms(row));
+    renderAiSummary(row);
+    renderPairsTable("firmKeyMetricsTable", toPairs(row?.keyMetrics, row?.cardMetrics));
+    renderPairsTable("firmTradingConditionsTable", toPairs(row?.tradingConditions));
+    renderRestrictedCountries(toList(row?.restrictedCountries));
+    setText("firmWhyChooseTitle", `Why Choose ${name}?`);
+    renderWhyChoose(toList(row?.whyChoose));
+
+    window.__rmpPanelData = {
+      rulesPanelData: row?.rulesPanelData || null,
+      challengesPanelData: row?.challengesPanelData || null,
+      spreadsPanelData: row?.spreadsPanelData || null,
+      announcementsPanelData: row?.announcementsPanelData || null
+    };
+    window.__rmpFirmContext = {
+      firmId: String(row?.id || "").trim(),
+      firmSlug: slug,
+      firmName: String(row?.name || "").trim()
+    };
+    document.body.dataset.firmSlug = slug;
+    window.__rmpCurrentFirmSlug = slug;
+    syncPanelFrames(slug);
+    if (typeof window.__syncRmpFirmTabLinks === "function") window.__syncRmpFirmTabLinks(slug);
+    if (typeof window.__setRmpFirmTabView === "function") window.__setRmpFirmTabView(view, { slug });
+    if (typeof window.__pushRmpPanelData === "function") window.__pushRmpPanelData();
+
+    if (window.__updateFirmRadar) {
+      window.__updateFirmRadar(performanceToRadarMetrics(row));
+    }
+
+    window.__applyFirmSeoForView = (nextView = view) => {
+      const nextSeo = seoForView(name, slug, nextView);
+      setText("firmNameHeading", name);
+      setHtml("detailSeoHeading", detailHeadingWithAccent(mainHeading));
+      setText("detailSeoParagraph", mainParagraph);
+      document.title = nextSeo.title;
+      byId("metaDesc")?.setAttribute("content", nextSeo.desc);
+      byId("canonicalLink")?.setAttribute("href", nextSeo.canonical);
+      [["ogTitle", nextSeo.title], ["ogDesc", nextSeo.desc], ["ogUrl", nextSeo.canonical], ["twitterTitle", nextSeo.title], ["twitterDesc", nextSeo.desc]].forEach(([id, value]) => {
+        byId(id)?.setAttribute("content", value);
+      });
+      const crumbs = [
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.rankmyprop.in/" },
+        { "@type": "ListItem", position: 2, name: "Compare Prop Firms", item: "https://www.rankmyprop.in/listedprop" },
+        { "@type": "ListItem", position: 3, name, item: buildFirmRouteUrl(slug, "overview") }
+      ];
+      if (String(nextView || "overview") !== "overview") {
+        crumbs.push({ "@type": "ListItem", position: 4, name: nextSeo.crumb, item: nextSeo.canonical });
+      }
+      setJsonLd("detailWebPageSchema", {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        name: nextSeo.title,
+        url: nextSeo.canonical,
+        description: nextSeo.desc,
+        about: { "@type": "Organization", name },
+        primaryImageOfPage: absUrl(String(row?.logo || "").trim() || FALLBACK_LOGO)
+      });
+      setJsonLd("detailBreadcrumbSchema", {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: crumbs
+      });
+    };
+    window.__applyFirmSeoForView(view);
+  }
+
+  function resolveFirmLookupFromUrl(href = location.href) {
+    let url;
+    try { url = new URL(href, location.origin); } catch (_) { url = new URL(location.href); }
+    const route = getRouteState(href);
+    const wantedId = String(url.searchParams.get("firmId") || "").trim();
+    const wantedSlug = normalizeDetailSlug(url.searchParams.get("slug") || "");
+    const file = String(url.pathname.split("/").pop() || "").toLowerCase();
+    let fileSlug = "";
+    if (file.endsWith("detail.html")) fileSlug = normalizeDetailSlug(file.replace("detail.html", ""));
+    if (!fileSlug && file.endsWith("detail") && file !== "firm-detail") fileSlug = normalizeDetailSlug(file.replace(/detail$/, ""));
+    const requestedSlug = normalizeDetailSlug(route.slug || wantedSlug || fileSlug || "");
+    const lookupKey = wantedId ? `id:${wantedId}` : (requestedSlug ? `slug:${requestedSlug}` : "missing");
+    return { route, wantedId, wantedSlug, fileSlug, requestedSlug, lookupKey };
+  }
+
+  function clearFirmRuntimeState() {
+    window.__rmpPanelData = {
+      rulesPanelData: null,
+      challengesPanelData: null,
+      spreadsPanelData: null,
+      announcementsPanelData: null
+    };
+    window.__rmpFirmContext = { firmId: "", firmSlug: "", firmName: "" };
+    document.body.dataset.firmSlug = "";
+    window.__rmpCurrentFirmSlug = "";
+  }
+
+  function showFirmNotFound() {
+    if (location.pathname === "/404.html") return;
+    window.location.replace("/404.html");
+  }
+
+  async function loadFirmData(opts = {}) {
+    const forceLoader = opts.forceLoader !== false;
+    const loadToken = ++detailLoadToken;
+    if (forceLoader) togglePageLoader(true);
+    clearFirmRuntimeState();
+    const loaderWait = minLoaderWait();
+    const lookup = resolveFirmLookupFromUrl();
+    const loaderHardCap = forceLoader
+      ? setTimeout(() => {
+          if (loadToken !== detailLoadToken) return;
+          togglePageLoader(false);
+        }, PAGE_MAX_LOADER_MS)
+      : null;
+    const quickFallback = fallbackFirmByLookup({
+      routeSlug: lookup.route?.slug || "",
+      wantedSlug: lookup.wantedSlug || "",
+      fileSlug: lookup.fileSlug || "",
+      requestedSlug: lookup.requestedSlug || ""
+    });
+    if (quickFallback) {
+      applyFirmData(quickFallback);
+    }
+    if (!lookup.wantedId && !lookup.requestedSlug) {
+      await loaderWait;
+      if (loadToken !== detailLoadToken) return;
+      if (loaderHardCap) clearTimeout(loaderHardCap);
+      togglePageLoader(false);
+      showFirmNotFound();
+      return;
+    }
+
+    try {
+      const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+      const selected = await fetchFirmByLookup(db, {
+        wantedId: lookup.wantedId,
+        wantedSlug: lookup.wantedSlug,
+        routeSlug: lookup.route.slug,
+        fileSlug: lookup.fileSlug
+      });
+      if (loadToken !== detailLoadToken) return;
+      if (!selected || selected.showFirmProfile === false) {
+        await loaderWait;
+        if (loadToken !== detailLoadToken) return;
+        if (loaderHardCap) clearTimeout(loaderHardCap);
+        togglePageLoader(false);
+        showFirmNotFound();
+        return;
+      }
+
+      const finalRow = await withFirmFieldOverrides(selected);
+      if (loadToken !== detailLoadToken) return;
+      if (!finalRow) {
+        await loaderWait;
+        if (loadToken !== detailLoadToken) return;
+        if (loaderHardCap) clearTimeout(loaderHardCap);
+        togglePageLoader(false);
+        showFirmNotFound();
+        return;
+      }
+
+      applyFirmData(finalRow);
+      fetchLiveReviewSummary(db, finalRow).then((summary) => {
+        if (!summary || loadToken !== detailLoadToken) return;
+        applyLiveReviewStats(finalRow, summary);
+      }).catch(() => {});
+    } catch (_) {
+      if (loadToken !== detailLoadToken) return;
+      await loaderWait;
+      if (loadToken !== detailLoadToken) return;
+      if (loaderHardCap) clearTimeout(loaderHardCap);
+      togglePageLoader(false);
+      showFirmNotFound();
+      return;
+    }
+
+    await loaderWait;
+    if (loadToken !== detailLoadToken) return;
+    if (loaderHardCap) clearTimeout(loaderHardCap);
+    togglePageLoader(false);
+  }
+
+  function reloadFirmIfLookupChanged() {
+    const nextKey = resolveFirmLookupFromUrl().lookupKey;
+    if (nextKey === lastFirmLookupKey) return;
+    lastFirmLookupKey = nextKey;
+    loadFirmData({ forceLoader: true });
+  }
+
+  window.__reloadRmpFirmDetail = () => {
+    const nextKey = resolveFirmLookupFromUrl().lookupKey;
+    if (nextKey === lastFirmLookupKey) return Promise.resolve(null);
+    lastFirmLookupKey = nextKey;
+    return loadFirmData({ forceLoader: true });
+  };
+
+  const nativePushState = history.pushState.bind(history);
+  history.pushState = (...args) => {
+    nativePushState(...args);
+    reloadFirmIfLookupChanged();
+  };
+  const nativeReplaceState = history.replaceState.bind(history);
+  history.replaceState = (...args) => {
+    nativeReplaceState(...args);
+    reloadFirmIfLookupChanged();
+  };
+  window.addEventListener("popstate", reloadFirmIfLookupChanged);
+  window.addEventListener("hashchange", reloadFirmIfLookupChanged);
+
+  lastFirmLookupKey = resolveFirmLookupFromUrl().lookupKey;
+  loadFirmData({ forceLoader: true });
+</script>
+
+<script type="module" src="site-animations.js"></script>
+<script type="module" src="rmp-nav.js"></script>
+  <script type="module" src="site-auth-header.js"></script>
+  <script type="module" src="content-cms-runtime.js"></script>
+<script type="module" src="/site-performance.js"></script>
+</body>
+</html>
