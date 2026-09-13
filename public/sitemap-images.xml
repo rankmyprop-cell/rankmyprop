@@ -1,6 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
+    <loc>https://www.rankmyprop.in/prop-firms/funderpro</loc>
+    <image:image>
+      <image:loc>https://www.rankmyprop.in/assets/funder%20pro%20logo%20(2).png</image:loc>
+      <image:title>FunderPro logo</image:title>
+      <image:caption>FunderPro prop firm profile</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rankmyprop.in/prop-firms/fx2-funding</loc>
+    <image:image>
+      <image:loc>https://www.rankmyprop.in/assets/fx2fundinglogo.png</image:loc>
+      <image:title>Fx2 Funding logo</image:title>
+      <image:caption>Fx2 Funding prop firm profile</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rankmyprop.in/prop-firms/fxify</loc>
+    <image:image>
+      <image:loc>https://www.rankmyprop.in/assets/fxify%20logo.png</image:loc>
+      <image:title>FXIFY logo</image:title>
+      <image:caption>FXIFY prop firm profile</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rankmyprop.in/prop-firms/goat-funded-trader</loc>
+    <image:image>
+      <image:loc>https://www.rankmyprop.in/assets/goat%20funded%20trader%20logo.png</image:loc>
+      <image:title>Goat Funded Trader logo</image:title>
+      <image:caption>Goat Funded Trader prop firm profile</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rankmyprop.in/prop-firms/top-one-trader</loc>
+    <image:image>
+      <image:loc>https://www.rankmyprop.in/assets/top%20one%20trader%20logo.png</image:loc>
+      <image:title>Top One Trader logo</image:title>
+      <image:caption>Top One Trader prop firm profile</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rankmyprop.in/prop-firms/trader-scale</loc>
+    <image:image>
+      <image:loc>https://www.rankmyprop.in/assets/traderscale%20logo.png</image:loc>
+      <image:title>TraderScale logo</image:title>
+      <image:caption>TraderScale prop firm profile</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rankmyprop.in/prop-firms/we-fund</loc>
+    <image:image>
+      <image:loc>https://www.rankmyprop.in/assets/we%20fund%20logo%20(2).png</image:loc>
+      <image:title>We Fund logo</image:title>
+      <image:caption>We Fund prop firm profile</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rankmyprop.in/news/ftmo-vs-fundednext-which-prop-firm-is-best-in-2026</loc>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3</image:loc>
+      <image:title>FTMO vs FundedNext – Which Prop Firm is Best in 2026?</image:title>
+      <image:caption>FTMO vs FundedNext — which prop firm is better in 2026? Compare profit split, payouts, rules, and features to choose the best option for your trading style.</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://www.rankmyprop.in/blog/blog-post-01</loc>
     <image:image>
       <image:loc>https://www.rankmyprop.in/assets/Rank%20My%20Prop%20Logo%201.webp</image:loc>
