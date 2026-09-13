@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-13T03:21:14.250Z",
+  "generatedAt": "2026-09-13T03:44:19.599Z",
   "source": "Approved Rank My Prop community reviews and published firm CMS records",
   "reviews": {
     "atlas-funded": [
@@ -345,6 +345,149 @@
       "bio": "Simple rules with fast payouts.",
       "logo": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgICAgMCAgIDAwMDBAYEBAQEBAgGBgUGCQgKCgkICQkKDA8MCgsOCwkJDRENDg8QEBEQCgwSExIQEw8QEBD/2wBDAQMDAwQDBAgEBAgQCwkLEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBD/wAARCAKAAoADAREAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDx",
       "verified": false,
+      "payoutAssurance": false,
+      "listingType": "best",
+      "showBestGlobal": true,
+      "bestRegions": {
+        "nigeria": false,
+        "uk": false,
+        "south_africa": false,
+        "australia": false,
+        "us": false,
+        "india": true,
+        "pakistan": false,
+        "china": false
+      },
+      "bestCategories": {
+        "beginner": false,
+        "highest_rated": false,
+        "trusted": false,
+        "cheapest": true,
+        "hft": false,
+        "fast_payout": false,
+        "futures": false,
+        "instant_funding": false
+      },
+      "ranking": 7,
+      "sortOrder": 7,
+      "score": 4.1,
+      "reviewCount": 0,
+      "followers": 7,
+      "markets": [
+        "Forex",
+        "Indices",
+        "Commodities",
+        "Crypto",
+        "Metals",
+        "Energy"
+      ],
+      "platforms": [
+        "Match Trader"
+      ],
+      "detailsLink": "/Funded-fun",
+      "promoText": "35% OFF",
+      "cardMetrics": {
+        "payoutCycle": "7 Days",
+        "minTradingDays": "",
+        "newsTrading": "",
+        "timeLimit": "",
+        "eaAllowed": "",
+        "startingPrice": "$19"
+      },
+      "keyMetrics": [
+        {
+          "label": "Max Allocation",
+          "value": "$100,000"
+        },
+        {
+          "label": "Profit Split",
+          "value": "Up to 90%"
+        },
+        {
+          "label": "Payout Cycle",
+          "value": "7 Days"
+        },
+        {
+          "label": "News Trading",
+          "value": "Allowed"
+        },
+        {
+          "label": "Min Trading Days",
+          "value": "3 Days"
+        },
+        {
+          "label": "Time Limit",
+          "value": "60 Days"
+        },
+        {
+          "label": "Starting Price",
+          "value": "$19"
+        },
+        {
+          "label": "EA Allowed",
+          "value": "No"
+        }
+      ],
+      "tradingConditions": [
+        {
+          "label": "Daily Drawdown",
+          "value": "4% - 5%"
+        },
+        {
+          "label": "Maximum Drawdown",
+          "value": "5% - 10%"
+        },
+        {
+          "label": "Leverage",
+          "value": "Up to 1:50"
+        },
+        {
+          "label": "Weekend Holding",
+          "value": "Allowed"
+        }
+      ],
+      "firmDetails": [
+        {
+          "label": "Company Name",
+          "value": "Funded Fun Limited"
+        },
+        {
+          "label": "Headquarters",
+          "value": "Saint Lucia"
+        },
+        {
+          "label": "Founded",
+          "value": "2025"
+        },
+        {
+          "label": "Platform",
+          "value": "Match Trader"
+        },
+        {
+          "label": "Registration",
+          "value": "2025-00449"
+        }
+      ],
+      "evaluationPrograms": [
+        {
+          "program": "Instant",
+          "target": "None",
+          "phase1": "None",
+          "split": "90%"
+        },
+        {
+          "program": "1-Step",
+          "target": "10%",
+          "phase1": "10%",
+          "split": "90%"
+        },
+        {
+          "program": "2-Step",
+          "target": "8%",
+          "phase1": "8%",
+          "split": "90%"
+        }
+      ],
       "showFirmProfile": true,
       "showHomeTable": true,
       "showListed": true,
@@ -374,20 +517,6 @@
       ],
       "ruleSections": [
         {
-          "key": "trading",
-          "title": "Trading Rules",
-          "rules": [
-            {
-              "title": "No prohibited arbitrage",
-              "text": "Latency/arbitrage exploitation strategies are not allowed."
-            },
-            {
-              "title": "Respect risk limits",
-              "text": "Daily and overall drawdown limits must always be respected."
-            }
-          ]
-        },
-        {
           "key": "general",
           "title": "General Trading Rules",
           "rules": [
@@ -412,6 +541,20 @@
               "text": "Expert Advisors and automated trading systems are not allowed."
             }
           ]
+        },
+        {
+          "key": "trading",
+          "title": "Trading Rules",
+          "rules": [
+            {
+              "title": "No prohibited arbitrage",
+              "text": "Latency/arbitrage exploitation strategies are not allowed."
+            },
+            {
+              "title": "Respect risk limits",
+              "text": "Daily and overall drawdown limits must always be respected."
+            }
+          ]
         }
       ],
       "programRules": {},
@@ -431,6 +574,157 @@
       "bio": "AquaFunded offers Instant Funding and multi-step evaluation programs with flexible rules",
       "logo": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAMAAABHPGVmAAACr1BMVEUBev/////9/v8Cef8Bef8Ce//9/f86j//D3P/l8P8Sff/o8f/4+//Z6f88kP/7/f8Ad//q8v8lhf9TnP/m8P/3+v/f7f/k7/8Nev8dgv8+kf8ihP85jv8Fef8lh//o8v/x9//v9f8Dd/8Kev8Tfv/y9/8Hev8Eev8mhv9Bl//2+f8Kef8Yf/8QfP8Wf/9El//z+P/U5v+/2f/a6v/0+P/g7f8Mff8Ief8Gef9Lmv93s/9ipv9YoP9zrv9jqP8zjf/h7v/K4P/d6//H3//t9f/j7v+ozf/P4v/W5/+eyP8PfP8Ddf8Ufv8Gd/8Iev9Wmv8dgf9Blf8oiv82j/9dpf9Sn/86jf9vrv9lqf8agf9/tv80j/88kv8agv86kf8ZgP8+j/8hhP9wrv9co/87k/8wjf+w0v+axf+iyf/5/P",
       "verified": true,
+      "payoutAssurance": true,
+      "listingType": "best",
+      "showBestGlobal": true,
+      "bestRegions": {
+        "australia": false,
+        "us": false,
+        "pakistan": false,
+        "nigeria": true,
+        "china": false,
+        "south_africa": true,
+        "india": true,
+        "uk": false
+      },
+      "bestCategories": {
+        "hft": true,
+        "instant_funding": true,
+        "fast_payout": true,
+        "futures": true,
+        "trusted": true,
+        "beginner": true,
+        "cheapest": true,
+        "highest_rated": true
+      },
+      "ranking": 15,
+      "sortOrder": 15,
+      "score": 0,
+      "reviewCount": 0,
+      "followers": 1,
+      "markets": [
+        "Forex",
+        "Crypto",
+        "Indices",
+        "Metals",
+        "Commodities"
+      ],
+      "platforms": [
+        "MT5",
+        "cTrader",
+        "Match Trader",
+        "TradeLocker"
+      ],
+      "detailsLink": "/prop-firms/aqua-funded",
+      "promoText": "50% OFF",
+      "cardMetrics": {
+        "payoutCycle": "14 Days",
+        "minTradingDays": "3",
+        "newsTrading": "Allowed",
+        "timeLimit": "No",
+        "eaAllowed": "Yes",
+        "startingPrice": "$30"
+      },
+      "keyMetrics": [
+        {
+          "label": "Max Allocation",
+          "value": "$400,000"
+        },
+        {
+          "label": "Profit Split",
+          "value": "Up to 90%"
+        },
+        {
+          "label": "Payout Cycle",
+          "value": "14 Days"
+        },
+        {
+          "label": "News Trading",
+          "value": "Allowed"
+        },
+        {
+          "label": "Min Trading Days",
+          "value": "No Minimum"
+        },
+        {
+          "label": "Time Limit",
+          "value": "Unlimited"
+        },
+        {
+          "label": "Starting Price",
+          "value": "$30"
+        },
+        {
+          "label": "EA Allowed",
+          "value": "Yes"
+        }
+      ],
+      "tradingConditions": [
+        {
+          "label": "Daily Drawdown",
+          "value": "3% - 5%"
+        },
+        {
+          "label": "Maximum Drawdown",
+          "value": "6% - 8%"
+        },
+        {
+          "label": "Minimum Payout",
+          "value": "$100"
+        },
+        {
+          "label": "News Trading",
+          "value": "Allowed"
+        }
+      ],
+      "firmDetails": [
+        {
+          "label": "Company Name",
+          "value": "AquaFunded"
+        },
+        {
+          "label": "Headquarters",
+          "value": "United Arab Emirates"
+        },
+        {
+          "label": "Founded",
+          "value": "2023"
+        },
+        {
+          "label": "CEO / COO",
+          "value": "Lewis Morton (COO)"
+        },
+        {
+          "label": "Broker",
+          "value": "Institutional Liquidity Provider"
+        }
+      ],
+      "evaluationPrograms": [
+        {
+          "program": "Instant",
+          "target": "None",
+          "phase1": "None",
+          "split": "Up to 90%"
+        },
+        {
+          "program": "1-Step Pro",
+          "target": "9%",
+          "phase1": "9%",
+          "split": "Up to 90%"
+        },
+        {
+          "program": "2-Step Pro",
+          "target": "8%",
+          "phase1": "8%",
+          "split": "Up to 90%"
+        },
+        {
+          "program": "3-Step",
+          "target": "6%",
+          "phase1": "6%",
+          "split": "Up to 90%"
+        }
+      ],
       "showFirmProfile": true,
       "showHomeTable": true,
       "showListed": true,
@@ -501,6 +795,179 @@
       "bio": "Atlas Funded offers Instant Funding, 1-Step, 2-Step, 3-Step, and Pay Later programs with up to $400K funding, 100% profit split upgrades, on-demand payouts, and support for MT5, TradeLocker, and Match-Trader.",
       "logo": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAIAAAD/gAIDAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAFeWlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSfvu78nIGlkPSdXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQnPz4KPHg6eG1wbWV0YSB4bWxuczp4PSdhZG9iZTpuczptZXRhLyc+CjxyZGY6UkRGIHhtbG5zOnJkZj0naHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyc+CgogPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9JycKICB4bWxuczpBdHRyaWI9J2h0dHA6Ly9ucy5hdHRyaWJ1dGlvbi5jb20vYWRzLzEuMC8nPgogIDxBdHRyaWI6QWRzPgogICA8cmRmOlNlcT4KICAgID",
       "verified": false,
+      "payoutAssurance": false,
+      "listingType": "listed",
+      "showBestGlobal": false,
+      "bestRegions": {
+        "nigeria": false,
+        "south_africa": false,
+        "us": false,
+        "pakistan": false,
+        "china": false,
+        "uk": false,
+        "india": false,
+        "australia": false
+      },
+      "bestCategories": {
+        "trusted": false,
+        "fast_payout": false,
+        "highest_rated": false,
+        "instant_funding": false,
+        "beginner": false,
+        "hft": false,
+        "cheapest": false,
+        "futures": false
+      },
+      "ranking": 17,
+      "sortOrder": 17,
+      "score": 5,
+      "reviewCount": 12,
+      "followers": 8,
+      "markets": [
+        "Forex"
+      ],
+      "platforms": [
+        "MatchTrader",
+        "TradeLocker"
+      ],
+      "detailsLink": "/prop-firms/atlas-funded",
+      "promoText": "50% OFF + Up To 100% Profit Split ( For all New Users)",
+      "cardMetrics": {
+        "payoutCycle": "14 Days",
+        "minTradingDays": "0-5 Days",
+        "newsTrading": "Allowed",
+        "timeLimit": "Unlimited",
+        "eaAllowed": "Allowed",
+        "startingPrice": "$5"
+      },
+      "keyMetrics": [
+        {
+          "label": "Max Allocation",
+          "value": "$400,000"
+        },
+        {
+          "label": "Profit Split",
+          "value": "Up To 100%"
+        },
+        {
+          "label": "Platforms",
+          "value": "3"
+        },
+        {
+          "label": "Funding Models",
+          "value": "6+"
+        }
+      ],
+      "tradingConditions": [
+        {
+          "label": "Daily Drawdown",
+          "value": "4% - 5%"
+        },
+        {
+          "label": "Maximum Drawdown",
+          "value": "5% - 10%"
+        },
+        {
+          "label": "Profit Split",
+          "value": "80% - 100%"
+        },
+        {
+          "label": "News Trading",
+          "value": "Allowed"
+        },
+        {
+          "label": "Weekend Holding",
+          "value": "Allowed"
+        },
+        {
+          "label": "Maximum Allocation",
+          "value": "$400,000"
+        }
+      ],
+      "firmDetails": [
+        {
+          "label": "Company Name",
+          "value": "Atlas Funded LTD"
+        },
+        {
+          "label": "Operating Entity",
+          "value": "Atlas Vanquish FZCO"
+        },
+        {
+          "label": "Founded",
+          "value": "2025"
+        },
+        {
+          "label": "Headquarters",
+          "value": "Saint Lucia"
+        },
+        {
+          "label": "Markets",
+          "value": "Forex, Futures"
+        },
+        {
+          "label": "Maximum Allocation",
+          "value": "$400,000"
+        },
+        {
+          "label": "Platforms",
+          "value": "MT5, TradeLocker, Match-Trader"
+        },
+        {
+          "label": "Support",
+          "value": "24/7"
+        }
+      ],
+      "evaluationPrograms": [
+        {
+          "program": "1-Step Pro",
+          "target": "9%",
+          "phase1": "9%",
+          "split": "Funded table: 100%*; 100% add-on also listed"
+        },
+        {
+          "program": "1-Step Standard",
+          "target": "11%",
+          "phase1": "11%",
+          "split": "80% default; 100% add-on available"
+        },
+        {
+          "program": "2-Step Pro",
+          "target": "8% / 5%",
+          "phase1": "8%",
+          "split": "Funded table: 100%*; 95% add-on also listed"
+        },
+        {
+          "program": "2-Step Standard",
+          "target": "9% / 5%",
+          "phase1": "9%",
+          "split": "Funded table: 100%*; 100% add-on also listed"
+        },
+        {
+          "program": "3-Step",
+          "target": "6% each phase",
+          "phase1": "6%",
+          "split": "Funded table: 100%*; 100% add-on also listed"
+        },
+        {
+          "program": "Instant Funded Zero",
+          "target": "Not applicable",
+          "phase1": "Not applicable",
+          "split": "80% default; 100% add-on available"
+        },
+        {
+          "program": "Instant Funded",
+          "target": "Not applicable",
+          "phase1": "Not applicable",
+          "split": "80% default; 100% add-on available"
+        },
+        {
+          "program": "Pay After Pass Professional",
+          "target": "3%",
+          "phase1": "3%",
+          "split": "80% default; optional 100% at checkout"
+        }
+      ],
       "showFirmProfile": false,
       "showHomeTable": false,
       "showListed": false,
@@ -571,112 +1038,6 @@
         }
       ],
       "programRules": {
-        "2-step-standard": {
-          "slug": "2-step-standard",
-          "program": "2-Step Standard",
-          "title": "2-Step Standard Challenge Rules",
-          "desc": "Rules for the 2-Step Standard account model.",
-          "notice": "",
-          "rules": [
-            {
-              "title": "Trading Period",
-              "text": "Unlimited in Step 1, Step 2, and Funded."
-            },
-            {
-              "title": "Minimum Trading Days",
-              "text": "5 days in each stage. Each qualifying day requires at least 0.5% profit."
-            },
-            {
-              "title": "Profit Targets",
-              "text": "9% in Step 1 and 5% in Step 2. Not applicable in Funded."
-            },
-            {
-              "title": "Maximum Overall Loss",
-              "text": "10% in all stages."
-            },
-            {
-              "title": "Maximum Daily Loss",
-              "text": "5% in all stages."
-            },
-            {
-              "title": "Expert Advisors",
-              "text": "Allowed in all stages."
-            },
-            {
-              "title": "Funded Profit Split",
-              "text": "The funded-stage table displays 100%*. The same PDF separately lists a 100% Profit Split add-on costing +20%; the PDF does not clarify the asterisk or reconcile these entries."
-            },
-            {
-              "title": "Refundable Fee",
-              "text": "Refunded on the 4th Reward."
-            },
-            {
-              "title": "Default Reward Schedule",
-              "text": "First reward after 14 days; subsequent rewards every 14 days."
-            },
-            {
-              "title": "On-Demand Payout Add-On",
-              "text": "Costs +20%. First reward is on demand; subsequent rewards are every 14 days."
-            },
-            {
-              "title": "Other Add-Ons",
-              "text": "100% Profit Split (+20%), No Minimum Trading Days (+20%), and Free Retry (+25%)."
-            }
-          ]
-        },
-        "3-step": {
-          "slug": "3-step",
-          "program": "3-Step",
-          "title": "3-Step Challenge Rules",
-          "desc": "Rules for the 3-Step account model.",
-          "notice": "",
-          "rules": [
-            {
-              "title": "Trading Period",
-              "text": "Unlimited in Step 1, Step 2, Step 3, and Funded."
-            },
-            {
-              "title": "Minimum Trading Days",
-              "text": "4 days in every stage, including Funded. Each qualifying day requires at least 0.5% profit based on the starting balance."
-            },
-            {
-              "title": "Profit Targets",
-              "text": "6% in each of Step 1, Step 2, and Step 3. Not applicable in Funded."
-            },
-            {
-              "title": "Maximum Overall Loss",
-              "text": "8% in every stage."
-            },
-            {
-              "title": "Maximum Daily Loss",
-              "text": "4% in every stage."
-            },
-            {
-              "title": "Expert Advisors",
-              "text": "Allowed in every stage."
-            },
-            {
-              "title": "Funded Profit Split",
-              "text": "The funded-stage table displays 100%*. The same PDF separately lists a 100% Profit Split add-on costing +20%; the PDF does not clarify the asterisk or reconcile these entries."
-            },
-            {
-              "title": "Refundable Fee",
-              "text": "Refunded on the 4th Reward."
-            },
-            {
-              "title": "Reward Schedule",
-              "text": "Not mentioned."
-            },
-            {
-              "title": "Add-Ons",
-              "text": "On-Demand Payout (+20%), Bi-Weekly Reward (+10%), 100% Profit Split (+20%), No Minimum Trading Days (+20%), and Free Retry (+25%)."
-            },
-            {
-              "title": "Leverage",
-              "text": "Evaluation / Funded: Forex 1:100 / 1:50; Indices 1:20 / 1:10; Commodities 1:20 / 1:10; Crypto 1:2 / 1:2."
-            }
-          ]
-        },
         "instant-funded": {
           "slug": "instant-funded",
           "program": "Instant Funded",
@@ -742,6 +1103,120 @@
             }
           ]
         },
+        "3-step": {
+          "slug": "3-step",
+          "program": "3-Step",
+          "title": "3-Step Challenge Rules",
+          "desc": "Rules for the 3-Step account model.",
+          "notice": "",
+          "rules": [
+            {
+              "title": "Trading Period",
+              "text": "Unlimited in Step 1, Step 2, Step 3, and Funded."
+            },
+            {
+              "title": "Minimum Trading Days",
+              "text": "4 days in every stage, including Funded. Each qualifying day requires at least 0.5% profit based on the starting balance."
+            },
+            {
+              "title": "Profit Targets",
+              "text": "6% in each of Step 1, Step 2, and Step 3. Not applicable in Funded."
+            },
+            {
+              "title": "Maximum Overall Loss",
+              "text": "8% in every stage."
+            },
+            {
+              "title": "Maximum Daily Loss",
+              "text": "4% in every stage."
+            },
+            {
+              "title": "Expert Advisors",
+              "text": "Allowed in every stage."
+            },
+            {
+              "title": "Funded Profit Split",
+              "text": "The funded-stage table displays 100%*. The same PDF separately lists a 100% Profit Split add-on costing +20%; the PDF does not clarify the asterisk or reconcile these entries."
+            },
+            {
+              "title": "Refundable Fee",
+              "text": "Refunded on the 4th Reward."
+            },
+            {
+              "title": "Reward Schedule",
+              "text": "Not mentioned."
+            },
+            {
+              "title": "Add-Ons",
+              "text": "On-Demand Payout (+20%), Bi-Weekly Reward (+10%), 100% Profit Split (+20%), No Minimum Trading Days (+20%), and Free Retry (+25%)."
+            },
+            {
+              "title": "Leverage",
+              "text": "Evaluation / Funded: Forex 1:100 / 1:50; Indices 1:20 / 1:10; Commodities 1:20 / 1:10; Crypto 1:2 / 1:2."
+            }
+          ]
+        },
+        "1-step-pro": {
+          "slug": "1-step-pro",
+          "program": "1-Step Pro",
+          "title": "1-Step Pro Challenge Rules",
+          "desc": "Rules for the 1-Step Pro account model.",
+          "notice": "",
+          "rules": [
+            {
+              "title": "Trading Period",
+              "text": "Unlimited in Step 1 and Funded."
+            },
+            {
+              "title": "Minimum Trading Days",
+              "text": "4 days in Step 1 and 4 days in Funded. Each qualifying day must generate at least 1% profit."
+            },
+            {
+              "title": "Profit Target",
+              "text": "9% in Step 1. Not applicable in Funded."
+            },
+            {
+              "title": "Maximum Overall Loss",
+              "text": "6% in Step 1 and Funded."
+            },
+            {
+              "title": "Maximum Daily Loss",
+              "text": "3% in Step 1 and Funded."
+            },
+            {
+              "title": "Expert Advisors",
+              "text": "Allowed in Step 1 and Funded."
+            },
+            {
+              "title": "Funded Profit Split",
+              "text": "The funded-stage table displays 100%*. The same PDF separately lists a 100% Profit Split add-on costing +20%; the PDF does not clarify the asterisk or reconcile these two entries."
+            },
+            {
+              "title": "Evaluation Profit",
+              "text": "15%, paid on the 3rd Reward."
+            },
+            {
+              "title": "Refundable Fee",
+              "text": "Refunded on the 4th Reward."
+            },
+            {
+              "title": "Default Reward Schedule",
+              "text": "First reward after 30 days; subsequent rewards every 30 days."
+            },
+            {
+              "title": "Weekly Reward Add-On",
+              "text": "Costs +20%. First reward after 21 days; subsequent rewards every 7 days."
+            },
+            {
+              "title": "Bi-Weekly Reward Add-On",
+              "text": "Costs +10%. First reward after 30 days; subsequent rewards every 14 days."
+            },
+            {
+              "title": "Other Add-Ons",
+              "text": "100% Profit Split (+20%), No Minimum Trading Days (+20%), and Free Retry (+25%)."
+            }
+          ]
+        },
         "pay-after-pass-professional": {
           "slug": "pay-after-pass-professional",
           "program": "Pay After Pass Professional",
@@ -800,6 +1275,128 @@
             {
               "title": "Payout Eligibility Note",
               "text": "The PDF also references 2-Step eligibility: first payout needs 5 funded trading days, with at least 0.5% gain per qualifying day. No separate 2-Step rules table is included in this PDF."
+            }
+          ]
+        },
+        "2-step-standard": {
+          "slug": "2-step-standard",
+          "program": "2-Step Standard",
+          "title": "2-Step Standard Challenge Rules",
+          "desc": "Rules for the 2-Step Standard account model.",
+          "notice": "",
+          "rules": [
+            {
+              "title": "Trading Period",
+              "text": "Unlimited in Step 1, Step 2, and Funded."
+            },
+            {
+              "title": "Minimum Trading Days",
+              "text": "5 days in each stage. Each qualifying day requires at least 0.5% profit."
+            },
+            {
+              "title": "Profit Targets",
+              "text": "9% in Step 1 and 5% in Step 2. Not applicable in Funded."
+            },
+            {
+              "title": "Maximum Overall Loss",
+              "text": "10% in all stages."
+            },
+            {
+              "title": "Maximum Daily Loss",
+              "text": "5% in all stages."
+            },
+            {
+              "title": "Expert Advisors",
+              "text": "Allowed in all stages."
+            },
+            {
+              "title": "Funded Profit Split",
+              "text": "The funded-stage table displays 100%*. The same PDF separately lists a 100% Profit Split add-on costing +20%; the PDF does not clarify the asterisk or reconcile these entries."
+            },
+            {
+              "title": "Refundable Fee",
+              "text": "Refunded on the 4th Reward."
+            },
+            {
+              "title": "Default Reward Schedule",
+              "text": "First reward after 14 days; subsequent rewards every 14 days."
+            },
+            {
+              "title": "On-Demand Payout Add-On",
+              "text": "Costs +20%. First reward is on demand; subsequent rewards are every 14 days."
+            },
+            {
+              "title": "Other Add-Ons",
+              "text": "100% Profit Split (+20%), No Minimum Trading Days (+20%), and Free Retry (+25%)."
+            }
+          ]
+        },
+        "2-step-pro": {
+          "slug": "2-step-pro",
+          "program": "2-Step Pro",
+          "title": "2-Step Pro Challenge Rules",
+          "desc": "Rules for the 2-Step Pro account model.",
+          "notice": "",
+          "rules": [
+            {
+              "title": "Trading Period",
+              "text": "Unlimited in Step 1, Step 2, and Funded."
+            },
+            {
+              "title": "Minimum Trading Days",
+              "text": "5 days in each stage. Each qualifying day requires at least a 0.5% gain."
+            },
+            {
+              "title": "Profit Targets",
+              "text": "8% in Step 1 and 5% in Step 2. Not applicable in Funded."
+            },
+            {
+              "title": "Maximum Overall Loss",
+              "text": "8% in all stages."
+            },
+            {
+              "title": "Maximum Daily Loss",
+              "text": "5% in all stages."
+            },
+            {
+              "title": "Expert Advisors",
+              "text": "Allowed in all stages."
+            },
+            {
+              "title": "Funded Profit Split",
+              "text": "The funded-stage table displays 100%*. The add-on table separately lists a 95% Profit Split add-on costing +20%; the PDF does not reconcile these entries."
+            },
+            {
+              "title": "Evaluation Profit Share",
+              "text": "5% for Step 1 and 10% for Step 2, paid with the 3rd Reward."
+            },
+            {
+              "title": "Refundable Fee",
+              "text": "Refunded on the 4th Reward."
+            },
+            {
+              "title": "Default Reward Schedule",
+              "text": "First reward after 14 days; subsequent rewards every 14 days."
+            },
+            {
+              "title": "On-Demand Payout Add-On",
+              "text": "Costs +20%. First reward is on demand; subsequent rewards are every 14 days."
+            },
+            {
+              "title": "Free Retry Add-On",
+              "text": "Costs +25% and applies only during Step 1 or Step 2. A fresh evaluation account is issued; maximum overall loss becomes 5% and maximum daily loss remains 4%. It does not apply to Funded accounts."
+            },
+            {
+              "title": "Other Add-Ons",
+              "text": "Bi-Weekly Reward (+10%), 95% Profit Split (+20%), and No Minimum Trading Days (+20%)."
+            },
+            {
+              "title": "Evaluation Leverage",
+              "text": "Forex 1:100; Indices 1:20; Commodities 1:20; Crypto 1:2."
+            },
+            {
+              "title": "Funded Leverage",
+              "text": "The PDF states funded leverage is generally reduced by 50%."
             }
           ]
         },
@@ -920,136 +1517,6 @@
               "text": "80% by default; 100% add-on costs +20% and applies from the first payout."
             }
           ]
-        },
-        "2-step-pro": {
-          "slug": "2-step-pro",
-          "program": "2-Step Pro",
-          "title": "2-Step Pro Challenge Rules",
-          "desc": "Rules for the 2-Step Pro account model.",
-          "notice": "",
-          "rules": [
-            {
-              "title": "Trading Period",
-              "text": "Unlimited in Step 1, Step 2, and Funded."
-            },
-            {
-              "title": "Minimum Trading Days",
-              "text": "5 days in each stage. Each qualifying day requires at least a 0.5% gain."
-            },
-            {
-              "title": "Profit Targets",
-              "text": "8% in Step 1 and 5% in Step 2. Not applicable in Funded."
-            },
-            {
-              "title": "Maximum Overall Loss",
-              "text": "8% in all stages."
-            },
-            {
-              "title": "Maximum Daily Loss",
-              "text": "5% in all stages."
-            },
-            {
-              "title": "Expert Advisors",
-              "text": "Allowed in all stages."
-            },
-            {
-              "title": "Funded Profit Split",
-              "text": "The funded-stage table displays 100%*. The add-on table separately lists a 95% Profit Split add-on costing +20%; the PDF does not reconcile these entries."
-            },
-            {
-              "title": "Evaluation Profit Share",
-              "text": "5% for Step 1 and 10% for Step 2, paid with the 3rd Reward."
-            },
-            {
-              "title": "Refundable Fee",
-              "text": "Refunded on the 4th Reward."
-            },
-            {
-              "title": "Default Reward Schedule",
-              "text": "First reward after 14 days; subsequent rewards every 14 days."
-            },
-            {
-              "title": "On-Demand Payout Add-On",
-              "text": "Costs +20%. First reward is on demand; subsequent rewards are every 14 days."
-            },
-            {
-              "title": "Free Retry Add-On",
-              "text": "Costs +25% and applies only during Step 1 or Step 2. A fresh evaluation account is issued; maximum overall loss becomes 5% and maximum daily loss remains 4%. It does not apply to Funded accounts."
-            },
-            {
-              "title": "Other Add-Ons",
-              "text": "Bi-Weekly Reward (+10%), 95% Profit Split (+20%), and No Minimum Trading Days (+20%)."
-            },
-            {
-              "title": "Evaluation Leverage",
-              "text": "Forex 1:100; Indices 1:20; Commodities 1:20; Crypto 1:2."
-            },
-            {
-              "title": "Funded Leverage",
-              "text": "The PDF states funded leverage is generally reduced by 50%."
-            }
-          ]
-        },
-        "1-step-pro": {
-          "slug": "1-step-pro",
-          "program": "1-Step Pro",
-          "title": "1-Step Pro Challenge Rules",
-          "desc": "Rules for the 1-Step Pro account model.",
-          "notice": "",
-          "rules": [
-            {
-              "title": "Trading Period",
-              "text": "Unlimited in Step 1 and Funded."
-            },
-            {
-              "title": "Minimum Trading Days",
-              "text": "4 days in Step 1 and 4 days in Funded. Each qualifying day must generate at least 1% profit."
-            },
-            {
-              "title": "Profit Target",
-              "text": "9% in Step 1. Not applicable in Funded."
-            },
-            {
-              "title": "Maximum Overall Loss",
-              "text": "6% in Step 1 and Funded."
-            },
-            {
-              "title": "Maximum Daily Loss",
-              "text": "3% in Step 1 and Funded."
-            },
-            {
-              "title": "Expert Advisors",
-              "text": "Allowed in Step 1 and Funded."
-            },
-            {
-              "title": "Funded Profit Split",
-              "text": "The funded-stage table displays 100%*. The same PDF separately lists a 100% Profit Split add-on costing +20%; the PDF does not clarify the asterisk or reconcile these two entries."
-            },
-            {
-              "title": "Evaluation Profit",
-              "text": "15%, paid on the 3rd Reward."
-            },
-            {
-              "title": "Refundable Fee",
-              "text": "Refunded on the 4th Reward."
-            },
-            {
-              "title": "Default Reward Schedule",
-              "text": "First reward after 30 days; subsequent rewards every 30 days."
-            },
-            {
-              "title": "Weekly Reward Add-On",
-              "text": "Costs +20%. First reward after 21 days; subsequent rewards every 7 days."
-            },
-            {
-              "title": "Bi-Weekly Reward Add-On",
-              "text": "Costs +10%. First reward after 30 days; subsequent rewards every 14 days."
-            },
-            {
-              "title": "Other Add-Ons",
-              "text": "100% Profit Split (+20%), No Minimum Trading Days (+20%), and Free Retry (+25%)."
-            }
-          ]
         }
       },
       "updatedAt": "2026-09-10T09:41:07.207Z"
@@ -1066,6 +1533,34 @@
       "bio": "Best fit for Blue Guardian traders.",
       "logo": "",
       "verified": false,
+      "payoutAssurance": false,
+      "listingType": "listed",
+      "showBestGlobal": false,
+      "bestRegions": {},
+      "bestCategories": {},
+      "ranking": 121,
+      "sortOrder": 121,
+      "score": 0,
+      "reviewCount": 0,
+      "followers": 0,
+      "markets": [
+        "Forex"
+      ],
+      "platforms": [],
+      "detailsLink": "/prop-firms/blue-guardian",
+      "promoText": "20% OFF + Cashback",
+      "cardMetrics": {
+        "payoutCycle": "",
+        "minTradingDays": "",
+        "newsTrading": "",
+        "timeLimit": "",
+        "eaAllowed": "",
+        "startingPrice": ""
+      },
+      "keyMetrics": [],
+      "tradingConditions": [],
+      "firmDetails": [],
+      "evaluationPrograms": [],
       "showFirmProfile": true,
       "showHomeTable": true,
       "showListed": true,
@@ -1112,6 +1607,161 @@
       "bio": "Modern prop firm with MT5 and TradeLocker support.",
       "logo": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAIAAADajyQQAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAE1GlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSfvu78nIGlkPSdXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQnPz4KPHg6eG1wbWV0YSB4bWxuczp4PSdhZG9iZTpuczptZXRhLyc+CjxyZGY6UkRGIHhtbG5zOnJkZj0naHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyc+CgogPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9JycKICB4bWxuczpBdHRyaWI9J2h0dHA6Ly9ucy5hdHRyaWJ1dGlvbi5jb20vYWRzLzEuMC8nPgogIDxBdHRyaWI6QWRzPgogICA8cmRmOlNlcT4KICAgID",
       "verified": true,
+      "payoutAssurance": true,
+      "listingType": "best",
+      "showBestGlobal": true,
+      "bestRegions": {
+        "nigeria": false,
+        "us": false,
+        "australia": false,
+        "south_africa": false,
+        "india": true,
+        "pakistan": false,
+        "china": false,
+        "uk": false
+      },
+      "bestCategories": {
+        "instant_funding": true,
+        "highest_rated": false,
+        "futures": false,
+        "beginner": true,
+        "cheapest": false,
+        "hft": false,
+        "fast_payout": false,
+        "trusted": false
+      },
+      "ranking": 11,
+      "sortOrder": 11,
+      "score": 0,
+      "reviewCount": 0,
+      "followers": 861,
+      "markets": [
+        "Forex",
+        "Indices",
+        "Metals",
+        "Crypto",
+        "Other Commodities"
+      ],
+      "platforms": [
+        "MT5",
+        "TradeLocker"
+      ],
+      "detailsLink": "/blueberryfundeddetail.html",
+      "promoText": "45% OFF",
+      "cardMetrics": {
+        "payoutCycle": "14 Days",
+        "minTradingDays": "3 Days",
+        "newsTrading": "Restricted",
+        "timeLimit": "Unlimited",
+        "eaAllowed": "Yes",
+        "startingPrice": "$33"
+      },
+      "keyMetrics": [
+        {
+          "label": "Max Allocation",
+          "value": "$2,000,000"
+        },
+        {
+          "label": "Profit Split",
+          "value": "Up to 90%"
+        },
+        {
+          "label": "Payout Cycle",
+          "value": "14 Days"
+        },
+        {
+          "label": "News Trading",
+          "value": "Restricted"
+        },
+        {
+          "label": "Min Trading Days",
+          "value": "3 Days"
+        },
+        {
+          "label": "Time Limit",
+          "value": "Unlimited"
+        },
+        {
+          "label": "Starting Price",
+          "value": "$33"
+        },
+        {
+          "label": "EA Allowed",
+          "value": "Yes"
+        }
+      ],
+      "tradingConditions": [
+        {
+          "label": "Daily Drawdown",
+          "value": "2% - 5%"
+        },
+        {
+          "label": "Maximum Drawdown",
+          "value": "4% - 10%"
+        },
+        {
+          "label": "Leverage",
+          "value": "Up to 1:50"
+        },
+        {
+          "label": "Weekend Holding",
+          "value": "Allowed"
+        }
+      ],
+      "firmDetails": [
+        {
+          "label": "Company Name",
+          "value": "Blueberry Funded"
+        },
+        {
+          "label": "Headquarters",
+          "value": "Vanuatu"
+        },
+        {
+          "label": "Founded",
+          "value": "2024"
+        },
+        {
+          "label": "Platform",
+          "value": "MT5, TradeLocker"
+        },
+        {
+          "label": "CEO",
+          "value": "Dean Hyde and Marcus Fetherston"
+        }
+      ],
+      "evaluationPrograms": [
+        {
+          "program": "1-Step",
+          "target": "10%",
+          "phase1": "10%",
+          "split": "80%-90%"
+        },
+        {
+          "program": "Prime 2-Step",
+          "target": "8%",
+          "phase1": "8%",
+          "split": "80%-90%"
+        },
+        {
+          "program": "2-Step",
+          "target": "10%",
+          "phase1": "10%",
+          "split": "80%-90%"
+        },
+        {
+          "program": "Instant Lite",
+          "target": "None",
+          "phase1": "None",
+          "split": "80%"
+        },
+        {
+          "program": "Instant Elite",
+          "target": "None",
+          "phase1": "None",
+          "split": "80%"
+        }
+      ],
       "showFirmProfile": true,
       "showHomeTable": true,
       "showListed": true,
@@ -1198,6 +1848,96 @@
       "bio": "Equity Edge challenge rules and trader reviews, published from the supplied rulebook.",
       "logo": "",
       "verified": false,
+      "payoutAssurance": false,
+      "listingType": "",
+      "showBestGlobal": false,
+      "bestRegions": {},
+      "bestCategories": {},
+      "ranking": 999,
+      "sortOrder": 999,
+      "score": 0,
+      "reviewCount": 0,
+      "followers": 0,
+      "markets": [
+        "Forex",
+        "Metals",
+        "Indices",
+        "Energies",
+        "Crypto"
+      ],
+      "platforms": [
+        "MetaTrader 5",
+        "Match-Trader"
+      ],
+      "detailsLink": "/prop-firms/equity-edge",
+      "promoText": "",
+      "cardMetrics": {
+        "payoutCycle": "Varies by model",
+        "minTradingDays": "2 or 3 days",
+        "newsTrading": "Varies by stage and model",
+        "timeLimit": "Unlimited",
+        "eaAllowed": "Not mentioned",
+        "startingPrice": "Not mentioned"
+      },
+      "keyMetrics": [],
+      "tradingConditions": [],
+      "firmDetails": [],
+      "evaluationPrograms": [
+        {
+          "program": "1-Step Legacy Evaluation",
+          "target": "10%",
+          "phase1": "10%",
+          "dailyLoss": "4%",
+          "maxDrawdown": "6% trailing",
+          "minimumDays": "2 days",
+          "split": "Not mentioned"
+        },
+        {
+          "program": "1-Step Swift Challenge",
+          "target": "8%",
+          "phase1": "8%",
+          "dailyLoss": "3%",
+          "maxDrawdown": "5% trailing",
+          "minimumDays": "2 days",
+          "split": "Not mentioned"
+        },
+        {
+          "program": "1-Step Flagship Challenge",
+          "target": "10%",
+          "phase1": "10%",
+          "dailyLoss": "4%",
+          "maxDrawdown": "6% trailing",
+          "minimumDays": "2 days",
+          "split": "80%"
+        },
+        {
+          "program": "2-Step Legacy Challenge",
+          "target": "10% / 5%",
+          "phase1": "10%",
+          "dailyLoss": "5%",
+          "maxDrawdown": "10% static",
+          "minimumDays": "2 days per phase",
+          "split": "Not mentioned"
+        },
+        {
+          "program": "2-Step Swift Challenge",
+          "target": "8% / 5%",
+          "phase1": "8%",
+          "dailyLoss": "4%",
+          "maxDrawdown": "8% static",
+          "minimumDays": "2 days per phase",
+          "split": "Not mentioned"
+        },
+        {
+          "program": "2-Step Flagship Challenge",
+          "target": "8% / 5%",
+          "phase1": "8%",
+          "dailyLoss": "4% evaluation; 5% funded",
+          "maxDrawdown": "10% static",
+          "minimumDays": "3 days per phase",
+          "split": "80%"
+        }
+      ],
       "showFirmProfile": false,
       "showHomeTable": false,
       "showListed": false,
@@ -1294,6 +2034,79 @@
         }
       ],
       "programRules": {
+        "2-step-swift-challenge": {
+          "slug": "2-step-swift-challenge",
+          "program": "2-Step Swift Challenge",
+          "title": "2-Step Swift Challenge Rules",
+          "desc": "Two-phase Swift targets plus evaluation, simulated-funded, news, weekend, consistency, and leverage rules.",
+          "notice": "Platforms and reward terms are not mentioned for this model.",
+          "rules": [
+            {
+              "title": "Evaluation phases",
+              "text": "2"
+            },
+            {
+              "title": "Phase 1 profit target",
+              "text": "8%"
+            },
+            {
+              "title": "Phase 2 profit target",
+              "text": "5%"
+            },
+            {
+              "title": "Evaluation daily loss",
+              "text": "4% in Phase 1 and Phase 2"
+            },
+            {
+              "title": "Evaluation maximum drawdown",
+              "text": "8% static in both phases"
+            },
+            {
+              "title": "Minimum trading days",
+              "text": "2 days in each phase"
+            },
+            {
+              "title": "Time limit",
+              "text": "Unlimited"
+            },
+            {
+              "title": "Evaluation news trading",
+              "text": "Restricted within 2 minutes before and after high-impact news events"
+            },
+            {
+              "title": "Evaluation weekend holding",
+              "text": "Available"
+            },
+            {
+              "title": "Evaluation consistency rule",
+              "text": "Biggest winning day cannot exceed 15% of total profits; the calculation resets after each payout."
+            },
+            {
+              "title": "Funded daily loss",
+              "text": "4%"
+            },
+            {
+              "title": "Funded maximum drawdown",
+              "text": "8% static"
+            },
+            {
+              "title": "Funded news trading",
+              "text": "Restricted within 2 minutes before and after high-impact news events"
+            },
+            {
+              "title": "Funded weekend holding",
+              "text": "Available"
+            },
+            {
+              "title": "Funded consistency rule",
+              "text": "Biggest winning day cannot exceed 15% of total profits; the calculation resets after each payout."
+            },
+            {
+              "title": "Forex leverage",
+              "text": "1:30"
+            }
+          ]
+        },
         "1-step-flagship-challenge": {
           "slug": "1-step-flagship-challenge",
           "program": "1-Step Flagship Challenge",
@@ -1437,6 +2250,79 @@
             {
               "title": "Forex leverage",
               "text": "1:40"
+            }
+          ]
+        },
+        "2-step-flagship-challenge": {
+          "slug": "2-step-flagship-challenge",
+          "program": "2-Step Flagship Challenge",
+          "title": "2-Step Flagship Challenge Rules",
+          "desc": "Two-phase Flagship targets, funded-stage risk/news differences, leverage, and reward terms.",
+          "notice": "The simulated funded account uses a 5% daily loss while both evaluation phases use 4%.",
+          "rules": [
+            {
+              "title": "Evaluation phases",
+              "text": "2"
+            },
+            {
+              "title": "Phase 1 profit target",
+              "text": "8%"
+            },
+            {
+              "title": "Phase 2 profit target",
+              "text": "5%"
+            },
+            {
+              "title": "Evaluation daily loss",
+              "text": "4% in Phase 1 and Phase 2"
+            },
+            {
+              "title": "Evaluation maximum drawdown",
+              "text": "10% static in both phases"
+            },
+            {
+              "title": "Minimum trading days",
+              "text": "3 days in each phase"
+            },
+            {
+              "title": "Time limit",
+              "text": "Unlimited"
+            },
+            {
+              "title": "Evaluation news trading",
+              "text": "Not restricted"
+            },
+            {
+              "title": "Evaluation weekend holding",
+              "text": "Available"
+            },
+            {
+              "title": "Evaluation consistency rule",
+              "text": "Biggest winning day cannot exceed 15% of total profits; the calculation resets after each payout."
+            },
+            {
+              "title": "Funded daily loss",
+              "text": "5%"
+            },
+            {
+              "title": "Funded maximum drawdown",
+              "text": "10% static"
+            },
+            {
+              "title": "Funded news trading",
+              "text": "Restricted within 5 minutes before and after high-impact news events"
+            },
+            {
+              "title": "Funded weekend holding",
+              "text": "Available"
+            },
+            {
+              "title": "Funded consistency rule",
+              "text": "Biggest winning day cannot exceed 15% of total profits; the calculation resets after each payout."
+            },
+            {
+              "title": "Forex leverage",
+              "text": "1:100"
             }
           ]
         },
@@ -1585,152 +2471,6 @@
               "text": "Not mentioned"
             }
           ]
-        },
-        "2-step-flagship-challenge": {
-          "slug": "2-step-flagship-challenge",
-          "program": "2-Step Flagship Challenge",
-          "title": "2-Step Flagship Challenge Rules",
-          "desc": "Two-phase Flagship targets, funded-stage risk/news differences, leverage, and reward terms.",
-          "notice": "The simulated funded account uses a 5% daily loss while both evaluation phases use 4%.",
-          "rules": [
-            {
-              "title": "Evaluation phases",
-              "text": "2"
-            },
-            {
-              "title": "Phase 1 profit target",
-              "text": "8%"
-            },
-            {
-              "title": "Phase 2 profit target",
-              "text": "5%"
-            },
-            {
-              "title": "Evaluation daily loss",
-              "text": "4% in Phase 1 and Phase 2"
-            },
-            {
-              "title": "Evaluation maximum drawdown",
-              "text": "10% static in both phases"
-            },
-            {
-              "title": "Minimum trading days",
-              "text": "3 days in each phase"
-            },
-            {
-              "title": "Time limit",
-              "text": "Unlimited"
-            },
-            {
-              "title": "Evaluation news trading",
-              "text": "Not restricted"
-            },
-            {
-              "title": "Evaluation weekend holding",
-              "text": "Available"
-            },
-            {
-              "title": "Evaluation consistency rule",
-              "text": "Biggest winning day cannot exceed 15% of total profits; the calculation resets after each payout."
-            },
-            {
-              "title": "Funded daily loss",
-              "text": "5%"
-            },
-            {
-              "title": "Funded maximum drawdown",
-              "text": "10% static"
-            },
-            {
-              "title": "Funded news trading",
-              "text": "Restricted within 5 minutes before and after high-impact news events"
-            },
-            {
-              "title": "Funded weekend holding",
-              "text": "Available"
-            },
-            {
-              "title": "Funded consistency rule",
-              "text": "Biggest winning day cannot exceed 15% of total profits; the calculation resets after each payout."
-            },
-            {
-              "title": "Forex leverage",
-              "text": "1:100"
-            }
-          ]
-        },
-        "2-step-swift-challenge": {
-          "slug": "2-step-swift-challenge",
-          "program": "2-Step Swift Challenge",
-          "title": "2-Step Swift Challenge Rules",
-          "desc": "Two-phase Swift targets plus evaluation, simulated-funded, news, weekend, consistency, and leverage rules.",
-          "notice": "Platforms and reward terms are not mentioned for this model.",
-          "rules": [
-            {
-              "title": "Evaluation phases",
-              "text": "2"
-            },
-            {
-              "title": "Phase 1 profit target",
-              "text": "8%"
-            },
-            {
-              "title": "Phase 2 profit target",
-              "text": "5%"
-            },
-            {
-              "title": "Evaluation daily loss",
-              "text": "4% in Phase 1 and Phase 2"
-            },
-            {
-              "title": "Evaluation maximum drawdown",
-              "text": "8% static in both phases"
-            },
-            {
-              "title": "Minimum trading days",
-              "text": "2 days in each phase"
-            },
-            {
-              "title": "Time limit",
-              "text": "Unlimited"
-            },
-            {
-              "title": "Evaluation news trading",
-              "text": "Restricted within 2 minutes before and after high-impact news events"
-            },
-            {
-              "title": "Evaluation weekend holding",
-              "text": "Available"
-            },
-            {
-              "title": "Evaluation consistency rule",
-              "text": "Biggest winning day cannot exceed 15% of total profits; the calculation resets after each payout."
-            },
-            {
-              "title": "Funded daily loss",
-              "text": "4%"
-            },
-            {
-              "title": "Funded maximum drawdown",
-              "text": "8% static"
-            },
-            {
-              "title": "Funded news trading",
-              "text": "Restricted within 2 minutes before and after high-impact news events"
-            },
-            {
-              "title": "Funded weekend holding",
-              "text": "Available"
-            },
-            {
-              "title": "Funded consistency rule",
-              "text": "Biggest winning day cannot exceed 15% of total profits; the calculation resets after each payout."
-            },
-            {
-              "title": "Forex leverage",
-              "text": "1:30"
-            }
-          ]
         }
       },
       "updatedAt": "2026-08-24T16:43:11.352Z"
@@ -1752,6 +2492,172 @@
       "bio": "Finotive Funding is a Budapest-based proprietary trading firm founded in 2021. It offers 1-Step, 2-Step, Pro, and Instant Funding models with news trading, overnight and weekend holding, MetaTrader 5, Match-Trader, and model-specific payout schedules.",
       "logo": "data:image/webp;base64,UklGRiwFAABXRUJQVlA4WAoAAAAgAAAARwAARwAASUNDUMgBAAAAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaI",
       "verified": true,
+      "payoutAssurance": true,
+      "listingType": "best",
+      "showBestGlobal": true,
+      "bestRegions": {},
+      "bestCategories": {},
+      "ranking": 6,
+      "sortOrder": 6,
+      "score": 0,
+      "reviewCount": 0,
+      "followers": 0,
+      "markets": [
+        "Forex",
+        "Metals",
+        "Energies",
+        "Indices",
+        "Equities",
+        "Crypto"
+      ],
+      "platforms": [
+        "MetaTrader 5",
+        "Match-Trader"
+      ],
+      "detailsLink": "/prop-firms/finotive-funding",
+      "promoText": "FIRST25 - 25% OFF first purchase",
+      "cardMetrics": {
+        "payoutCycle": "On demand, then 7 or 14 days",
+        "minTradingDays": "0 to 5 by model",
+        "newsTrading": "Allowed; no straddling",
+        "timeLimit": "Unlimited on evaluations",
+        "eaAllowed": "Yes, with restrictions",
+        "startingPrice": "Not mentioned"
+      },
+      "keyMetrics": [
+        {
+          "label": "Max Allocation",
+          "value": "$200,000"
+        },
+        {
+          "label": "Profit Split",
+          "value": "70% to 100%"
+        },
+        {
+          "label": "Payout Cycle",
+          "value": "On demand, then 7 or 14 days"
+        },
+        {
+          "label": "News Trading",
+          "value": "Allowed; no straddling"
+        },
+        {
+          "label": "Min Trading Days",
+          "value": "0 to 5 by model"
+        },
+        {
+          "label": "Time Limit",
+          "value": "Unlimited on evaluations"
+        },
+        {
+          "label": "Starting Price",
+          "value": "Not mentioned"
+        },
+        {
+          "label": "EA Allowed",
+          "value": "Yes, with restrictions"
+        }
+      ],
+      "tradingConditions": [
+        {
+          "label": "Daily Loss",
+          "value": "3% to 4.5%"
+        },
+        {
+          "label": "Maximum Loss",
+          "value": "6% to 9% static"
+        },
+        {
+          "label": "Weekend Holding",
+          "value": "Allowed"
+        },
+        {
+          "label": "News Trading",
+          "value": "Allowed; no straddling"
+        }
+      ],
+      "firmDetails": [
+        {
+          "label": "Company Name",
+          "value": "Finotive Funding"
+        },
+        {
+          "label": "Headquarters",
+          "value": "Budapest, Hungary"
+        },
+        {
+          "label": "Founded",
+          "value": "21 April 2021"
+        },
+        {
+          "label": "CEO",
+          "value": "Oliver Newland"
+        },
+        {
+          "label": "Broker",
+          "value": "Finotive Markets"
+        },
+        {
+          "label": "Trustpilot",
+          "value": "Unavailable"
+        }
+      ],
+      "evaluationPrograms": [
+        {
+          "program": "1-Step Challenge",
+          "target": "10%",
+          "phase1": "10%",
+          "dailyLoss": "4%",
+          "maxDrawdown": "7.5% static",
+          "minimumDays": "3 profitable days",
+          "split": "80%"
+        },
+        {
+          "program": "1-Step Pro",
+          "target": "10%",
+          "phase1": "10%",
+          "dailyLoss": "4%",
+          "maxDrawdown": "7.5% static",
+          "minimumDays": "3 profitable days",
+          "split": "80% to 100%"
+        },
+        {
+          "program": "2-Step Challenge",
+          "target": "7.5% / 5%",
+          "phase1": "7.5%",
+          "dailyLoss": "4.5%",
+          "maxDrawdown": "9% static",
+          "minimumDays": "2 profitable days",
+          "split": "80%"
+        },
+        {
+          "program": "2-Step Pro",
+          "target": "7.5% / 5%",
+          "phase1": "7.5%",
+          "dailyLoss": "4.5%",
+          "maxDrawdown": "9% static",
+          "minimumDays": "2 profitable days",
+          "split": "80% to 100%"
+        },
+        {
+          "program": "Instant Funding Standard",
+          "target": "Not mentioned",
+          "phase1": "Not applicable",
+          "dailyLoss": "3.5%",
+          "maxDrawdown": "7% static",
+          "minimumDays": "0 days",
+          "split": "75% to 90%"
+        },
+        {
+          "program": "Instant Funding Lite",
+          "target": "Not mentioned",
+          "phase1": "Not applicable",
+          "dailyLoss": "3%",
+          "maxDrawdown": "6% static",
+          "minimumDays": "5 profitable days",
+          "split": "70% to 85%"
+        }
+      ],
       "showFirmProfile": true,
       "showHomeTable": true,
       "showListed": true,
@@ -1816,6 +2722,86 @@
         }
       ],
       "ruleSections": [
+        {
+          "key": "access-and-restrictions",
+          "title": "Access & Restrictions",
+          "rules": [
+            {
+              "title": "Platforms",
+              "text": "MetaTrader 5 and Match-Trader"
+            },
+            {
+              "title": "Asset classes",
+              "text": "Forex, Metals, Energies, Indices, Equities, and Cryptocurrencies"
+            },
+            {
+              "title": "Travel and IP",
+              "text": "Different networks while travelling are allowed"
+            },
+            {
+              "title": "VPN, proxy, and IP masking",
+              "text": "Not allowed"
+            },
+            {
+              "title": "VPS",
+              "text": "Generally allowed for EA or bot trading"
+            },
+            {
+              "title": "Restricted locations",
+              "text": "Iran, Crimea, Sevastopol, Luhansk, Donetsk, Zaporizhzhia, Kherson, Abkhazia, South Ossetia, Northern Cyprus, Somaliland, Transnistria, Nagorno-Karabakh, North Korea, and Palestinian Territories"
+            }
+          ]
+        },
+        {
+          "key": "firm-information",
+          "title": "Firm Information",
+          "rules": [
+            {
+              "title": "Official website",
+              "text": "https://finotivefunding.com/"
+            },
+            {
+              "title": "Affiliate program",
+              "text": "https://finotivefunding.com/affiliate-program"
+            },
+            {
+              "title": "Founded",
+              "text": "21 April 2021"
+            },
+            {
+              "title": "CEO",
+              "text": "Oliver Newland"
+            },
+            {
+              "title": "Headquarters",
+              "text": "Budapest, Hungary"
+            },
+            {
+              "title": "Country",
+              "text": "Hungary"
+            },
+            {
+              "title": "Verified badge",
+              "text": "Yes"
+            },
+            {
+              "title": "Trustpilot score",
+              "text": "Unavailable due to a breach of Trustpilot's guidelines"
+            },
+            {
+              "title": "Support",
+              "text": "support@finotivefunding.com; 24/7 web support"
+            },
+            {
+              "title": "Help centre",
+              "text": "https://help.finotivefunding.com/en"
+            },
+            {
+              "title": "Broker and liquidity",
+              "text": "Finotive Markets; own/in-house"
+            }
+          ]
+        },
         {
           "key": "trading-rules",
           "title": "Trading Rules",
@@ -1909,36 +2895,6 @@
           ]
         },
         {
-          "key": "access-and-restrictions",
-          "title": "Access & Restrictions",
-          "rules": [
-            {
-              "title": "Platforms",
-              "text": "MetaTrader 5 and Match-Trader"
-            },
-            {
-              "title": "Asset classes",
-              "text": "Forex, Metals, Energies, Indices, Equities, and Cryptocurrencies"
-            },
-            {
-              "title": "Travel and IP",
-              "text": "Different networks while travelling are allowed"
-            },
-            {
-              "title": "VPN, proxy, and IP masking",
-              "text": "Not allowed"
-            },
-            {
-              "title": "VPS",
-              "text": "Generally allowed for EA or bot trading"
-            },
-            {
-              "title": "Restricted locations",
-              "text": "Iran, Crimea, Sevastopol, Luhansk, Donetsk, Zaporizhzhia, Kherson, Abkhazia, South Ossetia, Northern Cyprus, Somaliland, Transnistria, Nagorno-Karabakh, North Korea, and Palestinian Territories"
-            }
-          ]
-        },
-        {
           "key": "exposure-and-monitoring",
           "title": "Exposure & Monitoring",
           "rules": [
@@ -1981,56 +2937,6 @@
           ]
         },
         {
-          "key": "firm-information",
-          "title": "Firm Information",
-          "rules": [
-            {
-              "title": "Official website",
-              "text": "https://finotivefunding.com/"
-            },
-            {
-              "title": "Affiliate program",
-              "text": "https://finotivefunding.com/affiliate-program"
-            },
-            {
-              "title": "Founded",
-              "text": "21 April 2021"
-            },
-            {
-              "title": "CEO",
-              "text": "Oliver Newland"
-            },
-            {
-              "title": "Headquarters",
-              "text": "Budapest, Hungary"
-            },
-            {
-              "title": "Country",
-              "text": "Hungary"
-            },
-            {
-              "title": "Verified badge",
-              "text": "Yes"
-            },
-            {
-              "title": "Trustpilot score",
-              "text": "Unavailable due to a breach of Trustpilot's guidelines"
-            },
-            {
-              "title": "Support",
-              "text": "support@finotivefunding.com; 24/7 web support"
-            },
-            {
-              "title": "Help centre",
-              "text": "https://help.finotivefunding.com/en"
-            },
-            {
-              "title": "Broker and liquidity",
-              "text": "Finotive Markets; own/in-house"
-            }
-          ]
-        },
-        {
           "key": "offers",
           "title": "Current Offer Codes",
           "rules": [
@@ -2054,32 +2960,36 @@
         }
       ],
       "programRules": {
-        "1-step-challenge": {
-          "slug": "1-step-challenge",
-          "program": "1-Step Challenge",
-          "title": "1-Step Challenge Rules",
-          "desc": "One-phase evaluation targets, loss limits, leverage, trading permissions, and payout conditions.",
-          "notice": "News trading is allowed, but news straddling is prohibited.",
+        "2-step-pro": {
+          "slug": "2-step-pro",
+          "program": "2-Step Pro",
+          "title": "2-Step Pro Rules",
+          "desc": "Two-phase Pro targets, consistency, leverage, trading permissions, and payout conditions.",
+          "notice": "The Pro model adds weekly consistency and a 90-day profit requirement.",
           "rules": [
             {
               "title": "Evaluation phases",
-              "text": "1"
+              "text": "2"
             },
             {
-              "title": "Profit target",
-              "text": "10%"
+              "title": "Phase 1 profit target",
+              "text": "7.5%"
+            },
+            {
+              "title": "Phase 2 profit target",
+              "text": "5%"
             },
             {
               "title": "Daily loss",
-              "text": "4%"
+              "text": "4.5%"
             },
             {
               "title": "Maximum drawdown",
-              "text": "7.5% static"
+              "text": "9% static"
             },
             {
               "title": "Minimum trading days",
-              "text": "3 days with a minimum 0.5% profit condition"
+              "text": "2 days with a minimum 0.5% profit condition"
             },
             {
               "title": "Time limit",
@@ -2095,7 +3005,7 @@
             },
             {
               "title": "Consistency rule",
-              "text": "None"
+              "text": "25% weekly consistency and a minimum 5% profit every 90 days"
             },
             {
               "title": "Platforms",
@@ -2106,24 +3016,20 @@
               "text": "80%"
             },
             {
+              "title": "Maximum profit split",
+              "text": "100% after 30 funded days"
+            },
+            {
               "title": "Forex majors leverage",
-              "text": "1:50"
+              "text": "1:100"
             },
             {
               "title": "Forex minors leverage",
-              "text": "1:25"
+              "text": "1:50"
             },
             {
               "title": "Forex exotics leverage",
-              "text": "1:10"
-            },
-            {
-              "title": "Energies leverage",
-              "text": "1:10"
-            },
-            {
-              "title": "Metals leverage",
-              "text": "1:10"
+              "text": "1:25"
             }
           ]
         },
@@ -2200,36 +3106,52 @@
             }
           ]
         },
-        "1-step-pro": {
-          "slug": "1-step-pro",
-          "program": "1-Step Pro",
-          "title": "1-Step Pro Rules",
-          "desc": "One-phase Pro evaluation, consistency, leverage, trading permissions, and payout conditions.",
-          "notice": "The Pro model adds weekly consistency and a 90-day profit requirement.",
+        "2-step-challenge": {
+          "slug": "2-step-challenge",
+          "program": "2-Step Challenge",
+          "title": "2-Step Challenge Rules",
+          "desc": "Two-phase targets, $200K account details, loss limits, leverage, and payout conditions.",
+          "notice": "The stated fee and refundable-fee condition apply to the researched $200K account.",
           "rules": [
             {
               "title": "Evaluation phases",
-              "text": "1"
+              "text": "2"
             },
             {
-              "title": "Profit target",
-              "text": "10%"
+              "title": "Phase 1 profit target",
+              "text": "7.5%"
+            },
+            {
+              "title": "Phase 2 profit target",
+              "text": "5%"
             },
             {
               "title": "Daily loss",
-              "text": "4%"
+              "text": "4.5%"
             },
             {
               "title": "Maximum drawdown",
-              "text": "7.5% static"
+              "text": "9% static"
             },
             {
               "title": "Minimum trading days",
-              "text": "3 days with a minimum 0.5% profit condition"
+              "text": "2 days with a minimum 0.5% profit condition"
             },
             {
               "title": "Time limit",
               "text": "Unlimited"
+            },
+            {
+              "title": "Account size",
+              "text": "$200,000"
+            },
+            {
+              "title": "Challenge fee",
+              "text": "$447.50"
+            },
+            {
+              "title": "Refundable fee",
+              "text": "Refunded after 30 funded days if the account is in profit"
             },
             {
               "title": "News trading",
@@ -2241,7 +3163,7 @@
             },
             {
               "title": "Consistency rule",
-              "text": "25% weekly consistency and a minimum 5% profit every 90 days"
+              "text": "None"
             },
             {
               "title": "Platforms",
@@ -2253,23 +3175,7 @@
             },
             {
               "title": "Maximum profit split",
-              "text": "100% after 30 funded days"
-            },
-            {
-              "title": "Forex majors leverage",
-              "text": "1:50"
-            },
-            {
-              "title": "Forex minors leverage",
-              "text": "1:25"
-            },
-            {
-              "title": "Exotics, energies, and metals leverage",
-              "text": "1:10"
-            },
-            {
-              "title": "Indices leverage",
-              "text": "1:5"
+              "text": "95% through scaling"
             }
           ]
         },
@@ -2346,36 +3252,105 @@
             }
           ]
         },
-        "2-step-pro": {
-          "slug": "2-step-pro",
-          "program": "2-Step Pro",
-          "title": "2-Step Pro Rules",
-          "desc": "Two-phase Pro targets, consistency, leverage, trading permissions, and payout conditions.",
+        "1-step-challenge": {
+          "slug": "1-step-challenge",
+          "program": "1-Step Challenge",
+          "title": "1-Step Challenge Rules",
+          "desc": "One-phase evaluation targets, loss limits, leverage, trading permissions, and payout conditions.",
+          "notice": "News trading is allowed, but news straddling is prohibited.",
+          "rules": [
+            {
+              "title": "Evaluation phases",
+              "text": "1"
+            },
+            {
+              "title": "Profit target",
+              "text": "10%"
+            },
+            {
+              "title": "Daily loss",
+              "text": "4%"
+            },
+            {
+              "title": "Maximum drawdown",
+              "text": "7.5% static"
+            },
+            {
+              "title": "Minimum trading days",
+              "text": "3 days with a minimum 0.5% profit condition"
+            },
+            {
+              "title": "Time limit",
+              "text": "Unlimited"
+            },
+            {
+              "title": "News trading",
+              "text": "Allowed; news straddling prohibited"
+            },
+            {
+              "title": "Weekend and overnight holding",
+              "text": "Allowed"
+            },
+            {
+              "title": "Consistency rule",
+              "text": "None"
+            },
+            {
+              "title": "Platforms",
+              "text": "MetaTrader 5 and Match-Trader"
+            },
+            {
+              "title": "Default profit split",
+              "text": "80%"
+            },
+            {
+              "title": "Forex majors leverage",
+              "text": "1:50"
+            },
+            {
+              "title": "Forex minors leverage",
+              "text": "1:25"
+            },
+            {
+              "title": "Forex exotics leverage",
+              "text": "1:10"
+            },
+            {
+              "title": "Energies leverage",
+              "text": "1:10"
+            },
+            {
+              "title": "Metals leverage",
+              "text": "1:10"
+            }
+          ]
+        },
+        "1-step-pro": {
+          "slug": "1-step-pro",
+          "program": "1-Step Pro",
+          "title": "1-Step Pro Rules",
+          "desc": "One-phase Pro evaluation, consistency, leverage, trading permissions, and payout conditions.",
           "notice": "The Pro model adds weekly consistency and a 90-day profit requirement.",
           "rules": [
             {
               "title": "Evaluation phases",
-              "text": "2"
+              "text": "1"
             },
             {
-              "title": "Phase 1 profit target",
-              "text": "7.5%"
-            },
-            {
-              "title": "Phase 2 profit target",
-              "text": "5%"
+              "title": "Profit target",
+              "text": "10%"
             },
             {
               "title": "Daily loss",
-              "text": "4.5%"
+              "text": "4%"
             },
             {
               "title": "Maximum drawdown",
-              "text": "9% static"
+              "text": "7.5% static"
             },
             {
               "title": "Minimum trading days",
-              "text": "2 days with a minimum 0.5% profit condition"
+              "text": "3 days with a minimum 0.5% profit condition"
             },
             {
               "title": "Time limit",
@@ -2407,88 +3382,19 @@
             },
             {
               "title": "Forex majors leverage",
-              "text": "1:100"
-            },
-            {
-              "title": "Forex minors leverage",
               "text": "1:50"
             },
             {
-              "title": "Forex exotics leverage",
+              "title": "Forex minors leverage",
               "text": "1:25"
-            }
-          ]
-        },
-        "2-step-challenge": {
-          "slug": "2-step-challenge",
-          "program": "2-Step Challenge",
-          "title": "2-Step Challenge Rules",
-          "desc": "Two-phase targets, $200K account details, loss limits, leverage, and payout conditions.",
-          "notice": "The stated fee and refundable-fee condition apply to the researched $200K account.",
-          "rules": [
-            {
-              "title": "Evaluation phases",
-              "text": "2"
             },
             {
-              "title": "Phase 1 profit target",
-              "text": "7.5%"
+              "title": "Exotics, energies, and metals leverage",
+              "text": "1:10"
             },
             {
-              "title": "Phase 2 profit target",
-              "text": "5%"
-            },
-            {
-              "title": "Daily loss",
-              "text": "4.5%"
-            },
-            {
-              "title": "Maximum drawdown",
-              "text": "9% static"
-            },
-            {
-              "title": "Minimum trading days",
-              "text": "2 days with a minimum 0.5% profit condition"
-            },
-            {
-              "title": "Time limit",
-              "text": "Unlimited"
-            },
-            {
-              "title": "Account size",
-              "text": "$200,000"
-            },
-            {
-              "title": "Challenge fee",
-              "text": "$447.50"
-            },
-            {
-              "title": "Refundable fee",
-              "text": "Refunded after 30 funded days if the account is in profit"
-            },
-            {
-              "title": "News trading",
-              "text": "Allowed; news straddling prohibited"
-            },
-            {
-              "title": "Weekend and overnight holding",
-              "text": "Allowed"
-            },
-            {
-              "title": "Consistency rule",
-              "text": "None"
-            },
-            {
-              "title": "Platforms",
-              "text": "MetaTrader 5 and Match-Trader"
-            },
-            {
-              "title": "Default profit split",
-              "text": "80%"
-            },
-            {
-              "title": "Maximum profit split",
-              "text": "95% through scaling"
+              "title": "Indices leverage",
+              "text": "1:5"
             }
           ]
         }
@@ -2510,6 +3416,161 @@
       "bio": "Funded Trader Markets offers 1-Step Nitro, 2-Step Plus, and three Instant Funding models with model-specific loss, consistency, leverage, and payout conditions.",
       "logo": "",
       "verified": false,
+      "payoutAssurance": false,
+      "listingType": "listed",
+      "showBestGlobal": false,
+      "bestRegions": {
+        "nigeria": false,
+        "pakistan": false,
+        "south_africa": false,
+        "uk": false,
+        "australia": false,
+        "us": false,
+        "china": false,
+        "india": false
+      },
+      "bestCategories": {
+        "instant_funding": false,
+        "trusted": false,
+        "highest_rated": false,
+        "beginner": false,
+        "cheapest": false,
+        "hft": false,
+        "fast_payout": false,
+        "futures": false
+      },
+      "ranking": 999,
+      "sortOrder": 999,
+      "score": 0,
+      "reviewCount": 0,
+      "followers": 0,
+      "markets": [
+        "Forex",
+        "Indices",
+        "Commodities",
+        "Cryptocurrencies",
+        "Metals",
+        "Energies",
+        "CFDs"
+      ],
+      "platforms": [
+        "cTrader",
+        "TradeLocker",
+        "Match-Trader",
+        "MetaTrader 5"
+      ],
+      "detailsLink": "/prop-firms/funded-trader-markets",
+      "promoText": "",
+      "cardMetrics": {
+        "payoutCycle": "On demand",
+        "minTradingDays": "3-5 days, model dependent",
+        "newsTrading": "Allowed",
+        "timeLimit": "Model dependent",
+        "eaAllowed": "Allowed with restrictions",
+        "startingPrice": "Not mentioned"
+      },
+      "keyMetrics": [
+        {
+          "label": "Account Models",
+          "value": "5 supplied"
+        },
+        {
+          "label": "Payout Request",
+          "value": "On demand"
+        },
+        {
+          "label": "Processing",
+          "value": "Within 24 hours"
+        },
+        {
+          "label": "Maximum 2-Step Allocation",
+          "value": "$300,000 per member"
+        }
+      ],
+      "tradingConditions": [
+        {
+          "label": "Daily Loss",
+          "value": "3%-4%, model dependent"
+        },
+        {
+          "label": "Maximum Loss",
+          "value": "3%-10%, model dependent"
+        },
+        {
+          "label": "News Trading",
+          "value": "Allowed"
+        },
+        {
+          "label": "Weekend Holding",
+          "value": "Allowed"
+        },
+        {
+          "label": "Minimum Holding Time",
+          "value": "1 minute"
+        },
+        {
+          "label": "Payout Minimum Profit",
+          "value": "1%"
+        }
+      ],
+      "firmDetails": [
+        {
+          "label": "Firm Name",
+          "value": "Funded Trader Markets"
+        },
+        {
+          "label": "Founded",
+          "value": "2024"
+        },
+        {
+          "label": "CEO",
+          "value": "Revin Zabala"
+        },
+        {
+          "label": "Headquarters",
+          "value": "Dubai, UAE"
+        },
+        {
+          "label": "Support",
+          "value": "https://intercom.help/fundedtradermarkets/en"
+        },
+        {
+          "label": "Official Rules",
+          "value": "https://intercom.help/fundedtradermarkets/en/collections/10655252-general-trading-rules"
+        }
+      ],
+      "evaluationPrograms": [
+        {
+          "program": "1-Step Nitro Evaluation",
+          "target": "10%",
+          "phase1": "10%",
+          "split": "90% on first $10,000 profit; 80% thereafter"
+        },
+        {
+          "program": "2-Step Plus Evaluation",
+          "target": "8% / 5%",
+          "phase1": "8%",
+          "split": "70% default; 90% add-on"
+        },
+        {
+          "program": "Instant Funding Standard",
+          "target": "Not mentioned",
+          "phase1": "Not applicable",
+          "split": "50% first reward, then 60%, 70%, and 80% from fourth onward"
+        },
+        {
+          "program": "Instant Funding Pro",
+          "target": "Not mentioned",
+          "phase1": "Not applicable",
+          "split": "50% first reward, then 60%, 70%, and 80% from fourth onward"
+        },
+        {
+          "program": "Instant Funding Plus",
+          "target": "Not mentioned",
+          "phase1": "Not applicable",
+          "split": "80% default"
+        }
+      ],
       "showFirmProfile": false,
       "showHomeTable": false,
       "showListed": false,
@@ -2562,32 +3623,32 @@
         }
       ],
       "programRules": {
-        "instant-funding-pro": {
-          "slug": "instant-funding-pro",
-          "program": "Instant Funding Pro",
-          "title": "Instant Funding Pro Rules",
-          "desc": "Rules for the Instant Funding Pro account model.",
+        "1-step-nitro-evaluation": {
+          "slug": "1-step-nitro-evaluation",
+          "program": "1-Step Nitro Evaluation",
+          "title": "1-Step Nitro Evaluation Rules",
+          "desc": "Rules for the 1-Step Nitro Evaluation account model.",
           "notice": "PDF model values are shown first. Firm-wide rules below come from the supplied FTM research workbook.",
           "rules": [
             {
               "title": "Profit Target",
-              "text": "Not mentioned."
+              "text": "10%."
             },
             {
               "title": "Maximum Daily Loss",
-              "text": "3% trailing."
+              "text": "4% trailing."
             },
             {
               "title": "Maximum Overall Loss",
-              "text": "3% trailing."
+              "text": "6% static."
             },
             {
               "title": "Minimum Trading Days",
-              "text": "5 profitable days, each with at least 0.5% profit."
+              "text": "5 days with at least 0.5% profit per qualifying day. The PDF labels this requirement as Funded phase only."
             },
             {
               "title": "Trading Period",
-              "text": "Not mentioned."
+              "text": "Unlimited."
             },
             {
               "title": "News Trading",
@@ -2599,15 +3660,23 @@
             },
             {
               "title": "Consistency Rule",
-              "text": "15%."
+              "text": "50% during the challenge and 45% when funded."
+            },
+            {
+              "title": "Platforms",
+              "text": "cTrader, TradeLocker, Match-Trader, and MetaTrader 5."
             },
             {
               "title": "Profit Split",
-              "text": "First reward 50/50; second 60/40; third 70/30; fourth 80/20. It remains 80/20 from the fourth reward onward."
+              "text": "90% on the first $10,000 of profit, then 80% thereafter."
             },
             {
-              "title": "Leverage",
-              "text": "$5K-$100K: Forex 1:100 and Commodities 1:20. $150K-$200K: Forex 1:50 and Commodities 1:10. BTC and ETH 1:5; other cryptocurrencies 1:2."
+              "title": "Evaluation Leverage",
+              "text": "Forex 1:100; Commodities 1:30; BTC and ETH 1:5; other cryptocurrencies 1:2."
+            },
+            {
+              "title": "Funded Leverage",
+              "text": "$5K-$100K: Forex 1:100 and Commodities 1:20. $200K-$300K: Forex 1:50 and Commodities 1:10. BTC and ETH remain 1:5; other cryptocurrencies remain 1:2."
             },
             {
               "title": "Payouts",
@@ -2624,87 +3693,6 @@
             {
               "title": "High-Frequency Trading",
               "text": "Not allowed. Trades must satisfy the minimum holding-time requirement."
-            },
-            {
-              "title": "Martingale and Layering",
-              "text": "Allowed within one account, but cannot be used across multiple accounts to manipulate or abuse the strategy."
-            },
-            {
-              "title": "Grid Trading and Minimum Hold",
-              "text": "Grid trading is allowed when trades meet the 1-minute minimum holding time. During evaluation, if more than 20% of total closed profit comes from trades held under 1 minute, the challenge must be redone. During the simulated funded phase, profit from sub-1-min"
-            }
-          ]
-        },
-        "instant-funding-plus": {
-          "slug": "instant-funding-plus",
-          "program": "Instant Funding Plus",
-          "title": "Instant Funding Plus Rules",
-          "desc": "Rules for the Instant Funding Plus account model.",
-          "notice": "PDF model values are shown first. Firm-wide rules below come from the supplied FTM research workbook.",
-          "rules": [
-            {
-              "title": "Profit Target",
-              "text": "Not mentioned."
-            },
-            {
-              "title": "Maximum Daily Loss",
-              "text": "3% trailing."
-            },
-            {
-              "title": "Maximum Overall Loss",
-              "text": "6% trailing."
-            },
-            {
-              "title": "Minimum Trading Days",
-              "text": "5 profitable days, each with at least 0.5% profit."
-            },
-            {
-              "title": "Trading Period",
-              "text": "Not mentioned."
-            },
-            {
-              "title": "News Trading",
-              "text": "Allowed."
-            },
-            {
-              "title": "Weekend and Overnight Holding",
-              "text": "Allowed."
-            },
-            {
-              "title": "Consistency Rule",
-              "text": "15%."
-            },
-            {
-              "title": "Profit Split",
-              "text": "80% by default."
-            },
-            {
-              "title": "Leverage",
-              "text": "$5K-$100K: Forex 1:100 and Commodities 1:20. $150K-$200K: Forex 1:50 and Commodities 1:10. BTC and ETH 1:5; other cryptocurrencies 1:2."
-            },
-            {
-              "title": "Payouts",
-              "text": "On demand within 24 hours; minimum profit 1%; payout methods Crypto and Rise."
-            },
-            {
-              "title": "Trading Bots",
-              "text": "Trading bots are allowed, but high-frequency trading, news scalping, demo-server exploitation, reverse trading across multiple accounts, arbitrage or latency bots, tick scalping, and emulators are prohibited. The workbook states prohibited-bot use can lead to "
-            },
-            {
-              "title": "Copy Trading",
-              "text": "Allowed only when every account being copied between belongs to the same trader."
-            },
-            {
-              "title": "High-Frequency Trading",
-              "text": "Not allowed. Trades must satisfy the minimum holding-time requirement."
-            },
-            {
-              "title": "Martingale and Layering",
-              "text": "Allowed within one account, but cannot be used across multiple accounts to manipulate or abuse the strategy."
-            },
-            {
-              "title": "Grid Trading and Minimum Hold",
-              "text": "Grid trading is allowed when trades meet the 1-minute minimum holding time. During evaluation, if more than 20% of total closed profit comes from trades held under 1 minute, the challenge must be redone. During the simulated funded phase, profit from sub-1-min"
             }
           ]
         },
@@ -2854,32 +3842,32 @@
             }
           ]
         },
-        "1-step-nitro-evaluation": {
-          "slug": "1-step-nitro-evaluation",
-          "program": "1-Step Nitro Evaluation",
-          "title": "1-Step Nitro Evaluation Rules",
-          "desc": "Rules for the 1-Step Nitro Evaluation account model.",
+        "instant-funding-pro": {
+          "slug": "instant-funding-pro",
+          "program": "Instant Funding Pro",
+          "title": "Instant Funding Pro Rules",
+          "desc": "Rules for the Instant Funding Pro account model.",
           "notice": "PDF model values are shown first. Firm-wide rules below come from the supplied FTM research workbook.",
           "rules": [
             {
               "title": "Profit Target",
-              "text": "10%."
+              "text": "Not mentioned."
             },
             {
               "title": "Maximum Daily Loss",
-              "text": "4% trailing."
+              "text": "3% trailing."
             },
             {
               "title": "Maximum Overall Loss",
-              "text": "6% static."
+              "text": "3% trailing."
             },
             {
               "title": "Minimum Trading Days",
-              "text": "5 days with at least 0.5% profit per qualifying day. The PDF labels this requirement as Funded phase only."
+              "text": "5 profitable days, each with at least 0.5% profit."
             },
             {
               "title": "Trading Period",
-              "text": "Unlimited."
+              "text": "Not mentioned."
             },
             {
               "title": "News Trading",
@@ -2891,23 +3879,15 @@
             },
             {
               "title": "Consistency Rule",
-              "text": "50% during the challenge and 45% when funded."
-            },
-            {
-              "title": "Platforms",
-              "text": "cTrader, TradeLocker, Match-Trader, and MetaTrader 5."
+              "text": "15%."
             },
             {
               "title": "Profit Split",
-              "text": "90% on the first $10,000 of profit, then 80% thereafter."
+              "text": "First reward 50/50; second 60/40; third 70/30; fourth 80/20. It remains 80/20 from the fourth reward onward."
             },
             {
-              "title": "Evaluation Leverage",
-              "text": "Forex 1:100; Commodities 1:30; BTC and ETH 1:5; other cryptocurrencies 1:2."
-            },
-            {
-              "title": "Funded Leverage",
-              "text": "$5K-$100K: Forex 1:100 and Commodities 1:20. $200K-$300K: Forex 1:50 and Commodities 1:10. BTC and ETH remain 1:5; other cryptocurrencies remain 1:2."
+              "title": "Leverage",
+              "text": "$5K-$100K: Forex 1:100 and Commodities 1:20. $150K-$200K: Forex 1:50 and Commodities 1:10. BTC and ETH 1:5; other cryptocurrencies 1:2."
             },
             {
               "title": "Payouts",
@@ -2924,6 +3904,87 @@
             {
               "title": "High-Frequency Trading",
               "text": "Not allowed. Trades must satisfy the minimum holding-time requirement."
+            },
+            {
+              "title": "Martingale and Layering",
+              "text": "Allowed within one account, but cannot be used across multiple accounts to manipulate or abuse the strategy."
+            },
+            {
+              "title": "Grid Trading and Minimum Hold",
+              "text": "Grid trading is allowed when trades meet the 1-minute minimum holding time. During evaluation, if more than 20% of total closed profit comes from trades held under 1 minute, the challenge must be redone. During the simulated funded phase, profit from sub-1-min"
+            }
+          ]
+        },
+        "instant-funding-plus": {
+          "slug": "instant-funding-plus",
+          "program": "Instant Funding Plus",
+          "title": "Instant Funding Plus Rules",
+          "desc": "Rules for the Instant Funding Plus account model.",
+          "notice": "PDF model values are shown first. Firm-wide rules below come from the supplied FTM research workbook.",
+          "rules": [
+            {
+              "title": "Profit Target",
+              "text": "Not mentioned."
+            },
+            {
+              "title": "Maximum Daily Loss",
+              "text": "3% trailing."
+            },
+            {
+              "title": "Maximum Overall Loss",
+              "text": "6% trailing."
+            },
+            {
+              "title": "Minimum Trading Days",
+              "text": "5 profitable days, each with at least 0.5% profit."
+            },
+            {
+              "title": "Trading Period",
+              "text": "Not mentioned."
+            },
+            {
+              "title": "News Trading",
+              "text": "Allowed."
+            },
+            {
+              "title": "Weekend and Overnight Holding",
+              "text": "Allowed."
+            },
+            {
+              "title": "Consistency Rule",
+              "text": "15%."
+            },
+            {
+              "title": "Profit Split",
+              "text": "80% by default."
+            },
+            {
+              "title": "Leverage",
+              "text": "$5K-$100K: Forex 1:100 and Commodities 1:20. $150K-$200K: Forex 1:50 and Commodities 1:10. BTC and ETH 1:5; other cryptocurrencies 1:2."
+            },
+            {
+              "title": "Payouts",
+              "text": "On demand within 24 hours; minimum profit 1%; payout methods Crypto and Rise."
+            },
+            {
+              "title": "Trading Bots",
+              "text": "Trading bots are allowed, but high-frequency trading, news scalping, demo-server exploitation, reverse trading across multiple accounts, arbitrage or latency bots, tick scalping, and emulators are prohibited. The workbook states prohibited-bot use can lead to "
+            },
+            {
+              "title": "Copy Trading",
+              "text": "Allowed only when every account being copied between belongs to the same trader."
+            },
+            {
+              "title": "High-Frequency Trading",
+              "text": "Not allowed. Trades must satisfy the minimum holding-time requirement."
+            },
+            {
+              "title": "Martingale and Layering",
+              "text": "Allowed within one account, but cannot be used across multiple accounts to manipulate or abuse the strategy."
+            },
+            {
+              "title": "Grid Trading and Minimum Hold",
+              "text": "Grid trading is allowed when trades meet the 1-minute minimum holding time. During evaluation, if more than 20% of total closed profit comes from trades held under 1 minute, the challenge must be redone. During the simulated funded phase, profit from sub-1-min"
             }
           ]
         }
@@ -2945,6 +4006,128 @@
       "bio": "Alpha Trader Firm is a US-based prop firm offering 1-Step, 2-Step and Instant Funding programs with no time limits, up to 100% profit split, on-demand payouts, and support for MT5, MatchTrader, and TradeLocker.",
       "logo": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAIAAAD/gAIDAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAFf2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSfvu78nIGlkPSdXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQnPz4KPHg6eG1wbWV0YSB4bWxuczp4PSdhZG9iZTpuczptZXRhLyc+CjxyZGY6UkRGIHhtbG5zOnJkZj0naHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyc+CgogPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9JycKICB4bWxuczpBdHRyaWI9J2h0dHA6Ly9ucy5hdHRyaWJ1dGlvbi5jb20vYWRzLzEuMC8nPgogIDxBdHRyaWI6QWRzPgogICA8cmRmOlNlcT4KICAgID",
       "verified": true,
+      "payoutAssurance": true,
+      "listingType": "best",
+      "showBestGlobal": true,
+      "bestRegions": {
+        "nigeria": false,
+        "pakistan": false,
+        "south_africa": false,
+        "us": true,
+        "uk": false,
+        "india": false,
+        "australia": false,
+        "china": false
+      },
+      "bestCategories": {
+        "futures": false,
+        "hft": false,
+        "instant_funding": false,
+        "trusted": false,
+        "cheapest": false,
+        "beginner": true,
+        "highest_rated": false,
+        "fast_payout": false
+      },
+      "ranking": 35,
+      "sortOrder": 35,
+      "score": 4.5,
+      "reviewCount": 0,
+      "followers": 7,
+      "markets": [
+        "Forex",
+        "Indices",
+        "Commodities",
+        "Metals",
+        "Crypto"
+      ],
+      "platforms": [
+        "MT5",
+        "MatchTrader",
+        "TradeLocker"
+      ],
+      "detailsLink": "/alphatraderfirmdetail",
+      "promoText": "50% OFF Selected Challenges",
+      "cardMetrics": {
+        "payoutCycle": "On Demand",
+        "minTradingDays": "0 Days",
+        "newsTrading": "Restricted",
+        "timeLimit": "Unlimited",
+        "eaAllowed": "Yes",
+        "startingPrice": "$97"
+      },
+      "keyMetrics": [
+        {
+          "label": "Max Allocation",
+          "value": "$4M"
+        },
+        {
+          "label": "Profit Split",
+          "value": "100%"
+        },
+        {
+          "label": "Payout Type",
+          "value": "On Demand"
+        },
+        {
+          "label": "Founded",
+          "value": "2023"
+        }
+      ],
+      "tradingConditions": [
+        {
+          "label": "Daily Drawdown",
+          "value": "4% - 5%"
+        },
+        {
+          "label": "Maximum Drawdown",
+          "value": "8% - 10%"
+        },
+        {
+          "label": "Leverage",
+          "value": "Up to 1:100"
+        },
+        {
+          "label": "Weekend Holding",
+          "value": "Allowed on selected models"
+        }
+      ],
+      "firmDetails": [
+        {
+          "label": "Company Name",
+          "value": "Alpha Trader Firm"
+        },
+        {
+          "label": "Headquarters",
+          "value": "United Kingdom"
+        },
+        {
+          "label": "Founded",
+          "value": "2023"
+        },
+        {
+          "label": "Platform",
+          "value": "MT5, MatchTrader, TradeLocker"
+        },
+        {
+          "label": "CEO",
+          "value": "Undisclosed"
+        }
+      ],
+      "evaluationPrograms": [
+        {
+          "title": "1-Step Challenge"
+        },
+        {
+          "title": "2-Step Challenge"
+        },
+        {
+          "title": "2-Step Pro"
+        },
+        {
+          "title": "Instant Funding"
+        }
+      ],
       "showFirmProfile": true,
       "showHomeTable": true,
       "showListed": true,
@@ -3039,6 +4222,43 @@
       "bio": "Trusted payouts and policy clarity.",
       "logo": "assets/funder%20pro%20logo%20(2).png",
       "verified": true,
+      "payoutAssurance": true,
+      "listingType": "listed",
+      "showBestGlobal": false,
+      "bestRegions": {
+        "pakistan": false,
+        "australia": false,
+        "uk": false,
+        "south_africa": false,
+        "india": false,
+        "nigeria": false,
+        "china": false,
+        "us": false
+      },
+      "bestCategories": {},
+      "ranking": 100,
+      "sortOrder": 100,
+      "score": 0,
+      "reviewCount": 0,
+      "followers": 911,
+      "markets": [
+        "HFT"
+      ],
+      "platforms": [],
+      "detailsLink": "funderprodetail.html",
+      "promoText": "",
+      "cardMetrics": {
+        "payoutCycle": "",
+        "minTradingDays": "",
+        "newsTrading": "",
+        "timeLimit": "",
+        "eaAllowed": "",
+        "startingPrice": ""
+      },
+      "keyMetrics": [],
+      "tradingConditions": [],
+      "firmDetails": [],
+      "evaluationPrograms": [],
       "showFirmProfile": true,
       "showHomeTable": true,
       "showListed": true,
@@ -3067,6 +4287,93 @@
       "bio": "FundingPips challenge rules and trader reviews, published from the supplied model rulebooks.",
       "logo": "",
       "verified": false,
+      "payoutAssurance": false,
+      "listingType": "",
+      "showBestGlobal": false,
+      "bestRegions": {},
+      "bestCategories": {},
+      "ranking": 999,
+      "sortOrder": 999,
+      "score": 0,
+      "reviewCount": 0,
+      "followers": 0,
+      "markets": [
+        "Forex",
+        "Metals",
+        "Energies",
+        "Indices",
+        "Crypto"
+      ],
+      "platforms": [],
+      "detailsLink": "/prop-firms/funding-pips",
+      "promoText": "",
+      "cardMetrics": {
+        "payoutCycle": "Varies by model",
+        "minTradingDays": "Varies by model",
+        "newsTrading": "Varies by model",
+        "timeLimit": "Varies by model",
+        "eaAllowed": "Not mentioned",
+        "startingPrice": "Not mentioned"
+      },
+      "keyMetrics": [],
+      "tradingConditions": [],
+      "firmDetails": [],
+      "evaluationPrograms": [
+        {
+          "program": "2-Step Standard",
+          "target": "8% or 10% / 5%",
+          "phase1": "8% or 10%",
+          "dailyLoss": "5%",
+          "maxDrawdown": "10%",
+          "minimumDays": "3 days per phase",
+          "split": "60%, 80%, 90%, or 100% by reward cycle"
+        },
+        {
+          "program": "2-Step Pro",
+          "target": "6% / 6%",
+          "phase1": "6%",
+          "dailyLoss": "3%",
+          "maxDrawdown": "6%",
+          "minimumDays": "1 day per phase",
+          "split": "80%"
+        },
+        {
+          "program": "2-Step Flex",
+          "target": "10% / 6%",
+          "phase1": "10%",
+          "dailyLoss": "4%",
+          "maxDrawdown": "12%",
+          "minimumDays": "None at 85%; 3 profitable days at 95%",
+          "split": "85% or 95%"
+        },
+        {
+          "program": "1-Step",
+          "target": "10%",
+          "phase1": "10%",
+          "dailyLoss": "3%",
+          "maxDrawdown": "6%",
+          "minimumDays": "3 days",
+          "split": "60%, 80%, 90%, or 100% by reward cycle"
+        },
+        {
+          "program": "1K Instant Giveaway",
+          "target": "Not mentioned",
+          "phase1": "Not applicable",
+          "dailyLoss": "5%",
+          "maxDrawdown": "5%",
+          "minimumDays": "None",
+          "split": "50%"
+        },
+        {
+          "program": "FundingPips Zero",
+          "target": "Not mentioned",
+          "phase1": "Not applicable",
+          "dailyLoss": "3%",
+          "maxDrawdown": "5% trailing",
+          "minimumDays": "7 profitable days per rolling 30-day period",
+          "split": "95%"
+        }
+      ],
       "showFirmProfile": false,
       "showHomeTable": false,
       "showListed": false,
@@ -3159,79 +4466,6 @@
         }
       ],
       "programRules": {
-        "2-step-pro": {
-          "slug": "2-step-pro",
-          "program": "2-Step Pro",
-          "title": "2-Step Pro Rules",
-          "desc": "Two 6% phases, strict loss limits, weekly rewards, and Master news/window conditions.",
-          "notice": "Purposely trading news during evaluation is prohibited and can close the account.",
-          "rules": [
-            {
-              "title": "Evaluation phases",
-              "text": "2"
-            },
-            {
-              "title": "Profit target",
-              "text": "6% in Phase 1 and 6% in Phase 2"
-            },
-            {
-              "title": "Minimum trading days",
-              "text": "1 day in each phase"
-            },
-            {
-              "title": "Daily loss",
-              "text": "3% of the higher value between opening balance and opening equity for the day"
-            },
-            {
-              "title": "Maximum drawdown",
-              "text": "6% of the starting account size"
-            },
-            {
-              "title": "Account sizes",
-              "text": "$5K, $10K, $25K, $50K, $100K, and $200K; $2.5K in select countries"
-            },
-            {
-              "title": "Evaluation reset",
-              "text": "10% discount after breach; available for Phase 1 or Phase 2 within 7 calendar days, keeping the same size, reward cycle, and platform. A Phase 2 reset restarts at Phase 1."
-            },
-            {
-              "title": "Evaluation news trading",
-              "text": "Holding trades during news is unrestricted, but purposely trading news is prohibited and leads to account closure."
-            },
-            {
-              "title": "Evaluation weekend holding",
-              "text": "Allowed without restrictions."
-            },
-            {
-              "title": "Master weekend holding",
-              "text": "Temporarily not allowed. Open trades are automatically closed before the weekend; this is not a hard breach."
-            },
-            {
-              "title": "Master news window",
-              "text": "Do not open or close affected-currency positions from 5 minutes before until 5 minutes after a high-impact red-folder event. For speeches, the window ends 5 minutes after the speech concludes."
-            },
-            {
-              "title": "News-window consequence",
-              "text": "Full profit from an affected trade is deducted, not only profit earned during the window."
-            },
-            {
-              "title": "5-hour swing exception",
-              "text": "Trades opened 5 hours or more before the event or speech may be closed in the restricted window and their profit counts."
-            },
-            {
-              "title": "Partial orders",
-              "text": "Closing a partial order in the restricted window flags the entire order."
-            },
-            {
-              "title": "Loss-limit responsibility",
-              "text": "The trader remains responsible if a news-profit deduction causes a daily-loss or maximum-loss violation."
-            },
-            {
-              "title": "Profit split",
-              "text": "80%"
-            }
-          ]
-        },
         "fundingpips-zero": {
           "slug": "fundingpips-zero",
           "program": "FundingPips Zero",
@@ -3588,6 +4822,79 @@
               "text": "Temporarily not allowed from 29 January 2026. Open trades are automatically closed; this is not a hard breach."
             }
           ]
+        },
+        "2-step-pro": {
+          "slug": "2-step-pro",
+          "program": "2-Step Pro",
+          "title": "2-Step Pro Rules",
+          "desc": "Two 6% phases, strict loss limits, weekly rewards, and Master news/window conditions.",
+          "notice": "Purposely trading news during evaluation is prohibited and can close the account.",
+          "rules": [
+            {
+              "title": "Evaluation phases",
+              "text": "2"
+            },
+            {
+              "title": "Profit target",
+              "text": "6% in Phase 1 and 6% in Phase 2"
+            },
+            {
+              "title": "Minimum trading days",
+              "text": "1 day in each phase"
+            },
+            {
+              "title": "Daily loss",
+              "text": "3% of the higher value between opening balance and opening equity for the day"
+            },
+            {
+              "title": "Maximum drawdown",
+              "text": "6% of the starting account size"
+            },
+            {
+              "title": "Account sizes",
+              "text": "$5K, $10K, $25K, $50K, $100K, and $200K; $2.5K in select countries"
+            },
+            {
+              "title": "Evaluation reset",
+              "text": "10% discount after breach; available for Phase 1 or Phase 2 within 7 calendar days, keeping the same size, reward cycle, and platform. A Phase 2 reset restarts at Phase 1."
+            },
+            {
+              "title": "Evaluation news trading",
+              "text": "Holding trades during news is unrestricted, but purposely trading news is prohibited and leads to account closure."
+            },
+            {
+              "title": "Evaluation weekend holding",
+              "text": "Allowed without restrictions."
+            },
+            {
+              "title": "Master weekend holding",
+              "text": "Temporarily not allowed. Open trades are automatically closed before the weekend; this is not a hard breach."
+            },
+            {
+              "title": "Master news window",
+              "text": "Do not open or close affected-currency positions from 5 minutes before until 5 minutes after a high-impact red-folder event. For speeches, the window ends 5 minutes after the speech concludes."
+            },
+            {
+              "title": "News-window consequence",
+              "text": "Full profit from an affected trade is deducted, not only profit earned during the window."
+            },
+            {
+              "title": "5-hour swing exception",
+              "text": "Trades opened 5 hours or more before the event or speech may be closed in the restricted window and their profit counts."
+            },
+            {
+              "title": "Partial orders",
+              "text": "Closing a partial order in the restricted window flags the entire order."
+            },
+            {
+              "title": "Loss-limit responsibility",
+              "text": "The trader remains responsible if a news-profit deduction causes a daily-loss or maximum-loss violation."
+            },
+            {
+              "title": "Profit split",
+              "text": "80%"
+            }
+          ]
         }
       },
       "updatedAt": "2026-08-24T16:26:40.679Z"
@@ -3608,6 +4915,72 @@
       "bio": "Funding Traders offers 1-Step Pro, 2-Step Pro, and Instant Funded simulated-account models with model-specific loss, consistency, leverage, payout, and safety-cushion conditions.",
       "logo": "",
       "verified": false,
+      "payoutAssurance": false,
+      "listingType": "",
+      "showBestGlobal": false,
+      "bestRegions": {},
+      "bestCategories": {},
+      "ranking": 999,
+      "sortOrder": 999,
+      "score": 0,
+      "reviewCount": 0,
+      "followers": 0,
+      "markets": [
+        "FX",
+        "Crypto",
+        "Indices",
+        "Metals",
+        "Oil"
+      ],
+      "platforms": [
+        "MetaTrader 5",
+        "TradeLocker"
+      ],
+      "detailsLink": "/prop-firms/funding-traders",
+      "promoText": "",
+      "cardMetrics": {
+        "payoutCycle": "14 or 21 days",
+        "minTradingDays": "2 days Pro; 5 profitable days Instant",
+        "newsTrading": "Model-specific",
+        "timeLimit": "Unlimited on 1-Step Pro",
+        "eaAllowed": "Risk-management EAs only",
+        "startingPrice": "Not mentioned"
+      },
+      "keyMetrics": [],
+      "tradingConditions": [],
+      "firmDetails": [],
+      "evaluationPrograms": [
+        {
+          "program": "1-Step Pro",
+          "target": "10%",
+          "phase1": "10%",
+          "dailyLoss": "3%",
+          "maxDrawdown": "10% trailing",
+          "minimumDays": "2 days",
+          "split": "80% default; up to 100%",
+          "payoutCycle": "21 days default"
+        },
+        {
+          "program": "2-Step Pro",
+          "target": "Pro 6: 6% / 6%; Pro 10: 10% / 5%",
+          "phase1": "Pro 6: 6%; Pro 10: 10%",
+          "dailyLoss": "Pro 6: 3%; Pro 10: 5%",
+          "maxDrawdown": "Pro 6: 6%; Pro 10: 10% fixed",
+          "minimumDays": "2 days",
+          "split": "80% default; up to 100%",
+          "payoutCycle": "21 days default"
+        },
+        {
+          "program": "Instant Funded",
+          "target": "Not mentioned",
+          "phase1": "Not applicable",
+          "dailyLoss": "3%",
+          "maxDrawdown": "6% trailing then locked",
+          "minimumDays": "5 profitable days per 30 days",
+          "split": "90% default; up to 100%",
+          "payoutCycle": "14 days first payout"
+        }
+      ],
       "showFirmProfile": false,
       "showHomeTable": false,
       "showListed": false,
@@ -3733,79 +5106,6 @@
             }
           ]
         },
-        "instant-funded": {
-          "slug": "instant-funded",
-          "program": "Instant Funded",
-          "title": "Instant Funded Rules",
-          "desc": "Trailing drawdown, risk, profitable-day, news, weekend, consistency, payout, and safety-cushion rules for Funding Traders Instant Funded.",
-          "notice": "PDF model values are shown first. Firm-wide rules below come from the supplied Funding Traders research workbook.",
-          "rules": [
-            {
-              "title": "Profit Target",
-              "text": "Not mentioned."
-            },
-            {
-              "title": "Maximum Daily Loss",
-              "text": "3%, calculated from the higher of the day's starting balance or equity and including floating loss."
-            },
-            {
-              "title": "Maximum Overall Loss",
-              "text": "6% trailing until 3% profit is reached, then locked to the initial balance."
-            },
-            {
-              "title": "Maximum Risk",
-              "text": "1% of the initial account balance across all open trades combined."
-            },
-            {
-              "title": "Minimum Profitable Days",
-              "text": "Each 30-day period requires 5 profitable days with at least 0.25% profit each. The counter resets after a payout or after 30 days if no payout is made."
-            },
-            {
-              "title": "Trading Period",
-              "text": "Not mentioned."
-            },
-            {
-              "title": "News Trading",
-              "text": "Strictly prohibited; having trades open during high-impact news fails the account. The News Holding add-on provides an exemption."
-            },
-            {
-              "title": "Weekend and Overnight Holding",
-              "text": "Overnight holding is allowed, but weekend holding is not. All positions, including crypto, must be closed at least one hour before Friday market close."
-            },
-            {
-              "title": "Consistency Rule",
-              "text": "The largest profit day must remain at or below 15% of current profits at all times."
-            },
-            {
-              "title": "Platforms",
-              "text": "MetaTrader 5 and TradeLocker, according to the supplied workbook."
-            },
-            {
-              "title": "Leverage",
-              "text": "FX 1:50; indices 1:20; metals 1:20; crypto 1:2; energies 1:10."
-            },
-            {
-              "title": "Commissions",
-              "text": "$6 per lot roundtrip on all instruments except indices."
-            },
-            {
-              "title": "First Payout",
-              "text": "Available 14 days after the first trade."
-            },
-            {
-              "title": "Payout Eligibility",
-              "text": "At least 1% profit is required in addition to the mandatory 3% safety cushion."
-            },
-            {
-              "title": "Profit Split",
-              "text": "90% to the trader by default, up to 100% with add-ons."
-            },
-            {
-              "title": "Safety Cushion",
-              "text": "The first 3% profit is non-withdrawable and acts as a buffer. Including it in a payout request closes the account; excluding it allows the account to reset and trading to continue during processing."
-            }
-          ]
-        },
         "2-step-pro": {
           "slug": "2-step-pro",
           "program": "2-Step Pro",
@@ -3878,6 +5178,79 @@
               "text": "$200,000 account size. The workbook lists $400 for Pro 6 and $500 for Pro 10."
             }
           ]
+        },
+        "instant-funded": {
+          "slug": "instant-funded",
+          "program": "Instant Funded",
+          "title": "Instant Funded Rules",
+          "desc": "Trailing drawdown, risk, profitable-day, news, weekend, consistency, payout, and safety-cushion rules for Funding Traders Instant Funded.",
+          "notice": "PDF model values are shown first. Firm-wide rules below come from the supplied Funding Traders research workbook.",
+          "rules": [
+            {
+              "title": "Profit Target",
+              "text": "Not mentioned."
+            },
+            {
+              "title": "Maximum Daily Loss",
+              "text": "3%, calculated from the higher of the day's starting balance or equity and including floating loss."
+            },
+            {
+              "title": "Maximum Overall Loss",
+              "text": "6% trailing until 3% profit is reached, then locked to the initial balance."
+            },
+            {
+              "title": "Maximum Risk",
+              "text": "1% of the initial account balance across all open trades combined."
+            },
+            {
+              "title": "Minimum Profitable Days",
+              "text": "Each 30-day period requires 5 profitable days with at least 0.25% profit each. The counter resets after a payout or after 30 days if no payout is made."
+            },
+            {
+              "title": "Trading Period",
+              "text": "Not mentioned."
+            },
+            {
+              "title": "News Trading",
+              "text": "Strictly prohibited; having trades open during high-impact news fails the account. The News Holding add-on provides an exemption."
+            },
+            {
+              "title": "Weekend and Overnight Holding",
+              "text": "Overnight holding is allowed, but weekend holding is not. All positions, including crypto, must be closed at least one hour before Friday market close."
+            },
+            {
+              "title": "Consistency Rule",
+              "text": "The largest profit day must remain at or below 15% of current profits at all times."
+            },
+            {
+              "title": "Platforms",
+              "text": "MetaTrader 5 and TradeLocker, according to the supplied workbook."
+            },
+            {
+              "title": "Leverage",
+              "text": "FX 1:50; indices 1:20; metals 1:20; crypto 1:2; energies 1:10."
+            },
+            {
+              "title": "Commissions",
+              "text": "$6 per lot roundtrip on all instruments except indices."
+            },
+            {
+              "title": "First Payout",
+              "text": "Available 14 days after the first trade."
+            },
+            {
+              "title": "Payout Eligibility",
+              "text": "At least 1% profit is required in addition to the mandatory 3% safety cushion."
+            },
+            {
+              "title": "Profit Split",
+              "text": "90% to the trader by default, up to 100% with add-ons."
+            },
+            {
+              "title": "Safety Cushion",
+              "text": "The first 3% profit is non-withdrawable and acts as a buffer. Including it in a payout request closes the account; excluding it allows the account to reset and trading to continue during processing."
+            }
+          ]
         }
       },
       "updatedAt": "2026-08-24T16:07:26.591Z"
@@ -3894,6 +5267,43 @@
       "bio": "Crypto payouts and modern tools.",
       "logo": "assets/fx2fundinglogo.png",
       "verified": true,
+      "payoutAssurance": true,
+      "listingType": "listed",
+      "showBestGlobal": false,
+      "bestRegions": {
+        "nigeria": false,
+        "australia": false,
+        "us": false,
+        "india": false,
+        "pakistan": false,
+        "uk": false,
+        "china": false,
+        "south_africa": false
+      },
+      "bestCategories": {},
+      "ranking": 120,
+      "sortOrder": 120,
+      "score": 0,
+      "reviewCount": 0,
+      "followers": 701,
+      "markets": [
+        "Forex"
+      ],
+      "platforms": [],
+      "detailsLink": "fx2fundingdetail.html",
+      "promoText": "",
+      "cardMetrics": {
+        "payoutCycle": "",
+        "minTradingDays": "",
+        "newsTrading": "",
+        "timeLimit": "",
+        "eaAllowed": "",
+        "startingPrice": ""
+      },
+      "keyMetrics": [],
+      "tradingConditions": [],
+      "firmDetails": [],
+      "evaluationPrograms": [],
       "showFirmProfile": true,
       "showHomeTable": true,
       "showListed": true,
@@ -3920,6 +5330,129 @@
       "bio": "Flexible funding with TradingView support.",
       "logo": "assets/fxify%20logo.png",
       "verified": true,
+      "payoutAssurance": true,
+      "listingType": "best",
+      "showBestGlobal": true,
+      "bestRegions": {
+        "china": false,
+        "uk": true,
+        "south_africa": true,
+        "nigeria": true,
+        "india": true,
+        "australia": true,
+        "pakistan": true,
+        "us": false
+      },
+      "bestCategories": {
+        "instant_funding": true,
+        "trusted": true,
+        "beginner": true,
+        "highest_rated": true,
+        "cheapest": false,
+        "fast_payout": true,
+        "hft": false,
+        "futures": false
+      },
+      "ranking": 8,
+      "sortOrder": 8,
+      "score": 0,
+      "reviewCount": 0,
+      "followers": 0,
+      "markets": [
+        "Forex",
+        "Indices",
+        "Stocks",
+        "Metals",
+        "Other Commodities"
+      ],
+      "platforms": [
+        "United States"
+      ],
+      "detailsLink": "/prop-firms/fxify",
+      "promoText": "33% OFF",
+      "cardMetrics": {
+        "payoutCycle": "7-14 Days",
+        "minTradingDays": "3 Days",
+        "newsTrading": "Allowed",
+        "timeLimit": "Unlimited / 7 Days",
+        "eaAllowed": "Yes",
+        "startingPrice": "$19"
+      },
+      "keyMetrics": [
+        {
+          "label": "Reviews",
+          "value": "110"
+        },
+        {
+          "label": "Profit Split",
+          "value": "90%"
+        },
+        {
+          "label": "Min Trading Days",
+          "value": "3 Days"
+        },
+        {
+          "label": "Founded",
+          "value": "2023"
+        }
+      ],
+      "tradingConditions": [
+        {
+          "label": "Daily Drawdown",
+          "value": "4% - 5%"
+        },
+        {
+          "label": "Maximum Drawdown",
+          "value": "8% - 10%"
+        },
+        {
+          "label": "Leverage",
+          "value": "Up to 1:50"
+        },
+        {
+          "label": "Weekend Holding",
+          "value": "Allowed on most models"
+        }
+      ],
+      "firmDetails": [
+        {
+          "label": "Company Name",
+          "value": "FXIFY"
+        },
+        {
+          "label": "Headquarters",
+          "value": "United Kingdom"
+        },
+        {
+          "label": "Founded",
+          "value": "2023"
+        },
+        {
+          "label": "Platform",
+          "value": "MT5, DXtrade, TradingView"
+        },
+        {
+          "label": "CEO",
+          "value": "Peter Brown and David Bhidey"
+        }
+      ],
+      "evaluationPrograms": [
+        {
+          "title": "Stocks"
+        },
+        {
+          "title": "Indices"
+        },
+        {
+          "title": "Metals"
+        },
+        {
+          "title": "Other Commodities"
+        },
+        {
+          "title": "Forex"
+        }
+      ],
       "showFirmProfile": true,
       "showHomeTable": true,
       "showListed": true,
@@ -4004,6 +5537,222 @@
       "bio": "Flexible funding with strong payout system.",
       "logo": "assets/goat%20funded%20trader%20logo.png",
       "verified": true,
+      "payoutAssurance": true,
+      "listingType": "best",
+      "showBestGlobal": true,
+      "bestRegions": {
+        "us": false,
+        "china": false,
+        "pakistan": true,
+        "india": true,
+        "australia": true,
+        "south_africa": true,
+        "nigeria": true,
+        "uk": true
+      },
+      "bestCategories": {
+        "futures": true,
+        "highest_rated": true,
+        "instant_funding": true,
+        "fast_payout": true,
+        "trusted": true,
+        "cheapest": true,
+        "hft": true,
+        "beginner": true
+      },
+      "ranking": 8,
+      "sortOrder": 8,
+      "score": 0,
+      "reviewCount": 0,
+      "followers": 0,
+      "markets": [
+        "Forex",
+        "CFD",
+        "Crypto"
+      ],
+      "platforms": [
+        "MetaTrader 5",
+        "cTrader",
+        "MatchTrader",
+        "TradeLocker",
+        "Volumetrica"
+      ],
+      "detailsLink": "/prop-firms/goat-funded-trader",
+      "promoText": "40% OFF",
+      "cardMetrics": {
+        "payoutCycle": "10-14 Days",
+        "minTradingDays": "0-6 Days",
+        "newsTrading": "Allowed (1% cap)",
+        "timeLimit": "Unlimited",
+        "eaAllowed": "Not mentioned",
+        "startingPrice": "Not mentioned"
+      },
+      "keyMetrics": [
+        {
+          "label": "Published Models",
+          "value": "7"
+        },
+        {
+          "label": "Profit Split",
+          "value": "80%-90%; 100% add-on"
+        },
+        {
+          "label": "Payout Cycle",
+          "value": "10 or 14 days; GOAT first reward may be on demand"
+        },
+        {
+          "label": "Minimum Withdrawal",
+          "value": "$100"
+        },
+        {
+          "label": "Daily Profit Cap",
+          "value": "$3,000 on funded accounts"
+        },
+        {
+          "label": "Payout Processing",
+          "value": "Up to 2 business days after verification"
+        }
+      ],
+      "tradingConditions": [
+        {
+          "label": "Daily Loss Limit",
+          "value": "3%-5%, model/phase dependent"
+        },
+        {
+          "label": "Maximum Loss",
+          "value": "5%-10%, model dependent"
+        },
+        {
+          "label": "Drawdown Type",
+          "value": "Static on challenges; trailing on instant models"
+        },
+        {
+          "label": "Minimum Trading Days",
+          "value": "0-6 days, model/phase dependent"
+        },
+        {
+          "label": "Time Limit",
+          "value": "Unlimited"
+        },
+        {
+          "label": "News Trading",
+          "value": "Allowed; 1% profit cap within ±5 minutes of high-impact news"
+        },
+        {
+          "label": "Weekend/Overnight Holding",
+          "value": "Allowed"
+        },
+        {
+          "label": "Consistency Rule",
+          "value": "None on evaluations; 15% on Instant GOAT/HERO; none on Premium"
+        }
+      ],
+      "firmDetails": [
+        {
+          "label": "Company Name",
+          "value": "Goat Funded Trader"
+        },
+        {
+          "label": "Challenge Models",
+          "value": "1-Step GOAT, 2-Step GOAT, 2-Step Standard, 3-Step Standard, Instant GOAT, Instant HERO, Instant Premium"
+        },
+        {
+          "label": "Platforms",
+          "value": "cTrader, TradeLocker, MatchTrader, Volumetrica, MetaTrader 5"
+        },
+        {
+          "label": "Payout Methods",
+          "value": "Rise, Crypto, Skrill, Bank Transfer"
+        },
+        {
+          "label": "Minimum Withdrawal",
+          "value": "$100"
+        },
+        {
+          "label": "Daily Profit Cap",
+          "value": "$3,000 on funded accounts; excess is deducted without account breach"
+        },
+        {
+          "label": "Pending Requests",
+          "value": "Only one payout request may be pending; partial withdrawals are not allowed"
+        },
+        {
+          "label": "Payout Processing",
+          "value": "Up to 2 business days after verification"
+        },
+        {
+          "label": "Pricing",
+          "value": "Not mentioned"
+        },
+        {
+          "label": "Account Sizes",
+          "value": "Not mentioned"
+        },
+        {
+          "label": "Maximum Allocation",
+          "value": "Not mentioned"
+        },
+        {
+          "label": "Refundable Fee",
+          "value": "Not mentioned"
+        },
+        {
+          "label": "EA Rules",
+          "value": "Not mentioned"
+        },
+        {
+          "label": "Copy Trading",
+          "value": "Not mentioned"
+        },
+        {
+          "label": "Restricted Countries",
+          "value": "Not mentioned"
+        }
+      ],
+      "evaluationPrograms": [
+        {
+          "program": "1-Step GOAT",
+          "target": "10%",
+          "phase1": "10%",
+          "split": "80%; 100% add-on"
+        },
+        {
+          "program": "2-Step GOAT",
+          "target": "8% / 6%",
+          "phase1": "8%",
+          "split": "Not mentioned; 100% add-on available"
+        },
+        {
+          "program": "2-Step Standard",
+          "target": "10% / 5%",
+          "phase1": "10%",
+          "split": "Not mentioned; 100% add-on available"
+        },
+        {
+          "program": "3-Step Standard",
+          "target": "6% each phase",
+          "phase1": "6%",
+          "split": "80%; 100% add-on"
+        },
+        {
+          "program": "Instant GOAT",
+          "target": "Not mentioned",
+          "phase1": "Not applicable",
+          "split": "80%; 100% add-on"
+        },
+        {
+          "program": "Instant HERO",
+          "target": "Not mentioned",
+          "phase1": "Not applicable",
+          "split": "90%; 100% add-on"
+        },
+        {
+          "program": "Instant Premium",
+          "target": "Not mentioned",
+          "phase1": "Not applicable",
+          "split": "80%; 100% add-on"
+        }
+      ],
       "showFirmProfile": true,
       "showHomeTable": true,
       "showListed": true,
@@ -4112,246 +5861,6 @@
         }
       ],
       "programRules": {
-        "instant-premium": {
-          "slug": "instant-premium",
-          "program": "Instant Premium",
-          "title": "Instant Premium Challenge Rules",
-          "desc": "Rules for the Instant Premium account model.",
-          "notice": "",
-          "rules": [
-            {
-              "title": "Profit target",
-              "text": "Not mentioned"
-            },
-            {
-              "title": "Minimum trading days",
-              "text": "5 valid trading days at 0.5% profit each"
-            },
-            {
-              "title": "Daily loss",
-              "text": "3% trailing"
-            },
-            {
-              "title": "Maximum drawdown",
-              "text": "6% trailing EOD"
-            },
-            {
-              "title": "Consistency rule",
-              "text": "None"
-            },
-            {
-              "title": "Drawdown reset after payout",
-              "text": "Yes"
-            },
-            {
-              "title": "Time limit",
-              "text": "Unlimited"
-            },
-            {
-              "title": "Safety cushion",
-              "text": "No separate cushion; buffer is the gap between current equity and the trailing limits"
-            },
-            {
-              "title": "Profit split",
-              "text": "80%; optional 100% add-on"
-            },
-            {
-              "title": "Payout cycle",
-              "text": "Every 10 days"
-            },
-            {
-              "title": "Daily profit cap",
-              "text": "$3,000"
-            },
-            {
-              "title": "Leverage",
-              "text": "Forex 1:50; Indices/Commodities 1:10; Crypto 1:2"
-            }
-          ]
-        },
-        "instant-goat": {
-          "slug": "instant-goat",
-          "program": "Instant GOAT",
-          "title": "Instant GOAT Challenge Rules",
-          "desc": "Rules for the Instant GOAT account model.",
-          "notice": "",
-          "rules": [
-            {
-              "title": "Profit target",
-              "text": "Not mentioned"
-            },
-            {
-              "title": "Minimum trading days",
-              "text": "5 valid trading days"
-            },
-            {
-              "title": "Daily loss",
-              "text": "3% trailing"
-            },
-            {
-              "title": "Maximum drawdown",
-              "text": "6% trailing"
-            },
-            {
-              "title": "Consistency rule",
-              "text": "15%"
-            },
-            {
-              "title": "Drawdown reset after payout",
-              "text": "Yes"
-            },
-            {
-              "title": "Time limit",
-              "text": "Unlimited"
-            },
-            {
-              "title": "Safety cushion",
-              "text": "No separate cushion; buffer is the gap between current equity and the trailing limits"
-            },
-            {
-              "title": "Profit split",
-              "text": "80%; optional 100% add-on"
-            },
-            {
-              "title": "Payout cycle",
-              "text": "Bi-weekly (every 14 days)"
-            },
-            {
-              "title": "Daily profit cap",
-              "text": "$3,000"
-            },
-            {
-              "title": "Leverage",
-              "text": "Forex 1:50; Indices/Commodities 1:10; Crypto 1:2"
-            }
-          ]
-        },
-        "instant-hero": {
-          "slug": "instant-hero",
-          "program": "Instant HERO",
-          "title": "Instant HERO Challenge Rules",
-          "desc": "Rules for the Instant HERO account model.",
-          "notice": "",
-          "rules": [
-            {
-              "title": "Profit target",
-              "text": "Not mentioned"
-            },
-            {
-              "title": "Minimum trading days",
-              "text": "6 valid trading days at 0.5% profit each"
-            },
-            {
-              "title": "Payout eligibility paragraph",
-              "text": "The PDF separately states at least 5 valid trading days before requesting a reward"
-            },
-            {
-              "title": "Daily loss",
-              "text": "3% trailing"
-            },
-            {
-              "title": "Maximum drawdown",
-              "text": "5% trailing"
-            },
-            {
-              "title": "Consistency rule",
-              "text": "15%"
-            },
-            {
-              "title": "Drawdown reset after payout",
-              "text": "Yes"
-            },
-            {
-              "title": "Time limit",
-              "text": "Unlimited"
-            },
-            {
-              "title": "Safety cushion",
-              "text": "No separate cushion; the PDF wording references a 3% daily and 6% overall trailing buffer"
-            },
-            {
-              "title": "Profit split",
-              "text": "90%; optional 100% add-on"
-            },
-            {
-              "title": "Payout cycle",
-              "text": "Bi-weekly (every 14 days)"
-            },
-            {
-              "title": "Daily profit cap",
-              "text": "$3,000"
-            },
-            {
-              "title": "Leverage",
-              "text": "Forex 1:50; Indices/Commodities 1:10; Crypto 1:2"
-            }
-          ]
-        },
-        "2-step-goat": {
-          "slug": "2-step-goat",
-          "program": "2-Step GOAT",
-          "title": "2-Step GOAT Challenge Rules",
-          "desc": "Rules for the 2-Step GOAT account model.",
-          "notice": "",
-          "rules": [
-            {
-              "title": "Phase 1 profit target",
-              "text": "8%"
-            },
-            {
-              "title": "Phase 2 profit target",
-              "text": "6%"
-            },
-            {
-              "title": "Daily loss",
-              "text": "4% in both evaluation phases and funded account"
-            },
-            {
-              "title": "Maximum drawdown",
-              "text": "10% static"
-            },
-            {
-              "title": "Evaluation minimum trading days",
-              "text": "3 days per phase"
-            },
-            {
-              "title": "Funded minimum trading days",
-              "text": "3 days per payout; 4 days for accounts purchased from 25 July 2026"
-            },
-            {
-              "title": "Time limit",
-              "text": "Unlimited"
-            },
-            {
-              "title": "Consistency rule",
-              "text": "None"
-            },
-            {
-              "title": "Profit split",
-              "text": "Not mentioned; optional 100% add-on"
-            },
-            {
-              "title": "Payout cycle",
-              "text": "First reward on demand once eligible; later rewards bi-weekly"
-            },
-            {
-              "title": "Daily profit cap",
-              "text": "$3,000 on funded account"
-            },
-            {
-              "title": "On-demand first reward add-on",
-              "text": "40% split after 3 funded-account trading days"
-            },
-            {
-              "title": "Evaluation leverage",
-              "text": "Forex 1:100; Indices/Commodities 1:20; Crypto 1:2"
-            },
-            {
-              "title": "Funded leverage",
-              "text": "Forex 1:50; Indices/Commodities 1:10; Crypto 1:2"
-            }
-          ]
-        },
         "3-step-standard": {
           "slug": "3-step-standard",
           "program": "3-Step Standard",
@@ -4478,6 +5987,128 @@
             }
           ]
         },
+        "instant-premium": {
+          "slug": "instant-premium",
+          "program": "Instant Premium",
+          "title": "Instant Premium Challenge Rules",
+          "desc": "Rules for the Instant Premium account model.",
+          "notice": "",
+          "rules": [
+            {
+              "title": "Profit target",
+              "text": "Not mentioned"
+            },
+            {
+              "title": "Minimum trading days",
+              "text": "5 valid trading days at 0.5% profit each"
+            },
+            {
+              "title": "Daily loss",
+              "text": "3% trailing"
+            },
+            {
+              "title": "Maximum drawdown",
+              "text": "6% trailing EOD"
+            },
+            {
+              "title": "Consistency rule",
+              "text": "None"
+            },
+            {
+              "title": "Drawdown reset after payout",
+              "text": "Yes"
+            },
+            {
+              "title": "Time limit",
+              "text": "Unlimited"
+            },
+            {
+              "title": "Safety cushion",
+              "text": "No separate cushion; buffer is the gap between current equity and the trailing limits"
+            },
+            {
+              "title": "Profit split",
+              "text": "80%; optional 100% add-on"
+            },
+            {
+              "title": "Payout cycle",
+              "text": "Every 10 days"
+            },
+            {
+              "title": "Daily profit cap",
+              "text": "$3,000"
+            },
+            {
+              "title": "Leverage",
+              "text": "Forex 1:50; Indices/Commodities 1:10; Crypto 1:2"
+            }
+          ]
+        },
+        "2-step-goat": {
+          "slug": "2-step-goat",
+          "program": "2-Step GOAT",
+          "title": "2-Step GOAT Challenge Rules",
+          "desc": "Rules for the 2-Step GOAT account model.",
+          "notice": "",
+          "rules": [
+            {
+              "title": "Phase 1 profit target",
+              "text": "8%"
+            },
+            {
+              "title": "Phase 2 profit target",
+              "text": "6%"
+            },
+            {
+              "title": "Daily loss",
+              "text": "4% in both evaluation phases and funded account"
+            },
+            {
+              "title": "Maximum drawdown",
+              "text": "10% static"
+            },
+            {
+              "title": "Evaluation minimum trading days",
+              "text": "3 days per phase"
+            },
+            {
+              "title": "Funded minimum trading days",
+              "text": "3 days per payout; 4 days for accounts purchased from 25 July 2026"
+            },
+            {
+              "title": "Time limit",
+              "text": "Unlimited"
+            },
+            {
+              "title": "Consistency rule",
+              "text": "None"
+            },
+            {
+              "title": "Profit split",
+              "text": "Not mentioned; optional 100% add-on"
+            },
+            {
+              "title": "Payout cycle",
+              "text": "First reward on demand once eligible; later rewards bi-weekly"
+            },
+            {
+              "title": "Daily profit cap",
+              "text": "$3,000 on funded account"
+            },
+            {
+              "title": "On-demand first reward add-on",
+              "text": "40% split after 3 funded-account trading days"
+            },
+            {
+              "title": "Evaluation leverage",
+              "text": "Forex 1:100; Indices/Commodities 1:20; Crypto 1:2"
+            },
+            {
+              "title": "Funded leverage",
+              "text": "Forex 1:50; Indices/Commodities 1:10; Crypto 1:2"
+            }
+          ]
+        },
         "1-step-goat": {
           "slug": "1-step-goat",
           "program": "1-Step GOAT",
@@ -4550,6 +6181,124 @@
               "text": "Forex 1:50; Indices/Commodities 1:10; Crypto 1:2"
             }
           ]
+        },
+        "instant-goat": {
+          "slug": "instant-goat",
+          "program": "Instant GOAT",
+          "title": "Instant GOAT Challenge Rules",
+          "desc": "Rules for the Instant GOAT account model.",
+          "notice": "",
+          "rules": [
+            {
+              "title": "Profit target",
+              "text": "Not mentioned"
+            },
+            {
+              "title": "Minimum trading days",
+              "text": "5 valid trading days"
+            },
+            {
+              "title": "Daily loss",
+              "text": "3% trailing"
+            },
+            {
+              "title": "Maximum drawdown",
+              "text": "6% trailing"
+            },
+            {
+              "title": "Consistency rule",
+              "text": "15%"
+            },
+            {
+              "title": "Drawdown reset after payout",
+              "text": "Yes"
+            },
+            {
+              "title": "Time limit",
+              "text": "Unlimited"
+            },
+            {
+              "title": "Safety cushion",
+              "text": "No separate cushion; buffer is the gap between current equity and the trailing limits"
+            },
+            {
+              "title": "Profit split",
+              "text": "80%; optional 100% add-on"
+            },
+            {
+              "title": "Payout cycle",
+              "text": "Bi-weekly (every 14 days)"
+            },
+            {
+              "title": "Daily profit cap",
+              "text": "$3,000"
+            },
+            {
+              "title": "Leverage",
+              "text": "Forex 1:50; Indices/Commodities 1:10; Crypto 1:2"
+            }
+          ]
+        },
+        "instant-hero": {
+          "slug": "instant-hero",
+          "program": "Instant HERO",
+          "title": "Instant HERO Challenge Rules",
+          "desc": "Rules for the Instant HERO account model.",
+          "notice": "",
+          "rules": [
+            {
+              "title": "Profit target",
+              "text": "Not mentioned"
+            },
+            {
+              "title": "Minimum trading days",
+              "text": "6 valid trading days at 0.5% profit each"
+            },
+            {
+              "title": "Payout eligibility paragraph",
+              "text": "The PDF separately states at least 5 valid trading days before requesting a reward"
+            },
+            {
+              "title": "Daily loss",
+              "text": "3% trailing"
+            },
+            {
+              "title": "Maximum drawdown",
+              "text": "5% trailing"
+            },
+            {
+              "title": "Consistency rule",
+              "text": "15%"
+            },
+            {
+              "title": "Drawdown reset after payout",
+              "text": "Yes"
+            },
+            {
+              "title": "Time limit",
+              "text": "Unlimited"
+            },
+            {
+              "title": "Safety cushion",
+              "text": "No separate cushion; the PDF wording references a 3% daily and 6% overall trailing buffer"
+            },
+            {
+              "title": "Profit split",
+              "text": "90%; optional 100% add-on"
+            },
+            {
+              "title": "Payout cycle",
+              "text": "Bi-weekly (every 14 days)"
+            },
+            {
+              "title": "Daily profit cap",
+              "text": "$3,000"
+            },
+            {
+              "title": "Leverage",
+              "text": "Forex 1:50; Indices/Commodities 1:10; Crypto 1:2"
+            }
+          ]
         }
       },
       "updatedAt": "2026-08-24T10:50:39.614Z"
@@ -4568,6 +6317,157 @@
       "bio": "Flexible funding with cTrader and MT5 support.",
       "logo": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAIAAADajyQQAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAE1GlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSfvu78nIGlkPSdXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQnPz4KPHg6eG1wbWV0YSB4bWxuczp4PSdhZG9iZTpuczptZXRhLyc+CjxyZGY6UkRGIHhtbG5zOnJkZj0naHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyc+CgogPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9JycKICB4bWxuczpBdHRyaWI9J2h0dHA6Ly9ucy5hdHRyaWJ1dGlvbi5jb20vYWRzLzEuMC8nPgogIDxBdHRyaWI6QWRzPgogICA8cmRmOlNlcT4KICAgID",
       "verified": false,
+      "payoutAssurance": false,
+      "listingType": "best",
+      "showBestGlobal": true,
+      "bestRegions": {
+        "china": false,
+        "australia": false,
+        "india": true,
+        "us": false,
+        "south_africa": true,
+        "uk": false,
+        "nigeria": true,
+        "pakistan": false
+      },
+      "bestCategories": {
+        "instant_funding": false,
+        "fast_payout": false,
+        "highest_rated": false,
+        "futures": false,
+        "hft": true,
+        "trusted": false,
+        "beginner": true,
+        "cheapest": true
+      },
+      "ranking": 10,
+      "sortOrder": 10,
+      "score": 1,
+      "reviewCount": 1,
+      "followers": 651,
+      "markets": [
+        "Forex",
+        "Indices",
+        "Metals",
+        "Energy",
+        "Other Commodities",
+        "Crypto"
+      ],
+      "platforms": [
+        "cTrader",
+        "MT5",
+        "TradeLocker"
+      ],
+      "detailsLink": "/qtfundeddetail.html",
+      "promoText": "50% OFF+ BOGO",
+      "cardMetrics": {
+        "payoutCycle": "Bi-Weekly",
+        "minTradingDays": "2 Days",
+        "newsTrading": "Allowed on Evaluations",
+        "timeLimit": "Unlimited",
+        "eaAllowed": "Pre-Approval Add-On",
+        "startingPrice": "$10"
+      },
+      "keyMetrics": [
+        {
+          "label": "Max Allocation",
+          "value": "$300,000"
+        },
+        {
+          "label": "Profit Split",
+          "value": "Up to 90%"
+        },
+        {
+          "label": "Payout Cycle",
+          "value": "Bi-Weekly"
+        },
+        {
+          "label": "News Trading",
+          "value": "Allowed on Evaluations"
+        },
+        {
+          "label": "Min Trading Days",
+          "value": "2 Days"
+        },
+        {
+          "label": "Time Limit",
+          "value": "Unlimited"
+        },
+        {
+          "label": "Starting Price",
+          "value": "$10"
+        },
+        {
+          "label": "EA Allowed",
+          "value": "Pre-Approval Add-On"
+        }
+      ],
+      "tradingConditions": [
+        {
+          "label": "Daily Drawdown",
+          "value": "4% - 5%"
+        },
+        {
+          "label": "Maximum Drawdown",
+          "value": "8% - 10%"
+        },
+        {
+          "label": "Leverage",
+          "value": "Up to 1:50"
+        },
+        {
+          "label": "Weekend Holding",
+          "value": "Allowed"
+        }
+      ],
+      "firmDetails": [
+        {
+          "label": "Company Name",
+          "value": "QT Funded"
+        },
+        {
+          "label": "Headquarters",
+          "value": "United Kingdom"
+        },
+        {
+          "label": "Founded",
+          "value": "2023"
+        },
+        {
+          "label": "Platform",
+          "value": "cTrader, MT5, TradeLocker"
+        },
+        {
+          "label": "CEO",
+          "value": "Tanswell Sassman"
+        }
+      ],
+      "evaluationPrograms": [
+        {
+          "program": "QT Instant",
+          "target": "None",
+          "phase1": "None",
+          "split": "80%-90%"
+        },
+        {
+          "program": "QT 1-Step",
+          "target": "10%",
+          "phase1": "10%",
+          "split": "80%"
+        },
+        {
+          "program": "QT 2-Step",
+          "target": "8%",
+          "phase1": "8%",
+          "split": "80%-90%"
+        },
+        {
+          "program": "QT 2-Step Elite",
+          "target": "8%",
+          "phase1": "8%",
+          "split": "80%-90%"
+        }
+      ],
       "showFirmProfile": true,
       "showHomeTable": true,
       "showListed": true,
@@ -4648,6 +6548,137 @@
       "bio": "Stable execution and challenge options.",
       "logo": "assets/top%20one%20trader%20logo.png",
       "verified": true,
+      "payoutAssurance": true,
+      "listingType": "best",
+      "showBestGlobal": true,
+      "bestRegions": {
+        "australia": false,
+        "us": false,
+        "pakistan": false,
+        "india": false,
+        "nigeria": false,
+        "china": false,
+        "uk": false,
+        "south_africa": false
+      },
+      "bestCategories": {
+        "trusted": false,
+        "fast_payout": false,
+        "hft": false,
+        "instant_funding": false,
+        "highest_rated": false,
+        "beginner": false,
+        "cheapest": false,
+        "futures": false
+      },
+      "ranking": 40,
+      "sortOrder": 40,
+      "score": 0,
+      "reviewCount": 0,
+      "followers": 791,
+      "markets": [
+        "Forex",
+        "Metals",
+        "Indices",
+        "Energy",
+        "Crypto",
+        "Commodities"
+      ],
+      "platforms": [
+        "MT5",
+        "Match Trader",
+        "TradeLocker"
+      ],
+      "detailsLink": "/toponetraderdetail.html",
+      "promoText": "70% OFF + Free Account",
+      "cardMetrics": {
+        "payoutCycle": "Bi-Weekly",
+        "minTradingDays": "0-5 Days",
+        "newsTrading": "Restricted on funded",
+        "timeLimit": "Unlimited",
+        "eaAllowed": "Evaluation Only",
+        "startingPrice": "$7"
+      },
+      "keyMetrics": [
+        {
+          "label": "Max Allocation",
+          "value": "$5,000,000"
+        },
+        {
+          "label": "Profit Split",
+          "value": "Up to 100%"
+        },
+        {
+          "label": "Funding Models",
+          "value": "Instant,1-Step,2-Step"
+        },
+        {
+          "label": "Payout Frequency",
+          "value": "Weekly/Bi-Weekly"
+        }
+      ],
+      "tradingConditions": [
+        {
+          "label": "Daily Drawdown",
+          "value": "2.5% - 5%"
+        },
+        {
+          "label": "Maximum Drawdown",
+          "value": "5% - 10%"
+        },
+        {
+          "label": "Leverage",
+          "value": "Up to 1:100"
+        },
+        {
+          "label": "Profit Target",
+          "value": "5% - 10%"
+        }
+      ],
+      "firmDetails": [
+        {
+          "label": "Company Name",
+          "value": "Top One Trader"
+        },
+        {
+          "label": "Headquarters",
+          "value": "United States"
+        },
+        {
+          "label": "Founded",
+          "value": "September 2023"
+        },
+        {
+          "label": "CEO",
+          "value": "Matt Morris"
+        }
+      ],
+      "evaluationPrograms": [
+        {
+          "program": "1-Step Flash",
+          "target": "10%",
+          "phase1": "10%",
+          "split": "Up to 90%"
+        },
+        {
+          "program": "2-Step Pro",
+          "target": "8% / 5%",
+          "phase1": "8%",
+          "split": "Up to 100%"
+        },
+        {
+          "program": "Instant Funding",
+          "target": "No Target",
+          "phase1": "-",
+          "split": "60% to 90%"
+        },
+        {
+          "program": "Nova",
+          "target": "5%",
+          "phase1": "5%",
+          "split": "Up to 100%"
+        }
+      ],
       "showFirmProfile": true,
       "showHomeTable": true,
       "showListed": true,
@@ -4734,6 +6765,123 @@
       "bio": "Flexible evaluation firm with unlimited trading period and fast payouts.",
       "logo": "assets/traderscale%20logo.png",
       "verified": true,
+      "payoutAssurance": true,
+      "listingType": "best",
+      "showBestGlobal": true,
+      "bestRegions": {
+        "pakistan": false,
+        "nigeria": false,
+        "china": false,
+        "uk": false,
+        "india": false,
+        "us": false,
+        "australia": false,
+        "south_africa": false
+      },
+      "bestCategories": {
+        "beginner": false,
+        "trusted": false,
+        "cheapest": false,
+        "hft": false,
+        "instant_funding": false,
+        "fast_payout": false,
+        "highest_rated": false,
+        "futures": false
+      },
+      "ranking": 10,
+      "sortOrder": 10,
+      "score": 4.4,
+      "reviewCount": 0,
+      "followers": 940,
+      "markets": [
+        "Forex",
+        "Indices",
+        "Crypto",
+        "Metals"
+      ],
+      "platforms": [
+        "MT5",
+        "cTrader",
+        "Match-Trader"
+      ],
+      "detailsLink": "/traderscaledetail.html",
+      "promoText": "Fast Payout + Up to 90% Profit Split",
+      "cardMetrics": {
+        "payoutCycle": "14 Days",
+        "minTradingDays": "2-10 Days",
+        "newsTrading": "Allowed",
+        "timeLimit": "Unlimited",
+        "eaAllowed": "No",
+        "startingPrice": "$97"
+      },
+      "keyMetrics": [
+        {
+          "label": "Max Allocation",
+          "value": "$600,000"
+        },
+        {
+          "label": "Profit Split",
+          "value": "Up to 90%"
+        },
+        {
+          "label": "Trading Period",
+          "value": "Unlimited"
+        },
+        {
+          "label": "Platforms",
+          "value": "MT5, cTrader, Match-Trader"
+        }
+      ],
+      "tradingConditions": [
+        {
+          "label": "Daily Drawdown",
+          "value": "4%-5%"
+        },
+        {
+          "label": "Maximum Drawdown",
+          "value": "8%-10%"
+        },
+        {
+          "label": "Profit Split",
+          "value": "80%-90%"
+        },
+        {
+          "label": "Minimum Trading Days",
+          "value": "2-10 Days"
+        }
+      ],
+      "firmDetails": [
+        {
+          "label": "Daily Drawdown",
+          "value": "4%-5%"
+        },
+        {
+          "label": "Maximum Drawdown",
+          "value": "8%-10%"
+        },
+        {
+          "label": "Profit Split",
+          "value": "80%-90%"
+        },
+        {
+          "label": "Minimum Trading Days",
+          "value": "2-10 Days"
+        }
+      ],
+      "evaluationPrograms": [
+        {
+          "program": "Speedy 1-Step",
+          "target": "10%",
+          "phase1": "10%",
+          "split": "Up to 90%"
+        },
+        {
+          "program": "Pro 2-Step",
+          "target": "10%",
+          "phase1": "10%",
+          "split": "Up to 90%"
+        }
+      ],
       "showFirmProfile": true,
       "showHomeTable": true,
       "showListed": true,
@@ -4790,6 +6938,43 @@
       "bio": "Best fit for HFT-focused traders.",
       "logo": "assets/we%20fund%20logo%20(2).png",
       "verified": true,
+      "payoutAssurance": true,
+      "listingType": "best",
+      "showBestGlobal": true,
+      "bestRegions": {
+        "australia": false,
+        "us": false,
+        "nigeria": false,
+        "india": false,
+        "uk": false,
+        "south_africa": false,
+        "china": false,
+        "pakistan": false
+      },
+      "bestCategories": {},
+      "ranking": 60,
+      "sortOrder": 60,
+      "score": 4.8,
+      "reviewCount": 0,
+      "followers": 980,
+      "markets": [
+        "HFT"
+      ],
+      "platforms": [],
+      "detailsLink": "wefunddetail.html",
+      "promoText": "",
+      "cardMetrics": {
+        "payoutCycle": "",
+        "minTradingDays": "",
+        "newsTrading": "",
+        "timeLimit": "",
+        "eaAllowed": "",
+        "startingPrice": ""
+      },
+      "keyMetrics": [],
+      "tradingConditions": [],
+      "firmDetails": [],
+      "evaluationPrograms": [],
       "showFirmProfile": true,
       "showHomeTable": true,
       "showListed": true,
@@ -4817,6 +7002,70 @@
       "bio": "XPIPS offers 1-Step, 2-Step, and Instant Funded simulated-account models with model-specific drawdown, consistency, leverage, and payout conditions.",
       "logo": "",
       "verified": false,
+      "payoutAssurance": false,
+      "listingType": "",
+      "showBestGlobal": false,
+      "bestRegions": {},
+      "bestCategories": {},
+      "ranking": 999,
+      "sortOrder": 999,
+      "score": 0,
+      "reviewCount": 0,
+      "followers": 0,
+      "markets": [
+        "Forex",
+        "Indices",
+        "Commodities",
+        "Cryptocurrencies"
+      ],
+      "platforms": [
+        "MetaTrader 5 (MT5)"
+      ],
+      "detailsLink": "/prop-firms/xpips",
+      "promoText": "",
+      "cardMetrics": {
+        "payoutCycle": "30 days initially",
+        "minTradingDays": "3 days evaluation; 5 profitable days instant",
+        "newsTrading": "Restricted +/- 5 minutes around high-impact news",
+        "timeLimit": "Unlimited on evaluations",
+        "eaAllowed": "Allowed with restrictions",
+        "startingPrice": "Not mentioned"
+      },
+      "keyMetrics": [],
+      "tradingConditions": [],
+      "firmDetails": [],
+      "evaluationPrograms": [
+        {
+          "program": "1-Step Evaluation",
+          "target": "9%",
+          "phase1": "9%",
+          "dailyLoss": "4% trailing",
+          "maxDrawdown": "7% static",
+          "minimumDays": "3 days",
+          "split": "85% default; 100% add-on",
+          "payoutCycle": "30 days initially"
+        },
+        {
+          "program": "2-Step Evaluation",
+          "target": "8% / 5%",
+          "phase1": "8%",
+          "dailyLoss": "4%",
+          "maxDrawdown": "10% static",
+          "minimumDays": "3 days",
+          "split": "80% default; 100% add-on",
+          "payoutCycle": "30 days initially"
+        },
+        {
+          "program": "Instant Funded",
+          "target": "Not mentioned",
+          "phase1": "Not applicable",
+          "dailyLoss": "3% trailing",
+          "maxDrawdown": "6% trailing",
+          "minimumDays": "5 profitable days",
+          "split": "65% default; 80% add-on",
+          "payoutCycle": "30 days initially"
+        }
+      ],
       "showFirmProfile": false,
       "showHomeTable": false,
       "showListed": false,
@@ -4869,32 +7118,32 @@
         }
       ],
       "programRules": {
-        "instant-funded": {
-          "slug": "instant-funded",
-          "program": "Instant Funded",
-          "title": "Instant Funded Rules",
-          "desc": "Drawdown, consistency, leverage, payout, and trading conditions for the XPIPS Instant Funded account.",
+        "1-step-evaluation": {
+          "slug": "1-step-evaluation",
+          "program": "1-Step Evaluation",
+          "title": "1-Step Evaluation Rules",
+          "desc": "Profit target, drawdown, consistency, leverage, payout, and trading conditions for the XPIPS 1-Step Evaluation.",
           "notice": "PDF model values are shown first. Firm-wide rules below come from the supplied XPIPS research workbook.",
           "rules": [
             {
               "title": "Profit Target",
-              "text": "Not mentioned."
+              "text": "9%."
             },
             {
               "title": "Maximum Daily Loss",
-              "text": "3% trailing."
+              "text": "4% trailing."
             },
             {
               "title": "Maximum Overall Loss",
-              "text": "6% trailing."
+              "text": "7% static."
             },
             {
               "title": "Minimum Trading Days",
-              "text": "5 profitable days, each with at least 0.5% profit."
+              "text": "3 days with the PDF-stated minimum 0.5% profits condition."
             },
             {
               "title": "Trading Period",
-              "text": "Not mentioned."
+              "text": "Unlimited."
             },
             {
               "title": "News Trading",
@@ -4906,19 +7155,23 @@
             },
             {
               "title": "Consistency Rule",
-              "text": "30%."
+              "text": "30% on the funded stage only."
+            },
+            {
+              "title": "Maximum Risk per Trade Idea",
+              "text": "Up to 2% of the account balance per trade idea per day on funded accounts only."
             },
             {
               "title": "Platform",
-              "text": "MetaTrader 5 (MT5), according to the supplied workbook."
+              "text": "MetaTrader 5 (MT5)."
             },
             {
               "title": "Profit Split",
-              "text": "65% by default; 80% with the add-on."
+              "text": "85% by default; 100% with the add-on."
             },
             {
               "title": "Leverage",
-              "text": "1:30 by default and up to 1:50 with the add-on."
+              "text": "1:30 by default, up to 1:100 with the add-on, and 1:10 for cryptocurrencies."
             },
             {
               "title": "Default Payout Schedule",
@@ -4935,10 +7188,6 @@
             {
               "title": "Payout Method",
               "text": "Cryptocurrency, with no processing fee, sent to the nominated wallet."
-            },
-            {
-              "title": "Payout Processing",
-              "text": "Most payouts are processed within 1-2 business days. Processing can take longer during high-volume periods or additional reviews; once processed, the account is reopened automatically for continued trading."
             }
           ]
         },
@@ -5015,32 +7264,32 @@
             }
           ]
         },
-        "1-step-evaluation": {
-          "slug": "1-step-evaluation",
-          "program": "1-Step Evaluation",
-          "title": "1-Step Evaluation Rules",
-          "desc": "Profit target, drawdown, consistency, leverage, payout, and trading conditions for the XPIPS 1-Step Evaluation.",
+        "instant-funded": {
+          "slug": "instant-funded",
+          "program": "Instant Funded",
+          "title": "Instant Funded Rules",
+          "desc": "Drawdown, consistency, leverage, payout, and trading conditions for the XPIPS Instant Funded account.",
           "notice": "PDF model values are shown first. Firm-wide rules below come from the supplied XPIPS research workbook.",
           "rules": [
             {
               "title": "Profit Target",
-              "text": "9%."
+              "text": "Not mentioned."
             },
             {
               "title": "Maximum Daily Loss",
-              "text": "4% trailing."
+              "text": "3% trailing."
             },
             {
               "title": "Maximum Overall Loss",
-              "text": "7% static."
+              "text": "6% trailing."
             },
             {
               "title": "Minimum Trading Days",
-              "text": "3 days with the PDF-stated minimum 0.5% profits condition."
+              "text": "5 profitable days, each with at least 0.5% profit."
             },
             {
               "title": "Trading Period",
-              "text": "Unlimited."
+              "text": "Not mentioned."
             },
             {
               "title": "News Trading",
@@ -5052,23 +7301,19 @@
             },
             {
               "title": "Consistency Rule",
-              "text": "30% on the funded stage only."
-            },
-            {
-              "title": "Maximum Risk per Trade Idea",
-              "text": "Up to 2% of the account balance per trade idea per day on funded accounts only."
+              "text": "30%."
             },
             {
               "title": "Platform",
-              "text": "MetaTrader 5 (MT5)."
+              "text": "MetaTrader 5 (MT5), according to the supplied workbook."
             },
             {
               "title": "Profit Split",
-              "text": "85% by default; 100% with the add-on."
+              "text": "65% by default; 80% with the add-on."
             },
             {
               "title": "Leverage",
-              "text": "1:30 by default, up to 1:100 with the add-on, and 1:10 for cryptocurrencies."
+              "text": "1:30 by default and up to 1:50 with the add-on."
             },
             {
               "title": "Default Payout Schedule",
@@ -5085,6 +7330,10 @@
             {
               "title": "Payout Method",
               "text": "Cryptocurrency, with no processing fee, sent to the nominated wallet."
+            },
+            {
+              "title": "Payout Processing",
+              "text": "Most payouts are processed within 1-2 business days. Processing can take longer during high-volume periods or additional reviews; once processed, the account is reopened automatically for continued trading."
             }
           ]
         }
