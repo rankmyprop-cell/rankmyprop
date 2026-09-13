@@ -17,6 +17,16 @@ const seenDescriptions = new Map()
 const incomingLinks = new Map(sitemapUrls.map((url) => [url, 0]))
 const sitemapUrlSet = new Set(sitemapUrls)
 
+const decoded = (value = '') => value.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;/g, "'").trim()
+const metadataFromHtml = (html) => {
+  const descriptionTag = html.match(/<meta\s+[^>]*name=["']description["'][^>]*>/i)?.[0] || ''
+  return {
+    title: decoded(html.match(/<title>([\s\S]*?)<\/title>/i)?.[1] || ''),
+    description: decoded(descriptionTag.match(/content=(["'])([\s\S]*?)\1/i)?.[2] || ''),
+    canonical: html.match(/<link[^>]+rel=["']canonical["'][^>]*>/i)?.[0]?.match(/href=["']([^"']+)/i)?.[1] || '',
+  }
+}
+
 const duplicateUrls = sitemapUrls.filter((url, index) => sitemapUrls.indexOf(url) !== index)
 if (duplicateUrls.length) throw new Error(`Duplicate sitemap URLs: ${[...new Set(duplicateUrls)].join(', ')}`)
 
@@ -63,11 +73,22 @@ for (const url of sitemapUrls) {
   if (!/<script\s+[^>]*type=["']application\/ld\+json["']/i.test(html)) {
     throw new Error(`Missing server-visible JSON-LD schema for ${url}`)
   }
-  const title = html.match(/<title>([\s\S]*?)<\/title>/i)?.[1]?.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;/g, "'").trim() || ''
-  const descriptionTag = html.match(/<meta\s+[^>]*name=["']description["'][^>]*>/i)?.[0] || ''
-  const description = (descriptionTag.match(/content=(["'])([\s\S]*?)\1/i)?.[2] || '').replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;/g, "'").trim()
-  if (!title || title.length > 65) throw new Error(`Invalid title length (${title.length}) for ${url}`)
-  if (!description || description.length > 160) throw new Error(`Invalid description length (${description.length}) for ${url}`)
+  const { title, description } = metadataFromHtml(html)
+  const sourceCandidates = pathname === '/'
+    ? [path.join(root, 'index.html')]
+    : [path.join(root, 'public', `${pathname.slice(1)}.html`), path.join(root, 'public', pathname.slice(1), 'index.html')]
+  const sourceFile = sourceCandidates.find((candidate) => fs.existsSync(candidate))
+  if (sourceFile) {
+    const sourceMetadata = metadataFromHtml(fs.readFileSync(sourceFile, 'utf8'))
+    const builtMetadata = { title, description, canonical }
+    if (JSON.stringify(sourceMetadata) !== JSON.stringify(builtMetadata)) {
+      throw new Error(`Authored metadata changed during build for ${url}`)
+    }
+  } else {
+    if (!title || title.length > 65) throw new Error(`Invalid title length (${title.length}) for ${url}`)
+    if (!description || description.length > 160) throw new Error(`Invalid description length (${description.length}) for ${url}`)
+  }
+  if (!title || !description) throw new Error(`Missing metadata for ${url}`)
   if (seenTitles.has(title)) throw new Error(`Duplicate title for ${url} and ${seenTitles.get(title)}: ${title}`)
   if (seenDescriptions.has(description)) throw new Error(`Duplicate description for ${url} and ${seenDescriptions.get(description)}`)
   seenTitles.set(title, url)
@@ -96,8 +117,23 @@ if (weakInternalLinks.length) {
 }
 
 const homepageHtml = fs.readFileSync(path.join(root, 'dist', 'index.html'), 'utf8')
+if (!homepageHtml.includes('data-rmp-static-first-paint="true"') || !homepageHtml.includes('Prop firm rankings')) {
+  throw new Error('Homepage is missing server-rendered ranking content')
+}
 if (!/<noscript>\s*<section class="rmp-research-directory"[\s\S]*?<\/section>\s*<\/noscript>/.test(homepageHtml)) {
   throw new Error('Homepage research fallback must remain inside noscript to prevent a pre-hydration flash')
+}
+
+for (const pageName of ['listedprop.html', 'best-prop-firms-2026.html', 'bestprop.html']) {
+  const html = fs.readFileSync(path.join(root, 'dist', pageName), 'utf8')
+  if (!html.includes('data-rmp-static-first-paint="true"') || !html.includes('rmp-server-firm-card')) {
+    throw new Error(`${pageName} is missing server-rendered firm cards`)
+  }
+}
+
+const offersHtml = fs.readFileSync(path.join(root, 'dist', 'offers.html'), 'utf8')
+if (!offersHtml.includes('data-rmp-static-first-paint="true"') || !offersHtml.includes('rmp-server-offer-card') || offersHtml.includes('Loading current offers…')) {
+  throw new Error('Offers page is missing server-rendered offer cards')
 }
 
 const evidenceSnapshot = fs.readFileSync(path.join(root, 'public', 'seo-evidence.json'), 'utf8')

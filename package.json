@@ -20,7 +20,7 @@
     "dev": "npm run env:runtime && concurrently -n web,api -c cyan,magenta \"vite\" \"tsx watch server/index.ts\"",
     "dev:web": "vite",
     "dev:api": "tsx watch server/index.ts",
-    "build": "npm run env:runtime && npm run seo:evidence && npm run sitemap:generate && tsc -b && vite build && node scripts/generate-seo-pages.cjs && node scripts/generate-route-bootstrap.cjs && node scripts/verify-seo-output.cjs",
+    "build": "npm run env:runtime && npm run seo:evidence && npm run sitemap:generate && tsc -b && vite build && node scripts/generate-seo-pages.cjs && node scripts/generate-static-first-paint.cjs && node scripts/generate-route-bootstrap.cjs && node scripts/verify-seo-output.cjs",
     "start": "NODE_ENV=production tsx server/index.ts",
     "preview": "vite preview"
   },

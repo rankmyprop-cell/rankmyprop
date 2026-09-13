@@ -58,6 +58,23 @@ function sanitizeProgram(program = {}) {
   return Object.fromEntries(allowed.map((key) => [key, text(program[key], 120)]).filter(([, value]) => value))
 }
 
+function sanitizePairs(rows = [], limit = 24) {
+  const source = Array.isArray(rows)
+    ? rows
+    : rows && typeof rows === 'object'
+      ? Object.entries(rows).map(([label, value]) => ({ label, value }))
+      : []
+  return source.slice(0, limit).map((row) => ({
+    label: text(row?.label || row?.title || row?.name, 100),
+    value: text(row?.value || row?.amount || row?.text, 140),
+  })).filter((row) => row.label || row.value)
+}
+
+function sanitizeFlags(value = {}) {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return {}
+  return Object.fromEntries(Object.entries(value).slice(0, 24).map(([key, enabled]) => [slugify(key).replace(/-/g, '_'), Boolean(enabled)]))
+}
+
 function sanitizeRuleSections(sections = {}) {
   return Object.entries(sections).slice(0, 8).map(([key, section]) => ({
     key: slugify(key),
@@ -176,6 +193,34 @@ async function loadEvidence() {
       bio: text(row.bio || row.overviewShort || row.overviewLong, 400),
       logo: text(row.logo, 500),
       verified: Boolean(row.verified || row.payoutAssurance),
+      payoutAssurance: Boolean(row.payoutAssurance || row.verified),
+      listingType: text(row.listingType, 40).toLowerCase(),
+      showBestGlobal: row.showBestGlobal === true || String(row.listingType || '').toLowerCase() === 'best',
+      bestRegions: sanitizeFlags(row.bestRegions),
+      bestCategories: sanitizeFlags(row.bestCategories),
+      ranking: Math.max(0, Number(row.ranking || row.sortOrder) || 0),
+      sortOrder: Math.max(0, Number(row.sortOrder || row.ranking) || 0),
+      score: Math.max(0, Math.min(5, Number(row.score) || 0)),
+      reviewCount: Math.max(0, Math.round(Number(row.reviewCount) || 0)),
+      followers: Math.max(0, Math.round(Number(row.followers) || 0)),
+      markets: (Array.isArray(row.markets) ? row.markets : []).map((value) => text(value, 80)).filter(Boolean).slice(0, 12),
+      platforms: [row.platforms, row.tradingPlatforms, row.platform, row.supportedPlatforms]
+        .flatMap((value) => Array.isArray(value) ? value : String(value || '').split(/[,\n|]+/))
+        .map((value) => text(value, 80)).filter(Boolean).slice(0, 12),
+      detailsLink: text(row.detailsLink, 300),
+      promoText: text(row.promoText, 120),
+      cardMetrics: {
+        payoutCycle: text(row.cardMetrics?.payoutCycle || row.payoutCycle, 100),
+        minTradingDays: text(row.cardMetrics?.minTradingDays, 100),
+        newsTrading: text(row.cardMetrics?.newsTrading, 100),
+        timeLimit: text(row.cardMetrics?.timeLimit, 100),
+        eaAllowed: text(row.cardMetrics?.eaAllowed, 100),
+        startingPrice: text(row.cardMetrics?.startingPrice, 100),
+      },
+      keyMetrics: sanitizePairs(row.keyMetrics),
+      tradingConditions: sanitizePairs(row.tradingConditions),
+      firmDetails: sanitizePairs(row.firmDetails),
+      evaluationPrograms: (Array.isArray(row.evaluationPrograms) ? row.evaluationPrograms : []).slice(0, 12).map(sanitizeProgram),
       showFirmProfile: row.showFirmProfile !== false,
       showHomeTable: row.showHomeTable !== false,
       showListed: row.showListed !== false,
@@ -244,6 +289,12 @@ async function loadEvidence() {
 async function main() {
   try {
     const evidence = await loadEvidence()
+    const previous = fs.existsSync(outputPath) ? JSON.parse(fs.readFileSync(outputPath, 'utf8')) : null
+    const currentFirmCount = Object.keys(evidence.firms || {}).length
+    const previousFirmCount = Object.keys(previous?.firms || {}).length
+    if (currentFirmCount === 0 && previousFirmCount > 0) {
+      throw new Error('live CMS returned an empty firm snapshot')
+    }
     fs.writeFileSync(outputPath, `${JSON.stringify(evidence, null, 2)}\n`)
     const reviews = Object.values(evidence.reviews).flat()
     const articles = Object.values(evidence.content || {}).flat()

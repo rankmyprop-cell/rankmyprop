@@ -291,9 +291,15 @@ function ensureStaticSitemapSchemas() {
     let html = fs.readFileSync(file, 'utf8')
     const originalTitle = htmlUnescape(html.match(/<title>([\s\S]*?)<\/title>/i)?.[1]?.trim() || 'Rank My Prop')
     const originalDescription = htmlUnescape(metaContent(html, 'name', 'description'))
+    // Metadata authored in source HTML is intentionally preserved byte-for-byte.
+    // Generated CMS pages can still be normalized to the search snippet limits.
+    const sourceCandidates = pathname === '/'
+      ? [path.join(root, 'index.html')]
+      : [path.join(root, 'public', `${pathname.slice(1)}.html`), path.join(root, 'public', pathname.slice(1), 'index.html')]
+    const hasAuthoredSource = sourceCandidates.some((candidate) => fs.existsSync(candidate))
     const titleCore = originalTitle.replace(/\s*\|\s*Rank My Prop\s*$/i, '')
-    const title = originalTitle.length > 65 ? titleWithBrand(titleCore) : originalTitle
-    const description = descriptionWithinLimit(originalDescription)
+    const title = hasAuthoredSource ? originalTitle : (originalTitle.length > 65 ? titleWithBrand(titleCore) : originalTitle)
+    const description = hasAuthoredSource ? originalDescription : descriptionWithinLimit(originalDescription)
     if (title !== originalTitle || description !== originalDescription) {
       html = replaceOrInsert(html, /<title>[\s\S]*?<\/title>/i, `<title>${htmlEscape(title)}</title>`)
       html = replaceOrInsert(html, /<meta\s+[^>]*name=["']description["'][^>]*>/i, `<meta name="description" content="${htmlEscape(description)}">`)

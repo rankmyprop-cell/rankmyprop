@@ -748,7 +748,8 @@ async function init() {
   bindFilters();
   ensureCardLayoutFixStyle();
   applyBestHeading();
-  render();
+  const hasStaticFirstPaint = document.getElementById("grid")?.dataset.rmpStaticFirstPaint === "true";
+  if (!hasStaticFirstPaint) render();
   const [, , firms, liveReviewStats] = await Promise.all([
     wait(UX_DELAY_MS),
     loadFilterOptions(),

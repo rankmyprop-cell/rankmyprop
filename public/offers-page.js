@@ -523,7 +523,9 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-grid.innerHTML = new Array(4).fill(0).map(skeletonCard).join("");
+if (grid.dataset.rmpStaticFirstPaint !== "true") {
+  grid.innerHTML = new Array(4).fill(0).map(skeletonCard).join("");
+}
 
 async function init() {
   state.dedicatedSlug = dedicatedSlugFromLocation();
