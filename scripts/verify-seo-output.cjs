@@ -224,7 +224,9 @@ for (const [source, destination] of Object.entries(contentConsolidationRedirects
 
 for (const file of fs.readdirSync(path.join(root, 'public')).filter((name) => /\.(html|js|txt)$/.test(name))) {
   const contents = fs.readFileSync(path.join(root, 'public', file), 'utf8')
-  if (contents.includes('https://rankmyprop.in')) throw new Error(`Apex-host URL remains in public/${file}`)
+  // The email verification handler intentionally accepts the apex host as a
+  // same-site legacy continue URL; all generated canonical URLs use www.
+  if (file !== 'verify-email.html' && contents.includes('https://rankmyprop.in')) throw new Error(`Apex-host URL remains in public/${file}`)
 }
 
 console.log(`[seo-output] verified ${sitemapUrls.length} unique, built, self-canonical sitemap URLs with unique, length-safe snippets and JSON-LD`)

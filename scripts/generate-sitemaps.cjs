@@ -31,7 +31,7 @@ const xmlEscape = (value = '') => String(value)
 
 const unique = (values) => [...new Set(values.filter(Boolean))]
 const absolute = (route) => `${origin}${route === '/' ? '/' : `/${String(route).replace(/^\/+|\/+$/g, '')}`}`
-const slugAliases = { qtfunded: 'qt-funded' }
+const slugAliases = { qtfunded: 'qt-funded', 'fundednext-firm': 'fundednext' }
 const canonicalSlug = (value) => slugAliases[slugify(value)] || slugify(value)
 
 function validDate(value = '') {

@@ -20,7 +20,9 @@ const slugify = (value = '') => String(value)
 
 const canonicalSlug = (value = '') => {
   const slug = slugify(value)
-  return slug === 'qtfunded' ? 'qt-funded' : slug
+  if (slug === 'qtfunded') return 'qt-funded'
+  if (slug === 'fundednext-firm') return 'fundednext'
+  return slug
 }
 
 const htmlEscape = (value = '') => String(value)
