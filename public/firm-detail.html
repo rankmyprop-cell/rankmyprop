@@ -1797,7 +1797,12 @@
   import { DEFAULT_LISTED_FIRMS, DEFAULT_BEST_FIRMS } from "./firms-data.js";
 
   const PAGE_MIN_LOADER_MS = 0;
-  const PAGE_MAX_LOADER_MS = 1800;
+  // Keep the skeleton visible while the CMS gets a short chance to respond.
+  // The static firm catalog is used if the CMS stalls, so hydration never
+  // leaves the detail page hidden behind an empty shell.
+  const PAGE_MAX_LOADER_MS = 6500;
+  const FIRM_DATA_TIMEOUT_MS = 4500;
+  const FIELD_OVERRIDE_TIMEOUT_MS = 1200;
   const FALLBACK_LOGO = "assets/Rank%20My%20Prop%20Logo%201.webp";
   const pageLoadStartedAt = Date.now();
   const VALID_DETAIL_VIEWS = new Set(["overview", "challenges", "rules", "reviews", "spreads", "announcements"]);
@@ -1822,6 +1827,10 @@
     return /^https?:\/\//i.test(v) ? v : `https://${v}`;
   };
   const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  const withTimeoutFallback = (promise, ms, fallback) => Promise.race([
+    promise,
+    wait(ms).then(() => typeof fallback === "function" ? fallback() : fallback)
+  ]);
   const minLoaderWait = () => wait(Math.max(0, PAGE_MIN_LOADER_MS - (Date.now() - pageLoadStartedAt)));
   const uniq = (list = []) => Array.from(new Set(list.filter(Boolean)));
   const compactSlug = (value = "") => slugify(value).replace(/-/g, "");
@@ -2834,14 +2843,19 @@
     }
 
     try {
-      const selected = await fetchFirmByLookup({
+      const firmLookup = {
         wantedId: lookup.wantedId,
         wantedSlug: lookup.wantedSlug,
         routeSlug: lookup.route.slug,
         fileSlug: lookup.fileSlug
-      });
+      };
+      const selected = await withTimeoutFallback(
+        fetchFirmByLookup(firmLookup),
+        FIRM_DATA_TIMEOUT_MS,
+        () => fallbackFirmByLookup(firmLookup)
+      );
       if (loadToken !== detailLoadToken) return;
-      if (!selected || selected.showFirmProfile === false) {
+      if (!selected) {
         await loaderWait;
         if (loadToken !== detailLoadToken) return;
         if (loaderHardCap) clearTimeout(loaderHardCap);
@@ -2850,7 +2864,11 @@
         return;
       }
 
-      const finalRow = await withFirmFieldOverrides(selected);
+      const finalRow = await withTimeoutFallback(
+        withFirmFieldOverrides(selected),
+        FIELD_OVERRIDE_TIMEOUT_MS,
+        selected
+      );
       if (loadToken !== detailLoadToken) return;
       if (!finalRow) {
         await loaderWait;
