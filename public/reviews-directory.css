@@ -33,3 +33,14 @@
 @media(max-width:880px) and (min-width:681px){.recommendation-section>div{grid-template-columns:1fr}.recommendation-section button{height:40px}.aspect-stars{gap:2px}.aspect-stars button{width:20px;height:20px}}
 
 html.embedded-review-popup,html.embedded-review-popup body{height:100%;overflow:hidden!important;background:#05040b!important}html.embedded-review-popup #mainContent,html.embedded-review-popup .reviews-footer-placeholder,html.embedded-review-popup .rmp-shared-home-header,html.embedded-review-popup #rmpTopAnnouncement,html.embedded-review-popup body>nav,html.embedded-review-popup body>header,html.embedded-review-popup body>footer,html.embedded-review-popup body>aside.rmp-top-announcement{display:none!important}html.embedded-review-popup .review-modal,html.embedded-review-popup .review-modal[hidden]{display:grid!important;padding:clamp(12px,2.2vh,24px);background:#05040b;place-items:center}html.embedded-review-popup .review-modal-backdrop{background:#05040b;backdrop-filter:none}html.embedded-review-popup .review-modal-panel{max-height:calc(100dvh - clamp(24px,4.4vh,48px));}
+.table-actions .view-firm-details{border-color:rgba(151,130,206,.42);background:rgba(255,255,255,.035);color:#e7e0f2}.table-actions .view-firm-details:hover{border-color:rgba(169,139,255,.72);background:rgba(122,92,255,.12)}
+
+/* Reserve a full actions column so the detail link never gets clipped. */
+.review-table{min-width:1190px;table-layout:fixed}
+.review-table th:first-child,.review-table td:first-child{width:260px}
+.review-table th:nth-child(2),.review-table td:nth-child(2){width:110px}
+.review-table th:nth-child(n+3):nth-child(-n+6),.review-table td:nth-child(n+3):nth-child(-n+6){width:120px}
+.review-table th:nth-child(7),.review-table td:nth-child(7){width:120px}
+.review-table th:last-child,.review-table td:last-child{width:220px;min-width:220px}
+.table-actions{min-width:200px;flex-wrap:nowrap}
+.table-actions a{flex:0 0 auto}
