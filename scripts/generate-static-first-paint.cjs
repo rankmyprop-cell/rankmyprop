@@ -292,7 +292,12 @@ function homeSnapshot(firms, offers) {
 
 function injectHomepage(firms, offers) {
   const file = path.join(distRoot, 'index.html')
-  writeWithoutMetadataChanges(file, (html) => html.replace('<div id="root"></div>', `<div id="root">${homeSnapshot(firms, offers)}</div>`))
+  // Keep the crawlable homepage snapshot available to no-JavaScript clients,
+  // while leaving React's root empty so the interactive homepage can render
+  // immediately after hydration. Rendering the snapshot inside the root
+  // caused the first-paint shell to remain visible when the client bundle was
+  // delayed, which made the homepage differ from the deployed Cloudflare UI.
+  writeWithoutMetadataChanges(file, (html) => html.replace('<div id="root"></div>', `<div id="root"></div><noscript>${homeSnapshot(firms, offers)}</noscript>`))
 }
 
 async function main() {
