@@ -196,11 +196,13 @@ function isFirmDetailPage() {
 }
 
 function titleFirmName() {
+  if (window.__rmpFirmContext?.firmName) return window.__rmpFirmContext.firmName;
   const url = new URL(window.location.href);
   const parts = url.pathname.split("/").filter(Boolean);
   const routeSlug = parts[0] === "prop-firms" ? parts[1] : "";
   const querySlug = url.searchParams.get("slug");
   const dynamicSlug = routeSlug || (/firm-detail/i.test(parts[parts.length - 1] || "") ? querySlug : "");
+  if (dynamicSlug === "fundednext" || dynamicSlug === "fundednext-firm") return "FundedNext";
   if (dynamicSlug) {
     return dynamicSlug.split("-").filter(Boolean).map((part) => part[0].toUpperCase() + part.slice(1)).join(" ");
   }
@@ -215,6 +217,7 @@ function titleFirmName() {
 
 function showFirmHeadingImmediately() {
   if (!isFirmDetailPage()) return;
+  if (document.querySelector("#firmNameHeading[data-firm-owned]")) return;
   const name = titleFirmName();
   const heading = document.querySelector("#firmNameHeading");
   const overviewTitle = document.querySelector("#firmOverviewTitle");
@@ -1293,7 +1296,14 @@ async function installHomeShell() {
   else document.body.prepend(header);
 
   const footer = createFooter();
-  const existingFooter = document.querySelector("footer");
+  // Card components also use semantic <footer> elements. Only replace an
+  // existing page-level footer; otherwise the offers first paint can have its
+  // first card footer replaced and the FAQ/footer are then removed when the
+  // live offer grid hydrates.
+  const existingFooter = [...document.querySelectorAll("footer")].find((node) => (
+    !node.closest("main, article")
+    && !node.classList.contains("offer-card-footer")
+  ));
   if (existingFooter) existingFooter.replaceWith(footer);
   else document.body.appendChild(footer);
   installFirmDetailFaq(footer);

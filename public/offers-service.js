@@ -1,5 +1,4 @@
-import { collection, doc, getDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
-import { db } from "./dashboard-common.js";
+import { getDocument, listDocuments } from "./cloudflare-data.js";
 
 function imgLike(v = "") {
   const s = String(v || "").trim();
@@ -118,7 +117,8 @@ function norm(item = {}, firmMap = new Map(), statsMap = new Map()) {
     headingPrimary: String(item.headingPrimary || item.titlePrimary || "").trim(),
     headingAccent: String(item.headingAccent || item.titleAccent || "").trim(),
     paragraph: String(item.paragraph || item.pageParagraph || "").trim(),
-    lastUpdatedLabel: String(item.lastUpdatedLabel || item.lastUpdated || "").trim()
+    lastUpdatedLabel: String(item.lastUpdatedLabel || item.lastUpdated || "").trim(),
+    updatedAt: item.updatedAt || item.createdAt || ""
   };
 }
 
@@ -130,15 +130,14 @@ function withFallback(rows) {
 
 export async function getAllOffers() {
   try {
-    const [offersSnap, firmsSnap, statsSnap] = await Promise.all([
-      getDocs(collection(db, "offers")),
-      getDocs(collection(db, "firms")),
-      getDocs(collection(db, "firmRatingStats"))
+    const [offerRows, firmRows, statRows] = await Promise.all([
+      listDocuments("offers", 500),
+      listDocuments("firms", 500),
+      listDocuments("firmRatingStats", 500)
     ]);
     const firmMap = new Map();
     const statsMap = new Map();
-    firmsSnap.forEach((d) => {
-      const row = { id: d.id, ...d.data() };
+    firmRows.forEach((row) => {
       const idKey = toKey(row.id);
       if (idKey) firmMap.set(idKey, row);
       const slugKey = toKey(row.slug);
@@ -146,10 +145,9 @@ export async function getAllOffers() {
       const nameKey = toKey(row.name);
       if (nameKey) firmMap.set(nameKey, row);
     });
-    statsSnap.forEach((d) => {
-      const row = d.data() || {};
+    statRows.forEach((row) => {
       const stats = statPayload(row);
-      const idKey = toKey(d.id);
+      const idKey = toKey(row.id);
       const slugKey = toKey(row.firmSlug || "");
       const nameKey = toKey(row.firmName || "");
       if (idKey) statsMap.set(idKey, stats);
@@ -157,7 +155,7 @@ export async function getAllOffers() {
       if (nameKey) statsMap.set(nameKey, stats);
     });
     const fromDb = [];
-    offersSnap.forEach((d) => fromDb.push(norm({ id: d.id, ...d.data() }, firmMap, statsMap)));
+    offerRows.forEach((row) => fromDb.push(norm(row, firmMap, statsMap)));
     return withFallback(fromDb);
   } catch (err) {
     console.warn("offers load failed:", err?.message || err);
@@ -170,8 +168,7 @@ export async function getOfferPageContent(slug = "", offer = {}) {
   let cms = {};
   if (cleanSlug) {
     try {
-      const snap = await getDoc(doc(db, "pageSeoContent", offerPageDocId(cleanSlug)));
-      if (snap.exists()) cms = snap.data() || {};
+      cms = await getDocument("pageSeoContent", offerPageDocId(cleanSlug)) || {};
     } catch (err) {
       console.warn("offer page copy load failed:", err?.message || err);
     }
@@ -184,6 +181,7 @@ export async function getOfferPageContent(slug = "", offer = {}) {
     headingPrimary: String(cms.titlePrimary || offer.headingPrimary || "").trim(),
     headingAccent: String(cms.titleAccent || offer.headingAccent || "").trim(),
     paragraph: String(cms.paragraph || offer.paragraph || "").trim(),
-    lastUpdatedLabel: String(cms.lastUpdatedLabel || offer.lastUpdatedLabel || "").trim()
+    lastUpdatedLabel: String(cms.lastUpdatedLabel || offer.lastUpdatedLabel || "").trim(),
+    updatedAt: cms.updatedAt || offer.updatedAt || ""
   };
 }

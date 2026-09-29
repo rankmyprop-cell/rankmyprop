@@ -1,5 +1,4 @@
-import { collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
-import { db } from "./dashboard-common.js";
+import { listDocuments } from "./cloudflare-data.js";
 import { DEFAULT_LISTED_FIRMS, DEFAULT_BEST_FIRMS } from "./firms-data.js";
 import { withFirmFieldOverridesList } from "./firm-field-overrides.js";
 
@@ -197,6 +196,7 @@ function norm(row = {}) {
     verified: Boolean(row.verified),
     payoutAssurance: typeof row.payoutAssurance === "boolean" ? row.payoutAssurance : Boolean(row.verified),
     followers: Number(row.followers || 0),
+    updatedAt: row.updatedAt || row.createdAt || "",
     detailsLink: detailPathFor(row),
     buyLink: String(row.buyLink || "").trim(),
     logo: String(row.logo || "").trim(),
@@ -304,16 +304,14 @@ function uniqBySlug(rows) {
 
 export async function getFirmsByType(listingType, options = {}) {
   try {
-    const [snap, statsSnap] = await Promise.all([
-      getDocs(collection(db, "firms")),
-      getDocs(collection(db, "firmRatingStats"))
+    const [firmRows, statRows] = await Promise.all([
+      listDocuments("firms", 500),
+      listDocuments("firmRatingStats", 500)
     ]);
-    const all = [];
-    snap.forEach((d) => all.push(norm({ id: d.id, ...d.data() })));
+    const all = firmRows.map((row) => norm(row));
     const statsMap = new Map();
-    statsSnap.forEach((d) => {
-      const row = d.data() || {};
-      const idKey = slugify(d.id || "");
+    statRows.forEach((row) => {
+      const idKey = slugify(row.id || "");
       const slugKey = slugify(row.firmSlug || "");
       const nameKey = slugify(row.firmName || "");
       const avg = Number(row.averageRating ?? row.autoAverageRating);
@@ -361,7 +359,7 @@ export async function getFirmsByType(listingType, options = {}) {
 
     // If no results from Firebase, use fallback data
     if (result.length === 0 && all.length === 0) {
-      console.warn("No firms from Firebase, using fallback data");
+      console.warn("No firms from Cloudflare, using fallback data");
       const fallbackData = String(listingType || "listed").toLowerCase() === "best" ? DEFAULT_BEST_FIRMS : DEFAULT_LISTED_FIRMS;
       result = fallbackData.map(firm => norm(firm)).filter((firm) => isVisibleOnSurface(firm, surface));
     }
@@ -369,7 +367,7 @@ export async function getFirmsByType(listingType, options = {}) {
     return await withFirmFieldOverridesList(result);
   } catch (err) {
     console.warn("firm load failed, using fallback data:", err?.message || err);
-    // Return fallback data when Firebase fails
+    // Return fallback data when Cloudflare fails.
     const fallbackData = String(listingType || "listed").toLowerCase() === "best" ? DEFAULT_BEST_FIRMS : DEFAULT_LISTED_FIRMS;
     return await withFirmFieldOverridesList(fallbackData.map((firm) => norm(firm)));
   }

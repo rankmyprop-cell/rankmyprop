@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#0a0b12" />
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/dashboard-layout.css" />
+  <title>Push Notifications Admin | Rank My Prop</title>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-dot"></span><b>RMP Admin</b></div>
+      <div class="menu-group-title">Admin Modules</div>
+      <a class="side-link" href="/dashboard-admin">Admin Home</a>
+      <a class="side-link active" href="/admin-push">Push Notifications</a>
+      <a class="side-link" href="#" id="logoutBtn">Log out</a>
+    </aside>
+    <main class="main">
+      <header class="top"><div><h3>Push Notifications</h3><div class="welcome">Send targeted RankMyProp Web Push alerts through Cloudflare.</div></div><div class="top-actions"><span class="chip" id="adminEmail">loading...</span></div></header>
+      <div class="chip" id="notice" style="display:none"></div>
+
+      <section class="panel">
+        <div class="panel-head"><div><h3>Send Web Push</h3><p class="welcome">Only subscribers who enabled the selected category will receive this alert.</p></div><span class="chip">Cloudflare Queue</span></div>
+        <form id="pushForm" class="form-grid">
+          <div class="field"><label>Notification category</label><select name="category" required><option value="announcements">Announcements</option><option value="offers">New Offers</option><option value="firms">New Firms</option></select></div>
+          <div class="field"><label>Push click URL</label><input name="clickUrl" value="/announcements" placeholder="/offers/firm-slug" required /></div>
+          <div class="field full"><label>Push title</label><input name="title" maxlength="120" placeholder="New offer now live" required /></div>
+          <div class="field full"><label>Push body</label><textarea name="body" maxlength="300" placeholder="Tell subscribers what changed and why they should open it." required></textarea></div>
+          <div class="full"><p class="welcome" id="routeHint">Announcement → use /announcements or the relevant announcement URL.</p></div>
+          <div class="full top-actions"><button class="btn-primary" id="sendPushBtn" type="submit">Send Push</button></div>
+        </form>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><div><h3>Recent Send Logs</h3><p class="welcome">Delivery totals are stored in Cloudflare D1 after the Queue finishes sending.</p></div><button class="btn" id="refreshLogs" type="button">Refresh</button></div>
+        <div class="table-wrap"><table><thead><tr><th>Title</th><th>Category</th><th>Total</th><th>Successful</th><th>Failed</th><th>Invalid tokens</th><th>Sent</th></tr></thead><tbody id="logsBody"><tr><td colspan="7" class="empty">No push sends yet.</td></tr></tbody></table></div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module">
+    import { auth } from "./dashboard-common.js";
+    import { bindLogout, enforceAdmin, formDataToObj, showNotice } from "./admin-common.js";
+    import { CLOUDFLARE_API_URL } from "./cloudflare-config.js";
+
+    const form = document.getElementById("pushForm");
+    const notice = document.getElementById("notice");
+    const sendButton = document.getElementById("sendPushBtn");
+    const logsBody = document.getElementById("logsBody");
+    const routeHint = document.getElementById("routeHint");
+    const hints = {
+      announcements: ["/announcements", "Announcement → use /announcements or the relevant announcement URL."],
+      offers: ["/offers/firm-slug", "Offer → use the firm’s dedicated /offers/firm-slug page."],
+      firms: ["/prop-firms/firm-slug", "New firm → use the firm profile /prop-firms/firm-slug page."],
+    };
+
+    bindLogout("logoutBtn");
+    form.category.addEventListener("change", () => {
+      const [placeholder, hint] = hints[form.category.value];
+      form.clickUrl.value = placeholder;
+      routeHint.textContent = hint;
+    });
+
+    function formatDate(value) {
+      const date = value?.toDate?.();
+      if (date) return date.toLocaleString();
+      const parsed = new Date(value || "");
+      return Number.isNaN(parsed.getTime()) ? "Pending" : parsed.toLocaleString();
+    }
+
+    async function loadLogs() {
+      const token = await auth.currentUser?.getIdToken();
+      const response = await fetch(`${CLOUDFLARE_API_URL}/v1/admin/push/logs`, { headers: { authorization: `Bearer ${token || ""}` } });
+      if (!response.ok) throw new Error("Could not load Cloudflare push logs.");
+      const rows = (await response.json()).data || [];
+      logsBody.innerHTML = rows.length ? rows.map((row) => `<tr><td>${escapeHtml(row.title)}</td><td>${escapeHtml(row.category)}</td><td>${row.totalRecipients || 0}</td><td>${row.successful || 0}</td><td>${row.failed || 0}</td><td>${row.invalidToken || 0}</td><td>${formatDate(row.createdAt)}</td></tr>`).join("") : '<tr><td colspan="7" class="empty">No push sends yet.</td></tr>';
+    }
+
+    function escapeHtml(value) {
+      const node = document.createElement("span");
+      node.textContent = String(value || "-");
+      return node.innerHTML;
+    }
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const payload = formDataToObj(form);
+      const confirmed = confirm(`Send “${payload.title}” to all enabled ${payload.category} subscribers?`);
+      if (!confirmed) return;
+      sendButton.disabled = true;
+      sendButton.textContent = "Sending…";
+      try {
+        const token = await auth.currentUser?.getIdToken();
+        const response = await fetch(`${CLOUDFLARE_API_URL}/v1/admin/push/send`, { method: "POST", headers: { "content-type": "application/json", authorization: `Bearer ${token || ""}` }, body: JSON.stringify(payload) });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(data.error || "Push send failed.");
+        showNotice(notice, "Push queued securely. Delivery totals will appear in the log shortly.");
+        await loadLogs();
+      } catch (error) {
+        showNotice(notice, error?.message || "Push send failed.", "error");
+      } finally {
+        sendButton.disabled = false;
+        sendButton.textContent = "Send Push";
+      }
+    });
+
+    document.getElementById("refreshLogs").addEventListener("click", loadLogs);
+    enforceAdmin(async (user) => {
+      document.getElementById("adminEmail").textContent = user.email || "Admin";
+      await loadLogs();
+    });
+  </script>
+  <script defer src="/admin-shell.js"></script>
+  <script type="module" src="/site-performance.js"></script>
+</body>
+</html>

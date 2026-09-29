@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#090816">
+  <title>Verify your email | Rank My Prop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;background:radial-gradient(circle at 14% 0%,#1b1840 0%,#0c0b1f 46%,#05040b 100%);color:#f1efff;font-family:'Plus Jakarta Sans',sans-serif}.card{width:min(540px,100%);padding:34px;border:1px solid rgba(139,124,247,.36);border-radius:24px;background:rgba(17,15,34,.96);box-shadow:0 24px 80px #0008}.brand{display:flex;align-items:center;gap:11px;font-weight:800}.logo{display:grid;place-items:center;width:42px;height:42px;border-radius:13px;background:#241e46;color:#ad9bff;font-size:22px}.eyebrow{margin:28px 0 8px;color:#a996ff;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}h1{margin:0;font-size:clamp(28px,6vw,38px);letter-spacing:-.05em}.copy{margin:12px 0 0;color:#aaa6c4;line-height:1.7;font-size:14px}.email{color:#fff;font-weight:700;overflow-wrap:anywhere}.actions{display:grid;gap:10px;margin-top:26px}.btn{min-height:46px;border:1px solid #5f50b2;border-radius:11px;background:#201c3c;color:#eeeaff;font:700 13px 'Plus Jakarta Sans',sans-serif;cursor:pointer}.btn.primary{border:0;background:linear-gradient(100deg,#6652ff,#9275ff);color:white;box-shadow:0 8px 24px #6652ff44}.btn:disabled{opacity:.6;cursor:wait}.status{min-height:22px;margin-top:15px;color:#aaa6c4;font-size:13px;line-height:1.55}.status.ok{color:#83e2a6}.status.error{color:#ff9a9a}.foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:25px;padding-top:18px;border-top:1px solid #ffffff12;color:#77738e;font-size:12px}.foot a{color:#a996ff;text-decoration:none}@media(max-width:520px){.card{padding:25px 21px}}
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="brand"><span class="logo">R</span><span>Rank My Prop</span></div>
+    <div class="eyebrow">Account security</div>
+    <h1 id="title">Verify your email</h1>
+    <p class="copy" id="description">We sent a secure verification link to <span class="email" id="emailText">your email address</span>. Verify it to activate your account.</p>
+    <div class="actions" id="actions">
+      <button class="btn primary" id="resendBtn" type="button">Resend verification email</button>
+      <button class="btn" id="checkBtn" type="button">I verified my email · Continue</button>
+      <button class="btn" id="signInBtn" type="button">Sign in to another account</button>
+    </div>
+    <div class="status" id="status" role="status" aria-live="polite">Checking your verification status…</div>
+    <div class="foot"><span>Check your inbox and spam folder.</span><a href="/contact.html">Need help?</a></div>
+  </main>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+    import { getAuth, onAuthStateChanged, sendEmailVerification, reload, applyActionCode, signOut } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+    import { firebaseConfig } from "./firebase-config.js";
+
+    const auth = getAuth(initializeApp(firebaseConfig));
+    const params = new URLSearchParams(location.search);
+    const actionCode = params.get("oobCode") || "";
+    const mode = params.get("mode") || "";
+    const actionApiKey = params.get("apiKey") || "";
+    const rawContinueUrl = params.get("continueUrl") || params.get("continue") || "";
+    const statusEl = document.getElementById("status");
+    const emailEl = document.getElementById("emailText");
+    const titleEl = document.getElementById("title");
+    const descriptionEl = document.getElementById("description");
+    const resendBtn = document.getElementById("resendBtn");
+    const checkBtn = document.getElementById("checkBtn");
+    const signInBtn = document.getElementById("signInBtn");
+    const pendingUidKey = "rmp_pending_verification_uid";
+    const referralCodeKey = "rmp_ref_code";
+    const actionSettings = { url: "https://www.rankmyprop.in/dashboard.html", handleCodeInApp: false };
+    let activeUser = null;
+    let finishing = false;
+
+    function status(message, tone = "") { statusEl.textContent = message; statusEl.className = `status ${tone}`; }
+    function safeContinue() {
+      // Firebase may pass the configured continue URL through a custom action
+      // handler. Accept only our own dashboard URL to prevent open redirects.
+      if (!rawContinueUrl) return "/dashboard.html";
+      try {
+        const target = new URL(rawContinueUrl, location.origin);
+        if (target.origin !== "https://www.rankmyprop.in" && target.origin !== "https://rankmyprop.in") return "/dashboard.html";
+        if (target.pathname !== "/dashboard.html") return "/dashboard.html";
+        return `${target.pathname}${target.search}${target.hash}`;
+      } catch { return "/dashboard.html"; }
+    }
+    async function linkPendingReferral(user) {
+      if (!user || localStorage.getItem(pendingUidKey) !== user.uid) return;
+      const code = String(localStorage.getItem(referralCodeKey) || "").trim().toUpperCase();
+      if (!code) { localStorage.removeItem(pendingUidKey); return; }
+      const token = await user.getIdToken(true);
+      const response = await fetch("/api/referrals/attribute", { method:"POST", headers:{ Authorization:`Bearer ${token}`, "Content-Type":"application/json" }, body:JSON.stringify({code}) });
+      const result = await response.json().catch(()=>({}));
+      if (response.ok && result.attributed || response.status === 400 && /own referral/i.test(String(result.error || ""))) {
+        localStorage.removeItem(pendingUidKey); localStorage.removeItem(referralCodeKey);
+      } else if (!response.ok) throw new Error(result.error || "Referral code could not be linked yet.");
+    }
+    async function finishVerification(user = auth.currentUser) {
+      if (finishing) return;
+      finishing = true;
+      if (user) {
+        try { await reload(user); } catch {}
+        if (user.emailVerified) {
+          emailEl.textContent = user.email || "your email address";
+          titleEl.textContent = "Email verified";
+          descriptionEl.textContent = "Your Rank My Prop account is ready. Taking you to your dashboard…";
+          resendBtn.hidden = true; checkBtn.hidden = true; signInBtn.hidden = true;
+          status("Verification complete.", "ok");
+          try { await linkPendingReferral(user); } catch (error) { console.warn("Referral attribution will need a retry:", error.message); }
+          setTimeout(() => { location.replace(safeContinue()); }, 700);
+          return;
+        }
+      }
+      finishing = false;
+    }
+
+    onAuthStateChanged(auth, async (user) => {
+      activeUser = user;
+      if (user?.email) emailEl.textContent = user.email;
+      if (user?.emailVerified) await finishVerification(user);
+      else if (user) status("Open the verification link in your email, then come back and continue.");
+      else if (!actionCode) { titleEl.textContent = "Check your email"; status("After verifying, sign in to continue to your dashboard."); resendBtn.hidden = true; checkBtn.hidden = true; }
+    });
+
+    if (mode || actionCode || actionApiKey || rawContinueUrl) {
+      // The optional custom-handler path must contain a complete verifyEmail
+      // action and belong to this Firebase project. Never initialize Firebase
+      // from the URL; the app's bundled config remains authoritative.
+      if (mode !== "verifyEmail" || !actionCode || (actionApiKey && actionApiKey !== firebaseConfig.apiKey)) {
+        titleEl.textContent = "Invalid verification link";
+        descriptionEl.textContent = "This email verification link is incomplete or belongs to another project. Request a fresh link from your account.";
+        resendBtn.hidden = !auth.currentUser;
+        checkBtn.hidden = true;
+        status("The verification link could not be validated.", "error");
+      } else {
+      status("Verifying your email securely…");
+      try {
+        await applyActionCode(auth, actionCode);
+        status("Email verified. Opening your dashboard…", "ok");
+        await finishVerification(auth.currentUser);
+        if (!auth.currentUser) {
+          titleEl.textContent = "Email verified";
+          descriptionEl.textContent = "Your email is confirmed. Sign in to open your dashboard.";
+          status("Verification complete.", "ok");
+          resendBtn.hidden = true; checkBtn.hidden = true;
+          signInBtn.textContent = "Sign in and continue";
+          signInBtn.onclick = () => location.replace("/login.html");
+        }
+      } catch (error) { status(error?.code === "auth/expired-action-code" ? "This verification link has expired. Request a fresh link below." : "This verification link is invalid or has already been used. Request a fresh link if your email is still unverified.", "error"); }
+      }
+    }
+
+    resendBtn.addEventListener("click", async () => {
+      if (!activeUser) { location.href = "/login.html"; return; }
+      resendBtn.disabled = true; status("Sending a fresh verification email…");
+      try { await sendEmailVerification(activeUser, actionSettings); status(`Verification email sent to ${activeUser.email}. Check your inbox and spam folder.`, "ok"); }
+      catch (error) { status(error?.code === "auth/too-many-requests" ? "Too many requests. Wait a little before resending." : error?.message || "Could not send the email. Try again shortly.", "error"); }
+      finally { resendBtn.disabled = false; }
+    });
+    checkBtn.addEventListener("click", async () => {
+      if (!activeUser) { location.href = "/login.html"; return; }
+      checkBtn.disabled = true; status("Checking your email status…");
+      try { await reload(activeUser); if (!activeUser.emailVerified) { status("Email is not verified yet. Open the latest link, then try again.", "error"); return; } await finishVerification(activeUser); }
+      catch (error) { status(error?.message || "Could not check status. Try again.", "error"); }
+      finally { checkBtn.disabled = false; }
+    });
+    signInBtn.addEventListener("click", async () => { if (activeUser) await signOut(auth); location.replace("/login.html"); });
+    if (params.get("sendError") === "1") status("Your account was created, but the email could not be sent. Wait a moment and use Resend verification email.", "error");
+  </script>
+</body>
+</html>

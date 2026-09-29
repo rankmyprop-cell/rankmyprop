@@ -296,9 +296,9 @@
 
     <div class="rating-summary">
       <div>
-        <div class="big-score" id="avgScore">0.0</div>
+        <div class="big-score" id="avgScore">—</div>
         <div class="stars-row" id="avgStars"></div>
-        <div class="based-on" id="basedOn">Based on 0 reviews</div>
+        <div class="based-on" id="basedOn">Based on 0 approved reviews</div>
       </div>
       <div class="bars" id="barsEl"></div>
     </div>
@@ -653,11 +653,12 @@ function initHeader() {
   const avgNum = total ? (sum / total) : 0;
   const avg = avgNum.toFixed(1);
   const avgHalf = Math.round(avgNum * 2) / 2;
+  const canPublishRating = total >= 5;
 
-  document.getElementById('avgScore').textContent = avg;
-  document.getElementById('basedOn').textContent = `Based on ${total.toLocaleString()} reviews`;
+  document.getElementById('avgScore').textContent = canPublishRating ? avg : '—';
+  document.getElementById('basedOn').textContent = `Based on ${total.toLocaleString()} approved reviews`;
   document.getElementById('totalNum').textContent = total.toLocaleString();
-  document.getElementById('avgStars').innerHTML = renderStars(avgHalf, 18);
+  document.getElementById('avgStars').innerHTML = canPublishRating ? renderStars(avgHalf, 18) : '';
   const trustText = document.getElementById('trustText');
   if (trustText) trustText.innerHTML = total ? `${total.toLocaleString()} approved review${total === 1 ? '' : 's'}<br>from real traders` : 'No approved reviews<br>yet';
 
@@ -822,6 +823,7 @@ document.getElementById('modalOverlay').addEventListener('click', function(e) {
 });
 
 async function initBackendReactions() {
+  await hydrateApprovedReviewsFromCloudflare();
   try {
     const [{ initializeApp }, fire, cfg] = await Promise.all([
       import('https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js'),
@@ -844,10 +846,44 @@ async function initBackendReactions() {
       serverTimestamp: fire.serverTimestamp
     };
     backendReady = true;
-    await hydrateApprovedReviewsFromBackend();
     if (ALL_REVIEWS.length) await hydrateReactionsFromBackend();
   } catch (_) {
     backendReady = false;
+  }
+}
+
+async function hydrateApprovedReviewsFromCloudflare() {
+  if (!firmReviewKey || firmReviewKey === 'global') return false;
+  try {
+    const response = await fetch(`/api/reviews?firm=${encodeURIComponent(firmReviewKey)}&limit=100&sort=newest`, {
+      headers: { accept: 'application/json' }
+    });
+    if (!response.ok) throw new Error(`Review API failed (${response.status})`);
+    const payload = await response.json();
+    const items = (Array.isArray(payload.reviews) ? payload.reviews : []).map((review, index) => ({
+      id: String(review.id || index + 1),
+      name: String(review.reviewer?.name || 'Anonymous Trader'),
+      rating: Math.max(1, Math.min(5, Number(review.rating || 5))),
+      time: timeAgo(review.publishedAt || review.submittedAt),
+      text: String(review.text || ''),
+      program: String(review.program || 'Not mentioned'),
+      likes: 0,
+      liked: false,
+      helpful: false
+    }));
+    ALL_REVIEWS.splice(0, ALL_REVIEWS.length, ...normalizedReviewItems(items));
+    filtered = [...ALL_REVIEWS];
+    syncReviewIds();
+    initHeader();
+    applyFilters();
+    notifyParentReviewCount();
+    return true;
+  } catch (_) {
+    ALL_REVIEWS.splice(0, ALL_REVIEWS.length);
+    filtered = [];
+    applyFilters();
+    notifyParentReviewCount();
+    return false;
   }
 }
 

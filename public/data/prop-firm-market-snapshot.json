@@ -1,0 +1,20 @@
+{
+  "title": "Rank My Prop Market Snapshot 2026",
+  "lastMaterialUpdate": "2026-09-28",
+  "methodology": "Counts are calculated from published Rank My Prop CMS records. Draft, inactive and rejected records are excluded where applicable.",
+  "firms": 22,
+  "firmsWithAtLeast12CoreDataPoints": 15,
+  "activeOffers": 12,
+  "approvedCommunityReviews": 21,
+  "proofBackedApprovedReviews": 9,
+  "publishedAccountPrograms": 91,
+  "detailedProgramRulebooks": 74,
+  "platformCoverage": {
+    "MetaTrader 5": 15,
+    "Match-Trader": 13,
+    "TradeLocker": 10,
+    "cTrader": 8,
+    "MetaTrader 4": 1,
+    "Volumetrica": 1
+  }
+}

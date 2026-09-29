@@ -31,6 +31,7 @@
       <a class="side-link" href="/admin-moderation">Moderation</a>
       <a class="side-link" href="/admin-purchases">Purchases</a>
       <a class="side-link active" href="/admin-announcements">Announcement Hub</a>
+      <a class="side-link" href="/admin-push">Push Notifications</a>
       <a class="side-link" href="/admin-community">Community Posts</a>
       <a class="side-link" href="/admin-giveaways">Giveaways CMS</a>
       <a class="side-link" href="/admin-events">Upcoming Events</a>
@@ -73,6 +74,16 @@
       </section>
 
       <section class="panel">
+        <div class="panel-head"><div><h3>Announcement Push Alert</h3><p class="welcome">Publishing and sending are separate actions so an alert is never sent accidentally.</p></div><span class="chip">Cloudflare</span></div>
+        <div class="form-grid">
+          <div class="field full"><label>Push title</label><input id="announcementPushTitle" maxlength="120" placeholder="RankMyProp announcement" /></div>
+          <div class="field full"><label>Push body</label><textarea id="announcementPushBody" maxlength="300" placeholder="Short notification message"></textarea></div>
+          <div class="field full"><label>Push click URL</label><input id="announcementPushClickUrl" value="/announcements" /></div>
+          <div class="full top-actions"><button class="btn-primary" id="sendAnnouncementPushBtn" type="button">Send Push</button></div>
+        </div>
+      </section>
+
+      <section class="panel">
         <form id="form" class="form-grid">
           <input type="hidden" name="docId" />
           <div class="field"><label>Tag</label><input name="tag" placeholder="Giveaway" required /></div>
@@ -102,6 +113,7 @@
     import { db } from "./dashboard-common.js";
     import { bindLogout, enforceAdmin, formDataToObj, showNotice, sortByCreatedDesc } from "./admin-common.js";
     import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+    import { wirePushButton } from "./admin-push-client.js";
 
     const form = document.getElementById("form");
     const topBarForm = document.getElementById("topBarForm");
@@ -109,6 +121,11 @@
     const submitBtn = document.getElementById("submitBtn");
     const cancelBtn = document.getElementById("cancelBtn");
     const notice = document.getElementById("notice");
+    const announcementPushFields = {
+      title: document.getElementById("announcementPushTitle"),
+      body: document.getElementById("announcementPushBody"),
+      clickUrl: document.getElementById("announcementPushClickUrl"),
+    };
 
     bindLogout("logoutBtn");
 
@@ -219,6 +236,19 @@
       await loadList();
     });
 
+    wirePushButton({
+      button: "sendAnnouncementPushBtn",
+      fields: announcementPushFields,
+      category: "announcements",
+      notice,
+      showNotice,
+      defaults: () => ({
+        title: String(form.elements.namedItem("title")?.value || "RankMyProp announcement").trim(),
+        body: String(form.elements.namedItem("body")?.value || "Open RankMyProp to read the latest announcement.").trim().slice(0, 300),
+        clickUrl: "/announcements",
+      }),
+    });
+
     enforceAdmin(async (user) => {
       document.getElementById("adminEmail").textContent = user.email || "Admin";
       await Promise.all([loadTopBar(), loadList()]);
@@ -229,4 +259,3 @@
   <script type="module" src="/site-performance.js"></script>
 </body>
 </html>
-

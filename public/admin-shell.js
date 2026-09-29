@@ -8,6 +8,7 @@
     ["admin-reviews.html", "Reviews Hub"],
     ["admin-purchases.html", "Purchases"],
     ["admin-announcements.html", "Announcement Hub"],
+    ["admin-push.html", "Push Notifications"],
     ["admin-community.html", "Community Posts"],
     ["admin-giveaways.html", "Giveaways CMS"],
     ["admin-events.html", "Upcoming Events"],

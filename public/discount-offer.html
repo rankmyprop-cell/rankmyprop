@@ -47,7 +47,7 @@
     <section class="offers-hero" aria-labelledby="offersHeading">
       <div class="offers-hero-copy">
         <h1 id="offersHeading">Prop Firm <span>Discount Code & Promo Offers</span></h1>
-        <p>Loading the latest verified discount and promotional offer details.</p>
+        <p id="offersHeroDescription">Loading the latest verified discount and promotional offer details.</p>
         <div class="offers-updated">
           Last Updated: <span>July 28, 2026</span>
         </div>
@@ -61,9 +61,10 @@
           const firm = slug.replace(/[-_]+/g, " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
           const heading = document.getElementById("offersHeading");
           const paragraph = document.querySelector(".offers-hero-copy > p");
-          if (heading) heading.innerHTML = `${firm} <span>Discount Code & Promo Offers</span>`;
-          if (paragraph) paragraph.textContent = `Get the latest ${firm} discount code, current promotional savings and verified offer details before checkout.`;
-          document.title = `${firm} Discount Code & Promo Offers 2026 | Rank My Prop`;
+          const bootstrap = window.__RMP_SSR_BOOTSTRAP || {};
+          if (heading && bootstrap.heading) heading.textContent = bootstrap.heading;
+          if (paragraph && bootstrap.paragraph) paragraph.textContent = bootstrap.paragraph;
+          if (bootstrap.seoTitle) document.title = bootstrap.seoTitle;
         })();
       </script>
     </section>

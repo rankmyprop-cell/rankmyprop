@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
-import { collection, getDocs } from 'firebase/firestore'
-import { db } from './firebase'
+import { listCloudflareCollection } from './cloudflareData'
 
 type VideoRow = {
   id: string
@@ -150,12 +149,11 @@ export default function VideoShowcase({ pageKey = 'home' }: { pageKey?: string }
         const rows: VideoRow[] = []
 
         try {
-          const snapshot = await getDocs(collection(db, 'propNewsVideos'))
-          snapshot.forEach((document) => {
-            const data = document.data() as Record<string, unknown>
+          const cmsRows = await listCloudflareCollection<Record<string, unknown> & { id: string }>('propNewsVideos', 100)
+          cmsRows.forEach((data) => {
             const pages = pageKeysFrom(data)
             rows.push({
-              id: document.id,
+              id: data.id,
               title: text(data.title),
               description: text(data.description ?? data.excerpt),
               youtubeUrl: text(data.youtubeUrl ?? data.videoUrl ?? data.url),

@@ -41,10 +41,10 @@ const features: Feature[] = [
 ]
 
 const stats: Stat[] = [
-  { target: 250, suffix: '+', label: 'Prop Firms Reviewed' },
-  { target: 500, suffix: '+', label: 'Exclusive Offers' },
-  { target: 10000, suffix: '+', label: 'Trader Reviews', grouped: true },
-  { display: 'Guaranteed', suffix: '', label: 'Cashback on Every Eligible Purchase' },
+  { display: 'Published', suffix: '', label: 'Firm Research' },
+  { display: 'Current', suffix: '', label: 'Offer Tracking' },
+  { display: 'Moderated', suffix: '', label: 'Trader Reviews' },
+  { display: 'Eligible', suffix: '', label: 'Cashback Terms Apply' },
 ]
 
 function useCountUp(target: number, start: boolean, duration = 1450) {

@@ -5,7 +5,7 @@
 - The public website is the React application in `src/`.
 - `public/*.html` contains only the preserved client, admin, support, and authentication surfaces.
 - The old public website pages were not imported.
-- `api/support-*` remains the support workspace's CommonJS Vercel API.
+- `api/support-*` remains the local compatibility source while the production API runs on Cloudflare Workers.
 - Firebase/Firestore remains the client and admin source of truth.
 - Supabase remains the support identity, approvals, submissions, and audit store.
 
@@ -22,7 +22,7 @@ node scripts/verify-dashboard-source.cjs "/path/to/RMP_Dashboard_Preservation_20
 
 ## Environment requirements
 
-The supplied private environment file contains browser Firebase and Supabase values. The following server-only values still need to be configured in Vercel for the support APIs and notification services:
+The supplied private environment file contains browser Firebase and Supabase values. Server-only values belong in Cloudflare Worker secrets or the retained upstream service configuration, never in Pages assets:
 
 - `FIREBASE_SERVICE_ACCOUNT_JSON`
 - `FIREBASE_WEB_API_KEY`

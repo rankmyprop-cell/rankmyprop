@@ -57,8 +57,12 @@ function logoMarkup(item, className) {
     : `<span class="${className}">${escapeHtml(item.initials || item.name.slice(0, 2).toUpperCase())}</span>`;
 }
 
-function ratingMarkup(rating, className) {
-  return `<span class="${className}">${Number(rating).toFixed(1)} <em>★★★★★</em></span>`;
+function ratingMarkup(item, className) {
+  const rating = Number(item.rating);
+  const safeRating = Number.isFinite(rating) ? Math.max(0, Math.min(5, rating)) : 0;
+  const filledStars = Math.round(safeRating);
+  const stars = `${"★".repeat(filledStars)}${"☆".repeat(5 - filledStars)}`;
+  return `<span class="${className}" aria-label="${safeRating.toFixed(1)} out of 5">${safeRating.toFixed(1)} <em aria-hidden="true">${stars}</em></span>`;
 }
 
 function dealMarkup(item, className) {
@@ -80,7 +84,7 @@ function renderOffers(direction) {
       ${logoMarkup(item, "hero-offer-logo")}
       <span class="hero-offer-main">
         <span class="hero-offer-name" title="${escapeHtml(item.name)}">${escapeHtml(compactName(item.name))}</span>
-        ${ratingMarkup(item.rating, "hero-offer-rate")}
+        ${ratingMarkup(item, "hero-offer-rate")}
       </span>
       ${dealMarkup(item, "hero-offer-deal")}
     </a>
@@ -104,7 +108,7 @@ function renderFutures() {
       ${logoMarkup(item, "hero-future-logo")}
       <span class="hero-future-main">
         <span class="hero-future-top">${item.isNew ? '<span class="hero-future-new">NEW</span>' : ""}<span class="hero-future-name" title="${escapeHtml(item.name)}">${escapeHtml(compactName(item.name))}</span></span>
-        ${ratingMarkup(item.rating, "hero-future-rate")}
+        ${ratingMarkup(item, "hero-future-rate")}
       </span>
       ${dealMarkup(item, "hero-future-deal")}
     </a>
@@ -133,6 +137,7 @@ async function hydrateCentralFirmLogos() {
       firmId: item.firmId || item.id || item.slug,
       name: item.name,
       rating: Number(item.rating || 0),
+      reviewCount: Number(item.reviewCount || item.reviews || item.reviewsCount || item.ratingCount || 0),
       discount: item.discount || "Offer",
       code: item.code || "RMP",
       logo: item.logoUrl || (/^(?:data:image\/|https?:\/\/|\/?assets\/)/i.test(String(item.logo || "")) ? item.logo : ""),

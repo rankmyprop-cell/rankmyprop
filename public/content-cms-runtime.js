@@ -135,41 +135,52 @@
     wefund: "We Fund"
   };
   var SEO_COPY = {
+    "listedprop": {
+      heading: "Best Prop Firms 2026: Compare Funded Trading Firms",
+      paragraph: "Compare the best prop firms in 2026 based on funding options, profit splits, drawdown rules, payout cycles, trading platforms, challenge fees, news trading policies, and trader reviews.",
+      directCode: true
+    },
     "bestprop": {
       heading: "Best Forex Prop Firms in 2026",
       paragraph: "Compare the best forex prop firms in 2026 based on payouts, trading rules, leverage, account sizes, trust score, and overall trader experience."
     },
     "best-prop-firms-2026": {
-      heading: "Best Forex Prop Firms in 2026",
-      paragraph: "Compare the best forex prop firms in 2026 based on payouts, trading rules, leverage, account sizes, trust score, and overall trader experience."
+      heading: "Best Forex Prop Firms in 2026: Top-Rated Funded Trading Firms",
+      paragraph: "Discover the best forex prop firms in 2026, featuring top-rated funded trading firms with detailed information on account sizes, profit splits, drawdown rules, payout cycles, trading platforms, challenge fees, news trading policies, and trader reviews.",
+      directCode: true
     },
     "fast-payout-prop-firms": {
-      heading: "Best Fast Payout Prop Firms 2026",
-      paragraph: "Explore fast payout prop firms offering quick withdrawals, reliable profit sharing, flexible payout cycles, and trusted funded accounts for active forex traders."
+      heading: "Best Fast Payout Prop Firms in 2026: Top Firms for Quick Payouts",
+      paragraph: "Discover the best fast payout prop firms in 2026, featuring funded trading firms known for quick payout cycles, flexible withdrawal options, competitive profit splits, and trader-friendly funding programs.",
+      directCode: true
     },
     "best-instant-funding-firms": {
-      heading: "Best Instant Funding Prop Firms 2026",
-      paragraph: "Find top instant funding prop firms with no evaluation challenges, flexible trading rules, fast payouts, and affordable funded account pricing options."
+      heading: "Best Instant Funding Prop Firms in 2026: Top Instant Funded Accounts",
+      paragraph: "Discover the best instant funding prop firms in 2026 offering immediate access to funded trading accounts. Explore account sizes, profit splits, payout rules, drawdown limits, trading platforms, pricing, and key trading conditions before choosing an instant funding program.",
+      directCode: true
     },
     "best-hft-prop-firms": {
       heading: "Best HFT Friendly Prop Firms 2026",
       paragraph: "Compare HFT prop firms allowing scalping, expert advisors, automated trading, and high-frequency strategies with fast execution and trader-friendly conditions."
     },
     "best-futures-prop-firms": {
-      heading: "Best Futures Trading Prop Firms 2026",
-      paragraph: "Discover top futures prop firms offering funded futures accounts, competitive rules, scaling plans, low commissions, and reliable payouts for traders."
+      heading: "Best Futures Prop Firms in 2026: Top Firms for Futures Traders",
+      paragraph: "Discover the best futures prop firms in 2026 for traders looking for funded futures accounts. Explore available account sizes, profit splits, drawdown rules, payout conditions, trading platforms, scaling plans, and other key funding requirements.",
+      directCode: true
     },
     "cheapest-prop-firms": {
       heading: "Cheapest Forex Prop Firms in 2026",
       paragraph: "Compare affordable prop firms with low challenge fees, budget-friendly funded accounts, flexible trading conditions, and trusted payout systems for traders."
     },
     "most-trusted-prop-firms": {
-      heading: "Most Trusted Forex Prop Firms 2026",
-      paragraph: "Explore trusted prop firms known for reliable payouts, transparent rules, strong trader reputation, responsive support, and long-term consistency in funding."
+      heading: "Most Trusted Forex Prop Firms in 2026: Top Trusted Funded Trading Firms",
+      paragraph: "Discover the most trusted forex prop firms in 2026 based on verification, trader reviews, payout information, rule transparency, and overall trading conditions. Explore trusted funded trading firms and their key account features before choosing a prop firm.",
+      directCode: true
     },
     "beginner-friendly-firms": {
-      heading: "Best Beginner Friendly Prop Firms 2026",
-      paragraph: "Find beginner friendly prop firms with simple evaluation rules, flexible risk management, educational support, and funded accounts designed for new traders."
+      heading: "Best Beginner-Friendly Prop Firms in 2026: Top Firms for New Traders",
+      paragraph: "Discover the best beginner-friendly prop firms in 2026 for new and developing traders. Explore simple trading rules, affordable challenge fees, clear funding conditions, easy-to-use platforms, flexible account options, and trader-friendly requirements.",
+      directCode: true
     },
     "highest-rated-firms": {
       heading: "Highest Rated Forex Prop Firms 2026",
@@ -216,8 +227,11 @@
       paragraph: "Understand prop firm trading rules including drawdown limits, consistency requirements, leverage policies, payout systems, and restricted trading strategies clearly."
     },
     "prop-firm-rules": {
-      heading: "Complete Prop Firm Rules and Guidelines",
-      paragraph: "Understand prop firm trading rules including drawdown limits, consistency requirements, leverage policies, payout systems, and restricted trading strategies clearly."
+      heading: "Prop Firm Rules 2026: Trading Rules for Funded Accounts",
+      paragraph: "Explore prop firm rules for funded trading accounts in 2026, including daily drawdown, maximum loss, profit targets, payout rules, trading restrictions, news trading, EA usage, copy trading, and platform requirements.",
+      seoTitle: "Prop Firm Rules 2026 | Funded Account Trading Rules",
+      seoDescription: "Explore prop firm rules for funded accounts in 2026. Check drawdown, maximum loss, profit targets, payouts, news trading, EA, copy trading and platform rules.",
+      directCode: true
     },
     "firm-rules": {
       heading: "Complete Prop Firm Rules and Guidelines",
@@ -547,7 +561,7 @@
     if (refs.native) refs.headingEl.textContent = heading;
     else refs.headingEl.innerHTML = emphasizeHeading(heading, refs.wrap?.classList.contains("rmp-original-heading-layout"));
     refs.paragraphEl.textContent = normText((content && content.paragraph) || defaultSeoForPage(file).paragraph);
-    var updated = normText((content && (content.lastUpdatedLabel || content.lastUpdated)) || humanDate());
+    var updated = normText(content && (content.lastUpdatedLabel || content.lastUpdated));
     var updatedEl = refs.updatedEl || null;
     if (!updatedEl && refs.paragraphEl && refs.paragraphEl.parentNode) {
       updatedEl = refs.paragraphEl.parentNode.querySelector("[data-rmp-seo-updated='1']");
@@ -681,6 +695,11 @@
   }
 
   async function syncSeo(f, defaults, pageDocId) {
+    var directCopy = SEO_COPY[baseName(file)];
+    if (directCopy && directCopy.directCode === true) {
+      renderSeo({ heading: defaults.heading, paragraph: defaults.paragraph, lastUpdatedLabel: "" });
+      return;
+    }
     try {
       var seoRef = f.fs.doc(f.db, "pageSeoContent", pageDocId);
       var seoSnap = await f.fs.getDoc(seoRef);
@@ -699,7 +718,7 @@
       var previewParagraph = normText(previewData.paragraph);
       var fallbackParagraph = normText(pageItemData.paragraph);
       var liveParagraph = normText(previewParagraph || (useStoredParagraph ? storedParagraph : fallbackParagraph || defaults.paragraph)) || defaults.paragraph;
-      var liveUpdated = normText(previewData.lastUpdatedLabel || seoData.lastUpdatedLabel || pageItemData.lastUpdatedLabel || defaults.lastUpdatedLabel || humanDate());
+      var liveUpdated = normText(previewData.lastUpdatedLabel || seoData.lastUpdatedLabel || pageItemData.lastUpdatedLabel || defaults.lastUpdatedLabel);
       renderSeo({ heading: liveHeading, paragraph: liveParagraph, lastUpdatedLabel: liveUpdated });
 
       var payload = {
@@ -708,28 +727,31 @@
         defaultHeading: defaults.heading,
         defaultParagraph: defaults.paragraph,
         lastUpdatedLabel: liveUpdated,
-        lastSeenAt: f.fs.serverTimestamp(),
-        updatedAt: f.fs.serverTimestamp()
+        lastSeenAt: f.fs.serverTimestamp()
       };
 
       if (!seoSnap.exists()) payload.createdAt = f.fs.serverTimestamp();
+      var contentChanged = !seoSnap.exists() || storedHeading !== liveHeading || storedParagraph !== liveParagraph || normText(seoData.lastUpdatedLabel) !== liveUpdated;
       if (!useStoredHeading || storedHeading !== liveHeading) payload.heading = liveHeading;
       if (!useStoredParagraph || storedParagraph !== liveParagraph) payload.paragraph = liveParagraph;
+      if (contentChanged) payload.updatedAt = f.fs.serverTimestamp();
       await f.fs.setDoc(seoRef, payload, { merge: true });
     } catch (_) {
-      renderSeo({ heading: defaults.heading, paragraph: defaults.paragraph, lastUpdatedLabel: humanDate() });
+      renderSeo({ heading: defaults.heading, paragraph: defaults.paragraph, lastUpdatedLabel: defaults.lastUpdatedLabel || "" });
     }
   }
 
   async function scanAndSync() {
+    // Firm Detail CMS owns this entire dynamic surface, including query routes.
+    if (document.getElementById("firmNameHeading")) return;
     if (!nativeSeoRefs()) removeLegacyPageCopy();
     var seoDefaults = defaultSeoForPage(file);
     var initialPreview = readLocalPreview(file);
-    renderSeo(Object.assign({ pending: true, lastUpdatedLabel: humanDate() }, seoDefaults, initialPreview || {}));
+    renderSeo(Object.assign({ pending: true, lastUpdatedLabel: "" }, seoDefaults, initialPreview || {}));
 
     var blocks = collectBlocks(document);
     if (!blocks.length) {
-      renderSeo(Object.assign({ lastUpdatedLabel: humanDate() }, seoDefaults, initialPreview || {}));
+      renderSeo(Object.assign({ lastUpdatedLabel: "" }, seoDefaults, initialPreview || {}));
       return;
     }
     var pageDocId = docIdForPage(file);

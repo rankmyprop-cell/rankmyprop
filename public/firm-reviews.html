@@ -38,9 +38,9 @@
         <div class="firm-bar-copy">
           <h1 id="firmName">Prop Firm</h1>
           <div class="firm-rating-pill">
-            <strong id="averageRating">0.0</strong>
-            <span class="stars" id="averageStars" aria-hidden="true">☆☆☆☆☆</span>
-            <span id="reviewCount">0 reviews</span>
+            <strong id="averageRating">—</strong>
+            <span class="stars" id="averageStars" aria-hidden="true"></span>
+            <span id="reviewCount">0 verified reviews</span>
           </div>
         </div>
       </div>
@@ -95,6 +95,41 @@
           <div id="formMessage" class="form-message" role="status"></div>
         </form>
       </aside>
+    </section>
+
+    <section class="review-research" aria-labelledby="reviewResearchTitle">
+      <header class="review-research-heading">
+        <span class="section-kicker">EDITORIAL REVIEW NOTES</span>
+        <h2 id="reviewResearchTitle">How Rank My Prop evaluates this firm</h2>
+        <p>We separate published firm records from community claims and clearly show when supporting evidence is unavailable.</p>
+      </header>
+      <div class="review-research-grid">
+        <article>
+          <span>What we check</span>
+          <h3>Rules and account conditions</h3>
+          <p id="reviewResearchChecks">Published challenge structure, loss limits, payout terms, trading permissions and platform information.</p>
+        </article>
+        <article>
+          <span>Evidence reviewed</span>
+          <h3><strong id="reviewResearchCount">0</strong> approved reviews</h3>
+          <p><strong id="reviewResearchProofCount">0</strong> include a public proof attachment. Last material record: <strong id="reviewResearchUpdated">Not yet recorded</strong>.</p>
+        </article>
+        <article>
+          <span>Reported experience</span>
+          <h3>Positive and critical context</h3>
+          <p><strong>Positive:</strong> <span id="reviewResearchPositive">No approved positive detail yet.</span><br><strong>Concern:</strong> <span id="reviewResearchConcern">No approved concern detail yet.</span></p>
+        </article>
+        <article>
+          <span>Limitations</span>
+          <h3>What this page cannot prove</h3>
+          <p>Community submissions are user-reported. Rules and offers can change, so confirm material terms with the firm before purchase.</p>
+        </article>
+      </div>
+      <nav class="review-research-links" aria-label="Related evidence">
+        <a id="reviewResearchProfile" href="/listedprop">Firm profile</a>
+        <a id="reviewResearchRules" href="/prop-firm-rules">Rulebook</a>
+        <a id="reviewResearchCompare" href="/compare">Compare firms</a>
+      </nav>
     </section>
 
     <section class="firm-review-faq" aria-labelledby="firmReviewFaqTitle">

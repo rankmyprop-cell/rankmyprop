@@ -30,6 +30,7 @@
       <a class="side-link" href="/admin-moderation">Moderation</a>
       <a class="side-link" href="/admin-purchases">Purchases</a>
       <a class="side-link" href="/admin-announcements">Announcement Hub</a>
+      <a class="side-link" href="/admin-push">Push Notifications</a>
       <a class="side-link" href="/admin-community">Community Posts</a>
       <a class="side-link" href="/admin-giveaways">Giveaways CMS</a>
       <a class="side-link" href="/admin-events">Upcoming Events</a>
@@ -98,6 +99,16 @@
           <div class="field full"><label>Page Paragraph</label><textarea name="paragraph" placeholder="Get the latest verified FundedNext discount code, current savings and checkout conditions." rows="3"></textarea></div>
           <div class="field"><label>Last Updated Label</label><input name="lastUpdatedLabel" placeholder="July 28, 2026" /></div>
 
+          <div class="field full" style="margin-top:10px;padding:16px;border:1px solid rgba(139,115,255,.32);border-radius:14px;background:rgba(98,67,255,.07)">
+            <div class="panel-head" style="margin-bottom:12px"><div><h3>Offer Push Alert</h3><p class="welcome">Save/update the offer, then send this alert separately.</p></div><span class="chip">Cloudflare</span></div>
+            <div class="form-grid">
+              <div class="field full"><label>Push title</label><input id="offerPushTitle" maxlength="120" placeholder="New offer now live" /></div>
+              <div class="field full"><label>Push body</label><textarea id="offerPushBody" maxlength="300" placeholder="Tell traders about the discount and code."></textarea></div>
+              <div class="field full"><label>Push click URL</label><input id="offerPushClickUrl" placeholder="/offers/firm-slug" /></div>
+              <div class="full top-actions"><button class="btn-primary" id="sendOfferPushBtn" type="button">Send Push Notification</button></div>
+            </div>
+          </div>
+
           <div class="full top-actions">
             <button class="btn-primary" id="saveBtn" type="submit">Save Offer</button>
             <button class="btn" id="seedBtn" type="button">Load 13 Default Offers</button>
@@ -124,10 +135,16 @@
     import { bindLogout, enforceAdmin, formDataToObj, showNotice } from "./admin-common.js";
     import { DEFAULT_OFFERS } from "./offers-data.js";
     import { OTHER_FIRM_ID, createFirmIdentity, loadFirmIdentities, renderFirmIdentityOptions } from "./firm-identity-service.js";
+    import { wirePushButton } from "./admin-push-client.js";
 
     const form = document.getElementById("offerForm");
     const body = document.getElementById("offersBody");
     const notice = document.getElementById("notice");
+    const offerPushFields = {
+      title: document.getElementById("offerPushTitle"),
+      body: document.getElementById("offerPushBody"),
+      clickUrl: document.getElementById("offerPushClickUrl"),
+    };
     const cancelBtn = document.getElementById("cancelBtn");
     const saveBtn = document.getElementById("saveBtn");
     const seedBtn = document.getElementById("seedBtn");
@@ -399,6 +416,27 @@
 
       resetForm();
       await loadOffers();
+    });
+
+    wirePushButton({
+      button: "sendOfferPushBtn",
+      fields: offerPushFields,
+      category: "offers",
+      notice,
+      showNotice,
+      defaults: () => {
+        const firmId = String(form.elements.namedItem("firmId")?.value || "").trim();
+        const identity = firmIdentities.find((firm) => firm.id === firmId);
+        const name = String(form.elements.namedItem("unlistedFirmName")?.value || identity?.name || "New prop firm offer").trim();
+        const slug = slugify(form.elements.namedItem("unlistedFirmSlug")?.value || identity?.slug || firmId);
+        const discount = String(form.elements.namedItem("discount")?.value || "").trim();
+        const code = String(form.elements.namedItem("code")?.value || "").trim();
+        return {
+          title: `${name} offer is live`,
+          body: [discount && `Save ${discount}`, code && `with code ${code}`].filter(Boolean).join(" ") || "Open RankMyProp to view the latest verified offer.",
+          clickUrl: `/offers/${slug}`,
+        };
+      },
     });
 
     bindLogout("logoutBtn");

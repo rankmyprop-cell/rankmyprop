@@ -393,6 +393,7 @@ function detailHref(firm = {}) {
   })();
   const slug = slugify(rawSlug || firm.slug || firm.name || firm.id || "");
   const exportedDetailPages = {
+    upcomers: "/prop-firms/upcomers",
     "aqua-funded": "aquafundeddetail.html",
     aquafunded: "aquafundeddetail.html",
     blueberry: "blueberrydetail.html",
@@ -529,8 +530,9 @@ function render() {
   if (!grid) return;
   if (state.loading) {
     ensureLoaderStyle();
+    grid.classList.add("rmp-loading-grid");
     grid.setAttribute("aria-busy", "true");
-    grid.innerHTML = new Array(state.perPage).fill(0).map(() => `
+    grid.innerHTML = new Array(3).fill(0).map(() => `
       <div class="pf-card pf-loading-card" aria-hidden="true">
         <div class="pf-load-top">
           <div class="pf-load-logo"></div>
@@ -569,6 +571,7 @@ function render() {
     return;
   }
 
+  grid.classList.remove("rmp-loading-grid");
   grid.removeAttribute("aria-busy");
   const start = (state.page - 1) * state.perPage;
   const rows = state.filtered.slice(start, start + state.perPage);
@@ -589,7 +592,9 @@ function render() {
     const fullBio = String(f.bio || f.overviewShort || "").replace(/\s+/g, " ").trim();
     const bio = formatInline(truncateWords(fullBio, 14));
     const rating = Math.max(0, Math.min(5, Number(f.score || 0)));
-    const reviews = formatReviewCount(f.reviewCount);
+    const reviewTotal = Math.max(0, Number(f.reviewCount) || 0);
+    const reviews = formatReviewCount(reviewTotal);
+    const hasVerifiedRating = reviewTotal >= 5;
     const badgeMarket = String(markets[0] || tags[0] || "CFDs").toUpperCase();
     const stats = cardStats(f);
     const details = cardDetails(f);
@@ -614,8 +619,8 @@ function render() {
                 ${hasAssurance ? `<div class="pf-tick-wrap"><div class="pf-tick">${ICONS.check}</div><div class="pf-tooltip"><span class="dot"></span>Payout Assurance Enabled</div></div>` : ""}
               </div>
               <div class="pf-rating-row">
-                <span class="pf-rating-num">${rating ? rating.toFixed(1) : "0.0"}</span>
-                <div class="pf-stars">${starsHtml(rating)}</div>
+                <span class="pf-rating-num">${hasVerifiedRating ? rating.toFixed(1) : "—"}</span>
+                <div class="pf-stars" aria-label="${hasVerifiedRating ? `${rating.toFixed(1)} out of 5` : "Not enough verified reviews yet"}">${hasVerifiedRating ? starsHtml(rating) : ""}</div>
                 <a class="pf-reviews pf-reviews-link" href="${cardReviewHref}">${escapeHtml(reviews)} reviews</a>
               </div>
             </div>
@@ -748,8 +753,9 @@ async function init() {
   bindFilters();
   ensureCardLayoutFixStyle();
   applyBestHeading();
-  const hasStaticFirstPaint = document.getElementById("grid")?.dataset.rmpStaticFirstPaint === "true";
-  if (!hasStaticFirstPaint) render();
+  // The server cards remain available to crawlers, while visitors get the
+  // animated card-shaped loading state until the live CMS data is ready.
+  render();
   const [, , firms, liveReviewStats] = await Promise.all([
     wait(UX_DELAY_MS),
     loadFilterOptions(),

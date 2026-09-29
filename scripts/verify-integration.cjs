@@ -19,7 +19,7 @@ const excludedLegacyPublicPages = [
   'discount.html', 'faq.html',
 ]
 const supportEndpoints = [
-  'support-login', 'support-session', 'support-refresh', 'support-overview',
+  'support-login', 'support-session', 'support-overview',
   'support-workspace', 'support-actions', 'support-accounts',
   'support-submissions', 'support-approvals',
 ]
@@ -47,9 +47,13 @@ if (fs.existsSync(runtimeFile)) {
   if (unsafe.length) failures.push(`Runtime env exposes non-public keys: ${unsafe.join(', ')}`)
 }
 
-const vercel = JSON.parse(fs.readFileSync(path.join(root, 'vercel.json'), 'utf8'))
-if (vercel.cleanUrls !== true) failures.push('Vercel cleanUrls must remain enabled')
-if (!vercel.rewrites?.some((rule) => rule.destination === '/index')) failures.push('React SPA fallback is missing')
+requireFile('public/_worker.js')
+requireFile('cloudflare/wrangler.jsonc')
+if (fs.existsSync(path.join(root, 'public', '_worker.js'))) {
+  const pagesWorker = fs.readFileSync(path.join(root, 'public', '_worker.js'), 'utf8')
+  if (!pagesWorker.includes('env.ASSETS.fetch(request)')) failures.push('Cloudflare Pages asset fallback is missing')
+  if (!pagesWorker.includes('rankmyprop-api.theforexclue.workers.dev')) failures.push('Cloudflare API proxy is missing')
+}
 
 if (failures.length) {
   failures.forEach((failure) => console.error(`- ${failure}`))
@@ -57,5 +61,5 @@ if (failures.length) {
 }
 
 console.log(`[integration] ${requiredDashboardPages.length} dashboard pages verified`)
-console.log(`[integration] ${supportEndpoints.length} support APIs verified`)
-console.log('[integration] legacy public pages excluded and runtime env is browser-safe')
+console.log(`[integration] ${supportEndpoints.length} local compatibility APIs verified`)
+console.log('[integration] Cloudflare Pages routing, legacy page exclusions and browser-safe runtime env verified')

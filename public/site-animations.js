@@ -315,6 +315,7 @@
   };
 
   function shouldSkipFaq() {
+    if (String(window.location.pathname || "/").replace(/\/+$/, "") === "") return true;
     if (/^admin-/.test(path)) return true;
     if (/^(prop-news|prop-news-post|blog-post-\d+|content-post|trading-guides|funding-strategies|trading-psychology|beginner-tutorials|giveaways|giveaway|tradejournal)(?:\.html)?$/.test(path)) return true;
     if (/^\/(?:news|trading-guides|funding-strategies|trading-psychology|beginner-tutorials)\/[^/]+\/?$/i.test(String(window.location.pathname || ""))) return true;
@@ -666,21 +667,68 @@
     var core = [
       { label: "Compare Prop Firms", href: "/compare" },
       { label: "Best Prop Firms", href: "/bestprop" },
-      { label: "Prop Firm Discounts", href: "/discount" },
-      { label: "Prop Firm Rules", href: "/propfirmrule" },
+      { label: "Prop Firm Discounts", href: "/offers" },
+      { label: "Prop Firm Rules", href: "/prop-firm-rules" },
       { label: "Payout Proofs", href: "/payout-proofs" }
     ];
-    if (path.indexOf("/prop-firms/") === 0 || path.indexOf("firm-detail") !== -1) {
-      return { eyebrow: "Firm research links", title: "Quick Links For Firm Research", text: "Jump to the most useful Rank My Prop sections before choosing a firm.", links: core };
+    var parts = path.split("/").filter(Boolean);
+    var firmSlug = parts[0] === "prop-firms" ? parts[1] : "";
+    var ruleSlug = parts[0] === "prop-firm-rules" ? parts[1] : "";
+    var offerSlug = parts[0] === "offers" ? parts[1] : "";
+    var legacyDetailSlugs = {
+      aquafundeddetail: "aqua-funded", blueguardiandetail: "blue-guardian",
+      blueberrydetail: "blueberry-funded", blueberryfundeddetail: "blueberry-funded",
+      directfundingtraderdetail: "direct-funding-trader", finotivefundingdetail: "finotive-funding",
+      fundednextdetail: "fundednext", funderprodetail: "funderpro", fx2fundingdetail: "fx2-funding",
+      fxifydetail: "fxify", goatfundedtraderdetail: "goat-funded-trader",
+      instantfundingdetail: "instant-funding", qtfundeddetail: "qt-funded",
+      swayfundeddetail: "sway-funded", theproptradedetail: "the-prop-trade",
+      toponetraderdetail: "top-one-trader", traderscaledetail: "trader-scale", wefunddetail: "we-fund"
+    };
+    var legacyDetailKey = String(parts[parts.length - 1] || "").replace(/\.html$/, "");
+    if (!firmSlug && legacyDetailSlugs[legacyDetailKey]) firmSlug = legacyDetailSlugs[legacyDetailKey];
+
+    if (path === "/listedprop" || path === "/listedprop.html") {
+      return { eyebrow: "Directory shortcuts", title: "Continue Your Firm Research", text: "Move from the full directory to rankings, reviews, rules, offers, and direct comparisons.", links: [core[1], { label: "Prop Firm Reviews", href: "/reviews" }, core[3], core[2], core[0]] };
     }
-    if (path.indexOf("compare-prop-firms") !== -1) {
+    if (path === "/bestprop" || path === "/bestprop.html" || /^\/best-[^/]+(?:\.html)?\/?$/.test(path) || /highest-rated|most-trusted|cheapest|beginner-friendly|fast-payout/.test(path)) {
+      return { eyebrow: "Ranking shortcuts", title: "Explore More Prop Firm Rankings", text: "Compare the ranking with the full directory, trader reviews, payout evidence, and active offers.", links: [{ label: "All Listed Firms", href: "/listedprop" }, core[0], { label: "Prop Firm Reviews", href: "/reviews" }, core[4], core[2]] };
+    }
+    if (path.indexOf("/prop-firms/") === 0 || path.indexOf("firm-detail") !== -1 || firmSlug) {
+      var firmLinks = firmSlug ? [
+        { label: "Firm Overview", href: "/prop-firms/" + firmSlug },
+        { label: "Trader Reviews", href: "/prop-firms/" + firmSlug + "/reviews" },
+        { label: "Trading Rules", href: "/prop-firm-rules/" + firmSlug },
+        { label: "Current Offer", href: "/offers/" + firmSlug },
+        core[0]
+      ] : core;
+      return { eyebrow: "Firm research links", title: "Quick Links For Firm Research", text: "Jump to the most useful Rank My Prop sections before choosing a firm.", links: firmLinks };
+    }
+    if (path === "/compare" || path.indexOf("/compare/") === 0 || path.indexOf("compare-prop-firms") !== -1) {
       return { eyebrow: "Compare shortcuts", title: "Quick Links For Comparing Firms", text: "Use these pages to verify payouts, rules, offers, and rankings after comparing firms.", links: [core[2], core[3], core[4], { label: "Prop Firm Reviews", href: "/reviews" }, core[1]] };
     }
     if (path.indexOf("discount") !== -1 || path.indexOf("offer") !== -1) {
-      return { eyebrow: "Offer research", title: "Quick Links For Discount Research", text: "Check rules, reviews, payouts, and comparisons before using any prop firm offer.", links: [core[0], core[3], core[4], { label: "Prop Firm Reviews", href: "/reviews" }, core[1]] };
+      var offerLinks = offerSlug ? [
+        { label: "Firm Overview", href: "/prop-firms/" + offerSlug },
+        { label: "Trader Reviews", href: "/prop-firms/" + offerSlug + "/reviews" },
+        { label: "Trading Rules", href: "/prop-firm-rules/" + offerSlug },
+        core[0],
+        core[1]
+      ] : [core[0], core[3], core[4], { label: "Prop Firm Reviews", href: "/reviews" }, core[1]];
+      return { eyebrow: "Offer research", title: "Quick Links For Discount Research", text: "Check rules, reviews, payouts, and comparisons before using any prop firm offer.", links: offerLinks };
     }
     if (path.indexOf("rule") !== -1) {
-      return { eyebrow: "Rule research", title: "Quick Links For Prop Firm Rules", text: "Compare rules with payouts, reviews, and discount pages before selecting a challenge.", links: [core[0], core[4], { label: "Rule Explainer", href: "/ruletranslator" }, { label: "Prop Firm Reviews", href: "/reviews" }, core[1]] };
+      var ruleLinks = ruleSlug ? [
+        { label: "Firm Overview", href: "/prop-firms/" + ruleSlug },
+        { label: "Trader Reviews", href: "/prop-firms/" + ruleSlug + "/reviews" },
+        { label: "Current Offer", href: "/offers/" + ruleSlug },
+        { label: "Rule Explainer", href: "/ruletranslator" },
+        core[0]
+      ] : [core[0], core[4], { label: "Rule Explainer", href: "/ruletranslator" }, { label: "Prop Firm Reviews", href: "/reviews" }, core[1]];
+      return { eyebrow: "Rule research", title: "Quick Links For Prop Firm Rules", text: "Compare rules with payouts, reviews, and discount pages before selecting a challenge.", links: ruleLinks };
+    }
+    if (path === "/reviews" || path.indexOf("/reviews/") === 0 || path.indexOf("firm-reviews") !== -1) {
+      return { eyebrow: "Review research", title: "Quick Links For Checking Reviews", text: "Connect trader feedback with firm profiles, payout proof, rules, rankings, and comparisons.", links: [{ label: "All Listed Firms", href: "/listedprop" }, core[4], core[3], core[1], core[0]] };
     }
     if (/calculator|lotsize|drawdown|risk-to-reward|profit-split|consistency|lossrecovery|tradejournal|ruletranslator/.test(path)) {
       return { eyebrow: "Trader tools", title: "Quick Links For Trading Tools", text: "Move between calculators and research pages while planning funded account risk.", links: [
@@ -703,14 +751,23 @@
     if (path.indexOf("payout") !== -1) {
       return { eyebrow: "Payout research", title: "Quick Links For Payout Checks", text: "Verify payout proof alongside rules, reviews, and compare pages.", links: [core[0], core[3], { label: "Prop Firm Reviews", href: "/reviews" }, core[2], core[1]] };
     }
+    if (/giveaway|bonus|referral/.test(path)) {
+      return { eyebrow: "Community shortcuts", title: "Explore More Trader Resources", text: "Continue from community rewards to offers, firm research, education, and practical tools.", links: [core[2], core[1], { label: "Trading Guides", href: "/trading-guides" }, { label: "Calculator Hub", href: "/calculators" }, { label: "Prop News", href: "/prop-news" }] };
+    }
+    if (/about|contact|faq|privacy|terms|disclaimer|cookies|legal/.test(path)) {
+      return { eyebrow: "Explore Rank My Prop", title: "Continue Your Research", text: "Access the main research, comparison, education, and support areas of Rank My Prop.", links: [core[1], core[0], { label: "Trading Guides", href: "/trading-guides" }, { label: "Calculator Hub", href: "/calculators" }, { label: "Contact Support", href: "/contact" }] };
+    }
     return { eyebrow: "Rank My Prop shortcuts", title: "Quick Links For Prop Firm Research", text: "Explore the highest-value pages for comparing prop firms, rules, offers, and payouts.", links: core };
   }
 
   function renderQuickLinks() {
-    if (/^(listedprop|bestprop)(?:\.html)?$/.test(path)) return null;
     if (document.getElementById("rmpQuickLinksSection")) return null;
-    if (document.querySelector(".rmp-research-panels")) return null;
-    var footer = document.querySelector("footer");
+    var footer = document.querySelector("footer.rmp-shared-home-footer, footer.site-footer, footer.rmp-global-footer, footer[data-rmp-global-footer]");
+    if (!footer) {
+      footer = Array.from(document.querySelectorAll("footer")).reverse().find(function (node) {
+        return !node.classList.contains("offer-card-footer") && !node.classList.contains("review-modal-footer");
+      }) || null;
+    }
     if (!footer) return null;
     var cfg = quickLinkConfig();
     if (!cfg || !Array.isArray(cfg.links) || !cfg.links.length) return null;
@@ -725,12 +782,17 @@
       '<p>' + esc(cfg.text || "Explore related Rank My Prop pages.") + '</p>',
       '</div>',
       '<div class="rmp-quick-links-grid">' + cfg.links.map(function (link) {
-        return '<a href="' + esc(link.href) + '"><span>' + esc(link.label) + '</span><strong>&gt;</strong></a>';
+        var linkNumber = String(cfg.links.indexOf(link) + 1).padStart(2, "0");
+        return '<a href="' + esc(link.href) + '"><b>' + linkNumber + '</b><span>' + esc(link.label) + '</span><strong aria-hidden="true">&#8599;</strong></a>';
       }).join("") + '</div>',
       '</div>'
     ].join("");
     var faq = document.getElementById("rmpFaqSection");
     footer.parentNode.insertBefore(wrap, faq || footer);
+    var previousSection = wrap.previousElementSibling;
+    if (previousSection && previousSection.classList.contains("faq-section")) {
+      previousSection.classList.add("rmp-before-quick-links");
+    }
     return wrap;
   }
 
@@ -739,18 +801,23 @@
     style.textContent = [
       ".rmp-reveal{opacity:0;transform:translateY(20px);filter:blur(5px);transition:opacity .56s ease,transform .56s ease,filter .56s ease}",
       ".rmp-reveal.rmp-visible{opacity:1;transform:none;filter:none}",
-      ".rmp-quick-links-shell{position:relative;width:100%;padding:40px 24px 0;background:#05040b}",
-      ".rmp-quick-links-card{max-width:1100px;margin:0 auto;border:1px solid rgba(127,99,255,.34);border-radius:20px;background:linear-gradient(135deg,rgba(16,14,29,.96),rgba(10,8,18,.98));box-shadow:0 22px 48px rgba(0,0,0,.42);padding:24px}",
-      ".rmp-quick-links-head{display:flex;flex-direction:column;gap:8px;margin-bottom:18px}",
-      ".rmp-quick-links-pill{display:inline-flex;align-self:flex-start;padding:7px 14px;border-radius:999px;border:1px solid rgba(127,99,255,.45);background:rgba(127,99,255,.14);color:#cfc9ff;font:700 11px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.12em;text-transform:uppercase}",
-      ".rmp-quick-links-head h2{margin:0;color:#f5f3ff;font:700 clamp(22px,2.2vw,30px)/1.16 'Plus Jakarta Sans',sans-serif;letter-spacing:-.02em}",
-      ".rmp-quick-links-head p{margin:0;color:#aeb4d4;font:400 14px/1.65 'Plus Jakarta Sans',sans-serif;max-width:760px}",
-      ".rmp-quick-links-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}",
-      ".rmp-quick-links-grid a{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:48px;padding:12px 14px;border:1px solid rgba(127,99,255,.3);border-radius:13px;background:rgba(255,255,255,.035);color:#f2f0ff;text-decoration:none;font:700 13px/1.25 'Plus Jakarta Sans',sans-serif;transition:background .18s ease,border-color .18s ease,transform .18s ease}",
-      ".rmp-quick-links-grid a:hover{background:rgba(127,99,255,.16);border-color:rgba(127,99,255,.62);transform:translateY(-1px)}",
-      ".rmp-quick-links-grid strong{color:#8b5cf6;font-size:16px;line-height:1}",
-      "@media(max-width:900px){.rmp-quick-links-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.rmp-quick-links-shell{padding:30px 14px 0}.rmp-quick-links-card{padding:18px}}",
-      "@media(max-width:520px){.rmp-quick-links-grid{grid-template-columns:1fr}}",
+      ".faq-section.rmp-before-quick-links{padding-bottom:28px}",
+      ".rmp-quick-links-shell{position:relative;width:100%;padding:0 24px 48px;background:#05040b}",
+      ".rmp-quick-links-card{position:relative;isolation:isolate;display:grid;grid-template-columns:minmax(250px,.72fr) minmax(0,1.45fr);gap:34px;max-width:1100px;margin:0 auto;overflow:hidden;border:1px solid rgba(127,99,255,.3);border-radius:24px;background:linear-gradient(135deg,rgba(22,17,40,.98),rgba(9,8,17,.99));box-shadow:0 22px 48px rgba(0,0,0,.36);padding:30px}",
+      ".rmp-quick-links-card:after{position:absolute;z-index:-1;right:-90px;bottom:-120px;width:300px;height:300px;border-radius:50%;background:rgba(111,72,255,.15);filter:blur(24px);content:''}",
+      ".rmp-quick-links-head{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:10px;margin:0}",
+      ".rmp-quick-links-pill{display:inline-flex;padding:7px 12px;border-radius:8px;background:rgba(127,99,255,.16);color:#bdb2ff;font:700 10px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase}",
+      ".rmp-quick-links-head h2{margin:0;color:#f5f3ff;font:700 clamp(24px,2.4vw,32px)/1.12 'Plus Jakarta Sans',sans-serif;letter-spacing:-.035em}",
+      ".rmp-quick-links-head p{margin:0;color:#9da3be;font:400 13px/1.65 'Plus Jakarta Sans',sans-serif;max-width:340px}",
+      ".rmp-quick-links-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}",
+      ".rmp-quick-links-grid a{display:grid;grid-template-columns:30px minmax(0,1fr) 32px;align-items:center;gap:10px;min-height:64px;padding:10px 12px;border:1px solid rgba(255,255,255,.08);border-radius:14px;background:rgba(255,255,255,.035);color:#f2f0ff;text-decoration:none;font:700 13px/1.3 'Plus Jakarta Sans',sans-serif;transition:background .18s ease,border-color .18s ease,transform .18s ease}",
+      ".rmp-quick-links-grid a:last-child:nth-child(odd){grid-column:1/-1}",
+      ".rmp-quick-links-grid a:hover{background:rgba(127,99,255,.13);border-color:rgba(127,99,255,.5);transform:translateY(-1px)}",
+      ".rmp-quick-links-grid b{color:#77718d;font:700 10px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.08em}",
+      ".rmp-quick-links-grid strong{display:grid;place-items:center;width:30px;height:30px;border-radius:9px;background:rgba(127,99,255,.16);color:#a995ff;font-size:15px;line-height:1;transition:background .18s ease,color .18s ease}",
+      ".rmp-quick-links-grid a:hover strong{background:#7555eb;color:#fff}",
+      "@media(max-width:900px){.faq-section.rmp-before-quick-links{padding-bottom:22px}.rmp-quick-links-shell{padding:0 14px 36px}.rmp-quick-links-card{grid-template-columns:1fr;gap:22px;padding:22px}.rmp-quick-links-head p{max-width:620px}}",
+      "@media(max-width:520px){.rmp-quick-links-card{padding:18px;border-radius:18px}.rmp-quick-links-grid{grid-template-columns:1fr}.rmp-quick-links-grid a:last-child:nth-child(odd){grid-column:auto}.rmp-quick-links-head h2{font-size:23px}}",
       ".rmp-faq-shell{position:relative;width:100%;max-width:none;margin:0;padding:120px 24px;background:transparent}",
       ".rmp-faq-bg{display:none}",
       ".rmp-faq-grid{position:relative;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.1fr 1fr;gap:42px;align-items:flex-start;padding:0;border:none;border-radius:0;overflow:visible;background:transparent}",
@@ -876,6 +943,7 @@
   }
 
   function initDetailReviewRouting() {
+    if (document.querySelector("#firmNameHeading[data-firm-owned]")) return;
     var nav = document.querySelector(".detail-nav-item[data-view='reviews']");
     if (!nav) return;
 
@@ -920,6 +988,7 @@
 
   var __rmpDetailStatsBusy = false;
   async function refreshDetailLiveReviewStats() {
+    if (document.querySelector("#firmNameHeading[data-firm-owned]")) return;
     var scoreEl = document.getElementById("firmScoreValue");
     var badgeEl = document.getElementById("detailReviewsBadge");
     if (!scoreEl || !badgeEl) return;
@@ -1068,7 +1137,13 @@
       return;
     }
 
-    renderQuickLinks();
+    var quickLinksNode = renderQuickLinks();
+    if (!quickLinksNode && !document.getElementById("rmpQuickLinksSection") && quickLinkConfig()) {
+      var quickLinksObserver = new MutationObserver(function () {
+        if (renderQuickLinks()) quickLinksObserver.disconnect();
+      });
+      quickLinksObserver.observe(document.body, { childList: true, subtree: true });
+    }
     runReveal(faqNode);
   }
 

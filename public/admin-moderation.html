@@ -73,6 +73,16 @@
       </section>
 
       <section class="panel">
+        <div class="panel-head"><h3>Ranko Coin Withdrawals</h3><span class="welcome">Review UPI, bank and crypto reward requests.</span></div>
+        <div class="table-wrap"><table><thead><tr><th>Date</th><th>UID</th><th>Coins</th><th>INR</th><th>Method / Payout Details</th><th>Status</th><th>Action</th></tr></thead><tbody id="rankoWithdrawalsBody"><tr><td colspan="7" class="empty">Loading...</td></tr></tbody></table></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><h3>Ranko Purchase Credits</h3><span class="welcome">Verify a credit code at purchase; cancel to return the coins.</span></div>
+        <div class="table-wrap"><table><thead><tr><th>Date</th><th>UID</th><th>Credit Code</th><th>Coins</th><th>Value</th><th>Status</th><th>Action</th></tr></thead><tbody id="rankoCreditsBody"><tr><td colspan="7" class="empty">Loading...</td></tr></tbody></table></div>
+      </section>
+
+      <section class="panel">
         <div class="panel-head"><h3>Withdrawal Requests</h3></div>
         <div class="table-wrap"><table><thead><tr><th>Date</th><th>UID</th><th>Email</th><th>Amount</th><th>Method</th><th>Status</th><th>Action</th></tr></thead><tbody id="withdrawalsBody"><tr><td colspan="7" class="empty">Loading...</td></tr></tbody></table></div>
       </section>
@@ -471,20 +481,6 @@
             }
           }
 
-          if (tableType === "referralClaims" && nextStatus === "Approved") {
-            const referralSnap = await getDoc(doc(db, "referralClaims", recordId));
-            if (referralSnap.exists()) {
-              const r = referralSnap.data() || {};
-              if (!r.referralPointsAwarded && r.uid) {
-                await addPoints(r.uid, 50, "referral_approved");
-                await updateDoc(doc(db, "referralClaims", recordId), {
-                  referralPointsAwarded: true,
-                  referralPointsAwardedAt: serverTimestamp()
-                });
-              }
-            }
-          }
-
           if (tableType === "reviews" && nextStatus === "Approved") {
             const reviewSnap = updatedRow ? { exists: () => true, data: () => updatedRow } : await getDoc(doc(db, "reviews", recordId));
             if (reviewSnap.exists()) {
@@ -606,9 +602,57 @@
       document.getElementById("referralsBody").innerHTML = sortByCreatedDesc(referrals).map((r)=>`<tr><td>${toDate(r.createdAt)}</td><td>${r.uid||"-"}</td><td>${r.referredEmail||"-"}</td><td>${r.relation||"-"}</td><td>${r.status||"Pending"}</td><td>${rowActions(r.id,"referralClaims",r.referredUid||"")}</td></tr>`).join("") || '<tr><td colspan="6" class="empty">No records.</td></tr>';
       document.getElementById("withdrawalsBody").innerHTML = sortByCreatedDesc(withdrawals).map((r)=>`<tr><td>${toDate(r.createdAt)}</td><td>${r.uid||"-"}</td><td>${r.email||"-"}</td><td>$${Number(r.amount||0).toFixed(2)}</td><td>${r.method||"-"}</td><td>${r.status||"Pending"}</td><td>${rowActions(r.id,r._col||"withdrawalRequests",r.uid||"")}</td></tr>`).join("") || '<tr><td colspan="7" class="empty">No records.</td></tr>';
 
+      try {
+        const token = await currentAdmin.getIdToken();
+        const response = await fetch("/api/referral-withdrawals", { headers: { Authorization: `Bearer ${token}` }, cache: "no-store" });
+        const payload = await response.json();
+        if (!response.ok) throw new Error(payload.error || "Could not load Ranko withdrawals.");
+        document.getElementById("rankoWithdrawalsBody").innerHTML = (payload.data || []).map((r) => `<tr><td>${toDate(r.createdAt)}</td><td>${escAttr(r.uid)}</td><td>${Number(r.coins).toLocaleString()}</td><td>₹${Number(r.amountInr).toFixed(2)}</td><td>${escAttr(r.method)}<div style="max-width:260px;overflow-wrap:anywhere;color:#888">${escAttr(r.details)}</div></td><td>${escAttr(r.status)}</td><td>${r.status === "Pending" ? `<button class="btn-primary" data-ranko-status="Approved" data-ranko-id="${escAttr(r.id)}">Approve</button> <button class="btn-secondary" data-ranko-status="Rejected" data-ranko-id="${escAttr(r.id)}">Reject</button>` : r.status === "Approved" ? `<button class="btn-primary" data-ranko-status="Paid" data-ranko-id="${escAttr(r.id)}">Mark paid</button>` : "-"}</td></tr>`).join("") || '<tr><td colspan="7" class="empty">No Ranko withdrawal requests.</td></tr>';
+      } catch (error) {
+        document.getElementById("rankoWithdrawalsBody").innerHTML = `<tr><td colspan="7" class="empty">${escAttr(error.message)}</td></tr>`;
+      }
+
+      try {
+        const token = await currentAdmin.getIdToken();
+        const response = await fetch("/api/referral-credits", { headers: { Authorization: `Bearer ${token}` }, cache: "no-store" });
+        const payload = await response.json();
+        if (!response.ok) throw new Error(payload.error || "Could not load purchase credits.");
+        document.getElementById("rankoCreditsBody").innerHTML = (payload.data || []).map((r) => `<tr><td>${toDate(r.createdAt)}</td><td>${escAttr(r.uid)}</td><td>${escAttr(r.code)}</td><td>${Number(r.coins).toLocaleString()}</td><td>₹${Number(r.amountInr).toFixed(2)}</td><td>${escAttr(r.status)}</td><td>${r.status === "Ready" ? `<button class="btn-primary" data-credit-status="Applied" data-credit-id="${escAttr(r.id)}">Mark applied</button> <button class="btn" data-credit-status="Cancelled" data-credit-id="${escAttr(r.id)}">Cancel / refund</button>` : "-"}</td></tr>`).join("") || '<tr><td colspan="7" class="empty">No purchase credits.</td></tr>';
+      } catch (error) {
+        document.getElementById("rankoCreditsBody").innerHTML = `<tr><td colspan="7" class="empty">${escAttr(error.message)}</td></tr>`;
+      }
+
       bindSelects();
       bindRowActions();
     }
+
+    document.getElementById("rankoWithdrawalsBody").addEventListener("click", async (event) => {
+      const button = event.target.closest("[data-ranko-status]");
+      if (!button || !currentAdmin) return;
+      button.disabled = true;
+      try {
+        const token = await currentAdmin.getIdToken();
+        const response = await fetch("/api/referral-withdrawals", { method: "PATCH", headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" }, body: JSON.stringify({ id: button.dataset.rankoId, status: button.dataset.rankoStatus }) });
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || "Unable to update withdrawal.");
+        showNotice(notice, `Ranko withdrawal ${result.status.toLowerCase()}.`);
+        await loadAll();
+      } catch (error) { showNotice(notice, error.message); button.disabled = false; }
+    });
+
+    document.getElementById("rankoCreditsBody").addEventListener("click", async (event) => {
+      const button = event.target.closest("[data-credit-status]");
+      if (!button || !currentAdmin) return;
+      button.disabled = true;
+      try {
+        const token = await currentAdmin.getIdToken();
+        const response = await fetch("/api/referral-credits", { method: "PATCH", headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" }, body: JSON.stringify({ id: button.dataset.creditId, status: button.dataset.creditStatus }) });
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || "Unable to update purchase credit.");
+        showNotice(notice, `Purchase credit ${result.status.toLowerCase()}.`);
+        await loadAll();
+      } catch (error) { showNotice(notice, error.message); button.disabled = false; }
+    });
 
     enforceAdmin(async (user) => {
       currentAdmin = user;

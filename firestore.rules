@@ -374,4 +374,17 @@ service cloud.firestore {
       request.resource.data.keys().hasOnly(["uid", "reviewId", "vote", "updatedAt", "createdAt"]);
     allow delete: if isPrivileged();
   }
+
+  // Web Push tokens and delivery logs are managed by trusted Cloud Functions.
+  // Privileged admins may inspect them in Firebase, but browsers cannot write
+  // raw FCM tokens directly to Firestore.
+  match /databases/{database}/documents/pushSubscriptions/{subscriptionId} {
+    allow read: if isPrivileged();
+    allow write: if false;
+  }
+
+  match /databases/{database}/documents/pushSendLogs/{logId} {
+    allow read: if isPrivileged();
+    allow write: if false;
+  }
 }

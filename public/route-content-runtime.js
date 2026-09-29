@@ -27,6 +27,7 @@
     return "page-" + slugify(parts.join("-"));
   }
   var routeId = expectedId();
+  var directCodeRoute = bootstrapMatchesDirectCode();
   var authoritativeRecord = null;
   var hydrationApplyQueued = false;
   // Query-driven rules pages share one HTML shell but have distinct CMS identities.
@@ -37,6 +38,7 @@
   // A template/bootstrap record can only be used when it proves that it belongs
   // to this canonical browser route. Never let another page's record hydrate it.
   var bootstrapMatchesRoute = bootstrap.id === routeId;
+  function bootstrapMatchesDirectCode() { return Boolean(bootstrap && bootstrap.__directCode === true); }
   function current() { return { id: routeId, pathname: location.pathname || "/", search: location.search || "" }; }
   function isGeneratedHomePlaceholder(record) {
     return routeId === "home-hero"
@@ -53,6 +55,10 @@
   function apply(record) {
     if (!valid(record)) return;
     authoritativeRecord = record;
+    // Firm detail pages resolve their visible name, hero copy and metadata from
+    // the current firm record. A generic page-content record must not replace
+    // the firm name shown inside the detail card during hydration.
+    if (document.getElementById("firmNameHeading")) return;
     // Interactive rule pages own their hero and metadata after the selected
     // account model is known. Do not restore the route bootstrap over it.
     var h1 = document.querySelector("[data-rmp-route-heading], main h1, h1");
@@ -105,11 +111,11 @@
       });
     }).observe(document.body, { childList: true, subtree: true });
   }
-  refresh();
+  if (!directCodeRoute) refresh();
   window.addEventListener("rankmyprop-public-cache-updated", function (event) {
     var affected = event?.detail?.ids || event?.detail?.id || [];
     var ids = Array.isArray(affected) ? affected : [affected];
-    if (!ids.length || ids.includes(routeId)) refresh();
+    if (!directCodeRoute && (!ids.length || ids.includes(routeId))) refresh();
   });
   window.addEventListener("storage", function (event) { if (event.key === VERSION_KEY + ":" + routeId) refresh(); });
 })();

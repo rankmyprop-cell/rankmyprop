@@ -21,7 +21,7 @@ function HomeHero() {
       <section className="home-hero-bg" aria-labelledby="hero-title">
         <div className="hero-shell">
           <a className="hero-badge" href="#offer-wall">
-            <span>Trusted by 10,000+ Traders Worldwide</span>
+            <span>Independent Prop Firm Research</span>
             <span>See Who Ranks #1 in 2026 →</span>
           </a>
 
@@ -47,7 +47,7 @@ function HomeHero() {
                   <span className="hero-offer-dots" id="heroOffersDots" />
                   <button id="heroOffersNext" type="button" aria-label="Next offer page">❯</button>
                 </div>
-                <h2 className="hero-offer-title" id="heroOffersTitle">Exclusive July Forex Offers</h2>
+                <h2 className="hero-offer-title" id="heroOffersTitle">Current Forex Offers</h2>
               </div>
               <div className="hero-offer-grid-wrap">
                 <div className="hero-offer-grid" id="heroOffersGrid" />

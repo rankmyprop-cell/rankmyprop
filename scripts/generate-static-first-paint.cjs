@@ -100,13 +100,14 @@ function firmCard(firm = {}) {
   const logo = logoHref(firm)
   const rating = Math.max(0, Math.min(5, Number(firm.score) || 0))
   const reviews = Math.max(0, Math.round(Number(firm.reviewCount) || 0))
+  const hasVerifiedRating = reviews >= 5
   const bio = truncateWords(firm.bio || firm.overviewShort || '', 14)
   const market = compact(normalizedRows(firm.markets)[0] || normalizedRows(firm.tags)[0] || 'CFDs').toUpperCase()
   const stats = statValues(firm)
   const details = detailValues(firm)
   const initials = name.split(/\s+/).map((word) => word[0]).join('').slice(0, 3).toUpperCase()
   return `<article class="pf-card rmp-server-firm-card" data-firm-slug="${escapeHtml(slug)}">
-    <div class="pf-card-header"><div class="pf-header-left"><div class="pf-logo">${logo ? `<img src="${escapeHtml(logo)}" alt="${escapeHtml(name)} logo" loading="lazy" decoding="async" width="120" height="120">` : `<span>${escapeHtml(initials)}</span>`}</div><div class="pf-title-wrap"><div class="pf-firm-name-row"><a class="pf-firm-name pf-firm-link" href="${escapeHtml(href)}">${escapeHtml(name)}</a></div><div class="pf-rating-row"><span class="pf-rating-num">${rating.toFixed(1)}</span><span class="pf-stars" aria-label="${rating.toFixed(1)} out of 5">${stars(rating)}</span><a class="pf-reviews pf-reviews-link" href="/prop-firms/${encodeURIComponent(slug)}/reviews">${reviews} reviews</a></div></div></div></div>
+    <div class="pf-card-header"><div class="pf-header-left"><div class="pf-logo">${logo ? `<img src="${escapeHtml(logo)}" alt="${escapeHtml(name)} logo" loading="lazy" decoding="async" width="120" height="120">` : `<span>${escapeHtml(initials)}</span>`}</div><div class="pf-title-wrap"><div class="pf-firm-name-row"><a class="pf-firm-name pf-firm-link" href="${escapeHtml(href)}">${escapeHtml(name)}</a></div><div class="pf-rating-row"><span class="pf-rating-num">${hasVerifiedRating ? rating.toFixed(1) : '—'}</span><span class="pf-stars" aria-label="${hasVerifiedRating ? `${rating.toFixed(1)} out of 5` : 'Not enough verified reviews yet'}">${hasVerifiedRating ? stars(rating) : ''}</span><a class="pf-reviews pf-reviews-link" href="/prop-firms/${encodeURIComponent(slug)}/reviews">${reviews} reviews</a></div></div></div></div>
     <div class="pf-badges"><span class="pf-badge pf-badge-verified">VERIFIED</span><span class="pf-badge pf-badge-market">${escapeHtml(market)}</span></div>
     <p class="pf-tagline" title="${escapeHtml(compact(firm.bio || firm.overviewShort))}">${escapeHtml(bio || `${name} prop firm profile and account details.`)}</p>
     <div class="pf-divider"></div>
@@ -117,6 +118,39 @@ function firmCard(firm = {}) {
     <div class="pf-btn-row"><a class="pf-btn pf-btn-outline" href="${escapeHtml(firm.buyLink || firm.website || href)}">View Firm</a><a class="pf-btn pf-btn-primary" href="${escapeHtml(href)}">View Details</a></div>
   </article>`
 }
+
+function firmLoadingCard() {
+  return `<div class="pf-card pf-loading-card" aria-hidden="true">
+    <div class="pf-load-top"><div class="pf-load-logo"></div><div class="pf-load-identity"><div class="pf-load-line pf-load-line--title"></div><div class="pf-load-line pf-load-line--rating"></div></div></div>
+    <div class="pf-load-pills"><div class="pf-load-pill"></div><div class="pf-load-pill"></div></div>
+    <div class="pf-load-copy"><div class="pf-load-line"></div><div class="pf-load-line"></div></div>
+    <div class="pf-load-stats"><div class="pf-load-stat"></div><div class="pf-load-stat"></div><div class="pf-load-stat"></div></div>
+    <div class="pf-load-details"><div class="pf-load-detail"></div><div class="pf-load-detail"></div><div class="pf-load-detail"></div><div class="pf-load-detail"></div></div>
+    <div class="pf-load-actions"><div class="pf-load-btn"></div><div class="pf-load-btn"></div></div>
+  </div>`
+}
+
+const listingLoaderStyle = `<style id="rmpFirstPaintLoader">
+@keyframes rmpFirmShimmer{0%{transform:translateX(-115%)}100%{transform:translateX(230%)}}
+@keyframes rmpFirmBreathe{0%,100%{border-color:rgba(139,124,255,.14);box-shadow:0 18px 42px rgba(0,0,0,.22)}50%{border-color:rgba(139,124,255,.28);box-shadow:0 22px 52px rgba(72,54,190,.12)}}
+#grid.rmp-loading-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:24px!important;align-items:stretch!important}
+.rmp-loading-grid .pf-loading-card{position:relative;isolation:isolate;display:flex;flex-direction:column;min-width:0;min-height:336px;padding:20px!important;background:linear-gradient(145deg,rgba(20,19,34,.96),rgba(11,10,20,.98))!important;border:1px solid rgba(139,124,255,.15)!important;border-radius:18px!important;overflow:hidden!important;animation:rmpFirmBreathe 2.8s ease-in-out infinite}
+.rmp-loading-grid .pf-loading-card:before{content:'';position:absolute;z-index:-1;inset:-40% 42% 35% -20%;background:radial-gradient(circle,rgba(105,83,255,.17),transparent 68%)}
+.rmp-loading-grid .pf-loading-card:after{content:'';position:absolute;z-index:3;top:0;bottom:0;left:0;width:46%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent);transform:translateX(-115%);animation:rmpFirmShimmer 1.65s cubic-bezier(.4,0,.2,1) infinite;pointer-events:none}
+.rmp-loading-grid .pf-loading-card:nth-child(2):after{animation-delay:.18s}.rmp-loading-grid .pf-loading-card:nth-child(3):after{animation-delay:.34s}
+.rmp-loading-grid .pf-load-top{display:flex;align-items:center;gap:13px;padding-bottom:17px;border-bottom:1px solid rgba(255,255,255,.065)}
+.rmp-loading-grid .pf-load-logo{width:54px;height:54px;flex:0 0 54px;border-radius:14px;background:linear-gradient(145deg,rgba(151,132,255,.24),rgba(83,65,194,.09));box-shadow:inset 0 0 0 1px rgba(177,164,255,.12)}
+.rmp-loading-grid .pf-load-identity{flex:1;display:grid;gap:8px}.rmp-loading-grid .pf-load-line,.rmp-loading-grid .pf-load-pill,.rmp-loading-grid .pf-load-stat,.rmp-loading-grid .pf-load-detail,.rmp-loading-grid .pf-load-btn{background:rgba(255,255,255,.075)}
+.rmp-loading-grid .pf-load-line{height:10px;border-radius:999px}.rmp-loading-grid .pf-load-line--title{width:61%;height:15px;background:rgba(255,255,255,.14)}.rmp-loading-grid .pf-load-line--rating{width:43%}
+.rmp-loading-grid .pf-load-pills{display:flex;gap:7px;margin:15px 0}.rmp-loading-grid .pf-load-pill{width:66px;height:22px;border-radius:7px}.rmp-loading-grid .pf-load-pill:last-child{width:48px;background:rgba(129,103,255,.13)}
+.rmp-loading-grid .pf-load-copy{display:grid;gap:8px;margin-bottom:17px}.rmp-loading-grid .pf-load-copy .pf-load-line:first-child{width:92%}.rmp-loading-grid .pf-load-copy .pf-load-line:last-child{width:68%}
+.rmp-loading-grid .pf-load-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-bottom:17px}.rmp-loading-grid .pf-load-stat{height:58px;border-radius:11px;background:linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.025));box-shadow:inset 0 0 0 1px rgba(255,255,255,.035)}
+.rmp-loading-grid .pf-load-details{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:18px}.rmp-loading-grid .pf-load-detail{height:29px;border-radius:8px;background:rgba(255,255,255,.045)}
+.rmp-loading-grid .pf-load-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:auto}.rmp-loading-grid .pf-load-btn{height:42px;border-radius:10px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.045)}.rmp-loading-grid .pf-load-btn:last-child{background:linear-gradient(135deg,rgba(114,86,255,.3),rgba(88,64,221,.17))}
+@media(max-width:980px){#grid.rmp-loading-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:18px!important}.rmp-loading-grid .pf-loading-card:nth-child(3){display:none}}
+@media(max-width:640px){#grid.rmp-loading-grid{grid-template-columns:minmax(0,1fr)!important;gap:16px!important}.rmp-loading-grid .pf-loading-card:nth-child(n+2){display:none}.rmp-loading-grid .pf-loading-card{min-height:328px;padding:18px!important}.rmp-loading-grid .pf-load-details{grid-template-columns:1fr}.rmp-loading-grid .pf-load-detail:nth-child(n+3){display:none}.rmp-loading-grid .pf-load-actions{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.rmp-loading-grid .pf-loading-card,.rmp-loading-grid .pf-loading-card:after{animation:none!important}}
+</style>`
 
 function offerCard(offer = {}) {
   const name = compact(offer.name) || 'Prop firm'
@@ -207,7 +241,12 @@ function injectListingPages(firms) {
     const file = path.join(distRoot, fileName)
     const cards = listingRowsFor(fileName, firms).slice(0, 9).map(firmCard).join('')
     if (!cards) return
-    writeWithoutMetadataChanges(file, (html) => html.replace(/<div\s+id=["']grid["']\s+class=["']grid["'][^>]*>[\s\S]*?<\/div>/i, `<div id="grid" class="grid" data-rmp-static-first-paint="true" aria-busy="false">${cards}</div>`))
+    const skeletons = new Array(3).fill(0).map(firmLoadingCard).join('')
+    writeWithoutMetadataChanges(file, (html) => {
+      let output = html.replace(/<div\s+id=["']grid["']\s+class=["']grid["'][^>]*>[\s\S]*?<\/div>/i, `<div id="grid" class="grid rmp-loading-grid" data-rmp-static-first-paint="true" aria-busy="true">${skeletons}</div><noscript><div class="rmp-server-firm-directory">${cards}</div></noscript>`)
+      if (!output.includes('id="rmpFirstPaintLoader"')) output = output.replace('</head>', `${listingLoaderStyle}\n</head>`)
+      return output
+    })
     count += 1
   })
   return count
@@ -238,7 +277,9 @@ function homeSnapshot(firms, offers) {
   const rankingRows = firms.filter((firm) => firm.showHomeTable !== false).slice(0, 10).map((firm, index) => {
     const stats = statValues(firm)
     const rating = Math.max(0, Math.min(5, Number(firm.score) || 0))
-    return `<article class="ranking-row"><div class="firm-identity"><span class="ranking-name"><strong>${index + 1}. <a href="${escapeHtml(detailHref(firm))}">${escapeHtml(firm.name)}</a></strong><small>★ ${rating.toFixed(1)} · ${Math.max(0, Number(firm.reviewCount) || 0)} reviews</small></span></div><div class="metric-cell"><strong>${escapeHtml(stats.allocation)}</strong><span>Account size</span></div><div class="metric-cell"><strong>${escapeHtml(stats.profitSplit)}</strong><span>Profit split</span></div><div class="metric-cell"><strong>${escapeHtml(compact(firm.cardMetrics?.payoutCycle || firm.payoutCycle) || 'See profile')}</strong><span>Payout</span></div><div class="ranking-actions"><a href="${escapeHtml(detailHref(firm))}">View firm</a></div></article>`
+    const reviewCount = Math.max(0, Number(firm.reviewCount) || 0)
+    const ratingLabel = reviewCount >= 5 ? `★ ${rating.toFixed(1)} · ${reviewCount} reviews` : `${reviewCount} verified reviews · rating pending`
+    return `<article class="ranking-row"><div class="firm-identity"><span class="ranking-name"><strong>${index + 1}. <a href="${escapeHtml(detailHref(firm))}">${escapeHtml(firm.name)}</a></strong><small>${ratingLabel}</small></span></div><div class="metric-cell"><strong>${escapeHtml(stats.allocation)}</strong><span>Account size</span></div><div class="metric-cell"><strong>${escapeHtml(stats.profitSplit)}</strong><span>Profit split</span></div><div class="metric-cell"><strong>${escapeHtml(compact(firm.cardMetrics?.payoutCycle || firm.payoutCycle) || 'See profile')}</strong><span>Payout</span></div><div class="ranking-actions"><a href="${escapeHtml(detailHref(firm))}">View firm</a></div></article>`
   }).join('')
   const offerLinks = offers.slice(0, 6).map((offer) => `<li><a href="/offers/${encodeURIComponent(slugify(offer.slug || offer.name))}"><strong>${escapeHtml(offer.name)}</strong><span>${escapeHtml(offer.discount || 'Current offer')} · code ${escapeHtml(offer.code || 'RMP')}</span></a></li>`).join('')
   return `<div class="site rmp-server-home" data-rmp-static-first-paint="true">

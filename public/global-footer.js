@@ -2,7 +2,7 @@ const PRIVATE_PAGE = /(?:^|\/)(?:admin[^/]*|dashboard(?:-admin)?|support-dashboa
 
 const groups = [
   ['Discover', [['Listed Prop Firms','/listedprop'],['Best Prop Firms','/bestprop'],['Offers & Discounts','/offers'],['Prop Firm Reviews','/reviews']]],
-  ['Research', [['Compare Firms','/compare'],['Payout Proofs','/payout-proofs'],['Prop Firm Rules','/prop-firm-rules'],['Prop News','/prop-news']]],
+  ['Research', [['Compare Firms','/compare'],['Market Report','/prop-firm-market-report'],['Payout Proofs','/payout-proofs'],['Prop Firm Rules','/prop-firm-rules'],['Prop News','/prop-news']]],
   ['Tools', [['Calculator Hub','/calculators'],['Lot Size Calculator','/lotsizecalculator'],['Drawdown Calculator','/drawdown-calculator'],['Risk-to-Reward','/risk-to-reward-calculator'],['Consistency Rule','/consistency-rule-calculator'],['Loss Recovery','/lossrecoveryplanner'],['Trade Journal','/tradejournal']]],
   ['Learning', [['Trading Guides','/trading-guides'],['Funding Strategies','/funding-strategies'],['Trading Psychology','/trading-psychology'],['Beginner Tutorials','/beginner-tutorials'],['Giveaways','/giveaways']]],
   ['Company', [['About Rank My Prop','/about'],['Contact','/contact'],['FAQ','/faq'],['Login','/login']]],

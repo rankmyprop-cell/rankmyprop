@@ -4,6 +4,7 @@ const path = require('node:path')
 const root = path.resolve(__dirname, '..')
 const output = path.join(root, 'public', 'rmp-runtime-env.json')
 const browserKeys = [
+  'VITE_FIREBASE_VAPID_KEY',
   'VITE_SUPABASE_PROJECT_URL',
   'VITE_SUPABASE_ANON_KEY',
   'VITE_SUPABASE_NOTIFY_FUNCTION_NAME',

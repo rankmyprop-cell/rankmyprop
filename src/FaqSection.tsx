@@ -1,6 +1,5 @@
 import { useEffect, useId, useMemo, useState } from 'react'
-import { collection, getDocs } from 'firebase/firestore'
-import { db } from './firebase'
+import { listCloudflareCollection } from './cloudflareData'
 
 type FaqItem = {
   question: string
@@ -108,11 +107,9 @@ export default function FaqSection({
 
   useEffect(() => {
     let active = true
-    getDocs(collection(db, 'pageFaqs'))
-      .then((snapshot) => {
+    listCloudflareCollection<FaqCmsRow>('pageFaqs', 500)
+      .then((rows) => {
         if (!active) return
-        const rows: FaqCmsRow[] = []
-        snapshot.forEach((document) => rows.push({ id: document.id, ...document.data() } as FaqCmsRow))
         const exactPage = rows.find((row) =>
           normalize(row.scope || (row.id.startsWith('type-') ? 'type' : 'page')) === 'page' &&
           normalize(row.pageKey) === normalize(pageKey),

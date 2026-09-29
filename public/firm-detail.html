@@ -75,7 +75,43 @@
           desc: `Track ${firm} updates, promotions, policy changes, and platform announcements on Rank My Prop.`
         }
       };
-      const seo = map[view] || map.overview;
+      const seo = slug === "finotive-funding" && view === "overview" ? {
+        title: "Finotive Funding Review 2026 | Rules, Payouts & Challenges",
+        desc: "Read our Finotive Funding review for 2026. Explore account sizes, challenge options, profit splits, drawdown rules, payouts, trading platforms, and trader reviews."
+      } : slug === "finotive-funding" && view === "challenges" ? {
+        title: "Finotive Funding Challenges 2026 | Fees, Account Sizes & Programs",
+        desc: "Explore Finotive Funding challenges in 2026, including fees, account sizes, profit targets, profit splits, drawdown rules, and available funded trading programs."
+      } : slug === "fxify" && view === "overview" ? {
+        title: "FXIFY Review 2026 | Rules, Payouts & Challenges",
+        desc: "Read the FXIFY review for 2026. Explore funded accounts, challenge options, profit splits, drawdown rules, payouts, trading platforms, and trader reviews."
+      } : slug === "fxify" && view === "challenges" ? {
+        title: "FXIFY Challenges 2026 | Fees, Account Sizes & Programs",
+        desc: "Explore FXIFY challenges in 2026, including challenge fees, account sizes, profit targets, profit splits, drawdown rules, trading conditions, and funded account programs."
+      } : slug === "goat-funded-trader" && view === "overview" ? {
+        title: "Goat Funded Trader Review 2026 | Rules, Payouts & Challenges",
+        desc: "Read the Goat Funded Trader review for 2026. Explore funded accounts, challenge options, profit splits, drawdown rules, payouts, trading platforms, and trader reviews."
+      } : slug === "goat-funded-trader" && view === "challenges" ? {
+        title: "Goat Funded Trader Challenges 2026 | Fees, Accounts & Programs",
+        desc: "Explore Goat Funded Trader challenges in 2026, including fees, account sizes, profit targets, profit splits, drawdown rules, payouts, and funded trading programs."
+      } : slug === "aqua-funded" && view === "overview" ? {
+        title: "Aqua Funded Review 2026 | Rules, Payouts & Challenges",
+        desc: "Read the Aqua Funded review for 2026. Explore funded accounts, challenge options, profit splits, drawdown rules, payouts, trading platforms, news trading and trader reviews."
+      } : slug === "aqua-funded" && view === "challenges" ? {
+        title: "Aqua Funded Challenges 2026 | Fees, Account Sizes & Programs",
+        desc: "Explore Aqua Funded challenges in 2026, including fees, account sizes, profit targets, profit splits, drawdown rules, payouts, and funded trading programs."
+      } : slug === "blueberry-funded" && view === "overview" ? {
+        title: "Blueberry Funded Review 2026 | Rules, Payouts & Challenges",
+        desc: "Read the Blueberry Funded review for 2026. Explore funded accounts, challenge options, profit splits, drawdown rules, payouts, trading platforms, restrictions, and trader reviews."
+      } : slug === "blueberry-funded" && view === "challenges" ? {
+        title: "Blueberry Funded Challenges 2026 | Fees, Account Sizes & Programs",
+        desc: "Explore Blueberry Funded challenges in 2026, including fees, account sizes, profit targets, profit splits, drawdown rules, payouts, and funded trading programs."
+      } : slug === "alpha-trader-firm" && view === "overview" ? {
+        title: "Alpha Trader Firm Review 2026 | Rules, Payouts & Challenges",
+        desc: "Read the Alpha Trader Firm review for 2026. Explore funded accounts, challenge options, profit splits, drawdown rules, payouts, trading platforms, and trader reviews."
+      } : slug === "alpha-trader-firm" && view === "challenges" ? {
+        title: "Alpha Trader Firm Challenges 2026 | Fees, Account Sizes & Programs",
+        desc: "Explore Alpha Trader Firm challenges in 2026, including fees, account sizes, profit targets, profit splits, drawdown rules, payouts, and funded trading programs."
+      } : (map[view] || map.overview);
       const canonical = `https://www.rankmyprop.in/prop-firms/${slug}${view === "overview" ? "" : `/${view}`}`;
       document.title = seo.title;
       const set = (id, attr, value) => { const el = document.getElementById(id); if (el) el.setAttribute(attr, value); };
@@ -100,7 +136,7 @@
   </script>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght%40300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/site-shell.css" />
-  <script src="/firm-first-paint.js"></script>
+  <script src="/firm-first-paint.js?v=20260929-aifo-guard"></script>
 <style>
     :root {
       --bg: #030409;
@@ -1066,7 +1102,7 @@
                 <span id="firmLogoInitials">AF</span>
             </div>
             <div>
-                <h1 id="firmNameHeading" style="margin:0;font-size:32px;line-height:1.15;">Aqua Funded</h1>
+                <h1 id="firmNameHeading" data-copy-ignore="1" data-firm-owned="1" style="margin:0;font-size:32px;line-height:1.15;">Loading firm…</h1>
                 <div id="firmMetaLine" style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">
                     CEO: Sean Ballation • Forex • Crypto • Indices • Founded 2023 • UAE
                 </div>
@@ -1081,7 +1117,7 @@
     <!-- Navigation -->
     <nav class="detail-nav-bar">
         <a class="detail-nav-item active" data-view="overview" href="/prop-firms/aqua-funded">Overview</a>
-        <a class="detail-nav-item" data-view="challenges" href="/prop-firms/aqua-funded/challenges">Challenges <span class="detail-nav-badge" style="background:#1e213a">2</span></a>
+        <a class="detail-nav-item" data-view="challenges" href="/prop-firms/aqua-funded/challenges">Challenges <span id="detailChallengesBadge" class="detail-nav-badge" style="background:#1e213a">0</span></a>
         <a class="detail-nav-item" data-view="rules" href="/prop-firms/aqua-funded/rules">Rules</a>
         <a id="detailReviewsNavLink" class="detail-nav-item" data-view="reviews" href="/prop-firms/aqua-funded/reviews">Reviews <span id="detailReviewsBadge" class="detail-nav-badge">0</span></a>
         <a class="detail-nav-item" data-view="spreads" href="/prop-firms/aqua-funded/spreads">Spreads</a>
@@ -1092,9 +1128,9 @@
     <div id="detailOverviewMain" class="main-col">
         <div class="top-stats-row">
             <div class="glass-card score-card">
-                <div id="firmScoreValue" style="color:var(--purple-muted); font-size: 52px; margin: 10px 0; font-weight:700;">4.4</div>
+                <div id="firmScoreValue" style="color:var(--purple-muted); font-size: 52px; margin: 10px 0; font-weight:700;">—</div>
                 <div id="firmScoreStars" class="score-stars"></div>
-                <div id="firmTrustedText" style="font-size: 12px; color: var(--text-secondary); margin-bottom: 25px;">Trusted by 935+ traders</div>
+                <div id="firmTrustedText" style="font-size: 12px; color: var(--text-secondary); margin-bottom: 25px;">Not enough verified reviews yet</div>
                 <div style="background:#0d0f1a; border: 1px solid #1e213a; padding: 12px; border-radius: 8px; display:flex; justify-content:space-between; margin-bottom: 10px;">
                     <span style="font-weight: 600;">RMP</span>
                     <span style="color: var(--accent); font-weight: 600; cursor: pointer;">Copy</span>
@@ -1106,7 +1142,7 @@
                         <span class="review-title">Trader Reviews</span>
                         <span id="overviewReviewChip" class="review-chip">0</span>
                     </div>
-                    <p id="firmReviewSnippet" class="review-snippet">“Fast payout process, clean dashboard and smooth execution. Good overall prop experience.”</p>
+                    <p id="firmReviewSnippet" class="review-snippet">No approved trader reviews yet.</p>
                     <a class="review-btn" href="#detailReviewsPanel">Write Review</a>
                 </div>
             </div>
@@ -1141,7 +1177,7 @@
             <div id="mainExpand" class="expand-section">
                 <h4 id="firmOverviewLongTitle" style="margin: 20px 0 10px 0; font-size: 15px;">Detailed Overview</h4>
                 <div id="firmOverviewLongContent" style="font-size: 13px; color: var(--text-secondary); line-height: 1.85;">
-                    <p style="margin:0 0 14px 0;">No detailed overview added yet.</p>
+                    <p style="margin:0 0 14px 0;"></p>
                 </div>
             </div>
         </div>
@@ -1226,12 +1262,7 @@
     <div id="detailSpreadsPanel" class="detail-spreads-panel" aria-hidden="true">
         <div class="detail-panel-shell spreads-panel-shell">
             <iframe loading="lazy" class="detail-panel-frame detail-spreads-frame" src="/spreads-panel.html" title="Prop Firm Spreads" scrolling="no"></iframe>
-            <div class="detail-spreads-soon">
-              <div>
-                <h3>Spreads Module Coming Soon</h3>
-                <p>The spreads section layout is saved and will be connected with live instrument data in the next rollout.</p>
-              </div>
-            </div>
+            <div class="detail-spreads-soon" hidden></div>
         </div>
     </div>
     <div id="detailAnnouncementsPanel" class="detail-announcements-panel" aria-hidden="true">
@@ -1761,9 +1792,7 @@
 </script>
 
 <script type="module">
-  import { initializeApp, getApp, getApps } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-  import { collection, doc, getDoc, getDocs, getFirestore, limit, query, where } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
-  import { firebaseConfig } from "./firebase-config.js";
+  import { getDocument, listDocuments } from "./cloudflare-data.js";
   import { withFirmFieldOverrides } from "./firm-field-overrides.js";
   import { DEFAULT_LISTED_FIRMS, DEFAULT_BEST_FIRMS } from "./firms-data.js";
 
@@ -1812,7 +1841,8 @@
       const qSlug = slugify(u.searchParams.get("slug") || u.searchParams.get("firmSlug") || "");
       if (qSlug) out.push(qSlug);
       const path = String(u.pathname || "").replace(/^\/+/, "").replace(/\/+$/, "").replace(/\.html$/i, "");
-      if (path && path.toLowerCase() !== "firm-detail") out.push(slugify(path.replace(/detail$/i, "")));
+      if (path.startsWith("prop-firms/")) out.push(slugify(path.split("/")[1]));
+      else if (path && path.toLowerCase() !== "firm-detail") out.push(slugify(path.replace(/detail$/i, "")));
       return out.filter(Boolean);
     } catch (_) {
       const clean = txt.replace(/^\/+/, "").replace(/\/+$/, "").split("?")[0].split("#")[0].replace(/\.html$/i, "");
@@ -1823,18 +1853,13 @@
   function rowSlugKeys(row = {}) {
     return uniq([
       slugify(row?.slug || ""),
-      slugify(row?.id || ""),
+      slugify(row?.slug ? "" : row?.id || ""),
       slugify(row?.name || ""),
       ...keysFromDetailsLink(row?.detailsLink || "")
     ]);
   }
   function fallbackFirmByLookup(lookup = {}) {
-    const slugKeys = uniq([
-      slugify(lookup.routeSlug || ""),
-      slugify(lookup.wantedSlug || ""),
-      slugify(lookup.fileSlug || ""),
-      slugify(lookup.requestedSlug || "")
-    ]).filter(Boolean);
+    const slugKeys = [slugify(lookup.routeSlug || lookup.wantedSlug || lookup.fileSlug || lookup.requestedSlug || "")].filter(Boolean);
     if (!slugKeys.length) return null;
     const rows = [
       ...(Array.isArray(DEFAULT_LISTED_FIRMS) ? DEFAULT_LISTED_FIRMS : []),
@@ -1912,24 +1937,16 @@
 
   function applyLiveReviewStats(row = {}, summary = null) {
     const stats = summary && summary.count >= 0 ? summary : (row?.reviewSummary && row.reviewSummary.count >= 0 ? row.reviewSummary : null);
-    const score = stats && stats.count ? stats.avg : Math.max(0, Math.min(5, Number(row?.score || 0)));
-    setText("firmScoreValue", score.toFixed(1));
-    renderScoreStars(score);
     const count = stats && Number.isFinite(stats.count) ? Math.max(0, Math.round(stats.count)) : Math.max(0, Number(row?.reviewCount || 0));
-    const traders = stats && Number.isFinite(stats.traders) ? Math.max(0, Math.round(stats.traders)) : 0;
-    if (count > 0) {
-      setText("detailReviewsBadge", count);
-      setText("overviewReviewChip", count);
-    }
-    if (traders > 0) {
-      setText("firmTrustedText", `Trusted by ${traders.toLocaleString()} trader${traders === 1 ? "" : "s"}`);
-      return;
-    }
-    if (count > 0) {
-      setText("firmTrustedText", `Trusted by ${count.toLocaleString()} trader${count === 1 ? "" : "s"}`);
-      return;
-    }
-    setText("firmTrustedText", String(row?.trustedBy || "Trusted by traders"));
+    const score = stats && stats.count ? stats.avg : Math.max(0, Math.min(5, Number(row?.score || 0)));
+    const canPublishRating = count >= 5;
+    setText("firmScoreValue", canPublishRating ? score.toFixed(1) : "—");
+    renderScoreStars(canPublishRating ? score : 0);
+    // Always set both counters. Otherwise the static/default count can remain
+    // visible when the selected firm's approved-review count is zero.
+    setText("detailReviewsBadge", count);
+    setText("overviewReviewChip", count);
+    setText("firmTrustedText", canPublishRating ? `${count.toLocaleString()} verified trader reviews` : "Not enough verified reviews yet");
   }
 
   function getRouteState(href = location.href) {
@@ -1983,6 +2000,114 @@
     const cleanName = String(name || "Prop Firm").trim() || "Prop Firm";
     const cleanSlug = slugify(slug || cleanName);
     const currentView = String(view || "overview").trim().toLowerCase();
+    if (cleanSlug === "finotive-funding" && currentView === "overview") {
+      return {
+        h1: "Finotive Funding Review 2026: Rules, Challenges, Payouts & Funding",
+        title: "Finotive Funding Review 2026 | Rules, Payouts & Challenges",
+        desc: "Read our Finotive Funding review for 2026. Explore account sizes, challenge options, profit splits, drawdown rules, payouts, trading platforms, and trader reviews.",
+        crumb: cleanName,
+        canonical: buildFirmRouteUrl(cleanSlug, currentView)
+      };
+    }
+    if (cleanSlug === "finotive-funding" && currentView === "challenges") {
+      return {
+        h1: "Finotive Funding Challenges 2026: Fees, Account Sizes & Funding Programs",
+        title: "Finotive Funding Challenges 2026 | Fees, Account Sizes & Programs",
+        desc: "Explore Finotive Funding challenges in 2026, including fees, account sizes, profit targets, profit splits, drawdown rules, and available funded trading programs.",
+        crumb: "Challenges",
+        canonical: buildFirmRouteUrl(cleanSlug, currentView)
+      };
+    }
+    if (cleanSlug === "fxify" && currentView === "overview") {
+      return {
+        h1: "FXIFY Review 2026: Prop Firm Rules, Payouts & Challenges",
+        title: "FXIFY Review 2026 | Rules, Payouts & Challenges",
+        desc: "Read the FXIFY review for 2026. Explore funded accounts, challenge options, profit splits, drawdown rules, payouts, trading platforms, and trader reviews.",
+        crumb: cleanName,
+        canonical: buildFirmRouteUrl(cleanSlug, currentView)
+      };
+    }
+    if (cleanSlug === "fxify" && currentView === "challenges") {
+      return {
+        h1: "FXIFY Challenges 2026: Fees, Account Sizes & Funding Programs",
+        title: "FXIFY Challenges 2026 | Fees, Account Sizes & Programs",
+        desc: "Explore FXIFY challenges in 2026, including challenge fees, account sizes, profit targets, profit splits, drawdown rules, trading conditions, and funded account programs.",
+        crumb: "Challenges",
+        canonical: buildFirmRouteUrl(cleanSlug, currentView)
+      };
+    }
+    if (cleanSlug === "goat-funded-trader" && currentView === "overview") {
+      return {
+        h1: "Goat Funded Trader Review 2026: Rules, Payouts & Challenges",
+        title: "Goat Funded Trader Review 2026 | Rules, Payouts & Challenges",
+        desc: "Read the Goat Funded Trader review for 2026. Explore funded accounts, challenge options, profit splits, drawdown rules, payouts, trading platforms, and trader reviews.",
+        crumb: cleanName,
+        canonical: buildFirmRouteUrl(cleanSlug, currentView)
+      };
+    }
+    if (cleanSlug === "goat-funded-trader" && currentView === "challenges") {
+      return {
+        h1: "Goat Funded Trader Challenges 2026: Fees, Account Sizes & Funding Programs",
+        title: "Goat Funded Trader Challenges 2026 | Fees, Accounts & Programs",
+        desc: "Explore Goat Funded Trader challenges in 2026, including fees, account sizes, profit targets, profit splits, drawdown rules, payouts, and funded trading programs.",
+        crumb: "Challenges",
+        canonical: buildFirmRouteUrl(cleanSlug, currentView)
+      };
+    }
+    if (cleanSlug === "aqua-funded" && currentView === "overview") {
+      return {
+        h1: "Aqua Funded Review 2026: Rules, Payouts & Challenges",
+        title: "Aqua Funded Review 2026 | Rules, Payouts & Challenges",
+        desc: "Read the Aqua Funded review for 2026. Explore funded accounts, challenge options, profit splits, drawdown rules, payouts, trading platforms, news trading and trader reviews.",
+        crumb: cleanName,
+        canonical: buildFirmRouteUrl(cleanSlug, currentView)
+      };
+    }
+    if (cleanSlug === "aqua-funded" && currentView === "challenges") {
+      return {
+        h1: "Aqua Funded Challenges 2026: Fees, Account Sizes & Funding Programs",
+        title: "Aqua Funded Challenges 2026 | Fees, Account Sizes & Programs",
+        desc: "Explore Aqua Funded challenges in 2026, including fees, account sizes, profit targets, profit splits, drawdown rules, payouts, and funded trading programs.",
+        crumb: "Challenges",
+        canonical: buildFirmRouteUrl(cleanSlug, currentView)
+      };
+    }
+    if (cleanSlug === "blueberry-funded" && currentView === "overview") {
+      return {
+        h1: "Blueberry Funded Review 2026: Rules, Payouts & Challenges",
+        title: "Blueberry Funded Review 2026 | Rules, Payouts & Challenges",
+        desc: "Read the Blueberry Funded review for 2026. Explore funded accounts, challenge options, profit splits, drawdown rules, payouts, trading platforms, restrictions, and trader reviews.",
+        crumb: cleanName,
+        canonical: buildFirmRouteUrl(cleanSlug, currentView)
+      };
+    }
+    if (cleanSlug === "blueberry-funded" && currentView === "challenges") {
+      return {
+        h1: "Blueberry Funded Challenges 2026: Fees, Account Sizes & Funding Programs",
+        title: "Blueberry Funded Challenges 2026 | Fees, Account Sizes & Programs",
+        desc: "Explore Blueberry Funded challenges in 2026, including fees, account sizes, profit targets, profit splits, drawdown rules, payouts, and funded trading programs.",
+        crumb: "Challenges",
+        canonical: buildFirmRouteUrl(cleanSlug, currentView)
+      };
+    }
+    if (cleanSlug === "alpha-trader-firm" && currentView === "overview") {
+      return {
+        h1: "Alpha Trader Firm Review 2026: Rules, Payouts & Challenges",
+        title: "Alpha Trader Firm Review 2026 | Rules, Payouts & Challenges",
+        desc: "Read the Alpha Trader Firm review for 2026. Explore funded accounts, challenge options, profit splits, drawdown rules, payouts, trading platforms, and trader reviews.",
+        crumb: cleanName,
+        canonical: buildFirmRouteUrl(cleanSlug, currentView)
+      };
+    }
+    if (cleanSlug === "alpha-trader-firm" && currentView === "challenges") {
+      return {
+        h1: "Alpha Trader Firm Challenges 2026: Fees, Account Sizes & Funding Programs",
+        title: "Alpha Trader Firm Challenges 2026 | Fees, Account Sizes & Programs",
+        desc: "Explore Alpha Trader Firm challenges in 2026, including fees, account sizes, profit targets, profit splits, drawdown rules, payouts, and funded trading programs.",
+        crumb: "Challenges",
+        canonical: buildFirmRouteUrl(cleanSlug, currentView)
+      };
+    }
     const base = {
       overview: {
         h1: cleanName,
@@ -2033,13 +2158,37 @@
     };
   }
 
-  function detailPageHeading(name = "") {
+  function detailPageHeading(name = "", view = "overview") {
     const firm = String(name || "Prop Firm").trim() || "Prop Firm";
+    if (firm.toLowerCase() === "alpha trader firm" && String(view).toLowerCase() === "challenges") return "Alpha Trader Firm Challenges 2026: Fees, Account Sizes & Funding Programs";
+    if (firm.toLowerCase() === "alpha trader firm") return "Alpha Trader Firm Review 2026: Rules, Payouts & Challenges";
+    if (firm.toLowerCase() === "blueberry funded" && String(view).toLowerCase() === "challenges") return "Blueberry Funded Challenges 2026: Fees, Account Sizes & Funding Programs";
+    if (firm.toLowerCase() === "blueberry funded") return "Blueberry Funded Review 2026: Rules, Payouts & Challenges";
+    if (firm.toLowerCase() === "aqua funded" && String(view).toLowerCase() === "challenges") return "Aqua Funded Challenges 2026: Fees, Account Sizes & Funding Programs";
+    if (firm.toLowerCase() === "aqua funded") return "Aqua Funded Review 2026: Rules, Payouts & Challenges";
+    if (firm.toLowerCase() === "goat funded trader" && String(view).toLowerCase() === "challenges") return "Goat Funded Trader Challenges 2026: Fees, Account Sizes & Funding Programs";
+    if (firm.toLowerCase() === "goat funded trader") return "Goat Funded Trader Review 2026: Rules, Payouts & Challenges";
+    if (firm.toLowerCase() === "fxify" && String(view).toLowerCase() === "challenges") return "FXIFY Challenges 2026: Fees, Account Sizes & Funding Programs";
+    if (firm.toLowerCase() === "fxify") return "FXIFY Review 2026: Prop Firm Rules, Payouts & Challenges";
+    if (firm.toLowerCase() === "finotive funding" && String(view).toLowerCase() === "challenges") return "Finotive Funding Challenges 2026: Fees, Account Sizes & Funding Programs";
+    if (firm.toLowerCase() === "finotive funding") return "Finotive Funding Review 2026: Rules, Challenges, Payouts & Funding";
     return `${firm} Review 2026: Fees, Rules, Payout & Discount Code`;
   }
 
-  function detailPageParagraph(name = "") {
+  function detailPageParagraph(name = "", view = "overview") {
     const firm = String(name || "Prop Firm").trim() || "Prop Firm";
+    if (firm.toLowerCase() === "alpha trader firm" && String(view).toLowerCase() === "challenges") return "Explore Alpha Trader Firm challenges in 2026, including account sizes, challenge fees, profit targets, profit splits, drawdown requirements, payout conditions, and key trading rules for each funding program.";
+    if (firm.toLowerCase() === "alpha trader firm") return "Explore Alpha Trader Firm in 2026, including funded trading challenges, account sizes, profit splits, drawdown rules, payout conditions, trading platforms, and trader reviews. Get the key information you need before choosing an Alpha Trader Firm account.";
+    if (firm.toLowerCase() === "blueberry funded" && String(view).toLowerCase() === "challenges") return "Explore Blueberry Funded challenges in 2026, including account sizes, challenge fees, profit targets, profit splits, drawdown requirements, payout conditions, and key trading rules for each funding program.";
+    if (firm.toLowerCase() === "blueberry funded") return "Explore Blueberry Funded in 2026, including funded trading challenges, account sizes, profit splits, drawdown rules, payout conditions, trading platforms, trading restrictions, and trader reviews. Get the key information you need before choosing a Blueberry Funded account.";
+    if (firm.toLowerCase() === "aqua funded" && String(view).toLowerCase() === "challenges") return "Explore Aqua Funded challenges in 2026, including account sizes, challenge fees, profit targets, profit splits, drawdown requirements, payout conditions, and key trading rules for each funding program.";
+    if (firm.toLowerCase() === "aqua funded") return "Explore Aqua Funded in 2026, including funded trading challenges, account sizes, profit splits, drawdown rules, payout conditions, trading platforms, news trading policies, and trader reviews. Get the key information you need before choosing an Aqua Funded account.";
+    if (firm.toLowerCase() === "goat funded trader" && String(view).toLowerCase() === "challenges") return "Explore Goat Funded Trader challenges in 2026, including account sizes, challenge fees, profit targets, profit splits, drawdown requirements, payout conditions, and key trading rules for each funding program.";
+    if (firm.toLowerCase() === "goat funded trader") return "Explore Goat Funded Trader in 2026, including funded trading challenges, account sizes, profit splits, drawdown rules, payout conditions, trading platforms, and trader reviews. Get the key information you need before choosing a Goat Funded Trader account.";
+    if (firm.toLowerCase() === "fxify" && String(view).toLowerCase() === "challenges") return "Explore FXIFY challenges in 2026, including available account sizes, challenge fees, profit targets, profit splits, drawdown requirements, trading rules, and funded account options. Find detailed information on each FXIFY funding program.";
+    if (firm.toLowerCase() === "fxify") return "Explore FXIFY in 2026, including funded trading challenges, account sizes, profit splits, drawdown rules, payout conditions, trading platforms, and trader reviews. Get the key details about FXIFY before choosing a funded trading account.";
+    if (firm.toLowerCase() === "finotive funding" && String(view).toLowerCase() === "challenges") return "Explore Finotive Funding challenges in 2026, including account sizes, challenge fees, profit targets, profit splits, drawdown requirements, trading rules, and available funding programs. Find the right Finotive Funding challenge for your trading strategy.";
+    if (firm.toLowerCase() === "finotive funding") return "Explore Finotive Funding in 2026, including its funded trading challenges, account sizes, profit splits, drawdown rules, payout conditions, trading platforms, and trader reviews. Get the key information you need before choosing a Finotive Funding account.";
     return `Read our complete ${firm} review covering challenge fees, drawdown rules, payout proof, profit split, trading platforms, account types, and the latest discount code for traders in 2026.`;
   }
 
@@ -2092,8 +2241,7 @@
     return first ? { id: first.id, ...first.data() } : null;
   }
 
-  async function fetchFirmByLookup(db, lookup = {}) {
-    const col = collection(db, "firms");
+  async function fetchFirmByLookup(lookup = {}) {
     const hasName = (row) => String(row?.name || "").trim().length > 0;
     const keysFromDetailsLink = (raw = "") => {
       const txt = String(raw || "").trim();
@@ -2104,7 +2252,8 @@
         const qSlug = slugify(u.searchParams.get("slug") || u.searchParams.get("firmSlug") || "");
         if (qSlug) out.push(qSlug);
         const path = String(u.pathname || "").replace(/^\/+/, "").replace(/\/+$/, "").replace(/\.html$/i, "");
-        if (path && path.toLowerCase() !== "firm-detail") out.push(slugify(path.replace(/detail$/i, "")));
+        if (path.startsWith("prop-firms/")) out.push(slugify(path.split("/")[1]));
+      else if (path && path.toLowerCase() !== "firm-detail") out.push(slugify(path.replace(/detail$/i, "")));
         return out.filter(Boolean);
       } catch (_) {
         const clean = txt.replace(/^\/+/, "").replace(/\/+$/, "").split("?")[0].split("#")[0].replace(/\.html$/i, "");
@@ -2114,57 +2263,55 @@
     };
     const rowSlugKeys = (row = {}) => uniq([
       slugify(row?.slug || ""),
-      slugify(row?.id || ""),
+      slugify(row?.slug ? "" : row?.id || ""),
       slugify(row?.name || ""),
       ...keysFromDetailsLink(row?.detailsLink || "")
     ]);
     const wantedId = String(lookup.wantedId || "").trim();
+    const routeSlugKeys = [slugify(lookup.routeSlug || lookup.wantedSlug || lookup.fileSlug || "")].filter(Boolean);
+    // A slug can have both a legacy document whose ID equals the slug and a
+    // newer CMS record with a different ID. Choose the freshest exact-slug
+    // record first so an older firm's data cannot win by document ordering.
+    if (routeSlugKeys.length) {
+      try {
+        const all = await listDocuments("firms", 800);
+        const exactSlugRows = all.filter((row) => hasName(row) && routeSlugKeys.includes(slugify(row?.slug || "")));
+        const updatedMillis = (value) => {
+          if (!value) return 0;
+          if (Number.isFinite(Number(value.seconds))) return Number(value.seconds) * 1000;
+          const parsed = new Date(value).getTime();
+          return Number.isFinite(parsed) ? parsed : 0;
+        };
+        exactSlugRows.sort((a, b) => updatedMillis(b.updatedAt || b.createdAt) - updatedMillis(a.updatedAt || a.createdAt));
+        if (exactSlugRows.length) return exactSlugRows[0];
+      } catch (_) {}
+    }
+    // Prefer the explicit record ID, but only when it belongs to the route.
+    // Duplicate/legacy firm records can share a slug; matching the record's
+    // own slug or name keeps the URL identity stable without allowing a stale
+    // firmId to override a different firm's page.
     if (wantedId) {
       try {
-        const idSnap = await getDoc(doc(db, "firms", wantedId));
-        if (idSnap.exists()) {
-          const row = { id: idSnap.id, ...idSnap.data() };
-          if (hasName(row)) return row;
-        }
+        const row = await getDocument("firms", wantedId);
+        const rowIdentityKeys = uniq([slugify(row?.slug || ""), slugify(row?.name || "")]);
+        const idMatchesRoute = !routeSlugKeys.length || hasSlugMatch(rowIdentityKeys, routeSlugKeys);
+        if (row && hasName(row) && idMatchesRoute) return row;
       } catch (_) {}
     }
 
-    const slugKeys = uniq([
-      slugify(lookup.routeSlug || ""),
-      slugify(lookup.wantedSlug || ""),
-      slugify(lookup.fileSlug || "")
-    ]);
+    const slugKeys = routeSlugKeys;
 
     for (const key of slugKeys) {
       try {
-        const directSnap = await getDoc(doc(db, "firms", key));
-        if (directSnap.exists()) {
-          const row = { id: directSnap.id, ...directSnap.data() };
-          if (hasName(row)) return row;
-        }
-      } catch (_) {}
-
-      try {
-        const bySlug = await fetchFirstRow(query(col, where("slug", "==", key), limit(1)));
-        if (bySlug && hasName(bySlug)) return bySlug;
-      } catch (_) {}
-
-      try {
-        const byPath = await fetchFirstRow(query(col, where("detailsLink", "==", `/${key}`), limit(1)));
-        if (byPath && hasName(byPath)) return byPath;
-      } catch (_) {}
-
-      try {
-        const byLegacy = await fetchFirstRow(query(col, where("detailsLink", "==", `firm-detail.html?slug=${key}`), limit(1)));
-        if (byLegacy && hasName(byLegacy)) return byLegacy;
+        const row = await getDocument("firms", key);
+        if (row && hasName(row) && hasSlugMatch(rowSlugKeys(row), slugKeys)) return row;
       } catch (_) {}
     }
 
     if (slugKeys.length) {
       try {
-        const all = await getDocs(query(col, limit(800)));
-        for (const d of all.docs || []) {
-          const row = { id: d.id, ...d.data() };
+        const all = await listDocuments("firms", 800);
+        for (const row of all) {
           if (!hasName(row)) continue;
           const keys = rowSlugKeys(row);
           if (hasSlugMatch(keys, slugKeys)) return row;
@@ -2194,71 +2341,19 @@
     return null;
   }
 
-  async function fetchLiveReviewSummary(db, row = {}) {
+  async function fetchLiveReviewSummary(row = {}) {
     const firmName = String(row?.name || "").trim();
-    const detailsSlug = (() => {
-      const raw = String(row?.detailsLink || "").trim();
-      if (!raw) return "";
-      const clean = raw.split("?")[0].split("#")[0].replace(/^\/+/, "");
-      if (!clean) return "";
-      if (clean.endsWith(".html")) return slugify(clean.replace(".html", "").replace("detail", ""));
-      return slugify(clean);
-    })();
-    const slugKeys = uniq([
-      slugify(row?.slug || ""),
-      slugify(row?.id || ""),
-      slugify(firmName),
-      detailsSlug,
-      slugify(getDetailSlug() || "")
-    ]);
-    const sts = ["Approved","approved","Published","published","Publish","publish"];
-    const slugSet = new Set(slugKeys.filter(Boolean));
-    const nameSet = new Set([firmName.toLowerCase()].filter(Boolean));
-    const rows = [];
-    const pull = async (qry) => {
-      const snap = await getDocs(qry);
-      snap.forEach((d) => rows.push({ id: d.id, ...d.data() }));
-    };
-    for (const slug of slugKeys) {
-      if (!slug) continue;
-      for (const s of sts) {
-        try { await pull(query(collection(db, "reviews"), where("firmSlug", "==", slug), where("status", "==", s), limit(400))); } catch (_) {}
-      }
-      if (rows.length) break;
-    }
-    if (!rows.length && firmName) {
-      for (const fld of ["firm", "firmName"]) {
-        for (const s of sts) {
-          try { await pull(query(collection(db, "reviews"), where(fld, "==", firmName), where("status", "==", s), limit(400))); } catch (_) {}
-        }
-        if (rows.length) break;
-      }
-    }
-    if (!rows.length) {
-      for (const s of sts) {
-        try { await pull(query(collection(db, "reviews"), where("status", "==", s), limit(2500))); } catch (_) {}
-      }
-    }
-    const isForFirm = (r = {}) => {
-      const slugs = [
-        slugify(r.firmSlug || ""),
-        slugify(r.slug || ""),
-        slugify(r.firmName || ""),
-        slugify(r.firm || ""),
-        slugify(r.name || "")
-      ].filter(Boolean);
-      for (const x of slugs) if (Array.from(slugSet).some((wanted) => slugMatches(x, wanted))) return true;
-      const names = [
-        String(r.firmName || "").trim().toLowerCase(),
-        String(r.firm || "").trim().toLowerCase(),
-        String(r.name || "").trim().toLowerCase()
-      ].filter(Boolean);
-      for (const x of names) if (nameSet.has(x)) return true;
-      return false;
-    };
-    const deduped = Array.from(new Map(rows.filter((r) => isForFirm(r)).map((r) => [String(r.id || `${r.uid || ""}_${r.createdAt?.seconds || r.createdAt || ""}`), r])).values());
-    const summary = reviewSummaryFromRows(deduped);
-    return summary.count ? summary : null;
+    const slug = slugify(row?.slug || row?.id || getDetailSlug() || firmName);
+    if (!slug) return null;
+    const response = await fetch(`/api/reviews?firm=${encodeURIComponent(slug)}&limit=100&sort=newest`, {
+      headers: { accept: "application/json" }
+    });
+    if (!response.ok) throw new Error(`Review API failed (${response.status})`);
+    const payload = await response.json();
+    const summary = payload?.summary || {};
+    const count = Math.max(0, Number(summary.totalApproved || 0));
+    const avg = Math.max(0, Math.min(5, Number(summary.averageRating || 0)));
+    return count ? { count, avg, traders: count } : null;
   }
 
   function renderPairsTable(id, rows) {
@@ -2512,8 +2607,11 @@
   }
 
   function applyFirmData(row) {
+    const routeSlug = String(getDetailSlug() || "").trim().toLowerCase();
+    const slug = String(routeSlug || row?.slug || slugify(row?.name || "Firm")).trim().toLowerCase();
+    // The route identifies the requested firm. Keep the visible identity aligned
+    // with it if a stale or mis-keyed database record carries another firm's name.
     const name = String(row?.name || "Firm");
-    const slug = String(row?.slug || getDetailSlug() || slugify(name)).trim().toLowerCase();
     const view = getDetailView();
     const seo = seoForView(name, slug, view);
     const logoEl = byId("firmLogoImage");
@@ -2525,9 +2623,11 @@
         logoEl.src = FALLBACK_LOGO;
       };
     }
-    const mainHeading = detailPageHeading(name);
-    const mainParagraph = detailPageParagraph(name);
+    const mainHeading = detailPageHeading(name, view);
+    const mainParagraph = detailPageParagraph(name, view);
     setText("firmNameHeading", name);
+    setHtml("rmpSeoHeading", detailHeadingWithAccent(mainHeading));
+    setText("rmpSeoParagraph", mainParagraph);
     setHtml("detailSeoHeading", detailHeadingWithAccent(mainHeading));
     setText("detailSeoParagraph", mainParagraph);
     const metaMarkets = toList(row?.metaMarkets).length ? toList(row?.metaMarkets) : toList(row?.markets);
@@ -2573,12 +2673,32 @@
     if (buyBtn) buyBtn.href = buyUrl;
 
     applyLiveReviewStats(row);
+    const programs = row?.challengesPanelData?.programs || row?.evaluationPrograms || [];
+    setText("detailChallengesBadge", Array.isArray(programs) ? programs.length : 0);
     setText("firmPromoText", String(row?.promoText || "20% OFF + Cashback"));
-    setText("firmReviewSnippet", String(row?.reviewSnippet || "Fast payout process, clean dashboard and smooth execution. Good overall prop experience."));
+    const publishedReviewCount = Number(row?.reviewSummary?.count ?? row?.reviewCount ?? 0);
+    setText("firmReviewSnippet", publishedReviewCount > 0 && row?.reviewSnippet ? String(row.reviewSnippet) : "No approved trader reviews yet.");
 
-    const overviewTitle = String(row?.overviewTitle || `${name} Overview`);
+    const authoredOverviewCopy = {
+      "goat funded trader": {
+        title: "Goat Funded Trader Review & Funded Trading Details",
+        description: "Explore Goat Funded Trader's funding programs, account options, trading rules, payout conditions, platforms, and trader feedback. Review important requirements and key features before choosing a funded trading account."
+      },
+      "aqua funded": {
+        title: "Aqua Funded Review & Funded Trading Details",
+        description: "Explore Aqua Funded's funding programs, account options, trading rules, payout conditions, platforms, and trader feedback. Review account sizes, profit splits, drawdown limits, payout cycles, news trading rules, and other key requirements."
+      }
+    }[name.toLowerCase()] || null;
+    const currentOverviewTitle = byId("firmOverviewTitle");
+    if (authoredOverviewCopy && currentOverviewTitle && currentOverviewTitle.tagName !== "H2") {
+      const heading = document.createElement("h2");
+      heading.id = currentOverviewTitle.id;
+      heading.className = currentOverviewTitle.className;
+      currentOverviewTitle.replaceWith(heading);
+    }
+    const overviewTitle = String(authoredOverviewCopy?.title || row?.overviewTitle || `${name} Overview`);
     setText("firmOverviewTitle", overviewTitle);
-    setText("firmOverviewShort", String(row?.overviewShort || row?.bio || ""));
+    setText("firmOverviewShort", String(authoredOverviewCopy?.description || row?.overviewShort || row?.bio || ""));
     setText("firmOverviewLongTitle", String(row?.overviewLongTitle || "Detailed Overview"));
     renderLongOverview(String(row?.overviewLong || row?.overview || row?.bio || ""));
 
@@ -2602,7 +2722,7 @@
     window.__rmpFirmContext = {
       firmId: String(row?.id || "").trim(),
       firmSlug: slug,
-      firmName: String(row?.name || "").trim()
+      firmName: name
     };
     document.body.dataset.firmSlug = slug;
     window.__rmpCurrentFirmSlug = slug;
@@ -2611,6 +2731,8 @@
     if (typeof window.__setRmpFirmTabView === "function") window.__setRmpFirmTabView(view, { slug });
     if (typeof window.__pushRmpPanelData === "function") window.__pushRmpPanelData();
 
+    const radarContainer = document.querySelector(".radar-container");
+    if (radarContainer) radarContainer.hidden = false;
     if (window.__updateFirmRadar) {
       window.__updateFirmRadar(performanceToRadarMetrics(row));
     }
@@ -2618,8 +2740,11 @@
     window.__applyFirmSeoForView = (nextView = view) => {
       const nextSeo = seoForView(name, slug, nextView);
       setText("firmNameHeading", name);
-      setHtml("detailSeoHeading", detailHeadingWithAccent(mainHeading));
-      setText("detailSeoParagraph", mainParagraph);
+      const hasAuthoredViewCopy = ["finotive funding", "fxify", "goat funded trader", "aqua funded", "blueberry funded", "alpha trader firm"].includes(name.toLowerCase());
+      const nextHeading = hasAuthoredViewCopy ? detailPageHeading(name, nextView) : mainHeading;
+      const nextParagraph = hasAuthoredViewCopy ? detailPageParagraph(name, nextView) : mainParagraph;
+      setHtml("detailSeoHeading", detailHeadingWithAccent(nextHeading));
+      setText("detailSeoParagraph", nextParagraph);
       document.title = nextSeo.title;
       byId("metaDesc")?.setAttribute("content", nextSeo.desc);
       byId("canonicalLink")?.setAttribute("href", nextSeo.canonical);
@@ -2650,6 +2775,7 @@
       });
     };
     window.__applyFirmSeoForView(view);
+    document.body.classList.remove("rmp-firm-hydrating");
   }
 
   function resolveFirmLookupFromUrl(href = location.href) {
@@ -2687,6 +2813,7 @@
   async function loadFirmData(opts = {}) {
     const forceLoader = opts.forceLoader !== false;
     const loadToken = ++detailLoadToken;
+    document.body.classList.add("rmp-firm-hydrating");
     if (forceLoader) togglePageLoader(true);
     clearFirmRuntimeState();
     const loaderWait = minLoaderWait();
@@ -2697,15 +2824,6 @@
           togglePageLoader(false);
         }, PAGE_MAX_LOADER_MS)
       : null;
-    const quickFallback = fallbackFirmByLookup({
-      routeSlug: lookup.route?.slug || "",
-      wantedSlug: lookup.wantedSlug || "",
-      fileSlug: lookup.fileSlug || "",
-      requestedSlug: lookup.requestedSlug || ""
-    });
-    if (quickFallback) {
-      applyFirmData(quickFallback);
-    }
     if (!lookup.wantedId && !lookup.requestedSlug) {
       await loaderWait;
       if (loadToken !== detailLoadToken) return;
@@ -2716,9 +2834,7 @@
     }
 
     try {
-      const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
-      const db = getFirestore(app);
-      const selected = await fetchFirmByLookup(db, {
+      const selected = await fetchFirmByLookup({
         wantedId: lookup.wantedId,
         wantedSlug: lookup.wantedSlug,
         routeSlug: lookup.route.slug,
@@ -2746,7 +2862,7 @@
       }
 
       applyFirmData(finalRow);
-      fetchLiveReviewSummary(db, finalRow).then((summary) => {
+      fetchLiveReviewSummary(finalRow).then((summary) => {
         if (!summary || loadToken !== detailLoadToken) return;
         applyLiveReviewStats(finalRow, summary);
       }).catch(() => {});

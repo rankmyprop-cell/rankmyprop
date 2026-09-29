@@ -865,9 +865,9 @@
     <div id="detailOverviewMain" class="main-col">
         <div class="top-stats-row">
             <div class="glass-card score-card">
-                <h1 id="firmScoreValue" style="color:var(--purple-muted); font-size: 52px; margin: 10px 0;">4.4</h1>
+                <h1 id="firmScoreValue" style="color:var(--purple-muted); font-size: 52px; margin: 10px 0;">—</h1>
                 <div id="firmScoreStars" class="score-stars"></div>
-                <div id="firmTrustedText" style="font-size: 12px; color: var(--text-secondary); margin-bottom: 25px;">Trusted by 935+ traders</div>
+                <div id="firmTrustedText" style="font-size: 12px; color: var(--text-secondary); margin-bottom: 25px;">Not enough verified reviews yet</div>
                 <div style="background:#0d0f1a; border: 1px solid #1e213a; padding: 12px; border-radius: 8px; display:flex; justify-content:space-between; margin-bottom: 10px;">
                     <span style="font-weight: 600;">RMP</span>
                     <span style="color: var(--accent); font-weight: 600; cursor: pointer;">Copy</span>
@@ -879,7 +879,7 @@
                         <span class="review-title">Trader Reviews</span>
                         <span id="overviewReviewChip" class="review-chip">0</span>
                     </div>
-                    <p id="firmReviewSnippet" class="review-snippet">“Fast payout process, clean dashboard and smooth execution. Good overall prop experience.”</p>
+                    <p id="firmReviewSnippet" class="review-snippet">No approved trader reviews yet.</p>
                     <a class="review-btn" href="#detailReviewsPanel">Write Review</a>
                 </div>
             </div>
@@ -906,15 +906,15 @@
         </div>
 
         <div class="glass-card">
-            <h3 id="firmOverviewTitle" class="section-title">Aqua Funded Overview</h3>
+            <h3 id="firmOverviewTitle" class="section-title">Top One Trader Overview</h3>
             <p id="firmOverviewShort" style="font-size: 14px; color: var(--text-secondary); line-height: 1.6; margin: 0;">
-                AquaFunded is a leading proprietary trading firm built for traders who value high-performance technology, competitive profit shares, and a sustainable trading environment...
+                Top One Trader is a leading proprietary trading firm built for traders who value high-performance technology, competitive profit shares, and a sustainable trading environment...
             </p>
             <div style="color: var(--accent); font-size: 13px; margin-top: 15px; cursor: pointer;" onclick="toggleMainExpand()">Show More ⌵</div>
             <div id="mainExpand" class="expand-section">
                 <h4 id="firmOverviewLongTitle" style="margin: 20px 0 10px 0; font-size: 15px;">Detailed Overview</h4>
                 <div id="firmOverviewLongContent" style="font-size: 13px; color: var(--text-secondary); line-height: 1.85;">
-                    <p style="margin:0 0 14px 0;">No detailed overview added yet.</p>
+                    <p style="margin:0 0 14px 0;"></p>
                 </div>
             </div>
         </div>
@@ -958,7 +958,7 @@
         </div>
 
         <div class="glass-card">
-            <h4 id="firmWhyChooseTitle" style="margin:0 0 15px 0">Why Choose Aqua Funded?</h4>
+            <h4 id="firmWhyChooseTitle" style="margin:0 0 15px 0">Why Choose Top One Trader?</h4>
             <div id="firmWhyChooseList" style="font-size: 13px; color: var(--text-secondary); line-height: 2.2;"></div>
         </div>
     </div>
@@ -980,10 +980,10 @@
     <div id="detailSpreadsPanel" class="detail-spreads-panel" aria-hidden="true">
         <div class="detail-panel-shell spreads-panel-shell">
             <iframe loading="lazy" class="detail-panel-frame detail-spreads-frame" src="spreads-panel.html" title="Prop Firm Spreads" scrolling="no"></iframe>
-            <div class="detail-spreads-soon">
+            <div class="detail-spreads-soon" hidden>
               <div>
-                <h3>Spreads Module Coming Soon</h3>
-                <p>The spreads section layout is saved and will be connected with live instrument data in the next rollout.</p>
+                <h3></h3>
+                <p></p>
               </div>
             </div>
         </div>
@@ -1810,18 +1810,18 @@
     const buyBtn = byId("firmBuyNowBtn");
     if (buyBtn) buyBtn.href = buyUrl;
 
-    const score = Math.max(0, Math.min(5, Number(row?.score || 4.4)));
-    setText("firmScoreValue", score.toFixed(1));
-    renderScoreStars(score);
-    setText("firmTrustedText", `Trusted by ${String(row?.trustedBy || "935+ traders")}`);
-    setText("firmPromoText", String(row?.promoText || "20% OFF + Cashback"));
-
     const reviewCount = Number(row?.reviewCount || 0);
+    const canPublishRating = Number.isFinite(reviewCount) && reviewCount >= 5;
+    const score = Math.max(0, Math.min(5, Number(row?.score || 0)));
+    setText("firmScoreValue", canPublishRating ? score.toFixed(1) : "—");
+    renderScoreStars(canPublishRating ? score : 0);
+    setText("firmTrustedText", canPublishRating ? `${reviewCount} verified trader reviews` : "Not enough verified reviews yet");
+    setText("firmPromoText", String(row?.promoText || "20% OFF + Cashback"));
     if (Number.isFinite(reviewCount) && reviewCount > 0) {
       setText("detailReviewsBadge", reviewCount);
       setText("overviewReviewChip", reviewCount);
     }
-    setText("firmReviewSnippet", String(row?.reviewSnippet || "Fast payout process, clean dashboard and smooth execution. Good overall prop experience."));
+    setText("firmReviewSnippet", String(row?.reviewSnippet || "No approved trader reviews yet."));
 
     const overviewTitle = String(row?.overviewTitle || `${name} Overview`);
     setText("firmOverviewTitle", overviewTitle);
@@ -1887,7 +1887,7 @@
   }
 
   const FALLBACK_FIRM = {
-    name: "Aqua Funded",
+    name: "Top One Trader",
     ceo: "Sean Ballation",
     metaCeo: "Sean Ballation",
     metaMarkets: ["Forex", "Crypto", "Indices"],
@@ -1898,17 +1898,17 @@
     headquarters: "UAE",
     website: "#",
     buyLink: "#",
-    score: 4.4,
-    trustedBy: "935+ traders",
+    score: 0,
+    trustedBy: "",
     promoText: "20% OFF + Cashback",
     reviewCount: 0,
-    reviewSnippet: "Fast payout process, clean dashboard and smooth execution. Good overall prop experience.",
-    overviewTitle: "Aqua Funded Overview",
-    overviewShort: "AquaFunded is a leading proprietary trading firm built for traders who value high-performance technology, competitive profit shares, and a sustainable trading environment.",
+    reviewSnippet: "No approved trader reviews yet.",
+    overviewTitle: "Top One Trader Overview",
+    overviewShort: "Top One Trader is a leading proprietary trading firm built for traders who value high-performance technology, competitive profit shares, and a sustainable trading environment.",
     overviewLongTitle: "Detailed Overview",
-    overviewLong: "Aqua Funded detail content can be managed from admin panel.",
+    overviewLong: "Top One Trader detail content can be managed from admin panel.",
     firmDetails: [
-      { label: "Company Name", value: "Aqua Funded" },
+      { label: "Company Name", value: "Top One Trader" },
       { label: "Headquarters", value: "Dubai, UAE" },
       { label: "CEO", value: "Sean Ballation" },
       { label: "Payout Frequency", value: "Every 14 Days" }

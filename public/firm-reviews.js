@@ -1,10 +1,11 @@
 import { getApp, getApps, initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 import {
-  addDoc, collection, getDocs, getFirestore, limit, query, serverTimestamp, where
+  addDoc, collection, getFirestore, serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 import { firebaseConfig } from "./firebase-config.js";
 import { DEFAULT_LISTED_FIRMS } from "./firms-data.js";
+import { listDocuments } from "./cloudflare-data.js";
 
 const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -67,7 +68,7 @@ function timestampMs(value) {
 
 function dateLabel(value) {
   const ms = timestampMs(value);
-  return ms ? new Date(ms).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" }) : "July 28, 2026";
+  return ms ? new Date(ms).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" }) : "Not yet recorded";
 }
 
 function relativeDate(value) {
@@ -135,15 +136,13 @@ function reviewMatchesFirm(row = {}) {
 }
 
 async function loadFirms() {
-  const snapshot = await getDocs(query(collection(db, "firms"), limit(500)));
-  firms = snapshot.docs
-    .map((item) => ({ id: item.id, ...item.data() }))
+  firms = (await listDocuments("firms", 500))
     .filter((firm) => firm.active !== false && firm.showReviews !== false && String(firm.publishState || "published").toLowerCase() === "published")
     .sort((a, b) => String(a.name || a.id).localeCompare(String(b.name || b.id)));
   if (activeSlug.endsWith("-review")) activeSlug = activeSlug.replace(/-review$/, "");
   const requestedSlug = Boolean(activeSlug);
   if (!activeSlug && firms.length) activeSlug = slugify(firms[0].slug || firms[0].id || firms[0].name);
-  activeFirm = firms.find((firm) => [firm.id, firm.slug, firm.name].map(slugify).includes(activeSlug)) || (requestedSlug ? null : firms[0]) || null;
+  activeFirm = firms.find((firm) => [firm.slug || firm.id, firm.name].map(slugify).includes(activeSlug)) || (requestedSlug ? null : firms[0]) || null;
   if (activeFirm) activeSlug = slugify(activeFirm.slug || activeFirm.id || activeFirm.name);
   if (activeFirm) {
     try { sessionStorage.setItem(`rmp-firm-review:${activeSlug}`, JSON.stringify(activeFirm)); } catch (_) {}
@@ -151,34 +150,11 @@ async function loadFirms() {
 }
 
 async function loadApprovedReviews() {
-  const rows = [];
-  const seen = new Set();
-  const addSnapshot = (snapshot) => snapshot.docs.forEach((item) => {
-    if (seen.has(item.id)) return;
-    seen.add(item.id);
-    rows.push({ id: item.id, ...item.data() });
-  });
-
-  const targeted = await Promise.all(approvedStatuses.map(async (status) => {
-    try { return await getDocs(query(
-        collection(db, "reviews"),
-        where("firmSlug", "==", activeSlug),
-        where("status", "==", status),
-        limit(300)
-      )); } catch (_) { return null; }
-  }));
-  targeted.filter(Boolean).forEach(addSnapshot);
-
-  if (!rows.length) {
-    const fallback = await Promise.all(approvedStatuses.map(async (status) => {
-      try { return await getDocs(query(collection(db, "reviews"), where("status", "==", status), limit(1200))); } catch (_) { return null; }
-    }));
-    fallback.filter(Boolean).forEach(addSnapshot);
-  }
+  const rows = await listDocuments("reviews", 2500);
 
   reviews = rows
     .filter(reviewMatchesFirm)
-    .filter((row) => approvedStatuses.includes(String(row.status || "")))
+    .filter((row) => approvedStatuses.includes(String(row.status || "Approved")))
     .sort((a, b) => timestampMs(b.createdAt || b.updatedAt) - timestampMs(a.createdAt || a.updatedAt));
 }
 
@@ -228,11 +204,32 @@ function renderFirmFaq(name = "this firm") {
 function renderSummary() {
   const total = reviews.length;
   const average = total ? reviews.reduce((sum, row) => sum + Number(row.rating || 0), 0) / total : 0;
-  qs("averageRating").textContent = average.toFixed(1);
-  qs("averageStars").textContent = stars(average);
-  qs("reviewCount").textContent = `${total.toLocaleString()} review${total === 1 ? "" : "s"}`;
-  const newest = reviews[0]?.updatedAt || reviews[0]?.createdAt || new Date();
+  const canPublishRating = total >= 5;
+  qs("averageRating").textContent = canPublishRating ? average.toFixed(1) : "—";
+  qs("averageStars").textContent = canPublishRating ? stars(average) : "";
+  qs("reviewCount").textContent = `${total.toLocaleString()} verified review${total === 1 ? "" : "s"}`;
+  const newest = reviews[0]?.updatedAt || reviews[0]?.createdAt || activeFirm?.updatedAt || activeFirm?.createdAt;
   qs("dedicatedReviewUpdated").textContent = dateLabel(newest);
+}
+
+function renderReviewResearch() {
+  const proofBacked = reviews.filter((row) => Array.isArray(row.proofUrls) && row.proofUrls.some(Boolean));
+  const positive = reviews.map((row) => firstText(row, ["pros", "prosText", "reviewPros"], "")).find(Boolean);
+  const concern = reviews.map((row) => firstText(row, ["cons", "consText", "reviewCons"], "")).find(Boolean);
+  const newest = reviews[0]?.updatedAt || reviews[0]?.createdAt || activeFirm?.updatedAt || activeFirm?.createdAt;
+  qs("reviewResearchCount").textContent = String(reviews.length);
+  qs("reviewResearchProofCount").textContent = String(proofBacked.length);
+  qs("reviewResearchUpdated").textContent = dateLabel(newest);
+  qs("reviewResearchPositive").textContent = positive || "No approved positive detail yet.";
+  qs("reviewResearchConcern").textContent = concern || "No approved concern detail yet.";
+  qs("reviewResearchProfile").href = `/prop-firms/${encodeURIComponent(activeSlug)}`;
+  qs("reviewResearchRules").href = `/prop-firm-rules/${encodeURIComponent(activeSlug)}`;
+  const comparisonPartner = firms.find((firm) => slugify(firm.slug || firm.id || firm.name) !== activeSlug);
+  if (comparisonPartner) {
+    const partnerSlug = slugify(comparisonPartner.slug || comparisonPartner.id || comparisonPartner.name);
+    qs("reviewResearchCompare").href = `/compare/${[activeSlug, partnerSlug].sort().join("-vs-")}`;
+    qs("reviewResearchCompare").textContent = `Compare with ${comparisonPartner.name}`;
+  }
 }
 
 function renderReviews() {
@@ -306,8 +303,8 @@ function renderReviews() {
 }
 
 async function refreshPage() {
-  const hasServerFirstPaint = qs("reviewsList").querySelector(".rmp-server-review-card,.rmp-server-review-empty");
-  if (!hasServerFirstPaint) qs("reviewsList").innerHTML = Array.from({ length: 2 }, () => `<div class="review-skeleton-card" aria-hidden="true"><div class="review-skeleton-head"><span class="review-skeleton-avatar"></span><div class="review-skeleton-copy"><span class="review-skeleton-line"></span><span class="review-skeleton-line"></span></div></div><div class="review-skeleton-grid"><span class="review-skeleton-box"></span><span class="review-skeleton-box"></span></div></div>`).join("");
+  qs("reviewsList").setAttribute("aria-busy", "true");
+  qs("reviewsList").innerHTML = Array.from({ length: 2 }, () => `<div class="review-skeleton-card" aria-hidden="true"><div class="review-skeleton-head"><span class="review-skeleton-avatar"></span><div class="review-skeleton-copy"><span class="review-skeleton-line"></span><span class="review-skeleton-line"></span></div></div><div class="review-skeleton-grid"><span class="review-skeleton-box"></span><span class="review-skeleton-box"></span></div></div>`).join("");
   await Promise.all([loadFirms(), loadApprovedReviews()]);
   if (activeSlug && !activeFirm) {
     location.replace("/404.html");
@@ -316,7 +313,9 @@ async function refreshPage() {
   renderFirm();
   currentReviewPage = 1;
   renderSummary();
+  renderReviewResearch();
   renderReviews();
+  qs("reviewsList").removeAttribute("aria-busy");
 }
 
 async function submitReview(event) {

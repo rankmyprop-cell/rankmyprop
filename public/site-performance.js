@@ -1,6 +1,7 @@
 import "/global-footer.js";
 import "/site-heading-theme.js";
 import "/funding-offers-banner.js";
+import "/push-notifications.js";
 
 (() => {
   const GTAG_ID = "G-W3E425827L";
@@ -223,4 +224,5 @@ import "/funding-offers-banner.js";
   }).observe(document.documentElement, { childList: true, subtree: true });
   window.addEventListener("rmp:announcement-ready", syncStickyHeaderMetrics);
   window.addEventListener("resize", syncStickyHeaderMetrics, { passive: true });
+
 })();

@@ -1,5 +1,12 @@
 const fs = require('node:fs')
 const path = require('node:path')
+const legacyBlogRedirects = require('./legacy-blog-redirects.cjs')
+const contentConsolidationRedirects = require('./content-consolidation-redirects.cjs')
+const {
+  isIndexableComparisonFirm,
+  isIndexableContentPost,
+  isIndexableReviewFirm,
+} = require('./seo-quality-gates.cjs')
 
 const root = path.resolve(__dirname, '..')
 const distRoot = path.join(root, 'dist')
@@ -34,6 +41,28 @@ const htmlUnescape = (value = '') => String(value)
 
 const compact = (value = '') => String(value).replace(/\s+/g, ' ').trim()
 
+function legacyLongFormBodies() {
+  const bodies = new Map()
+  for (const id of Object.keys(legacyBlogRedirects)) {
+    if (id === '04') continue
+    const file = path.join(distRoot, `blog-post-${id}.html`)
+    if (!fs.existsSync(file)) continue
+    const html = fs.readFileSync(file, 'utf8')
+    const title = htmlUnescape(html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i)?.[1] || '').replace(/<[^>]+>/g, ' ')
+    let body = html.match(/<article\s+class=["']content["'][^>]*>([\s\S]*?)<\/article>/i)?.[1] || ''
+    body = body
+      .replace(/<div\s+class=["']rmp-seo-links-block["'][\s\S]*?<\/div>/gi, '')
+      .replace(/<p>\s*From an SEO perspective,[\s\S]*?<\/p>/gi, '')
+      .replace(/href=(["'])\/blog\/blog-post-(\d+)\1/gi, (match, quote, rawId) => {
+        const target = legacyBlogRedirects[String(Number(rawId)).padStart(2, '0')]
+        return target ? `href=${quote}${target}${quote}` : match
+      })
+      .trim()
+    if (compact(title) && compact(body)) bodies.set(compact(title).toLowerCase(), body)
+  }
+  return bodies
+}
+
 function metaContent(html, attribute, value) {
   const tag = html.match(new RegExp(`<meta\\s+[^>]*${attribute}=["']${value}["'][^>]*>`, 'i'))?.[0]
   return tag?.match(/content=(["'])([\s\S]*?)\1/i)?.[2] || ''
@@ -51,6 +80,13 @@ function descriptionWithinLimit(value) {
   if (description.length <= 160) return description
   const shortened = description.slice(0, 157).replace(/\s+\S*$/, '')
   return `${shortened}...`
+}
+
+function offerDiscountPercent(value = '') {
+  const match = String(value || '').match(/(\d+(?:\.\d+)?)\s*%?/)
+  if (!match) return '0'
+  const amount = Number(match[1])
+  return Number.isFinite(amount) ? String(amount) : match[1]
 }
 
 function evidenceReviewCards(firmName, reviews = []) {
@@ -71,18 +107,28 @@ function reviewEvidenceSection(firmName, reviews = [], cmsFirm = {}) {
 }
 
 function publishedRulesSection(firmName, cmsFirm = {}, selectedProgram = '') {
-  const programs = Array.isArray(cmsFirm.programs) ? cmsFirm.programs : []
-  const chosen = selectedProgram
-    ? programs.find((program) => slugify(program.program || program.name || program.title || program.model) === selectedProgram) || programs[0]
-    : programs[0]
-  const programSlug = selectedProgram || slugify(chosen?.program || chosen?.name || chosen?.title || chosen?.model)
-  const programRuleSet = cmsFirm.programRules?.[programSlug]
-  const selectedProgramRows = programRuleSet
-    ? (Array.isArray(programRuleSet.rules) ? programRuleSet.rules : []).map((rule) => `<tr><th scope="row">${htmlEscape(rule.title || 'Rule')}</th><td>${htmlEscape(rule.text || 'See published program record')}</td></tr>`).join('')
-    : chosen ? Object.entries(chosen).filter(([, value]) => value).map(([key, value]) => `<tr><th scope="row">${htmlEscape(key.replace(/([A-Z])/g, ' $1').replace(/^./, (letter) => letter.toUpperCase()))}</th><td>${htmlEscape(value)}</td></tr>`).join('') : ''
-  const generalRules = (cmsFirm.ruleSections || []).flatMap((section) => (Array.isArray(section.rules) ? section.rules : []).map((rule) => ({ ...rule, section: section.title }))).slice(0, 14)
-  const generalRows = generalRules.map((rule) => `<tr><th scope="row">${htmlEscape(rule.title || rule.section)}</th><td>${htmlEscape(rule.text || 'See published firm record')}</td></tr>`).join('')
-  return `<section class="rmp-published-rules" aria-label="${htmlEscape(firmName)} published rule data" style="max-width:1120px;margin:28px auto;padding:24px;border:1px solid rgba(122,116,255,.22);border-radius:16px"><h2>${htmlEscape(firmName)} published rule data</h2><p>${programs.length} account model${programs.length === 1 ? '' : 's'} and ${(cmsFirm.ruleSections || []).length} rule section${(cmsFirm.ruleSections || []).length === 1 ? '' : 's'} are currently available in the CMS. Values below are not invented; verify changes against the official rulebook.</p>${programRuleSet ? `<h3 style="margin:22px 0 10px">${htmlEscape(programRuleSet.title || `${programRuleSet.program || programSlug} Challenge Rules`)}</h3><p>${htmlEscape(programRuleSet.desc || 'Program-specific rules are published below.')}</p>${selectedProgramRows ? `<div style="overflow:auto"><table><tbody>${selectedProgramRows}</tbody></table></div>` : '<p>No structured program-specific rules are currently published.</p>'}` : selectedProgramRows ? `<div style="overflow:auto"><table><tbody>${selectedProgramRows}</tbody></table></div>` : ''}${generalRows ? `<h3 style="margin:24px 0 10px">General firm rules</h3><div style="overflow:auto"><table><tbody>${generalRows}</tbody></table></div>` : '<p>No structured rule values are currently published for this firm.</p>'}</section>`
+  // Rules already render in the dedicated CMS-driven rule UI. Repeating the
+  // same dataset as a generated block made it appear below the shared footer.
+  return ''
+}
+
+function insertBeforePageFooter(html, content) {
+  if (!content) return html
+  const lower = html.toLowerCase()
+  const mainClose = lower.lastIndexOf('</main>')
+  const footerStart = lower.lastIndexOf('<footer')
+  const footerEnd = footerStart >= 0 ? lower.indexOf('>', footerStart) : -1
+  const footerTag = footerStart >= 0 && footerEnd >= 0 ? lower.slice(footerStart, footerEnd + 1) : ''
+  const isPageFooter = footerStart >= 0 && (
+    mainClose < 0
+    || footerStart > mainClose
+    || /(?:site-footer|rmp-global-footer|rmp-shared-home-footer)/.test(footerTag)
+  )
+  if (isPageFooter) return `${html.slice(0, footerStart)}${content}\n${html.slice(footerStart)}`
+  if (mainClose >= 0) return `${html.slice(0, mainClose)}${content}\n${html.slice(mainClose)}`
+  const bodyClose = lower.lastIndexOf('</body>')
+  if (bodyClose >= 0) return `${html.slice(0, bodyClose)}${content}\n${html.slice(bodyClose)}`
+  return `${html}${content}`
 }
 
 function reviewSchemas(firmName, canonical, reviews = []) {
@@ -123,6 +169,7 @@ function applySeo(html, seo) {
   let output = html
   output = replaceOrInsert(output, /<title>[\s\S]*?<\/title>/i, `<title>${htmlEscape(seo.title)}</title>`)
   output = replaceOrInsert(output, /<meta\s+[^>]*name=["']description["'][^>]*>/i, `<meta name="description" content="${htmlEscape(seo.description)}">`)
+  output = replaceOrInsert(output, /<meta\s+[^>]*name=["']robots["'][^>]*>/i, `<meta name="robots" content="${htmlEscape(seo.robots || 'index, follow, max-image-preview:large, max-snippet:-1')}">`)
   output = replaceOrInsert(output, /<link\s+[^>]*rel=["']canonical["'][^>]*>/i, `<link rel="canonical" href="${htmlEscape(seo.canonical)}">`)
   output = replaceOrInsert(output, /<meta\s+[^>]*property=["']og:title["'][^>]*>/i, `<meta property="og:title" content="${htmlEscape(seo.title)}">`)
   output = replaceOrInsert(output, /<meta\s+[^>]*property=["']og:description["'][^>]*>/i, `<meta property="og:description" content="${htmlEscape(seo.description)}">`)
@@ -143,7 +190,14 @@ function applySeo(html, seo) {
   for (const replacement of seo.replacements || []) {
     const escapedId = String(replacement.id).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
     const pattern = new RegExp(`(<([a-z0-9:-]+)[^>]*\\bid=["']${escapedId}["'][^>]*>)[\\s\\S]*?(<\\/\\2>)`, 'i')
-    output = output.replace(pattern, `$1${replacement.html}$3`)
+    output = output.replace(pattern, (match, opening, currentTag) => {
+      if (!replacement.tagName) return `${opening}${replacement.html}</${currentTag}>`
+      const tagName = String(replacement.tagName).toLowerCase()
+      return `${opening.replace(new RegExp(`^<${currentTag}`, 'i'), `<${tagName}`)}${replacement.html}</${tagName}>`
+    })
+  }
+  for (const [from, to] of seo.literalReplacements || []) {
+    output = output.split(String(from)).join(String(to))
   }
   if (seo.summary) {
     const facts = (seo.summary.facts || []).map(([label, value]) => `<li><strong>${htmlEscape(label)}:</strong> ${htmlEscape(value)}</li>`).join('')
@@ -154,12 +208,12 @@ function applySeo(html, seo) {
     else output = /<main\b[^>]*>/i.test(output) ? output.replace(/(<main\b[^>]*>)/i, `$1\n${summary}`) : output.replace(/(<body\b[^>]*>)/i, `$1\n${summary}`)
   }
   if (seo.evidenceHtml) {
-    output = output.includes('</main>') ? output.replace('</main>', `${seo.evidenceHtml}\n</main>`) : output.replace('</body>', `${seo.evidenceHtml}\n</body>`)
+    output = insertBeforePageFooter(output, seo.evidenceHtml)
   }
   if (Array.isArray(seo.links) && seo.links.length) {
     const links = seo.links.map(([label, href]) => `<a href="${htmlEscape(href)}">${htmlEscape(label)}</a>`).join(' · ')
     const nav = `<nav class="rmp-seo-context-links" aria-label="Related prop firm research" style="max-width:1120px;margin:32px auto;padding:20px;border:1px solid rgba(122,116,255,.22);border-radius:14px;background:rgba(122,116,255,.06)"><strong>Continue your research:</strong> ${links}</nav>`
-    output = output.includes('</main>') ? output.replace('</main>', `${nav}\n</main>`) : output.replace('</body>', `${nav}\n</body>`)
+    output = insertBeforePageFooter(output, nav)
   }
   return output
 }
@@ -256,6 +310,7 @@ function addStaticResourceDirectory() {
     ['/prop-firm-rules', 'Prop Firm Rules'], ['/trading-guides', 'Trading Guides'],
     ['/funding-strategies', 'Funding Strategies'], ['/trading-psychology', 'Trading Psychology'],
     ['/beginner-tutorials', 'Beginner Tutorials'], ['/calculators', 'Trading Calculators'],
+    ['/blog/blog-post-30', '2026 Prop Firm Market Outlook'], ['/prop-firm-market-report', 'Prop Firm Market Report'],
     ['/risk-to-reward-calculator', 'Risk-to-Reward Calculator'], ['/profit-split-calculator', 'Profit Split Calculator'],
     ['/consistency-rule-calculator', 'Consistency Rule Calculator'],
   ]
@@ -297,6 +352,8 @@ function ensureStaticSitemapSchemas() {
       ? [path.join(root, 'index.html')]
       : [path.join(root, 'public', `${pathname.slice(1)}.html`), path.join(root, 'public', pathname.slice(1), 'index.html')]
     const hasAuthoredSource = sourceCandidates.some((candidate) => fs.existsSync(candidate))
+      || /^\/prop-firms\/(?:finotive-funding|fxify|goat-funded-trader|aqua-funded|blueberry-funded|fundednext)$/.test(pathname)
+      || /^\/prop-firm-rules\/[^/]+\/[^/]+$/.test(pathname)
     const titleCore = originalTitle.replace(/\s*\|\s*Rank My Prop\s*$/i, '')
     const title = hasAuthoredSource ? originalTitle : (originalTitle.length > 65 ? titleWithBrand(titleCore) : originalTitle)
     const description = hasAuthoredSource ? originalDescription : descriptionWithinLimit(originalDescription)
@@ -334,7 +391,13 @@ async function main() {
   const offersModule = await import(path.join(root, 'public', 'offers-data.js'))
   const editorialModule = await import(path.join(root, 'public', 'editorial-contributors.js'))
   const evidence = JSON.parse(fs.readFileSync(path.join(root, 'public', 'seo-evidence.json'), 'utf8'))
-  const contentPosts = Object.values(evidence.content || {}).flat().filter((post) => post.slug && post.title && post.routeBase)
+  const contentPosts = Object.values(evidence.content || {}).flat().filter((post) => {
+    if (!post.slug || !post.title || !post.routeBase) return false
+    return !contentConsolidationRedirects[`/${post.routeBase}/${post.slug}`]
+  })
+  const retainedContentDestinations = new Set(Object.values(contentConsolidationRedirects))
+  const indexableContentPosts = contentPosts.filter((post) => isIndexableContentPost(post) || retainedContentDestinations.has(`/${post.routeBase}/${post.slug}`))
+  const legacyBodies = legacyLongFormBodies()
   const firmRows = [...firmsModule.DEFAULT_LISTED_FIRMS, ...firmsModule.DEFAULT_BEST_FIRMS]
   const firmMap = new Map(Object.entries(evidence.firms || {}).map(([key, firm]) => {
     const slug = canonicalSlug(firm.slug || key || firm.name || firm.id)
@@ -343,7 +406,7 @@ async function main() {
   for (const firm of firmRows) {
     const slug = canonicalSlug(firm.slug || firm.name || firm.id)
     if (!slug) continue
-    firmMap.set(slug, { ...(firmMap.get(slug) || {}), ...firm, slug })
+    firmMap.set(slug, { ...firm, ...(firmMap.get(slug) || {}), slug })
   }
   const firms = [...firmMap.values()].filter((firm) => firm.slug).sort((a, b) => a.slug.localeCompare(b.slug))
 
@@ -362,10 +425,16 @@ async function main() {
   const firmBySlug = new Map(firms.map((firm) => [firm.slug, firm]))
   const offerBySlug = new Map(offers.map((offer) => [offer.slug, offer]))
   const comparisonFirms = firms.filter((firm) => firm.showFirmProfile !== false && firm.showListed !== false)
+  const indexableComparisonSlugs = new Set(comparisonFirms.filter((firm) => isIndexableComparisonFirm(firm, evidence)).map((firm) => firm.slug))
   const comparisons = []
   for (let first = 0; first < comparisonFirms.length; first += 1) {
     for (let second = first + 1; second < comparisonFirms.length; second += 1) {
-      comparisons.push({ left: comparisonFirms[first], right: comparisonFirms[second], route: `/compare/${comparisonFirms[first].slug}-vs-${comparisonFirms[second].slug}` })
+      comparisons.push({
+        left: comparisonFirms[first],
+        right: comparisonFirms[second],
+        route: `/compare/${comparisonFirms[first].slug}-vs-${comparisonFirms[second].slug}`,
+        indexable: indexableComparisonSlugs.has(comparisonFirms[first].slug) && indexableComparisonSlugs.has(comparisonFirms[second].slug),
+      })
     }
   }
 
@@ -374,7 +443,7 @@ async function main() {
     const approvedReviews = evidence.reviews?.[firm.slug] || []
     const cmsFirm = evidence.firms?.[firm.slug] || {}
     const about = { '@type': 'Organization', name: firm.name, url: firm.website ? `https://${String(firm.website).replace(/^https?:\/\//, '')}` : undefined }
-    const comparisonPartner = comparisonFirms.find((candidate) => candidate.slug === (firm.slug === 'trader-scale' ? 'fundednext' : 'trader-scale')) || comparisonFirms.find((candidate) => candidate.slug !== firm.slug)
+    const comparisonPartner = comparisonFirms.find((candidate) => indexableComparisonSlugs.has(candidate.slug) && candidate.slug === (firm.slug === 'trader-scale' ? 'fundednext' : 'trader-scale')) || comparisonFirms.find((candidate) => indexableComparisonSlugs.has(candidate.slug) && candidate.slug !== firm.slug)
     const comparisonSlugs = comparisonPartner ? [firm.slug, comparisonPartner.slug].sort() : []
     const comparisonRoute = comparisonSlugs.length === 2 ? `/compare/${comparisonSlugs[0]}-vs-${comparisonSlugs[1]}` : '/compare'
     const programs = (Array.isArray(cmsFirm.programs) ? cmsFirm.programs : [])
@@ -396,17 +465,81 @@ async function main() {
     if (firm.showFirmProfile !== false) {
       const route = `/prop-firms/${firm.slug}`
       const canonical = `${origin}${route}`
-      const title = titleWithBrand(`${firm.name} Review 2026: Rules & Payouts`)
-      const description = descriptionWithinLimit(firm.slug === 'trader-scale'
+      const authoredProfile = {
+        'finotive-funding': {
+          title: 'Finotive Funding Review 2026 | Rules, Payouts & Challenges',
+          description: 'Read our Finotive Funding review for 2026. Explore account sizes, challenge options, profit splits, drawdown rules, payouts, trading platforms, and trader reviews.',
+          heading: 'Finotive Funding Review 2026: Rules, Challenges, Payouts & Funding',
+          paragraph: 'Explore Finotive Funding in 2026, including its funded trading challenges, account sizes, profit splits, drawdown rules, payout conditions, trading platforms, and trader reviews. Get the key information you need before choosing a Finotive Funding account.',
+        },
+        fxify: {
+          title: 'FXIFY Review 2026 | Rules, Payouts & Challenges',
+          description: 'Read the FXIFY review for 2026. Explore funded accounts, challenge options, profit splits, drawdown rules, payouts, trading platforms, and trader reviews.',
+          heading: 'FXIFY Review 2026: Prop Firm Rules, Payouts & Challenges',
+          paragraph: 'Explore FXIFY in 2026, including funded trading challenges, account sizes, profit splits, drawdown rules, payout conditions, trading platforms, and trader reviews. Get the key details about FXIFY before choosing a funded trading account.',
+        },
+        'goat-funded-trader': {
+          title: 'Goat Funded Trader Review 2026 | Rules, Payouts & Challenges',
+          description: 'Read the Goat Funded Trader review for 2026. Explore funded accounts, challenge options, profit splits, drawdown rules, payouts, trading platforms, and trader reviews.',
+          heading: 'Goat Funded Trader Review 2026: Rules, Payouts & Challenges',
+          paragraph: 'Explore Goat Funded Trader in 2026, including funded trading challenges, account sizes, profit splits, drawdown rules, payout conditions, trading platforms, and trader reviews. Get the key information you need before choosing a Goat Funded Trader account.',
+          h2: 'Goat Funded Trader Review & Funded Trading Details',
+          h2Description: "Explore Goat Funded Trader's funding programs, account options, trading rules, payout conditions, platforms, and trader feedback. Review important requirements and key features before choosing a funded trading account.",
+        },
+        'aqua-funded': {
+          title: 'Aqua Funded Review 2026 | Rules, Payouts & Challenges',
+          description: 'Read the Aqua Funded review for 2026. Explore funded accounts, challenge options, profit splits, drawdown rules, payouts, trading platforms, news trading and trader reviews.',
+          heading: 'Aqua Funded Review 2026: Rules, Payouts & Challenges',
+          paragraph: 'Explore Aqua Funded in 2026, including funded trading challenges, account sizes, profit splits, drawdown rules, payout conditions, trading platforms, news trading policies, and trader reviews. Get the key information you need before choosing an Aqua Funded account.',
+          h2: 'Aqua Funded Review & Funded Trading Details',
+          h2Description: "Explore Aqua Funded's funding programs, account options, trading rules, payout conditions, platforms, and trader feedback. Review account sizes, profit splits, drawdown limits, payout cycles, news trading rules, and other key requirements.",
+        },
+        'blueberry-funded': {
+          title: 'Blueberry Funded Review 2026 | Rules, Payouts & Challenges',
+          description: 'Read the Blueberry Funded review for 2026. Explore funded accounts, challenge options, profit splits, drawdown rules, payouts, trading platforms, restrictions, and trader reviews.',
+          heading: 'Blueberry Funded Review 2026: Rules, Payouts & Challenges',
+          paragraph: 'Explore Blueberry Funded in 2026, including funded trading challenges, account sizes, profit splits, drawdown rules, payout conditions, trading platforms, trading restrictions, and trader reviews. Get the key information you need before choosing a Blueberry Funded account.',
+        },
+        'alpha-trader-firm': {
+          title: 'Alpha Trader Firm Review 2026 | Rules, Payouts & Challenges',
+          description: 'Read the Alpha Trader Firm review for 2026. Explore funded accounts, challenge options, profit splits, drawdown rules, payouts, trading platforms, and trader reviews.',
+          heading: 'Alpha Trader Firm Review 2026: Rules, Payouts & Challenges',
+          paragraph: 'Explore Alpha Trader Firm in 2026, including funded trading challenges, account sizes, profit splits, drawdown rules, payout conditions, trading platforms, and trader reviews. Get the key information you need before choosing an Alpha Trader Firm account.',
+        },
+      }[firm.slug]
+      const title = authoredProfile
+        ? authoredProfile.title
+        : titleWithBrand(`${firm.name} Review 2026: Rules & Payouts`)
+      const description = authoredProfile
+        ? authoredProfile.description
+        : descriptionWithinLimit(firm.slug === 'trader-scale'
         ? 'Read our 2026 Trader Scale review covering challenge fees, drawdown rules, payout terms, trader ratings and the latest verified discount.'
         : `Review ${firm.name} challenge fees, drawdown rules, payout terms, trading conditions and trader feedback before choosing a funded account.`)
+      const profileHeading = authoredProfile
+        ? authoredProfile.heading
+        : `${firm.name} Review 2026: Fees, Rules, Payouts & Offers`
+      const profileParagraph = authoredProfile
+        ? authoredProfile.paragraph
+        : description
       writePage(route, 'firm-detail.html', {
         title, description, canonical, links: firmLinks.slice(1),
+        literalReplacements: [
+          ['/prop-firms/aqua-funded', `/prop-firms/${firm.slug}`],
+          ['Aqua Funded', firm.name],
+          ['AquaFunded', firm.name],
+        ],
         replacements: [
-          { id: 'detailSeoHeading', html: `${htmlEscape(firm.name)} Review 2026: Fees, Rules, Payouts &amp; Offers` },
-          { id: 'detailSeoParagraph', html: htmlEscape(description) },
+          { id: 'detailSeoHeading', html: htmlEscape(profileHeading) },
+          { id: 'detailSeoParagraph', html: htmlEscape(profileParagraph) },
           { id: 'firmNameHeading', html: htmlEscape(firm.name) },
           { id: 'firmLogoInitials', html: htmlEscape(firm.name.split(/\s+/).map((word) => word[0]).join('').slice(0, 3).toUpperCase()) },
+          { id: 'firmScoreValue', html: approvedReviews.length >= 5 ? (approvedReviews.reduce((sum, review) => sum + Number(review.rating || 0), 0) / approvedReviews.length).toFixed(1) : '—' },
+          { id: 'firmTrustedText', html: approvedReviews.length >= 5 ? `${approvedReviews.length} verified trader reviews` : 'Not enough verified reviews yet' },
+          { id: 'firmReviewSnippet', html: approvedReviews.length ? htmlEscape(approvedReviews[0].body || approvedReviews[0].title || 'Read the latest approved trader review.') : 'No approved trader reviews yet.' },
+          { id: 'firmOverviewTitle', html: htmlEscape(authoredProfile?.h2 || `${firm.name} Overview`), tagName: authoredProfile?.h2 ? 'h2' : undefined },
+          { id: 'firmOverviewShort', html: htmlEscape(authoredProfile?.h2Description || firm.overviewShort || firm.bio || `Review the published ${firm.name} account conditions and firm details.`) },
+          { id: 'firmOverviewLongContent', html: `<p style="margin:0 0 14px 0;">${htmlEscape(firm.overviewLong || firm.overview || firm.overviewShort || firm.bio || `Confirm current ${firm.name} terms on the official firm website before purchasing an account.`)}</p>` },
+          { id: 'firmWhyChooseTitle', html: `Why Choose ${htmlEscape(firm.name)}?` },
         ],
         summary: {
           heading: `${firm.name} prop firm overview`,
@@ -426,6 +559,62 @@ async function main() {
         ]), reviewSchemas(firm.name, canonical, approvedReviews)),
       })
       generated += 1
+
+      const authoredChallenges = {
+        'finotive-funding': {
+          title: 'Finotive Funding Challenges 2026 | Fees, Account Sizes & Programs',
+          description: 'Explore Finotive Funding challenges in 2026, including fees, account sizes, profit targets, profit splits, drawdown rules, and available funded trading programs.',
+          heading: 'Finotive Funding Challenges 2026: Fees, Account Sizes & Funding Programs',
+          paragraph: 'Explore Finotive Funding challenges in 2026, including account sizes, challenge fees, profit targets, profit splits, drawdown requirements, trading rules, and available funding programs. Find the right Finotive Funding challenge for your trading strategy.',
+        },
+        fxify: {
+          title: 'FXIFY Challenges 2026 | Fees, Account Sizes & Programs',
+          description: 'Explore FXIFY challenges in 2026, including challenge fees, account sizes, profit targets, profit splits, drawdown rules, trading conditions, and funded account programs.',
+          heading: 'FXIFY Challenges 2026: Fees, Account Sizes & Funding Programs',
+          paragraph: 'Explore FXIFY challenges in 2026, including available account sizes, challenge fees, profit targets, profit splits, drawdown requirements, trading rules, and funded account options. Find detailed information on each FXIFY funding program.',
+        },
+        'goat-funded-trader': {
+          title: 'Goat Funded Trader Challenges 2026 | Fees, Accounts & Programs',
+          description: 'Explore Goat Funded Trader challenges in 2026, including fees, account sizes, profit targets, profit splits, drawdown rules, payouts, and funded trading programs.',
+          heading: 'Goat Funded Trader Challenges 2026: Fees, Account Sizes & Funding Programs',
+          paragraph: 'Explore Goat Funded Trader challenges in 2026, including account sizes, challenge fees, profit targets, profit splits, drawdown requirements, payout conditions, and key trading rules for each funding program.',
+        },
+        'aqua-funded': {
+          title: 'Aqua Funded Challenges 2026 | Fees, Account Sizes & Programs',
+          description: 'Explore Aqua Funded challenges in 2026, including fees, account sizes, profit targets, profit splits, drawdown rules, payouts, and funded trading programs.',
+          heading: 'Aqua Funded Challenges 2026: Fees, Account Sizes & Funding Programs',
+          paragraph: 'Explore Aqua Funded challenges in 2026, including account sizes, challenge fees, profit targets, profit splits, drawdown requirements, payout conditions, and key trading rules for each funding program.',
+        },
+        'blueberry-funded': {
+          title: 'Blueberry Funded Challenges 2026 | Fees, Account Sizes & Programs',
+          description: 'Explore Blueberry Funded challenges in 2026, including fees, account sizes, profit targets, profit splits, drawdown rules, payouts, and funded trading programs.',
+          heading: 'Blueberry Funded Challenges 2026: Fees, Account Sizes & Funding Programs',
+          paragraph: 'Explore Blueberry Funded challenges in 2026, including account sizes, challenge fees, profit targets, profit splits, drawdown requirements, payout conditions, and key trading rules for each funding program.',
+        },
+        'alpha-trader-firm': {
+          title: 'Alpha Trader Firm Challenges 2026 | Fees, Account Sizes & Programs',
+          description: 'Explore Alpha Trader Firm challenges in 2026, including fees, account sizes, profit targets, profit splits, drawdown rules, payouts, and funded trading programs.',
+          heading: 'Alpha Trader Firm Challenges 2026: Fees, Account Sizes & Funding Programs',
+          paragraph: 'Explore Alpha Trader Firm challenges in 2026, including account sizes, challenge fees, profit targets, profit splits, drawdown requirements, payout conditions, and key trading rules for each funding program.',
+        },
+      }[firm.slug]
+      if (authoredChallenges) {
+        const challengesRoute = `/prop-firms/${firm.slug}/challenges`
+        const challengesCanonical = `${origin}${challengesRoute}`
+        writePage(challengesRoute, `prop-firms/${firm.slug}.html`, {
+          title: authoredChallenges.title,
+          description: authoredChallenges.description,
+          canonical: challengesCanonical,
+          replacements: [
+            { id: 'detailSeoHeading', html: htmlEscape(authoredChallenges.heading) },
+            { id: 'detailSeoParagraph', html: htmlEscape(authoredChallenges.paragraph) },
+          ],
+          schema: graph({ name: authoredChallenges.title, url: challengesCanonical, description: authoredChallenges.description, about }, breadcrumb([
+            ['Home', `${origin}/`], ['Prop Firms', `${origin}/listedprop`], [firm.name, `${origin}/prop-firms/${firm.slug}`], ['Challenges', challengesCanonical],
+          ])),
+        })
+        generated += 1
+      }
     }
 
     if (firm.showReviews !== false) {
@@ -435,19 +624,31 @@ async function main() {
       const description = descriptionWithinLimit(`Read verified ${firm.name} trader reviews, ratings and payout feedback before choosing a challenge or funded account.`)
       const approvedAverage = approvedReviews.length ? approvedReviews.reduce((sum, review) => sum + Number(review.rating || 0), 0) / approvedReviews.length : 0
       const firmLogo = publicAssetUrl(firm.logo || cmsFirm.logo)
+      const proofBackedReviews = approvedReviews.filter((review) => review.proofUrl)
+      const reportedPositive = approvedReviews.map((review) => compact(review.pros)).find(Boolean) || 'No approved positive detail yet.'
+      const reportedConcern = approvedReviews.map((review) => compact(review.cons)).find(Boolean) || 'No approved concern detail yet.'
+      const materialDate = approvedReviews.map((review) => review.datePublished).filter(Boolean).sort().at(-1) || cmsFirm.updatedAt || ''
       writePage(route, 'firm-reviews.html', {
-        title, description, canonical, links: [...firmLinks.filter(([, href]) => href !== route), ...programLinks],
+        title, description, canonical,
+        robots: isIndexableReviewFirm(firm.slug, evidence) ? undefined : 'noindex, follow',
+        links: [...firmLinks.filter(([, href]) => href !== route), ...programLinks],
         replacements: [
           { id: 'dedicatedReviewTitle', html: `${htmlEscape(firm.name)} Reviews &amp; Trader Experiences` },
           { id: 'dedicatedReviewDescription', html: htmlEscape(description) },
           { id: 'firmName', html: htmlEscape(firm.name) },
           { id: 'firmLogo', html: firmLogo ? `<img src="${htmlEscape(firmLogo)}" alt="${htmlEscape(firm.name)} logo" width="58" height="58" fetchpriority="high">` : htmlEscape(firm.name.split(/\s+/).map((word) => word[0]).join('').slice(0, 3).toUpperCase()) },
-          { id: 'averageRating', html: approvedReviews.length ? approvedAverage.toFixed(1) : '0.0' },
-          { id: 'averageStars', html: `${'★'.repeat(Math.round(approvedAverage))}${'☆'.repeat(5 - Math.round(approvedAverage))}` },
+          { id: 'averageRating', html: approvedReviews.length >= 5 ? approvedAverage.toFixed(1) : '—' },
+          { id: 'averageStars', html: approvedReviews.length >= 5 ? `${'★'.repeat(Math.round(approvedAverage))}${'☆'.repeat(5 - Math.round(approvedAverage))}` : 'Not enough verified reviews yet' },
           { id: 'reviewCount', html: `${approvedReviews.length} approved review${approvedReviews.length === 1 ? '' : 's'}` },
           { id: 'reviewsList', html: reviewFirstPaintCards(firm.name, approvedReviews) },
           { id: 'communityHeading', html: `What traders say about ${htmlEscape(firm.name)}` },
           { id: 'firmReviewFaqName', html: htmlEscape(firm.name) },
+          { id: 'reviewResearchTitle', html: `How Rank My Prop evaluates ${htmlEscape(firm.name)}` },
+          { id: 'reviewResearchCount', html: String(approvedReviews.length) },
+          { id: 'reviewResearchProofCount', html: String(proofBackedReviews.length) },
+          { id: 'reviewResearchUpdated', html: htmlEscape(materialDate ? materialDate.slice(0, 10) : 'Not yet recorded') },
+          { id: 'reviewResearchPositive', html: htmlEscape(reportedPositive) },
+          { id: 'reviewResearchConcern', html: htmlEscape(reportedConcern) },
         ],
         summary: {
           heading: `How to assess ${firm.name} reviews`,
@@ -501,13 +702,14 @@ async function main() {
     if (firm.showRules !== false) for (const { slug: programSlug, model } of programs) {
       const route = `/prop-firm-rules/${firm.slug}/${programSlug}`
       const canonical = `${origin}${route}`
-      const title = titleWithBrand(`${firm.name} ${model} Rules 2026`)
-      const description = descriptionWithinLimit(`Check ${firm.name} ${model} rules for 2026: daily loss, maximum drawdown, profit target, minimum days, payouts and trading restrictions.`)
+      const title = `${firm.name} ${model} Rules 2026 | Trading Rules & Requirements`
+      const description = `Check ${firm.name} ${model} rules for 2026, including profit targets, daily loss, maximum drawdown, minimum trading days, profit split, payouts, news trading and other requirements.`
+      const heroDescription = `Review the ${model} rules for ${firm.name}, including profit targets, daily loss limits, maximum drawdown, minimum trading days, profit split, trading restrictions, and payout conditions.`
       writePage(route, 'firm-rules.html', {
         title, description, canonical, links: [...firmLinks, ...programLinks.filter(([, href]) => href !== route)],
         replacements: [
-          { id: 'firmRulesHeading', html: `${htmlEscape(firm.name)} <span>${htmlEscape(model)} Rules</span>` },
-          { id: 'firmRulesIntro', html: htmlEscape(description) },
+          { id: 'firmRulesHeading', html: `${htmlEscape(firm.name)} ${htmlEscape(model)} Rules 2026: <span>Complete Trading Rules</span>` },
+          { id: 'firmRulesIntro', html: htmlEscape(heroDescription) },
           { id: 'programTitle', html: `${htmlEscape(firm.name)} ${htmlEscape(model)} conditions` },
           { id: 'selectedProgramLabel', html: `${htmlEscape(model)} rulebook` },
           { id: 'publishedRulesTitle', html: `Verify ${htmlEscape(model)} limits before the first trade` },
@@ -542,8 +744,11 @@ async function main() {
     const cmsFirm = evidence.firms?.[offer.slug] || {}
     const route = `/offers/${offer.slug}`
     const canonical = `${origin}${route}`
-    const title = titleWithBrand(`${offer.name} Discount Code 2026`)
-    const description = descriptionWithinLimit(`${offer.description} Verify code ${offer.code || 'RMP'} and final terms at checkout.`)
+    const discountPercent = offerDiscountPercent(offer.discount)
+    const heading = `${offer.name} Discount Code 2026: Latest Offer & Save Up to ${discountPercent}%`
+    const heroDescription = `Get the latest ${offer.name} discount code for 2026 and save up to ${discountPercent}% on eligible trading accounts. Find the current offer, discount details, and code information before purchasing your ${offer.name} account.`
+    const title = `${offer.name} Discount Code 2026 | Latest Offer & ${discountPercent}% Off`
+    const description = `Looking for a ${offer.name} discount code? Get the latest 2026 offer and save up to ${discountPercent}% on eligible trading accounts. Check the current discount and code details.`
     const about = { '@type': 'Organization', name: offer.name, url: offer.link || undefined }
     const offerSchema = {
       '@type': 'Offer',
@@ -553,12 +758,13 @@ async function main() {
       category: 'Prop firm challenge discount',
       offeredBy: about,
     }
-    const comparisonPartner = firms.find((candidate) => candidate.slug === (offer.slug === 'trader-scale' ? 'fundednext' : 'trader-scale')) || firms.find((candidate) => candidate.slug !== offer.slug)
-    const comparisonSlugs = [offer.slug, comparisonPartner.slug].sort()
+    const comparisonPartner = firms.find((candidate) => indexableComparisonSlugs.has(candidate.slug) && candidate.slug === (offer.slug === 'trader-scale' ? 'fundednext' : 'trader-scale')) || firms.find((candidate) => indexableComparisonSlugs.has(candidate.slug) && candidate.slug !== offer.slug)
+    const comparisonSlugs = comparisonPartner ? [offer.slug, comparisonPartner.slug].sort() : []
     writePage(route, 'discount-offer.html', {
       title, description, canonical,
       replacements: [
-        { id: 'offersHeading', html: `${htmlEscape(offer.name)} <span>Discount Code &amp; Promo Offer</span>` },
+        { id: 'offersHeading', html: `${htmlEscape(offer.name)} <span>Discount Code 2026: Latest Offer &amp; Save Up to ${htmlEscape(discountPercent)}%</span>` },
+        { id: 'offersHeroDescription', html: htmlEscape(heroDescription) },
         { id: 'resultsCount', html: `${htmlEscape(offer.name)} offer: ${htmlEscape(offer.discount || 'active saving')} with code ${htmlEscape(offer.code || 'RMP')}` },
         { id: 'offersGrid', html: `<article><h2>${htmlEscape(offer.name)} ${htmlEscape(offer.discount || '')} discount</h2><p>${htmlEscape(offer.description)}</p><p><strong>Code:</strong> ${htmlEscape(offer.code || 'RMP')} · <strong>Rating:</strong> ${htmlEscape(offer.rating ?? 'Check firm page')}</p><a href="${htmlEscape(offer.link || '#')}" rel="sponsored nofollow">Verify offer at checkout</a></article>` },
       ],
@@ -575,7 +781,7 @@ async function main() {
         [`${offer.name} profile`, `/prop-firms/${offer.slug}`],
         [`${offer.name} rules`, `/prop-firm-rules/${offer.slug}`],
         [`${offer.name} reviews`, `/prop-firms/${offer.slug}/reviews`],
-        [`Compare ${offer.name}`, `/compare/${comparisonSlugs[0]}-vs-${comparisonSlugs[1]}`],
+        ...(comparisonSlugs.length === 2 ? [[`Compare ${offer.name}`, `/compare/${comparisonSlugs[0]}-vs-${comparisonSlugs[1]}`]] : []),
       ],
       schema: graph({ name: title.replace(' | Rank My Prop', ''), url: canonical, description, about }, breadcrumb([
         ['Home', `${origin}/`], ['Offers', `${origin}/offers`], [`${offer.name} Discount`, canonical],
@@ -588,12 +794,15 @@ async function main() {
   for (const [postIndex, post] of contentPosts.entries()) {
     const route = `/${post.routeBase}/${post.slug}`
     const canonical = `${origin}${route}`
-    const bodyRows = post.paragraphs?.some(Boolean) ? post.paragraphs : String(post.content || '').split(/\n{2,}/)
-    const articleBodyHtml = bodyRows.map((paragraph, index) => {
+    const bodyRows = (post.paragraphs?.some(Boolean) ? post.paragraphs : String(post.content || '').split(/\n{2,}/))
+      .map((paragraph) => String(paragraph || '').trim())
+      .filter((paragraph) => paragraph && !/This post was migrated from the legacy article page|You can fully edit this content from Prop News CMS/i.test(paragraph))
+    const generatedArticleBodyHtml = bodyRows.map((paragraph, index) => {
       if (!compact(paragraph)) return ''
       const heading = compact(post.subheadings?.[index] || '')
       return `${heading ? `<h2>${htmlEscape(heading)}</h2>` : ''}<p>${htmlEscape(paragraph)}</p>`
     }).join('')
+    const articleBodyHtml = legacyBodies.get(compact(post.title).toLowerCase()) || generatedArticleBodyHtml
     const assignments = editorialModule.resolveEditorialAssignments(post, post.type)
     const editorialEntries = []
     if (assignments.reviewed) editorialEntries.push({ role: 'Reviewed By', contributor: assignments.reviewed })
@@ -619,7 +828,8 @@ async function main() {
       title = `${title.slice(0, 65 - marker.length).trim()}${marker}`
     }
     usedArticleTitles.add(title)
-    const related = Array.from({ length: Math.min(4, Math.max(0, contentPosts.length - 1)) }, (_, offset) => contentPosts[(postIndex + offset + 1) % contentPosts.length]).filter((candidate) => candidate !== post)
+    const relatedPool = indexableContentPosts.filter((candidate) => candidate !== post)
+    const related = Array.from({ length: Math.min(4, relatedPool.length) }, (_, offset) => relatedPool[(postIndex + offset) % relatedPool.length]).filter(Boolean)
     const image = /^https:\/\//i.test(post.coverImage || '') ? post.coverImage : `${origin}/assets/og-default-1200x630.webp`
     const articleSchema = {
       '@type': 'Article', '@id': `${canonical}#article`, headline: post.title, description,
@@ -631,6 +841,7 @@ async function main() {
     }
     writePage(route, 'content-post.html', {
       title, description, canonical, image, isArticle: true,
+      robots: isIndexableContentPost(post) || retainedContentDestinations.has(route) ? undefined : 'noindex, follow',
       replacements: [
         { id: 'postTitle', html: htmlEscape(post.title) },
         { id: 'postMin', html: `${htmlEscape(post.readTime)} min read` },
@@ -663,10 +874,11 @@ async function main() {
       const description = descriptionWithinLimit(`Compare ${left.name} vs ${right.name}: challenge fees, account sizes, drawdown rules, payouts, platforms and trader reviews.`)
       const about = [left, right].map((firm) => ({ '@type': 'Organization', name: firm.name }))
       const relatedComparisons = comparisons
-        .filter((candidate) => candidate.route !== route && [candidate.left.slug, candidate.right.slug].some((slug) => slug === left.slug || slug === right.slug))
+        .filter((candidate) => candidate.indexable && candidate.route !== route && [candidate.left.slug, candidate.right.slug].some((slug) => slug === left.slug || slug === right.slug))
         .slice(comparisonIndex % 3, (comparisonIndex % 3) + 3)
       writePage(route, 'compare.html', {
         title, description, canonical,
+        robots: comparison.indexable ? undefined : 'noindex, follow',
         replacements: [
           { id: 'compareTitle', html: `${htmlEscape(left.name)} vs ${htmlEscape(right.name)} <span>2026 Comparison</span>` },
           { id: 'compareLead', html: htmlEscape(description) },
@@ -699,11 +911,13 @@ async function main() {
       generated += 1
   }
 
-  addContentDirectories(contentPosts)
+  addContentDirectories(indexableContentPosts)
+  addComparisonDirectory(comparisons.filter((comparison) => comparison.indexable))
   addStaticResourceDirectory()
 
   for (let index = 1; index <= 30; index += 1) {
     const id = String(index).padStart(2, '0')
+    if (legacyBlogRedirects[id]) continue
     const source = path.join(distRoot, `blog-post-${id}.html`)
     const target = path.join(distRoot, 'blog', `blog-post-${id}.html`)
     if (!fs.existsSync(source)) throw new Error(`Missing built blog article: blog-post-${id}.html`)
@@ -720,9 +934,10 @@ async function main() {
     + (firm.showFirmProfile !== false ? 1 : 0)
     + (firm.showReviews !== false ? 1 : 0)
     + (firm.showRules !== false ? 1 : 0), 0)
-  const expected = firmSurfaceCount + programCount + offers.length + comparisons.length + contentPosts.length
+  const authoredFirmSubpageCount = firms.filter((firm) => ['finotive-funding', 'fxify', 'goat-funded-trader', 'aqua-funded', 'blueberry-funded', 'fundednext'].includes(firm.slug) && firm.showFirmProfile !== false).length
+  const expected = firmSurfaceCount + programCount + offers.length + comparisons.length + contentPosts.length + authoredFirmSubpageCount
   if (generated !== expected) throw new Error(`Generated ${generated} SEO pages; expected ${expected}`)
-  console.log(`[seo-pages] generated ${generated} dynamic SEO pages for ${firms.length} firms, ${programCount} rule programs, ${offers.length} offers, ${comparisons.length} canonical comparisons and ${contentPosts.length} CMS articles; plus 30 canonical legacy blog routes, ${staticOutput.injected} fallback schemas and ${staticOutput.normalizedMetadata} normalized snippets on ${origin}`)
+  console.log(`[seo-pages] generated ${generated} dynamic SEO pages for ${firms.length} firms, ${programCount} rule programs, ${offers.length} offers, ${comparisons.length} canonical comparisons and ${contentPosts.length} CMS articles; plus 1 standalone legacy blog route, ${staticOutput.injected} fallback schemas and ${staticOutput.normalizedMetadata} normalized snippets on ${origin}`)
 }
 
 main().catch((error) => {

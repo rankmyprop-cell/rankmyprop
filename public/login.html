@@ -417,6 +417,8 @@
       getRedirectResult,
       GoogleAuthProvider,
       sendPasswordResetEmail,
+      sendEmailVerification,
+      reload,
       updateProfile,
       signOut
     } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
@@ -446,10 +448,18 @@
     const resetPasswordBtn = document.getElementById("resetPasswordBtn");
     const recoveryGoogleBtn = document.getElementById("recoveryGoogleBtn");
     const REF_KEY = "rmp_ref_code";
+    const PENDING_VERIFY_UID_KEY = "rmp_pending_verification_uid";
+    // Keep Firebase's hosted email-action handler. Its continue URL returns the
+    // verified browser session to the dashboard after the user applies the link.
+    const EMAIL_ACTION_SETTINGS = { url: "https://www.rankmyprop.in/dashboard.html", handleCodeInApp: false };
     const qs = new URLSearchParams(window.location.search);
     const refFromUrl = qs.get("ref");
     const nextFromUrl = qs.get("next");
-    if (refFromUrl) localStorage.setItem(REF_KEY, String(refFromUrl).trim().toUpperCase());
+    if (refFromUrl) {
+      const normalizedRef = String(refFromUrl).trim().toUpperCase();
+      localStorage.setItem(REF_KEY, normalizedRef);
+      fetch(`/api/referrals/click?code=${encodeURIComponent(normalizedRef)}`, { cache: "no-store", keepalive: true }).catch(() => {});
+    }
     if (refCodeEl) refCodeEl.value = String(refFromUrl || localStorage.getItem(REF_KEY) || "").trim().toUpperCase();
     function safeNext(v = "") {
       const raw = String(v || "").trim();
@@ -561,30 +571,16 @@
     async function applyReferralOnSignup(user) {
       const code = pendingRefCode();
       if (!user || !code) return;
-      const meRef = doc(db, "users", user.uid);
-      const meSnap = await getDoc(meRef);
-      const me = meSnap.exists() ? meSnap.data() : {};
-      if (me.referredByUid) return;
-
-      const refSnap = await getDocs(query(collection(db, "users"), where("referralCode", "==", code)));
-      if (refSnap.empty) return;
-      const refDoc = refSnap.docs[0];
-      const refUid = refDoc.id;
-      if (!refUid || refUid === user.uid) return;
-
-      await updateDoc(meRef, { referredByUid: refUid, referredByCode: code, updatedAt: serverTimestamp() });
-      await setDoc(doc(db, "referralClaims", `${refUid}_${user.uid}`), {
-        uid: refUid,
-        referredUid: user.uid,
-        referredEmail: user.email || "",
-        relation: "signup_link",
-        status: "Pending",
-        referralPointsAwarded: false,
-        cashbackRewardPaid: false,
-        createdAt: serverTimestamp(),
-        updatedAt: serverTimestamp()
-      }, { merge: true });
-      clearPendingRef();
+      const token = await user.getIdToken(true);
+      const response = await fetch("/api/referrals/attribute", {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+        body: JSON.stringify({ code })
+      });
+      const result = await response.json().catch(() => ({}));
+      if (response.ok && result.attributed) clearPendingRef();
+      else if (response.status === 400 && /own referral/i.test(String(result.error || ""))) clearPendingRef();
+      else console.warn("Referral code was not applied:", result.error || response.status);
     }
 
     function wireSwitch() {
@@ -624,7 +620,15 @@
           msgEl.textContent = "This email is banned.";
           return;
         }
+        if (!user.emailVerified && user.providerData?.some((provider) => provider.providerId === "password")) {
+          window.location.replace("verify-email.html");
+          return;
+        }
         await ensureUserDoc(user, { fullName: user.displayName || "" });
+        if (user.emailVerified && localStorage.getItem(PENDING_VERIFY_UID_KEY) === user.uid) {
+          await applyReferralOnSignup(user);
+          localStorage.removeItem(PENDING_VERIFY_UID_KEY);
+        }
         const isNewGoogleUser = user?.metadata?.creationTime && user?.metadata?.creationTime === user?.metadata?.lastSignInTime;
         if (isNewGoogleUser) await applyReferralOnSignup(user);
         goAfterAuth();
@@ -655,12 +659,27 @@
             whatsapp: whatsappEl.value.trim(),
             fullName
           });
-          await applyReferralOnSignup(cred.user);
+          localStorage.setItem(PENDING_VERIFY_UID_KEY, cred.user.uid);
+          const pendingCode = pendingRefCode();
+          if (pendingCode) localStorage.setItem(REF_KEY, pendingCode);
+          try { await sendEmailVerification(cred.user, EMAIL_ACTION_SETTINGS); }
+          catch (verificationError) {
+            console.warn("Verification email could not be sent during signup:", verificationError?.code || verificationError?.message || "Unknown error");
+            window.location.replace("verify-email.html?sendError=1");
+            return;
+          }
+          window.location.replace("verify-email.html");
+          return;
         } else {
           cred = await signInWithEmailAndPassword(auth, emailEl.value.trim(), passEl.value);
           if (await isEmailBanned(cred.user.email || "", cred.user.uid)) {
             await signOut(auth);
             throw new Error("This email is banned.");
+          }
+          await reload(cred.user);
+          if (!cred.user.emailVerified && cred.user.providerData?.some((provider) => provider.providerId === "password")) {
+            window.location.replace("verify-email.html");
+            return;
           }
           await ensureUserDoc(cred.user);
         }

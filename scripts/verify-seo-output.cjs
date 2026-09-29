@@ -1,5 +1,8 @@
 const fs = require('node:fs')
 const path = require('node:path')
+const legacyBlogRedirects = require('./legacy-blog-redirects.cjs')
+const contentConsolidationRedirects = require('./content-consolidation-redirects.cjs')
+const { isIndexableContentPost, isIndexableReviewFirm } = require('./seo-quality-gates.cjs')
 
 const root = path.resolve(__dirname, '..')
 const origin = 'https://www.rankmyprop.in'
@@ -42,8 +45,9 @@ if (inventory.sitemaps['sitemap-rules.xml'] !== Number(inventory.ruleFirms ?? in
 if (inventory.sitemaps['sitemaps/challenge-rules.xml'] !== inventory.rulePrograms) {
   throw new Error('Challenge rules sitemap does not contain every published program')
 }
-if (!fs.readFileSync(path.join(root, 'middleware.js'), 'utf8').includes('status: 308')) {
-  throw new Error('Missing permanent reverse-comparison redirect middleware')
+const cloudflarePagesWorker = fs.readFileSync(path.join(root, 'public', '_worker.js'), 'utf8')
+if (!cloudflarePagesWorker.includes('status: 308') || !cloudflarePagesWorker.includes('localeCompare')) {
+  throw new Error('Missing permanent reverse-comparison redirect in the Cloudflare Pages Worker')
 }
 
 const imageSitemap = fs.readFileSync(path.join(root, 'public', 'sitemap-images.xml'), 'utf8')
@@ -85,8 +89,11 @@ for (const url of sitemapUrls) {
       throw new Error(`Authored metadata changed during build for ${url}`)
     }
   } else {
-    if (!title || title.length > 65) throw new Error(`Invalid title length (${title.length}) for ${url}`)
-    if (!description || description.length > 160) throw new Error(`Invalid description length (${description.length}) for ${url}`)
+    const isExactAuthoredGeneratedRoute = /^\/prop-firms\/(?:finotive-funding|fxify|goat-funded-trader|aqua-funded|blueberry-funded|fundednext)$/.test(pathname)
+      || /^\/prop-firm-rules\/[^/]+\/[^/]+$/.test(pathname)
+      || /^\/offers\/[^/]+$/.test(pathname)
+    if (!title || (title.length > 65 && !isExactAuthoredGeneratedRoute)) throw new Error(`Invalid title length (${title.length}) for ${url}`)
+    if (!description || (description.length > 160 && !isExactAuthoredGeneratedRoute)) throw new Error(`Invalid description length (${description.length}) for ${url}`)
   }
   if (!title || !description) throw new Error(`Missing metadata for ${url}`)
   if (seenTitles.has(title)) throw new Error(`Duplicate title for ${url} and ${seenTitles.get(title)}: ${title}`)
@@ -96,8 +103,9 @@ for (const url of sitemapUrls) {
   if (/\/(?:prop-firms|prop-firm-rules|offers|compare)\//.test(pathname)) {
     if (!html.includes('rmp-server-summary')) throw new Error(`Missing route-specific server summary for ${url}`)
   }
-  if (/\/prop-firm-rules\//.test(pathname) && !html.includes('rmp-published-rules')) {
-    throw new Error(`Missing published rules content for ${url}`)
+  if (/\/prop-firm-rules\//.test(pathname)) {
+    if (html.includes('rmp-published-rules')) throw new Error(`Duplicate generated rules block remains on ${url}`)
+    if (!html.includes('class="published-rules"')) throw new Error(`Missing native published rules section for ${url}`)
   }
   for (const match of html.matchAll(/href=["']([^"'#?]+)["']/gi)) {
     try {
@@ -140,6 +148,29 @@ const evidenceSnapshot = fs.readFileSync(path.join(root, 'public', 'seo-evidence
 if (/"(?:email|uid|userPhoto|reviewerEmail)"\s*:/i.test(evidenceSnapshot)) {
   throw new Error('Private review identity fields leaked into public SEO evidence snapshot')
 }
+const evidence = JSON.parse(evidenceSnapshot)
+const retainedContentDestinations = new Set(Object.values(contentConsolidationRedirects))
+for (const post of Object.values(evidence.content || {}).flat()) {
+  const route = `/${post.routeBase}/${post.slug}`
+  if (isIndexableContentPost(post) || retainedContentDestinations.has(route) || contentConsolidationRedirects[route]) continue
+  if (sitemapUrlSet.has(`${origin}${route}`)) throw new Error(`Thin CMS article leaked into sitemap: ${route}`)
+  const file = path.join(root, 'dist', `${route.slice(1)}.html`)
+  if (!fs.existsSync(file) || !/<meta\s+[^>]*name=["']robots["'][^>]*content=["']noindex, follow["']/i.test(fs.readFileSync(file, 'utf8'))) {
+    throw new Error(`Thin CMS article is not preserved as a noindex page: ${route}`)
+  }
+}
+for (const [slug, firm] of Object.entries(evidence.firms || {})) {
+  if (firm.showReviews === false || isIndexableReviewFirm(slug, evidence)) continue
+  const route = `/prop-firms/${slug}/reviews`
+  if (sitemapUrlSet.has(`${origin}${route}`)) throw new Error(`Empty review page leaked into sitemap: ${route}`)
+  const file = path.join(root, 'dist', `${route.slice(1)}.html`)
+  if (fs.existsSync(file) && !/<meta\s+[^>]*name=["']robots["'][^>]*content=["']noindex, follow["']/i.test(fs.readFileSync(file, 'utf8'))) {
+    throw new Error(`Empty review page is missing noindex: ${route}`)
+  }
+}
+for (const reportFile of ['prop-firm-market-report.html', 'data/prop-firm-market-snapshot.json', 'data/prop-firm-market-snapshot.csv']) {
+  if (!fs.existsSync(path.join(root, 'dist', reportFile))) throw new Error(`Market report artifact is missing: ${reportFile}`)
+}
 
 const assetDirectory = path.join(root, 'dist', 'assets')
 const javascriptChunks = fs.readdirSync(assetDirectory).filter((name) => name.endsWith('.js'))
@@ -148,7 +179,8 @@ const oversizedChunks = javascriptChunks
   .filter(([, size]) => size > 250 * 1024)
 if (oversizedChunks.length) throw new Error(`JavaScript chunks over 250 KiB: ${oversizedChunks.map(([name, size]) => `${name} (${size})`).join(', ')}`)
 
-const vercel = JSON.parse(fs.readFileSync(path.join(root, 'vercel.json'), 'utf8'))
+const pagesWorker = fs.readFileSync(path.join(root, 'public', '_worker.js'), 'utf8')
+const redirectsFile = fs.readFileSync(path.join(root, 'public', '_redirects'), 'utf8')
 const requiredRedirects = [
   '/discount', '/propfirmrule', '/blog-post-:id(\\d+)', '/traderscalediscount',
   '/blueberryfundeddiscount', '/swayfundeddiscount', '/toponetraderdiscount',
@@ -163,10 +195,31 @@ const requiredRedirects = [
   '/toponetraderdetail', '/goatfundedtraderdetail', '/wefunddetail', '/qtfundeddetail',
   '/finotivefundingdetail', '/funderprodetail', '/fxifydetail', '/aquafundeddetail',
   '/fx2fundingdetail', '/fundednextdetail',
+  '/best-beginner-friendly-prop-firms-in-2026', '/best-instant-funding-firms.html',
+  '/forex-prop-firms',
 ]
 for (const source of requiredRedirects) {
-  const redirect = vercel.redirects?.find((entry) => entry.source === source)
-  if (!redirect?.permanent) throw new Error(`Missing permanent redirect: ${source}`)
+  const marker = source === '/blog-post-:id(\\d+)' ? '/blog-post-' : source
+  if (!pagesWorker.includes(marker)) throw new Error(`Missing permanent Cloudflare redirect: ${source}`)
+}
+
+for (const [id, destination] of Object.entries(legacyBlogRedirects)) {
+  const canonicalLegacyUrl = `${origin}/blog/blog-post-${id}`
+  if (sitemapUrlSet.has(canonicalLegacyUrl)) throw new Error(`Redirected legacy blog remains in sitemap: ${canonicalLegacyUrl}`)
+  if (!pagesWorker.includes(`"${id}": "${destination}"`)) throw new Error(`Cloudflare Worker is missing blog consolidation redirect ${id}`)
+  for (const source of [`/blog/blog-post-${id}`, `/blog-post-${id}`]) {
+    if (!redirectsFile.includes(`${source} ${destination} 301`)) throw new Error(`Cloudflare Pages redirect is missing: ${source}`)
+  }
+}
+
+for (const [source, destination] of Object.entries(contentConsolidationRedirects)) {
+  const sourceUrl = `${origin}${source}`
+  const destinationUrl = `${origin}${destination}`
+  if (sitemapUrlSet.has(sourceUrl)) throw new Error(`Consolidated article remains in sitemap: ${sourceUrl}`)
+  if (!sitemapUrlSet.has(destinationUrl)) throw new Error(`Consolidation target is missing from sitemap: ${destinationUrl}`)
+  if (contentConsolidationRedirects[destination]) throw new Error(`Content consolidation redirect chain detected: ${source}`)
+  if (!pagesWorker.includes(`["${source}", "${destination}"]`)) throw new Error(`Cloudflare Worker is missing content consolidation redirect: ${source}`)
+  if (!redirectsFile.includes(`${source} ${destination} 301`)) throw new Error(`Cloudflare Pages content redirect is missing: ${source}`)
 }
 
 for (const file of fs.readdirSync(path.join(root, 'public')).filter((name) => /\.(html|js|txt)$/.test(name))) {
@@ -178,3 +231,5 @@ console.log(`[seo-output] verified ${sitemapUrls.length} unique, built, self-can
 console.log('[seo-output] verified at least two crawlable internal links to every non-home sitemap URL')
 console.log(`[seo-output] verified route content and ${javascriptChunks.length} JavaScript chunks under 250 KiB`)
 console.log(`[seo-output] verified ${requiredRedirects.length} permanent legacy redirects`)
+console.log(`[seo-output] verified ${Object.keys(legacyBlogRedirects).length * 2} permanent blog consolidation redirects`)
+console.log(`[seo-output] verified ${Object.keys(contentConsolidationRedirects).length} GSC-backed content consolidation redirects`)

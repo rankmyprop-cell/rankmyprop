@@ -247,6 +247,7 @@
       <a class="side-link" href="/admin-moderation">Moderation</a>
       <a class="side-link" href="/admin-purchases">Purchases</a>
       <a class="side-link" href="/admin-announcements">Announcement Hub</a>
+      <a class="side-link" href="/admin-push">Push Notifications</a>
       <a class="side-link" href="/admin-community">Community Posts</a>
       <a class="side-link" href="/admin-giveaways">Giveaways CMS</a>
       <a class="side-link" href="/admin-events">Upcoming Events</a>
@@ -292,6 +293,16 @@
               <div class="firm-identity-actions"><input id="identityLogoFile" name="logoFile" form="detailForm" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml" /><button class="btn-primary" id="saveFirmLogoBtn" type="button">Upload & Save Logo</button><button class="btn-danger" id="deleteFirmBtn" type="button">Delete Selected Firm</button></div>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><div><h3>New Firm Push Alert</h3><p class="welcome">Save the firm listing first, then alert New Firms subscribers.</p></div><span class="chip">Cloudflare</span></div>
+        <div class="form-grid">
+          <div class="field full"><label>Push title</label><input id="firmPushTitle" maxlength="120" placeholder="New firm listed on RankMyProp" /></div>
+          <div class="field full"><label>Push body</label><textarea id="firmPushBody" maxlength="300" placeholder="Tell traders what is now available."></textarea></div>
+          <div class="field full"><label>Push click URL</label><input id="firmPushClickUrl" placeholder="/prop-firms/firm-slug" /></div>
+          <div class="full top-actions"><button class="btn-primary" id="sendFirmPushBtn" type="button">Send Push</button></div>
         </div>
       </section>
 
@@ -446,9 +457,11 @@
 
   <script type="module">
     import { collection, deleteDoc, doc, getDoc, getDocs, serverTimestamp, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
-    import { db } from "./dashboard-common.js";
+    import { auth, db } from "./dashboard-common.js";
     import { bindLogout, enforceAdmin, formDataToObj, showNotice } from "./admin-common.js";
     import { OTHER_FIRM_ID, compressFirmLogo, createFirmIdentity, renderFirmIdentityOptions } from "./firm-identity-service.js";
+    import { wirePushButton } from "./admin-push-client.js";
+    import { CLOUDFLARE_API_URL } from "./cloudflare-config.js";
 
     const BEST_REGIONS = [
       { key: "india", label: "India" },
@@ -471,9 +484,75 @@
       { key: "highest_rated", label: "Highest Rated" }
     ];
 
+    // Public firm and rules pages are served from Cloudflare. Firebase remains
+    // the authenticated CMS source during the migration, so each admin write
+    // must be mirrored to Cloudflare before we report it as live.
+    const cloudflareRuleSyncSeen = new Set();
+    const cloudflareFirmUrl = (id) => `${CLOUDFLARE_API_URL}/v1/collections/firms/${encodeURIComponent(String(id || "").trim())}`;
+
+    async function cloudflareAdminHeaders() {
+      const token = await auth.currentUser?.getIdToken(true);
+      if (!token) throw new Error("Admin session expired. Please sign in again.");
+      return { "content-type": "application/json", authorization: `Bearer ${token}` };
+    }
+
+    async function readCloudflareFirm(id) {
+      const response = await fetch(cloudflareFirmUrl(id), { headers: { accept: "application/json" }, cache: "no-store" });
+      if (response.status === 404) return {};
+      if (!response.ok) throw new Error("Cloudflare firm record could not be read.");
+      const payload = await response.json();
+      return payload?.data && typeof payload.data === "object" ? payload.data : {};
+    }
+
+    async function mirrorFirmToCloudflare(id, changes = {}) {
+      const firmId = String(id || "").trim();
+      if (!firmId) throw new Error("Firm ID is required for Cloudflare sync.");
+      const current = await readCloudflareFirm(firmId);
+      const data = {
+        ...current,
+        ...changes,
+        id: firmId,
+        firmId: String(changes.firmId || current.firmId || firmId),
+        slug: String(changes.slug || current.slug || firmId),
+        updatedAt: new Date().toISOString()
+      };
+      const response = await fetch(cloudflareFirmUrl(firmId), {
+        method: "PUT",
+        headers: await cloudflareAdminHeaders(),
+        body: JSON.stringify({ data })
+      });
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(payload.error || "Cloudflare public sync failed.");
+      return data;
+    }
+
+    async function syncMissingRuleModelsToCloudflare(row = {}) {
+      const id = String(row.id || row.firmId || "").trim();
+      const localRules = row.rulesPanelData && typeof row.rulesPanelData === "object" ? row.rulesPanelData : null;
+      const localModels = localRules?.programRules && typeof localRules.programRules === "object" ? Object.keys(localRules.programRules) : [];
+      if (!id || !localModels.length || cloudflareRuleSyncSeen.has(id)) return;
+      cloudflareRuleSyncSeen.add(id);
+      try {
+        const live = await readCloudflareFirm(id);
+        const liveModels = live?.rulesPanelData?.programRules && typeof live.rulesPanelData.programRules === "object"
+          ? Object.keys(live.rulesPanelData.programRules)
+          : [];
+        // Only repair an empty Cloudflare rulebook automatically. This never
+        // overwrites a newer public rulebook that already has account models.
+        if (!liveModels.length) await mirrorFirmToCloudflare(id, { rulesPanelData: localRules, slug: row.slug || live.slug || id, name: row.name || live.name || id });
+      } catch (error) {
+        console.warn("Cloudflare rules auto-sync skipped:", error?.message || error);
+      }
+    }
+
     const picker = document.getElementById("firmPicker");
     const form = document.getElementById("detailForm");
     const notice = document.getElementById("notice");
+    const firmPushFields = {
+      title: document.getElementById("firmPushTitle"),
+      body: document.getElementById("firmPushBody"),
+      clickUrl: document.getElementById("firmPushClickUrl"),
+    };
     const createBtn = document.getElementById("createFirmBtn");
     const deleteBtn = document.getElementById("deleteFirmBtn");
     const newFirmName = document.getElementById("newFirmName");
@@ -1128,6 +1207,12 @@
           rulesPanelData,
           updatedAt: serverTimestamp()
         });
+        await mirrorFirmToCloudflare(id, {
+          firmId: id,
+          slug: row.slug || id,
+          name: name || row.name || id,
+          rulesPanelData
+        });
         if (row) row.rulesPanelData = rulesPanelData;
         window.__rmpCurrentRulesSource = rulesPanelData;
         const rulesJsonField = form.elements.namedItem("rulesPanelDataJson");
@@ -1421,6 +1506,7 @@
       fillForm(active);
       applyDraftIfExists(active.id);
       await loadTeamReviewProfile(active);
+      await syncMissingRuleModelsToCloudflare(active);
       if (usedCache) showNotice(notice, "Live read unavailable. Loaded cached firm data + draft safely.", "warn");
     }
 
@@ -1437,9 +1523,14 @@
       fillForm(row);
       applyDraftIfExists(row.id);
       await loadTeamReviewProfile(row);
+      await syncMissingRuleModelsToCloudflare(row);
     });
 
     createBtn.addEventListener("click", async () => {
+      createBtn.disabled = true;
+      const originalLabel = createBtn.textContent;
+      createBtn.textContent = "Creating…";
+      try {
       const name = String(newFirmName.value || "").trim();
       const slug = slugify(newFirmSlug.value || name);
       if (!name || !slug) {
@@ -1451,7 +1542,7 @@
       const rulesLink = `/firm-rules?firm=${encodeURIComponent(slug)}`;
       const discountPage = `/offers/${slug}`;
       const nextRank = identity.ranking;
-      await setDoc(doc(db, "firms", slug), {
+      const firmPayload = {
         firmId: slug,
         name,
         slug,
@@ -1493,7 +1584,11 @@
         teamReviewProfile: defaultReviewProfile(name, slug),
         rulesPanelData: defaultRulesPanelData(name, []),
         updatedAt: serverTimestamp()
-      }, { merge: true });
+      };
+      await setDoc(doc(db, "firms", slug), firmPayload, { merge: true });
+      // New firms must be written to the public Cloudflare collection as well
+      // as Firestore; public detail pages read their firm records from Cloudflare.
+      await mirrorFirmToCloudflare(slug, firmPayload);
       await Promise.allSettled([
         setDoc(doc(db, "firmReviews", slug), {
           firmId: slug,
@@ -1549,6 +1644,12 @@
       newFirmName.value = "";
       newFirmSlug.value = "";
       await loadFirms(slug);
+      } catch (err) {
+        showNotice(notice, err?.message || "Firm could not be created.", "error");
+      } finally {
+        createBtn.disabled = false;
+        createBtn.textContent = originalLabel;
+      }
     });
 
     saveFirmLogoBtn.addEventListener("click", async () => {
@@ -1568,6 +1669,7 @@
       try {
         const logo = await compressFirmLogo(file);
         await setDoc(doc(db, "firms", id), { firmId: id, logo, updatedAt: serverTimestamp() }, { merge: true });
+        await mirrorFirmToCloudflare(id, { firmId: id, logo });
         setValue("existingLogo", logo);
         identityLogoFile.value = "";
         showNotice(notice, "Central firm logo saved. Every page using this firm ID will now use this logo.");
@@ -1724,6 +1826,7 @@
           ? normalizeRulesPanelData(normalizedRules, { ...currentRow, name: payload.name, evaluationPrograms })
           : normalizeRulesPanelData({}, { ...currentRow, name: payload.name, evaluationPrograms });
         await setDoc(doc(db, "firms", id), payload, { merge: true });
+        await mirrorFirmToCloudflare(id, payload);
         await Promise.allSettled([
           setDoc(doc(db, "firmRatingStats", id), {
             firmSlug: canonicalSlug,
@@ -1758,6 +1861,23 @@
       } catch (err) {
         showNotice(notice, err?.message || "Save failed.", "error");
       }
+    });
+
+    wirePushButton({
+      button: "sendFirmPushBtn",
+      fields: firmPushFields,
+      category: "firms",
+      notice,
+      showNotice,
+      defaults: () => {
+        const name = String(form.elements.namedItem("name")?.value || newFirmName?.value || "New prop firm").trim();
+        const slug = slugify(form.elements.namedItem("docSlug")?.value || newFirmSlug?.value || name);
+        return {
+          title: `${name} is now listed`,
+          body: "View its profile, trading conditions, rules, offers and reviews on RankMyProp.",
+          clickUrl: `/prop-firms/${slug}`,
+        };
+      },
     });
 
     saveTeamReviewBtn?.addEventListener("click", async () => {

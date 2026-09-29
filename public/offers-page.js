@@ -72,6 +72,13 @@ function formatDiscount(value = "") {
   return /^\d+(?:\.\d+)?$/.test(raw) ? `${raw}%` : raw;
 }
 
+function offerDiscountPercent(value = "") {
+  const match = String(value || "").match(/(\d+(?:\.\d+)?)\s*%?/);
+  if (!match) return "0";
+  const amount = Number(match[1]);
+  return Number.isFinite(amount) ? String(amount) : match[1];
+}
+
 function destination(offer = {}) {
   const url = String(offer.affiliateLink || offer.link || offer.buyLink || offer.website || "").trim();
   return /^(https?:\/\/|\/)/i.test(url) ? url : "#";
@@ -411,27 +418,26 @@ async function applyDedicatedPageContent(priorityOffer) {
 
   const name = String(priorityOffer.name || state.dedicatedSlug.replace(/-/g, " ")).trim();
   const copy = await getOfferPageContent(state.dedicatedSlug, priorityOffer);
-  const fallbackHeading = `${name} Discount Code & Promo Offers`;
-  const heading = copy.heading || [copy.headingPrimary, copy.headingAccent].filter(Boolean).join(" ") || fallbackHeading;
-  const parts = {
-    ...splitHeading(heading, name),
-    ...(copy.headingPrimary ? { primary: copy.headingPrimary } : {}),
-    ...(copy.headingAccent ? { accent: copy.headingAccent } : {}),
-  };
-  const paragraph = copy.paragraph || `Get the latest ${name} discount code, current promotional savings and verified offer details. Copy the code, check eligibility and confirm the final price before checkout.`;
-  const seoTitle = copy.seoTitle || `${name} Discount Code & Promo Offers 2026 | Rank My Prop`;
-  const seoDescription = copy.seoDescription || `Find the latest ${name} discount code and active promo offers. Compare current savings, copy the code and verify the final challenge price before checkout.`;
+  const discountPercent = offerDiscountPercent(priorityOffer.discount);
+  const heading = `${name} Discount Code 2026: Latest Offer & Save Up to ${discountPercent}%`;
+  const parts = splitHeading(heading, name);
+  const paragraph = `Get the latest ${name} discount code for 2026 and save up to ${discountPercent}% on eligible trading accounts. Find the current offer, discount details, and code information before purchasing your ${name} account.`;
+  const seoTitle = `${name} Discount Code 2026 | Latest Offer & ${discountPercent}% Off`;
+  const seoDescription = `Looking for a ${name} discount code? Get the latest 2026 offer and save up to ${discountPercent}% on eligible trading accounts. Check the current discount and code details.`;
   const canonical = `https://www.rankmyprop.in/offers/${encodeURIComponent(state.dedicatedSlug)}`;
   const faqItems = renderDedicatedFaq(priorityOffer);
 
   document.title = seoTitle;
   if (heroHeading) heroHeading.innerHTML = `${escapeHtml(parts.primary)}${parts.accent ? ` <span>${escapeHtml(parts.accent)}</span>` : ""}`;
   if (heroParagraph) heroParagraph.textContent = paragraph;
-  if (heroUpdated) heroUpdated.textContent = copy.lastUpdatedLabel || new Intl.DateTimeFormat("en-US", {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-  }).format(new Date());
+  if (heroUpdated) {
+    const materialDate = new Date(copy.updatedAt || priorityOffer.updatedAt || 0);
+    const fallbackLabel = Number.isFinite(materialDate.getTime()) && materialDate.getTime() > 0
+      ? new Intl.DateTimeFormat("en-US", { month: "long", day: "numeric", year: "numeric" }).format(materialDate)
+      : "";
+    heroUpdated.textContent = copy.lastUpdatedLabel || fallbackLabel;
+    heroUpdated.closest(".offers-updated")?.toggleAttribute("hidden", !heroUpdated.textContent.trim());
+  }
 
   setMeta('meta[name="description"]', seoDescription);
   setMeta('meta[name="keywords"]', copy.seoKeywords);
@@ -523,9 +529,10 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-if (grid.dataset.rmpStaticFirstPaint !== "true") {
-  grid.innerHTML = new Array(4).fill(0).map(skeletonCard).join("");
-}
+// Replace the crawlable first paint with the animated card loading state while
+// the current CMS offers are fetched.
+grid.setAttribute("aria-busy", "true");
+grid.innerHTML = new Array(4).fill(0).map(skeletonCard).join("");
 
 async function init() {
   state.dedicatedSlug = dedicatedSlugFromLocation();

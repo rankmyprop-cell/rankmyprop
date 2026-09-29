@@ -37,6 +37,10 @@ const firmSlug = (value = '') => {
 
 const text = (value = '', limit = 500) => String(value ?? '').replace(/\s+/g, ' ').trim().slice(0, limit)
 
+const publicContentText = (value = '', limit = 500) => text(String(value ?? '')
+  .replace(/This post was migrated from the legacy article page \([^)]*\)\.?/gi, '')
+  .replace(/You can fully edit this content from Prop News CMS and republish with updated SEO-focused details\.?/gi, ''), limit)
+
 function isoDate(value) {
   const date = value?.toDate?.() || (value?._seconds ? new Date(value._seconds * 1000) : new Date(value || 0))
   return Number.isFinite(date.getTime()) ? date.toISOString() : ''
@@ -115,7 +119,7 @@ const contentSources = [
 
 function sanitizeContentPost(document, row, type, routeBase, sectionName) {
   const slug = slugify(row.slug || document.id || row.title)
-  const paragraphs = Array.from({ length: 6 }, (_, index) => text(row[`paragraph${index + 1}`], 3500))
+  const paragraphs = Array.from({ length: 6 }, (_, index) => publicContentText(row[`paragraph${index + 1}`], 3500))
   const subheadings = Array.from({ length: 6 }, (_, index) => text(row[`subheading${index + 1}`], 180))
   return {
     id: document.id,
@@ -126,7 +130,7 @@ function sanitizeContentPost(document, row, type, routeBase, sectionName) {
     title: text(row.title, 180),
     category: text(row.category || sectionName, 100),
     excerpt: text(row.excerpt, 700),
-    content: text(row.content, 18000),
+    content: publicContentText(row.content, 18000),
     paragraphs,
     subheadings,
     author: text(row.author || 'Rank My Prop Editorial', 100),
@@ -254,6 +258,7 @@ async function loadEvidence() {
       link: text(row.link || row.buyLink || firm.buyLink || firm.website, 500),
       rating: Math.max(0, Math.min(5, Number(row.rating) || 0)),
       reviews: Math.max(0, Math.round(Number(row.reviews || row.reviewCount) || 0)),
+      updatedAt: isoDate(row.updatedAt || row.createdAt),
     }
   })
 

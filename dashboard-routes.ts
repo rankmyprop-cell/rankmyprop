@@ -47,6 +47,7 @@ export const PUBLIC_STATIC_ROUTES = [
   'beginner-tutorials',
   'giveaway',
   'reviews',
+  'prop-firm-market-report',
   'firm-reviews',
   'broker-coming-soon',
   'offers',

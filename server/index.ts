@@ -40,8 +40,8 @@ for (const endpoint of supportHandlers) {
 }
 app.all('/api/support-refresh', require('../api/support-session.js'))
 
-// Keep local development on the same route-content contract as production
-// Vercel functions. This is deliberately registered before static assets.
+// Keep local development on the same route-content contract as the production
+// Cloudflare Worker compatibility API. This is registered before static assets.
 const publicPageHandler = require('../api/public-page-content.js')
 app.all('/api/public-page-content', publicPageHandler)
 app.all('/api/reviews', publicPageHandler)

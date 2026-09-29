@@ -10,6 +10,7 @@
     "env:runtime": "node scripts/generate-runtime-env.cjs",
     "sitemap:generate": "node scripts/generate-sitemaps.cjs",
     "seo:evidence": "node scripts/generate-seo-evidence.cjs",
+    "seo:market-report": "node scripts/generate-market-report.cjs",
     "preserve:manifest": "node scripts/generate-dashboard-manifest.cjs",
     "preserve:verify": "shasum -a 256 -c docs/dashboard-preservation.sha256",
     "preserve:firms": "shasum -a 256 -c docs/firm-pages-preservation.sha256",
@@ -20,13 +21,12 @@
     "dev": "npm run env:runtime && concurrently -n web,api -c cyan,magenta \"vite\" \"tsx watch server/index.ts\"",
     "dev:web": "vite",
     "dev:api": "tsx watch server/index.ts",
-    "build": "npm run env:runtime && npm run seo:evidence && npm run sitemap:generate && tsc -b && vite build && node scripts/generate-seo-pages.cjs && node scripts/generate-static-first-paint.cjs && node scripts/generate-route-bootstrap.cjs && node scripts/verify-seo-output.cjs",
+    "build": "npm run env:runtime && npm run seo:evidence && npm run seo:market-report && npm run sitemap:generate && tsc -b && vite build && node scripts/generate-seo-pages.cjs && node scripts/generate-static-first-paint.cjs && node scripts/generate-route-bootstrap.cjs && node scripts/verify-seo-output.cjs",
     "start": "NODE_ENV=production tsx server/index.ts",
     "preview": "vite preview"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.110.0",
-    "@vercel/functions": "^3.9.3",
     "@vitejs/plugin-react": "latest",
     "cors": "latest",
     "express": "latest",

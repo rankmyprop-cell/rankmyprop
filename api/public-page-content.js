@@ -26,7 +26,7 @@ async function latestFirmForSlug(db, rawSlug) {
     db.collection("firms").where("slug", "==", slug).get(),
   ]);
   const candidates = [];
-  if (byId.exists) candidates.push(byId);
+  if (byId.exists && (!byId.data()?.slug || byId.data().slug === slug)) candidates.push(byId);
   bySlug.docs.forEach((document) => {
     if (!candidates.some((item) => item.id === document.id)) candidates.push(document);
   });
@@ -101,7 +101,7 @@ module.exports = async (req, res) => {
     if (!source) return res.status(404).json({ ok: false, id, unavailable: true });
     const record = normalizeRecord({ id, ...source, __stableSsrHero: true }, context);
     // Reuse this public endpoint for the rules UI's exact-firm refresh. Keeping
-    // the full record here avoids adding another Vercel Function on Hobby.
+    // the full record here also preserves the local compatibility contract.
     let firm = null;
     if (String(req.query.includeFirm || "") === "1" && /^(firm-rules|challenge-model)-/.test(id)) {
       const routeParts = String(pathname || "").split("/").filter(Boolean);

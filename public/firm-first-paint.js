@@ -2,6 +2,7 @@
   "use strict";
 
   var names = {
+    aifo: "AIFO",
     aquafundeddetail: "Aqua Funded",
     blueberrydetail: "Blueberry",
     blueberryfundeddetail: "Blueberry Funded",
@@ -35,18 +36,13 @@
       .toLowerCase();
     if (names[file]) return names[file];
     var parts = url.pathname.split("/").filter(Boolean);
-    if (parts[0] === "prop-firms" && parts[1]) return titleCaseSlug(parts[1]);
+    if (parts[0] === "prop-firms" && parts[1]) return /^(fundednext|fundednext-firm)$/.test(parts[1]) ? "FundedNext" : titleCaseSlug(parts[1]);
     var querySlug = url.searchParams.get("slug");
-    if (querySlug) return titleCaseSlug(querySlug);
+    if (querySlug) return /^(fundednext|fundednext-firm)$/.test(querySlug) ? "FundedNext" : titleCaseSlug(querySlug);
     return String(document.title || "").split(/\s+(?:Review|Rules|Prop Firm)/i)[0].trim() || "Prop Firm";
   }
 
   var firmName = resolveName();
-  var updatedLabel = new Intl.DateTimeFormat("en-US", {
-    month: "long",
-    day: "numeric",
-    year: "numeric"
-  }).format(new Date());
   var platformAssets = {
     mt4: ["MetaTrader 4", "/assets/platforms/metatrader-4.ico"],
     metatrader4: ["MetaTrader 4", "/assets/platforms/metatrader-4.ico"],
@@ -90,11 +86,14 @@
     var wrapper = document.querySelector(".dashboard-wrapper");
     if (!wrapper) return false;
 
-    var pageLoader = document.getElementById("firmPageLoader");
-    if (pageLoader) {
-      pageLoader.classList.add("hide");
-      pageLoader.style.setProperty("display", "none", "important");
+    var guardStyle = document.getElementById("rmpFirmHydrationGuard");
+    if (!guardStyle) {
+      guardStyle = document.createElement("style");
+      guardStyle.id = "rmpFirmHydrationGuard";
+      guardStyle.textContent = "body.rmp-firm-hydrating .dashboard-wrapper > :not(#firmPageLoader){visibility:hidden!important}";
+      document.head.appendChild(guardStyle);
     }
+    document.body.classList.add("rmp-firm-hydrating");
 
     var firmHeading = document.getElementById("firmNameHeading");
     if (firmHeading) firmHeading.textContent = firmName;
@@ -109,7 +108,7 @@
         '<div class="rmp-seo">' +
           '<h2 id="rmpSeoHeading">' + firmName.replace(/[&<>"']/g, "") + ' <span class="rmp-seo-accent">Prop Firm Details</span></h2>' +
           '<p id="rmpSeoParagraph">' + firmName.replace(/[&<>"']/g, "") + ' detail page gives account highlights, fee context, payout data, and essential terms so you can make faster prop firm decisions.</p>' +
-          '<div id="rmpSeoUpdated" class="rmp-seo-updated" data-copy-ignore="1">Last Updated: <span>' + updatedLabel + '</span></div>' +
+          '<div id="rmpSeoUpdated" class="rmp-seo-updated" data-copy-ignore="1" hidden></div>' +
         "</div>";
       wrapper.parentNode.insertBefore(hero, wrapper);
     }

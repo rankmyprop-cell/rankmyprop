@@ -1,5 +1,4 @@
-import { collection, getDocs } from 'firebase/firestore'
-import { db } from './firebase'
+import { listCloudflareCollection } from './cloudflareData'
 
 export type RankingFilter = 'Best Overall' | 'Fast Payout' | 'Instant Funding' | 'Lowest Fee'
 
@@ -177,31 +176,28 @@ function normalizeFirm(firm: BackendFirm, offer?: BackendOffer): RankedFirm {
 }
 
 export async function loadRankedFirms(): Promise<RankedFirm[]> {
-  const [firmsSnapshot, ratingsSnapshot, offersSnapshot] = await Promise.all([
-    getDocs(collection(db, 'firms')),
-    getDocs(collection(db, 'firmRatingStats')),
-    getDocs(collection(db, 'offers')),
+  const [firmRows, ratingRows, offerRows] = await Promise.all([
+    listCloudflareCollection<BackendFirm>('firms', 500),
+    listCloudflareCollection<Record<string, unknown> & { id: string }>('firmRatingStats', 500),
+    listCloudflareCollection<BackendOffer & { id: string; active?: boolean }>('offers', 500),
   ])
 
   const ratings = new Map<string, { rating: number; reviewCount: number }>()
-  ratingsSnapshot.forEach((document) => {
-    const row = document.data()
+  ratingRows.forEach((row) => {
     const rating = Math.max(0, Math.min(5, Number(row.averageRating ?? row.autoAverageRating) || 0))
     const reviewCount = Math.max(0, Math.round(Number(row.reviewCount ?? row.autoReviewCount) || 0))
     const value = { rating, reviewCount }
-    ;[document.id, row.firmSlug, row.firmName].map(key).filter(Boolean).forEach((ratingKey) => ratings.set(ratingKey, value))
+    ;[row.id, row.firmSlug, row.firmName].map(key).filter(Boolean).forEach((ratingKey) => ratings.set(ratingKey, value))
   })
 
   const backendFirms: BackendFirm[] = []
-  firmsSnapshot.forEach((document) => {
-    const row = { id: document.id, ...document.data() } as BackendFirm
+  firmRows.forEach((row) => {
     const stats = ratings.get(key(row.id)) || ratings.get(key(row.slug)) || ratings.get(key(row.name))
     backendFirms.push(stats ? { ...row, score: stats.rating, reviewCount: stats.reviewCount } : row)
   })
 
   const offers: BackendOffer[] = []
-  offersSnapshot.forEach((document) => {
-    const row = { id: document.id, ...document.data() } as BackendOffer & { active?: boolean }
+  offerRows.forEach((row) => {
     if (row.active !== false) offers.push(row)
   })
 

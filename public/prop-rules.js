@@ -142,8 +142,8 @@ function metricsFor(firm, program) {
   return [
     ["Profit target", saved("profit target") || field(program, ["target", "profitTarget", "phase1", "phaseOneTarget"]) || field(firm, ["profitTarget"]), "Evaluation objective"],
     ["Daily loss", saved("daily loss", "daily drawdown") || field(program, ["dailyLoss", "dailyDrawdown", "dailyLossLimit"]) || firm.dailyDrawdown, "Daily breach limit"],
-    ["Max drawdown", saved("maximum drawdown", "max drawdown", "maximum overall loss", "overall loss") || field(program, ["maxDrawdown", "overallDrawdown", "maximumLoss"]) || firm.maxDrawdown, "Overall loss limit"],
-    ["Minimum days", saved("minimum trading days", "minimum days") || field(program, ["minimumDays", "minTradingDays", "tradingDays"]) || firm.cardMetrics?.minTradingDays, "Required activity"],
+    ["Max drawdown", saved("maximum drawdown", "max drawdown", "maximum overall loss", "overall loss", "maximum loss") || field(program, ["maxDrawdown", "overallDrawdown", "maximumLoss"]) || firm.maxDrawdown, "Overall loss limit"],
+    ["Minimum days", saved("minimum trading days", "minimum days", "payout days", "funded payout days") || field(program, ["minimumDays", "minTradingDays", "tradingDays"]) || firm.cardMetrics?.minTradingDays, "Required activity"],
     ["Profit split", saved("profit split") || field(program, ["split", "profitSplit", "payoutSplit"]) || firm.payoutModel, "Trader share"],
     ["Time limit", saved("time limit", "trading period") || field(program, ["timeLimit", "duration", "challengeDuration"]) || firm.cardMetrics?.timeLimit, "Completion window"],
   ];
@@ -470,10 +470,10 @@ function setMeta(firm, program, faqRows) {
   const requestedProgramSlug = programSlugFromLocation();
   const hasProgramRoute = Boolean(requestedProgramSlug);
   const title = hasProgramRoute
-    ? `${firm.name} ${model} Rules: Drawdown & Targets (2026) | Rank My Prop`
+    ? `${firm.name} ${model} Rules 2026 | Trading Rules & Requirements`
     : `${firm.name} Prop Firm Rules: Drawdown & Restrictions (2026) | Rank My Prop`;
   const description = hasProgramRoute
-    ? `Check ${firm.name} ${model} rules for 2026: daily loss, maximum drawdown, profit target, minimum days, payout terms and trading restrictions.`
+    ? `Check ${firm.name} ${model} rules for 2026, including profit targets, daily loss, maximum drawdown, minimum trading days, profit split, payouts, news trading and other requirements.`
     : `Check ${firm.name} rules for 2026, including daily loss, maximum drawdown, profit targets, payout terms and trading restrictions.`;
   const canonical = `https://www.rankmyprop.in/prop-firm-rules/${encodeURIComponent(firm.slug)}${hasProgramRoute ? `/${encodeURIComponent(requestedProgramSlug || modelSlug)}` : ""}`;
   document.title = title;
@@ -571,9 +571,14 @@ async function initFirm() {
       button.classList.toggle("is-active", index === selectedIndex);
       button.setAttribute("aria-selected", String(index === selectedIndex));
     });
+    const hasProgramRoute = Boolean(programSlugFromLocation());
     $("#programTitle").textContent = `${firm.name} ${model} conditions`;
-    $("#firmRulesHeading").innerHTML = `${escapeHtml(firm.name)} <span>${escapeHtml(model)} Rules</span>`;
-    $("#firmRulesIntro").textContent = `Review the ${model} rules for ${firm.name}, including profit targets, drawdown limits, trading permissions and payout conditions for this account model.`;
+    $("#firmRulesHeading").innerHTML = hasProgramRoute
+      ? `${escapeHtml(firm.name)} ${escapeHtml(model)} Rules 2026: <span>Complete Trading Rules</span>`
+      : `${escapeHtml(firm.name)} <span>${escapeHtml(model)} Rules</span>`;
+    $("#firmRulesIntro").textContent = hasProgramRoute
+      ? `Review the ${model} rules for ${firm.name}, including profit targets, daily loss limits, maximum drawdown, minimum trading days, profit split, trading restrictions, and payout conditions.`
+      : `Review the ${model} rules for ${firm.name}, including profit targets, drawdown limits, trading permissions and payout conditions for this account model.`;
     renderMetrics(firm, selected);
     renderSections(firm, selected);
     const faqRows = renderFaq(firm, selected);

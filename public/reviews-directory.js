@@ -1,4 +1,5 @@
 import { getFirmsByType, slugify } from "./firms-service.js";
+import { listDocuments } from "./cloudflare-data.js";
 import { auth, db } from "./dashboard-common.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 import { addDoc, collection, doc, getDoc, getDocs, limit, query, runTransaction, serverTimestamp, where } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
@@ -63,19 +64,12 @@ const logoMarkup = (firm) => {
 };
 
 async function loadApprovedReviews() {
-  const rows = [];
-  const seen = new Set();
-  for (const status of ["Approved", "approved", "Published", "published", "Publish", "publish"]) {
-    try {
-      const snapshot = await getDocs(query(collection(db, "reviews"), where("status", "==", status), limit(2500)));
-      snapshot.forEach((item) => {
-        if (seen.has(item.id)) return;
-        seen.add(item.id);
-        rows.push({ id: item.id, ...item.data() });
-      });
-    } catch (_) {}
-  }
-  return rows.filter((review) => approvedStatuses.has(clean(review.status).toLowerCase()));
+  const rows = await listDocuments("reviews", 2500);
+  const approved = rows.filter((review) => approvedStatuses.has(clean(review.status).toLowerCase()));
+  const newest = approved.map((review) => reviewDateMs(review.updatedAt || review.createdAt)).filter(Boolean).sort((a, b) => b - a)[0];
+  const updated = document.getElementById("reviewsLastUpdated");
+  if (updated && newest) updated.textContent = new Date(newest).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" });
+  return approved;
 }
 
 function buildTableRows() {

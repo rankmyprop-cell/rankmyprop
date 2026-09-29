@@ -8,7 +8,7 @@ This bundle preserves the existing dashboard system so it can be integrated into
 
 - Client dashboard and its login, onboarding, profile, rewards, review, challenge, announcement, rule, and trade-journal flows
 - Complete admin dashboard and all `admin-*.html` management screens
-- Support dashboard, support-access administration, Vercel support APIs, and their shared server libraries
+- Support dashboard, support-access administration, Cloudflare compatibility APIs, and their shared server libraries
 - Shared Firebase authentication/Firestore configuration and rules
 - Supabase support-dashboard schema, email-notification schema, and notification Edge Function
 - Dashboard CSS, JavaScript services, fallback data, icons, email assets, and other referenced assets

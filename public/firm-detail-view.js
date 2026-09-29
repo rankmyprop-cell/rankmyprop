@@ -426,7 +426,7 @@ async function loadFirm() {
   const listed = await getFirmsByType("listed", { surface: "profile" });
   const best = [];
   const all = [...listed, ...best];
-  const found = all.find((f) => String(f.slug || "").toLowerCase() === slug) || all.find((f) => slugify(f.name || "") === slug) || all[0];
+  const found = all.find((f) => String(f.slug || "").toLowerCase() === slug) || all.find((f) => slugify(f.name || "") === slug);
 
   if (!found) {
     app.innerHTML = `${appStyles()}<div style="max-width:900px;margin:80px auto;color:#fff;padding:24px">Firm not found.</div>`;
@@ -434,6 +434,12 @@ async function loadFirm() {
   }
   document.title = `${found.name} Review, Rules, Payout & Discounts | Rank My Prop`;
   app.innerHTML = layout(found);
+  const updatedElement = document.getElementById("rmpSeoUpdated");
+  const updatedDate = new Date(found.updatedAt || 0);
+  if (updatedElement && Number.isFinite(updatedDate.getTime()) && updatedDate.getTime() > 0) {
+    updatedElement.hidden = false;
+    updatedElement.innerHTML = `Last Updated: <span>${updatedDate.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</span>`;
+  }
   wireHeaderControls();
 }
 
