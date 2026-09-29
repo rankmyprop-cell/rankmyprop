@@ -115,7 +115,7 @@ function rowMarkup(row, maximumReviews) {
     <td><div class="reviews-number"><strong>${row.reviewCount.toLocaleString()}</strong><span class="review-meter"><i style="width:${countWidth}%"></i></span></div></td>
     <td>${metricMarkup(row.tc)}</td><td>${metricMarkup(row.cs)}</td><td>${metricMarkup(row.oe)}</td><td>${metricMarkup(row.pp)}</td>
     <td><span class="rank-score">${row.rating.toFixed(1)}</span><span class="rank-stars">${stars(row.rating)}</span></td>
-    <td><div class="table-actions"><a class="view-reviews" href="${reviewHref}">View</a>${row.showFirmProfile !== false ? `<a href="${detailHref}">View Detail</a>` : ""}</div></td>
+    <td><div class="table-actions"><a class="view-reviews" href="${reviewHref}">View</a><a class="view-firm-details" href="${detailHref}">View Details</a></div></td>
   </tr>`;
 }
 
