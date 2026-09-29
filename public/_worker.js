@@ -163,6 +163,15 @@ export default {
     if (firmProfile) {
       let slug = firmProfile[1];
       try { slug = decodeURIComponent(slug); } catch (_) {}
+      // Dedicated firm review pages have their own full layout. They must not
+      // be rendered inside the legacy detail-page reviews panel.
+      if (firmProfile[2] === "reviews") {
+        const reviewsUrl = new URL("/firm-reviews", incoming);
+        reviewsUrl.searchParams.set("slug", slug);
+        const firmId = incoming.searchParams.get("firmId");
+        if (firmId) reviewsUrl.searchParams.set("firmId", firmId);
+        return env.ASSETS.fetch(new Request(reviewsUrl, request));
+      }
       // Pages clean URLs redirects `.html` paths to the extensionless route;
       // use the extensionless asset path internally to avoid a browser redirect loop.
       const detailUrl = new URL("/firm-detail", incoming);
