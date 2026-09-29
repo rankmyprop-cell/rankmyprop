@@ -1863,8 +1863,9 @@ body.light{--bg:#f0f0f8;--sbg:#e8e7f4;--card:#fff;--card2:#f4f3fc;--border:rgba(
     <div class="ref-link-title">Your Referral Link</div>
     <div class="ref-link-sub">Every new account linked to your code earns you 5 Ranko Coins (₹3). Coins can be saved as purchase credit or withdrawn after 1,000 coins.</div>
     <div class="ref-link-row">
-      <input class="ref-link-input" type="text" value="Creating your personal link…" readonly>
+      <input class="ref-link-input" type="text" value="Loading your personal link…" readonly>
       <button class="ref-copy-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button>
+      <button class="ref-copy-btn" id="referralRetryBtn" type="button" hidden>Retry</button>
       <div style="margin-left:8px;">
         <div style="font-size:11px;color:var(--t2);margin-bottom:6px;">Share via</div>
         <div class="share-icons">
@@ -2530,6 +2531,7 @@ document.querySelectorAll('.dc-code-row').forEach(row=>{
 
 /* Copy referral */
 document.querySelectorAll('.ref-copy-btn, .ref-code-copy-btn').forEach(btn=>{
+  if(btn.id === 'referralRetryBtn') return;
   btn.addEventListener('click',()=>{
     const txt = btn.closest('.ref-link-card').querySelector('input')?.value || 'RANKMYPROP';
     navigator.clipboard.writeText(txt).catch(()=>{});
@@ -5302,14 +5304,27 @@ function renderSummaryStats() {
 async function referralApi(path, method = "GET", payload) {
   const currentUser = state.user || auth.currentUser;
   if (!currentUser) throw new Error("Please sign in again to continue.");
-  const token = await currentUser.getIdToken();
-  const response = await fetch(`/api/referrals/${path}`, {
-    method,
-    headers: { Authorization: `Bearer ${token}`, ...(payload ? { "Content-Type": "application/json" } : {}) },
-    body: payload ? JSON.stringify(payload) : undefined,
-    cache: "no-store"
-  });
-  const data = await response.json().catch(() => ({}));
+  const send = async (token) => {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 15000);
+    try {
+      const response = await fetch(`/api/referrals/${path}`, {
+        method,
+        headers: { Authorization: `Bearer ${token}`, ...(payload ? { "Content-Type": "application/json" } : {}) },
+        body: payload ? JSON.stringify(payload) : undefined,
+        cache: "no-store",
+        signal: controller.signal
+      });
+      return { response, data: await response.json().catch(() => ({})) };
+    } finally { clearTimeout(timeout); }
+  };
+  let result = await send(await currentUser.getIdToken());
+  // Firebase can keep an old email_verified claim cached immediately after a
+  // user clicks the verification email. Refresh that claim once, then retry.
+  if (result.response.status === 403 && /verify your email/i.test(String(result.data.error || ""))) {
+    result = await send(await currentUser.getIdToken(true));
+  }
+  const { response, data } = result;
   if (!response.ok) throw new Error(data.error || "Ranko Rewards could not complete this request.");
   return data;
 }
@@ -5356,9 +5371,10 @@ function renderReferralChart(rows = []) {
 
 async function loadReferralData() {
   if (!state.user) return;
+  setReferralLinkLoading();
   let code = "";
   try { code = await ensureReferralCode(); }
-  catch (error) { const chart = document.getElementById("referralChart"); if (chart) chart.textContent = error.message; return; }
+  catch (error) { showReferralLinkError(); const chart = document.getElementById("referralChart"); if (chart) chart.textContent = error.message; return; }
   if (!code) return;
   try {
     const data = await referralApi("me");
@@ -5370,33 +5386,76 @@ async function loadReferralData() {
     renderReferralTable();
     renderSummaryStats();
   } catch (error) {
+    // Code registration is authoritative; keep the personal link usable even
+    // if loading the optional referral statistics fails.
+    showReferralLinkError(true);
     const chart = document.getElementById("referralChart");
     if (chart) chart.textContent = error.message;
   }
 }
 
+function setReferralLinkLoading() {
+  const input = document.querySelector("#page-referrals .ref-link-input");
+  const retry = document.getElementById("referralRetryBtn");
+  if (input && !state.profile?.referralCode) input.value = "Creating your personal link…";
+  if (retry) { retry.hidden = true; retry.disabled = true; }
+}
+
+function setReferralCodeUI(code) {
+  const normalized = String(code || "").trim();
+  if (!normalized) return;
+  state.profile = { ...state.profile, referralCode: normalized };
+  const link = `${REF_BASE_URL}?ref=${encodeURIComponent(normalized)}`;
+  const input = document.querySelector("#page-referrals .ref-link-input");
+  const codeText = document.querySelector("#page-referrals .ref-code-txt");
+  const retry = document.getElementById("referralRetryBtn");
+  if (input) input.value = link;
+  if (codeText) codeText.textContent = normalized;
+  if (retry) { retry.hidden = true; retry.disabled = false; }
+}
+
+function showReferralLinkError(keepWorkingLink = false) {
+  const input = document.querySelector("#page-referrals .ref-link-input");
+  const codeText = document.querySelector("#page-referrals .ref-code-txt");
+  const retry = document.getElementById("referralRetryBtn");
+  const code = String(state.profile?.referralCode || "").trim();
+  if (!keepWorkingLink || !code) {
+    if (input) input.value = "Couldn’t create your link. Tap Retry.";
+    if (codeText) codeText.textContent = "Unavailable";
+  }
+  if (retry) { retry.hidden = false; retry.disabled = false; }
+}
+
+const referralCodeRequests = new Map();
 async function ensureReferralCode() {
-  if (!state.user) return "";
-  let code = String(state.profile.referralCode || "").trim();
-  if (!code) {
-    code = `RMP${state.user.uid.replace(/[^a-z0-9]/gi, "").slice(-8).toUpperCase()}${Math.random().toString(36).slice(2, 6).toUpperCase()}`;
-  }
-  let registered;
-  for (let attempt = 0; attempt < 4; attempt += 1) {
-    try { registered = await referralApi("register", "POST", { code }); code = String(registered.code || code); break; }
-    catch (error) {
-      if (!/already in use/i.test(error.message) || attempt === 3) throw error;
-      code = `RMP${state.user.uid.replace(/[^a-z0-9]/gi, "").slice(-8).toUpperCase()}${Math.random().toString(36).slice(2, 6).toUpperCase()}`;
+  const user = state.user;
+  if (!user) return "";
+  if (referralCodeRequests.has(user.uid)) return referralCodeRequests.get(user.uid);
+  const request = (async () => {
+    const makeCode = () => `RMP${user.uid.replace(/[^a-z0-9]/gi, "").slice(-8).toUpperCase()}${Math.random().toString(36).slice(2, 6).toUpperCase()}`;
+    let code = String(state.profile?.referralCode || "").trim().toUpperCase();
+    if (!/^RMP[A-Z0-9]{6,14}$/.test(code)) code = makeCode();
+    let registered;
+    for (let attempt = 0; attempt < 6; attempt += 1) {
+      try {
+        registered = await referralApi("register", "POST", { code });
+        code = String(registered.code || code).trim().toUpperCase();
+        break;
+      } catch (error) {
+        if (!/already in use|unique constraint|unique failed/i.test(error.message) || attempt === 5) throw error;
+        code = makeCode();
+      }
     }
-  }
-  await setDoc(doc(db, "users", state.user.uid), { referralCode: code, updatedAt: serverTimestamp() }, { merge: true });
-  state.profile.referralCode = code;
-  const link = `${REF_BASE_URL}?ref=${encodeURIComponent(code)}`;
-  const li = document.querySelector("#page-referrals .ref-link-input");
-  if (li) li.value = link;
-  const ct = document.querySelector("#page-referrals .ref-code-txt");
-  if (ct) ct.textContent = code;
-  return code;
+    // The API owns uniqueness and persistence. Render its successful result
+    // before mirroring to Firestore so a mirror failure cannot strand the UI.
+    setReferralCodeUI(code);
+    setDoc(doc(db, "users", user.uid), { referralCode: code, updatedAt: serverTimestamp() }, { merge: true })
+      .catch((error) => console.warn("Referral code is active; profile mirror will retry later:", error?.code || error?.message || "unknown error"));
+    return code;
+  })();
+  referralCodeRequests.set(user.uid, request);
+  try { return await request; }
+  finally { referralCodeRequests.delete(user.uid); }
 }
 
 function initReferralCopy() {
@@ -5404,6 +5463,16 @@ function initReferralCopy() {
   const codeTxt = document.querySelector("#page-referrals .ref-code-txt");
   const a = document.querySelector("#page-referrals .ref-copy-btn");
   const b = document.querySelector("#page-referrals .ref-code-copy-btn");
+  const retry = document.getElementById("referralRetryBtn");
+  if (retry && retry.dataset.bound !== "1") {
+    retry.dataset.bound = "1";
+    retry.addEventListener("click", async () => {
+      retry.disabled = true;
+      if (linkInput) linkInput.value = "Creating your personal link…";
+      try { await loadReferralData(); }
+      finally { retry.disabled = false; }
+    });
+  }
   if (a && a.parentElement) {
     const c = a.cloneNode(true);
     a.parentElement.replaceChild(c, a);
