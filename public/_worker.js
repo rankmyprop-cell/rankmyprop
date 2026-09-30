@@ -161,7 +161,9 @@ export default {
     // `.html` extension. Register new admin modules here so Cloudflare assets
     // resolve them consistently with the existing admin routes.
     if (incoming.pathname === "/admin-website-popup" || incoming.pathname === "/admin-website-popup/") {
-      const popupAdminUrl = new URL("/admin-website-popup.html", incoming);
+      // Cloudflare Pages redirects the `.html` source path back to this clean
+      // URL. Fetching the clean asset path internally prevents that loop.
+      const popupAdminUrl = new URL("/admin-website-popup", incoming);
       return env.ASSETS.fetch(new Request(popupAdminUrl, request));
     }
     // Resolve canonical firm pages from the live CMS-backed template so direct
