@@ -35,6 +35,7 @@ export const DASHBOARD_ROUTES = [
   'admin-support-access',
   'admin-trading-guides',
   'admin-trading-psychology',
+  'admin-website-popup',
 ] as const
 
 export const PUBLIC_STATIC_ROUTES = [

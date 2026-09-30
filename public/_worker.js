@@ -157,6 +157,13 @@ export default {
         redirect: "manual",
       }));
     }
+    // Admin pages use clean URLs while their static source files keep the
+    // `.html` extension. Register new admin modules here so Cloudflare assets
+    // resolve them consistently with the existing admin routes.
+    if (incoming.pathname === "/admin-website-popup" || incoming.pathname === "/admin-website-popup/") {
+      const popupAdminUrl = new URL("/admin-website-popup.html", incoming);
+      return env.ASSETS.fetch(new Request(popupAdminUrl, request));
+    }
     // Resolve canonical firm pages from the live CMS-backed template so direct
     // reloads and paths created after a build use the same firm record.
     const firmProfile = incoming.pathname.match(/^\/prop-firms\/([^/]+)(?:\/(overview|rules|challenges|reviews|spreads|announcements))?\/?$/);
