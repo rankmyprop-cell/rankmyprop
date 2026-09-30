@@ -1820,7 +1820,7 @@
   let detailLoadToken = 0;
   let lastFirmLookupKey = "";
   const toList = (v) => Array.isArray(v) ? v.map((x) => String(x || "").trim()).filter(Boolean) : typeof v === "string" ? v.split(/[,\n|]+/).map((x) => x.trim()).filter(Boolean) : [];
-  const toPlatforms = (row = {}) => { const allowed = new Set(["mt4","metatrader4","mt5","metatrader5","ctrader","matchtrader","tradelocker","dxtrade"]); return [row.platforms, row.tradingPlatforms, row.platform, row.supportedPlatforms].flatMap(toList).filter((name, index, all) => { const key = String(name).toLowerCase().replace(/[^a-z0-9]/g, ""); return allowed.has(key) && all.findIndex((item) => String(item).toLowerCase().replace(/[^a-z0-9]/g, "") === key) === index; }); };
+  const toPlatforms = (row = {}) => { const allowed = new Set(["mt4","metatrader4","mt5","metatrader5","ctrader","matchtrader","tradelocker","dxtrade","tradingview"]); return [row.platforms, row.tradingPlatforms, row.platform, row.supportedPlatforms].flatMap(toList).filter((name, index, all) => { const key = String(name).toLowerCase().replace(/[^a-z0-9]/g, ""); return allowed.has(key) && all.findIndex((item) => String(item).toLowerCase().replace(/[^a-z0-9]/g, "") === key) === index; }); };
   const toPairs = (v, fallback = null) => { const source = v && (Array.isArray(v) ? v.length : typeof v === "object" ? Object.keys(v).length : 0) ? v : fallback; if (Array.isArray(source)) return source; if (source && typeof source === "object") return Object.entries(source).map(([label, value]) => ({ label: String(label).replace(/([a-z])([A-Z])/g, (m, a, b) => a + " " + b).replace(/^./, (c) => c.toUpperCase()), value: String(value ?? "-") })); return []; };
   const slugify = (text = "") => String(text || "").toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
   const byId = (id) => document.getElementById(id);
@@ -1896,6 +1896,57 @@
       };
     }
     return null;
+  }
+  const PROFILE_FIELDS = [
+    "platforms", "tradingPlatforms", "platform", "supportedPlatforms", "markets", "metaMarkets",
+    "keyMetrics", "cardMetrics", "tradingConditions", "firmDetails", "leverageRows", "commissions",
+    "restrictedCountries", "whyChoose", "evaluationPrograms", "overviewTitle", "overviewShort",
+    "overviewLongTitle", "overviewLong", "overview", "bio", "aiSummary", "metaLine", "detailMeta",
+    "metaHeadquarters", "metaCeo", "metaFounded", "headquarters", "ceo", "founded", "country", "website", "buyLink", "logo", "promoText"
+  ];
+  const isBlankProfileValue = (value) => {
+    if (value == null) return true;
+    if (typeof value === "string") return !value.trim() || /^(?:-|n\/a|na|null|undefined)$/i.test(value.trim()) || /detail content can be managed from admin panel/i.test(value);
+    if (Array.isArray(value)) return value.length === 0;
+    if (typeof value === "object") return Object.keys(value).length === 0;
+    return false;
+  };
+  const profileCompleteness = (row = {}) => {
+    const direct = PROFILE_FIELDS.reduce((count, key) => count + (isBlankProfileValue(row[key]) ? 0 : 1), 0);
+    const nested = ["programs", "stats"].reduce((count, key) => count + (isBlankProfileValue(row?.challengesPanelData?.[key]) ? 0 : 1), 0);
+    return direct + nested;
+  };
+  function mergeFirmProfileWithFallback(liveRow, lookup = {}) {
+    const fallback = fallbackFirmByLookup(lookup);
+    if (!fallback) return liveRow;
+    const live = liveRow && typeof liveRow === "object" ? liveRow : {};
+    const isFxify = [lookup.routeSlug, lookup.wantedSlug, live.slug, live.name, fallback.slug, fallback.name]
+      .some((value) => slugify(value || "") === "fxify");
+    const merged = { ...fallback, ...live };
+    PROFILE_FIELDS.forEach((field) => {
+      if (!isBlankProfileValue(fallback[field]) && (isFxify || isBlankProfileValue(live[field]))) merged[field] = fallback[field];
+    });
+    for (const key of ["challengesPanelData", "rulesPanelData", "spreadsPanelData", "announcementsPanelData"]) {
+      const saved = fallback[key];
+      const current = live[key];
+      if (!saved || typeof saved !== "object") continue;
+      if (key === "challengesPanelData" && (isFxify || isBlankProfileValue(current))) {
+        merged[key] = isFxify ? saved : { ...(saved || {}), ...(current || {}),
+          programs: isBlankProfileValue(current?.programs) ? (saved.programs || []) : current.programs,
+          stats: isBlankProfileValue(current?.stats) ? (saved.stats || []) : current.stats };
+      } else if (isBlankProfileValue(current)) merged[key] = saved;
+    }
+    if (isFxify) {
+      // Keep CMS identity, moderation and review counters, but use the manually
+      // verified FXIFY listing content as the authoritative profile.
+      merged.name = fallback.name;
+      merged.slug = fallback.slug;
+      merged.id = live.id || fallback.id;
+      ["reviewCount", "reviewSummary", "reviewSnippet", "score", "performance", "trustedBy", "followers", "verified", "active", "sortOrder"].forEach((field) => {
+        if (live[field] !== undefined) merged[field] = live[field];
+      });
+    }
+    return merged;
   }
   function togglePageLoader(show) {
     const el = byId("firmPageLoader");
@@ -2297,7 +2348,7 @@
           const parsed = new Date(value).getTime();
           return Number.isFinite(parsed) ? parsed : 0;
         };
-        exactSlugRows.sort((a, b) => updatedMillis(b.updatedAt || b.createdAt) - updatedMillis(a.updatedAt || a.createdAt));
+        exactSlugRows.sort((a, b) => profileCompleteness(b) - profileCompleteness(a) || updatedMillis(b.updatedAt || b.createdAt) - updatedMillis(a.updatedAt || a.createdAt));
         if (exactSlugRows.length) return exactSlugRows[0];
       } catch (_) {}
     }
@@ -2871,10 +2922,11 @@
         return;
       }
 
+      const hydratedSelection = mergeFirmProfileWithFallback(selected, firmLookup);
       const finalRow = await withTimeoutFallback(
-        withFirmFieldOverrides(selected),
+        withFirmFieldOverrides(hydratedSelection),
         FIELD_OVERRIDE_TIMEOUT_MS,
-        selected
+        hydratedSelection
       );
       if (loadToken !== detailLoadToken) return;
       if (!finalRow) {
