@@ -387,4 +387,38 @@ service cloud.firestore {
     allow read: if isPrivileged();
     allow write: if false;
   }
+
+  // Games and quiz CRM. Players can read active configuration and keep their
+  // own run history; all quiz authoring, campaign controls and reward review
+  // actions stay with privileged Rank My Prop staff.
+  match /databases/{database}/documents/gameSettings/{settingId} {
+    allow read: if request.auth != null;
+    allow write: if isPrivileged();
+  }
+
+  match /databases/{database}/documents/gameQuizzes/{quizId} {
+    allow read: if request.auth != null;
+    allow write: if isPrivileged();
+  }
+
+  match /databases/{database}/documents/gameQuestions/{questionId} {
+    allow read: if request.auth != null;
+    allow write: if isPrivileged();
+  }
+
+  match /databases/{database}/documents/gameResults/{resultId} {
+    allow read: if isPrivileged() ||
+      (request.auth != null && resource.data.uid == request.auth.uid);
+    allow create: if request.auth != null && request.resource.data.uid == request.auth.uid;
+    allow update, delete: if isPrivileged();
+  }
+
+  match /databases/{database}/documents/gameClaims/{claimId} {
+    allow read: if isPrivileged() ||
+      (request.auth != null && resource.data.uid == request.auth.uid);
+    allow create: if request.auth != null &&
+      request.resource.data.uid == request.auth.uid &&
+      request.resource.data.status == "pending";
+    allow update, delete: if isPrivileged();
+  }
 }

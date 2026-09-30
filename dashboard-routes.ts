@@ -1,6 +1,7 @@
 export const DASHBOARD_ROUTES = [
   'login',
   'dashboard',
+  'dashboard-games',
   'onboarding',
   'my-profile',
   'edit-profile',
@@ -36,6 +37,7 @@ export const DASHBOARD_ROUTES = [
   'admin-trading-guides',
   'admin-trading-psychology',
   'admin-website-popup',
+  'admin-games',
 ] as const
 
 export const PUBLIC_STATIC_ROUTES = [

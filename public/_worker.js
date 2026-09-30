@@ -181,6 +181,14 @@ export default {
       const popupAdminUrl = new URL("/admin-website-popup", incoming);
       return env.ASSETS.fetch(new Request(popupAdminUrl, request));
     }
+    if (incoming.pathname === "/admin-games" || incoming.pathname === "/admin-games/") {
+      const gamesAdminUrl = new URL("/admin-games", incoming);
+      return env.ASSETS.fetch(new Request(gamesAdminUrl, request));
+    }
+    if (incoming.pathname === "/dashboard-games" || incoming.pathname === "/dashboard-games/") {
+      const gamesDashboardUrl = new URL("/dashboard-games", incoming);
+      return env.ASSETS.fetch(new Request(gamesDashboardUrl, request));
+    }
     // Resolve canonical firm pages from the live CMS-backed template so direct
     // reloads and paths created after a build use the same firm record.
     const firmProfile = incoming.pathname.match(/^\/prop-firms\/([^/]+)(?:\/(overview|rules|challenges|reviews|spreads|announcements))?\/?$/);

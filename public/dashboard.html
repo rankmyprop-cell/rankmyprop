@@ -31,6 +31,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--t1);font-size:13px;l
 /* SIDEBAR */
 .sidebar{width:205px;flex-shrink:0;height:100%;background:var(--sbg);border-right:1px solid var(--border);display:flex;flex-direction:column;padding:18px 12px 16px;overflow-y:auto;}
 .sidebar::-webkit-scrollbar{width:0;}
+.games-nav{margin:3px 0}.games-nav>summary{list-style:none;cursor:pointer}.games-nav>summary::-webkit-details-marker{display:none}.games-nav summary .games-chevron{margin-left:auto;transition:transform .18s}.games-nav[open] .games-chevron{transform:rotate(90deg)}.games-subnav{display:grid;gap:4px;padding:5px 0 7px 39px}.games-subnav a{color:var(--t2);font-size:12px;text-decoration:none;padding:7px 8px;border-radius:7px}.games-subnav a:hover{color:#fff;background:rgba(139,99,255,.14)}
 .sb-logo{display:flex;align-items:center;gap:9px;padding:0 6px;margin-bottom:22px;}
 .sb-logo-ico{width:34px;height:34px;border-radius:9px;background:var(--agrad);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .sb-logo-ico svg{width:18px;height:18px;fill:#fff;}
@@ -1105,6 +1106,10 @@ body.light{--bg:#f0f0f8;--sbg:#e8e7f4;--card:#fff;--card2:#f4f3fc;--border:rgba(
     Referrals
     <span class="nav-badge" id="navBadgeReferrals">0</span>
   </a>
+  <details class="games-nav">
+    <summary class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h12v5H6zM4 8h16v13H4z"/><path d="M8 12h.01M12 12h.01M16 12h.01M8 16h8"/></svg>Games <svg class="games-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></summary>
+    <div class="games-subnav"><a href="/dashboard-games?game=quiz">Live Quiz</a><a href="/dashboard-games?game=snake">Snake Rush</a><a href="/dashboard-games?game=chess">Chess vs Computer</a><a href="/dashboard-games?game=ludo">Ludo Sprint</a></div>
+  </details>
   <div class="nav-section-lbl">Other</div>
   <a class="nav-item" id="backToSiteBtn" href="/">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>

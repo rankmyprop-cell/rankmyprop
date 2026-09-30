@@ -22,6 +22,7 @@
     ["admin-beginner-tutorials.html", "Beginner Tutorials CMS"],
     ["admin-blog-banner.html", "Blog Sidebar Banner"],
     ["admin-website-popup.html", "Website Popup"],
+    ["admin-games.html", "Games & Live Quiz"],
     ["admin-content-cms.html", "Page Copy CMS"],
     ["admin-faqs.html", "FAQ CMS"],
     ["admin-newsletter.html", "Newsletter"]
