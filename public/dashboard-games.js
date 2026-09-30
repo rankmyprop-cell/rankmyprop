@@ -1,5 +1,12 @@
 import { collection, doc, getDoc, getDocs, addDoc, runTransaction, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 import { requireAuth, db, ensureUser } from "./dashboard-common.js";
+if (new URLSearchParams(location.search).get("embedded") === "1") {
+  document.body.classList.add("games-embedded");
+  const stylesheet = document.createElement("link");
+  stylesheet.rel = "stylesheet";
+  stylesheet.href = "/games-embed.css";
+  document.head.append(stylesheet);
+}
 const $=s=>document.querySelector(s),app=$("#gameApp"),qs=v=>String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));
 let user=null,profile={},quizzes=[],questions=[],settings={};let game="hub",snakeTimer=0;
 const num=(v,d=0)=>Number.isFinite(Number(v))?Number(v):d;

@@ -393,6 +393,7 @@ body.dash-loading .nav-badge::after{content:"";position:absolute;inset:0;backgro
 .page-sec{display:none;flex-direction:column;gap:18px;}
 .page-sec.active{display:flex;}
 .journal-frame{display:block;width:100%;height:1200px;border:0;background:transparent}
+.games-frame{display:block;width:100%;height:1180px;border:0;border-radius:18px;background:#080812;overflow:hidden}
 .pg-hd{margin-bottom:2px;}
 .pg-hd h2{font-size:22px;font-weight:800;letter-spacing:-.5px;margin-bottom:4px;}
 .pg-hd p{font-size:13px;color:var(--t2);}
@@ -1108,7 +1109,7 @@ body.light{--bg:#f0f0f8;--sbg:#e8e7f4;--card:#fff;--card2:#f4f3fc;--border:rgba(
   </a>
   <details class="games-nav">
     <summary class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h12v5H6zM4 8h16v13H4z"/><path d="M8 12h.01M12 12h.01M16 12h.01M8 16h8"/></svg>Games <svg class="games-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></summary>
-    <div class="games-subnav"><a href="/dashboard-games?game=quiz">Live Quiz</a><a href="/dashboard-games?game=snake">Snake Rush</a><a href="/dashboard-games?game=chess">Chess vs Computer</a><a href="/dashboard-games?game=ludo">Ludo Sprint</a></div>
+    <div class="games-subnav"><a class="nav-item" href="/dashboard?page=games&game=quiz" data-page="games" data-game="quiz">Live Quiz</a><a class="nav-item" href="/dashboard?page=games&game=snake" data-page="games" data-game="snake">Snake Rush</a><a class="nav-item" href="/dashboard?page=games&game=chess" data-page="games" data-game="chess">Chess vs Computer</a><a class="nav-item" href="/dashboard?page=games&game=ludo" data-page="games" data-game="ludo">Ludo Sprint</a></div>
   </details>
   <div class="nav-section-lbl">Other</div>
   <a class="nav-item" id="backToSiteBtn" href="/">
@@ -1799,6 +1800,12 @@ body.light{--bg:#f0f0f8;--sbg:#e8e7f4;--card:#fff;--card2:#f4f3fc;--border:rgba(
 </div>
 
 <!-- ══ REFERRALS ══ (Image 2 Clone) -->
+<div class="page-sec" id="page-games">
+  <div class="pg-hd"><h2>Games</h2><p>Play live quizzes and daily game challenges without leaving your Rank My Prop dashboard.</p></div>
+  <iframe class="games-frame" id="gamesFrame" title="Rank My Prop games" src="/dashboard-games?embedded=1"></iframe>
+</div>
+
+<!-- ══ REFERRALS ══ (Image 2 Clone) -->
 <div class="page-sec" id="page-referrals">
   <!-- Header -->
   <div class="ref-page-hd">
@@ -2391,6 +2398,7 @@ function persistDashPage(page){
   try{sessionStorage.setItem(DASH_PAGE_KEY,p);}catch{}
   const u=new URL(location.href);
   if(p&&p!=='dashboard') u.searchParams.set('page',p); else u.searchParams.delete('page');
+  if(p!=='games') u.searchParams.delete('game');
   history.replaceState({page:p},'',`${u.pathname}${u.search}${u.hash}`);
 }
 function resolvedDashPage(){
@@ -2401,8 +2409,14 @@ function resolvedDashPage(){
 }
 /* Nav switching */
 document.querySelectorAll('.nav-item[data-page]').forEach(item => {
-  item.addEventListener('click', () => {
+  item.addEventListener('click', (event) => {
+    event.preventDefault();
     const page = item.getAttribute('data-page');
+    const game = item.getAttribute('data-game');
+    if (page === 'games' && game) {
+      const frame = document.getElementById('gamesFrame');
+      if (frame) frame.src = `/dashboard-games?embedded=1&game=${encodeURIComponent(game)}`;
+    }
     persistDashPage(page);
     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
     item.classList.add('active');
@@ -2419,7 +2433,7 @@ document.querySelectorAll('.nav-item[data-page]').forEach(item => {
     const activePanel = document.getElementById(map[page] || 'right-default');
     if(activePanel) activePanel.style.display='flex';
     // Update need help text
-    const texts={cashback:'Manage cashback, claims, reviews, and earning rewards.',reviews:'Manage your reviews, track their status, and share your experience.',"trade-journal":'Track your trades, keep journal history, and export your records.',claims:'Manage your claims and track their status.',referrals:'Track your referrals and earned rewards.',faq:'Find answers to common questions about Rank My Prop.'};
+    const texts={cashback:'Manage cashback, claims, reviews, and earning rewards.',reviews:'Manage your reviews, track their status, and share your experience.',"trade-journal":'Track your trades, keep journal history, and export your records.',claims:'Manage your claims and track their status.',referrals:'Track your referrals and earned rewards.',games:'Play quizzes and daily game challenges from your dashboard.',faq:'Find answers to common questions about Rank My Prop.'};
     document.getElementById('nh-sub-txt').textContent = texts[page]||'Manage cashback, claims, reviews, and expiring bonus offers.';
     closeSidebarNav();
   });
@@ -2427,7 +2441,7 @@ document.querySelectorAll('.nav-item[data-page]').forEach(item => {
 
 /* Show default panel on load */
 document.getElementById('right-default').style.display='flex';
-const goPage=p=>{const n=document.querySelector(`.nav-item[data-page="${p}"]`);if(n)n.click();};
+const goPage=p=>{const requestedGame=new URLSearchParams(location.search).get('game');const selector=p==='games'&&requestedGame?`.nav-item[data-page="games"][data-game="${requestedGame}"]`:`.nav-item[data-page="${p}"]`;const n=document.querySelector(selector);if(n)n.click();};
 goPage(resolvedDashPage());
 window.addEventListener('popstate',()=>goPage(resolvedDashPage()));
 
