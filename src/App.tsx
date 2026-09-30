@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import HomeHero from './HomeHero'
+import HomeCampaignPopup from './HomeCampaignPopup'
 
 const RankingsSection = lazy(() => import('./RankingsSection'))
 const FundingOffersBanner = lazy(() => import('./FundingOffersBanner'))
@@ -270,6 +271,7 @@ function App() {
 
   return (
     <div className="site">
+      <HomeCampaignPopup />
       <header className="site-header">
         <div ref={headerRef} className="header-shell" onMouseLeave={() => !mobileOpen && setActiveDropdown(null)}>
           <a className="brand" href="/" aria-label="RankMyProp home">
