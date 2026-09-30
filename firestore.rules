@@ -421,4 +421,14 @@ service cloud.firestore {
       request.resource.data.status == "pending";
     allow update, delete: if isPrivileged();
   }
+
+  // One document per game/day lets a Firestore transaction reserve the daily
+  // winner slot globally before its reward claim is sent for review.
+  match /databases/{database}/documents/gameDailyWinners/{winnerId} {
+    allow read: if request.auth != null;
+    allow create: if request.auth != null &&
+      request.resource.data.uid == request.auth.uid &&
+      request.resource.data.status == "pending";
+    allow update, delete: if isPrivileged();
+  }
 }
