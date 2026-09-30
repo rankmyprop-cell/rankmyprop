@@ -135,6 +135,21 @@ function canonicalComparison(url) {
   return first && second && first.localeCompare(second) > 0 ? `/compare/${second}-vs-${first}` : "";
 }
 
+function withCampaignPopup(response, pathname) {
+  if (response.status < 200 || response.status >= 300 || !response.headers.get("content-type")?.includes("text/html")) return response;
+  // The React homepage already renders this feature itself. Admin and account
+  // workspaces stay clear of public campaign overlays.
+  if (pathname === "/" || /^\/(?:admin(?:-|\/|$)|dashboard(?:-|\/|$)|client-dashboard(?:\/|$)|login(?:\/|$)|signup(?:\/|$)|verify-email(?:\.html)?$)/i.test(pathname)) return response;
+  return new HTMLRewriter()
+    .on("head", { element(element) {
+      element.append('<link rel="stylesheet" href="/site-campaign-popup.css">', { html: true });
+    } })
+    .on("body", { element(element) {
+      element.append('<script type="module" src="/site-campaign-popup.js"></script>', { html: true });
+    } })
+    .transform(response);
+}
+
 export default {
   async fetch(request, env) {
     const incoming = new URL(request.url);
@@ -179,7 +194,7 @@ export default {
         reviewsUrl.searchParams.set("slug", slug);
         const firmId = incoming.searchParams.get("firmId");
         if (firmId) reviewsUrl.searchParams.set("firmId", firmId);
-        return env.ASSETS.fetch(new Request(reviewsUrl, request));
+        return withCampaignPopup(await env.ASSETS.fetch(new Request(reviewsUrl, request)), incoming.pathname);
       }
       // Pages clean URLs redirects `.html` paths to the extensionless route;
       // use the extensionless asset path internally to avoid a browser redirect loop.
@@ -189,11 +204,11 @@ export default {
       if (firmId) detailUrl.searchParams.set("firmId", firmId);
       if (firmProfile[2] && firmProfile[2] !== "overview") detailUrl.searchParams.set("view", firmProfile[2]);
       const detailRequest = new Request(detailUrl, request);
-      return env.ASSETS.fetch(detailRequest);
+      return withCampaignPopup(await env.ASSETS.fetch(detailRequest), incoming.pathname);
     }
 
     const assetResponse = await env.ASSETS.fetch(request);
-    if (assetResponse.status !== 404) return assetResponse;
+    if (assetResponse.status !== 404) return withCampaignPopup(assetResponse, incoming.pathname);
     return assetResponse;
   },
 };

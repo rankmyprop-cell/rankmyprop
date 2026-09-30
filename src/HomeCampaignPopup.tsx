@@ -16,6 +16,16 @@ type PopupSettings = {
 
 const SETTINGS_COLLECTION = 'siteSettings'
 const SETTINGS_ID = 'websitePopup'
+const DISMISSED_KEY = 'rmp:website-popup:dismissed'
+
+// A reload begins a fresh popup viewing session. Ordinary page navigation
+// keeps the dismissal for this tab so the popup cannot reappear on another page.
+if (typeof window !== 'undefined') {
+  try {
+    const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming | undefined
+    if (navigation?.type === 'reload') sessionStorage.removeItem(DISMISSED_KEY)
+  } catch { /* Storage may be unavailable in restricted browser contexts. */ }
+}
 
 const safeUrl = (value = '') => {
   const url = String(value || '').trim()
@@ -52,16 +62,14 @@ export default function HomeCampaignPopup() {
 
   useEffect(() => {
     if (!settings || open) return
-    const imageUrl = safeUrl(settings.imageUrl)
-    const updated = typeof settings.updatedAt === 'object' ? settings.updatedAt?.seconds || 0 : settings.updatedAt || 0
-    const dismissalKey = `rmp:website-popup:dismissed:${imageUrl}:${updated}`
-    if (sessionStorage.getItem(dismissalKey) === '1') return
+    try { if (sessionStorage.getItem(DISMISSED_KEY) === '1') return } catch { /* Continue without persistence. */ }
 
     let timer = 0
     const onScroll = () => {
       if (window.scrollY < 120 || timer) return
       const delay = Math.max(0, Math.min(30, Number(settings.openDelay ?? 2))) * 1000
       timer = window.setTimeout(() => {
+        try { sessionStorage.setItem(DISMISSED_KEY, '1') } catch { /* Popup is still limited to this mounted page. */ }
         setOpen(true)
         window.removeEventListener('scroll', onScroll)
       }, delay)
@@ -77,9 +85,7 @@ export default function HomeCampaignPopup() {
   const close = () => {
     if (!settings || closing) return
     setClosing(true)
-    const imageUrl = safeUrl(settings.imageUrl)
-    const updated = typeof settings.updatedAt === 'object' ? settings.updatedAt?.seconds || 0 : settings.updatedAt || 0
-    sessionStorage.setItem(`rmp:website-popup:dismissed:${imageUrl}:${updated}`, '1')
+    try { sessionStorage.setItem(DISMISSED_KEY, '1') } catch { /* Dismiss for this mounted page. */ }
     window.setTimeout(() => {
       setOpen(false)
       setClosing(false)
