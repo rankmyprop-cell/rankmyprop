@@ -388,6 +388,11 @@ body.dash-loading .nav-badge::after{content:"";position:absolute;inset:0;backgro
 .ql-ico svg{width:13px;height:13px;color:var(--t2);}
 .ql-name{font-size:12.5px;color:var(--t1);flex:1;font-weight:500;}
 .ql-arr svg{width:13px;height:13px;color:var(--t3);}
+.dashboard-side-banner{display:block;overflow:hidden;border:1px solid var(--border2);border-radius:var(--r);background:var(--card);box-shadow:0 10px 24px rgba(0,0,0,.14);transition:transform .18s ease,border-color .18s ease;}
+.dashboard-side-banner:hover{transform:translateY(-2px);border-color:var(--accent2);}
+.dashboard-side-banner img{display:block;width:100%;height:100%;object-fit:cover;}
+.dashboard-side-banner--earnings{aspect-ratio:120 / 146;}
+.dashboard-side-banner--quicklinks{aspect-ratio:6 / 11;}
 
 /* PAGE SECTIONS */
 .page-sec{display:none;flex-direction:column;gap:18px;}
@@ -2012,16 +2017,12 @@ body.light{--bg:#f0f0f8;--sbg:#e8e7f4;--card:#fff;--card2:#f4f3fc;--border:rgba(
           </div>
           <div class="uc-btns"><span class="p-link" id="usageHint" style="text-decoration:none;cursor:default">Minimum withdraw is $10.00</span><button class="upg-btn" id="openWithdrawBtn">Withdraw</button></div>
         </div>
-        <div class="sources-card" id="earnSourcesCard">
-          <div class="sc2-hd"><span class="sc2-title">Earnings Breakdown</span><span style="color:var(--t3);cursor:pointer;font-size:18px;letter-spacing:1px;">···</span></div>
-          <div class="sc2-sub">Referral, reviews, claims, cashback</div>
-          <div id="earnTopBar" style="display:flex;height:5px;border-radius:99px;overflow:hidden;gap:2px;margin-bottom:12px;"></div>
-          <div class="src-list" id="earnSourcesList"></div>
-        </div>
-        <div class="ql-card" id="quickLinksCard">
-          <div class="ql-title">Quick Links</div>
-          <div id="quickLinksList"></div>
-        </div>
+        <a class="dashboard-side-banner dashboard-side-banner--earnings" id="clientDashboardEarningsBanner" href="/listedprop" hidden>
+          <img id="clientDashboardEarningsBannerImage" alt="Client dashboard offer" />
+        </a>
+        <a class="dashboard-side-banner dashboard-side-banner--quicklinks" id="clientDashboardQuickLinksBanner" href="/listedprop" hidden>
+          <img id="clientDashboardQuickLinksBannerImage" alt="Client dashboard offer" />
+        </a>
       </div>
 
       <!-- FAQ right panel - Popular Articles + Stay Updated -->
@@ -4548,6 +4549,39 @@ function animateLineFill(el, target = 0, dur = 800) {
   requestAnimationFrame(step);
 }
 
+function safeDashboardBannerUrl(value, fallback = "/listedprop") {
+  const url = String(value || "").trim();
+  if (!url) return fallback;
+  if (url.startsWith("/") || /^https:\/\//i.test(url)) return url;
+  return fallback;
+}
+
+function renderClientDashboardBanner(slot, config = {}) {
+  const banner = document.getElementById(`clientDashboard${slot}Banner`);
+  const image = document.getElementById(`clientDashboard${slot}BannerImage`);
+  if (!banner || !image) return;
+  const imageUrl = normalizePublicAssetUrl(config.imageUrl || "");
+  if (!imageUrl) {
+    banner.hidden = true;
+    return;
+  }
+  banner.href = safeDashboardBannerUrl(config.targetUrl);
+  image.src = imageUrl;
+  image.alt = String(config.alt || "Rank My Prop offer").trim() || "Rank My Prop offer";
+  banner.hidden = false;
+}
+
+async function loadClientDashboardBanners() {
+  try {
+    const snap = await getDoc(doc(db, "siteSettings", "clientDashboardBanners"));
+    const banners = snap.exists() ? (snap.data() || {}) : {};
+    renderClientDashboardBanner("Earnings", banners.earnings || {});
+    renderClientDashboardBanner("QuickLinks", banners.quickLinks || {});
+  } catch (error) {
+    console.warn("Client dashboard banners could not load", error);
+  }
+}
+
 function renderEarningsSources() {
   const topBar = document.getElementById("earnTopBar");
   const list = document.getElementById("earnSourcesList");
@@ -6316,6 +6350,7 @@ async function init() {
     initReferralFilters();
     initRankoActions();
     renderQuickLinks();
+    await loadClientDashboardBanners();
     initInviteNavigation();
     initWithdrawModal();
     initClaimFirmRealtime();
