@@ -227,6 +227,19 @@ async function chessHint(request, env) {
   return json({ ok: true, kind, used: used + 1, remaining: 4 - used, charged, balance: Number(wallet?.balance || 0) });
 }
 
+async function startGame(request, env) {
+  const user = await identity(request, env);
+  if (!user) return json({ error: "Sign in to play games." }, 401);
+  const input = await body(request);
+  const game = String(input.game || "").trim();
+  if (!["quiz", "snake", "chess", "ludo"].includes(game)) return json({ error: "Unknown game." }, 400);
+  const row = await env.DB.prepare("SELECT COUNT(*) AS total FROM game_play_sessions WHERE uid=? AND game=? AND played_at > datetime('now','-24 hours')").bind(user.uid, game).first();
+  const used = Number(row?.total || 0);
+  if (used >= 2) return json({ error: "You have used both plays for this game. Try again after your 24-hour window resets." }, 429);
+  await env.DB.prepare("INSERT INTO game_play_sessions(id,uid,game) VALUES(?,?,?)").bind(ID(), user.uid, game).run();
+  return json({ ok: true, remaining: 1 - used });
+}
+
 async function adminReferralWithdrawals(request, env) {
   const admin = await requireAdmin(request, env);
   if (request.method === "GET") {
@@ -453,6 +466,7 @@ async function router(request, env) {
   if (path === "/api/referral-withdrawals") return adminReferralWithdrawals(request, env);
   if (path === "/api/referral-credits") return adminReferralCredits(request, env);
   if (path === "/api/games/chess-hint" && request.method === "POST") return chessHint(request, env);
+  if (path === "/api/games/start" && request.method === "POST") return startGame(request, env);
   if (path === "/v1/migration/import" && request.method === "POST") return importDocuments(request, env);
   if (path === "/v1/migration/auth" && request.method === "POST") return importAuthUsers(request, env);
   if (path === "/v1/auth/exchange" && request.method === "POST") return exchangeAuth(request, env);
