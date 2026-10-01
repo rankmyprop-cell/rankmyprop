@@ -6333,9 +6333,12 @@ setTimeout(() => releaseDashboardLoading(true), 6000);
 window.addEventListener("message", (event) => {
   const frame = document.getElementById("gamesFrame");
   const payload = event.data;
-  if (!frame || event.source !== frame.contentWindow || !payload || payload.type !== "rmp-games-height") return;
+  if (!frame || event.origin !== location.origin || !payload || payload.type !== "rmp-games-height") return;
   const height = Number(payload.height);
   if (Number.isFinite(height)) frame.style.height = `${Math.max(420, Math.min(1800, Math.ceil(height)))}px`;
+});
+document.getElementById("gamesFrame")?.addEventListener("load", (event) => {
+  event.currentTarget.contentWindow?.postMessage({ type: "rmp-games-resize-request" }, location.origin);
 });
 init();
 </script>

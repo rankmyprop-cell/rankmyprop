@@ -12,8 +12,8 @@ polish.rel = "stylesheet";
 polish.href = "/games-polish.css";
 document.head.append(polish);
 const $=s=>document.querySelector(s),app=$("#gameApp"),qs=v=>String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));
-function reportHeight(){if(window.parent===window)return;requestAnimationFrame(()=>window.parent.postMessage({type:"rmp-games-height",height:Math.ceil(document.documentElement.scrollHeight)},location.origin))}
-if(window.parent!==window&&"ResizeObserver" in window)new ResizeObserver(reportHeight).observe(document.body);
+function reportHeight(){if(window.parent===window)return;requestAnimationFrame(()=>window.parent.postMessage({type:"rmp-games-height",height:Math.ceil(Math.max(document.body.scrollHeight,document.documentElement.scrollHeight))},location.origin))}
+if(window.parent!==window){if("ResizeObserver" in window)new ResizeObserver(reportHeight).observe(document.body);window.addEventListener("load",()=>{reportHeight();setTimeout(reportHeight,250);setTimeout(reportHeight,1000)});window.addEventListener("message",event=>{if(event.origin===location.origin&&event.data?.type==="rmp-games-resize-request")reportHeight()})}
 let user=null,profile={},quizzes=[],questions=[],settings={};let game="hub",snakeTimer=0,gameCleanup=()=>{};
 const num=(v,d=0)=>Number.isFinite(Number(v))?Number(v):d;
 const dayKey=()=>new Date().toLocaleDateString("en-CA",{timeZone:"Asia/Kolkata"});
