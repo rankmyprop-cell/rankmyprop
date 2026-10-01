@@ -20,7 +20,7 @@
     ["admin-funding-strategies.html", "Funding Strategies CMS"],
     ["admin-trading-psychology.html", "Trading Psychology CMS"],
     ["admin-beginner-tutorials.html", "Beginner Tutorials CMS"],
-    ["admin-blog-banner.html", "Blog Sidebar Banner"],
+    ["admin-blog-banner.html", "Banner Manager"],
     ["admin-website-popup.html", "Website Popup"],
     ["admin-games.html", "Games & Live Quiz"],
     ["admin-content-cms.html", "Page Copy CMS"],
