@@ -1,0 +1,17 @@
+/* Keep the chess action controls spacious at every dashboard width. */
+.chess-side > .game-actions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  width: 100%;
+  margin-top: 12px;
+}
+
+.chess-side > .game-actions .game-btn {
+  width: 100%;
+  min-width: 0;
+  min-height: 42px;
+  padding: 10px 14px;
+  font-size: 12px;
+  white-space: nowrap;
+}

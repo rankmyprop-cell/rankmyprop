@@ -11,6 +11,10 @@ const polish = document.createElement("link");
 polish.rel = "stylesheet";
 polish.href = "/games-polish.css?v=20261001";
 document.head.append(polish);
+const controls = document.createElement("link");
+controls.rel = "stylesheet";
+controls.href = "/games-controls.css?v=20261001-3";
+document.head.append(controls);
 const $=s=>document.querySelector(s),app=$("#gameApp"),qs=v=>String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));
 function reportHeight(){if(window.parent===window)return;requestAnimationFrame(()=>window.parent.postMessage({type:"rmp-games-height",height:Math.ceil(Math.max(document.body.scrollHeight,document.documentElement.scrollHeight))},location.origin))}
 if(window.parent!==window){if("ResizeObserver" in window)new ResizeObserver(reportHeight).observe(document.body);window.addEventListener("load",()=>{reportHeight();setTimeout(reportHeight,250);setTimeout(reportHeight,1000)});window.addEventListener("message",event=>{if(event.origin===location.origin&&event.data?.type==="rmp-games-resize-request")reportHeight()})}
