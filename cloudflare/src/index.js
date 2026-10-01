@@ -199,6 +199,34 @@ async function requestReferralWithdrawal(request, env) {
   return json({ ok: true, withdrawal: { id, coins, amountInr: inr, method, status: "Pending" } }, 201);
 }
 
+async function chessHint(request, env) {
+  const user = await requireUser(request, env);
+  const input = await body(request);
+  const matchId = String(input.matchId || "").trim();
+  const kind = String(input.kind || "").trim();
+  if (!/^[A-Za-z0-9_-]{12,100}$/.test(matchId) || !["move", "threat"].includes(kind)) return json({ error: "Invalid chess hint request." }, 400);
+  const row = await env.DB.prepare("SELECT COUNT(*) AS total FROM game_hint_uses WHERE uid=? AND match_id=?").bind(user.uid, matchId).first();
+  const used = Number(row?.total || 0);
+  if (used >= 5) return json({ error: "You have used all 5 hints for this match." }, 400);
+  const charged = used === 0 ? 0 : 5;
+  if (charged) {
+    const debit = await env.DB.prepare("UPDATE referral_wallets SET balance_coins=balance_coins-5,spent_coins=spent_coins+5,updated_at=CURRENT_TIMESTAMP WHERE uid=? AND balance_coins>=5").bind(user.uid).run();
+    if (!Number(debit?.meta?.changes || 0)) return json({ error: "You need 5 Ranko Coins for your next hint." }, 400);
+  }
+  const id = ID();
+  try {
+    await env.DB.batch([
+      env.DB.prepare("INSERT INTO game_hint_uses(id,uid,match_id,hint_number,hint_kind,coins_charged) VALUES(?,?,?,?,?,?)").bind(id, user.uid, matchId, used + 1, kind, charged),
+      env.DB.prepare("INSERT INTO referral_ledger(id,uid,amount_coins,type,related_id,note) VALUES(?,?,?,'chess_hint',?,?)").bind(ID(), user.uid, -charged, id, charged ? "Chess hint used (5 Ranko Coins)" : "Chess welcome hint used (free)")
+    ]);
+  } catch (error) {
+    if (charged) await env.DB.prepare("UPDATE referral_wallets SET balance_coins=balance_coins+5,spent_coins=MAX(0,spent_coins-5),updated_at=CURRENT_TIMESTAMP WHERE uid=?").bind(user.uid).run();
+    throw error;
+  }
+  const wallet = await env.DB.prepare("SELECT balance_coins AS balance FROM referral_wallets WHERE uid=?").bind(user.uid).first();
+  return json({ ok: true, kind, used: used + 1, remaining: 4 - used, charged, balance: Number(wallet?.balance || 0) });
+}
+
 async function adminReferralWithdrawals(request, env) {
   const admin = await requireAdmin(request, env);
   if (request.method === "GET") {
@@ -424,6 +452,7 @@ async function router(request, env) {
   }
   if (path === "/api/referral-withdrawals") return adminReferralWithdrawals(request, env);
   if (path === "/api/referral-credits") return adminReferralCredits(request, env);
+  if (path === "/api/games/chess-hint" && request.method === "POST") return chessHint(request, env);
   if (path === "/v1/migration/import" && request.method === "POST") return importDocuments(request, env);
   if (path === "/v1/migration/auth" && request.method === "POST") return importAuthUsers(request, env);
   if (path === "/v1/auth/exchange" && request.method === "POST") return exchangeAuth(request, env);
