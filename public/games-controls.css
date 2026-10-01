@@ -15,3 +15,7 @@
   font-size: 12px;
   white-space: nowrap;
 }
+
+.game-card[data-open="ludo"] {
+  display: none;
+}

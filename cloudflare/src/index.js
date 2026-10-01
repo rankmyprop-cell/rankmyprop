@@ -232,7 +232,7 @@ async function startGame(request, env) {
   if (!user) return json({ error: "Sign in to play games." }, 401);
   const input = await body(request);
   const game = String(input.game || "").trim();
-  if (!["quiz", "snake", "chess", "ludo"].includes(game)) return json({ error: "Unknown game." }, 400);
+  if (!["quiz", "snake", "chess"].includes(game)) return json({ error: "Unknown game." }, 400);
   const row = await env.DB.prepare("SELECT COUNT(*) AS total FROM game_play_sessions WHERE uid=? AND game=? AND played_at > datetime('now','-24 hours')").bind(user.uid, game).first();
   const used = Number(row?.total || 0);
   if (used >= 2) return json({ error: "You have used both plays for this game. Try again after your 24-hour window resets." }, 429);
