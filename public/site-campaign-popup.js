@@ -55,13 +55,21 @@ function mountPopup(settings) {
   popup.setAttribute("role", "dialog");
   popup.setAttribute("aria-modal", "true");
   popup.setAttribute("aria-label", settings.name || "Website offer");
-  const close = () => {
-    if (!open) return;
+  let closed = false;
+  const close = (event) => {
+    event?.preventDefault?.();
+    event?.stopPropagation?.();
+    if (closed) return;
+    closed = true;
     open = false;
+    if (timer) window.clearTimeout(timer);
+    window.removeEventListener("scroll", onScroll);
+    document.removeEventListener("keydown", onKeydown);
     try { sessionStorage.setItem(DISMISSED_KEY, "1"); } catch { /* Current page stays dismissed. */ }
     popup.classList.add("is-closing");
-    window.setTimeout(() => popup.remove(), 190);
+    window.setTimeout(() => popup.remove(), 220);
   };
+  const onKeydown = (event) => { if (event.key === "Escape") close(event); };
   const onScroll = () => {
     if (open || timer || window.scrollY < 120) return;
     const delay = Math.max(0, Math.min(30, Number(settings.openDelay ?? 2))) * 1000;
@@ -89,6 +97,7 @@ function mountPopup(settings) {
   closeButton.setAttribute("aria-label", "Close popup");
   closeButton.textContent = "×";
   closeButton.addEventListener("click", close);
+  closeButton.addEventListener("pointerup", close);
   const targetUrl = safeUrl(settings.targetUrl);
   let image;
   if (targetUrl) {
@@ -110,8 +119,12 @@ function mountPopup(settings) {
   image.alt = String(settings.alt || "Rank My Prop offer");
   card.append(closeButton);
   popup.append(backdrop, card);
+  popup.addEventListener("click", (event) => {
+    if (event.target === popup || event.target === backdrop || event.target.closest?.(".rmp-campaign-close")) close(event);
+  }, true);
   document.body.append(popup);
   window.addEventListener("scroll", onScroll, { passive: true });
+  document.addEventListener("keydown", onKeydown);
   onScroll();
   window.addEventListener("pagehide", () => { if (timer) window.clearTimeout(timer); }, { once: true });
 }
