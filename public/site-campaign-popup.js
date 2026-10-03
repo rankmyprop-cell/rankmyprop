@@ -3,11 +3,12 @@ import { doc, getDoc, getFirestore } from "https://www.gstatic.com/firebasejs/10
 import { firebaseConfig } from "/firebase-config.js";
 
 const DISMISSED_KEY = "rmp:website-popup:dismissed";
-let dismissedForSession = false;
+const STATE_KEY = "__rmpCampaignPopupState";
+const popupState = window[STATE_KEY] || (window[STATE_KEY] = { dismissed: false, mounted: false });
 try {
   const navigation = performance.getEntriesByType("navigation")[0];
   if (navigation?.type === "reload") sessionStorage.removeItem(DISMISSED_KEY);
-  dismissedForSession = sessionStorage.getItem(DISMISSED_KEY) === "1";
+  popupState.dismissed = sessionStorage.getItem(DISMISSED_KEY) === "1";
 } catch { /* Storage may be unavailable in restricted browser contexts. */ }
 
 const safeUrl = (value) => {
@@ -47,7 +48,8 @@ function matchesTarget(campaign) {
 
 function mountPopup(settings) {
   const imageUrl = safeUrl(settings.imageUrl);
-  if (!settings.enabled || !imageUrl || document.querySelector(".rmp-campaign-popup")) return;
+  if (!settings.enabled || !imageUrl || popupState.dismissed || popupState.mounted || document.querySelector(".rmp-campaign-popup")) return;
+  popupState.mounted = true;
   let timer = 0;
   let open = false;
   const popup = document.createElement("div");
@@ -65,16 +67,16 @@ function mountPopup(settings) {
     if (timer) window.clearTimeout(timer);
     window.removeEventListener("scroll", onScroll);
     document.removeEventListener("keydown", onKeydown);
+    popupState.dismissed = true;
+    popupState.mounted = false;
     try { sessionStorage.setItem(DISMISSED_KEY, "1"); } catch { /* Current page stays dismissed. */ }
-    // Clear the page-covering layer first. The card can finish its exit motion,
-    // but a delayed animation must never leave the website dark underneath.
-    backdrop.style.opacity = "0";
-    backdrop.style.backdropFilter = "none";
-    popup.style.background = "transparent";
-    popup.classList.add("is-closing");
-    const removePopup = () => popup.remove();
-    popup.addEventListener("animationend", removePopup, { once: true });
-    window.setTimeout(removePopup, 260);
+    // Clear every campaign layer in this document. This protects against an
+    // older cached module resolving late and creating a second overlay.
+    document.querySelectorAll(".rmp-campaign-popup").forEach((element) => {
+      element.style.pointerEvents = "none";
+      element.style.opacity = "0";
+      element.remove();
+    });
   };
   const onKeydown = (event) => { if (event.key === "Escape") close(event); };
   const onScroll = () => {
@@ -137,7 +139,7 @@ function mountPopup(settings) {
 }
 
 try {
-  if (dismissedForSession) throw new Error("popup dismissed for this tab session");
+  if (popupState.dismissed) throw new Error("popup dismissed for this tab session");
   const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
   const firestore = getFirestore(app);
   const [multi, legacy] = await Promise.all([
@@ -146,8 +148,8 @@ try {
   ]);
   const campaigns = Array.isArray(multi.data()?.campaigns) ? multi.data().campaigns : [];
   const selected = campaigns.filter(matchesTarget).sort((a, b) => Number(b.priority || 0) - Number(a.priority || 0) || Number(b.updatedAt || 0) - Number(a.updatedAt || 0))[0];
-  if (selected) mountPopup(selected);
-  else if (!campaigns.length && legacy.exists()) mountPopup(legacy.data() || {});
+  if (!popupState.dismissed && selected) mountPopup(selected);
+  else if (!popupState.dismissed && !campaigns.length && legacy.exists()) mountPopup(legacy.data() || {});
 } catch (error) {
   if (error?.message !== "popup dismissed for this tab session") console.warn("Website campaign popup could not load.", error);
 }

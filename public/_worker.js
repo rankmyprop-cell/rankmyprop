@@ -145,7 +145,7 @@ function withCampaignPopup(response, pathname) {
       element.append('<link rel="stylesheet" href="/site-campaign-popup.css">', { html: true });
     } })
     .on("body", { element(element) {
-      element.append('<script type="module" src="/site-campaign-popup.js?v=20261003-4"></script>', { html: true });
+      element.append('<script type="module" src="/site-campaign-popup.js?v=20261003-5"></script>', { html: true });
     } })
     .transform(response);
 }
