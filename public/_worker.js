@@ -137,15 +137,15 @@ function canonicalComparison(url) {
 
 function withCampaignPopup(response, pathname) {
   if (response.status < 200 || response.status >= 300 || !response.headers.get("content-type")?.includes("text/html")) return response;
-  // The React homepage already renders this feature itself. Admin and account
-  // workspaces stay clear of public campaign overlays.
-  if (pathname === "/" || /^\/(?:admin(?:-|\/|$)|dashboard(?:-|\/|$)|client-dashboard(?:\/|$)|login(?:\/|$)|signup(?:\/|$)|verify-email(?:\.html)?$)/i.test(pathname)) return response;
+  // Admin and account workspaces stay clear of public campaign overlays.
+  // Public campaign targeting includes the homepage as well as deep links.
+  if (/^\/(?:admin(?:-|\/|$)|dashboard(?:-|\/|$)|client-dashboard(?:\/|$)|login(?:\/|$)|signup(?:\/|$)|verify-email(?:\.html)?$)/i.test(pathname)) return response;
   return new HTMLRewriter()
     .on("head", { element(element) {
       element.append('<link rel="stylesheet" href="/site-campaign-popup.css">', { html: true });
     } })
     .on("body", { element(element) {
-      element.append('<script type="module" src="/site-campaign-popup.js?v=20261003-1"></script>', { html: true });
+      element.append('<script type="module" src="/site-campaign-popup.js?v=20261003-2"></script>', { html: true });
     } })
     .transform(response);
 }
