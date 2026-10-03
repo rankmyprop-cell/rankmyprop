@@ -66,8 +66,15 @@ function mountPopup(settings) {
     window.removeEventListener("scroll", onScroll);
     document.removeEventListener("keydown", onKeydown);
     try { sessionStorage.setItem(DISMISSED_KEY, "1"); } catch { /* Current page stays dismissed. */ }
+    // Clear the page-covering layer first. The card can finish its exit motion,
+    // but a delayed animation must never leave the website dark underneath.
+    backdrop.style.opacity = "0";
+    backdrop.style.backdropFilter = "none";
+    popup.style.background = "transparent";
     popup.classList.add("is-closing");
-    window.setTimeout(() => popup.remove(), 220);
+    const removePopup = () => popup.remove();
+    popup.addEventListener("animationend", removePopup, { once: true });
+    window.setTimeout(removePopup, 260);
   };
   const onKeydown = (event) => { if (event.key === "Escape") close(event); };
   const onScroll = () => {
