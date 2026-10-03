@@ -142,7 +142,7 @@ function withCampaignPopup(response, pathname) {
   if (/^\/(?:admin(?:-|\/|$)|dashboard(?:-|\/|$)|client-dashboard(?:\/|$)|login(?:\/|$)|signup(?:\/|$)|verify-email(?:\.html)?$)/i.test(pathname)) return response;
   return new HTMLRewriter()
     .on("head", { element(element) {
-      element.append('<link rel="stylesheet" href="/site-campaign-popup.css">', { html: true });
+      element.append('<link rel="stylesheet" href="/site-campaign-popup.css?v=20261003-6">', { html: true });
     } })
     .on("body", { element(element) {
       element.append('<script type="module" src="/site-campaign-popup.js?v=20261003-5"></script>', { html: true });
