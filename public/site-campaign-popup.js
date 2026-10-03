@@ -17,15 +17,48 @@ const safeUrl = (value) => {
   } catch { return ""; }
 };
 
+const slugify = (value) => String(value || "").toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+
+function pageFirmSlug() {
+  const url = new URL(location.href);
+  const parts = url.pathname.split("/").filter(Boolean);
+  if ((parts[0] === "prop-firms" || parts[0] === "prop-firm-rules" || parts[0] === "offers") && parts[1]) return slugify(parts[1]);
+  const querySlug = url.searchParams.get("firm") || url.searchParams.get("slug") || url.searchParams.get("firmSlug");
+  return slugify(querySlug);
+}
+
+function matchesPath(pattern) {
+  const clean = String(pattern || "").trim();
+  if (!clean) return false;
+  const path = location.pathname.replace(/\/+$/, "") || "/";
+  const normalized = clean.startsWith("/") ? clean.replace(/\/+$/, "") || "/" : `/${clean.replace(/\/+$/, "")}`;
+  if (normalized.endsWith("*")) return path.startsWith(normalized.slice(0, -1));
+  return path === normalized;
+}
+
+function matchesTarget(campaign) {
+  if (!campaign?.enabled) return false;
+  const mode = String(campaign.targetMode || "all");
+  if (mode === "all") return true;
+  if (mode === "firm") return Boolean(campaign.targetFirmSlug) && pageFirmSlug() === slugify(campaign.targetFirmSlug);
+  if (mode === "paths") return Array.isArray(campaign.targetPaths) && campaign.targetPaths.some(matchesPath);
+  return false;
+}
+
 function mountPopup(settings) {
   const imageUrl = safeUrl(settings.imageUrl);
   if (!settings.enabled || !imageUrl || document.querySelector(".rmp-campaign-popup")) return;
   let timer = 0;
   let open = false;
+  const popup = document.createElement("div");
+  popup.className = "rmp-campaign-popup";
+  popup.setAttribute("role", "dialog");
+  popup.setAttribute("aria-modal", "true");
+  popup.setAttribute("aria-label", settings.name || "Website offer");
   const close = () => {
     if (!open) return;
     open = false;
-    try { sessionStorage.setItem(DISMISSED_KEY, "1"); } catch { /* Keep the current page dismissed. */ }
+    try { sessionStorage.setItem(DISMISSED_KEY, "1"); } catch { /* Current page stays dismissed. */ }
     popup.classList.add("is-closing");
     window.setTimeout(() => popup.remove(), 190);
   };
@@ -36,17 +69,11 @@ function mountPopup(settings) {
       timer = 0;
       if (window.scrollY < 120) return;
       open = true;
-      try { sessionStorage.setItem(DISMISSED_KEY, "1"); } catch { /* Popup remains limited to this page. */ }
+      try { sessionStorage.setItem(DISMISSED_KEY, "1"); } catch { /* Current page stays dismissed. */ }
       popup.classList.add("is-visible");
       window.removeEventListener("scroll", onScroll);
     }, delay);
   };
-
-  const popup = document.createElement("div");
-  popup.className = "rmp-campaign-popup";
-  popup.setAttribute("role", "dialog");
-  popup.setAttribute("aria-modal", "true");
-  popup.setAttribute("aria-label", "Website offer");
   const backdrop = document.createElement("button");
   backdrop.className = "rmp-campaign-backdrop";
   backdrop.type = "button";
@@ -92,8 +119,15 @@ function mountPopup(settings) {
 try {
   if (dismissedForSession) throw new Error("popup dismissed for this tab session");
   const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
-  const snapshot = await getDoc(doc(getFirestore(app), "siteSettings", "websitePopup"));
-  if (snapshot.exists()) mountPopup(snapshot.data() || {});
+  const firestore = getFirestore(app);
+  const [multi, legacy] = await Promise.all([
+    getDoc(doc(firestore, "siteSettings", "websitePopups")),
+    getDoc(doc(firestore, "siteSettings", "websitePopup"))
+  ]);
+  const campaigns = Array.isArray(multi.data()?.campaigns) ? multi.data().campaigns : [];
+  const selected = campaigns.filter(matchesTarget).sort((a, b) => Number(b.priority || 0) - Number(a.priority || 0) || Number(b.updatedAt || 0) - Number(a.updatedAt || 0))[0];
+  if (selected) mountPopup(selected);
+  else if (!campaigns.length && legacy.exists()) mountPopup(legacy.data() || {});
 } catch (error) {
   if (error?.message !== "popup dismissed for this tab session") console.warn("Website campaign popup could not load.", error);
 }
