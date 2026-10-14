@@ -1863,9 +1863,20 @@
   const normalizeDetailSlug = (v = "") => slugify(v);
   let detailLoadToken = 0;
   let lastFirmLookupKey = "";
-  const toList = (v) => Array.isArray(v) ? v.map((x) => String(x || "").trim()).filter(Boolean) : typeof v === "string" ? v.split(/[,\n|]+/).map((x) => x.trim()).filter(Boolean) : [];
+  const parseStructuredValue = (value) => {
+    if (typeof value !== "string") return value;
+    const text = value.trim();
+    if (!text || !/^[\[{]/.test(text)) return value;
+    try { return JSON.parse(text); } catch (_) { return value; }
+  };
+  const toList = (input) => {
+    const value = parseStructuredValue(input);
+    if (Array.isArray(value)) return value.map((x) => String(x || "").trim()).filter(Boolean);
+    if (value && typeof value === "object") return Object.values(value).map((x) => String(x || "").trim()).filter(Boolean);
+    return typeof value === "string" ? value.split(/[,\n|]+/).map((x) => x.trim()).filter(Boolean) : [];
+  };
   const toPlatforms = (row = {}) => { const allowed = new Set(["mt4","metatrader4","mt5","metatrader5","ctrader","matchtrader","tradelocker","dxtrade","tradingview"]); return [row.platforms, row.tradingPlatforms, row.platform, row.supportedPlatforms].flatMap(toList).filter((name, index, all) => { const key = String(name).toLowerCase().replace(/[^a-z0-9]/g, ""); return allowed.has(key) && all.findIndex((item) => String(item).toLowerCase().replace(/[^a-z0-9]/g, "") === key) === index; }); };
-  const toPairs = (v, fallback = null) => { const source = v && (Array.isArray(v) ? v.length : typeof v === "object" ? Object.keys(v).length : 0) ? v : fallback; if (Array.isArray(source)) return source; if (source && typeof source === "object") return Object.entries(source).map(([label, value]) => ({ label: String(label).replace(/([a-z])([A-Z])/g, (m, a, b) => a + " " + b).replace(/^./, (c) => c.toUpperCase()), value: String(value ?? "-") })); return []; };
+  const toPairs = (v, fallback = null) => { const parsed = parseStructuredValue(v); const backup = parseStructuredValue(fallback); const source = parsed && (Array.isArray(parsed) ? parsed.length : typeof parsed === "object" ? Object.keys(parsed).length : 0) ? parsed : backup; if (Array.isArray(source)) return source.filter((row) => row && typeof row === "object"); if (source && typeof source === "object") return Object.entries(source).map(([label, value]) => ({ label: String(label).replace(/([a-z])([A-Z])/g, (m, a, b) => a + " " + b).replace(/^./, (c) => c.toUpperCase()), value: String(value ?? "-") })); return []; };
   const slugify = (text = "") => String(text || "").toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
   const byId = (id) => document.getElementById(id);
   const setText = (id, value) => { const el = byId(id); if (el) el.textContent = String(value ?? ""); };
@@ -1950,7 +1961,13 @@
   ];
   const isBlankProfileValue = (value) => {
     if (value == null) return true;
-    if (typeof value === "string") return !value.trim() || /^(?:-|n\/a|na|null|undefined)$/i.test(value.trim()) || /detail content can be managed from admin panel/i.test(value);
+    if (typeof value === "string") {
+      const trimmed = value.trim();
+      if (!trimmed || /^(?:-|n\/a|na|null|undefined)$/i.test(trimmed) || /detail content can be managed from admin panel/i.test(trimmed)) return true;
+      const parsed = parseStructuredValue(trimmed);
+      if (parsed !== value) return Array.isArray(parsed) ? parsed.length === 0 : parsed && typeof parsed === "object" ? Object.keys(parsed).length === 0 : false;
+      return false;
+    }
     if (Array.isArray(value)) return value.length === 0;
     if (typeof value === "object") return Object.keys(value).length === 0;
     return false;
@@ -2469,7 +2486,7 @@
   function renderPairsTable(id, rows) {
     const table = byId(id);
     if (!table) return;
-    table.innerHTML = (Array.isArray(rows) ? rows : []).map((row) => {
+    table.innerHTML = toPairs(rows).map((row) => {
       const rawLabel = String(row?.label || row?.name || "-");
       const rawValue = String(row?.value || "-");
       const label = escapeHtml(rawLabel);
@@ -2800,7 +2817,7 @@
     setText("firmOverviewLongTitle", String(row?.overviewLongTitle || "Detailed Overview"));
     renderLongOverview(String(row?.overviewLong || row?.overview || row?.bio || ""));
 
-    renderPairsTable("firmDetailsTable", Array.isArray(row?.firmDetails) ? row.firmDetails : []);
+    renderPairsTable("firmDetailsTable", row?.firmDetails);
     renderProsCons(row || {});
     renderPlatforms(toPlatforms(row));
     renderAiSummary(row);

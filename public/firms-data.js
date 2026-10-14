@@ -254,6 +254,31 @@ export const DEFAULT_LISTED_FIRMS = [
     bio: "High profit split options.",
     website: "finotivefunding.com",
     country: "Global",
+    headquarters: "UAE",
+    metaHeadquarters: "UAE",
+    founded: "2023",
+    metaFounded: "2023",
+    ceo: "Sean Ballation",
+    metaCeo: "Sean Ballation",
+    platforms: ["MT5", "DXTrade", "cTrader"],
+    firmDetails: [
+      { label: "Company Name", value: "Finotive Funding" },
+      { label: "Headquarters", value: "Dubai, UAE" },
+      { label: "CEO", value: "Sean Ballation" },
+      { label: "Payout Frequency", value: "Every 14 Days" }
+    ],
+    keyMetrics: [
+      { label: "Max Allocation", value: "$4,000,000" },
+      { label: "Profit Split", value: "Up to 90%" },
+      { label: "Payout Cycle", value: "14 Days" }
+    ],
+    tradingConditions: [
+      { label: "Daily Drawdown", value: "3% - 5%" },
+      { label: "Maximum Drawdown", value: "6% - 10%" },
+      { label: "Leverage", value: "Up to 1:100" }
+    ],
+    restrictedCountries: ["Bangladesh", "Belarus", "Malaysia", "Russia"],
+    whyChoose: ["High Profit Split up to 95%", "No Minimum Trading Days", "Multiple Platforms"],
     tags: ["Forex"],
     verified: false,
     followers: 690,
