@@ -594,15 +594,6 @@
     }
 
     .expand-section {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
-      opacity: 0;
-    }
-
-    .expand-section.active {
-      max-height: 1000px;
-      opacity: 1;
       margin-top: 12px;
     }
 
@@ -1215,7 +1206,6 @@
             <p id="firmOverviewShort" style="font-size: 14px; color: var(--text-secondary); line-height: 1.6; margin: 0;">
                 AquaFunded is a leading proprietary trading firm built for traders who value high-performance technology, competitive profit shares, and a sustainable trading environment...
             </p>
-            <div style="color: var(--accent); font-size: 13px; margin-top: 15px; cursor: pointer;" onclick="toggleMainExpand()">Show More ⌵</div>
             <div id="mainExpand" class="expand-section">
                 <h4 id="firmOverviewLongTitle" style="margin: 20px 0 10px 0; font-size: 15px;">Detailed Overview</h4>
                 <div id="firmOverviewLongContent" style="font-size: 13px; color: var(--text-secondary); line-height: 1.85;">
@@ -1448,11 +1438,6 @@
       mobileMenu.classList.toggle("open");
     });
     mobileMenu.addEventListener("click", (e) => e.stopPropagation());
-  }
-
-  function toggleMainExpand() {
-    const section = document.getElementById('mainExpand');
-    section.classList.toggle('active');
   }
 
   (function initDetailViewTabs(){
