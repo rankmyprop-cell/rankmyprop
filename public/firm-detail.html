@@ -419,24 +419,35 @@
       margin-bottom: 24px;
     }
 
-    .firm-pros-cons{position:relative;overflow:hidden;background:radial-gradient(600px 220px at 0% 0%,rgba(111,75,255,.13),transparent 68%),linear-gradient(145deg,rgba(18,16,32,.98),rgba(9,10,17,.98));border-color:rgba(144,113,255,.27);box-shadow:0 20px 48px rgba(0,0,0,.22)}
+    .firm-pros-cons{position:relative;overflow:hidden;background:radial-gradient(600px 220px at 0% 0%,rgba(111,75,255,.16),transparent 68%),linear-gradient(145deg,rgba(18,16,32,.98),rgba(9,10,17,.98));border-color:rgba(144,113,255,.3);box-shadow:0 20px 48px rgba(0,0,0,.22)}
     .firm-pros-cons:after{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:linear-gradient(180deg,#a879ff,#7054ff 55%,#35d9b0)}
     .firm-pros-cons-head{display:flex;align-items:center;justify-content:space-between;gap:16px}
     .firm-pros-cons-kicker{color:#b99bff;font-size:10px;font-weight:800;letter-spacing:.18em}
     .firm-pros-cons .section-title{margin:5px 0 0;font-size:22px;letter-spacing:-.04em}
     .firm-pros-cons-mark{display:grid;place-items:center;width:42px;height:42px;border-radius:14px;color:#d8c6ff;font-size:21px;background:linear-gradient(145deg,rgba(126,83,255,.24),rgba(56,215,181,.1));border:1px solid rgba(161,130,255,.2)}
     .firm-pros-cons-intro{margin:8px 0 20px;color:var(--text-secondary);font-size:13px;line-height:1.6}
-    .firm-pros-cons-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-    .firm-pros-cons-column{min-width:0;padding:17px;border-radius:14px;background:rgba(6,8,15,.62);border:1px solid rgba(255,255,255,.075)}
-    .firm-pros-cons-column h4{display:flex;align-items:center;gap:9px;margin:0 0 13px;font-size:14px;font-weight:800}
-    .firm-pros-cons-column h4 span{display:grid;place-items:center;width:23px;height:23px;border-radius:8px;font-size:15px}
-    .firm-pros-cons-column.is-pros h4{color:#8de8c1}.firm-pros-cons-column.is-pros h4 span{background:rgba(42,207,144,.13);color:#5ee0aa}
-    .firm-pros-cons-column.is-cons h4{color:#ffb2bd}.firm-pros-cons-column.is-cons h4 span{background:rgba(255,93,119,.12);color:#ff8798}
-    .firm-pros-cons-column ul{display:grid;gap:10px;margin:0;padding:0;list-style:none}
-    .firm-pros-cons-column li{position:relative;padding-left:20px;color:#d5d4e2;font-size:12.5px;line-height:1.6;overflow-wrap:anywhere}
-    .firm-pros-cons-column li:before{position:absolute;left:0;top:0;font-weight:900}
+    .firm-pros-cons-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+    .firm-pros-cons-column{position:relative;min-width:0;padding:18px;border-radius:16px;background:linear-gradient(145deg,rgba(15,17,27,.94),rgba(8,9,16,.86));border:1px solid rgba(255,255,255,.09);box-shadow:inset 0 1px rgba(255,255,255,.035)}
+    .firm-pros-cons-column:before{content:"";position:absolute;inset:0 0 auto;height:2px;background:linear-gradient(90deg,transparent,currentColor,transparent);opacity:.55}
+    .firm-pros-cons-column.is-pros{color:#5ee0aa;background:radial-gradient(260px 130px at 0% 0%,rgba(42,207,144,.09),transparent 75%),linear-gradient(145deg,rgba(15,22,25,.96),rgba(8,9,16,.88))}
+    .firm-pros-cons-column.is-cons{color:#ff8798;background:radial-gradient(260px 130px at 0% 0%,rgba(255,93,119,.08),transparent 75%),linear-gradient(145deg,rgba(24,16,23,.96),rgba(8,9,16,.88))}
+    .firm-pros-cons-column-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:15px}
+    .firm-pros-cons-column-title{display:flex;align-items:center;gap:10px;min-width:0}
+    .firm-pros-cons-column h4{margin:0;color:#f4f1fb;font-size:15px;font-weight:800;letter-spacing:-.02em}
+    .firm-pros-cons-icon{display:grid;place-items:center;flex:0 0 32px;width:32px;height:32px;border-radius:11px;font-size:17px;font-weight:800;background:rgba(42,207,144,.14);color:#5ee0aa}
+    .firm-pros-cons-column.is-cons .firm-pros-cons-icon{background:rgba(255,93,119,.13);color:#ff8798}
+    .firm-pros-cons-eyebrow{display:block;margin-bottom:3px;color:#9894a8;font-size:9px;font-weight:800;letter-spacing:.14em}
+    .firm-pros-cons-count{flex:0 0 auto;padding:5px 8px;border-radius:999px;border:1px solid rgba(94,224,170,.2);background:rgba(42,207,144,.07);color:#7ee8bb;font-size:10px;font-weight:750;white-space:nowrap}
+    .firm-pros-cons-column.is-cons .firm-pros-cons-count{border-color:rgba(255,135,152,.2);background:rgba(255,93,119,.07);color:#ffabb5}
+    .firm-pros-cons-column ul{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+    .firm-pros-cons-column li{position:relative;padding:10px 11px 10px 32px;border:1px solid rgba(255,255,255,.055);border-radius:11px;background:rgba(255,255,255,.025);color:#d8d6e2;font-size:12.5px;line-height:1.55;overflow-wrap:anywhere}
+    .firm-pros-cons-column li:before{position:absolute;left:12px;top:10px;font-weight:900}
     .firm-pros-cons-column.is-pros li:before{content:"✓";color:#5ee0aa}.firm-pros-cons-column.is-cons li:before{content:"!";color:#ff8798}
-    .firm-pros-cons-empty{color:#8f8b9f!important;font-style:italic}
+    .firm-pros-cons-column li.firm-pros-cons-empty{display:flex;align-items:flex-start;gap:10px;padding:13px;border-style:dashed;background:rgba(255,255,255,.018);color:#a6a2b4}
+    .firm-pros-cons-column li.firm-pros-cons-empty:before{content:"✦";position:static;flex:0 0 auto;color:#b99bff}
+    .firm-pros-cons-empty-copy strong,.firm-pros-cons-empty-copy small{display:block}
+    .firm-pros-cons-empty-copy strong{margin-bottom:3px;color:#e4e0ee;font-size:12px;font-style:normal}
+    .firm-pros-cons-empty-copy small{color:#9894a8;font-size:11px;line-height:1.5;font-style:normal}
     @media(max-width:640px){.firm-pros-cons{padding:18px}.firm-pros-cons-grid{grid-template-columns:1fr;gap:10px}.firm-pros-cons-column{padding:15px}.firm-pros-cons .section-title{font-size:20px}}
 
     .radar-container {
@@ -1221,11 +1232,11 @@
             <p class="firm-pros-cons-intro">A balanced look at what traders may like and what to consider.</p>
             <div class="firm-pros-cons-grid">
                 <section class="firm-pros-cons-column is-pros" aria-labelledby="firmProsTitle">
-                    <h4 id="firmProsTitle"><span aria-hidden="true">＋</span> Pros</h4>
+                    <div class="firm-pros-cons-column-head"><div class="firm-pros-cons-column-title"><span class="firm-pros-cons-icon" aria-hidden="true">＋</span><div><span class="firm-pros-cons-eyebrow">TRADER UPSIDE</span><h4 id="firmProsTitle">Pros</h4></div></div><span class="firm-pros-cons-count" id="firmProsCount">0 points</span></div>
                     <ul id="firmProsList"></ul>
                 </section>
                 <section class="firm-pros-cons-column is-cons" aria-labelledby="firmConsTitle">
-                    <h4 id="firmConsTitle"><span aria-hidden="true">−</span> Cons</h4>
+                    <div class="firm-pros-cons-column-head"><div class="firm-pros-cons-column-title"><span class="firm-pros-cons-icon" aria-hidden="true">−</span><div><span class="firm-pros-cons-eyebrow">BEFORE YOU CHOOSE</span><h4 id="firmConsTitle">Cons</h4></div></div><span class="firm-pros-cons-count" id="firmConsCount">0 points</span></div>
                     <ul id="firmConsList"></ul>
                 </section>
             </div>
@@ -2464,17 +2475,19 @@
   }
 
   function renderProsCons(data = {}) {
-    const renderList = (id, items, emptyText) => {
+    const renderList = (id, countId, items, emptyText, emptyTitle) => {
       const list = byId(id);
       if (!list) return;
       const lines = toList(items);
+      const count = byId(countId);
+      if (count) count.textContent = `${lines.length} ${lines.length === 1 ? "point" : "points"}`;
       list.innerHTML = lines.length
         ? lines.map((line) => `<li>${escapeHtml(line)}</li>`).join("")
-        : `<li class="firm-pros-cons-empty">${escapeHtml(emptyText)}</li>`;
+        : `<li class="firm-pros-cons-empty"><span class="firm-pros-cons-empty-copy"><strong>${escapeHtml(emptyTitle)}</strong><small>${escapeHtml(emptyText)}</small></span></li>`;
     };
     const source = data?.prosCons && typeof data.prosCons === "object" ? data.prosCons : data;
-    renderList("firmProsList", source?.pros, "No pros have been added yet.");
-    renderList("firmConsList", source?.cons, "No cons have been added yet.");
+    renderList("firmProsList", "firmProsCount", source?.pros, "Firm highlights will appear here when available.", "No pros listed yet");
+    renderList("firmConsList", "firmConsCount", source?.cons, "Trading considerations will appear here when available.", "No cons listed yet");
   }
 
   function renderPlatforms(list) {
