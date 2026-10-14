@@ -596,6 +596,9 @@
     .expand-section {
       margin-top: 12px;
     }
+    .expand-section[hidden] { display:none; }
+    .overview-expand-toggle{display:inline-flex;align-items:center;gap:6px;margin-top:16px;padding:0;border:0;background:transparent;color:var(--accent);font:inherit;font-size:13px;font-weight:700;cursor:pointer}
+    .overview-expand-toggle:hover{color:#bda4ff}
 
     .btn-purple {
       background: var(--accent);
@@ -1212,6 +1215,7 @@
                     <p style="margin:0 0 14px 0;"></p>
                 </div>
             </div>
+            <button id="firmOverviewToggle" class="overview-expand-toggle" type="button" aria-expanded="true">Show less ⌃</button>
         </div>
 
         <div class="glass-card">
@@ -1438,6 +1442,17 @@
       mobileMenu.classList.toggle("open");
     });
     mobileMenu.addEventListener("click", (e) => e.stopPropagation());
+  }
+
+  const overviewToggle = document.getElementById("firmOverviewToggle");
+  const overviewContent = document.getElementById("mainExpand");
+  if (overviewToggle && overviewContent) {
+    overviewToggle.addEventListener("click", () => {
+      const isOpen = !overviewContent.hidden;
+      overviewContent.hidden = isOpen;
+      overviewToggle.setAttribute("aria-expanded", String(!isOpen));
+      overviewToggle.textContent = isOpen ? "Show more ⌄" : "Show less ⌃";
+    });
   }
 
   (function initDetailViewTabs(){
