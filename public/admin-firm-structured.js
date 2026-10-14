@@ -12,8 +12,6 @@
 
   var columnEditors = [
     ["radarMetricsJson", "Performance Radar", ["label", "short", "value"], ["Full label", "Short label", "Score"]],
-    ["leverageRowsJson", "Leverage Rows", ["instrument", "c1", "c2", "c3", "c4"], ["Instrument", "Option 1", "Option 2", "Option 3", "Variable"]],
-    ["commissionsJson", "Commissions", ["title", "lines"], ["Market", "Commission lines"]],
     ["evaluationProgramsJson", "Evaluation Programs", ["program", "phase1", "phase2", "target", "allocation", "split", "features"], ["Program", "Phase 1", "Phase 2", "Target", "Allocation", "Profit split", "Features"]]
   ];
 
@@ -49,7 +47,8 @@
       ".rmp-editor-row label{display:grid;gap:5px;color:#aeb6d5;font-size:11px;font-weight:700}.rmp-editor-row input,.rmp-editor-row textarea{width:100%;min-height:40px;padding:9px 10px;border:1px solid rgba(255,255,255,.13);border-radius:8px;background:#0d0f19;color:#fff;font:inherit}" +
       ".rmp-add,.rmp-remove{border:0;border-radius:8px;padding:9px 12px;color:#fff;font:inherit;font-size:12px;font-weight:800;cursor:pointer}.rmp-add{background:#6757f5}.rmp-remove{background:#35202b;color:#ff9fb0}" +
       ".rmp-platform-picker{display:flex;flex-wrap:wrap;gap:9px}.rmp-platform-pick{display:flex;align-items:center;gap:7px;padding:9px 11px;border:1px solid rgba(255,255,255,.13);border-radius:9px;background:#0d0f19;color:#dfe3f7;font-size:13px;font-weight:700}" +
-      "@media(max-width:900px){.rmp-editor-row{grid-template-columns:1fr}.rmp-remove{width:100%}}";
+      ".rmp-pros-cons-editor{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.rmp-pros-cons-list{display:grid;gap:8px}.rmp-pros-cons-list textarea{width:100%;min-height:68px;padding:10px;border:1px solid rgba(255,255,255,.13);border-radius:9px;background:#0d0f19;color:#fff;font:inherit;resize:vertical}.rmp-pros-cons-group{display:grid;gap:9px}.rmp-pros-cons-group>strong{font-size:12px}.rmp-pros-cons-group.is-pros>strong{color:#8de8c1}.rmp-pros-cons-group.is-cons>strong{color:#ffb2bd}" +
+      "@media(max-width:900px){.rmp-editor-row{grid-template-columns:1fr}.rmp-remove{width:100%}.rmp-pros-cons-editor{grid-template-columns:1fr}}";
     document.head.appendChild(style);
   }
 
@@ -227,6 +226,52 @@
     };
   }
 
+  function setupProsCons(root) {
+    var hidden = hideRaw("prosConsJson");
+    if (!hidden) return null;
+    var card = document.createElement("section");
+    card.className = "rmp-structured-card";
+    card.innerHTML = '<div class="rmp-structured-title"><span>Pros &amp; Cons</span></div><div class="rmp-pros-cons-editor"><div class="rmp-pros-cons-group is-pros"><strong>Pros</strong><div class="rmp-pros-cons-list" data-list="pros"></div><button class="rmp-add" type="button" data-add="pros">+ Add pro</button></div><div class="rmp-pros-cons-group is-cons"><strong>Cons</strong><div class="rmp-pros-cons-list" data-list="cons"></div><button class="rmp-add" type="button" data-add="cons">+ Add con</button></div></div>';
+    root.appendChild(card);
+    var pros = card.querySelector('[data-list="pros"]');
+    var cons = card.querySelector('[data-list="cons"]');
+
+    function addItem(list, value) {
+      var row = document.createElement("div");
+      row.className = "rmp-editor-row";
+      row.style.setProperty("--cols", "1");
+      var item = field(list === pros ? "Pro" : "Con", value, true);
+      var remove = document.createElement("button");
+      remove.type = "button";
+      remove.className = "rmp-remove";
+      remove.textContent = "Remove";
+      remove.addEventListener("click", function () { row.remove(); });
+      row.append(item.wrap, remove);
+      list.appendChild(row);
+    }
+
+    card.querySelectorAll("[data-add]").forEach(function (button) {
+      button.addEventListener("click", function () { addItem(button.dataset.add === "pros" ? pros : cons, ""); });
+    });
+    return {
+      load: function () {
+        var data = safeParse(hidden.value, {});
+        pros.innerHTML = "";
+        cons.innerHTML = "";
+        (Array.isArray(data.pros) ? data.pros : []).forEach(function (value) { addItem(pros, value); });
+        (Array.isArray(data.cons) ? data.cons : []).forEach(function (value) { addItem(cons, value); });
+        if (!pros.children.length) addItem(pros, "");
+        if (!cons.children.length) addItem(cons, "");
+      },
+      sync: function () {
+        function values(list) {
+          return Array.from(list.querySelectorAll("textarea")).map(function (input) { return String(input.value || "").trim(); }).filter(Boolean);
+        }
+        hidden.value = JSON.stringify({ pros: values(pros), cons: values(cons) });
+      }
+    };
+  }
+
   function init() {
     var form = document.getElementById("detailForm");
     if (!form) return;
@@ -242,6 +287,8 @@
     var editors = [];
     var platformEditor = setupPlatforms(builder);
     if (platformEditor) editors.push(platformEditor);
+    var prosConsEditor = setupProsCons(builder);
+    if (prosConsEditor) editors.push(prosConsEditor);
     pairEditors.forEach(function (config) {
       var editor = setupPairEditor(builder, config);
       if (editor) editors.push(editor);

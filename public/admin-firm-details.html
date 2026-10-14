@@ -396,8 +396,7 @@
           <div class="field full"><label>Listing Card Metrics JSON</label><textarea name="cardMetricsJson" rows="6" placeholder='{"payoutCycle":"14 Days","minTradingDays":"5 Days","newsTrading":"Allowed","timeLimit":"Unlimited","eaAllowed":"Allowed","startingPrice":"$39"}'></textarea></div>
           <div class="field full"><label>Trading Conditions JSON</label><textarea name="tradingConditionsJson" rows="6" placeholder='[{"label":"Daily Drawdown","value":"3% - 5%"},{"label":"Maximum Drawdown","value":"6% - 10%"}]'></textarea></div>
           <div class="field full"><label>Firm Details JSON</label><textarea name="firmDetailsJson" rows="6" placeholder='[{"label":"Company Name","value":"Aqua Funded"},{"label":"Headquarters","value":"Dubai, UAE"}]'></textarea></div>
-          <div class="field full"><label>Leverage Rows JSON</label><textarea name="leverageRowsJson" rows="6" placeholder='[{"instrument":"Indices","c1":"1:50","c2":"1:30","c3":"1:100","c4":"Variable"}]'></textarea></div>
-          <div class="field full"><label>Commissions JSON</label><textarea name="commissionsJson" rows="6" placeholder='[{"title":"Indices","lines":["Standard: No Commission","Swap Free: No Commission"]}]'></textarea></div>
+          <div class="field full"><label>Pros &amp; Cons JSON</label><textarea name="prosConsJson" rows="6" placeholder='{"pros":["Clear payout terms","Multiple challenge options"],"cons":["Minimum trading days apply"]}'></textarea></div>
           <div class="field full"><label>Evaluation Programs JSON</label><textarea name="evaluationProgramsJson" rows="6" placeholder='[{"program":"1-Step","phase1":"10%","phase2":"-","target":"10%","allocation":"$2,000,000","split":"Up to 90%"}]'></textarea></div>
           <div class="field full"><label>Challenges Panel JSON</label><textarea name="challengesPanelDataJson" rows="8" placeholder='{"programs":[{"program":"1-Step","phase1":"10%","phase2":"-","target":"10%","allocation":"$2,000,000","split":"Up to 90%","features":["No minimum trading days"]}],"stats":[{"value":"14 Days","label":"First Payout"}]}'></textarea></div>
           <div class="field full"><label>Spreads Panel JSON</label><textarea name="spreadsPanelDataJson" rows="8" placeholder='{"items":[{"symbol":"EUR/USD","flag":"🇺🇸","category":"forex","unit":"Pips","std":[0.1,0.2,0.5]}]}'></textarea></div>
@@ -1420,8 +1419,7 @@
       setValue("cardMetricsJson", jsonInputValue(deriveCardMetrics(row)));
       setValue("tradingConditionsJson", jsonInputValue(row.tradingConditions));
       setValue("firmDetailsJson", jsonInputValue(row.firmDetails));
-      setValue("leverageRowsJson", jsonInputValue(row.leverageRows));
-      setValue("commissionsJson", jsonInputValue(row.commissions));
+      setValue("prosConsJson", jsonInputValue(row.prosCons || { pros: row.pros || [], cons: row.cons || [] }));
       setValue("evaluationProgramsJson", jsonInputValue(row.evaluationPrograms));
       setValue("rulesPanelDataJson", jsonInputValue(row.rulesPanelData));
       setValue("challengesPanelDataJson", jsonInputValue(row.challengesPanelData));
@@ -1801,8 +1799,7 @@
           cardMetrics: jsonParse(data.cardMetricsJson, deriveCardMetrics({}), "cardMetrics"),
           tradingConditions: jsonParse(data.tradingConditionsJson, [], "tradingConditions"),
           firmDetails: jsonParse(data.firmDetailsJson, [], "firmDetails"),
-          leverageRows: jsonParse(data.leverageRowsJson, [], "leverageRows"),
-          commissions: jsonParse(data.commissionsJson, [], "commissions"),
+          prosCons: jsonParse(data.prosConsJson, { pros: [], cons: [] }, "prosCons"),
           evaluationPrograms,
 
           challengesPanelData: jsonParse(data.challengesPanelDataJson, null, "challengesPanelData"),

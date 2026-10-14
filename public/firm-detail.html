@@ -419,6 +419,26 @@
       margin-bottom: 24px;
     }
 
+    .firm-pros-cons{position:relative;overflow:hidden;background:radial-gradient(600px 220px at 0% 0%,rgba(111,75,255,.13),transparent 68%),linear-gradient(145deg,rgba(18,16,32,.98),rgba(9,10,17,.98));border-color:rgba(144,113,255,.27);box-shadow:0 20px 48px rgba(0,0,0,.22)}
+    .firm-pros-cons:after{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:linear-gradient(180deg,#a879ff,#7054ff 55%,#35d9b0)}
+    .firm-pros-cons-head{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .firm-pros-cons-kicker{color:#b99bff;font-size:10px;font-weight:800;letter-spacing:.18em}
+    .firm-pros-cons .section-title{margin:5px 0 0;font-size:22px;letter-spacing:-.04em}
+    .firm-pros-cons-mark{display:grid;place-items:center;width:42px;height:42px;border-radius:14px;color:#d8c6ff;font-size:21px;background:linear-gradient(145deg,rgba(126,83,255,.24),rgba(56,215,181,.1));border:1px solid rgba(161,130,255,.2)}
+    .firm-pros-cons-intro{margin:8px 0 20px;color:var(--text-secondary);font-size:13px;line-height:1.6}
+    .firm-pros-cons-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+    .firm-pros-cons-column{min-width:0;padding:17px;border-radius:14px;background:rgba(6,8,15,.62);border:1px solid rgba(255,255,255,.075)}
+    .firm-pros-cons-column h4{display:flex;align-items:center;gap:9px;margin:0 0 13px;font-size:14px;font-weight:800}
+    .firm-pros-cons-column h4 span{display:grid;place-items:center;width:23px;height:23px;border-radius:8px;font-size:15px}
+    .firm-pros-cons-column.is-pros h4{color:#8de8c1}.firm-pros-cons-column.is-pros h4 span{background:rgba(42,207,144,.13);color:#5ee0aa}
+    .firm-pros-cons-column.is-cons h4{color:#ffb2bd}.firm-pros-cons-column.is-cons h4 span{background:rgba(255,93,119,.12);color:#ff8798}
+    .firm-pros-cons-column ul{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+    .firm-pros-cons-column li{position:relative;padding-left:20px;color:#d5d4e2;font-size:12.5px;line-height:1.6;overflow-wrap:anywhere}
+    .firm-pros-cons-column li:before{position:absolute;left:0;top:0;font-weight:900}
+    .firm-pros-cons-column.is-pros li:before{content:"✓";color:#5ee0aa}.firm-pros-cons-column.is-cons li:before{content:"!";color:#ff8798}
+    .firm-pros-cons-empty{color:#8f8b9f!important;font-style:italic}
+    @media(max-width:640px){.firm-pros-cons{padding:18px}.firm-pros-cons-grid{grid-template-columns:1fr;gap:10px}.firm-pros-cons-column{padding:15px}.firm-pros-cons .section-title{font-size:20px}}
+
     .radar-container {
       display: flex;
       flex-direction: column;
@@ -1193,15 +1213,23 @@
             <table class="data-table" id="firmDetailsTable"></table>
         </div>
 
-        <div class="glass-card">
-            <h3 class="section-title">Leverage &amp; Spreads</h3>
-            <table class="data-table" id="firmLeverageTable"></table>
-        </div>
-
-        <div class="glass-card">
-            <h3 class="section-title">Commissions</h3>
-            <div id="firmCommissionsGrid" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;"></div>
-        </div>
+        <section class="glass-card firm-pros-cons" id="firmProsCons" aria-labelledby="firmProsConsTitle">
+            <div class="firm-pros-cons-head">
+                <div><span class="firm-pros-cons-kicker">AT A GLANCE</span><h3 class="section-title" id="firmProsConsTitle">Pros &amp; Cons</h3></div>
+                <span class="firm-pros-cons-mark" aria-hidden="true">✦</span>
+            </div>
+            <p class="firm-pros-cons-intro">A balanced look at what traders may like and what to consider.</p>
+            <div class="firm-pros-cons-grid">
+                <section class="firm-pros-cons-column is-pros" aria-labelledby="firmProsTitle">
+                    <h4 id="firmProsTitle"><span aria-hidden="true">＋</span> Pros</h4>
+                    <ul id="firmProsList"></ul>
+                </section>
+                <section class="firm-pros-cons-column is-cons" aria-labelledby="firmConsTitle">
+                    <h4 id="firmConsTitle"><span aria-hidden="true">−</span> Cons</h4>
+                    <ul id="firmConsList"></ul>
+                </section>
+            </div>
+        </section>
     </div>
 
     <!-- Sidebar Right -->
@@ -2435,32 +2463,18 @@
     }).join("");
   }
 
-  function renderLeverageTable(rows) {
-    const table = byId("firmLeverageTable");
-    if (!table) return;
-    const list = Array.isArray(rows) ? rows : [];
-    const head = `<tr><td style="font-weight:600;color:#cdd4e8">Instruments</td><td style="text-align:center;color:#cdd4e8">1:50</td><td style="text-align:center;color:#cdd4e8">1:30</td><td style="text-align:center;color:#cdd4e8">1:100</td><td style="text-align:right;color:#cdd4e8">Variable</td></tr>`;
-    table.innerHTML = head + list.map((row) => `
-      <tr>
-        <td>${String(row?.instrument || "-")}</td>
-        <td style="text-align:center">${String(row?.c1 || "-")}</td>
-        <td style="text-align:center">${String(row?.c2 || "-")}</td>
-        <td style="text-align:center">${String(row?.c3 || "-")}</td>
-        <td>${String(row?.c4 || "-")}</td>
-      </tr>`).join("");
-  }
-
-  function renderCommissions(rows) {
-    const wrap = byId("firmCommissionsGrid");
-    if (!wrap) return;
-    const list = Array.isArray(rows) ? rows : [];
-    wrap.innerHTML = list.map((row) => `
-      <div style="background:#0d0f1a;border:1px solid #1e213a;border-radius:10px;padding:10px;">
-        <div style="font-size:13px;font-weight:700;margin-bottom:6px;">${String(row?.title || "-")}</div>
-        <div style="font-size:11px;color:var(--text-secondary);line-height:1.45;">
-          ${toList(row?.lines).map((line) => `${String(line)}<br>`).join("")}
-        </div>
-      </div>`).join("");
+  function renderProsCons(data = {}) {
+    const renderList = (id, items, emptyText) => {
+      const list = byId(id);
+      if (!list) return;
+      const lines = toList(items);
+      list.innerHTML = lines.length
+        ? lines.map((line) => `<li>${escapeHtml(line)}</li>`).join("")
+        : `<li class="firm-pros-cons-empty">${escapeHtml(emptyText)}</li>`;
+    };
+    const source = data?.prosCons && typeof data.prosCons === "object" ? data.prosCons : data;
+    renderList("firmProsList", source?.pros, "No pros have been added yet.");
+    renderList("firmConsList", source?.cons, "No cons have been added yet.");
   }
 
   function renderPlatforms(list) {
@@ -2769,8 +2783,7 @@
     renderLongOverview(String(row?.overviewLong || row?.overview || row?.bio || ""));
 
     renderPairsTable("firmDetailsTable", Array.isArray(row?.firmDetails) ? row.firmDetails : []);
-    renderLeverageTable(Array.isArray(row?.leverageRows) ? row.leverageRows : []);
-    renderCommissions(Array.isArray(row?.commissions) ? row.commissions : []);
+    renderProsCons(row || {});
     renderPlatforms(toPlatforms(row));
     renderAiSummary(row);
     renderPairsTable("firmKeyMetricsTable", toPairs(row?.keyMetrics, row?.cardMetrics));
