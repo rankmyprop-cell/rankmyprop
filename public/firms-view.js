@@ -89,12 +89,6 @@ const state = {
   loading: true
 };
 const UX_DELAY_MS = 2000;
-const EXCLUDED_LISTING_SLUGS = new Set(["blue-guardian"]);
-
-function isExcludedListingFirm(firm = {}) {
-  return EXCLUDED_LISTING_SLUGS.has(slugify(firm.slug || firm.name || firm.id || ""));
-}
-
 function rankVal(f = {}) {
   const r = Number(f.ranking);
   if (Number.isFinite(r) && r > 0) return r;
@@ -762,7 +756,7 @@ async function init() {
     getFirmsByType(listingType, { bestRegion, bestCategory: bestCategory.key }),
     loadLiveReviewStats()
   ]);
-  state.firms = firms.filter((firm) => !isExcludedListingFirm(firm)).map((firm) => {
+  state.firms = firms.map((firm) => {
     const key = slugify(firm.slug || firm.name || firm.id || "");
     const live = liveReviewStats.get(key);
     if (!live) return firm;
