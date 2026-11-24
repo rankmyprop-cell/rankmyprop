@@ -394,7 +394,7 @@ export const DEFAULT_BEST_FIRMS = [
     showReviews: false,
     showOffers: false,
     showComparison: false,
-    bestRegions: { india: true },
+    bestRegions: { india: false },
     lastVerified: "2026-11-24",
     source: "Trade Bridges company documents",
     cardMetrics: {

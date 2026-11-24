@@ -183,23 +183,44 @@ function norm(row = {}) {
   const showListed = typeof row.showListed === "boolean" ? row.showListed : legacyType === "listed";
   const showBestGlobal = typeof row.showBestGlobal === "boolean" ? row.showBestGlobal : legacyType === "best";
 
+  const isTradeBridges = slug === "trade-bridges" || row.id === "trade-bridges";
+  const name = isTradeBridges ? "Trade Bridges" : String(row.name || "").trim();
+  const country = isTradeBridges ? "India" : String(row.country || "Global").trim();
+  const website = isTradeBridges ? "https://tradebridges.in" : String(row.website || "").trim();
+  const buyLink = isTradeBridges ? "https://tradebridges.in" : String(row.buyLink || "").trim();
+  const markets = isTradeBridges
+    ? ["Funded Trading Evaluation Programme"]
+    : (Array.isArray(row.markets) ? row.markets.map((x) => String(x || "").trim()).filter(Boolean) : []);
+  const tags = isTradeBridges
+    ? ["India-based", "Funded Trading Evaluation Programme"]
+    : (Array.isArray(row.tags) ? row.tags.map((x) => String(x || "").trim()).filter(Boolean) : []);
+  if (isTradeBridges) {
+    regionFlags.india = true;
+  }
+
+  // Validate logo - reject truncated or invalid base64 or stub slugs
+  const rawLogo = String(row.logo || "").trim();
+  const isBase64Valid = /^data:image\/(?:png|jpeg|jpg|webp|svg\+xml);base64,[A-Za-z0-9+/=]{100,}$/.test(rawLogo) && !rawLogo.endsWith("jaWFlaI");
+  const isUrlValid = /^https?:\/\//i.test(rawLogo) || (rawLogo.startsWith("/assets/") && !rawLogo.includes(" "));
+  const safeLogoStr = (isBase64Valid || isUrlValid) ? rawLogo : "";
+
   return {
     id: row.id || slug,
     slug,
-    name: String(row.name || "").trim(),
+    name,
     listingType: legacyType || (showBestGlobal ? "best" : "listed"),
     handle: String(row.handle || "").trim(),
     bio: String(row.bio || "").trim(),
-    website: String(row.website || "").trim(),
-    country: String(row.country || "Global").trim(),
-    tags: Array.isArray(row.tags) ? row.tags.map((x) => String(x || "").trim()).filter(Boolean) : [],
+    website,
+    country,
+    tags,
     verified: Boolean(row.verified),
     payoutAssurance: typeof row.payoutAssurance === "boolean" ? row.payoutAssurance : Boolean(row.verified),
     followers: Number(row.followers || 0),
     updatedAt: row.updatedAt || row.createdAt || "",
-    detailsLink: detailPathFor(row),
-    buyLink: String(row.buyLink || "").trim(),
-    logo: String(row.logo || "").trim(),
+    detailsLink: isTradeBridges ? "/firms/trade-bridges" : detailPathFor(row),
+    buyLink,
+    logo: safeLogoStr,
     banner: String(row.banner || "").trim(),
     ceo: String(row.ceo || "").trim(),
     founded: String(row.founded || "").trim(),
@@ -331,7 +352,33 @@ export async function getFirmsByType(listingType, options = {}) {
           f.bestRegions = { ...f.bestRegions, india: false };
         }
         const prev = mergedMap.get(k);
-        mergedMap.set(k, prev ? { ...prev, ...f } : f);
+        if (k === "trade-bridges" && prev) {
+          const cleanF = Object.fromEntries(Object.entries(f).filter(([key, val]) => {
+            if (val == null || val === "") return false;
+            if (Array.isArray(val) && val.length === 0) return false;
+            if (typeof val === "object" && Object.keys(val).length === 0) return false;
+            if (key === "name" && val === "trade-bridges") return false;
+            return true;
+          }));
+          mergedMap.set(k, {
+            ...prev,
+            ...cleanF,
+            name: "Trade Bridges",
+            country: "India",
+            website: "https://tradebridges.in",
+            buyLink: "https://tradebridges.in",
+            detailsLink: "/firms/trade-bridges",
+            markets: ["Funded Trading Evaluation Programme"],
+            tags: ["India-based", "Funded Trading Evaluation Programme"],
+            bestRegions: { ...(prev.bestRegions || {}), ...(f.bestRegions || {}), india: true },
+            cardMetrics: {
+              ...(prev.cardMetrics || {}),
+              ...Object.fromEntries(Object.entries(f.cardMetrics || {}).filter(([, val]) => val && String(val).trim()))
+            }
+          });
+        } else {
+          mergedMap.set(k, prev ? { ...prev, ...f } : f);
+        }
       }
     });
     const all = Array.from(mergedMap.values());

@@ -179,9 +179,13 @@ function slugify(text = "") {
 }
 
 function safeLogo(firm) {
-  if (firm.logo) return firm.logo;
-  const name = encodeURIComponent((firm.name || "Logo").split(" ").slice(0, 2).join(" "));
-  return `https://dummyimage.com/100x100/0b0b12/7c5cff&text=${name}`;
+  const logo = String(firm?.logo || "").trim();
+  if (logo) {
+    const isBase64 = /^data:image\/(?:png|jpeg|jpg|webp|svg\+xml);base64,[A-Za-z0-9+/=]{100,}$/.test(logo) && !logo.endsWith("jaWFlaI");
+    const isUrl = /^https?:\/\//i.test(logo) || (logo.startsWith("/assets/") && !logo.includes(" "));
+    if (isBase64 || isUrl) return logo;
+  }
+  return "";
 }
 
 function safeBanner(firm) {
@@ -603,12 +607,14 @@ function render() {
     const reviewTotal = Math.max(0, Number(f.reviewCount) || 0);
     const reviews = formatReviewCount(reviewTotal);
     const hasVerifiedRating = reviewTotal >= 5;
-    const badgeMarket = String(markets[0] || tags[0] || "CFDs").toUpperCase();
+    const isTradeBridges = f.slug === "trade-bridges" || f.id === "trade-bridges";
+    const rawMarket = String(markets[0] || tags[0] || (isTradeBridges ? "Funded Trading Evaluation Programme" : "CFDs")).trim();
+    const badgeMarket = rawMarket.toUpperCase();
     const stats = cardStats(f);
     const details = cardDetails(f);
     const logoSrc = safeLogo(f);
-    const initials = String(f.name || "TB").split(/\s+/).map((w) => w[0]).join("").slice(0, 3).toUpperCase();
-    const logoBlock = f.logo ? `<img fetchpriority="low" src="${logoSrc}" alt="${escapeHtml(f.name)} logo" loading="lazy" decoding="async" width="120" height="120">` : `<span>${escapeHtml(initials)}</span>`;
+    const initials = String(f.name || (isTradeBridges ? "Trade Bridges" : "TB")).split(/\s+/).map((w) => w[0]).join("").slice(0, 3).toUpperCase() || "TB";
+    const logoBlock = logoSrc ? `<img fetchpriority="low" src="${logoSrc}" alt="${escapeHtml(f.name)} logo" loading="lazy" decoding="async" width="120" height="120">` : `<span>${escapeHtml(initials)}</span>`;
     const ratingBlock = reviewTotal > 0
       ? `<div class="pf-rating-row"><span class="pf-rating-num">${hasVerifiedRating ? rating.toFixed(1) : "—"}</span><div class="pf-stars" aria-label="${hasVerifiedRating ? `${rating.toFixed(1)} out of 5` : "Not enough verified reviews yet"}">${hasVerifiedRating ? starsHtml(rating) : ""}</div><a class="pf-reviews pf-reviews-link" href="${cardReviewHref}">${escapeHtml(reviews)} reviews</a></div>`
       : "";
@@ -634,6 +640,10 @@ function render() {
         <span class="pf-detail-val" title="${escapeHtml(d.val || "-")}">${escapeHtml(d.val || "-")}</span>
       </div>
     `).join("");
+    const detailsBlock = detailRows.length
+      ? `<div class="pf-divider"></div><div class="pf-details-grid">${detailRows}</div>`
+      : "";
+
     return `
       <div class="pf-card">
         <div class="pf-card-header">
@@ -653,8 +663,7 @@ function render() {
         ${badgesBlock}
         <div class="pf-tagline" title="${escapeHtml(fullBio)}">${bio}</div>
         ${statsBlock}
-        <div class="pf-divider"></div>
-        <div class="pf-details-grid">${detailRows}</div>
+        ${detailsBlock}
         <div class="pf-divider"></div>
         <div class="pf-btn-row">
           <a class="pf-btn pf-btn-outline" href="${escapeHtml(buyHref || "#")}" target="_blank" rel="noopener noreferrer sponsored">View Firm</a>

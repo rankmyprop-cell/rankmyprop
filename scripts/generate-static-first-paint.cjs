@@ -66,7 +66,13 @@ function detailHref(firm = {}) {
 function logoHref(firm = {}) {
   const logo = compact(firm.logo)
   if (!logo) return ''
-  return /^(?:https?:\/\/|data:|\/)/i.test(logo) ? logo : `/${logo.replace(/^\.\//, '')}`
+  if (logo.startsWith('data:image/')) {
+    if (/^data:image\/(?:png|jpeg|jpg|webp|svg\+xml);base64,[A-Za-z0-9+/=]{100,}$/.test(logo) && !logo.endsWith('jaWFlaI')) {
+      return logo
+    }
+    return ''
+  }
+  return /^(?:https?:\/\/|\/)/i.test(logo) ? logo : `/${logo.replace(/^\.\//, '')}`
 }
 
 function statValues(firm = {}) {
@@ -95,18 +101,19 @@ function stars(rating) {
 }
 
 function firmCard(firm = {}) {
-  const name = compact(firm.name) || 'Prop firm'
+  const isTradeBridges = firm.slug === 'trade-bridges' || firm.id === 'trade-bridges'
+  const name = isTradeBridges ? 'Trade Bridges' : (compact(firm.name) || 'Prop firm')
   const slug = firmSlug(firm)
-  const href = firm.slug === 'trade-bridges' ? '/firms/trade-bridges' : detailHref(firm)
+  const href = isTradeBridges ? '/firms/trade-bridges' : detailHref(firm)
   const logo = logoHref(firm)
   const rating = Math.max(0, Math.min(5, Number(firm.score) || 0))
   const reviews = Math.max(0, Math.round(Number(firm.reviewCount) || 0))
   const hasVerifiedRating = reviews >= 5
   const bio = truncateWords(firm.bio || firm.overviewShort || '', 14)
-  const market = compact(normalizedRows(firm.markets)[0] || normalizedRows(firm.tags)[0] || 'CFDs').toUpperCase()
+  const market = isTradeBridges ? 'FUNDED TRADING EVALUATION PROGRAMME' : compact(normalizedRows(firm.markets)[0] || normalizedRows(firm.tags)[0] || 'CFDs').toUpperCase()
   const stats = statValues(firm)
   const details = detailValues(firm)
-  const initials = name.split(/\s+/).map((word) => word[0]).join('').slice(0, 3).toUpperCase()
+  const initials = isTradeBridges ? 'TB' : ((name.split(/\s+/).map((word) => word[0]).join('').slice(0, 3).toUpperCase()) || 'TB')
 
   const statItems = []
   if (stats.allocation && !/^(?:Not specified|Not mentioned)$/i.test(stats.allocation)) {
@@ -206,13 +213,44 @@ function mergeFirmRows(listedDefaults, bestDefaults, evidenceFirms) {
     const slug = firmSlug(firm)
     if (!slug) return
     const previous = map.get(slug) || {}
-    map.set(slug, {
+    const isTradeBridges = slug === 'trade-bridges' || firm.id === 'trade-bridges'
+
+    const mergedCardMetrics = {
+      ...(previous.cardMetrics || {}),
+      ...Object.fromEntries(Object.entries(firm.cardMetrics || {}).filter(([, v]) => v != null && String(v).trim() !== ''))
+    }
+
+    const mergedFirm = {
       ...previous,
       ...firm,
       slug,
       showListed: surface === 'listed' || previous.showListed === true || firm.showListed === true,
       showBestGlobal: surface === 'best' || previous.showBestGlobal === true || firm.showBestGlobal === true,
-    })
+      cardMetrics: mergedCardMetrics
+    }
+
+    if (isTradeBridges) {
+      mergedFirm.name = 'Trade Bridges'
+      mergedFirm.country = 'India'
+      mergedFirm.website = 'https://tradebridges.in'
+      mergedFirm.buyLink = 'https://tradebridges.in'
+      mergedFirm.detailsLink = '/firms/trade-bridges'
+      mergedFirm.markets = ['Funded Trading Evaluation Programme']
+      mergedFirm.tags = ['India-based', 'Funded Trading Evaluation Programme']
+      mergedFirm.bestRegions = { ...(previous.bestRegions || {}), ...(firm.bestRegions || {}), india: true }
+      if (!mergedFirm.cardMetrics?.payoutCycle) {
+        mergedFirm.cardMetrics = {
+          payoutCycle: '14 Days',
+          minTradingDays: '5 Days (2-Step, 1-Step)',
+          newsTrading: 'Not allowed',
+          timeLimit: 'Unlimited',
+          eaAllowed: 'Not allowed',
+          startingPrice: 'Not specified'
+        }
+      }
+    }
+
+    map.set(slug, mergedFirm)
   }
   listedDefaults.forEach((firm) => add(firm, 'listed'))
   bestDefaults.forEach((firm) => add(firm, 'best'))
@@ -266,7 +304,7 @@ function injectListingPages(firms) {
     const loadingClass = isFastPage ? '' : ' rmp-loading-grid'
     const busy = isFastPage ? 'false' : 'true'
     writeWithoutMetadataChanges(file, (html) => {
-      let output = html.replace(/<div\s+id=["']grid["']\s+class=["']grid["'][^>]*>[\s\S]*?<\/div>/i, `<div id="grid" class="grid${loadingClass}" data-rmp-static-first-paint="true" aria-busy="${busy}">${gridContent}</div><noscript><div class="rmp-server-firm-directory">${cards}</div></noscript>`)
+      let output = html.replace(/<div\s+id=["']grid["'][\s\S]*?(?=\s*<div\s+class=["']pagination["']|\s*<section\s+class=["']info-section["'])/i, `<div id="grid" class="grid${loadingClass}" data-rmp-static-first-paint="true" aria-busy="${busy}">${gridContent}</div><noscript><div class="rmp-server-firm-directory">${cards}</div></noscript>\n\n  `)
       if (!output.includes('id="rmpFirstPaintLoader"')) output = output.replace('</head>', `${listingLoaderStyle}\n</head>`)
       return output
     })

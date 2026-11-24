@@ -20,7 +20,20 @@
     theproptradedetail: "The Prop Trade",
     toponetraderdetail: "Top One Trader",
     traderscaledetail: "Trader Scale",
+    tradebridges: "Trade Bridges",
+    "trade-bridges": "Trade Bridges",
     wefunddetail: "We Fund"
+  };
+
+  var knownFirmData = {
+    "trade-bridges": {
+      name: "Trade Bridges",
+      initials: "TB",
+      meta: "Lucknow, Uttar Pradesh, India • Founded 2025 • Funded Trading Evaluation Programme",
+      overview: "Trade Bridges was established in 2025 with the objective of providing Indian traders with access to structured funded trading evaluation programmes, helping traders demonstrate their skills through structured challenges and performance-based reward programmes.",
+      whyChoose: "Why Choose Trade Bridges?",
+      buyUrl: "https://tradebridges.in"
+    }
   };
 
   function titleCaseSlug(value) {
@@ -29,16 +42,29 @@
     }).join(" ");
   }
 
+  function resolveSlug() {
+    var url = new URL(location.href);
+    var parts = url.pathname.split("/").filter(Boolean);
+    if (parts[0] === "prop-firms" && parts[1]) return parts[1].toLowerCase();
+    var querySlug = url.searchParams.get("slug") || url.searchParams.get("firmSlug");
+    if (querySlug) return querySlug.toLowerCase();
+    var file = String(parts.pop() || "").replace(/\.html$/i, "").toLowerCase();
+    if (file.endsWith("detail") && file !== "firm-detail") return file.replace(/detail$/, "");
+    return "";
+  }
+
   function resolveName() {
+    var slug = resolveSlug();
+    if (slug) {
+      if (names[slug]) return names[slug];
+      if (/^(fundednext|fundednext-firm)$/.test(slug)) return "FundedNext";
+      return titleCaseSlug(slug);
+    }
     var url = new URL(location.href);
     var file = String(url.pathname.split("/").filter(Boolean).pop() || "")
       .replace(/\.html$/i, "")
       .toLowerCase();
     if (names[file]) return names[file];
-    var parts = url.pathname.split("/").filter(Boolean);
-    if (parts[0] === "prop-firms" && parts[1]) return /^(fundednext|fundednext-firm)$/.test(parts[1]) ? "FundedNext" : titleCaseSlug(parts[1]);
-    var querySlug = url.searchParams.get("slug");
-    if (querySlug) return /^(fundednext|fundednext-firm)$/.test(querySlug) ? "FundedNext" : titleCaseSlug(querySlug);
     return String(document.title || "").split(/\s+(?:Review|Rules|Prop Firm)/i)[0].trim() || "Prop Firm";
   }
 
@@ -95,8 +121,45 @@
     }
     document.body.classList.add("rmp-firm-hydrating");
 
+    var slug = resolveSlug();
+    var known = knownFirmData[slug];
+    var displayName = known ? known.name : firmName;
+    var initials = known ? known.initials : displayName.split(/\s+/).map(function (w) { return w[0]; }).join("").slice(0, 3).toUpperCase();
+
     var firmHeading = document.getElementById("firmNameHeading");
-    if (firmHeading) firmHeading.textContent = firmName;
+    if (firmHeading) firmHeading.textContent = displayName;
+
+    var initialsEl = document.getElementById("firmLogoInitials");
+    if (initialsEl) initialsEl.textContent = initials;
+
+    var metaEl = document.getElementById("firmMetaLine");
+    if (metaEl) metaEl.textContent = known ? known.meta : (displayName + " • Proprietary Trading Evaluation");
+
+    var overviewTitle = document.getElementById("firmOverviewTitle");
+    if (overviewTitle) overviewTitle.textContent = displayName + " Overview";
+
+    var overviewShort = document.getElementById("firmOverviewShort");
+    if (overviewShort && known) overviewShort.textContent = known.overview;
+
+    var whyChoose = document.getElementById("firmWhyChooseTitle");
+    if (whyChoose) whyChoose.textContent = known ? known.whyChoose : ("Why Choose " + displayName + "?");
+
+    var buyBtn = document.getElementById("firmBuyNowBtn");
+    if (buyBtn && known && known.buyUrl) buyBtn.href = known.buyUrl;
+
+    var seoHeading = document.getElementById("detailSeoHeading");
+    if (seoHeading) seoHeading.textContent = displayName + " Review 2026: Fees, Rules, Payout & Details";
+
+    var seoParagraph = document.getElementById("detailSeoParagraph");
+    if (seoParagraph) seoParagraph.textContent = "Explore " + displayName + " review covering evaluation models, challenge rules, profit splits, payout cycle, and trader ratings.";
+
+    if (slug) {
+      document.querySelectorAll(".detail-nav-item").forEach(function (link) {
+        var view = link.getAttribute("data-view") || "overview";
+        link.href = "/prop-firms/" + slug + (view === "overview" ? "" : "/" + view);
+      });
+    }
+
     installPlatformObserver();
 
     if (!document.getElementById("rmpSeoHeroWrap")) {
@@ -106,8 +169,8 @@
       hero.setAttribute("data-copy-ignore", "1");
       hero.innerHTML =
         '<div class="rmp-seo">' +
-          '<h2 id="rmpSeoHeading">' + firmName.replace(/[&<>"']/g, "") + ' <span class="rmp-seo-accent">Prop Firm Details</span></h2>' +
-          '<p id="rmpSeoParagraph">' + firmName.replace(/[&<>"']/g, "") + ' detail page gives account highlights, fee context, payout data, and essential terms so you can make faster prop firm decisions.</p>' +
+          '<h2 id="rmpSeoHeading">' + displayName.replace(/[&<>"']/g, "") + ' <span class="rmp-seo-accent">Prop Firm Details</span></h2>' +
+          '<p id="rmpSeoParagraph">' + displayName.replace(/[&<>"']/g, "") + ' detail page gives account highlights, fee context, payout data, and essential terms so you can make faster prop firm decisions.</p>' +
           '<div id="rmpSeoUpdated" class="rmp-seo-updated" data-copy-ignore="1" hidden></div>' +
         "</div>";
       wrapper.parentNode.insertBefore(hero, wrapper);

@@ -302,11 +302,32 @@ async function main() {
     }
     const localEvidence = previous || {}
     if (localEvidence.firms?.['trade-bridges']) {
+      const liveTb = evidence.firms['trade-bridges'] || {}
+      const baseTb = localEvidence.firms['trade-bridges']
       evidence.firms['trade-bridges'] = {
-        ...localEvidence.firms['trade-bridges'],
-        ...(evidence.firms['trade-bridges'] || {}),
+        ...baseTb,
+        ...Object.fromEntries(Object.entries(liveTb).filter(([k, v]) => {
+          if (v == null || v === '') return false
+          if (Array.isArray(v) && v.length === 0) return false
+          if (typeof v === 'object' && Object.keys(v).length === 0) return false
+          if (k === 'name' && v === 'trade-bridges') return false
+          if (k === 'logo' && String(v).length < 200) return false
+          return true
+        })),
+        name: 'Trade Bridges',
+        country: 'India',
+        website: 'https://tradebridges.in',
+        buyLink: 'https://tradebridges.in',
+        detailsLink: '/prop-firms/trade-bridges',
+        markets: ['Funded Trading Evaluation Programme'],
+        tags: ['India-based', 'Funded Trading Evaluation Programme'],
+        cardMetrics: {
+          ...(baseTb.cardMetrics || {}),
+          ...Object.fromEntries(Object.entries(liveTb.cardMetrics || {}).filter(([, v]) => v && String(v).trim()))
+        },
         bestRegions: {
-          ...(evidence.firms['trade-bridges']?.bestRegions || localEvidence.firms['trade-bridges']?.bestRegions || {}),
+          ...(baseTb.bestRegions || {}),
+          ...(liveTb.bestRegions || {}),
           india: true,
         },
       }
