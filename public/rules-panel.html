@@ -288,6 +288,17 @@
   html,body{display:block!important;}
   .main{height:auto!important;overflow:visible!important;padding:20px 16px!important;}
   .categories-card,.content-card,.side-card{border:0!important;}
+  @media (max-width: 900px) {
+    .category-grid { grid-template-columns: repeat(3, 1fr); }
+    .bottom-row { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .main { padding: 14px 10px !important; }
+    .category-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
+    .categories-card { padding: 12px; }
+    .content-card { padding: 14px 12px; }
+    .page-title { font-size: 18px; }
+  }
 </style>
 <script id="rmp-ssr-bootstrap">window.__RMP_SSR_BOOTSTRAP={"id":"page-rules-panel","heading":"","paragraph":"","seoTitle":"Rules","seoDescription":"","canonical":"https://www.rankmyprop.in/rules-panel","robots":"index, follow, max-image-preview:large, max-snippet:-1","__stableSsrHero":true};</script>
 <script defer src="/route-content-runtime.js"></script>

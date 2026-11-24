@@ -47,8 +47,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    body {
+    * { box-sizing: border-box; }
+    html, body {
       margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      width: 100%;
+    }
+    body {
       font-family: 'Plus Jakarta Sans', sans-serif;
       background: #05040b;
       color: #fff;
@@ -57,6 +63,8 @@
       max-width: 1300px;
       margin: 40px auto 60px;
       padding: 0 24px;
+      box-sizing: border-box;
+      width: 100%;
     }
     .hero-badge-wrap {
       text-align: center;
@@ -75,13 +83,16 @@
       background: rgba(122, 116, 255, 0.12);
       border: 1px solid rgba(122, 116, 255, 0.35);
       color: #cfcbff;
+      max-width: 100%;
+      white-space: normal;
+      text-align: center;
     }
     .heading {
       text-align: center;
-      font-size: clamp(34px, 4.8vw, 54px);
+      font-size: clamp(26px, 5.2vw, 52px);
       font-weight: 800;
       letter-spacing: -0.04em;
-      line-height: 1.1;
+      line-height: 1.15;
       margin: 0 auto 16px;
       max-width: 900px;
     }
@@ -100,7 +111,7 @@
       max-width: 760px;
       margin: 0 auto 32px;
       color: #f0eff9;
-      font-size: 16px;
+      font-size: clamp(14px, 1.8vw, 16px);
       line-height: 1.6;
       font-weight: 500;
     }
@@ -110,9 +121,11 @@
       gap: 12px;
       margin-bottom: 36px;
       flex-wrap: wrap;
+      width: 100%;
     }
     .search {
-      width: 240px;
+      width: 260px;
+      max-width: 100%;
       padding: 10px 16px;
       border-radius: 999px;
       background: rgba(255, 255, 255, 0.04);
@@ -120,6 +133,7 @@
       color: #fff;
       outline: none;
       font-size: 13px;
+      box-sizing: border-box;
     }
     .search:focus {
       border-color: #7a74ff;
@@ -133,6 +147,7 @@
       outline: none;
       font-size: 13px;
       cursor: pointer;
+      box-sizing: border-box;
     }
     .filter option {
       background: #0f0e1a;
@@ -142,14 +157,30 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
+      width: 100%;
     }
     @media (max-width: 1024px) {
-      .grid { grid-template-columns: repeat(2, 1fr); }
+      .grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+      .container { padding: 0 20px; }
+    }
+    @media (max-width: 768px) {
+      .container { padding: 0 16px; margin-top: 24px; margin-bottom: 40px; }
+      .controls { gap: 10px; }
     }
     @media (max-width: 640px) {
-      .grid { grid-template-columns: 1fr; }
-      .container { padding: 0 16px; margin-top: 24px; }
-      .search { width: 100%; }
+      .grid { grid-template-columns: 1fr; gap: 16px; }
+      .controls { flex-direction: column; width: 100%; }
+      .search { width: 100% !important; }
+      .filter { width: 100% !important; }
+    }
+    @media (max-width: 520px) {
+      .container { padding: 0 12px; margin-top: 18px; margin-bottom: 32px; }
+      .pf-card { padding: 16px; border-radius: 14px; }
+      .pf-details-grid { grid-template-columns: 1fr !important; gap: 10px !important; }
+      .pf-btn-row { flex-direction: column; gap: 8px; }
+      .pf-btn { width: 100%; padding: 10px 0; font-size: 13.5px; }
+      .info-section { padding: 20px 14px; border-radius: 14px; margin-top: 36px; }
+      .hero-badge-pill { font-size: 11px; padding: 5px 12px; }
     }
 
     /* FIRM CARD UI */
@@ -323,6 +354,7 @@
       margin: 0;
     }
   </style>
+  <style id="rmpNavPrehide">nav.glass{visibility:hidden}nav.glass.rmp-nav-ready{visibility:visible}</style>
 
   <!-- RMP CORE SCHEMA START -->
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","@id":"https://www.rankmyprop.in/#organization","name":"Rank My Prop","url":"https://www.rankmyprop.in/","logo":{"@type":"ImageObject","url":"https://www.rankmyprop.in/assets/Rank%20My%20Prop%20Logo%201.webp"}}</script>

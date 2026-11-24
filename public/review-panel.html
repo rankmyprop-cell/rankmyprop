@@ -282,6 +282,27 @@
     padding:8px 20px; border-radius:8px; cursor:pointer; font-size:13px; font-weight:600;
   }
   .btn-submit:hover { filter:brightness(1.06); }
+
+  @media (max-width: 900px) {
+    .page { padding: 20px 16px; }
+    .top-header { grid-template-columns: 1fr; gap: 16px; }
+    .rating-summary { flex-wrap: wrap; gap: 16px; }
+    .trust-strip { grid-template-columns: repeat(2, 1fr); }
+    .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .page { padding: 14px 10px; }
+    .rating-summary { flex-direction: column; gap: 12px; }
+    .bars { width: 100%; min-width: 0; }
+    .trust-strip { grid-template-columns: 1fr; }
+    .trust-item { border-right: none; border-bottom: 1px solid var(--card-border); padding: 12px 14px; }
+    .trust-item:last-child { border-bottom: none; }
+    .filters-row { flex-direction: column; align-items: stretch; gap: 8px; }
+    .search-wrap { margin-left: 0; width: 100%; }
+    .search-input { width: 100%; }
+    .reviews-grid { grid-template-columns: 1fr; }
+    .write-btn { width: 100%; justify-content: center; }
+  }
 </style>
 <script id="rmp-ssr-bootstrap">window.__RMP_SSR_BOOTSTRAP={"id":"page-review-panel","heading":"","paragraph":"","seoTitle":"Reviews","seoDescription":"","canonical":"https://www.rankmyprop.in/review-panel","robots":"index, follow, max-image-preview:large, max-snippet:-1","__stableSsrHero":true};</script>
 <script defer src="/route-content-runtime.js"></script>

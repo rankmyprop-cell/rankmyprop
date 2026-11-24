@@ -263,6 +263,8 @@
       max-width: 1320px;
       width: 100%;
       margin: 40px auto 0;
+      padding: 0 24px;
+      box-sizing: border-box;
       display: grid;
       grid-template-columns: 1fr 340px;
       gap: 24px;
@@ -894,18 +896,41 @@
     }
 
     @media (max-width: 1100px) {
-      .dashboard-wrapper { grid-template-columns: 1fr; }
+      .dashboard-wrapper {
+        grid-template-columns: 1fr;
+        padding: 0 20px;
+      }
       .top-stats-row { grid-template-columns: 1fr; }
-      .header-section { flex-direction: column; align-items: flex-start; gap: 14px; }
-      .header-actions{width:100%;}
-      .header-btn{flex:1 1 auto;}
+      .header-section {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        padding: 18px 20px;
+      }
+      .header-actions { width: 100%; }
+      .header-btn { flex: 1 1 auto; }
     }
 
-    @media (max-width: 720px) {
+    @media (max-width: 768px) {
       body { padding: 0; }
-      .dashboard-wrapper { margin-top: 24px; gap: 16px; }
-      .glass-card { padding: 16px; margin-bottom: 16px; }
-      .detail-nav-bar { overflow-x: auto; gap: 14px; }
+      .dashboard-wrapper {
+        margin-top: 20px;
+        gap: 16px;
+        padding: 0 16px;
+      }
+      .glass-card { padding: 16px; margin-bottom: 16px; border-radius: 14px; }
+      .detail-nav-bar {
+        overflow-x: auto;
+        overflow-y: hidden;
+        flex-wrap: nowrap;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 14px;
+        padding: 0 2px 2px;
+        width: 100%;
+      }
+      .detail-nav-bar::-webkit-scrollbar { display: none; }
+      .detail-nav-item { flex-shrink: 0; white-space: nowrap; }
       .restricted-grid { grid-template-columns: 1fr; }
       .radar-wrap { max-width: 100%; padding: 8px; }
       .radar-bar-row { grid-template-columns: 96px 1fr 34px; gap: 8px; }
@@ -917,8 +942,111 @@
       .detail-challenges-frame { height: 320px; }
       .detail-spreads-frame { height: 320px; }
       .detail-announcements-frame { height: 320px; }
-      .detail-seo-copy h2{font-size:clamp(30px,9vw,52px)}
-      .detail-seo-copy p{font-size:13px}
+      .detail-seo-copy h2 { font-size: clamp(24px, 6.5vw, 42px); }
+      .detail-seo-copy p { font-size: 13px; }
+      .data-table td { padding: 11px 6px; font-size: 12.5px; word-break: break-word; }
+      .data-table td:last-child { word-break: break-word; }
+    }
+
+    @media (max-width: 520px) {
+      .dashboard-wrapper {
+        padding: 0 12px;
+        margin-top: 14px;
+        gap: 12px;
+      }
+      .header-section {
+        padding: 14px;
+        border-radius: 14px;
+      }
+      .brand-block {
+        gap: 12px;
+        width: 100%;
+      }
+      .logo-box {
+        width: 44px;
+        height: 44px;
+        flex-shrink: 0;
+      }
+      #firmNameHeading {
+        font-size: clamp(20px, 5.2vw, 26px) !important;
+        line-height: 1.2 !important;
+        word-break: break-word;
+      }
+      #firmMetaLine {
+        font-size: 11px !important;
+        word-break: break-word;
+        line-height: 1.4;
+      }
+      .header-actions {
+        flex-direction: column;
+        width: 100%;
+        gap: 8px;
+      }
+      .header-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 10px 14px;
+        font-size: 13px;
+        box-sizing: border-box;
+      }
+      .score-card {
+        padding: 16px 12px;
+      }
+      #firmScoreValue {
+        font-size: 42px !important;
+        margin: 4px 0 !important;
+      }
+      .radar-container {
+        padding: 16px 10px;
+      }
+      .radar-bar-row {
+        grid-template-columns: 82px 1fr 28px;
+        gap: 6px;
+        font-size: 10.5px;
+      }
+      .data-table td {
+        padding: 9px 4px;
+        font-size: 12px;
+        word-break: break-word;
+      }
+      .data-table td:last-child {
+        word-break: break-word;
+        font-size: 12px;
+      }
+      .firm-pros-cons {
+        padding: 14px;
+        border-radius: 14px;
+      }
+      .firm-pros-cons-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      .firm-pros-cons-column {
+        padding: 12px;
+      }
+      .firm-pros-cons-column li {
+        font-size: 12px;
+        padding: 8px 10px 8px 28px;
+      }
+      .glass-card {
+        padding: 14px;
+        border-radius: 12px;
+        margin-bottom: 12px;
+      }
+      .loader-header {
+        padding: 14px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+      .loader-header-actions {
+        width: 100%;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .loader-header-actions .loader-btn {
+        width: 100%;
+      }
     }
   </style>
   <style id="rmpNavPrehide">nav.glass{visibility:hidden}nav.glass.rmp-nav-ready{visibility:visible}</style>
