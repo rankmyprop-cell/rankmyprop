@@ -38,9 +38,11 @@ export const DASHBOARD_ROUTES = [
   'admin-trading-psychology',
   'admin-website-popup',
   'admin-games',
+  'admin-best-indian-prop-firms',
 ] as const
 
 export const PUBLIC_STATIC_ROUTES = [
+  'best-indian-prop-firms',
   'prop-news',
   'prop-news-post',
   'content-post',
@@ -111,4 +113,5 @@ export const PUBLIC_ROUTE_REDIRECTS: Record<string, string> = {
   '/termsofservice': '/terms',
   '/cookiespolicy': '/cookies-policy',
   '/cookie-policy': '/cookies-policy',
+  '/firms/trade-bridges': '/prop-firms/trade-bridges',
 }

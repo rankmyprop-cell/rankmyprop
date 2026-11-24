@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#0a0b12" />
+  <title>Best Indian Prop Firms Admin | Rank My Prop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/dashboard-layout.css" />
+  <style>
+    .toggle-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.05);
+      color: #ccc;
+      transition: all 0.2s ease;
+    }
+    .toggle-pill.is-active {
+      background: rgba(34, 197, 94, 0.16);
+      border-color: rgba(34, 197, 94, 0.45);
+      color: #4ade80;
+    }
+    .toggle-pill:hover {
+      border-color: rgba(255, 255, 255, 0.35);
+    }
+    .firm-thumb {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      object-fit: cover;
+      background: rgba(255, 255, 255, 0.05);
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+    .status-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: capitalize;
+    }
+    .status-published { background: rgba(34, 197, 94, 0.15); color: #4ade80; }
+    .status-draft { background: rgba(234, 179, 8, 0.15); color: #facc15; }
+    .status-unpublished { background: rgba(239, 68, 68, 0.15); color: #f87171; }
+    .fieldset-box {
+      border: 1px solid rgba(122, 116, 255, 0.2);
+      border-radius: 12px;
+      background: rgba(122, 116, 255, 0.03);
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .fieldset-box legend {
+      font-size: 13px;
+      font-weight: 700;
+      color: #cfcbff;
+      padding: 0 8px;
+      letter-spacing: 0.02em;
+    }
+    .table-responsive {
+      overflow-x: auto;
+      max-width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-dot"></span><b>RMP Admin</b></div>
+      <div class="menu-group-title">Admin Modules</div>
+      <a class="side-link" href="/dashboard-admin">Admin Home</a>
+      <a class="side-link" href="/admin-firm-details">Firm Detail CMS</a>
+      <a class="side-link active" href="/admin-best-indian-prop-firms">Best Indian Prop Firms</a>
+      <a class="side-link" href="/admin-filters">Filters Control</a>
+      <a class="side-link" href="/admin-offers">Offers Control</a>
+      <a class="side-link" href="/admin-reviews">Reviews Hub</a>
+      <a class="side-link" href="/admin-content-cms">Page Copy CMS</a>
+      <a class="side-link" href="/dashboard">Back to Client Dashboard</a>
+      <a class="side-link" href="#" id="logoutBtn">Log out</a>
+    </aside>
+
+    <main class="main">
+      <header class="top">
+        <div>
+          <h3>Best Indian Prop Firms Manager</h3>
+          <div class="welcome">Manage firms displayed on the /best-indian-prop-firms page, regional availability, and rules.</div>
+        </div>
+        <div class="top-actions">
+          <span class="chip" id="adminEmail">loading...</span>
+        </div>
+      </header>
+
+      <div class="chip" id="notice" style="display:none;margin-bottom:14px;"></div>
+
+      <!-- Metrics Overview -->
+      <section class="cards">
+        <article class="card">
+          <h3>Total Indian Firms</h3>
+          <div class="metric-value" id="countTotal">0</div>
+        </article>
+        <article class="card">
+          <h3>Published in India</h3>
+          <div class="metric-value" id="countPublished">0</div>
+        </article>
+        <article class="card">
+          <h3>Drafts / Pending</h3>
+          <div class="metric-value" id="countDraft">0</div>
+        </article>
+        <article class="card">
+          <h3>Active Listings</h3>
+          <div class="metric-value" id="countActive">0</div>
+        </article>
+      </section>
+
+      <!-- Manage Indian Availability Table -->
+      <section class="panel">
+        <div class="panel-head" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+          <h3>Indian Prop Firm Showcase Registry</h3>
+          <div style="display:flex;gap:10px;align-items:center;">
+            <input type="text" id="firmSearchInput" placeholder="Filter firms by name..." class="input" style="padding:7px 12px;border-radius:8px;font-size:13px;width:200px;" />
+            <select id="filterStatusSelect" style="padding:7px 10px;border-radius:8px;background:rgba(255,255,255,0.06);color:#fff;border:1px solid rgba(255,255,255,0.12);font-size:13px;">
+              <option value="all">All Statuses</option>
+              <option value="india-only">Indian Showcase Only</option>
+              <option value="published">Published</option>
+              <option value="draft">Draft</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table" id="firmsTable">
+            <thead>
+              <tr>
+                <th style="width:60px;">Rank</th>
+                <th>Firm</th>
+                <th>Country</th>
+                <th>Profit Split</th>
+                <th>Starting Fee</th>
+                <th>India Showcase</th>
+                <th>Status</th>
+                <th style="text-align:right;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="firmsTableBody">
+              <tr><td colspan="8" style="text-align:center;padding:24px;color:#888;">Loading firm catalog...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Add or Edit Indian Prop Firm Form -->
+      <section class="panel" id="formPanel">
+        <div class="panel-head">
+          <h3 id="formTitle">Add / Edit Prop Firm for Indian Market</h3>
+        </div>
+
+        <form id="indianFirmForm" class="form-grid">
+          <input type="hidden" name="firmDocId" id="firmDocId" value="" />
+
+          <!-- Fieldset 1: Identity -->
+          <fieldset class="fieldset-box full">
+            <legend>1. Basic Identity &amp; India Availability</legend>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:12px;">
+              <div class="field">
+                <label>Firm Name *</label>
+                <input type="text" name="name" id="name" required placeholder="e.g. Aqua Funded" />
+              </div>
+              <div class="field">
+                <label>Slug *</label>
+                <input type="text" name="slug" id="slug" required placeholder="e.g. aqua-funded" />
+              </div>
+              <div class="field">
+                <label>Logo URL or Asset Path</label>
+                <input type="text" name="logo" id="logo" placeholder="assets/aqua-funded-logo.webp" />
+              </div>
+              <div class="field">
+                <label>Official Website</label>
+                <input type="text" name="website" id="website" placeholder="https://example.com" />
+              </div>
+              <div class="field">
+                <label>Country of Origin / Registration</label>
+                <input type="text" name="country" id="country" placeholder="Global / UAE / UK / India" />
+              </div>
+              <div class="field">
+                <label>Display Ranking / Order</label>
+                <input type="number" name="ranking" id="ranking" value="10" />
+              </div>
+            </div>
+
+            <div style="margin-top:12px;display:flex;gap:16px;flex-wrap:wrap;align-items:center;">
+              <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-weight:600;">
+                <input type="checkbox" name="showIndia" id="showIndia" checked />
+                <span>Show on Best Indian Prop Firms page (bestRegions.india)</span>
+              </label>
+              <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+                <input type="checkbox" name="active" id="active" checked />
+                <span>Active</span>
+              </label>
+              <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+                <input type="checkbox" name="verified" id="verified" checked />
+                <span>Verified / Payout Assurance</span>
+              </label>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <label>Status:</label>
+                <select name="publishState" id="publishState" style="padding:4px 8px;border-radius:6px;background:rgba(255,255,255,0.06);color:#fff;border:1px solid rgba(255,255,255,0.12);">
+                  <option value="published">Published</option>
+                  <option value="draft">Draft</option>
+                  <option value="unpublished">Unpublished</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field full" style="margin-top:12px;">
+              <label>Short Bio / Tagline</label>
+              <textarea name="bio" id="bio" rows="2" placeholder="High leverage, fast bi-weekly payouts and UPI payment support."></textarea>
+            </div>
+          </fieldset>
+
+          <!-- Fieldset 2: Challenge Details -->
+          <fieldset class="fieldset-box full">
+            <legend>2. Challenge Details &amp; Models</legend>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:12px;">
+              <div class="field">
+                <label>Starting Price</label>
+                <input type="text" name="startingPrice" id="startingPrice" placeholder="From $49" />
+              </div>
+              <div class="field">
+                <label>Max Capital Allocation</label>
+                <input type="text" name="maxAllocation" id="maxAllocation" placeholder="$200K / $400K" />
+              </div>
+              <div class="field">
+                <label>Max Daily Drawdown</label>
+                <input type="text" name="dailyDrawdown" id="dailyDrawdown" placeholder="5%" />
+              </div>
+              <div class="field">
+                <label>Max Total Drawdown</label>
+                <input type="text" name="maxDrawdown" id="maxDrawdown" placeholder="10%" />
+              </div>
+              <div class="field">
+                <label>Min Trading Days</label>
+                <input type="text" name="minTradingDays" id="minTradingDays" placeholder="0 or 5 days" />
+              </div>
+              <div class="field">
+                <label>Time Limit</label>
+                <input type="text" name="timeLimit" id="timeLimit" placeholder="No Time Limit" />
+              </div>
+            </div>
+
+            <div style="margin-top:12px;display:flex;gap:20px;flex-wrap:wrap;">
+              <label style="display:flex;align-items:center;gap:6px;cursor:pointer;">
+                <input type="checkbox" name="model1Step" id="model1Step" checked />
+                <span>1-Step Evaluation</span>
+              </label>
+              <label style="display:flex;align-items:center;gap:6px;cursor:pointer;">
+                <input type="checkbox" name="model2Step" id="model2Step" checked />
+                <span>2-Step Evaluation</span>
+              </label>
+              <label style="display:flex;align-items:center;gap:6px;cursor:pointer;">
+                <input type="checkbox" name="modelInstant" id="modelInstant" />
+                <span>Instant Funding Available</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <!-- Fieldset 3: Payout & India Payment Methods -->
+          <fieldset class="fieldset-box full">
+            <legend>3. Payout &amp; Payment Details</legend>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:12px;">
+              <div class="field">
+                <label>Profit Split</label>
+                <input type="text" name="profitSplit" id="profitSplit" placeholder="80% - 95%" />
+              </div>
+              <div class="field">
+                <label>Payout Cycle</label>
+                <input type="text" name="payoutCycle" id="payoutCycle" placeholder="Bi-weekly / On Demand" />
+              </div>
+              <div class="field">
+                <label>Minimum Payout</label>
+                <input type="text" name="minPayout" id="minPayout" placeholder="e.g. $50" />
+              </div>
+              <div class="field">
+                <label>Leverage (Max)</label>
+                <input type="text" name="leverage" id="leverage" placeholder="1:100" />
+              </div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px;">
+              <div class="field">
+                <label>Payment Methods (comma separated)</label>
+                <input type="text" name="paymentMethods" id="paymentMethods" placeholder="Crypto, Credit Card, UPI, Bank Transfer" />
+              </div>
+              <div class="field">
+                <label>Supported Platforms (comma separated)</label>
+                <input type="text" name="platforms" id="platforms" placeholder="MT4, MT5, cTrader, DXtrade" />
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Fieldset 4: Rules -->
+          <fieldset class="fieldset-box full">
+            <legend>4. Trading Rules &amp; Permissions</legend>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));gap:12px;">
+              <div class="field">
+                <label>News Trading</label>
+                <input type="text" name="newsTrading" id="newsTrading" placeholder="Allowed / Restricted" />
+              </div>
+              <div class="field">
+                <label>Weekend Holding</label>
+                <input type="text" name="weekendHolding" id="weekendHolding" placeholder="Allowed / Swing accounts only" />
+              </div>
+              <div class="field">
+                <label>EA / Automated Trading</label>
+                <input type="text" name="eaAllowed" id="eaAllowed" placeholder="Allowed" />
+              </div>
+              <div class="field">
+                <label>Consistency Rule</label>
+                <input type="text" name="consistencyRule" id="consistencyRule" placeholder="No / 30% concentration" />
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Fieldset 5: SEO Metadata -->
+          <fieldset class="fieldset-box full">
+            <legend>5. SEO Metadata &amp; Notes</legend>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+              <div class="field">
+                <label>SEO Title</label>
+                <input type="text" name="seoTitle" id="seoTitle" placeholder="Firm Name Review &amp; Challenge Rules" />
+              </div>
+              <div class="field">
+                <label>SEO Description</label>
+                <input type="text" name="seoDescription" id="seoDescription" placeholder="Compare challenge fees, payout policies and trading rules." />
+              </div>
+            </div>
+            <div class="field full" style="margin-top:8px;">
+              <label>Important Notes / Restrictions for Indian Traders</label>
+              <textarea name="notes" id="notes" rows="2" placeholder="Crypto payouts require TRC20/ERC20 wallet. UPI supported via third-party gateway."></textarea>
+            </div>
+          </fieldset>
+
+          <div class="full top-actions" style="display:flex;gap:10px;justify-content:flex-end;">
+            <button type="button" class="btn" id="resetBtn" style="background:rgba(255,255,255,0.06);color:#fff;">Cancel / Reset</button>
+            <button type="submit" class="btn-primary" id="saveFirmBtn">Save Firm</button>
+          </div>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <script type="module">
+    import { collection, doc, getDoc, getDocs, setDoc, deleteDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+    import { auth, db } from "./dashboard-common.js";
+    import { enforceAdmin, bindLogout, showNotice, formDataToObj } from "./admin-common.js";
+    import { CLOUDFLARE_API_URL } from "./cloudflare-config.js";
+    import { clearCache } from "./cloudflare-data.js";
+    import { DEFAULT_BEST_FIRMS } from "./firms-data.js";
+
+    const cloudflareFirmUrl = (id) => `${CLOUDFLARE_API_URL}/v1/collections/firms/${encodeURIComponent(String(id || "").trim())}`;
+
+    async function cloudflareAdminHeaders() {
+      const token = await auth.currentUser?.getIdToken(true);
+      if (!token) return { "content-type": "application/json" };
+      return { "content-type": "application/json", authorization: `Bearer ${token}` };
+    }
+
+    async function readCloudflareFirm(id) {
+      try {
+        const response = await fetch(cloudflareFirmUrl(id), { headers: { accept: "application/json" }, cache: "no-store" });
+        if (response.status === 404) return {};
+        if (!response.ok) return {};
+        const payload = await response.json();
+        return payload?.data && typeof payload.data === "object" ? payload.data : {};
+      } catch (_) {
+        return {};
+      }
+    }
+
+    async function mirrorFirmToCloudflare(id, changes = {}) {
+      const firmId = String(id || "").trim();
+      if (!firmId) return;
+      try {
+        const current = await readCloudflareFirm(firmId);
+        const data = {
+          ...current,
+          ...changes,
+          id: firmId,
+          firmId: String(changes.firmId || current.firmId || firmId),
+          slug: String(changes.slug || current.slug || firmId),
+          updatedAt: new Date().toISOString()
+        };
+        await fetch(cloudflareFirmUrl(firmId), {
+          method: "PUT",
+          headers: await cloudflareAdminHeaders(),
+          body: JSON.stringify({ data })
+        });
+        clearCache();
+      } catch (err) {
+        console.warn("Cloudflare mirror notice:", err);
+      }
+    }
+
+    async function deleteCloudflareFirm(id) {
+      const firmId = String(id || "").trim();
+      if (!firmId) return;
+      try {
+        await fetch(cloudflareFirmUrl(firmId), {
+          method: "DELETE",
+          headers: await cloudflareAdminHeaders()
+        });
+        clearCache();
+      } catch (err) {
+        console.warn("Cloudflare delete notice:", err);
+      }
+    }
+
+    const notice = document.getElementById("notice");
+    const firmsTableBody = document.getElementById("firmsTableBody");
+    const firmForm = document.getElementById("indianFirmForm");
+    const resetBtn = document.getElementById("resetBtn");
+    const formTitle = document.getElementById("formTitle");
+    const searchInput = document.getElementById("firmSearchInput");
+    const filterStatusSelect = document.getElementById("filterStatusSelect");
+
+    const countTotal = document.getElementById("countTotal");
+    const countPublished = document.getElementById("countPublished");
+    const countDraft = document.getElementById("countDraft");
+    const countActive = document.getElementById("countActive");
+
+    let allFirms = [];
+
+    bindLogout("logoutBtn");
+
+    enforceAdmin(async (user) => {
+      document.getElementById("adminEmail").textContent = user.email || "Admin";
+      await loadFirms();
+    });
+
+    const DETACHED_INDIA_FIRMS = new Set([
+      "funded-fun",
+      "aqua-funded",
+      "blueberry-funded",
+      "fxify",
+      "goat-funded-trader",
+      "qt-funded"
+    ]);
+
+    async function loadFirms() {
+      try {
+        const snap = await getDocs(collection(db, "firms"));
+        allFirms = [];
+        snap.forEach((d) => {
+          const data = d.data() || {};
+          allFirms.push({ id: d.id, ...data });
+        });
+        DEFAULT_BEST_FIRMS.forEach((def) => {
+          const k = String(def.slug || def.id || "").toLowerCase();
+          if (k && !allFirms.some((f) => String(f.slug || f.id || "").toLowerCase() === k)) {
+            allFirms.push({ id: def.id || def.slug, ...def });
+          }
+        });
+        allFirms.forEach((f) => {
+          const k = String(f.slug || f.id || "").toLowerCase();
+          if (DETACHED_INDIA_FIRMS.has(k) && f.bestRegions?.india) {
+            f.bestRegions = { ...f.bestRegions, india: false };
+          }
+        });
+        renderMetrics();
+        renderTable();
+      } catch (err) {
+        console.error("Error loading firms:", err);
+        showNotice(notice, "Failed to load firms: " + (err.message || err), "error");
+      }
+    }
+
+    function renderMetrics() {
+      const indianFirms = allFirms.filter((f) => Boolean(f.bestRegions?.india));
+      countTotal.textContent = String(indianFirms.length);
+      countPublished.textContent = String(indianFirms.filter((f) => (f.publishState || "published") === "published").length);
+      countDraft.textContent = String(indianFirms.filter((f) => (f.publishState || "") === "draft").length);
+      countActive.textContent = String(indianFirms.filter((f) => f.active !== false).length);
+    }
+
+    function renderTable() {
+      const q = String(searchInput.value || "").toLowerCase().trim();
+      const statusFilter = filterStatusSelect.value;
+
+      let filtered = allFirms.filter((f) => {
+        const name = String(f.name || "").toLowerCase();
+        const country = String(f.country || "").toLowerCase();
+        const matchesQuery = !q || name.includes(q) || country.includes(q);
+        if (!matchesQuery) return false;
+
+        const isIndia = Boolean(f.bestRegions?.india);
+        if (statusFilter === "india-only" && !isIndia) return false;
+        if (statusFilter === "published" && (f.publishState || "published") !== "published") return false;
+        if (statusFilter === "draft" && (f.publishState || "") !== "draft") return false;
+
+        return true;
+      });
+
+      // Sort Indian firms to the top, then by ranking
+      filtered.sort((a, b) => {
+        const aIndia = Boolean(a.bestRegions?.india) ? 1 : 0;
+        const bIndia = Boolean(b.bestRegions?.india) ? 1 : 0;
+        if (aIndia !== bIndia) return bIndia - aIndia;
+        return (Number(a.ranking) || 999) - (Number(b.ranking) || 999);
+      });
+
+      if (!filtered.length) {
+        firmsTableBody.innerHTML = `<tr><td colspan="8" style="text-align:center;padding:24px;color:#888;">No firms match the criteria.</td></tr>`;
+        return;
+      }
+
+      firmsTableBody.innerHTML = filtered.map((f) => {
+        const isIndia = Boolean(f.bestRegions?.india);
+        const status = String(f.publishState || "published").toLowerCase();
+        const statusClass = status === "published" ? "status-published" : (status === "draft" ? "status-draft" : "status-unpublished");
+        const logoUrl = f.logo || "/assets/Rank%20My%20Prop%20Logo%201.webp";
+        const startingPrice = f.cardMetrics?.startingPrice || f.startingPrice || "—";
+        const profitSplit = f.cardMetrics?.profitSplit || f.profitSplit || "—";
+
+        return `
+          <tr>
+            <td><strong>${f.ranking || "—"}</strong></td>
+            <td>
+              <img src="${logoUrl}" class="firm-thumb" alt="" onerror="this.src='/assets/Rank%20My%20Prop%20Logo%201.webp'" />
+              <strong>${f.name || f.id}</strong>
+            </td>
+            <td>${f.country || "Global"}</td>
+            <td>${profitSplit}</td>
+            <td>${startingPrice}</td>
+            <td>
+              <button type="button" class="toggle-pill ${isIndia ? "is-active" : ""}" data-toggle-india="${f.id}">
+                ${isIndia ? "✓ Listed in India" : "+ Add to India"}
+              </button>
+            </td>
+            <td><span class="status-badge ${statusClass}">${status}</span></td>
+            <td style="text-align:right;">
+              <button class="btn" style="padding:4px 8px;font-size:12px;margin-right:4px;" data-edit-firm="${f.id}">Edit</button>
+              <a href="/admin-firm-details?id=${f.id}" class="btn" style="padding:4px 8px;font-size:12px;margin-right:4px;text-decoration:none;">CMS</a>
+              <button class="btn" style="padding:4px 8px;font-size:12px;color:#f87171;border-color:rgba(239,68,68,0.3);" data-delete-firm="${f.id}">Del</button>
+            </td>
+          </tr>
+        `;
+      }).join("");
+
+      // Bind quick toggle buttons
+      firmsTableBody.querySelectorAll("[data-toggle-india]").forEach((btn) => {
+        btn.addEventListener("click", async () => {
+          const firmId = btn.dataset.toggleIndia;
+          await toggleIndiaAvailability(firmId);
+        });
+      });
+
+      // Bind Edit buttons
+      firmsTableBody.querySelectorAll("[data-edit-firm]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const firmId = btn.dataset.editFirm;
+          populateFormForEdit(firmId);
+        });
+      });
+
+      // Bind Delete buttons
+      firmsTableBody.querySelectorAll("[data-delete-firm]").forEach((btn) => {
+        btn.addEventListener("click", async () => {
+          const firmId = btn.dataset.deleteFirm;
+          if (confirm(`Are you sure you want to delete firm "${firmId}"? This action cannot be undone.`)) {
+            await deleteFirmDoc(firmId);
+          }
+        });
+      });
+    }
+
+    searchInput.addEventListener("input", renderTable);
+    filterStatusSelect.addEventListener("change", renderTable);
+
+    async function toggleIndiaAvailability(firmId) {
+      const target = allFirms.find((f) => f.id === firmId);
+      if (!target) return;
+      const currentIndia = Boolean(target.bestRegions?.india);
+      const nextIndia = !currentIndia;
+
+      const nextRegions = { ...(target.bestRegions || {}), india: nextIndia };
+      try {
+        await setDoc(doc(db, "firms", firmId), {
+          bestRegions: nextRegions,
+          updatedAt: serverTimestamp()
+        }, { merge: true });
+
+        await mirrorFirmToCloudflare(firmId, { bestRegions: nextRegions });
+
+        target.bestRegions = nextRegions;
+        renderMetrics();
+        renderTable();
+        showNotice(notice, `Updated "${target.name || firmId}": Indian availability is now ${nextIndia ? "ON" : "OFF"} (Synced to live site).`);
+      } catch (err) {
+        showNotice(notice, "Failed to toggle: " + err.message, "error");
+      }
+    }
+
+    async function deleteFirmDoc(firmId) {
+      try {
+        await deleteDoc(doc(db, "firms", firmId));
+        await deleteCloudflareFirm(firmId);
+        allFirms = allFirms.filter((f) => f.id !== firmId);
+        renderMetrics();
+        renderTable();
+        showNotice(notice, `Firm "${firmId}" deleted from Firestore and Cloudflare.`);
+      } catch (err) {
+        showNotice(notice, "Delete failed: " + err.message, "error");
+      }
+    }
+
+    function populateFormForEdit(firmId) {
+      const firm = allFirms.find((f) => f.id === firmId);
+      if (!firm) return;
+
+      document.getElementById("firmDocId").value = firm.id;
+      document.getElementById("name").value = firm.name || "";
+      document.getElementById("slug").value = firm.slug || firm.id || "";
+      document.getElementById("logo").value = firm.logo || "";
+      document.getElementById("website").value = firm.website || "";
+      document.getElementById("country").value = firm.country || "";
+      document.getElementById("ranking").value = firm.ranking || 10;
+      document.getElementById("bio").value = firm.bio || "";
+      document.getElementById("publishState").value = firm.publishState || "published";
+
+      document.getElementById("showIndia").checked = Boolean(firm.bestRegions?.india);
+      document.getElementById("active").checked = firm.active !== false;
+      document.getElementById("verified").checked = Boolean(firm.verified);
+
+      const card = firm.cardMetrics || {};
+      document.getElementById("startingPrice").value = card.startingPrice || firm.startingPrice || "";
+      document.getElementById("dailyDrawdown").value = firm.dailyDrawdown || "";
+      document.getElementById("maxDrawdown").value = firm.maxDrawdown || "";
+      document.getElementById("minTradingDays").value = card.minTradingDays || "";
+      document.getElementById("timeLimit").value = card.timeLimit || "";
+      document.getElementById("payoutCycle").value = card.payoutCycle || "";
+      document.getElementById("newsTrading").value = card.newsTrading || "";
+      document.getElementById("eaAllowed").value = card.eaAllowed || "";
+
+      document.getElementById("platforms").value = (firm.platforms || []).join(", ");
+      document.getElementById("paymentMethods").value = (firm.paymentMethods || []).join(", ");
+
+      formTitle.textContent = `Edit Prop Firm: ${firm.name || firm.id}`;
+      document.getElementById("formPanel").scrollIntoView({ behavior: "smooth" });
+    }
+
+    resetBtn.addEventListener("click", () => {
+      firmForm.reset();
+      document.getElementById("firmDocId").value = "";
+      formTitle.textContent = "Add / Edit Prop Firm for Indian Market";
+    });
+
+    firmForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const raw = formDataToObj(firmForm);
+      const firmDocId = raw.firmDocId || raw.slug.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+
+      if (!firmDocId) {
+        showNotice(notice, "Please enter a firm name or slug.", "error");
+        return;
+      }
+
+      const existing = allFirms.find((f) => f.id === firmDocId) || {};
+      const bestRegions = { ...(existing.bestRegions || {}), india: Boolean(document.getElementById("showIndia").checked) };
+
+      const platformsArray = raw.platforms.split(",").map((s) => s.trim()).filter(Boolean);
+      const paymentMethodsArray = raw.paymentMethods.split(",").map((s) => s.trim()).filter(Boolean);
+
+      const payload = {
+        name: raw.name,
+        slug: raw.slug || firmDocId,
+        logo: raw.logo,
+        website: raw.website,
+        country: raw.country || "Global",
+        ranking: Number(raw.ranking) || 10,
+        bio: raw.bio,
+        publishState: raw.publishState,
+        active: Boolean(document.getElementById("active").checked),
+        verified: Boolean(document.getElementById("verified").checked),
+        bestRegions,
+        dailyDrawdown: raw.dailyDrawdown,
+        maxDrawdown: raw.maxDrawdown,
+        platforms: platformsArray,
+        paymentMethods: paymentMethodsArray,
+        cardMetrics: {
+          ...(existing.cardMetrics || {}),
+          startingPrice: raw.startingPrice,
+          minTradingDays: raw.minTradingDays,
+          timeLimit: raw.timeLimit,
+          payoutCycle: raw.payoutCycle,
+          newsTrading: raw.newsTrading,
+          eaAllowed: raw.eaAllowed
+        },
+        seoTitle: raw.seoTitle,
+        seoDescription: raw.seoDescription,
+        notes: raw.notes,
+        updatedAt: serverTimestamp()
+      };
+
+      try {
+        await setDoc(doc(db, "firms", firmDocId), payload, { merge: true });
+        await mirrorFirmToCloudflare(firmDocId, payload);
+        showNotice(notice, `Firm "${raw.name}" saved and synced to live website successfully!`);
+
+        // Refresh
+        await loadFirms();
+        firmForm.reset();
+        document.getElementById("firmDocId").value = "";
+        formTitle.textContent = "Add / Edit Prop Firm for Indian Market";
+      } catch (err) {
+        console.error("Save error:", err);
+        showNotice(notice, "Failed to save: " + err.message, "error");
+      }
+    });
+  </script>
+  <script defer src="/admin-shell.js"></script>
+  <script type="module" src="/site-performance.js"></script>
+</body>
+</html>

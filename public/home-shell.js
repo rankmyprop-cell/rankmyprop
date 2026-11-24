@@ -1,5 +1,6 @@
 const firmItems = [
   { label: "Best Prop Firms 2026", description: "Our highest-rated firms overall", href: "/best-prop-firms-2026", badge: "Popular" },
+  { label: "Best Indian Prop Firms", description: "Top funded accounts for Indian traders", href: "/best-indian-prop-firms", badge: "India" },
   { label: "Fast Payout Firms", description: "Get paid without the long wait", href: "/fast-payout-prop-firms" },
   { label: "Instant Funding", description: "Skip the evaluation challenge", href: "/best-instant-funding-firms" },
   { label: "Futures Prop Firms", description: "Top firms built for futures traders", href: "/best-futures-prop-firms" },
@@ -69,6 +70,7 @@ const footerGroups = [
     links: [
       ["Listed Prop Firms", "/listedprop"],
       ["Best Prop Firms", "/bestprop"],
+      ["Best Indian Prop Firms", "/best-indian-prop-firms"],
       ["Offers & Discounts", "/offers"],
       ["Prop Firm Reviews", "/reviews"],
     ],

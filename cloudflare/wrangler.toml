@@ -1,0 +1,20 @@
+name = "rankmyprop-api"
+main = "src/index.js"
+compatibility_date = "2026-09-18"
+workers_dev = true
+
+[[d1_databases]]
+binding = "DB"
+database_name = "rankmyprop-db"
+database_id = "6c2572cb-6359-4285-bf42-db706283dc90"
+migrations_dir = "migrations"
+
+[[r2_buckets]]
+binding = "MEDIA"
+bucket_name = "rankmyprop-media"
+
+[vars]
+ENVIRONMENT = "production"
+FIREBASE_PROJECT_ID = "rank-my-prop"
+ALLOWED_ORIGINS = "https://www.rankmyprop.in,https://rankmyprop.in,https://rankmyprop-web.pages.dev,http://127.0.0.1:5173,http://localhost:5173"
+ADMIN_EMAIL = "rankmyprop@gmail.com"

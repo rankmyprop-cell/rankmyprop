@@ -1,5 +1,5 @@
 const footerGroups = [
-  { title: 'Discover', links: [['Listed Prop Firms', '/listedprop'], ['Best Prop Firms', '/bestprop'], ['Offers & Discounts', '/offers'], ['Prop Firm Reviews', '/reviews']] },
+  { title: 'Discover', links: [['Listed Prop Firms', '/listedprop'], ['Best Prop Firms', '/bestprop'], ['Best Indian Prop Firms', '/best-indian-prop-firms'], ['Offers & Discounts', '/offers'], ['Prop Firm Reviews', '/reviews']] },
   { title: 'Research', links: [['Compare Firms', '/compare'], ['Market Report', '/prop-firm-market-report'], ['Payout Proofs', '/payout-proofs'], ['Prop Firm Rules', '/prop-firm-rules'], ['Prop News', '/prop-news']] },
   { title: 'Tools', links: [['Calculator Hub', '/calculators'], ['Lot Size Calculator', '/lotsizecalculator'], ['Drawdown Calculator', '/drawdown-calculator'], ['Risk-to-Reward', '/risk-to-reward-calculator'], ['Consistency Rule', '/consistency-rule-calculator'], ['Loss Recovery', '/lossrecoveryplanner'], ['Trade Journal', '/tradejournal']] },
   { title: 'Learning', links: [['Trading Guides', '/trading-guides'], ['Funding Strategies', '/funding-strategies'], ['Trading Psychology', '/trading-psychology'], ['Beginner Tutorials', '/beginner-tutorials'], ['Giveaways', '/giveaways']] },

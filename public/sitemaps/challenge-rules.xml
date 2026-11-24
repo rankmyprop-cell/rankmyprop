@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://www.rankmyprop.in/prop-firm-rules/aifo/1-step-challenge</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.rankmyprop.in/prop-firm-rules/aifo/2-step-challenge</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.rankmyprop.in/prop-firm-rules/aifo/instant-funding-account</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.rankmyprop.in/prop-firm-rules/aifo/sprint-account</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://www.rankmyprop.in/prop-firm-rules/alpha-trader-firm/1-step-challenge</loc>
     <lastmod>2026-05-29</lastmod>
     <changefreq>weekly</changefreq>
@@ -50,49 +74,103 @@
   </url>
   <url>
     <loc>https://www.rankmyprop.in/prop-firm-rules/atlas-funded/1-step-pro</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-10-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.rankmyprop.in/prop-firm-rules/atlas-funded/1-step-standard</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-10-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.rankmyprop.in/prop-firm-rules/atlas-funded/2-step-pro</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-10-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.rankmyprop.in/prop-firm-rules/atlas-funded/2-step-standard</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-10-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.rankmyprop.in/prop-firm-rules/atlas-funded/3-step</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-10-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.rankmyprop.in/prop-firm-rules/atlas-funded/instant-funded-zero</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-10-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.rankmyprop.in/prop-firm-rules/atlas-funded/instant-funded</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-10-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.rankmyprop.in/prop-firm-rules/atlas-funded/pay-after-pass-professional</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-10-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.rankmyprop.in/prop-firm-rules/blue-guardian/forex-instant-funding</loc>
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.rankmyprop.in/prop-firm-rules/blue-guardian/forex-1-step-standard</loc>
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.rankmyprop.in/prop-firm-rules/blue-guardian/forex-1-step-nano</loc>
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.rankmyprop.in/prop-firm-rules/blue-guardian/forex-2-step-standard</loc>
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.rankmyprop.in/prop-firm-rules/blue-guardian/forex-2-step-nano</loc>
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.rankmyprop.in/prop-firm-rules/blue-guardian/futures-standard</loc>
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.rankmyprop.in/prop-firm-rules/blue-guardian/futures-reserve</loc>
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.rankmyprop.in/prop-firm-rules/blue-guardian/futures-express</loc>
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.rankmyprop.in/prop-firm-rules/blue-guardian/futures-direct</loc>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -163,42 +241,6 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.rankmyprop.in/prop-firm-rules/finotive-funding/1-step-challenge</loc>
-    <lastmod>2026-08-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.rankmyprop.in/prop-firm-rules/finotive-funding/1-step-pro</loc>
-    <lastmod>2026-08-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.rankmyprop.in/prop-firm-rules/finotive-funding/2-step-challenge</loc>
-    <lastmod>2026-08-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.rankmyprop.in/prop-firm-rules/finotive-funding/2-step-pro</loc>
-    <lastmod>2026-08-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.rankmyprop.in/prop-firm-rules/finotive-funding/instant-funding-standard</loc>
-    <lastmod>2026-08-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.rankmyprop.in/prop-firm-rules/finotive-funding/instant-funding-lite</loc>
-    <lastmod>2026-08-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
     <loc>https://www.rankmyprop.in/prop-firm-rules/funded-fun/instant</loc>
     <lastmod>2026-05-13</lastmod>
     <changefreq>weekly</changefreq>
@@ -243,30 +285,6 @@
   <url>
     <loc>https://www.rankmyprop.in/prop-firm-rules/funded-trader-markets/instant-funding-plus</loc>
     <lastmod>2026-08-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.rankmyprop.in/prop-firm-rules/fundednext-firm/stellar-1-step-challenge</loc>
-    <lastmod>2026-09-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.rankmyprop.in/prop-firm-rules/fundednext-firm/stellar-2-step-challenge</loc>
-    <lastmod>2026-09-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.rankmyprop.in/prop-firm-rules/fundednext-firm/stellar-lite-challenge</loc>
-    <lastmod>2026-09-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.rankmyprop.in/prop-firm-rules/fundednext-firm/stellar-instant-instant-fundednext-account-no-challenge</loc>
-    <lastmod>2026-09-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -387,6 +405,48 @@
   <url>
     <loc>https://www.rankmyprop.in/prop-firm-rules/goat-funded-trader/instant-premium</loc>
     <lastmod>2026-08-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.rankmyprop.in/prop-firm-rules/nys-markets/instant</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.rankmyprop.in/prop-firm-rules/nys-markets/one-trade</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.rankmyprop.in/prop-firm-rules/nys-markets/2-step</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.rankmyprop.in/prop-firm-rules/nys-markets/flash</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.rankmyprop.in/prop-firm-rules/premier-capital/1-step-challenge</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.rankmyprop.in/prop-firm-rules/premier-capital/day-one-instant-funding</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.rankmyprop.in/prop-firm-rules/premier-capital/ptp-pass-then-pay-1-step</loc>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>

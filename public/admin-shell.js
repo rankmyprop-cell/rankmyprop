@@ -14,6 +14,7 @@
     ["admin-events.html", "Upcoming Events"],
     ["admin-offers.html", "Offers Control"],
     ["admin-firm-details.html", "Firm Detail CMS"],
+    ["admin-best-indian-prop-firms.html", "Best Indian Prop Firms"],
     ["admin-filters.html", "Filters Control"],
     ["admin-propnews.html", "Prop News CMS"],
     ["admin-trading-guides.html", "Trading Guides CMS"],

@@ -1,5 +1,6 @@
 const fs = require('node:fs')
 const path = require('node:path')
+const { pathToFileURL } = require('node:url')
 
 const root = path.resolve(__dirname, '..')
 const distRoot = path.join(root, 'dist')
@@ -96,7 +97,7 @@ function stars(rating) {
 function firmCard(firm = {}) {
   const name = compact(firm.name) || 'Prop firm'
   const slug = firmSlug(firm)
-  const href = detailHref(firm)
+  const href = firm.slug === 'trade-bridges' ? '/firms/trade-bridges' : detailHref(firm)
   const logo = logoHref(firm)
   const rating = Math.max(0, Math.min(5, Number(firm.score) || 0))
   const reviews = Math.max(0, Math.round(Number(firm.reviewCount) || 0))
@@ -106,16 +107,30 @@ function firmCard(firm = {}) {
   const stats = statValues(firm)
   const details = detailValues(firm)
   const initials = name.split(/\s+/).map((word) => word[0]).join('').slice(0, 3).toUpperCase()
+
+  const statItems = []
+  if (stats.allocation && !/^(?:Not specified|Not mentioned)$/i.test(stats.allocation)) {
+    statItems.push(`<div class="pf-stat-item"><div><div class="pf-stat-val">${escapeHtml(stats.allocation)}</div><div class="pf-stat-label">Allocation</div></div></div>`)
+  }
+  if (stats.leverage && !/^(?:Not specified|Not mentioned)$/i.test(stats.leverage)) {
+    statItems.push(`<div class="pf-stat-item"><div><div class="pf-stat-val">${escapeHtml(stats.leverage)}</div><div class="pf-stat-label">Leverage</div></div></div>`)
+  }
+  if (stats.profitSplit && !/^(?:Not specified|Not mentioned)$/i.test(stats.profitSplit)) {
+    statItems.push(`<div class="pf-stat-item"><div><div class="pf-stat-val">${escapeHtml(stats.profitSplit)}</div><div class="pf-stat-label">Profit Split</div></div></div>`)
+  }
+  const statsHtml = statItems.length ? `<div class="pf-divider"></div><div class="pf-stats-row" style="${statItems.length < 3 ? 'display:flex;justify-content:center;gap:16px;' : ''}">${statItems.join('')}</div>` : ''
+
+  const visibleDetails = details.filter(([, value]) => value && !/^(?:Not specified|Not mentioned)$/i.test(value))
+
   return `<article class="pf-card rmp-server-firm-card" data-firm-slug="${escapeHtml(slug)}">
-    <div class="pf-card-header"><div class="pf-header-left"><div class="pf-logo">${logo ? `<img src="${escapeHtml(logo)}" alt="${escapeHtml(name)} logo" loading="lazy" decoding="async" width="120" height="120">` : `<span>${escapeHtml(initials)}</span>`}</div><div class="pf-title-wrap"><div class="pf-firm-name-row"><a class="pf-firm-name pf-firm-link" href="${escapeHtml(href)}">${escapeHtml(name)}</a></div><div class="pf-rating-row"><span class="pf-rating-num">${hasVerifiedRating ? rating.toFixed(1) : '—'}</span><span class="pf-stars" aria-label="${hasVerifiedRating ? `${rating.toFixed(1)} out of 5` : 'Not enough verified reviews yet'}">${hasVerifiedRating ? stars(rating) : ''}</span><a class="pf-reviews pf-reviews-link" href="/prop-firms/${encodeURIComponent(slug)}/reviews">${reviews} reviews</a></div></div></div></div>
-    <div class="pf-badges"><span class="pf-badge pf-badge-verified">VERIFIED</span><span class="pf-badge pf-badge-market">${escapeHtml(market)}</span></div>
+    <div class="pf-card-header"><div class="pf-header-left"><div class="pf-logo">${logo ? `<img src="${escapeHtml(logo)}" alt="${escapeHtml(name)} logo" loading="lazy" decoding="async" width="120" height="120">` : `<span>${escapeHtml(initials)}</span>`}</div><div class="pf-title-wrap"><div class="pf-firm-name-row"><a class="pf-firm-name pf-firm-link" href="${escapeHtml(href)}">${escapeHtml(name)}</a></div>${reviews > 0 ? `<div class="pf-rating-row"><span class="pf-rating-num">${hasVerifiedRating ? rating.toFixed(1) : '—'}</span><span class="pf-stars" aria-label="${hasVerifiedRating ? `${rating.toFixed(1)} out of 5` : 'Not enough verified reviews yet'}">${hasVerifiedRating ? stars(rating) : ''}</span><a class="pf-reviews pf-reviews-link" href="/prop-firms/${encodeURIComponent(slug)}/reviews">${reviews} reviews</a></div>` : ''}</div></div></div>
+    <div class="pf-badges">${firm.verified ? '<span class="pf-badge pf-badge-verified">VERIFIED</span>' : ''}<span class="pf-badge pf-badge-market">${escapeHtml(market)}</span></div>
     <p class="pf-tagline" title="${escapeHtml(compact(firm.bio || firm.overviewShort))}">${escapeHtml(bio || `${name} prop firm profile and account details.`)}</p>
+    ${statsHtml}
     <div class="pf-divider"></div>
-    <div class="pf-stats-row"><div class="pf-stat-item"><div><div class="pf-stat-val">${escapeHtml(stats.allocation)}</div><div class="pf-stat-label">Allocation</div></div></div><div class="pf-stat-item"><div><div class="pf-stat-val">${escapeHtml(stats.leverage)}</div><div class="pf-stat-label">Leverage</div></div></div><div class="pf-stat-item"><div><div class="pf-stat-val">${escapeHtml(stats.profitSplit)}</div><div class="pf-stat-label">Profit Split</div></div></div></div>
+    <div class="pf-details-grid">${visibleDetails.map(([label, value]) => `<div class="pf-detail-row"><span class="pf-detail-label">${escapeHtml(label)}</span><span class="pf-detail-val" title="${escapeHtml(value)}">${escapeHtml(value)}</span></div>`).join('')}</div>
     <div class="pf-divider"></div>
-    <div class="pf-details-grid">${details.map(([label, value]) => `<div class="pf-detail-row"><span class="pf-detail-label">${escapeHtml(label)}</span><span class="pf-detail-val" title="${escapeHtml(value)}">${escapeHtml(value)}</span></div>`).join('')}</div>
-    <div class="pf-divider"></div>
-    <div class="pf-btn-row"><a class="pf-btn pf-btn-outline" href="${escapeHtml(firm.buyLink || firm.website || href)}">View Firm</a><a class="pf-btn pf-btn-primary" href="${escapeHtml(href)}">View Details</a></div>
+    <div class="pf-btn-row"><a class="pf-btn pf-btn-outline" href="${escapeHtml(firm.buyLink || firm.website || href)}" target="_blank" rel="noopener noreferrer sponsored">View Firm</a><a class="pf-btn pf-btn-primary" href="${escapeHtml(href)}">View Details</a></div>
   </article>`
 }
 
@@ -227,6 +242,10 @@ const listingCategoryByFile = {
 
 function listingRowsFor(fileName, firms) {
   if (fileName === 'listedprop.html') return firms.filter((firm) => firm.showListed !== false)
+  if (fileName === 'best-indian-prop-firms.html') {
+    const indian = firms.filter((firm) => firm.bestRegions?.india === true || firm.country === 'India' || (Array.isArray(firm.tags) && firm.tags.some((t) => String(t).toLowerCase().includes('india'))))
+    return indian.length ? indian : firms.filter((firm) => firm.showBestGlobal === true)
+  }
   const best = firms.filter((firm) => firm.showBestGlobal === true || String(firm.listingType).toLowerCase() === 'best' || Object.values(firm.bestRegions || {}).some(Boolean))
   const category = listingCategoryByFile[fileName]
   if (!category) return best
@@ -242,8 +261,12 @@ function injectListingPages(firms) {
     const cards = listingRowsFor(fileName, firms).slice(0, 9).map(firmCard).join('')
     if (!cards) return
     const skeletons = new Array(3).fill(0).map(firmLoadingCard).join('')
+    const isFastPage = fileName === 'best-indian-prop-firms.html'
+    const gridContent = isFastPage ? cards : skeletons
+    const loadingClass = isFastPage ? '' : ' rmp-loading-grid'
+    const busy = isFastPage ? 'false' : 'true'
     writeWithoutMetadataChanges(file, (html) => {
-      let output = html.replace(/<div\s+id=["']grid["']\s+class=["']grid["'][^>]*>[\s\S]*?<\/div>/i, `<div id="grid" class="grid rmp-loading-grid" data-rmp-static-first-paint="true" aria-busy="true">${skeletons}</div><noscript><div class="rmp-server-firm-directory">${cards}</div></noscript>`)
+      let output = html.replace(/<div\s+id=["']grid["']\s+class=["']grid["'][^>]*>[\s\S]*?<\/div>/i, `<div id="grid" class="grid${loadingClass}" data-rmp-static-first-paint="true" aria-busy="${busy}">${gridContent}</div><noscript><div class="rmp-server-firm-directory">${cards}</div></noscript>`)
       if (!output.includes('id="rmpFirstPaintLoader"')) output = output.replace('</head>', `${listingLoaderStyle}\n</head>`)
       return output
     })
@@ -311,8 +334,8 @@ function injectHomepage(firms, offers) {
 async function main() {
   if (!fs.existsSync(distRoot)) throw new Error('Run Vite build before static first-paint generation')
   const evidence = fs.existsSync(evidencePath) ? JSON.parse(fs.readFileSync(evidencePath, 'utf8')) : {}
-  const firmsModule = await import(path.join(root, 'public', 'firms-data.js'))
-  const offersModule = await import(path.join(root, 'public', 'offers-data.js'))
+  const firmsModule = await import(pathToFileURL(path.join(root, 'public', 'firms-data.js')).href)
+  const offersModule = await import(pathToFileURL(path.join(root, 'public', 'offers-data.js')).href)
   const firms = mergeFirmRows(firmsModule.DEFAULT_LISTED_FIRMS || [], firmsModule.DEFAULT_BEST_FIRMS || [], evidence.firms || {})
   const offers = mergeOffers(offersModule.DEFAULT_OFFERS || [], evidence.offers || {})
   const listingPages = injectListingPages(firms)

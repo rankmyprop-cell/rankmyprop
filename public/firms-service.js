@@ -302,13 +302,39 @@ function uniqBySlug(rows) {
   return Array.from(map.values());
 }
 
+const DETACHED_INDIA_FIRMS = new Set([
+  "funded-fun",
+  "aqua-funded",
+  "blueberry-funded",
+  "fxify",
+  "goat-funded-trader",
+  "qt-funded"
+]);
+
 export async function getFirmsByType(listingType, options = {}) {
   try {
     const [firmRows, statRows] = await Promise.all([
       listDocuments("firms", 500),
       listDocuments("firmRatingStats", 500)
     ]);
-    const all = firmRows.map((row) => norm(row));
+    const defaults = (String(listingType || "listed").toLowerCase() === "best" ? DEFAULT_BEST_FIRMS : DEFAULT_LISTED_FIRMS).map((f) => norm(f));
+    const mergedMap = new Map();
+    defaults.forEach((f) => {
+      const k = slugify(f.slug || f.id || f.name);
+      if (k) mergedMap.set(k, f);
+    });
+    firmRows.forEach((row) => {
+      const f = norm(row);
+      const k = slugify(f.slug || f.id || f.name);
+      if (k) {
+        if (DETACHED_INDIA_FIRMS.has(k) && f.bestRegions?.india) {
+          f.bestRegions = { ...f.bestRegions, india: false };
+        }
+        const prev = mergedMap.get(k);
+        mergedMap.set(k, prev ? { ...prev, ...f } : f);
+      }
+    });
+    const all = Array.from(mergedMap.values());
     const statsMap = new Map();
     statRows.forEach((row) => {
       const idKey = slugify(row.id || "");

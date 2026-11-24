@@ -13,12 +13,14 @@ const BEST_PAGE_FILE_HINTS = [
   "cheapest-prop-firms",
   "most-trusted-prop-firms",
   "beginner-friendly-firms",
-  "highest-rated-firms"
+  "highest-rated-firms",
+  "best-indian-prop-firms"
 ];
 const listingType = (page.includes("bestprop") || page.includes("best-prop") || /^best/.test(page) || BEST_PAGE_FILE_HINTS.some((x) => page.includes(x))) ? "best" : "listed";
 
 const BEST_PAGE_HINTS = [
   { hint: "best-prop-firms-2026", key: "", title: "Best Prop Firms 2026" },
+  { hint: "best-indian-prop-firms", key: "", title: "Best Indian Prop Firms" },
   { hint: "fast-payout-prop-firms", key: "fast_payout", title: "Fast Payout Prop Firms" },
   { hint: "best-instant-funding-firms", key: "instant_funding", title: "Best Instant Funding Firms" },
   { hint: "best-hft-prop-firms", key: "hft", title: "Best HFT Prop Firms" },
@@ -88,7 +90,7 @@ const state = {
   perPage: 9,
   loading: true
 };
-const UX_DELAY_MS = 2000;
+const UX_DELAY_MS = 0;
 function rankVal(f = {}) {
   const r = Number(f.ranking);
   if (Number.isFinite(r) && r > 0) return r;
@@ -136,20 +138,27 @@ function ensureCardLayoutFixStyle() {
     ".container{max-width:1580px !important;padding-left:20px !important;padding-right:20px !important}",
     "#grid.grid{display:grid !important;grid-template-columns:repeat(3,minmax(0,1fr)) !important;gap:24px !important;align-items:stretch !important;padding:2px 0 !important}",
     "#grid.grid>*{min-width:0 !important}",
-    ".pf-card{width:100% !important;display:flex !important;flex-direction:column !important;height:100% !important;min-width:0 !important;margin:0 !important;box-sizing:border-box !important;overflow:hidden !important}",
+    ".pf-card{width:100% !important;display:flex !important;flex-direction:column !important;height:100% !important;min-width:0 !important;margin:0 !important;box-sizing:border-box !important;overflow:hidden !important;background:#13131f !important;border:1px solid #2a2a3d !important;border-radius:16px !important;padding:22px !important;box-shadow:0 18px 36px rgba(0,0,0,.45) !important}",
     ".pf-card *{min-width:0 !important}",
+    ".pf-logo{width:54px !important;height:54px !important;border-radius:12px !important;background:#1a1a2e !important;display:flex !important;align-items:center !important;justify-content:center !important;overflow:hidden !important;flex-shrink:0 !important;border:1px solid rgba(255,255,255,.08) !important}",
+    ".pf-logo img{width:100% !important;height:100% !important;object-fit:cover !important;display:block !important}",
     ".pf-tagline{min-height:40px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}",
     ".pf-details-grid{flex:1 1 auto}",
     ".pf-btn-row{margin-top:auto !important}",
     ".pf-stats-row{display:grid !important;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;align-items:start}",
-    ".pf-stat-item{min-width:0;gap:6px}",
+    ".pf-stat-item{min-width:0;gap:6px;display:flex !important;align-items:center !important}",
     ".pf-stat-item>div:last-child{min-width:0}",
     ".pf-stat-sep{display:none !important}",
+    ".pf-stat-icon{width:32px !important;height:32px !important;background:#1a1a2e !important;border-radius:8px !important;display:flex !important;align-items:center !important;justify-content:center !important;color:#7c3aed !important;flex-shrink:0 !important}",
+    ".pf-stat-icon svg{width:15px !important;height:15px !important;max-width:15px !important;max-height:15px !important;display:block !important}",
+    ".pf-tick{width:18px !important;height:18px !important;border-radius:50% !important;background:#6c47ff !important;display:flex !important;align-items:center !important;justify-content:center !important;box-shadow:0 0 12px rgba(108,71,255,.45) !important;flex-shrink:0 !important}",
+    ".pf-tick svg{width:10px !important;height:10px !important;max-width:10px !important;max-height:10px !important;display:block !important}",
     ".pf-stat-val{max-width:none !important;font-size:13px}",
     ".pf-stat-label{letter-spacing:.35px;line-height:1.15}",
     ".pf-tagline{overflow-wrap:anywhere}",
     ".pf-detail-row{display:grid!important;grid-template-columns:22px minmax(0,1fr)!important;grid-template-rows:auto auto;column-gap:7px!important;row-gap:2px!important;align-items:center!important}",
-    ".pf-detail-icon{grid-column:1;grid-row:1/3}",
+    ".pf-detail-icon{grid-column:1;grid-row:1/3;width:22px !important;height:22px !important;background:#1a1a2e !important;border-radius:6px !important;display:flex !important;align-items:center !important;justify-content:center !important;color:#6c47ff !important;flex-shrink:0 !important}",
+    ".pf-detail-icon svg{width:11px !important;height:11px !important;max-width:11px !important;max-height:11px !important;display:block !important}",
     ".pf-detail-label{grid-column:2;grid-row:1;min-width:0;white-space:normal!important;line-height:1.18;overflow-wrap:normal!important;word-break:normal!important}",
     ".pf-detail-val{grid-column:2;grid-row:2;min-width:0;max-width:none!important;margin-left:0!important;white-space:nowrap!important;overflow:hidden;text-overflow:ellipsis;line-height:1.25;overflow-wrap:normal!important;word-break:normal!important}",
     ".pf-firm-link,.pf-reviews-link{text-decoration:none}",
@@ -420,6 +429,8 @@ function detailHref(firm = {}) {
     toponetrader: "toponetraderdetail.html",
     "trader-scale": "traderscaledetail.html",
     traderscale: "traderscaledetail.html",
+    "trade-bridges": "/firms/trade-bridges",
+    tradebridges: "/firms/trade-bridges",
     "we-fund": "wefunddetail.html",
     wefund: "wefunddetail.html"
   };
@@ -490,13 +501,13 @@ function starsHtml(score) {
 }
 
 const ICONS = {
-  dollar: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v12M9 9.5c0-1.1.9-2 2-2h2a2 2 0 0 1 0 4h-2a2 2 0 0 0 0 4h2a2 2 0 0 0 2-2"/></svg>`,
-  scale: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M3 9l9-6 9 6M5 19h14M5 19l-2-6h4L5 19zm14 0l2-6h-4l2 6z"/></svg>`,
-  clock: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>`,
-  calendar: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>`,
-  lightning: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>`,
-  shield: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
-  check: `<svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`
+  dollar: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v12M9 9.5c0-1.1.9-2 2-2h2a2 2 0 0 1 0 4h-2a2 2 0 0 0 0 4h2a2 2 0 0 0 2-2"/></svg>`,
+  scale: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M3 9l9-6 9 6M5 19h14M5 19l-2-6h4L5 19zm14 0l2-6h-4l2 6z"/></svg>`,
+  clock: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>`,
+  calendar: `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>`,
+  lightning: `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>`,
+  shield: `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+  check: `<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`
 };
 
 function renderPagination() {
@@ -523,6 +534,9 @@ function render() {
   const grid = document.getElementById("grid");
   if (!grid) return;
   if (state.loading) {
+    if (grid.children.length > 0 && !grid.classList.contains("rmp-loading-grid")) {
+      return;
+    }
     ensureLoaderStyle();
     grid.classList.add("rmp-loading-grid");
     grid.setAttribute("aria-busy", "true");
@@ -593,7 +607,27 @@ function render() {
     const stats = cardStats(f);
     const details = cardDetails(f);
     const logoSrc = safeLogo(f);
-    const detailRows = details.map((d) => `
+    const initials = String(f.name || "TB").split(/\s+/).map((w) => w[0]).join("").slice(0, 3).toUpperCase();
+    const logoBlock = f.logo ? `<img fetchpriority="low" src="${logoSrc}" alt="${escapeHtml(f.name)} logo" loading="lazy" decoding="async" width="120" height="120">` : `<span>${escapeHtml(initials)}</span>`;
+    const ratingBlock = reviewTotal > 0
+      ? `<div class="pf-rating-row"><span class="pf-rating-num">${hasVerifiedRating ? rating.toFixed(1) : "—"}</span><div class="pf-stars" aria-label="${hasVerifiedRating ? `${rating.toFixed(1)} out of 5` : "Not enough verified reviews yet"}">${hasVerifiedRating ? starsHtml(rating) : ""}</div><a class="pf-reviews pf-reviews-link" href="${cardReviewHref}">${escapeHtml(reviews)} reviews</a></div>`
+      : "";
+    const badgesBlock = `<div class="pf-badges">${f.verified ? '<span class="pf-badge pf-badge-verified">VERIFIED</span>' : ''}<span class="pf-badge pf-badge-market">${escapeHtml(badgeMarket)}</span></div>`;
+    const statItems = [];
+    if (stats.allocation && !/^(?:Not specified|Not mentioned|-)$/i.test(stats.allocation)) {
+      statItems.push(`<div class="pf-stat-item"><div class="pf-stat-icon">${ICONS.dollar}</div><div><div class="pf-stat-val">${escapeHtml(stats.allocation)}</div><div class="pf-stat-label">Allocation</div></div></div>`);
+    }
+    if (stats.leverage && !/^(?:Not specified|Not mentioned|-)$/i.test(stats.leverage)) {
+      statItems.push(`<div class="pf-stat-item"><div class="pf-stat-icon">${ICONS.scale}</div><div><div class="pf-stat-val">${escapeHtml(stats.leverage)}</div><div class="pf-stat-label">Leverage</div></div></div>`);
+    }
+    if (stats.profitSplit && !/^(?:Not specified|Not mentioned|-)$/i.test(stats.profitSplit)) {
+      statItems.push(`<div class="pf-stat-item"><div class="pf-stat-icon">${ICONS.clock}</div><div><div class="pf-stat-val">${escapeHtml(stats.profitSplit)}</div><div class="pf-stat-label">Profit Split</div></div></div>`);
+    }
+    const statsBlock = statItems.length
+      ? `<div class="pf-divider"></div><div class="pf-stats-row" style="${statItems.length < 3 ? 'display:flex;justify-content:center;gap:20px;' : ''}">${statItems.join('<div class="pf-stat-sep"></div>')}</div>`
+      : "";
+
+    const detailRows = details.filter((d) => d.val && !/^(?:Not specified|Not mentioned|-)$/i.test(d.val)).map((d) => `
       <div class="pf-detail-row">
         <div class="pf-detail-icon">${ICONS[d.icon] || ICONS.shield}</div>
         <span class="pf-detail-label">${escapeHtml(d.label)}</span>
@@ -605,48 +639,25 @@ function render() {
         <div class="pf-card-header">
           <div class="pf-header-left">
             <div class="pf-logo">
-              <img fetchpriority="low" src="${logoSrc}" alt="${escapeHtml(f.name)} logo" loading="lazy" decoding="async" width="120" height="120">
+              ${logoBlock}
             </div>
             <div class="pf-title-wrap">
               <div class="pf-firm-name-row">
                 <a class="pf-firm-name pf-firm-link" href="${cardDetailHref}">${escapeHtml(f.name)}</a>
                 ${hasAssurance ? `<div class="pf-tick-wrap"><div class="pf-tick">${ICONS.check}</div><div class="pf-tooltip"><span class="dot"></span>Payout Assurance Enabled</div></div>` : ""}
               </div>
-              <div class="pf-rating-row">
-                <span class="pf-rating-num">${hasVerifiedRating ? rating.toFixed(1) : "—"}</span>
-                <div class="pf-stars" aria-label="${hasVerifiedRating ? `${rating.toFixed(1)} out of 5` : "Not enough verified reviews yet"}">${hasVerifiedRating ? starsHtml(rating) : ""}</div>
-                <a class="pf-reviews pf-reviews-link" href="${cardReviewHref}">${escapeHtml(reviews)} reviews</a>
-              </div>
+              ${ratingBlock}
             </div>
           </div>
         </div>
-        <div class="pf-badges">
-          <span class="pf-badge pf-badge-verified">VERIFIED</span>
-          <span class="pf-badge pf-badge-market">${escapeHtml(badgeMarket)}</span>
-        </div>
+        ${badgesBlock}
         <div class="pf-tagline" title="${escapeHtml(fullBio)}">${bio}</div>
-        <div class="pf-divider"></div>
-        <div class="pf-stats-row">
-          <div class="pf-stat-item">
-            <div class="pf-stat-icon">${ICONS.dollar}</div>
-            <div><div class="pf-stat-val">${escapeHtml(stats.allocation)}</div><div class="pf-stat-label">Allocation</div></div>
-          </div>
-          <div class="pf-stat-sep"></div>
-          <div class="pf-stat-item">
-            <div class="pf-stat-icon">${ICONS.scale}</div>
-            <div><div class="pf-stat-val">${escapeHtml(stats.leverage)}</div><div class="pf-stat-label">Leverage</div></div>
-          </div>
-          <div class="pf-stat-sep"></div>
-          <div class="pf-stat-item">
-            <div class="pf-stat-icon">${ICONS.clock}</div>
-            <div><div class="pf-stat-val">${escapeHtml(stats.profitSplit)}</div><div class="pf-stat-label">Profit Split</div></div>
-          </div>
-        </div>
+        ${statsBlock}
         <div class="pf-divider"></div>
         <div class="pf-details-grid">${detailRows}</div>
         <div class="pf-divider"></div>
         <div class="pf-btn-row">
-          <a class="pf-btn pf-btn-outline" href="${escapeHtml(buyHref || "#")}" target="_blank" rel="noopener noreferrer">View Firm</a>
+          <a class="pf-btn pf-btn-outline" href="${escapeHtml(buyHref || "#")}" target="_blank" rel="noopener noreferrer sponsored">View Firm</a>
           <a class="pf-btn pf-btn-primary" href="${cardDetailHref}">View Details</a>
         </div>
       </div>`;

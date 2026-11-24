@@ -1,7 +1,7 @@
 const PRIVATE_PAGE = /(?:^|\/)(?:admin[^/]*|dashboard(?:-admin)?|support-dashboard|login|signup|onboarding|my-profile|edit-profile|bonus|review-panel|challenges-panel|announcements-panel|rules-panel|spreads-panel)(?:\.html)?\/?$/i
 
 const groups = [
-  ['Discover', [['Listed Prop Firms','/listedprop'],['Best Prop Firms','/bestprop'],['Offers & Discounts','/offers'],['Prop Firm Reviews','/reviews']]],
+  ['Discover', [['Listed Prop Firms','/listedprop'],['Best Prop Firms','/bestprop'],['Best Indian Prop Firms','/best-indian-prop-firms'],['Offers & Discounts','/offers'],['Prop Firm Reviews','/reviews']]],
   ['Research', [['Compare Firms','/compare'],['Market Report','/prop-firm-market-report'],['Payout Proofs','/payout-proofs'],['Prop Firm Rules','/prop-firm-rules'],['Prop News','/prop-news']]],
   ['Tools', [['Calculator Hub','/calculators'],['Lot Size Calculator','/lotsizecalculator'],['Drawdown Calculator','/drawdown-calculator'],['Risk-to-Reward','/risk-to-reward-calculator'],['Consistency Rule','/consistency-rule-calculator'],['Loss Recovery','/lossrecoveryplanner'],['Trade Journal','/tradejournal']]],
   ['Learning', [['Trading Guides','/trading-guides'],['Funding Strategies','/funding-strategies'],['Trading Psychology','/trading-psychology'],['Beginner Tutorials','/beginner-tutorials'],['Giveaways','/giveaways']]],

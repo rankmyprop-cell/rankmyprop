@@ -8,7 +8,7 @@
   </url>
   <url>
     <loc>https://www.rankmyprop.in/prop-firms/atlas-funded/reviews</loc>
-    <lastmod>2026-08-17</lastmod>
+    <lastmod>2026-10-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
@@ -25,6 +25,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.rankmyprop.in/prop-firms/premier-capital/reviews</loc>
+    <lastmod>2026-11-14</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.rankmyprop.in/prop-firms/qt-funded/reviews</loc>
     <lastmod>2026-06-19</lastmod>
     <changefreq>daily</changefreq>
@@ -33,6 +39,18 @@
   <url>
     <loc>https://www.rankmyprop.in/prop-firms/top-one-trader/reviews</loc>
     <lastmod>2026-05-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.rankmyprop.in/prop-firms/upcomers/reviews</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.rankmyprop.in/prop-firms/zedd-funding/reviews</loc>
+    <lastmod>2026-11-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>

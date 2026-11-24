@@ -111,6 +111,12 @@
       } : slug === "alpha-trader-firm" && view === "challenges" ? {
         title: "Alpha Trader Firm Challenges 2026 | Fees, Account Sizes & Programs",
         desc: "Explore Alpha Trader Firm challenges in 2026, including fees, account sizes, profit targets, profit splits, drawdown rules, payouts, and funded trading programs."
+      } : slug === "trade-bridges" && view === "overview" ? {
+        title: "Trade Bridges Review & Rules 2026 | Rank My Prop",
+        desc: "Trade Bridges review for 2026. Explore 2-Step, 1-Step, and Instant Funding evaluation models, 80-90% profit splits, 14-day payouts, and UPI/INR payments."
+      } : slug === "trade-bridges" && view === "challenges" ? {
+        title: "Trade Bridges Challenges 2026 | Rules, Models & Programs",
+        desc: "Explore Trade Bridges evaluation models in 2026, including 2-Step, 1-Step, and Instant Funding rules, profit targets, 30% consistency, and 80-90% splits."
       } : (map[view] || map.overview);
       const canonical = `https://www.rankmyprop.in/prop-firms/${slug}${view === "overview" ? "" : `/${view}`}`;
       document.title = seo.title;
@@ -1846,12 +1852,12 @@
   import { withFirmFieldOverrides } from "./firm-field-overrides.js";
   import { DEFAULT_LISTED_FIRMS, DEFAULT_BEST_FIRMS } from "./firms-data.js?v=20261014-profile-data";
 
-  const PAGE_MIN_LOADER_MS = 250;
+  const PAGE_MIN_LOADER_MS = 0;
   // Keep the skeleton visible while the CMS gets a short chance to respond.
   // The static firm catalog is used if the CMS stalls, so hydration never
   // leaves the detail page hidden behind an empty shell.
-  const PAGE_MAX_LOADER_MS = 3000;
-  const FIRM_DATA_TIMEOUT_MS = 2200;
+  const PAGE_MAX_LOADER_MS = 2000;
+  const FIRM_DATA_TIMEOUT_MS = 1000;
   const FIELD_OVERRIDE_TIMEOUT_MS = 400;
   const FALLBACK_LOGO = "assets/Rank%20My%20Prop%20Logo%201.webp";
   const pageLoadStartedAt = Date.now();
@@ -2396,73 +2402,27 @@
     ]);
     const wantedId = String(lookup.wantedId || "").trim();
     const routeSlugKeys = [slugify(lookup.routeSlug || lookup.wantedSlug || lookup.fileSlug || "")].filter(Boolean);
-    // A slug can have both a legacy document whose ID equals the slug and a
-    // newer CMS record with a different ID. Choose the freshest exact-slug
-    // record first so an older firm's data cannot win by document ordering.
-    if (routeSlugKeys.length) {
-      try {
-        const all = await listDocuments("firms", 800);
-        const exactSlugRows = all.filter((row) => hasName(row) && routeSlugKeys.includes(slugify(row?.slug || "")));
-        const updatedMillis = (value) => {
-          if (!value) return 0;
-          if (Number.isFinite(Number(value.seconds))) return Number(value.seconds) * 1000;
-          const parsed = new Date(value).getTime();
-          return Number.isFinite(parsed) ? parsed : 0;
-        };
-        exactSlugRows.sort((a, b) => profileCompleteness(b) - profileCompleteness(a) || updatedMillis(b.updatedAt || b.createdAt) - updatedMillis(a.updatedAt || a.createdAt));
-        if (exactSlugRows.length) return exactSlugRows[0];
-      } catch (_) {}
-    }
-    // Prefer the explicit record ID, but only when it belongs to the route.
-    // Duplicate/legacy firm records can share a slug; matching the record's
-    // own slug or name keeps the URL identity stable without allowing a stale
-    // firmId to override a different firm's page.
-    if (wantedId) {
-      try {
-        const row = await getDocument("firms", wantedId);
-        const rowIdentityKeys = uniq([slugify(row?.slug || ""), slugify(row?.name || "")]);
-        const idMatchesRoute = !routeSlugKeys.length || hasSlugMatch(rowIdentityKeys, routeSlugKeys);
-        if (row && hasName(row) && idMatchesRoute) return row;
-      } catch (_) {}
-    }
-
-    const slugKeys = routeSlugKeys;
-
-    for (const key of slugKeys) {
+    // Fast direct document lookup by explicit ID or route slug
+    const directKeys = uniq([wantedId, ...routeSlugKeys]);
+    for (const key of directKeys) {
+      if (!key) continue;
       try {
         const row = await getDocument("firms", key);
-        if (row && hasName(row) && hasSlugMatch(rowSlugKeys(row), slugKeys)) return row;
+        if (row && hasName(row)) return row;
       } catch (_) {}
     }
 
-    if (slugKeys.length) {
+    // Immediate in-memory baseline fallback lookup (0ms)
+    const memFallback = fallbackFirmByLookup(lookup);
+    if (memFallback) return memFallback;
+
+    // Small-batch collection search if not matched by direct lookup
+    if (routeSlugKeys.length) {
       try {
-        const all = await listDocuments("firms", 800);
-        for (const row of all) {
-          if (!hasName(row)) continue;
-          const keys = rowSlugKeys(row);
-          if (hasSlugMatch(keys, slugKeys)) return row;
-        }
+        const all = await listDocuments("firms", 100);
+        const exact = all.find((row) => hasName(row) && routeSlugKeys.includes(slugify(row?.slug || "")));
+        if (exact) return exact;
       } catch (_) {}
-    }
-
-    if (slugKeys.length) {
-      const fallbackRows = [...(Array.isArray(DEFAULT_LISTED_FIRMS) ? DEFAULT_LISTED_FIRMS : []), ...(Array.isArray(DEFAULT_BEST_FIRMS) ? DEFAULT_BEST_FIRMS : [])];
-      const seen = new Set();
-      for (const rawRow of fallbackRows) {
-        const row = rawRow && typeof rawRow === "object" ? rawRow : null;
-        if (!row) continue;
-        const stableId = slugify(row?.id || row?.slug || row?.name || "") || "";
-        if (stableId && seen.has(stableId)) continue;
-        if (stableId) seen.add(stableId);
-        const keys = rowSlugKeys(row);
-        if (!hasSlugMatch(keys, slugKeys)) continue;
-        return {
-          id: String(row?.id || stableId || "fallback-firm").trim(),
-          ...row,
-          slug: String(row?.slug || stableId).trim()
-        };
-      }
     }
 
     return null;
@@ -2929,11 +2889,25 @@
     const loadToken = ++detailLoadToken;
     const loadStartedAt = Date.now();
     document.body.classList.add("rmp-firm-hydrating");
-    if (forceLoader) togglePageLoader(true);
     clearFirmRuntimeState();
-    const loaderWait = minLoaderWait(loadStartedAt);
     const lookup = resolveFirmLookupFromUrl();
-    const loaderHardCap = forceLoader
+    const firmLookup = {
+      wantedId: lookup.wantedId,
+      wantedSlug: lookup.wantedSlug,
+      routeSlug: lookup.route.slug,
+      fileSlug: lookup.fileSlug
+    };
+    // Immediate instant render if available in memory (0ms)
+    const fastMem = fallbackFirmByLookup(firmLookup);
+    if (fastMem) {
+      const early = mergeFirmProfileWithFallback(fastMem, firmLookup);
+      applyFirmData(early);
+      togglePageLoader(false);
+    } else if (forceLoader) {
+      togglePageLoader(true);
+    }
+    const loaderWait = fastMem ? Promise.resolve() : minLoaderWait(loadStartedAt);
+    const loaderHardCap = (forceLoader && !fastMem)
       ? setTimeout(() => {
           if (loadToken !== detailLoadToken) return;
           togglePageLoader(false);
@@ -2949,16 +2923,10 @@
     }
 
     try {
-      const firmLookup = {
-        wantedId: lookup.wantedId,
-        wantedSlug: lookup.wantedSlug,
-        routeSlug: lookup.route.slug,
-        fileSlug: lookup.fileSlug
-      };
       const selected = await withTimeoutFallback(
         fetchFirmByLookup(firmLookup),
         FIRM_DATA_TIMEOUT_MS,
-        () => fallbackFirmByLookup(firmLookup)
+        () => fastMem || fallbackFirmByLookup(firmLookup)
       );
       if (loadToken !== detailLoadToken) return;
       if (!selected) {

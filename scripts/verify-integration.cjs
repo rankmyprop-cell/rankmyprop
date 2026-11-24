@@ -10,6 +10,7 @@ const requiredDashboardPages = [
   'admin-activity.html', 'admin-announcements.html', 'admin-beginner-tutorials.html',
   'admin-clients.html', 'admin-community.html', 'admin-content-cms.html', 'admin-events.html',
   'admin-faqs.html', 'admin-filters.html', 'admin-firm-details.html', 'admin-firms.html',
+  'admin-best-indian-prop-firms.html',
   'admin-funding-strategies.html', 'admin-giveaways.html', 'admin-moderation.html',
   'admin-newsletter.html', 'admin-offers.html', 'admin-propnews.html', 'admin-purchases.html',
   'admin-reviews.html', 'admin-support-access.html', 'admin-trading-guides.html',

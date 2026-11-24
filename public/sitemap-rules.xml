@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://www.rankmyprop.in/prop-firm-rules/aifo</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.rankmyprop.in/prop-firm-rules/alpha-trader-firm</loc>
     <lastmod>2026-05-29</lastmod>
     <changefreq>weekly</changefreq>
@@ -14,13 +20,13 @@
   </url>
   <url>
     <loc>https://www.rankmyprop.in/prop-firm-rules/atlas-funded</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-10-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.rankmyprop.in/prop-firm-rules/blue-guardian</loc>
-    <lastmod>2026-08-22</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -33,12 +39,6 @@
   <url>
     <loc>https://www.rankmyprop.in/prop-firm-rules/equity-edge</loc>
     <lastmod>2026-08-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.rankmyprop.in/prop-firm-rules/finotive-funding</loc>
-    <lastmod>2026-08-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -56,13 +56,7 @@
   </url>
   <url>
     <loc>https://www.rankmyprop.in/prop-firm-rules/fundednext</loc>
-    <lastmod>2026-09-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.rankmyprop.in/prop-firm-rules/fundednext-firm</loc>
-    <lastmod>2026-09-28</lastmod>
+    <lastmod>2026-11-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -103,6 +97,24 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.rankmyprop.in/prop-firm-rules/my-funded-preps</loc>
+    <lastmod>2026-10-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.rankmyprop.in/prop-firm-rules/nys-markets</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.rankmyprop.in/prop-firm-rules/premier-capital</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.rankmyprop.in/prop-firm-rules/qt-funded</loc>
     <lastmod>2026-06-19</lastmod>
     <changefreq>weekly</changefreq>
@@ -110,13 +122,19 @@
   </url>
   <url>
     <loc>https://www.rankmyprop.in/prop-firm-rules/sway-funded</loc>
-    <lastmod>2026-09-28</lastmod>
+    <lastmod>2026-11-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.rankmyprop.in/prop-firm-rules/top-one-trader</loc>
     <lastmod>2026-05-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.rankmyprop.in/prop-firm-rules/trade-bridges</loc>
+    <lastmod>2026-11-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -141,6 +159,12 @@
   <url>
     <loc>https://www.rankmyprop.in/prop-firm-rules/xpips</loc>
     <lastmod>2026-08-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.rankmyprop.in/prop-firm-rules/zedd-funding</loc>
+    <lastmod>2026-11-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

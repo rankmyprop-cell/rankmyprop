@@ -55,6 +55,9 @@ const CONTENT_CONSOLIDATION_REDIRECTS = new Map([
 ]);
 const REDIRECTS = new Map([
   ["/discount", "/offers"],
+  ["/prop-firms/india", "/best-indian-prop-firms"],
+  ["/prop-firms-india", "/best-indian-prop-firms"],
+  ["/firms/trade-bridges", "/prop-firms/trade-bridges"],
   ["/sitemap-challenge-rules.xml", "/sitemaps/challenge-rules.xml"],
   ["/propfirmrule", "/prop-firm-rules"],
   ["/firm-reviews", "/reviews"],

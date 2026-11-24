@@ -14,12 +14,13 @@ export const DEFAULT_LISTED_FIRMS = [
     logo: "assets/traderscale%20logo.webp",
     banner: "https://dummyimage.com/600x200/0b0b12/7c5cff&text=TraderScale",
     sortOrder: 10,
+    bestRegions: { india: false },
     active: true
   },
   {
     name: "Blueberry Funded",
     listingType: "listed",
-    handle: "@blueberryfundedindia",
+    handle: "@blueberryfunded",
     bio: "High capital and stable challenge structure.",
     website: "blueberryfunded.com",
     country: "Global",
@@ -361,6 +362,128 @@ export const DEFAULT_LISTED_FIRMS = [
 
 export const DEFAULT_BEST_FIRMS = [
   {
+    name: "Trade Bridges",
+    slug: "trade-bridges",
+    id: "trade-bridges",
+    website: "https://tradebridges.in",
+    buyLink: "https://tradebridges.in",
+    detailsLink: "/prop-firms/trade-bridges",
+    tagline: "We Fund. You Trade.",
+    founded: 2025,
+    years: 1,
+    founder: "Akash Motwani — trader and investor with over 5 years of experience",
+    hq: "Lucknow, Uttar Pradesh, India",
+    country: "India",
+    incorporationDate: "23 December 2025",
+    registrationTypeAndNumber: "Not yet confirmed",
+    regulatoryStatus: "Not registered or regulated by any financial authority",
+    markets: ["Funded Trading Evaluation Programme"],
+    tags: ["India-based", "Funded Trading Evaluation Programme"],
+    bio: "Trade Bridges was established in 2025 with the objective of providing Indian traders with access to structured funded trading evaluation programmes, helping traders demonstrate their skills through structured challenges and performance-based reward programmes.",
+    logo: "",
+    score: null,
+    reviewCount: 0,
+    verified: false,
+    payoutAssurance: false,
+    sortOrder: 1,
+    listingType: "best",
+    showListed: false,
+    showBestGlobal: false,
+    showFirmProfile: true,
+    showRules: true,
+    showReviews: false,
+    showOffers: false,
+    showComparison: false,
+    bestRegions: { india: true },
+    lastVerified: "2026-11-24",
+    source: "Trade Bridges company documents",
+    cardMetrics: {
+      payoutCycle: "14 Days",
+      minTradingDays: "5 Days (2-Step, 1-Step)",
+      newsTrading: "Not allowed",
+      timeLimit: "Unlimited",
+      eaAllowed: "Not allowed",
+      startingPrice: "Not specified"
+    },
+    keyMetrics: [
+      { label: "Founded", value: "2025" },
+      { label: "Profit Split", value: "80% - 90%" },
+      { label: "Payout Cycle", value: "Every 14 days" },
+      { label: "Minimum Payout", value: "₹5,000" },
+      { label: "Daily Loss Limit", value: "4% - 5%" },
+      { label: "Maximum Drawdown", value: "7% - 10%" }
+    ],
+    tradingConditions: [
+      { label: "News Trading", value: "Not allowed" },
+      { label: "Weekend Positions", value: "Not allowed" },
+      { label: "Overnight Positions", value: "Not allowed" },
+      { label: "Copy Trading", value: "Not allowed" },
+      { label: "EA / Automated Bots", value: "Not allowed" },
+      { label: "Consistency Rule", value: "30%" }
+    ],
+    firmDetails: [
+      { label: "Company Name", value: "Trade Bridges" },
+      { label: "Headquarters", value: "Lucknow, Uttar Pradesh, India" },
+      { label: "Founder / CEO", value: "Akash Motwani — trader and investor with over 5 years of experience" },
+      { label: "Incorporation Date", value: "23 December 2025" },
+      { label: "Registration Type & Number", value: "Not yet confirmed" },
+      { label: "Regulatory Status", value: "Not registered or regulated by any financial authority" },
+      { label: "Trading Platform", value: "Trade Bridges proprietary platform" },
+      { label: "Purchase Methods", value: "UPI; card payments also listed" },
+      { label: "Currency", value: "INR only" }
+    ],
+    evaluationPrograms: [
+      {
+        program: "2-Step Evaluation",
+        model: "2-Step",
+        target: "12% (Phase 1), 6% (Phase 2)",
+        phase1: "12%",
+        phase2: "6%",
+        dailyLoss: "5%",
+        maxDrawdown: "10%",
+        consistencyRule: "30%",
+        minDays: "5 days",
+        maxDays: "Unlimited",
+        payoutCycle: "14 days",
+        split: "80%",
+        allocation: "Not specified",
+        leverage: "Not specified"
+      },
+      {
+        program: "1-Step Evaluation",
+        model: "1-Step",
+        target: "12%",
+        phase1: "12%",
+        dailyLoss: "5%",
+        maxDrawdown: "8%",
+        consistencyRule: "30%",
+        minDays: "5 days",
+        maxDays: "Unlimited",
+        payoutCycle: "14 days",
+        split: "80%",
+        allocation: "Not specified",
+        leverage: "Not specified"
+      },
+      {
+        program: "Instant Funding",
+        model: "Instant Funding",
+        target: "None listed",
+        phase1: "None listed",
+        dailyLoss: "4%",
+        maxDrawdown: "7% EOD",
+        consistencyRule: "30%",
+        minDays: "Not specified for Instant Funding",
+        maxDays: "Unlimited",
+        payoutCycle: "14 days",
+        split: "Up to 90%",
+        allocation: "Not specified",
+        leverage: "Not specified"
+      }
+    ],
+    active: true
+  },
+
+  {
     name: "Trader Scale",
     listingType: "best",
     handle: "@traderscalepro",
@@ -375,6 +498,7 @@ export const DEFAULT_BEST_FIRMS = [
     logo: "assets/traderscale%20logo.webp",
     banner: "https://dummyimage.com/600x200/0b0b12/7c5cff&text=TraderScale",
     sortOrder: 10,
+    bestRegions: { india: false },
     active: true
   },
   {
@@ -409,6 +533,7 @@ export const DEFAULT_BEST_FIRMS = [
     logo: "assets/goat%20funded%20trader%20logo.webp",
     banner: "https://dummyimage.com/600x200/0b0b12/7c5cff&text=Goat+Funded",
     sortOrder: 30,
+    bestRegions: { india: false },
     active: true
   },
   {

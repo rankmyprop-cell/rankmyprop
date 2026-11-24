@@ -45,6 +45,7 @@ function DeferredSection({ children, minHeight = 320 }: { children: ReactNode; m
 
 const firmItems: MenuItem[] = [
   { label: 'Best Prop Firms 2026', description: 'Our highest-rated firms overall', href: '/best-prop-firms-2026', badge: 'Popular' },
+  { label: 'Best Indian Prop Firms', description: 'Top firms accepting Indian traders', href: '/best-indian-prop-firms', badge: 'India' },
   { label: 'Fast Payout Firms', description: 'Get paid without the long wait', href: '/fast-payout-prop-firms' },
   { label: 'Instant Funding', description: 'Skip the evaluation challenge', href: '/best-instant-funding-firms' },
   { label: 'Futures Prop Firms', description: 'Top firms built for futures traders', href: '/best-futures-prop-firms' },
@@ -207,7 +208,7 @@ function App() {
   }, [searchQuery])
 
   useEffect(() => {
-    let unsubscribeAuth = () => {}
+    let unsubscribeAuth = () => { }
     let active = true
     Promise.all([import('./firebase'), import('firebase/auth')]).then(([firebase, authModule]) => {
       if (!active) return

@@ -1,5 +1,6 @@
 const fs = require('node:fs')
 const path = require('node:path')
+const { pathToFileURL } = require('node:url')
 const legacyBlogRedirects = require('./legacy-blog-redirects.cjs')
 const contentConsolidationRedirects = require('./content-consolidation-redirects.cjs')
 const {
@@ -59,8 +60,8 @@ function write(name, contents) {
 }
 
 async function main() {
-  const firmsModule = await import(path.join(publicRoot, 'firms-data.js'))
-  const offersModule = await import(path.join(publicRoot, 'offers-data.js'))
+  const firmsModule = await import(pathToFileURL(path.join(publicRoot, 'firms-data.js')).href)
+  const offersModule = await import(pathToFileURL(path.join(publicRoot, 'offers-data.js')).href)
   const evidence = JSON.parse(fs.readFileSync(path.join(publicRoot, 'seo-evidence.json'), 'utf8'))
   const lastmodByRoute = new Map()
   const firms = [...firmsModule.DEFAULT_LISTED_FIRMS, ...firmsModule.DEFAULT_BEST_FIRMS]
@@ -82,7 +83,7 @@ async function main() {
     '/', '/listedprop', '/bestprop', '/best-prop-firms-2026', '/highest-rated-firms',
     '/fast-payout-prop-firms', '/best-instant-funding-firms', '/best-futures-prop-firms',
     '/best-hft-prop-firms', '/cheapest-prop-firms', '/most-trusted-prop-firms',
-    '/beginner-friendly-firms', '/offers', '/reviews', '/compare', '/prop-firm-rules',
+    '/beginner-friendly-firms', '/best-indian-prop-firms', '/offers', '/reviews', '/compare', '/prop-firm-rules',
     '/prop-news', '/trading-guides', '/funding-strategies', '/trading-psychology',
     '/beginner-tutorials', '/calculators', '/lotsizecalculator', '/risk-to-reward-calculator',
     '/drawdown-calculator', '/profit-split-calculator', '/consistency-rule-calculator',

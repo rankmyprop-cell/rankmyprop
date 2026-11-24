@@ -89,7 +89,7 @@ for (const url of sitemapUrls) {
       throw new Error(`Authored metadata changed during build for ${url}`)
     }
   } else {
-    const isExactAuthoredGeneratedRoute = /^\/prop-firms\/(?:finotive-funding|fxify|goat-funded-trader|aqua-funded|blueberry-funded|fundednext)$/.test(pathname)
+    const isExactAuthoredGeneratedRoute = /^\/prop-firms\/(?:finotive-funding|fxify|goat-funded-trader|aqua-funded|blueberry-funded|fundednext|trade-bridges)$/.test(pathname)
       || /^\/prop-firm-rules\/[^/]+\/[^/]+$/.test(pathname)
       || /^\/offers\/[^/]+$/.test(pathname)
     if (!title || (title.length > 65 && !isExactAuthoredGeneratedRoute)) throw new Error(`Invalid title length (${title.length}) for ${url}`)

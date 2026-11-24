@@ -13,5 +13,34 @@ Disallow: /review-panel
 Disallow: /challenges-panel
 Disallow: /announcements-panel
 Disallow: /rules-panel
+Disallow: /*?*sort=
+Disallow: /*?*search=
+Disallow: /*?*filter=
+Disallow: /*?*cat=
+
+# AI Crawlers for AI Search Visibility & Citations
+User-agent: GPTBot
+Allow: /
+Disallow: /admin
+Disallow: /dashboard
+Disallow: /login
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /admin
+Disallow: /dashboard
+Disallow: /login
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /admin
+Disallow: /dashboard
+Disallow: /login
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
 
 Sitemap: https://www.rankmyprop.in/sitemap.xml

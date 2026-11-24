@@ -1,5 +1,6 @@
 const fs = require('node:fs')
 const path = require('node:path')
+const { pathToFileURL } = require('node:url')
 const legacyBlogRedirects = require('./legacy-blog-redirects.cjs')
 const contentConsolidationRedirects = require('./content-consolidation-redirects.cjs')
 const {
@@ -153,6 +154,121 @@ function reviewFirstPaintCards(firmName, reviews = []) {
     const stars = `${'★'.repeat(Math.round(rating))}${'☆'.repeat(5 - Math.round(rating))}`
     return `<article class="review-card rmp-server-review-card"><div class="review-card-head"><span class="review-avatar">${htmlEscape(initials || 'AT')}</span><div class="review-author"><strong>${htmlEscape(review.reviewer || 'Anonymous Trader')}</strong><span>${htmlEscape(review.datePublished ? review.datePublished.slice(0, 10) : 'Approved review')}</span></div><div class="review-rating-badge"><strong>${rating.toFixed(1)}</strong><span class="review-rating" aria-label="${rating} out of 5">${stars}</span></div></div><h3>${htmlEscape(review.title || `${firmName} trader review`)}</h3><p class="review-body">${htmlEscape(review.body || 'Approved rating submitted without a written review.')}</p><div class="review-meta">${review.program ? `<span>${htmlEscape(review.program)}</span>` : ''}${review.accountSize ? `<span>${htmlEscape(review.accountSize)}</span>` : ''}${review.payoutCount > 0 ? `<span class="verified">${htmlEscape(review.payoutCount)} reported payout${review.payoutCount === 1 ? '' : 's'}</span>` : ''}</div></article>`
   }).join('')
+}
+
+function tradeBridgesDetailHtml() {
+  return `<section class="trade-bridges-deep-profile" style="max-width:1120px;margin:32px auto;padding:0 20px;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;">
+    <div style="margin-bottom:28px;padding:16px 20px;border-radius:12px;background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.38);color:#fca5a5;font-size:14px;line-height:1.6;">
+      <strong style="color:#ef4444;display:block;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.04em;">Regulatory Status:</strong>
+      Not registered or regulated by any financial authority.
+    </div>
+
+    <div style="background:#13131f;border:1px solid #2a2a3d;border-radius:16px;padding:28px;margin-bottom:28px;">
+      <h2 style="font-size:22px;font-weight:800;margin-top:0;margin-bottom:12px;color:#fff;">Trade Bridges Overview &amp; Mission</h2>
+      <p style="color:#bdb8d9;font-size:14.5px;line-height:1.7;margin-bottom:14px;">
+        Trade Bridges was established in 2025 with the objective of providing Indian traders with access to structured funded trading evaluation programmes, helping traders demonstrate their skills through structured challenges and performance-based reward programmes.
+      </p>
+      <p style="color:#bdb8d9;font-size:14.5px;line-height:1.7;margin-bottom:20px;">
+        <strong>Mission:</strong> To create opportunities for skilled Indian traders by providing structured trading programmes, transparent rules, and performance-based profit-sharing opportunities.
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;border-top:1px solid #2a2a3d;padding-top:18px;">
+        <div><small style="color:#9ca3af;font-size:11px;text-transform:uppercase;letter-spacing:0.05em;">Founder / CEO</small><div style="font-weight:700;font-size:13.5px;margin-top:3px;color:#fff;">Akash Motwani — trader and investor with over 5 years of experience</div></div>
+        <div><small style="color:#9ca3af;font-size:11px;text-transform:uppercase;letter-spacing:0.05em;">Headquarters</small><div style="font-weight:700;font-size:13.5px;margin-top:3px;color:#fff;">Lucknow, Uttar Pradesh, India</div></div>
+        <div><small style="color:#9ca3af;font-size:11px;text-transform:uppercase;letter-spacing:0.05em;">Incorporation Date</small><div style="font-weight:700;font-size:13.5px;margin-top:3px;color:#fff;">23 December 2025 (Registration type and number: Not yet confirmed)</div></div>
+        <div><small style="color:#9ca3af;font-size:11px;text-transform:uppercase;letter-spacing:0.05em;">Official Website</small><div style="font-weight:700;font-size:13.5px;margin-top:3px;"><a href="https://tradebridges.in" target="_blank" rel="noopener noreferrer" style="color:#a78bfa;text-decoration:none;">https://tradebridges.in</a></div></div>
+      </div>
+    </div>
+
+    <div style="background:#13131f;border:1px solid #2a2a3d;border-radius:16px;padding:28px;margin-bottom:28px;overflow-x:auto;">
+      <h2 style="font-size:22px;font-weight:800;margin-top:0;margin-bottom:8px;color:#fff;">Challenge Models Comparison Table</h2>
+      <p style="color:#9ca3af;font-size:13px;margin-bottom:20px;">Detailed side-by-side comparison of Trade Bridges evaluation and instant funding programs.</p>
+      <table style="width:100%;border-collapse:collapse;font-size:13.5px;text-align:left;">
+        <thead>
+          <tr style="border-bottom:1px solid #3d3d5c;background:rgba(255,255,255,0.02);">
+            <th style="padding:12px 14px;color:#a78bfa;font-weight:700;">Rule / Specification</th>
+            <th style="padding:12px 14px;color:#fff;font-weight:700;">2-Step Evaluation</th>
+            <th style="padding:12px 14px;color:#fff;font-weight:700;">1-Step Evaluation</th>
+            <th style="padding:12px 14px;color:#fff;font-weight:700;">Instant Funding</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #222238;"><td style="padding:12px 14px;color:#9ca3af;font-weight:600;">Phase 1 Profit Target</td><td style="padding:12px 14px;color:#fff;">12%</td><td style="padding:12px 14px;color:#fff;">12%</td><td style="padding:12px 14px;color:#9ca3af;">None listed</td></tr>
+          <tr style="border-bottom:1px solid #222238;"><td style="padding:12px 14px;color:#9ca3af;font-weight:600;">Phase 2 Profit Target</td><td style="padding:12px 14px;color:#fff;">6%</td><td style="padding:12px 14px;color:#9ca3af;">—</td><td style="padding:12px 14px;color:#9ca3af;">—</td></tr>
+          <tr style="border-bottom:1px solid #222238;"><td style="padding:12px 14px;color:#9ca3af;font-weight:600;">Daily Loss Limit</td><td style="padding:12px 14px;color:#fff;">5% (Not specified)</td><td style="padding:12px 14px;color:#fff;">5% (Not specified)</td><td style="padding:12px 14px;color:#fff;">4%</td></tr>
+          <tr style="border-bottom:1px solid #222238;"><td style="padding:12px 14px;color:#9ca3af;font-weight:600;">Maximum Drawdown</td><td style="padding:12px 14px;color:#fff;">10% (Not specified)</td><td style="padding:12px 14px;color:#fff;">8% (Not specified)</td><td style="padding:12px 14px;color:#fff;">7% EOD</td></tr>
+          <tr style="border-bottom:1px solid #222238;"><td style="padding:12px 14px;color:#9ca3af;font-weight:600;">Consistency Rule</td><td style="padding:12px 14px;color:#fff;">30%</td><td style="padding:12px 14px;color:#fff;">30%</td><td style="padding:12px 14px;color:#fff;">30% (Applies to Instant)</td></tr>
+          <tr style="border-bottom:1px solid #222238;"><td style="padding:12px 14px;color:#9ca3af;font-weight:600;">Minimum Trading Days</td><td style="padding:12px 14px;color:#fff;">5 days</td><td style="padding:12px 14px;color:#fff;">5 days</td><td style="padding:12px 14px;color:#9ca3af;">Not specified for Instant Funding</td></tr>
+          <tr style="border-bottom:1px solid #222238;"><td style="padding:12px 14px;color:#9ca3af;font-weight:600;">Maximum Trading Days</td><td style="padding:12px 14px;color:#fff;">Unlimited</td><td style="padding:12px 14px;color:#fff;">Unlimited</td><td style="padding:12px 14px;color:#fff;">Unlimited</td></tr>
+          <tr style="border-bottom:1px solid #222238;"><td style="padding:12px 14px;color:#9ca3af;font-weight:600;">Payout Cycle</td><td style="padding:12px 14px;color:#fff;">14 days</td><td style="padding:12px 14px;color:#fff;">14 days</td><td style="padding:12px 14px;color:#fff;">14 days</td></tr>
+          <tr><td style="padding:12px 14px;color:#9ca3af;font-weight:600;">Profit Split</td><td style="padding:12px 14px;color:#fff;">80%</td><td style="padding:12px 14px;color:#fff;">80%</td><td style="padding:12px 14px;color:#fff;">Up to 90%</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:14px;font-size:12px;color:#9ca3af;">Note: Account sizes, challenge fees, leverage, instruments, and refund amounts were not provided in source company documents.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;margin-bottom:28px;">
+      <div style="background:#13131f;border:1px solid #2a2a3d;border-radius:16px;padding:24px;">
+        <h3 style="font-size:17px;font-weight:700;color:#fff;margin-top:0;margin-bottom:12px;">Payout Policy</h3>
+        <ul style="padding-left:18px;margin:0;color:#bdb8d9;font-size:13.5px;line-height:1.7;">
+          <li><strong>Payout Cycle:</strong> Every 14 days</li>
+          <li><strong>Minimum Payout:</strong> ₹5,000 (Currency symbol to be confirmed)</li>
+          <li><strong>Payout Methods:</strong> UPI, bank transfer</li>
+          <li><strong>Processing Time:</strong> 24–48 hours</li>
+          <li><strong>KYC:</strong> Mandatory before payout</li>
+          <li><strong>Conditions:</strong> Traders must comply with all applicable trading rules and programme conditions</li>
+          <li><strong>Partial Payouts:</strong> Allowed</li>
+        </ul>
+      </div>
+
+      <div style="background:#13131f;border:1px solid #2a2a3d;border-radius:16px;padding:24px;">
+        <h3 style="font-size:17px;font-weight:700;color:#fff;margin-top:0;margin-bottom:12px;">Prohibited &amp; Allowed Practices</h3>
+        <ul style="padding-left:18px;margin:0;color:#bdb8d9;font-size:13.5px;line-height:1.7;">
+          <li><strong>Copy Trading:</strong> Not allowed</li>
+          <li><strong>Account Sharing:</strong> Strictly prohibited</li>
+          <li><strong>Multiple Accounts:</strong> Allowed</li>
+          <li><strong>Automated / Bot Trading (EAs):</strong> Not allowed</li>
+        </ul>
+      </div>
+
+      <div style="background:#13131f;border:1px solid #2a2a3d;border-radius:16px;padding:24px;">
+        <h3 style="font-size:17px;font-weight:700;color:#fff;margin-top:0;margin-bottom:12px;">Trading Conditions</h3>
+        <ul style="padding-left:18px;margin:0;color:#bdb8d9;font-size:13.5px;line-height:1.7;">
+          <li><strong>News Trading:</strong> Not allowed</li>
+          <li><strong>Overnight Positions:</strong> Not allowed</li>
+          <li><strong>Weekend Positions:</strong> Not allowed</li>
+          <li><strong>Lot Size Restrictions:</strong> None specified</li>
+          <li><strong>Minimum Trading Days:</strong> 5 (2-Step and 1-Step); not specified for Instant Funding</li>
+          <li><strong>Maximum Trading Days:</strong> None (Unlimited)</li>
+        </ul>
+      </div>
+
+      <div style="background:#13131f;border:1px solid #2a2a3d;border-radius:16px;padding:24px;">
+        <h3 style="font-size:17px;font-weight:700;color:#fff;margin-top:0;margin-bottom:12px;">Platform &amp; Payments</h3>
+        <ul style="padding-left:18px;margin:0;color:#bdb8d9;font-size:13.5px;line-height:1.7;">
+          <li><strong>Platform:</strong> Trade Bridges proprietary platform (desktop and mobile; live market data and charts). MT4/MT5/cTrader not listed.</li>
+          <li><strong>Purchase Methods:</strong> UPI; card payments also listed</li>
+          <li><strong>Currency:</strong> INR only</li>
+          <li><strong>International Payments:</strong> Not accepted</li>
+          <li><strong>Refunds:</strong> Governed by official refund policy (<a href="https://tradebridges.in" target="_blank" rel="noopener noreferrer" style="color:#a78bfa;">tradebridges.in</a>)</li>
+          <li><strong>Hidden Charges / Activation Fee:</strong> None</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="background:#13131f;border:1px solid #2a2a3d;border-radius:16px;padding:24px;margin-bottom:28px;">
+      <h3 style="font-size:17px;font-weight:700;color:#fff;margin-top:0;margin-bottom:12px;">Eligibility &amp; Document Source</h3>
+      <p style="color:#bdb8d9;font-size:13.5px;line-height:1.65;margin-bottom:8px;">
+        <strong>Eligibility:</strong> Minimum age 18. Traders from all countries are eligible, subject to applicable laws and company policies (Note: INR only and international payments not accepted).
+      </p>
+      <p style="color:#9ca3af;font-size:12.5px;line-height:1.6;margin-bottom:0;">
+        <strong>Last verified:</strong> 2026-11-24 &middot; <strong>Source:</strong> Trade Bridges company documents
+      </p>
+    </div>
+
+    <div style="padding:16px 20px;border-radius:12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.08);color:#9ca3af;font-size:12px;line-height:1.6;">
+      <strong>Risk Disclaimer:</strong> Trading financial instruments, currencies, and CFDs carries a high level of risk and may not be suitable for all investors. Proprietary trading firms evaluate trading performance on simulated demo accounts using virtual funds. No real capital investment or deposit taking is performed.
+    </div>
+  </section>`;
 }
 
 function publicAssetUrl(value = '') {
@@ -354,7 +470,7 @@ function ensureStaticSitemapSchemas() {
       ? [path.join(root, 'index.html')]
       : [path.join(root, 'public', `${pathname.slice(1)}.html`), path.join(root, 'public', pathname.slice(1), 'index.html')]
     const hasAuthoredSource = sourceCandidates.some((candidate) => fs.existsSync(candidate))
-      || /^\/prop-firms\/(?:finotive-funding|fxify|goat-funded-trader|aqua-funded|blueberry-funded|fundednext)$/.test(pathname)
+      || /^\/prop-firms\/(?:finotive-funding|fxify|goat-funded-trader|aqua-funded|blueberry-funded|fundednext|trade-bridges)$/.test(pathname)
       || /^\/prop-firm-rules\/[^/]+\/[^/]+$/.test(pathname)
     const titleCore = originalTitle.replace(/\s*\|\s*Rank My Prop\s*$/i, '')
     const title = hasAuthoredSource ? originalTitle : (originalTitle.length > 65 ? titleWithBrand(titleCore) : originalTitle)
@@ -389,9 +505,9 @@ function ensureStaticSitemapSchemas() {
 async function main() {
   if (!fs.existsSync(distRoot)) throw new Error('Run Vite build before generating SEO pages')
 
-  const firmsModule = await import(path.join(root, 'public', 'firms-data.js'))
-  const offersModule = await import(path.join(root, 'public', 'offers-data.js'))
-  const editorialModule = await import(path.join(root, 'public', 'editorial-contributors.js'))
+  const firmsModule = await import(pathToFileURL(path.join(root, 'public', 'firms-data.js')).href)
+  const offersModule = await import(pathToFileURL(path.join(root, 'public', 'offers-data.js')).href)
+  const editorialModule = await import(pathToFileURL(path.join(root, 'public', 'editorial-contributors.js')).href)
   const evidence = JSON.parse(fs.readFileSync(path.join(root, 'public', 'seo-evidence.json'), 'utf8'))
   const contentPosts = Object.values(evidence.content || {}).flat().filter((post) => {
     if (!post.slug || !post.title || !post.routeBase) return false
@@ -462,6 +578,7 @@ async function main() {
       ...(firm.showReviews !== false ? [[`${firm.name} reviews`, `/prop-firms/${firm.slug}/reviews`]] : []),
       ...(offer && firm.showOffers !== false ? [[`${firm.name} discount`, `/offers/${offerSlug}`]] : []),
       ...(firm.showFirmProfile !== false && firm.showListed !== false ? [[`Compare ${firm.name}`, comparisonRoute]] : []),
+      ...(firm.bestRegions?.india ? [['Best Indian Prop Firms', '/best-indian-prop-firms']] : []),
     ]
 
     if (firm.showFirmProfile !== false) {
@@ -507,6 +624,14 @@ async function main() {
           description: 'Read the Alpha Trader Firm review for 2026. Explore funded accounts, challenge options, profit splits, drawdown rules, payouts, trading platforms, and trader reviews.',
           heading: 'Alpha Trader Firm Review 2026: Rules, Payouts & Challenges',
           paragraph: 'Explore Alpha Trader Firm in 2026, including funded trading challenges, account sizes, profit splits, drawdown rules, payout conditions, trading platforms, and trader reviews. Get the key information you need before choosing an Alpha Trader Firm account.',
+        },
+        'trade-bridges': {
+          title: 'Trade Bridges Review & Rules 2026 | Rank My Prop',
+          description: 'Trade Bridges review for 2026. Explore 2-Step, 1-Step, and Instant Funding evaluation models, 80-90% profit splits, 14-day payouts, and UPI/INR payments.',
+          heading: 'Trade Bridges Review & Rules (2026): Evaluation Rules & Funding Details',
+          paragraph: 'Review Trade Bridges funded evaluation and instant funding programs, 80-90% profit splits, 14-day payout cycles, 30% consistency rules, and INR payment conditions for 2026.',
+          h2: 'Trade Bridges Overview & Evaluation Details',
+          h2Description: 'Explore Trade Bridges evaluation models, 30% consistency rule, 14-day payouts, UPI/bank transfer payments, and Lucknow headquarters before purchasing a challenge.',
         },
       }[firm.slug]
       const title = authoredProfile
@@ -555,12 +680,55 @@ async function main() {
             ['Current offer', offer ? `${offer.discount || 'Active'} with code ${offer.code || 'shown on offer page'}` : 'Check the linked offer page'],
           ],
         },
-        evidenceHtml: `${reviewEvidenceSection(firm.name, approvedReviews, cmsFirm)}${publishedRulesSection(firm.name, cmsFirm)}`,
+        evidenceHtml: firm.slug === 'trade-bridges'
+          ? tradeBridgesDetailHtml()
+          : `${reviewEvidenceSection(firm.name, approvedReviews, cmsFirm)}${publishedRulesSection(firm.name, cmsFirm)}`,
         schema: graph({ name: title.replace(' | Rank My Prop', ''), url: canonical, description, about }, breadcrumb([
           ['Home', `${origin}/`], ['Prop Firms', `${origin}/listedprop`], [firm.name, canonical],
         ]), reviewSchemas(firm.name, canonical, approvedReviews)),
       })
       generated += 1
+
+      if (firm.slug === 'trade-bridges') {
+        const firmsRoute = `/firms/${firm.slug}`
+        writePage(firmsRoute, 'firm-detail.html', {
+          title, description, canonical, links: firmLinks.slice(1),
+          literalReplacements: [
+            ['/prop-firms/aqua-funded', `/prop-firms/${firm.slug}`],
+            ['Aqua Funded', firm.name],
+            ['AquaFunded', firm.name],
+          ],
+          replacements: [
+            { id: 'detailSeoHeading', html: htmlEscape(profileHeading) },
+            { id: 'detailSeoParagraph', html: htmlEscape(profileParagraph) },
+            { id: 'firmNameHeading', html: htmlEscape(firm.name) },
+            { id: 'firmLogoInitials', html: htmlEscape(firm.name.split(/\s+/).map((word) => word[0]).join('').slice(0, 3).toUpperCase()) },
+            { id: 'firmScoreValue', html: '—' },
+            { id: 'firmTrustedText', html: 'Not enough verified reviews yet' },
+            { id: 'firmReviewSnippet', html: 'No approved trader reviews yet.' },
+            { id: 'firmOverviewTitle', html: htmlEscape(authoredProfile?.h2 || `${firm.name} Overview`), tagName: authoredProfile?.h2 ? 'h2' : undefined },
+            { id: 'firmOverviewShort', html: htmlEscape(authoredProfile?.h2Description || firm.overviewShort || firm.bio || `Review the published ${firm.name} account conditions and firm details.`) },
+            { id: 'firmOverviewLongContent', html: `<p style="margin:0 0 14px 0;">${htmlEscape(firm.overviewLong || firm.overview || firm.overviewShort || firm.bio || `Confirm current ${firm.name} terms on the official firm website before purchasing an account.`)}</p>` },
+            { id: 'firmWhyChooseTitle', html: `Why Choose ${htmlEscape(firm.name)}?` },
+          ],
+          summary: {
+            heading: `${firm.name} prop firm overview`,
+            paragraphs: [
+              `${firm.name} is listed for ${firm.country || 'global'} traders. ${firm.bio || `Use this profile to review ${firm.name} before selecting a funded account.`}`,
+              `This research page connects the ${firm.name} profile with its trading rules, approved trader reviews, current offer and direct comparison pages. Confirm final program terms on the official firm website before checkout.`,
+            ],
+            facts: [
+              ['Market', (firm.tags || ['Prop trading']).join(', ')],
+              ['Website', firm.website || 'See official firm link'],
+              ['Current offer', offer ? `${offer.discount || 'Active'} with code ${offer.code || 'shown on offer page'}` : 'Check the linked offer page'],
+            ],
+          },
+          evidenceHtml: tradeBridgesDetailHtml(),
+          schema: graph({ name: title.replace(' | Rank My Prop', ''), url: canonical, description, about }, breadcrumb([
+            ['Home', `${origin}/`], ['Prop Firms', `${origin}/listedprop`], [firm.name, canonical],
+          ])),
+        })
+      }
 
       const authoredChallenges = {
         'finotive-funding': {

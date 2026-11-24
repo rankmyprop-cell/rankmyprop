@@ -461,6 +461,7 @@
     import { OTHER_FIRM_ID, compressFirmLogo, createFirmIdentity, renderFirmIdentityOptions } from "./firm-identity-service.js";
     import { wirePushButton } from "./admin-push-client.js";
     import { CLOUDFLARE_API_URL } from "./cloudflare-config.js";
+    import { DEFAULT_BEST_FIRMS } from "./firms-data.js";
 
     const BEST_REGIONS = [
       { key: "india", label: "India" },
@@ -1462,6 +1463,12 @@
         ]);
         snap.forEach((d) => nextFirms.push({ id: d.id, ...d.data() }));
         statsSnap.forEach((d) => nextStatsMap.set(String(d.id || "").trim(), { id: d.id, ...d.data() }));
+        DEFAULT_BEST_FIRMS.forEach((def) => {
+          const k = String(def.slug || def.id || "").toLowerCase();
+          if (k && !nextFirms.some((f) => String(f.slug || f.id || "").toLowerCase() === k)) {
+            nextFirms.push({ id: def.id || def.slug, ...def });
+          }
+        });
         if (nextFirms.length) writeFirmCache(nextFirms, nextStatsMap);
       } catch (err) {
         loadError = err?.message || "Backend read failed";

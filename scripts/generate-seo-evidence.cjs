@@ -300,6 +300,22 @@ async function main() {
     if (currentFirmCount === 0 && previousFirmCount > 0) {
       throw new Error('live CMS returned an empty firm snapshot')
     }
+    const localEvidence = previous || {}
+    if (localEvidence.firms?.['trade-bridges']) {
+      evidence.firms['trade-bridges'] = {
+        ...localEvidence.firms['trade-bridges'],
+        ...(evidence.firms['trade-bridges'] || {}),
+        bestRegions: {
+          ...(evidence.firms['trade-bridges']?.bestRegions || localEvidence.firms['trade-bridges']?.bestRegions || {}),
+          india: true,
+        },
+      }
+    }
+    for (const [slug, firm] of Object.entries(evidence.firms)) {
+      if (slug !== 'trade-bridges' && firm.bestRegions) {
+        firm.bestRegions.india = false
+      }
+    }
     fs.writeFileSync(outputPath, `${JSON.stringify(evidence, null, 2)}\n`)
     const reviews = Object.values(evidence.reviews).flat()
     const articles = Object.values(evidence.content || {}).flat()
