@@ -131,6 +131,30 @@ const directCodeRecords = {
     seoTitle: 'Best Futures Prop Firms in 2026 | Top Futures Funding Firms',
     seoDescription: 'Discover the best futures prop firms in 2026. Explore funded futures accounts, profit splits, drawdown rules, payouts, platforms, scaling plans, and key trading requirements.'
   },
+  '/best-cfd-prop-firms': {
+    heading: 'Best CFD Prop Firms in 2026: Top Firms for CFD & Forex Traders',
+    paragraph: 'Compare the best CFD prop trading firms in 2026. Explore funded trading accounts, leverage, tight spreads, profit splits, payout proof, and trading rules.',
+    seoTitle: 'Best CFD Prop Firms in 2026 | Compare & Review – PropFirmMine',
+    seoDescription: 'Compare the best CFD prop firms in 2026. Review funded trading accounts, leverage, tight spreads, profit splits, payout proof, and trading rules.'
+  },
+  '/best-crypto-prop-firms': {
+    heading: 'Best Crypto Prop Firms in 2026: Top Funded Accounts for Digital Assets',
+    paragraph: 'Discover the top crypto prop firms in 2026. Trade Bitcoin, Ethereum, and altcoins with funded trading capital, high leverage, fast payouts, and transparent evaluation rules.',
+    seoTitle: 'Best Crypto Prop Firms in 2026 | Top Crypto Funding Accounts – PropFirmMine',
+    seoDescription: 'Discover the best crypto prop firms in 2026. Trade digital assets with institutional capital, fast payouts, fair drawdown rules, and top crypto trading platforms.'
+  },
+  '/best-prediction-prop-firms': {
+    heading: 'Best Prediction Prop Firms in 2026: Top Event & Forecasting Props',
+    paragraph: 'Discover top prediction and event market prop firms in 2026. Trade geopolitical, macroeconomic, sports, and financial event contracts with funded trading balances.',
+    seoTitle: 'Best Prediction Prop Firms in 2026 | Event Market Funding – PropFirmMine',
+    seoDescription: 'Explore the best prediction prop firms in 2026. Trade event contracts, prediction markets, macroeconomic forecasting with funded accounts and fast payouts.'
+  },
+  '/best-perps-prop-firms': {
+    heading: 'Best Perps Prop Firms in 2026: Top Perpetual Contract Funding Firms',
+    paragraph: 'Discover top perpetual contracts (perps) prop firms in 2026. Trade crypto perps and decentralized derivatives with institutional backing, tight spreads, and instant payouts.',
+    seoTitle: 'Best Perps Prop Firms in 2026 | Perpetual Contract Funding – PropFirmMine',
+    seoDescription: 'Explore the best perps prop firms in 2026. Trade crypto perpetual contracts (DEX & CEX) with funded accounts, high leverage, and fast profit withdrawals.'
+  },
   '/beginner-friendly-firms': {
     heading: 'Best Beginner-Friendly Prop Firms in 2026: Top Firms for New Traders',
     paragraph: 'Discover the best beginner-friendly prop firms in 2026 for new and developing traders. Explore simple trading rules, affordable challenge fees, clear funding conditions, easy-to-use platforms, flexible account options, and trader-friendly requirements.',

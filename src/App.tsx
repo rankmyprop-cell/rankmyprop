@@ -12,7 +12,7 @@ const Footer = lazy(() => import('./Footer'))
 
 type AuthUser = { uid: string } | null
 
-type DropdownKey = 'firms' | 'compare' | 'calculators'
+type DropdownKey = 'listed' | 'firms' | 'compare' | 'calculators'
 type Market = 'Prop Firm' | 'Broker'
 
 type MenuItem = {
@@ -43,14 +43,22 @@ function DeferredSection({ children, minHeight = 320 }: { children: ReactNode; m
   return <div ref={host} style={visible ? undefined : { minHeight }}><Suspense fallback={<div style={{ minHeight }} aria-hidden="true" />}>{visible ? children : null}</Suspense></div>
 }
 
+const listedItems: MenuItem[] = [
+  { label: 'Futures PropFirm', description: 'All listed propfirms offering futures contracts', href: '/listedprop?market=futures', badge: 'Futures' },
+  { label: 'CFD PropFirm', description: 'All listed propfirms offering CFD and Forex instruments', href: '/listedprop?market=cfd', badge: 'CFD' },
+  { label: 'Crypto PropFirm', description: 'All listed propfirms supporting cryptocurrency trading', href: '/listedprop?market=crypto', badge: 'Crypto' },
+  { label: 'Perps PropFirm', description: 'All listed propfirms offering perpetual contracts', href: '/listedprop?market=perps', badge: 'Perps' },
+  { label: 'Prediction PropFirm', description: 'All listed propfirms for prediction & event markets', href: '/listedprop?market=predictions', badge: 'Predictions' },
+  { label: 'Indian PropFirm', description: 'All listed propfirms available to Indian traders', href: '/listedprop?market=indian', badge: 'India' },
+]
+
 const firmItems: MenuItem[] = [
-  { label: 'Best Prop Firms 2026', description: 'Our highest-rated firms overall', href: '/best-prop-firms-2026', badge: 'Popular' },
-  { label: 'Best Indian Prop Firms', description: 'Top firms accepting Indian traders', href: '/best-indian-prop-firms', badge: 'India' },
-  { label: 'Fast Payout Firms', description: 'Get paid without the long wait', href: '/fast-payout-prop-firms' },
-  { label: 'Instant Funding', description: 'Skip the evaluation challenge', href: '/best-instant-funding-firms' },
-  { label: 'Futures Prop Firms', description: 'Top firms built for futures traders', href: '/best-futures-prop-firms' },
-  { label: 'Most Trusted Firms', description: 'Proven track records and fair rules', href: '/most-trusted-prop-firms' },
-  { label: 'Beginner Friendly', description: 'Simple rules and trader-first support', href: '/beginner-friendly-firms' },
+  { label: 'Best CFD Prop Firms', description: 'Top-rated CFD and Forex funded accounts', href: '/best-cfd-prop-firms', badge: 'CFD' },
+  { label: 'Best Futures Prop Firms', description: 'Top funded accounts for futures traders', href: '/best-futures-prop-firms', badge: 'Futures' },
+  { label: 'Best Crypto Prop Firms', description: 'Crypto evaluation & digital asset funding', href: '/best-crypto-prop-firms', badge: 'Crypto' },
+  { label: 'Best Indian Prop Firms', description: 'Dedicated funded accounts for Indian traders', href: '/best-indian-prop-firms', badge: 'India' },
+  { label: 'Best Prediction Prop Firms', description: 'Prediction markets and event forecasting props', href: '/best-prediction-prop-firms', badge: 'Prediction' },
+  { label: 'Best Perps Prop Firms', description: 'Perpetual contracts (DEX/CEX) prop firms', href: '/best-perps-prop-firms', badge: 'Perps' },
 ]
 
 const compareItems: MenuItem[] = [
@@ -77,15 +85,23 @@ const calculatorItems: MenuItem[] = [
 ]
 
 const searchItems: MenuItem[] = [
-  { label: 'Listed Props', description: 'Browse every listed prop firm', href: '/listedprop' },
+  { label: 'Listed PropFirms', description: 'Browse every listed propfirm', href: '/listedprop' },
   { label: 'Prop Firm Offers', description: 'Explore active deals and discounts', href: '/offers' },
   { label: 'Prop News', description: 'Latest updates from the prop trading industry', href: '/prop-news' },
+  ...listedItems,
   ...firmItems,
   ...compareItems,
   ...calculatorItems,
 ]
 
 const dropdownData: Record<DropdownKey, { eyebrow: string; title: string; items: MenuItem[]; allLabel: string; allHref: string }> = {
+  listed: {
+    eyebrow: 'Directory',
+    title: 'Browse listed propfirms by market',
+    items: listedItems,
+    allLabel: 'Explore all listed propfirms',
+    allHref: '/listedprop',
+  },
   firms: {
     eyebrow: 'Discover',
     title: 'Find your right prop firm',
@@ -279,7 +295,16 @@ function App() {
           </a>
 
           <nav className={mobileOpen ? 'main-nav is-open' : 'main-nav'} aria-label="Primary navigation">
-            <a className="nav-link" href="/listedprop">Listed Props</a>
+            <div className="nav-group" onMouseEnter={() => setActiveDropdown('listed')}>
+              <a
+                href="/listedprop"
+                className={activeDropdown === 'listed' ? 'nav-link nav-button is-active' : 'nav-link nav-button'}
+                aria-expanded={activeDropdown === 'listed'}
+              >
+                Listed PropFirms <Chevron open={activeDropdown === 'listed'} />
+              </a>
+              {activeDropdown === 'listed' && <DropdownPanel menuKey="listed" />}
+            </div>
 
             <div className="nav-group" onMouseEnter={() => setActiveDropdown('firms')}>
               <a

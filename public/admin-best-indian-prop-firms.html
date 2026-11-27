@@ -9,33 +9,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
   <meta name="theme-color" content="#0a0b12" />
-  <title>Best Indian Prop Firms Admin | Rank My Prop</title>
+  <title>Best Prop Firms &amp; Category Manager | Rank My Prop Admin</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/dashboard-layout.css" />
   <style>
-    .toggle-pill {
+    .cat-pill {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 6px 12px;
+      padding: 6px 14px;
       border-radius: 999px;
-      font-size: 12px;
+      font-size: 12.5px;
       font-weight: 600;
       cursor: pointer;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      background: rgba(255, 255, 255, 0.05);
-      color: #ccc;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.04);
+      color: #c4c2dc;
       transition: all 0.2s ease;
     }
-    .toggle-pill.is-active {
-      background: rgba(34, 197, 94, 0.16);
-      border-color: rgba(34, 197, 94, 0.45);
-      color: #4ade80;
+    .cat-pill:hover {
+      border-color: rgba(122, 116, 255, 0.4);
+      color: #fff;
     }
-    .toggle-pill:hover {
-      border-color: rgba(255, 255, 255, 0.35);
+    .cat-pill.is-active {
+      background: linear-gradient(135deg, #7a74ff, #5b40f5);
+      border-color: #7a74ff;
+      color: #fff;
+      box-shadow: 0 2px 10px rgba(122, 116, 255, 0.3);
     }
     .firm-thumb {
       width: 34px;
@@ -57,23 +59,150 @@
     .status-published { background: rgba(34, 197, 94, 0.15); color: #4ade80; }
     .status-draft { background: rgba(234, 179, 8, 0.15); color: #facc15; }
     .status-unpublished { background: rgba(239, 68, 68, 0.15); color: #f87171; }
-    .fieldset-box {
-      border: 1px solid rgba(122, 116, 255, 0.2);
-      border-radius: 12px;
-      background: rgba(122, 116, 255, 0.03);
-      padding: 16px;
-      margin-bottom: 16px;
-    }
-    .fieldset-box legend {
-      font-size: 13px;
+    .cat-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 11px;
       font-weight: 700;
-      color: #cfcbff;
-      padding: 0 8px;
       letter-spacing: 0.02em;
+      margin-right: 4px;
+      margin-bottom: 4px;
     }
+    .cat-badge-cfd { background: rgba(59, 130, 246, 0.2); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.35); }
+    .cat-badge-futures { background: rgba(249, 115, 22, 0.2); color: #fb923c; border: 1px solid rgba(249, 115, 22, 0.35); }
+    .cat-badge-crypto { background: rgba(168, 85, 247, 0.2); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.35); }
+    .cat-badge-indian { background: rgba(34, 197, 94, 0.2); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.35); }
+    .cat-badge-prediction { background: rgba(236, 72, 153, 0.2); color: #f472b6; border: 1px solid rgba(236, 72, 153, 0.35); }
+    .cat-badge-perps { background: rgba(20, 184, 166, 0.2); color: #2dd4bf; border: 1px solid rgba(20, 184, 166, 0.35); }
+    
     .table-responsive {
       overflow-x: auto;
       max-width: 100%;
+    }
+
+    /* MODAL POPUP (SMALL BOX) */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 4, 11, 0.78);
+      backdrop-filter: blur(6px);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+    .modal-backdrop.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .modal-box {
+      width: 100%;
+      max-width: 580px;
+      background: #13131f;
+      border: 1px solid rgba(122, 116, 255, 0.35);
+      border-radius: 16px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(122, 116, 255, 0.15);
+      overflow: hidden;
+      transform: scale(0.95);
+      transition: transform 0.2s ease;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .modal-backdrop.is-open .modal-box {
+      transform: scale(1);
+    }
+    .modal-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(122, 116, 255, 0.06);
+    }
+    .modal-close-btn {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      font-size: 24px;
+      line-height: 1;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 6px;
+      transition: all 0.15s ease;
+    }
+    .modal-close-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .modal-body {
+      padding: 20px;
+      overflow-y: auto;
+      flex: 1;
+    }
+    .modal-footer {
+      padding: 14px 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .modal-cat-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      margin-bottom: 8px;
+      transition: border-color 0.15s ease;
+    }
+    .modal-cat-row:hover {
+      border-color: rgba(122, 116, 255, 0.3);
+      background: rgba(122, 116, 255, 0.04);
+    }
+    .rank-input-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: #94a3b8;
+    }
+    .rank-input-wrap input {
+      width: 60px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      font-size: 13px;
+      text-align: center;
+    }
+    .tag-checkbox-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #cbd5e1;
+      cursor: pointer;
+    }
+    .tag-checkbox-pill:has(input:checked) {
+      background: rgba(122, 116, 255, 0.2);
+      border-color: rgba(122, 116, 255, 0.5);
+      color: #fff;
     }
   </style>
 </head>
@@ -84,7 +213,7 @@
       <div class="menu-group-title">Admin Modules</div>
       <a class="side-link" href="/dashboard-admin">Admin Home</a>
       <a class="side-link" href="/admin-firm-details">Firm Detail CMS</a>
-      <a class="side-link active" href="/admin-best-indian-prop-firms">Best Indian Prop Firms</a>
+      <a class="side-link active" href="/admin-best-indian-prop-firms">Best Prop Firms Manager</a>
       <a class="side-link" href="/admin-filters">Filters Control</a>
       <a class="side-link" href="/admin-offers">Offers Control</a>
       <a class="side-link" href="/admin-reviews">Reviews Hub</a>
@@ -96,8 +225,8 @@
     <main class="main">
       <header class="top">
         <div>
-          <h3>Best Indian Prop Firms Manager</h3>
-          <div class="welcome">Manage firms displayed on the /best-indian-prop-firms page, regional availability, and rules.</div>
+          <h3>Best Prop Firms &amp; Category Manager</h3>
+          <div class="welcome">Click "Edit Categories" on any firm to quickly assign CFD, Futures, Crypto, Indian, Prediction, or Perps and set rankings.</div>
         </div>
         <div class="top-actions">
           <span class="chip" id="adminEmail">loading...</span>
@@ -106,53 +235,72 @@
 
       <div class="chip" id="notice" style="display:none;margin-bottom:14px;"></div>
 
-      <!-- Metrics Overview -->
-      <section class="cards">
+      <!-- Metrics Overview (6 Categories) -->
+      <section class="cards" style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));">
         <article class="card">
-          <h3>Total Indian Firms</h3>
-          <div class="metric-value" id="countTotal">0</div>
+          <h3 style="color:#60a5fa;">Best CFD</h3>
+          <div class="metric-value" id="countCfd">0</div>
         </article>
         <article class="card">
-          <h3>Published in India</h3>
-          <div class="metric-value" id="countPublished">0</div>
+          <h3 style="color:#fb923c;">Best Futures</h3>
+          <div class="metric-value" id="countFutures">0</div>
         </article>
         <article class="card">
-          <h3>Drafts / Pending</h3>
-          <div class="metric-value" id="countDraft">0</div>
+          <h3 style="color:#c084fc;">Best Crypto</h3>
+          <div class="metric-value" id="countCrypto">0</div>
         </article>
         <article class="card">
-          <h3>Active Listings</h3>
-          <div class="metric-value" id="countActive">0</div>
+          <h3 style="color:#4ade80;">Best Indian</h3>
+          <div class="metric-value" id="countIndian">0</div>
+        </article>
+        <article class="card">
+          <h3 style="color:#f472b6;">Best Prediction</h3>
+          <div class="metric-value" id="countPrediction">0</div>
+        </article>
+        <article class="card">
+          <h3 style="color:#2dd4bf;">Best Perps</h3>
+          <div class="metric-value" id="countPerps">0</div>
         </article>
       </section>
 
-      <!-- Manage Indian Availability Table -->
+      <!-- Manage Availability Table -->
       <section class="panel">
-        <div class="panel-head" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
-          <h3>Indian Prop Firm Showcase Registry</h3>
-          <div style="display:flex;gap:10px;align-items:center;">
-            <input type="text" id="firmSearchInput" placeholder="Filter firms by name..." class="input" style="padding:7px 12px;border-radius:8px;font-size:13px;width:200px;" />
-            <select id="filterStatusSelect" style="padding:7px 10px;border-radius:8px;background:rgba(255,255,255,0.06);color:#fff;border:1px solid rgba(255,255,255,0.12);font-size:13px;">
-              <option value="all">All Statuses</option>
-              <option value="india-only">Indian Showcase Only</option>
-              <option value="published">Published</option>
-              <option value="draft">Draft</option>
-            </select>
+        <div class="panel-head" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+          <div>
+            <h3>Prop Firms Directory &amp; Categories</h3>
+            <div style="font-size:12px;color:#94a3b8;">Filter by category or search. Click "Edit Categories" on any firm to open the quick editor.</div>
           </div>
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+            <input type="text" id="firmSearchInput" placeholder="Filter by name, slug, country..." class="input" style="padding:7px 14px;border-radius:8px;font-size:13px;width:240px;background:rgba(255,255,255,0.06);color:#fff;border:1px solid rgba(255,255,255,0.12);" />
+            <button type="button" class="btn-primary" id="openAddFirmBtn" style="padding:7px 14px;font-size:13px;display:flex;align-items:center;gap:6px;">
+              <span>+ Add New Firm</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Category Filter Pills -->
+        <div style="display:flex;flex-wrap:wrap;gap:8px;padding:12px 20px;border-bottom:1px solid rgba(255,255,255,0.06);background:rgba(0,0,0,0.15);" id="categoryFilterBar">
+          <button type="button" class="cat-pill is-active" data-cat-filter="all">All Firms (<span id="pillCountAll">0</span>)</button>
+          <button type="button" class="cat-pill" data-cat-filter="cfd">CFD (<span id="pillCountCfd">0</span>)</button>
+          <button type="button" class="cat-pill" data-cat-filter="futures">Futures (<span id="pillCountFutures">0</span>)</button>
+          <button type="button" class="cat-pill" data-cat-filter="crypto">Crypto (<span id="pillCountCrypto">0</span>)</button>
+          <button type="button" class="cat-pill" data-cat-filter="indian">Indian (<span id="pillCountIndian">0</span>)</button>
+          <button type="button" class="cat-pill" data-cat-filter="prediction">Prediction (<span id="pillCountPrediction">0</span>)</button>
+          <button type="button" class="cat-pill" data-cat-filter="perps">Perps (<span id="pillCountPerps">0</span>)</button>
         </div>
 
         <div class="table-responsive">
           <table class="table" id="firmsTable">
             <thead>
               <tr>
-                <th style="width:60px;">Rank</th>
+                <th style="width:50px;">Rank</th>
                 <th>Firm</th>
+                <th>Slug</th>
                 <th>Country</th>
-                <th>Profit Split</th>
-                <th>Starting Fee</th>
-                <th>India Showcase</th>
+                <th>Assigned Categories</th>
+                <th>Markets</th>
                 <th>Status</th>
-                <th style="text-align:right;">Actions</th>
+                <th style="text-align:right;">Action</th>
               </tr>
             </thead>
             <tbody id="firmsTableBody">
@@ -161,212 +309,169 @@
           </table>
         </div>
       </section>
-
-      <!-- Add or Edit Indian Prop Firm Form -->
-      <section class="panel" id="formPanel">
-        <div class="panel-head">
-          <h3 id="formTitle">Add / Edit Prop Firm for Indian Market</h3>
-        </div>
-
-        <form id="indianFirmForm" class="form-grid">
-          <input type="hidden" name="firmDocId" id="firmDocId" value="" />
-
-          <!-- Fieldset 1: Identity -->
-          <fieldset class="fieldset-box full">
-            <legend>1. Basic Identity &amp; India Availability</legend>
-            <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:12px;">
-              <div class="field">
-                <label>Firm Name *</label>
-                <input type="text" name="name" id="name" required placeholder="e.g. Aqua Funded" />
-              </div>
-              <div class="field">
-                <label>Slug *</label>
-                <input type="text" name="slug" id="slug" required placeholder="e.g. aqua-funded" />
-              </div>
-              <div class="field">
-                <label>Logo URL or Asset Path</label>
-                <input type="text" name="logo" id="logo" placeholder="assets/aqua-funded-logo.webp" />
-              </div>
-              <div class="field">
-                <label>Official Website</label>
-                <input type="text" name="website" id="website" placeholder="https://example.com" />
-              </div>
-              <div class="field">
-                <label>Country of Origin / Registration</label>
-                <input type="text" name="country" id="country" placeholder="Global / UAE / UK / India" />
-              </div>
-              <div class="field">
-                <label>Display Ranking / Order</label>
-                <input type="number" name="ranking" id="ranking" value="10" />
-              </div>
-            </div>
-
-            <div style="margin-top:12px;display:flex;gap:16px;flex-wrap:wrap;align-items:center;">
-              <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-weight:600;">
-                <input type="checkbox" name="showIndia" id="showIndia" checked />
-                <span>Show on Best Indian Prop Firms page (bestRegions.india)</span>
-              </label>
-              <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
-                <input type="checkbox" name="active" id="active" checked />
-                <span>Active</span>
-              </label>
-              <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
-                <input type="checkbox" name="verified" id="verified" checked />
-                <span>Verified / Payout Assurance</span>
-              </label>
-              <div style="display:flex;align-items:center;gap:8px;">
-                <label>Status:</label>
-                <select name="publishState" id="publishState" style="padding:4px 8px;border-radius:6px;background:rgba(255,255,255,0.06);color:#fff;border:1px solid rgba(255,255,255,0.12);">
-                  <option value="published">Published</option>
-                  <option value="draft">Draft</option>
-                  <option value="unpublished">Unpublished</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="field full" style="margin-top:12px;">
-              <label>Short Bio / Tagline</label>
-              <textarea name="bio" id="bio" rows="2" placeholder="High leverage, fast bi-weekly payouts and UPI payment support."></textarea>
-            </div>
-          </fieldset>
-
-          <!-- Fieldset 2: Challenge Details -->
-          <fieldset class="fieldset-box full">
-            <legend>2. Challenge Details &amp; Models</legend>
-            <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:12px;">
-              <div class="field">
-                <label>Starting Price</label>
-                <input type="text" name="startingPrice" id="startingPrice" placeholder="From $49" />
-              </div>
-              <div class="field">
-                <label>Max Capital Allocation</label>
-                <input type="text" name="maxAllocation" id="maxAllocation" placeholder="$200K / $400K" />
-              </div>
-              <div class="field">
-                <label>Max Daily Drawdown</label>
-                <input type="text" name="dailyDrawdown" id="dailyDrawdown" placeholder="5%" />
-              </div>
-              <div class="field">
-                <label>Max Total Drawdown</label>
-                <input type="text" name="maxDrawdown" id="maxDrawdown" placeholder="10%" />
-              </div>
-              <div class="field">
-                <label>Min Trading Days</label>
-                <input type="text" name="minTradingDays" id="minTradingDays" placeholder="0 or 5 days" />
-              </div>
-              <div class="field">
-                <label>Time Limit</label>
-                <input type="text" name="timeLimit" id="timeLimit" placeholder="No Time Limit" />
-              </div>
-            </div>
-
-            <div style="margin-top:12px;display:flex;gap:20px;flex-wrap:wrap;">
-              <label style="display:flex;align-items:center;gap:6px;cursor:pointer;">
-                <input type="checkbox" name="model1Step" id="model1Step" checked />
-                <span>1-Step Evaluation</span>
-              </label>
-              <label style="display:flex;align-items:center;gap:6px;cursor:pointer;">
-                <input type="checkbox" name="model2Step" id="model2Step" checked />
-                <span>2-Step Evaluation</span>
-              </label>
-              <label style="display:flex;align-items:center;gap:6px;cursor:pointer;">
-                <input type="checkbox" name="modelInstant" id="modelInstant" />
-                <span>Instant Funding Available</span>
-              </label>
-            </div>
-          </fieldset>
-
-          <!-- Fieldset 3: Payout & India Payment Methods -->
-          <fieldset class="fieldset-box full">
-            <legend>3. Payout &amp; Payment Details</legend>
-            <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:12px;">
-              <div class="field">
-                <label>Profit Split</label>
-                <input type="text" name="profitSplit" id="profitSplit" placeholder="80% - 95%" />
-              </div>
-              <div class="field">
-                <label>Payout Cycle</label>
-                <input type="text" name="payoutCycle" id="payoutCycle" placeholder="Bi-weekly / On Demand" />
-              </div>
-              <div class="field">
-                <label>Minimum Payout</label>
-                <input type="text" name="minPayout" id="minPayout" placeholder="e.g. $50" />
-              </div>
-              <div class="field">
-                <label>Leverage (Max)</label>
-                <input type="text" name="leverage" id="leverage" placeholder="1:100" />
-              </div>
-            </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px;">
-              <div class="field">
-                <label>Payment Methods (comma separated)</label>
-                <input type="text" name="paymentMethods" id="paymentMethods" placeholder="Crypto, Credit Card, UPI, Bank Transfer" />
-              </div>
-              <div class="field">
-                <label>Supported Platforms (comma separated)</label>
-                <input type="text" name="platforms" id="platforms" placeholder="MT4, MT5, cTrader, DXtrade" />
-              </div>
-            </div>
-          </fieldset>
-
-          <!-- Fieldset 4: Rules -->
-          <fieldset class="fieldset-box full">
-            <legend>4. Trading Rules &amp; Permissions</legend>
-            <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));gap:12px;">
-              <div class="field">
-                <label>News Trading</label>
-                <input type="text" name="newsTrading" id="newsTrading" placeholder="Allowed / Restricted" />
-              </div>
-              <div class="field">
-                <label>Weekend Holding</label>
-                <input type="text" name="weekendHolding" id="weekendHolding" placeholder="Allowed / Swing accounts only" />
-              </div>
-              <div class="field">
-                <label>EA / Automated Trading</label>
-                <input type="text" name="eaAllowed" id="eaAllowed" placeholder="Allowed" />
-              </div>
-              <div class="field">
-                <label>Consistency Rule</label>
-                <input type="text" name="consistencyRule" id="consistencyRule" placeholder="No / 30% concentration" />
-              </div>
-            </div>
-          </fieldset>
-
-          <!-- Fieldset 5: SEO Metadata -->
-          <fieldset class="fieldset-box full">
-            <legend>5. SEO Metadata &amp; Notes</legend>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-              <div class="field">
-                <label>SEO Title</label>
-                <input type="text" name="seoTitle" id="seoTitle" placeholder="Firm Name Review &amp; Challenge Rules" />
-              </div>
-              <div class="field">
-                <label>SEO Description</label>
-                <input type="text" name="seoDescription" id="seoDescription" placeholder="Compare challenge fees, payout policies and trading rules." />
-              </div>
-            </div>
-            <div class="field full" style="margin-top:8px;">
-              <label>Important Notes / Restrictions for Indian Traders</label>
-              <textarea name="notes" id="notes" rows="2" placeholder="Crypto payouts require TRC20/ERC20 wallet. UPI supported via third-party gateway."></textarea>
-            </div>
-          </fieldset>
-
-          <div class="full top-actions" style="display:flex;gap:10px;justify-content:flex-end;">
-            <button type="button" class="btn" id="resetBtn" style="background:rgba(255,255,255,0.06);color:#fff;">Cancel / Reset</button>
-            <button type="submit" class="btn-primary" id="saveFirmBtn">Save Firm</button>
-          </div>
-        </form>
-      </section>
     </main>
   </div>
 
+  <!-- LIGHTWEIGHT EDIT MODAL (SMALL BOX) -->
+  <div class="modal-backdrop" id="categoryModal" aria-hidden="true">
+    <div class="modal-box" role="dialog" aria-modal="true">
+      <div class="modal-header">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <img id="m_firmLogo" class="firm-thumb" src="/assets/Rank%20My%20Prop%20Logo%201.webp" alt="" />
+          <div>
+            <h3 id="m_firmName" style="margin:0;font-size:16px;color:#fff;">Edit Firm Categories</h3>
+            <code id="m_firmSlug" style="color:#a78bfa;font-size:12px;">slug</code>
+          </div>
+        </div>
+        <button type="button" class="modal-close-btn" id="closeModalBtn" aria-label="Close">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <input type="hidden" id="m_docId" value="" />
+
+        <!-- New firm fields (only visible if adding new firm) -->
+        <div id="newFirmFieldsWrap" style="display:none;margin-bottom:16px;padding:12px;background:rgba(122,116,255,0.06);border-radius:10px;border:1px solid rgba(122,116,255,0.2);">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div>
+              <label style="font-size:12px;color:#cbd5e1;font-weight:600;display:block;margin-bottom:4px;">Firm Name *</label>
+              <input type="text" id="m_inputName" placeholder="e.g. Aqua Funded" style="width:100%;padding:6px 10px;border-radius:6px;background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.15);color:#fff;font-size:13px;" />
+            </div>
+            <div>
+              <label style="font-size:12px;color:#cbd5e1;font-weight:600;display:block;margin-bottom:4px;">Slug (Unique ID) *</label>
+              <input type="text" id="m_inputSlug" placeholder="e.g. aqua-funded" style="width:100%;padding:6px 10px;border-radius:6px;background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.15);color:#fff;font-size:13px;" />
+            </div>
+          </div>
+        </div>
+
+        <!-- 1. Best Prop Firms Categories -->
+        <div style="margin-bottom:18px;">
+          <div style="font-size:13px;font-weight:700;color:#cfcbff;margin-bottom:10px;display:flex;align-items:center;gap:6px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            Best Prop Firm Categories &amp; Rankings:
+          </div>
+
+          <!-- CFD -->
+          <div class="modal-cat-row">
+            <label style="display:flex;align-items:center;gap:8px;font-weight:600;cursor:pointer;color:#e2e8f0;font-size:13px;">
+              <input type="checkbox" id="m_cat_cfd" />
+              <span>Best CFD Prop Firms</span>
+            </label>
+            <div class="rank-input-wrap">
+              <span>Category Rank:</span>
+              <input type="number" id="m_rank_cfd" placeholder="1" min="1" />
+            </div>
+          </div>
+
+          <!-- Futures -->
+          <div class="modal-cat-row">
+            <label style="display:flex;align-items:center;gap:8px;font-weight:600;cursor:pointer;color:#e2e8f0;font-size:13px;">
+              <input type="checkbox" id="m_cat_futures" />
+              <span>Best Futures Prop Firms</span>
+            </label>
+            <div class="rank-input-wrap">
+              <span>Category Rank:</span>
+              <input type="number" id="m_rank_futures" placeholder="1" min="1" />
+            </div>
+          </div>
+
+          <!-- Crypto -->
+          <div class="modal-cat-row">
+            <label style="display:flex;align-items:center;gap:8px;font-weight:600;cursor:pointer;color:#e2e8f0;font-size:13px;">
+              <input type="checkbox" id="m_cat_crypto" />
+              <span>Best Crypto Prop Firms</span>
+            </label>
+            <div class="rank-input-wrap">
+              <span>Category Rank:</span>
+              <input type="number" id="m_rank_crypto" placeholder="1" min="1" />
+            </div>
+          </div>
+
+          <!-- Indian -->
+          <div class="modal-cat-row">
+            <label style="display:flex;align-items:center;gap:8px;font-weight:600;cursor:pointer;color:#e2e8f0;font-size:13px;">
+              <input type="checkbox" id="m_cat_indian" />
+              <span>Best Indian Prop Firms</span>
+            </label>
+            <div class="rank-input-wrap">
+              <span>Category Rank:</span>
+              <input type="number" id="m_rank_indian" placeholder="1" min="1" />
+            </div>
+          </div>
+
+          <!-- Prediction -->
+          <div class="modal-cat-row">
+            <label style="display:flex;align-items:center;gap:8px;font-weight:600;cursor:pointer;color:#e2e8f0;font-size:13px;">
+              <input type="checkbox" id="m_cat_prediction" />
+              <span>Best Prediction Prop Firms</span>
+            </label>
+            <div class="rank-input-wrap">
+              <span>Category Rank:</span>
+              <input type="number" id="m_rank_prediction" placeholder="1" min="1" />
+            </div>
+          </div>
+
+          <!-- Perps -->
+          <div class="modal-cat-row">
+            <label style="display:flex;align-items:center;gap:8px;font-weight:600;cursor:pointer;color:#e2e8f0;font-size:13px;">
+              <input type="checkbox" id="m_cat_perps" />
+              <span>Best Perps Prop Firms</span>
+            </label>
+            <div class="rank-input-wrap">
+              <span>Category Rank:</span>
+              <input type="number" id="m_rank_perps" placeholder="1" min="1" />
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Listed Prop Markets -->
+        <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:14px;margin-bottom:16px;">
+          <div style="font-size:13px;font-weight:700;color:#cfcbff;margin-bottom:8px;">
+            Listed Prop Directory Toggles (Markets):
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;">
+            <label class="tag-checkbox-pill"><input type="checkbox" id="m_mkt_cfd" /> CFD</label>
+            <label class="tag-checkbox-pill"><input type="checkbox" id="m_mkt_futures" /> Futures</label>
+            <label class="tag-checkbox-pill"><input type="checkbox" id="m_mkt_crypto" /> Crypto</label>
+            <label class="tag-checkbox-pill"><input type="checkbox" id="m_mkt_perps" /> Perps</label>
+            <label class="tag-checkbox-pill"><input type="checkbox" id="m_mkt_predictions" /> Predictions</label>
+            <label class="tag-checkbox-pill"><input type="checkbox" id="m_mkt_indian" /> Indian</label>
+          </div>
+        </div>
+
+        <!-- 3. Publish State & Directory Visibility -->
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:1px solid rgba(255,255,255,0.08);padding-top:12px;">
+          <label style="display:flex;align-items:center;gap:8px;font-size:12.5px;color:#cbd5e1;cursor:pointer;font-weight:600;">
+            <input type="checkbox" id="m_showListed" checked />
+            <span>Show in Listed Props Directory</span>
+          </label>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <label style="font-size:12.5px;color:#cbd5e1;font-weight:600;">Status:</label>
+            <select id="m_publishState" style="padding:5px 12px;border-radius:6px;background:rgba(255,255,255,0.06);color:#fff;border:1px solid rgba(255,255,255,0.15);font-size:12.5px;">
+              <option value="published">Published</option>
+              <option value="draft">Draft</option>
+              <option value="unpublished">Unpublished</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn" id="cancelModalBtn" style="background:rgba(255,255,255,0.06);color:#fff;padding:8px 16px;">Cancel</button>
+        <button type="button" class="btn-primary" id="saveModalBtn" style="padding:8px 20px;">Save Categories</button>
+      </div>
+    </div>
+  </div>
+
   <script type="module">
-    import { collection, doc, getDoc, getDocs, setDoc, deleteDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+    import { collection, doc, getDocs, setDoc, deleteDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
     import { auth, db } from "./dashboard-common.js";
-    import { enforceAdmin, bindLogout, showNotice, formDataToObj } from "./admin-common.js";
+    import { enforceAdmin, bindLogout, showNotice } from "./admin-common.js";
     import { CLOUDFLARE_API_URL } from "./cloudflare-config.js";
     import { clearCache } from "./cloudflare-data.js";
     import { DEFAULT_BEST_FIRMS } from "./firms-data.js";
+
+    const CATEGORY_KEYS = ["cfd", "futures", "crypto", "indian", "prediction", "perps"];
+    const MARKET_KEYS = ["cfd", "futures", "crypto", "perps", "predictions", "indian"];
 
     const cloudflareFirmUrl = (id) => `${CLOUDFLARE_API_URL}/v1/collections/firms/${encodeURIComponent(String(id || "").trim())}`;
 
@@ -428,18 +533,43 @@
 
     const notice = document.getElementById("notice");
     const firmsTableBody = document.getElementById("firmsTableBody");
-    const firmForm = document.getElementById("indianFirmForm");
-    const resetBtn = document.getElementById("resetBtn");
-    const formTitle = document.getElementById("formTitle");
     const searchInput = document.getElementById("firmSearchInput");
-    const filterStatusSelect = document.getElementById("filterStatusSelect");
+    const openAddFirmBtn = document.getElementById("openAddFirmBtn");
 
-    const countTotal = document.getElementById("countTotal");
-    const countPublished = document.getElementById("countPublished");
-    const countDraft = document.getElementById("countDraft");
-    const countActive = document.getElementById("countActive");
+    // Modal elements
+    const categoryModal = document.getElementById("categoryModal");
+    const closeModalBtn = document.getElementById("closeModalBtn");
+    const cancelModalBtn = document.getElementById("cancelModalBtn");
+    const saveModalBtn = document.getElementById("saveModalBtn");
+
+    const m_docId = document.getElementById("m_docId");
+    const m_firmLogo = document.getElementById("m_firmLogo");
+    const m_firmName = document.getElementById("m_firmName");
+    const m_firmSlug = document.getElementById("m_firmSlug");
+    const newFirmFieldsWrap = document.getElementById("newFirmFieldsWrap");
+    const m_inputName = document.getElementById("m_inputName");
+    const m_inputSlug = document.getElementById("m_inputSlug");
+    const m_publishState = document.getElementById("m_publishState");
+
+    // Metrics elements
+    const countCfd = document.getElementById("countCfd");
+    const countFutures = document.getElementById("countFutures");
+    const countCrypto = document.getElementById("countCrypto");
+    const countIndian = document.getElementById("countIndian");
+    const countPrediction = document.getElementById("countPrediction");
+    const countPerps = document.getElementById("countPerps");
+
+    // Pill count elements
+    const pillCountAll = document.getElementById("pillCountAll");
+    const pillCountCfd = document.getElementById("pillCountCfd");
+    const pillCountFutures = document.getElementById("pillCountFutures");
+    const pillCountCrypto = document.getElementById("pillCountCrypto");
+    const pillCountIndian = document.getElementById("pillCountIndian");
+    const pillCountPrediction = document.getElementById("pillCountPrediction");
+    const pillCountPerps = document.getElementById("pillCountPerps");
 
     let allFirms = [];
+    let currentCategoryFilter = "all";
 
     bindLogout("logoutBtn");
 
@@ -447,15 +577,6 @@
       document.getElementById("adminEmail").textContent = user.email || "Admin";
       await loadFirms();
     });
-
-    const DETACHED_INDIA_FIRMS = new Set([
-      "funded-fun",
-      "aqua-funded",
-      "blueberry-funded",
-      "fxify",
-      "goat-funded-trader",
-      "qt-funded"
-    ]);
 
     async function loadFirms() {
       try {
@@ -471,12 +592,6 @@
             allFirms.push({ id: def.id || def.slug, ...def });
           }
         });
-        allFirms.forEach((f) => {
-          const k = String(f.slug || f.id || "").toLowerCase();
-          if (DETACHED_INDIA_FIRMS.has(k) && f.bestRegions?.india) {
-            f.bestRegions = { ...f.bestRegions, india: false };
-          }
-        });
         renderMetrics();
         renderTable();
       } catch (err) {
@@ -485,37 +600,70 @@
       }
     }
 
+    function isFirmInCategory(firm, cat) {
+      if (!firm) return false;
+      if (Boolean(firm.bestCategories?.[cat])) return true;
+      if (cat === "indian") {
+        return Boolean(firm.bestRegions?.india || firm.country === "India" || firm.slug === "trade-bridges");
+      }
+      const m = (Array.isArray(firm.markets) ? firm.markets : []).map((x) => String(x || "").toLowerCase().trim());
+      const t = (Array.isArray(firm.tags) ? firm.tags : []).map((x) => String(x || "").toLowerCase().trim());
+      const hay = [...m, ...t, String(firm.country || "").toLowerCase(), String(firm.name || "").toLowerCase()].join(" ");
+      if (cat === "cfd") return hay.includes("cfd") || hay.includes("forex") || hay.includes("fx");
+      if (cat === "futures") return hay.includes("future");
+      if (cat === "crypto") return hay.includes("crypto");
+      if (cat === "prediction") return hay.includes("prediction") || hay.includes("forecast") || hay.includes("event");
+      if (cat === "perps") return hay.includes("perp") || hay.includes("perpetual");
+      return false;
+    }
+
     function renderMetrics() {
-      const indianFirms = allFirms.filter((f) => Boolean(f.bestRegions?.india));
-      countTotal.textContent = String(indianFirms.length);
-      countPublished.textContent = String(indianFirms.filter((f) => (f.publishState || "published") === "published").length);
-      countDraft.textContent = String(indianFirms.filter((f) => (f.publishState || "") === "draft").length);
-      countActive.textContent = String(indianFirms.filter((f) => f.active !== false).length);
+      const counts = { cfd: 0, futures: 0, crypto: 0, indian: 0, prediction: 0, perps: 0 };
+      allFirms.forEach((f) => {
+        CATEGORY_KEYS.forEach((cat) => {
+          if (isFirmInCategory(f, cat)) counts[cat]++;
+        });
+      });
+
+      countCfd.textContent = String(counts.cfd);
+      countFutures.textContent = String(counts.futures);
+      countCrypto.textContent = String(counts.crypto);
+      countIndian.textContent = String(counts.indian);
+      countPrediction.textContent = String(counts.prediction);
+      countPerps.textContent = String(counts.perps);
+
+      pillCountAll.textContent = String(allFirms.length);
+      pillCountCfd.textContent = String(counts.cfd);
+      pillCountFutures.textContent = String(counts.futures);
+      pillCountCrypto.textContent = String(counts.crypto);
+      pillCountIndian.textContent = String(counts.indian);
+      pillCountPrediction.textContent = String(counts.prediction);
+      pillCountPerps.textContent = String(counts.perps);
     }
 
     function renderTable() {
       const q = String(searchInput.value || "").toLowerCase().trim();
-      const statusFilter = filterStatusSelect.value;
 
       let filtered = allFirms.filter((f) => {
         const name = String(f.name || "").toLowerCase();
+        const slug = String(f.slug || f.id || "").toLowerCase();
         const country = String(f.country || "").toLowerCase();
-        const matchesQuery = !q || name.includes(q) || country.includes(q);
+        const matchesQuery = !q || name.includes(q) || slug.includes(q) || country.includes(q);
         if (!matchesQuery) return false;
 
-        const isIndia = Boolean(f.bestRegions?.india);
-        if (statusFilter === "india-only" && !isIndia) return false;
-        if (statusFilter === "published" && (f.publishState || "published") !== "published") return false;
-        if (statusFilter === "draft" && (f.publishState || "") !== "draft") return false;
-
+        if (currentCategoryFilter !== "all" && !isFirmInCategory(f, currentCategoryFilter)) {
+          return false;
+        }
         return true;
       });
 
-      // Sort Indian firms to the top, then by ranking
+      // Sort by active category ranking or global ranking
       filtered.sort((a, b) => {
-        const aIndia = Boolean(a.bestRegions?.india) ? 1 : 0;
-        const bIndia = Boolean(b.bestRegions?.india) ? 1 : 0;
-        if (aIndia !== bIndia) return bIndia - aIndia;
+        if (currentCategoryFilter !== "all") {
+          const aRank = Number(a.categoryRankings?.[currentCategoryFilter]) || Number(a.ranking) || 999;
+          const bRank = Number(b.categoryRankings?.[currentCategoryFilter]) || Number(b.ranking) || 999;
+          return aRank - bRank;
+        }
         return (Number(a.ranking) || 999) - (Number(b.ranking) || 999);
       });
 
@@ -525,91 +673,271 @@
       }
 
       firmsTableBody.innerHTML = filtered.map((f) => {
-        const isIndia = Boolean(f.bestRegions?.india);
         const status = String(f.publishState || "published").toLowerCase();
         const statusClass = status === "published" ? "status-published" : (status === "draft" ? "status-draft" : "status-unpublished");
         const logoUrl = f.logo || "/assets/Rank%20My%20Prop%20Logo%201.webp";
-        const startingPrice = f.cardMetrics?.startingPrice || f.startingPrice || "—";
-        const profitSplit = f.cardMetrics?.profitSplit || f.profitSplit || "—";
+        const rank = currentCategoryFilter !== "all" && f.categoryRankings?.[currentCategoryFilter] 
+          ? `#${f.categoryRankings[currentCategoryFilter]}`
+          : (f.ranking || "—");
+
+        const categoryBadges = CATEGORY_KEYS.map((cat) => {
+          if (!isFirmInCategory(f, cat)) return "";
+          const catRank = f.categoryRankings?.[cat] ? ` #${f.categoryRankings[cat]}` : "";
+          return `<span class="cat-badge cat-badge-${cat}">${cat.toUpperCase()}${catRank}</span>`;
+        }).filter(Boolean).join("");
+
+        const marketsList = (Array.isArray(f.markets) ? f.markets : []).join(", ") || "—";
 
         return `
           <tr>
-            <td><strong>${f.ranking || "—"}</strong></td>
+            <td><strong>${rank}</strong></td>
             <td>
               <img src="${logoUrl}" class="firm-thumb" alt="" onerror="this.src='/assets/Rank%20My%20Prop%20Logo%201.webp'" />
               <strong>${f.name || f.id}</strong>
             </td>
+            <td><code style="color:#a78bfa;font-size:12px;">${f.slug || f.id}</code></td>
             <td>${f.country || "Global"}</td>
-            <td>${profitSplit}</td>
-            <td>${startingPrice}</td>
-            <td>
-              <button type="button" class="toggle-pill ${isIndia ? "is-active" : ""}" data-toggle-india="${f.id}">
-                ${isIndia ? "✓ Listed in India" : "+ Add to India"}
-              </button>
-            </td>
+            <td>${categoryBadges || '<span style="color:#64748b;font-size:12px;">None</span>'}</td>
+            <td style="font-size:12px;color:#cbd5e1;">${marketsList}</td>
             <td><span class="status-badge ${statusClass}">${status}</span></td>
-            <td style="text-align:right;">
-              <button class="btn" style="padding:4px 8px;font-size:12px;margin-right:4px;" data-edit-firm="${f.id}">Edit</button>
-              <a href="/admin-firm-details?id=${f.id}" class="btn" style="padding:4px 8px;font-size:12px;margin-right:4px;text-decoration:none;">CMS</a>
-              <button class="btn" style="padding:4px 8px;font-size:12px;color:#f87171;border-color:rgba(239,68,68,0.3);" data-delete-firm="${f.id}">Del</button>
+            <td style="text-align:right;white-space:nowrap;">
+              <button type="button" class="btn btn-sm" data-edit-firm="${f.id}" style="padding:6px 12px;font-size:12px;font-weight:600;background:linear-gradient(135deg,#7a74ff,#5b40f5);border:none;color:#fff;border-radius:6px;cursor:pointer;box-shadow:0 2px 8px rgba(122,116,255,0.25);">Edit Categories</button>
+              <button type="button" class="btn btn-sm" data-delete-firm="${f.id}" style="padding:6px 10px;font-size:12px;background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.3);color:#fca5a5;border-radius:6px;cursor:pointer;margin-left:4px;">Delete</button>
             </td>
           </tr>
         `;
       }).join("");
 
-      // Bind quick toggle buttons
-      firmsTableBody.querySelectorAll("[data-toggle-india]").forEach((btn) => {
-        btn.addEventListener("click", async () => {
-          const firmId = btn.dataset.toggleIndia;
-          await toggleIndiaAvailability(firmId);
-        });
-      });
-
-      // Bind Edit buttons
+      // Attach button events
       firmsTableBody.querySelectorAll("[data-edit-firm]").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const firmId = btn.dataset.editFirm;
-          populateFormForEdit(firmId);
-        });
+        btn.addEventListener("click", () => openModalForFirm(btn.getAttribute("data-edit-firm")));
       });
-
-      // Bind Delete buttons
       firmsTableBody.querySelectorAll("[data-delete-firm]").forEach((btn) => {
         btn.addEventListener("click", async () => {
-          const firmId = btn.dataset.deleteFirm;
-          if (confirm(`Are you sure you want to delete firm "${firmId}"? This action cannot be undone.`)) {
+          const firmId = btn.getAttribute("data-delete-firm");
+          if (confirm(`Are you sure you want to delete firm "${firmId}"?`)) {
             await deleteFirmDoc(firmId);
           }
         });
       });
     }
 
+    // Category filter pills
+    document.getElementById("categoryFilterBar").querySelectorAll("[data-cat-filter]").forEach((pill) => {
+      pill.addEventListener("click", () => {
+        document.getElementById("categoryFilterBar").querySelectorAll("[data-cat-filter]").forEach((p) => p.classList.remove("is-active"));
+        pill.classList.add("is-active");
+        currentCategoryFilter = pill.getAttribute("data-cat-filter");
+        renderTable();
+      });
+    });
+
     searchInput.addEventListener("input", renderTable);
-    filterStatusSelect.addEventListener("change", renderTable);
 
-    async function toggleIndiaAvailability(firmId) {
-      const target = allFirms.find((f) => f.id === firmId);
-      if (!target) return;
-      const currentIndia = Boolean(target.bestRegions?.india);
-      const nextIndia = !currentIndia;
+    // OPEN MODAL FOR EXISTING FIRM
+    function openModalForFirm(firmId) {
+      const firm = allFirms.find((f) => f.id === firmId);
+      if (!firm) return;
 
-      const nextRegions = { ...(target.bestRegions || {}), india: nextIndia };
+      m_docId.value = firm.id;
+      m_firmName.textContent = firm.name || firm.id;
+      m_firmSlug.textContent = firm.slug || firm.id;
+      m_firmLogo.src = firm.logo || "/assets/Rank%20My%20Prop%20Logo%201.webp";
+      newFirmFieldsWrap.style.display = "none";
+      m_publishState.value = firm.publishState || "published";
+      const showListedEl = document.getElementById("m_showListed");
+      if (showListedEl) showListedEl.checked = firm.showListed !== false;
+
+      // Best Categories & Rankings
+      CATEGORY_KEYS.forEach((cat) => {
+        const isChecked = isFirmInCategory(firm, cat);
+        const rank = firm.categoryRankings?.[cat] || "";
+        const cb = document.getElementById(`m_cat_${cat}`);
+        const rankInput = document.getElementById(`m_rank_${cat}`);
+        if (cb) cb.checked = isChecked;
+        if (rankInput) rankInput.value = rank;
+      });
+
+      // Markets
+      const firmMarkets = new Set((Array.isArray(firm.markets) ? firm.markets : []).map((s) => String(s).toLowerCase().trim()));
+      MARKET_KEYS.forEach((mkt) => {
+        const cb = document.getElementById(`m_mkt_${mkt}`);
+        if (cb) cb.checked = firmMarkets.has(mkt);
+      });
+
+      categoryModal.classList.add("is-open");
+      categoryModal.setAttribute("aria-hidden", "false");
+    }
+
+    // OPEN MODAL FOR NEW FIRM
+    openAddFirmBtn.addEventListener("click", () => {
+      m_docId.value = "__NEW__";
+      m_firmName.textContent = "New Prop Firm";
+      m_firmSlug.textContent = "enter slug below";
+      m_firmLogo.src = "/assets/Rank%20My%20Prop%20Logo%201.webp";
+      m_inputName.value = "";
+      m_inputSlug.value = "";
+      newFirmFieldsWrap.style.display = "block";
+      m_publishState.value = "published";
+
+      CATEGORY_KEYS.forEach((cat) => {
+        const cb = document.getElementById(`m_cat_${cat}`);
+        const rankInput = document.getElementById(`m_rank_${cat}`);
+        if (cb) cb.checked = false;
+        if (rankInput) rankInput.value = "";
+      });
+
+      MARKET_KEYS.forEach((mkt) => {
+        const cb = document.getElementById(`m_mkt_${mkt}`);
+        if (cb) cb.checked = false;
+      });
+
+      categoryModal.classList.add("is-open");
+      categoryModal.setAttribute("aria-hidden", "false");
+      m_inputName.focus();
+    });
+
+    function closeModal() {
+      categoryModal.classList.remove("is-open");
+      categoryModal.setAttribute("aria-hidden", "true");
+    }
+
+    closeModalBtn.addEventListener("click", closeModal);
+    cancelModalBtn.addEventListener("click", closeModal);
+    categoryModal.addEventListener("click", (e) => {
+      if (e.target === categoryModal) closeModal();
+    });
+
+    // Sync category checkboxes and listed market toggles
+    const CAT_TO_MKT = {
+      cfd: "cfd",
+      futures: "futures",
+      crypto: "crypto",
+      indian: "indian",
+      prediction: "predictions",
+      perps: "perps"
+    };
+    const MKT_TO_CAT = {
+      cfd: "cfd",
+      futures: "futures",
+      crypto: "crypto",
+      indian: "indian",
+      predictions: "prediction",
+      perps: "perps"
+    };
+
+    CATEGORY_KEYS.forEach((cat) => {
+      const catEl = document.getElementById(`m_cat_${cat}`);
+      const mktKey = CAT_TO_MKT[cat];
+      const mktEl = mktKey ? document.getElementById(`m_mkt_${mktKey}`) : null;
+      if (catEl && mktEl) {
+        catEl.addEventListener("change", () => {
+          if (catEl.checked) mktEl.checked = true;
+        });
+      }
+    });
+
+    MARKET_KEYS.forEach((mkt) => {
+      const mktEl = document.getElementById(`m_mkt_${mkt}`);
+      const catKey = MKT_TO_CAT[mkt];
+      const catEl = catKey ? document.getElementById(`m_cat_${catKey}`) : null;
+      if (mktEl && catEl) {
+        mktEl.addEventListener("change", () => {
+          if (mktEl.checked) catEl.checked = true;
+        });
+      }
+    });
+
+    // SAVE MODAL
+    saveModalBtn.addEventListener("click", async () => {
+      const isNew = m_docId.value === "__NEW__";
+      let firmId = m_docId.value;
+      let firmName = m_firmName.textContent;
+      let firmSlug = m_firmSlug.textContent;
+
+      if (isNew) {
+        firmName = String(m_inputName.value || "").trim();
+        firmSlug = String(m_inputSlug.value || "").trim().toLowerCase().replace(/[^a-z0-9]+/g, "-");
+        firmId = firmSlug;
+        if (!firmSlug || !firmName) {
+          alert("Please provide both Firm Name and Slug.");
+          return;
+        }
+      }
+
+      saveModalBtn.textContent = "Saving...";
+      saveModalBtn.disabled = true;
+
+      const existing = allFirms.find((f) => f.id === firmId) || {};
+
+      // Gather categories & rankings
+      const bestCategories = { ...(existing.bestCategories || {}) };
+      const categoryRankings = { ...(existing.categoryRankings || {}) };
+
+      CATEGORY_KEYS.forEach((cat) => {
+        const isChecked = Boolean(document.getElementById(`m_cat_${cat}`)?.checked);
+        bestCategories[cat] = isChecked;
+        const rankVal = Number(document.getElementById(`m_rank_${cat}`)?.value);
+        if (isChecked && rankVal > 0) {
+          categoryRankings[cat] = rankVal;
+        } else if (!isChecked) {
+          delete categoryRankings[cat];
+        }
+      });
+
+      const isIndian = Boolean(bestCategories.indian);
+      const bestRegions = { ...(existing.bestRegions || {}), india: isIndian };
+
+      // Gather markets
+      const markets = [];
+      MARKET_KEYS.forEach((mkt) => {
+        if (document.getElementById(`m_mkt_${mkt}`)?.checked) {
+          markets.push(mkt);
+        }
+      });
+
+      const isListed = Boolean(document.getElementById("m_showListed")?.checked);
+      const anyBest = Object.values(bestCategories).some(Boolean);
+
+      const payload = {
+        name: isNew ? firmName : (existing.name || firmName),
+        slug: isNew ? firmSlug : (existing.slug || firmId),
+        publishState: m_publishState.value,
+        active: true,
+        showListed: isListed,
+        showBestGlobal: anyBest || existing.showBestGlobal || false,
+        listingType: anyBest ? "best" : "listed",
+        bestCategories,
+        categoryRankings,
+        bestRegions,
+        markets,
+        updatedAt: serverTimestamp()
+      };
+
       try {
-        await setDoc(doc(db, "firms", firmId), {
-          bestRegions: nextRegions,
-          updatedAt: serverTimestamp()
-        }, { merge: true });
+        await setDoc(doc(db, "firms", firmId), payload, { merge: true });
+        await mirrorFirmToCloudflare(firmId, payload);
 
-        await mirrorFirmToCloudflare(firmId, { bestRegions: nextRegions });
+        // Update local memory
+        const idx = allFirms.findIndex((f) => f.id === firmId);
+        if (idx >= 0) {
+          allFirms[idx] = { ...allFirms[idx], ...payload, id: firmId };
+        } else {
+          allFirms.push({ ...payload, id: firmId, country: "Global", ranking: 10 });
+        }
 
-        target.bestRegions = nextRegions;
         renderMetrics();
         renderTable();
-        showNotice(notice, `Updated "${target.name || firmId}": Indian availability is now ${nextIndia ? "ON" : "OFF"} (Synced to live site).`);
+        closeModal();
+        showNotice(notice, `Firm "${firmName}" categories saved successfully!`);
       } catch (err) {
-        showNotice(notice, "Failed to toggle: " + err.message, "error");
+        console.error("Save error:", err);
+        alert("Failed to save: " + err.message);
+      } finally {
+        saveModalBtn.textContent = "Save Categories";
+        saveModalBtn.disabled = false;
       }
-    }
+    });
 
     async function deleteFirmDoc(firmId) {
       try {
@@ -618,115 +946,11 @@
         allFirms = allFirms.filter((f) => f.id !== firmId);
         renderMetrics();
         renderTable();
-        showNotice(notice, `Firm "${firmId}" deleted from Firestore and Cloudflare.`);
+        showNotice(notice, `Firm "${firmId}" deleted successfully.`);
       } catch (err) {
         showNotice(notice, "Delete failed: " + err.message, "error");
       }
     }
-
-    function populateFormForEdit(firmId) {
-      const firm = allFirms.find((f) => f.id === firmId);
-      if (!firm) return;
-
-      document.getElementById("firmDocId").value = firm.id;
-      document.getElementById("name").value = firm.name || "";
-      document.getElementById("slug").value = firm.slug || firm.id || "";
-      document.getElementById("logo").value = firm.logo || "";
-      document.getElementById("website").value = firm.website || "";
-      document.getElementById("country").value = firm.country || "";
-      document.getElementById("ranking").value = firm.ranking || 10;
-      document.getElementById("bio").value = firm.bio || "";
-      document.getElementById("publishState").value = firm.publishState || "published";
-
-      document.getElementById("showIndia").checked = Boolean(firm.bestRegions?.india);
-      document.getElementById("active").checked = firm.active !== false;
-      document.getElementById("verified").checked = Boolean(firm.verified);
-
-      const card = firm.cardMetrics || {};
-      document.getElementById("startingPrice").value = card.startingPrice || firm.startingPrice || "";
-      document.getElementById("dailyDrawdown").value = firm.dailyDrawdown || "";
-      document.getElementById("maxDrawdown").value = firm.maxDrawdown || "";
-      document.getElementById("minTradingDays").value = card.minTradingDays || "";
-      document.getElementById("timeLimit").value = card.timeLimit || "";
-      document.getElementById("payoutCycle").value = card.payoutCycle || "";
-      document.getElementById("newsTrading").value = card.newsTrading || "";
-      document.getElementById("eaAllowed").value = card.eaAllowed || "";
-
-      document.getElementById("platforms").value = (firm.platforms || []).join(", ");
-      document.getElementById("paymentMethods").value = (firm.paymentMethods || []).join(", ");
-
-      formTitle.textContent = `Edit Prop Firm: ${firm.name || firm.id}`;
-      document.getElementById("formPanel").scrollIntoView({ behavior: "smooth" });
-    }
-
-    resetBtn.addEventListener("click", () => {
-      firmForm.reset();
-      document.getElementById("firmDocId").value = "";
-      formTitle.textContent = "Add / Edit Prop Firm for Indian Market";
-    });
-
-    firmForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const raw = formDataToObj(firmForm);
-      const firmDocId = raw.firmDocId || raw.slug.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-
-      if (!firmDocId) {
-        showNotice(notice, "Please enter a firm name or slug.", "error");
-        return;
-      }
-
-      const existing = allFirms.find((f) => f.id === firmDocId) || {};
-      const bestRegions = { ...(existing.bestRegions || {}), india: Boolean(document.getElementById("showIndia").checked) };
-
-      const platformsArray = raw.platforms.split(",").map((s) => s.trim()).filter(Boolean);
-      const paymentMethodsArray = raw.paymentMethods.split(",").map((s) => s.trim()).filter(Boolean);
-
-      const payload = {
-        name: raw.name,
-        slug: raw.slug || firmDocId,
-        logo: raw.logo,
-        website: raw.website,
-        country: raw.country || "Global",
-        ranking: Number(raw.ranking) || 10,
-        bio: raw.bio,
-        publishState: raw.publishState,
-        active: Boolean(document.getElementById("active").checked),
-        verified: Boolean(document.getElementById("verified").checked),
-        bestRegions,
-        dailyDrawdown: raw.dailyDrawdown,
-        maxDrawdown: raw.maxDrawdown,
-        platforms: platformsArray,
-        paymentMethods: paymentMethodsArray,
-        cardMetrics: {
-          ...(existing.cardMetrics || {}),
-          startingPrice: raw.startingPrice,
-          minTradingDays: raw.minTradingDays,
-          timeLimit: raw.timeLimit,
-          payoutCycle: raw.payoutCycle,
-          newsTrading: raw.newsTrading,
-          eaAllowed: raw.eaAllowed
-        },
-        seoTitle: raw.seoTitle,
-        seoDescription: raw.seoDescription,
-        notes: raw.notes,
-        updatedAt: serverTimestamp()
-      };
-
-      try {
-        await setDoc(doc(db, "firms", firmDocId), payload, { merge: true });
-        await mirrorFirmToCloudflare(firmDocId, payload);
-        showNotice(notice, `Firm "${raw.name}" saved and synced to live website successfully!`);
-
-        // Refresh
-        await loadFirms();
-        firmForm.reset();
-        document.getElementById("firmDocId").value = "";
-        formTitle.textContent = "Add / Edit Prop Firm for Indian Market";
-      } catch (err) {
-        console.error("Save error:", err);
-        showNotice(notice, "Failed to save: " + err.message, "error");
-      }
-    });
   </script>
   <script defer src="/admin-shell.js"></script>
   <script type="module" src="/site-performance.js"></script>

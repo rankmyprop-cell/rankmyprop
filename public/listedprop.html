@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
@@ -249,6 +249,43 @@ body{
   outline:none;
   font-size:13px;
   cursor:pointer;
+}
+
+.rmp-market-toggles{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:-18px;
+  margin-bottom:30px;
+  width:100%;
+}
+
+.rmp-market-pill{
+  padding:7px 15px;
+  border-radius:999px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.12);
+  color:#c4c2dc;
+  font-size:12.5px;
+  font-weight:600;
+  cursor:pointer;
+  transition:all 0.18s ease;
+  outline:none;
+  font-family:inherit;
+}
+
+.rmp-market-pill:hover{
+  background:rgba(122,116,255,0.15);
+  border-color:rgba(122,116,255,0.45);
+  color:#fff;
+}
+
+.rmp-market-pill.is-active{
+  background:linear-gradient(135deg, #7a74ff, #5b40f5);
+  border-color:#7a74ff;
+  color:#fff;
+  box-shadow:0 3px 14px rgba(122,116,255,0.35);
 }
 
 /* CUSTOM DIRECTORY FILTERS */
@@ -977,6 +1014,16 @@ body{
       <option value="all">All Countries</option>
     </select>
   </div>
+</div>
+
+<div class="rmp-market-toggles" id="marketToggles" role="tablist" aria-label="Filter propfirms by market">
+  <button type="button" class="rmp-market-pill is-active" data-market="all">All PropFirms</button>
+  <button type="button" class="rmp-market-pill" data-market="futures">Futures PropFirm</button>
+  <button type="button" class="rmp-market-pill" data-market="cfd">CFD PropFirm</button>
+  <button type="button" class="rmp-market-pill" data-market="crypto">Crypto PropFirm</button>
+  <button type="button" class="rmp-market-pill" data-market="perps">Perps PropFirm</button>
+  <button type="button" class="rmp-market-pill" data-market="predictions">Prediction PropFirm</button>
+  <button type="button" class="rmp-market-pill" data-market="indian">Indian PropFirm</button>
 </div>
 
 <div id="grid" class="grid"></div>

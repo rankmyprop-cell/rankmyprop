@@ -82,6 +82,7 @@ async function main() {
   const primaryPages = [
     '/', '/listedprop', '/bestprop', '/best-prop-firms-2026', '/highest-rated-firms',
     '/fast-payout-prop-firms', '/best-instant-funding-firms', '/best-futures-prop-firms',
+    '/best-cfd-prop-firms', '/best-crypto-prop-firms', '/best-prediction-prop-firms', '/best-perps-prop-firms',
     '/best-hft-prop-firms', '/cheapest-prop-firms', '/most-trusted-prop-firms',
     '/beginner-friendly-firms', '/best-indian-prop-firms', '/offers', '/reviews', '/compare', '/prop-firm-rules',
     '/prop-news', '/trading-guides', '/funding-strategies', '/trading-psychology',

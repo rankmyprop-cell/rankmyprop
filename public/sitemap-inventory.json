@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-11-24T11:58:10.584Z",
+  "generatedAt": "2026-11-27T15:21:20.432Z",
   "origin": "https://www.rankmyprop.in",
-  "totalUrls": 328,
+  "totalUrls": 332,
   "activeFirms": 29,
   "profileFirms": 23,
   "reviewFirms": 9,
@@ -16,7 +16,7 @@
   "uniqueComparisonPairs": 105,
   "reverseComparisonAliases": 105,
   "sitemaps": {
-    "sitemap-pages.xml": 38,
+    "sitemap-pages.xml": 42,
     "sitemap-articles.xml": 4,
     "sitemap-firms.xml": 23,
     "sitemap-reviews.xml": 9,

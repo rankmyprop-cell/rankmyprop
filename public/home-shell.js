@@ -1,11 +1,19 @@
+const listedItems = [
+  { label: "Futures PropFirm", description: "All listed propfirms offering futures contracts", href: "/listedprop?market=futures", badge: "Futures" },
+  { label: "CFD PropFirm", description: "All listed propfirms offering CFD and Forex instruments", href: "/listedprop?market=cfd", badge: "CFD" },
+  { label: "Crypto PropFirm", description: "All listed propfirms supporting cryptocurrency trading", href: "/listedprop?market=crypto", badge: "Crypto" },
+  { label: "Perps PropFirm", description: "All listed propfirms offering perpetual contracts", href: "/listedprop?market=perps", badge: "Perps" },
+  { label: "Prediction PropFirm", description: "All listed propfirms for prediction & event markets", href: "/listedprop?market=predictions", badge: "Predictions" },
+  { label: "Indian PropFirm", description: "All listed propfirms available to Indian traders", href: "/listedprop?market=indian", badge: "India" },
+];
+
 const firmItems = [
-  { label: "Best Prop Firms 2026", description: "Our highest-rated firms overall", href: "/best-prop-firms-2026", badge: "Popular" },
-  { label: "Best Indian Prop Firms", description: "Top funded accounts for Indian traders", href: "/best-indian-prop-firms", badge: "India" },
-  { label: "Fast Payout Firms", description: "Get paid without the long wait", href: "/fast-payout-prop-firms" },
-  { label: "Instant Funding", description: "Skip the evaluation challenge", href: "/best-instant-funding-firms" },
-  { label: "Futures Prop Firms", description: "Top firms built for futures traders", href: "/best-futures-prop-firms" },
-  { label: "Most Trusted Firms", description: "Proven track records and fair rules", href: "/most-trusted-prop-firms" },
-  { label: "Beginner Friendly", description: "Simple rules and trader-first support", href: "/beginner-friendly-firms" },
+  { label: "Best CFD Prop Firms", description: "Top-rated CFD and Forex funded accounts", href: "/best-cfd-prop-firms", badge: "CFD" },
+  { label: "Best Futures Prop Firms", description: "Top funded accounts for futures traders", href: "/best-futures-prop-firms", badge: "Futures" },
+  { label: "Best Crypto Prop Firms", description: "Crypto evaluation & digital asset funding", href: "/best-crypto-prop-firms", badge: "Crypto" },
+  { label: "Best Indian Prop Firms", description: "Dedicated funded accounts for Indian traders", href: "/best-indian-prop-firms", badge: "India" },
+  { label: "Best Prediction Prop Firms", description: "Prediction markets and event forecasting props", href: "/best-prediction-prop-firms", badge: "Prediction" },
+  { label: "Best Perps Prop Firms", description: "Perpetual contracts (DEX/CEX) prop firms", href: "/best-perps-prop-firms", badge: "Perps" },
 ];
 
 const compareItems = [
@@ -32,6 +40,13 @@ const calculatorItems = [
 ];
 
 const dropdownData = {
+  listed: {
+    eyebrow: "Directory",
+    title: "Browse listed propfirms by market",
+    items: listedItems,
+    allLabel: "Explore all listed propfirms",
+    allHref: "/listedprop",
+  },
   firms: {
     eyebrow: "Discover",
     title: "Find your right prop firm",
@@ -56,9 +71,10 @@ const dropdownData = {
 };
 
 const searchItems = [
-  { label: "Listed Props", description: "Browse every listed prop firm", href: "/listedprop" },
+  { label: "Listed PropFirms", description: "Browse every listed propfirm", href: "/listedprop" },
   { label: "Prop Firm Offers", description: "Explore active deals and discounts", href: "/offers" },
   { label: "Prop News", description: "Latest updates from the prop trading industry", href: "/prop-news" },
+  ...listedItems,
   ...firmItems,
   ...compareItems,
   ...calculatorItems,
@@ -1044,7 +1060,10 @@ function createHeader() {
         <span>Rank My Prop</span>
       </a>
       <nav class="main-nav" aria-label="Primary navigation">
-        <a class="nav-link" href="/listedprop">Listed Props</a>
+        <div class="nav-group" data-dropdown="listed">
+          <a class="nav-link nav-button" href="/listedprop" aria-expanded="false">Listed PropFirms${chevron()}</a>
+          ${dropdownMarkup("listed")}
+        </div>
         ${["firms", "compare", "calculators"].map((key, index) => {
           const labels = ["Best Prop Firms", "Compare", "Calculators"];
           const before = index === 1 ? `<a class="nav-link" href="/offers">Offers</a><a class="nav-link" href="/reviews">Reviews</a>` : "";

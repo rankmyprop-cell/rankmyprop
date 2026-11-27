@@ -1,64 +1,74 @@
 import { CLOUDFLARE_API_URL } from "./cloudflare-config.js";
 
 const cache = new Map();
-const CACHE_TTL_MS = 3 * 60 * 1000; // 3 minutes cache
+const isLocal = typeof window !== "undefined" && (location.hostname === "localhost" || location.hostname === "127.0.0.1");
+const CACHE_TTL_MS = isLocal ? 60 * 1000 : 5 * 60 * 1000; // 60s on localhost, 5m in prod
+const STALE_TTL_MS = 15 * 60 * 1000; // serve stale immediately while revalidating in background
 
 export async function listDocuments(collection, maxRows = 500, params = {}) {
   const cacheKey = `${collection}:${maxRows}:${JSON.stringify(params)}`;
   const now = Date.now();
-  const cached = cache.get(cacheKey);
+  let cached = cache.get(cacheKey);
+  if (!cached) {
+    try {
+      if (typeof sessionStorage !== "undefined") {
+        const stored = sessionStorage.getItem(`rmp_cache_${cacheKey}`);
+        if (stored) {
+          cached = JSON.parse(stored);
+          if (cached) cache.set(cacheKey, cached);
+        }
+      }
+    } catch (_) {}
+  }
+
   if (cached && (now - cached.time < CACHE_TTL_MS)) {
     return cached.data;
   }
-  try {
-    if (typeof sessionStorage !== "undefined") {
-      const stored = sessionStorage.getItem(`rmp_cache_${cacheKey}`);
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        if (parsed && (now - parsed.time < CACHE_TTL_MS)) {
-          cache.set(cacheKey, parsed);
-          return parsed.data;
-        }
+
+  const fetchFresh = async () => {
+    const rows = [];
+    let cursor = "";
+    do {
+      const url = new URL(`${CLOUDFLARE_API_URL}/v1/collections/${encodeURIComponent(collection)}`);
+      url.searchParams.set("limit", String(Math.min(100, Math.max(1, maxRows - rows.length))));
+      if (cursor) url.searchParams.set("cursor", cursor);
+      Object.entries(params).forEach(([key, value]) => { if (value != null && value !== "") url.searchParams.set(key, String(value)); });
+
+      const controller = typeof AbortController !== "undefined" ? new AbortController() : null;
+      const timeout = controller ? setTimeout(() => controller.abort(), 4000) : null;
+      try {
+        const response = await fetch(url, {
+          headers: { accept: "application/json" },
+          signal: controller?.signal
+        });
+        if (timeout) clearTimeout(timeout);
+        if (!response.ok) throw new Error(`Cloudflare ${collection} request failed (${response.status})`);
+        const payload = await response.json();
+        rows.push(...(Array.isArray(payload.data) ? payload.data : []));
+        cursor = String(payload.nextCursor || "");
+      } catch (err) {
+        if (timeout) clearTimeout(timeout);
+        throw err;
       }
-    }
-  } catch (_) {}
+    } while (cursor && rows.length < maxRows);
 
-  const rows = [];
-  let cursor = "";
-  do {
-    const url = new URL(`${CLOUDFLARE_API_URL}/v1/collections/${encodeURIComponent(collection)}`);
-    url.searchParams.set("limit", String(Math.min(100, Math.max(1, maxRows - rows.length))));
-    if (cursor) url.searchParams.set("cursor", cursor);
-    Object.entries(params).forEach(([key, value]) => { if (value != null && value !== "") url.searchParams.set(key, String(value)); });
-    
-    const controller = typeof AbortController !== "undefined" ? new AbortController() : null;
-    const timeout = controller ? setTimeout(() => controller.abort(), 4000) : null;
+    const finalRows = rows.slice(0, maxRows);
+    const cacheItem = { time: Date.now(), data: finalRows };
+    cache.set(cacheKey, cacheItem);
     try {
-      const response = await fetch(url, { 
-        headers: { accept: "application/json" },
-        signal: controller?.signal
-      });
-      if (timeout) clearTimeout(timeout);
-      if (!response.ok) throw new Error(`Cloudflare ${collection} request failed (${response.status})`);
-      const payload = await response.json();
-      rows.push(...(Array.isArray(payload.data) ? payload.data : []));
-      cursor = String(payload.nextCursor || "");
-    } catch (err) {
-      if (timeout) clearTimeout(timeout);
-      throw err;
-    }
-  } while (cursor && rows.length < maxRows);
+      if (typeof sessionStorage !== "undefined") {
+        sessionStorage.setItem(`rmp_cache_${cacheKey}`, JSON.stringify(cacheItem));
+      }
+    } catch (_) {}
+    return finalRows;
+  };
 
-  const finalRows = rows.slice(0, maxRows);
-  const cacheItem = { time: now, data: finalRows };
-  cache.set(cacheKey, cacheItem);
-  try {
-    if (typeof sessionStorage !== "undefined") {
-      sessionStorage.setItem(`rmp_cache_${cacheKey}`, JSON.stringify(cacheItem));
-    }
-  } catch (_) {}
+  if (cached && (now - cached.time < STALE_TTL_MS)) {
+    fetchFresh().catch(() => {});
+    return cached.data;
+  }
 
-  return finalRows;
+  return fetchFresh();
 }
 
 export async function getDocument(collection, id) {

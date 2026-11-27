@@ -82,7 +82,7 @@
           <a class="link-card module-card" href="/admin-events"><h3>Upcoming Events</h3><p>Manage event cards shown in client dashboard.</p></a>
           <a class="link-card module-card" href="/admin-offers"><h3>Offers Control</h3><p>Update discount %, coupon code, visit links, and card order site-wide.</p></a>
           <a class="link-card module-card" href="/admin-firm-details"><h3>Firm Detail CMS</h3><p>Manage listing visibility, regions, and full firm detail CMS from one page.</p></a>
-          <a class="link-card module-card" href="/admin-best-indian-prop-firms"><h3>Best Indian Prop Firms</h3><p>Manage Indian prop firm listings, regional availability toggles, and Indian trader challenges.</p></a>
+          <a class="link-card module-card" href="/admin-best-indian-prop-firms"><h3>Best Prop Firms & Categories</h3><p>Assign firms to Best CFD, Futures, Crypto, Indian, Prediction, and Perps categories with custom rankings.</p></a>
           <a class="link-card module-card" href="/admin-content-cms"><h3>Page Copy CMS</h3><p>Edit headings and paragraphs for every page with sitemap auto-sync for new pages.</p></a>
           <a class="link-card module-card" href="/admin-blog-banner"><h3>Banner Manager</h3><p>Manage blog and client dashboard banner placements.</p></a>
           <a class="link-card module-card" href="/admin-website-popup"><h3>Website Popup</h3><p>Upload and schedule the home-page campaign poster, its click link, and display settings.</p></a>
@@ -121,7 +121,7 @@
     }
 
     async function loadServerStats(user) {
-      const token = await user.getIdToken(true);
+      const token = await user.getIdToken();
       const response = await fetch("/api/admin-stats", {
         headers: { Authorization: `Bearer ${token}` },
         cache: "no-store"

@@ -14,10 +14,15 @@ const BEST_REGIONS = [
 ];
 
 const BEST_CATEGORIES = [
+  "cfd",
+  "futures",
+  "crypto",
+  "indian",
+  "prediction",
+  "perps",
   "fast_payout",
   "instant_funding",
   "hft",
-  "futures",
   "cheapest",
   "trusted",
   "beginner",
@@ -78,14 +83,35 @@ function bestCategoryKey(text = "") {
     .replace(/^_+|_+$/g, "");
   if (!k) return "";
   const map = {
+    best_cfd_prop_firms: "cfd",
+    cfd_prop_firms: "cfd",
+    cfd: "cfd",
+    cfds: "cfd",
+    best_futures_prop_firms: "futures",
+    futures_prop_firms: "futures",
+    futures: "futures",
+    future: "futures",
+    best_crypto_prop_firms: "crypto",
+    crypto_prop_firms: "crypto",
+    crypto: "crypto",
+    best_indian_prop_firms: "indian",
+    indian_prop_firms: "indian",
+    indian: "indian",
+    india: "indian",
+    best_prediction_prop_firms: "prediction",
+    prediction_prop_firms: "prediction",
+    prediction: "prediction",
+    predictions: "prediction",
+    best_perps_prop_firms: "perps",
+    perps_prop_firms: "perps",
+    perps: "perps",
+    perp: "perps",
     fast_payout_prop_firms: "fast_payout",
     fast_payout: "fast_payout",
     best_instant_funding_firms: "instant_funding",
     instant_funding: "instant_funding",
     best_hft_prop_firms: "hft",
     hft: "hft",
-    best_futures_prop_firms: "futures",
-    futures: "futures",
     cheapest_prop_firms: "cheapest",
     cheapest: "cheapest",
     most_trusted_prop_firms: "trusted",
@@ -96,6 +122,23 @@ function bestCategoryKey(text = "") {
     highest_rated: "highest_rated"
   };
   return map[k] || (BEST_CATEGORIES.includes(k) ? k : "");
+}
+
+function isFirmInBestCategory(f = {}, cat = "") {
+  if (!f || !cat) return false;
+  if (Boolean(f.bestCategories?.[cat])) return true;
+  if (cat === "indian") {
+    return Boolean(f.bestRegions?.india) || f.country === "India" || f.slug === "trade-bridges";
+  }
+  const m = (Array.isArray(f.markets) ? f.markets : []).map((x) => String(x || "").toLowerCase().trim());
+  const t = (Array.isArray(f.tags) ? f.tags : []).map((x) => String(x || "").toLowerCase().trim());
+  const hay = [...m, ...t, String(f.country || "").toLowerCase(), String(f.name || "").toLowerCase()].join(" ");
+  if (cat === "cfd") return hay.includes("cfd") || hay.includes("forex") || hay.includes("fx");
+  if (cat === "futures") return hay.includes("future");
+  if (cat === "crypto") return hay.includes("crypto");
+  if (cat === "prediction") return hay.includes("prediction") || hay.includes("forecast") || hay.includes("event");
+  if (cat === "perps") return hay.includes("perp") || hay.includes("perpetual");
+  return false;
 }
 
 function pickRegionFlags(row = {}) {
@@ -127,7 +170,11 @@ function cleanMetric(v = "") {
   return String(v ?? "").trim();
 }
 
-function rankingValue(row = {}) {
+function rankingValue(row = {}, category = "") {
+  if (category && row.categoryRankings && typeof row.categoryRankings === "object") {
+    const cr = Number(row.categoryRankings[category]);
+    if (Number.isFinite(cr) && cr > 0) return cr;
+  }
   const rank = Number(row.ranking);
   if (Number.isFinite(rank) && rank > 0) return rank;
   const legacy = Number(row.sortOrder);
@@ -200,9 +247,10 @@ function norm(row = {}) {
 
   // Validate logo - reject truncated or invalid base64 or stub slugs
   const rawLogo = String(row.logo || "").trim();
-  const isBase64Valid = /^data:image\/(?:png|jpeg|jpg|webp|svg\+xml);base64,[A-Za-z0-9+/=]{100,}$/.test(rawLogo) && !rawLogo.endsWith("jaWFlaI");
-  const isUrlValid = /^https?:\/\//i.test(rawLogo) || (rawLogo.startsWith("/assets/") && !rawLogo.includes(" "));
-  const safeLogoStr = (isBase64Valid || isUrlValid) ? rawLogo : "";
+  const normalizedLogo = rawLogo.startsWith("assets/") ? `/${rawLogo}` : rawLogo;
+  const isBase64Valid = /^data:image\/(?:png|jpeg|jpg|webp|svg\+xml);base64,[A-Za-z0-9+/=]{100,}$/.test(normalizedLogo) && !normalizedLogo.endsWith("jaWFlaI");
+  const isUrlValid = /^https?:\/\//i.test(normalizedLogo) || normalizedLogo.startsWith("/assets/");
+  const safeLogoStr = isBase64Valid ? normalizedLogo : (isUrlValid ? (normalizedLogo.includes(" ") ? encodeURI(normalizedLogo) : normalizedLogo) : "");
 
   return {
     id: row.id || slug,
@@ -230,6 +278,7 @@ function norm(row = {}) {
     metaFounded: String(row.metaFounded || row.founded || "").trim(),
     metaCeo: String(row.metaCeo || row.ceo || "").trim(),
     trustText: String(row.trustText || "").trim(),
+    categoryRankings: (row.categoryRankings && typeof row.categoryRankings === "object") ? row.categoryRankings : {},
     platforms: [row.platforms, row.tradingPlatforms, row.platform, row.supportedPlatforms]
       .flatMap((value) => Array.isArray(value) ? value : String(value || "").split(/[,\n|]+/))
       .map((value) => String(value || "").trim())
@@ -417,18 +466,19 @@ export async function getFirmsByType(listingType, options = {}) {
         if (!f.visibleNow || !f.name) return false;
         if (!isVisibleOnSurface(f, surface)) return false;
         if (["profile", "rules", "reviews", "offers"].includes(surface)) return true;
-        const isBest = Boolean(f.showBestGlobal) || BEST_REGIONS.some((k) => Boolean(f.bestRegions?.[k]));
-        const isListed = Boolean(f.showListed);
+        const isBest = Boolean(f.showBestGlobal) || BEST_REGIONS.some((k) => Boolean(f.bestRegions?.[k])) || BEST_CATEGORIES.some((k) => Boolean(f.bestCategories?.[k]));
+        const isListed = f.showListed !== false || (Array.isArray(f.markets) && f.markets.length > 0);
 
         if (String(listingType || "listed").toLowerCase() === "best") {
-          if (!isBest) return false;
           if (region && !Boolean(f.bestRegions?.[region])) return false;
-          if (category && !Boolean(f.bestCategories?.[category])) return false;
-          return true;
+          if (category) {
+            return isFirmInBestCategory(f, category);
+          }
+          return isBest;
         }
         return isListed;
       })
-      .sort((a, b) => rankingValue(a) - rankingValue(b));
+      .sort((a, b) => rankingValue(a, category) - rankingValue(b, category));
 
     // If no results from Firebase, use fallback data
     if (result.length === 0 && all.length === 0) {

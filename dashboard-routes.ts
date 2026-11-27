@@ -43,6 +43,10 @@ export const DASHBOARD_ROUTES = [
 
 export const PUBLIC_STATIC_ROUTES = [
   'best-indian-prop-firms',
+  'best-cfd-prop-firms',
+  'best-crypto-prop-firms',
+  'best-prediction-prop-firms',
+  'best-perps-prop-firms',
   'prop-news',
   'prop-news-post',
   'content-post',

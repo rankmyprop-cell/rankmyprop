@@ -306,6 +306,40 @@
         </div>
       </section>
 
+      <section class="panel" id="categoryCatalogPanel">
+        <div class="panel-head">
+          <div>
+            <h3>Prop Firm Categories &amp; Catalog</h3>
+            <p class="welcome" style="margin:4px 0 0;font-size:13px;color:#bdb8d9;">Filter existing firms by category, review assignments, and modify category rankings.</p>
+          </div>
+          <span class="chip" id="categoryFirmsTotalChip">Total Firms: 0</span>
+        </div>
+        <div style="padding:16px 20px;">
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;" id="adminCategoryPills"></div>
+          <div style="display:flex;gap:12px;margin-bottom:14px;align-items:center;flex-wrap:wrap;">
+            <input id="adminFirmTableSearch" placeholder="Search firms by name, slug, country..." style="flex:1;min-width:240px;max-width:360px;padding:8px 14px;border-radius:8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:#fff;font-size:13px;" />
+            <span id="adminTableCountLabel" style="font-size:13px;color:#a78bfa;font-weight:600;"></span>
+          </div>
+          <div style="overflow-x:auto;max-height:440px;border:1px solid rgba(255,255,255,0.08);border-radius:10px;">
+            <table style="width:100%;border-collapse:collapse;font-size:13px;text-align:left;">
+              <thead>
+                <tr style="background:rgba(255,255,255,0.04);border-bottom:1px solid rgba(255,255,255,0.1);color:#a78bfa;">
+                  <th style="padding:10px 14px;">Firm</th>
+                  <th style="padding:10px 14px;">Assigned Categories</th>
+                  <th style="padding:10px 14px;">Category Rankings</th>
+                  <th style="padding:10px 14px;">Global Rank</th>
+                  <th style="padding:10px 14px;">Status</th>
+                  <th style="padding:10px 14px;text-align:right;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="adminFirmsTableBody">
+                <tr><td colspan="6" style="text-align:center;padding:24px;color:#888;">Loading firm catalog...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
       <section class="panel">
         <div class="panel-head"><h3>Detail Content</h3></div>
         <form id="detailForm" class="form-grid">
@@ -473,16 +507,24 @@
       { key: "us", label: "US" },
       { key: "uk", label: "UK" }
     ];
-    const BEST_CATEGORIES = [
+    const CORE_CATEGORIES = [
+      { key: "cfd", label: "Best CFD Prop Firms" },
+      { key: "futures", label: "Best Futures Prop Firms" },
+      { key: "crypto", label: "Best Crypto Prop Firms" },
+      { key: "indian", label: "Best Indian Prop Firms" },
+      { key: "prediction", label: "Best Prediction Prop Firms" },
+      { key: "perps", label: "Best Perps Prop Firms" }
+    ];
+    const LEGACY_CATEGORIES = [
       { key: "fast_payout", label: "Fast Payout" },
       { key: "instant_funding", label: "Instant Funding" },
       { key: "hft", label: "HFT" },
-      { key: "futures", label: "Futures" },
       { key: "cheapest", label: "Cheapest" },
       { key: "trusted", label: "Most Trusted" },
       { key: "beginner", label: "Beginner Friendly" },
       { key: "highest_rated", label: "Highest Rated" }
     ];
+    const BEST_CATEGORIES = [...CORE_CATEGORIES, ...LEGACY_CATEGORIES];
 
     // Public firm and rules pages are served from Cloudflare. Firebase remains
     // the authenticated CMS source during the migration, so each admin write
@@ -773,10 +815,15 @@
         if (el) el.checked = Boolean(flags[key]);
       });
     }
-    function fillCategoryToggles(flags = {}) {
+    function fillCategoryToggles(flags = {}, categoryRankings = {}) {
       BEST_CATEGORIES.forEach(({ key }) => {
         const el = form.elements.namedItem(`bestCategory_${key}`);
-        if (el) el.checked = Boolean(flags[key]);
+        if (el) el.checked = Boolean(flags[key] || (key === "indian" && (flags.india || flags.indian)));
+        const rankEl = form.elements.namedItem(`catRank_${key}`);
+        if (rankEl) {
+          const r = categoryRankings?.[key];
+          rankEl.value = (Number.isFinite(r) && r > 0) ? r : "";
+        }
       });
     }
     function readRegionToggles() {
@@ -788,12 +835,21 @@
       return out;
     }
     function readCategoryToggles() {
-      const out = {};
+      const bestCategories = {};
+      const categoryRankings = {};
       BEST_CATEGORIES.forEach(({ key }) => {
         const el = form.elements.namedItem(`bestCategory_${key}`);
-        out[key] = Boolean(el?.checked);
+        const isChecked = Boolean(el?.checked);
+        bestCategories[key] = isChecked;
+        if (isChecked) {
+          const rankEl = form.elements.namedItem(`catRank_${key}`);
+          const r = Number(rankEl?.value);
+          if (Number.isFinite(r) && r > 0) {
+            categoryRankings[key] = r;
+          }
+        }
       });
-      return out;
+      return { bestCategories, categoryRankings };
     }
     function renderRegionToggles() {
       if (!regionWrap) return;
@@ -806,12 +862,33 @@
     }
     function renderCategoryToggles() {
       if (!categoryWrap) return;
-      categoryWrap.innerHTML = BEST_CATEGORIES.map(({ key, label }) => `
-        <label class="toggle-item">
-          <input type="checkbox" name="bestCategory_${key}" />
-          <span>${label}</span>
-        </label>
-      `).join("");
+      categoryWrap.innerHTML = `
+        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:12px;width:100%;margin-bottom:14px;">
+          ${CORE_CATEGORIES.map(({ key, label }) => `
+            <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:12px;">
+              <label style="display:flex;align-items:center;gap:8px;font-weight:600;font-size:13px;cursor:pointer;">
+                <input type="checkbox" name="bestCategory_${key}" id="cat_cb_${key}" />
+                <span>${label}</span>
+              </label>
+              <div style="margin-top:8px;display:flex;align-items:center;gap:8px;">
+                <span style="font-size:11.5px;color:#a78bfa;">Category Rank:</span>
+                <input type="number" name="catRank_${key}" min="1" max="999" placeholder="Auto" style="width:75px;padding:4px 8px;border-radius:6px;background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.15);color:#fff;font-size:12px;" />
+              </div>
+            </div>
+          `).join("")}
+        </div>
+        <details style="margin-top:8px;padding:8px 12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:8px;">
+          <summary style="font-size:12px;color:#8f86ff;cursor:pointer;font-weight:600;">Other Feature Badges (Fast Payout, Instant Funding, HFT, etc.)</summary>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));gap:8px;margin-top:10px;">
+            ${LEGACY_CATEGORIES.map(({ key, label }) => `
+              <label class="toggle-item">
+                <input type="checkbox" name="bestCategory_${key}" />
+                <span>${label}</span>
+              </label>
+            `).join("")}
+          </div>
+        </details>
+      `;
     }
     function fileToDataUrl(file) {
       return new Promise((resolve, reject) => {
@@ -1381,7 +1458,7 @@
       form.elements.namedItem("showReviews").checked = row.showReviews !== false;
       form.elements.namedItem("showOffers").checked = row.showOffers !== false;
       fillRegionToggles(makeBestRegionFlags(row));
-      fillCategoryToggles(makeBestCategoryFlags(row));
+      fillCategoryToggles(makeBestCategoryFlags(row), row.categoryRankings || {});
 
       form.elements.namedItem("active").checked = row.active !== false;
       setValue("publishState", String(row.publishState || "published"));
@@ -1450,6 +1527,113 @@
       teamReviewProfileJson.value = JSON.stringify({ ...fallback, ...(data || {}) }, null, 2);
     }
 
+    let selectedAdminCategory = "all";
+
+    function renderCategoryManagerTable() {
+      const tableBody = document.getElementById("adminFirmsTableBody");
+      const pillsContainer = document.getElementById("adminCategoryPills");
+      const totalChip = document.getElementById("categoryFirmsTotalChip");
+      const countLabel = document.getElementById("adminTableCountLabel");
+      const searchInput = document.getElementById("adminFirmTableSearch");
+      if (!tableBody || !pillsContainer) return;
+
+      const searchQuery = String(searchInput?.value || "").toLowerCase().trim();
+
+      const counts = { all: firms.length, cfd: 0, futures: 0, crypto: 0, indian: 0, prediction: 0, perps: 0 };
+      firms.forEach((f) => {
+        const cats = f.bestCategories || {};
+        if (cats.cfd) counts.cfd++;
+        if (cats.futures) counts.futures++;
+        if (cats.crypto) counts.crypto++;
+        if (cats.indian || f.bestRegions?.india || f.country === "India") counts.indian++;
+        if (cats.prediction) counts.prediction++;
+        if (cats.perps) counts.perps++;
+      });
+
+      if (totalChip) totalChip.textContent = `Total Firms: ${firms.length}`;
+
+      const categoryDefs = [
+        { key: "all", label: "All Firms" },
+        { key: "cfd", label: "Best CFD" },
+        { key: "futures", label: "Best Futures" },
+        { key: "crypto", label: "Best Crypto" },
+        { key: "indian", label: "Best Indian" },
+        { key: "prediction", label: "Best Prediction" },
+        { key: "perps", label: "Best Perps" }
+      ];
+
+      pillsContainer.innerHTML = categoryDefs.map((c) => `
+        <button type="button" class="btn ${selectedAdminCategory === c.key ? "btn-primary" : ""}" data-category-filter="${c.key}" style="padding:6px 14px;border-radius:999px;font-size:12px;font-weight:600;cursor:pointer;">
+          ${c.label} (${counts[c.key] || 0})
+        </button>
+      `).join("");
+
+      let filtered = firms.filter((f) => {
+        if (selectedAdminCategory !== "all") {
+          const cats = f.bestCategories || {};
+          const match = selectedAdminCategory === "indian"
+            ? Boolean(cats.indian || f.bestRegions?.india || f.country === "India")
+            : Boolean(cats[selectedAdminCategory]);
+          if (!match) return false;
+        }
+        if (searchQuery) {
+          const text = [f.name, f.slug, f.id, f.country].join(" ").toLowerCase();
+          if (!text.includes(searchQuery)) return false;
+        }
+        return true;
+      });
+
+      if (countLabel) countLabel.textContent = `Showing ${filtered.length} of ${firms.length} firms`;
+
+      if (!filtered.length) {
+        tableBody.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:24px;color:#888;">No firms found matching the selected category or filter.</td></tr>`;
+        return;
+      }
+
+      tableBody.innerHTML = filtered.map((f) => {
+        const cats = f.bestCategories || {};
+        const catRanks = f.categoryRankings || {};
+        const assigned = categoryDefs.filter((c) => c.key !== "all" && (cats[c.key] || (c.key === "indian" && (f.bestRegions?.india || f.country === "India"))));
+        const assignedBadges = assigned.length
+          ? assigned.map((c) => `<span style="display:inline-block;padding:2px 8px;margin:2px;border-radius:4px;font-size:11px;font-weight:600;background:rgba(122,116,255,0.18);border:1px solid rgba(122,116,255,0.35);color:#cfcbff;">${c.label}</span>`).join("")
+          : `<span style="color:#666;font-size:11.5px;">None</span>`;
+
+        const rankPills = assigned.length
+          ? assigned.map((c) => {
+              const r = catRanks[c.key];
+              return `<span style="font-size:11.5px;color:#a78bfa;margin-right:8px;">${c.key.toUpperCase()}: <strong>#${(Number.isFinite(Number(r)) && Number(r) > 0) ? r : (f.ranking || "-")}</strong></span>`;
+            }).join(" ")
+          : "-";
+
+        const logoHtml = f.logo
+          ? `<img src="${escapeHtml(f.logo)}" style="width:26px;height:26px;border-radius:6px;object-fit:cover;" onerror="this.style.display='none'" />`
+          : `<span style="display:inline-block;width:26px;height:26px;line-height:26px;text-align:center;border-radius:6px;background:#2a2a3d;color:#fff;font-size:10px;font-weight:700;">${(f.name || "TB").slice(0,2).toUpperCase()}</span>`;
+
+        const statusBadge = f.active !== false
+          ? `<span style="color:#4ade80;font-size:12px;font-weight:600;">Active</span>`
+          : `<span style="color:#f87171;font-size:12px;">Inactive</span>`;
+
+        return `
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+            <td style="padding:10px 14px;display:flex;align-items:center;gap:10px;">
+              ${logoHtml}
+              <div>
+                <strong style="color:#fff;font-size:13.5px;">${escapeHtml(f.name || f.slug || f.id)}</strong>
+                <div style="color:#888;font-size:11px;">${escapeHtml(f.slug || f.id)} • ${escapeHtml(f.country || "Global")}</div>
+              </div>
+            </td>
+            <td style="padding:10px 14px;">${assignedBadges}</td>
+            <td style="padding:10px 14px;">${rankPills}</td>
+            <td style="padding:10px 14px;color:#fff;font-weight:600;">#${f.ranking || f.sortOrder || 999}</td>
+            <td style="padding:10px 14px;">${statusBadge}</td>
+            <td style="padding:10px 14px;text-align:right;">
+              <button type="button" class="btn" data-edit-firm-id="${escapeHtml(f.id)}" style="padding:5px 12px;font-size:12px;">Edit Firm</button>
+            </td>
+          </tr>
+        `;
+      }).join("");
+    }
+
     async function loadFirms(selectedId = "") {
       let nextFirms = [];
       let nextStatsMap = new Map();
@@ -1493,6 +1677,7 @@
       });
 
       renderFirmIdentityOptions(picker, firms, selectedId, { includeOther: true });
+      renderCategoryManagerTable();
 
       if (!firms.length) {
         const cachedDrafts = readDraftStore();
@@ -1514,6 +1699,134 @@
       await syncMissingRuleModelsToCloudflare(active);
       if (usedCache) showNotice(notice, "Live read unavailable. Loaded cached firm data + draft safely.", "warn");
     }
+
+    let selectedAdminCategory = "all";
+
+    function renderCategoryManagerTable() {
+      const tableBody = document.getElementById("adminFirmsTableBody");
+      const pillsContainer = document.getElementById("adminCategoryPills");
+      const totalChip = document.getElementById("categoryFirmsTotalChip");
+      const countLabel = document.getElementById("adminTableCountLabel");
+      const searchInput = document.getElementById("adminFirmTableSearch");
+      if (!tableBody || !pillsContainer) return;
+
+      const searchQuery = String(searchInput?.value || "").toLowerCase().trim();
+
+      const counts = { all: firms.length, cfd: 0, futures: 0, crypto: 0, indian: 0, prediction: 0, perps: 0 };
+      firms.forEach((f) => {
+        const cats = f.bestCategories || {};
+        if (cats.cfd) counts.cfd++;
+        if (cats.futures) counts.futures++;
+        if (cats.crypto) counts.crypto++;
+        if (cats.indian || f.bestRegions?.india || f.country === "India" || f.slug === "trade-bridges") counts.indian++;
+        if (cats.prediction) counts.prediction++;
+        if (cats.perps) counts.perps++;
+      });
+
+      if (totalChip) totalChip.textContent = `Total Firms: ${firms.length}`;
+
+      const categoryDefs = [
+        { key: "all", label: "All Firms" },
+        { key: "cfd", label: "Best CFD" },
+        { key: "futures", label: "Best Futures" },
+        { key: "crypto", label: "Best Crypto" },
+        { key: "indian", label: "Best Indian" },
+        { key: "prediction", label: "Best Prediction" },
+        { key: "perps", label: "Best Perps" }
+      ];
+
+      pillsContainer.innerHTML = categoryDefs.map((c) => `
+        <button type="button" class="btn ${selectedAdminCategory === c.key ? "btn-primary" : ""}" data-category-filter="${c.key}" style="padding:6px 14px;border-radius:999px;font-size:12px;font-weight:600;cursor:pointer;">
+          ${c.label} (${counts[c.key] || 0})
+        </button>
+      `).join("");
+
+      const filtered = firms.filter((f) => {
+        if (selectedAdminCategory !== "all") {
+          const cats = f.bestCategories || {};
+          const match = selectedAdminCategory === "indian"
+            ? Boolean(cats.indian || f.bestRegions?.india || f.country === "India" || f.slug === "trade-bridges")
+            : Boolean(cats[selectedAdminCategory]);
+          if (!match) return false;
+        }
+        if (searchQuery) {
+          const text = [f.name, f.slug, f.id, f.country].join(" ").toLowerCase();
+          if (!text.includes(searchQuery)) return false;
+        }
+        return true;
+      });
+
+      if (countLabel) countLabel.textContent = `Showing ${filtered.length} of ${firms.length} firms`;
+
+      if (!filtered.length) {
+        tableBody.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:24px;color:#888;">No firms found matching current filter.</td></tr>`;
+        return;
+      }
+
+      tableBody.innerHTML = filtered.map((f) => {
+        const cats = f.bestCategories || {};
+        const catRanks = f.categoryRankings || {};
+        const assigned = categoryDefs.filter((c) => c.key !== "all" && (cats[c.key] || (c.key === "indian" && (f.bestRegions?.india || f.country === "India" || f.slug === "trade-bridges"))));
+        const assignedBadges = assigned.length
+          ? assigned.map((c) => `<span style="display:inline-block;padding:2px 8px;margin:2px;border-radius:4px;font-size:11px;font-weight:600;background:rgba(122,116,255,0.18);border:1px solid rgba(122,116,255,0.35);color:#cfcbff;">${c.label}</span>`).join("")
+          : `<span style="color:#666;font-size:11.5px;">None</span>`;
+
+        const rankPills = assigned.length
+          ? assigned.map((c) => {
+              const r = catRanks[c.key];
+              return `<span style="font-size:11px;color:#a78bfa;margin-right:6px;">${c.key.toUpperCase()}: <strong>#${(Number.isFinite(r) && r > 0) ? r : (f.ranking || "-")}</strong></span>`;
+            }).join(" ")
+          : "-";
+
+        const logoHtml = f.logo
+          ? `<img src="${f.logo}" style="width:26px;height:26px;border-radius:6px;object-fit:cover;" onerror="this.style.display='none'" />`
+          : `<span style="display:inline-block;width:26px;height:26px;line-height:26px;text-align:center;border-radius:6px;background:#2a2a3d;color:#fff;font-size:10px;font-weight:700;">${(f.name || "TB").slice(0,2).toUpperCase()}</span>`;
+
+        const statusBadge = f.active !== false
+          ? `<span style="color:#4ade80;font-size:12px;font-weight:600;">Active</span>`
+          : `<span style="color:#f87171;font-size:12px;">Inactive</span>`;
+
+        return `
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.05);transition:background 0.15s ease;" onmouseover="this.style.background='rgba(255,255,255,0.02)'" onmouseout="this.style.background='transparent'">
+            <td style="padding:10px 14px;display:flex;align-items:center;gap:10px;">
+              ${logoHtml}
+              <div>
+                <strong style="color:#fff;font-size:13.5px;">${f.name || f.slug || f.id}</strong>
+                <div style="color:#888;font-size:11px;">${f.slug || f.id} • ${f.country || "Global"}</div>
+              </div>
+            </td>
+            <td style="padding:10px 14px;">${assignedBadges}</td>
+            <td style="padding:10px 14px;">${rankPills}</td>
+            <td style="padding:10px 14px;color:#fff;font-weight:600;">#${f.ranking || f.sortOrder || 999}</td>
+            <td style="padding:10px 14px;">${statusBadge}</td>
+            <td style="padding:10px 14px;text-align:right;">
+              <button type="button" class="btn edit-firm-table-btn" data-edit-firm-id="${f.id}" style="padding:5px 12px;font-size:12px;cursor:pointer;">Edit Firm</button>
+            </td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    document.getElementById("adminCategoryPills")?.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-category-filter]");
+      if (!btn) return;
+      selectedAdminCategory = btn.dataset.categoryFilter;
+      renderCategoryManagerTable();
+    });
+
+    document.getElementById("adminFirmTableSearch")?.addEventListener("input", () => {
+      renderCategoryManagerTable();
+    });
+
+    document.getElementById("adminFirmsTableBody")?.addEventListener("click", (e) => {
+      const btn = e.target.closest(".edit-firm-table-btn");
+      if (!btn) return;
+      const targetId = btn.dataset.editFirmId;
+      if (!targetId || !picker) return;
+      picker.value = targetId;
+      picker.dispatchEvent(new Event("change"));
+      document.getElementById("detailForm")?.scrollIntoView({ behavior: "smooth" });
+    });
 
     picker.addEventListener("change", async () => {
       saveDraftNow();
@@ -1734,7 +2047,10 @@
         });
         const finalMetaLine = String(data.detailMeta || "").trim() || derivedMetaLine;
         const bestRegions = readRegionToggles();
-        const bestCategories = readCategoryToggles();
+        const { bestCategories, categoryRankings } = readCategoryToggles();
+        if (bestCategories.indian) {
+          bestRegions.india = true;
+        }
         const anyBestRegion = Object.values(bestRegions).some(Boolean);
         const anyBestCategory = Object.values(bestCategories).some(Boolean);
         const showListed = Boolean(form.elements.namedItem("showListed")?.checked);
@@ -1773,6 +2089,7 @@
           showOffers: Boolean(form.elements.namedItem("showOffers")?.checked),
           bestRegions,
           bestCategories,
+          categoryRankings,
           listingType: (showBestGlobal || anyBestRegion || anyBestCategory) ? "best" : "listed",
 
           publishState: String(data.publishState || "published").toLowerCase(),

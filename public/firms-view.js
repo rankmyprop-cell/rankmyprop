@@ -5,26 +5,34 @@ import { escapeHtml, formatInline } from "./text-format.js";
 
 const page = (window.location.pathname.split("/").pop() || "").toLowerCase();
 const BEST_PAGE_FILE_HINTS = [
+  "best-cfd-prop-firms",
+  "best-futures-prop-firms",
+  "best-crypto-prop-firms",
+  "best-indian-prop-firms",
+  "best-prediction-prop-firms",
+  "best-perps-prop-firms",
   "best-prop-firms-2026",
   "fast-payout-prop-firms",
   "best-instant-funding-firms",
   "best-hft-prop-firms",
-  "best-futures-prop-firms",
   "cheapest-prop-firms",
   "most-trusted-prop-firms",
   "beginner-friendly-firms",
-  "highest-rated-firms",
-  "best-indian-prop-firms"
+  "highest-rated-firms"
 ];
 const listingType = (page.includes("bestprop") || page.includes("best-prop") || /^best/.test(page) || BEST_PAGE_FILE_HINTS.some((x) => page.includes(x))) ? "best" : "listed";
 
 const BEST_PAGE_HINTS = [
+  { hint: "best-cfd-prop-firms", key: "cfd", title: "Best CFD Prop Firms" },
+  { hint: "best-futures-prop-firms", key: "futures", title: "Best Futures Prop Firms" },
+  { hint: "best-crypto-prop-firms", key: "crypto", title: "Best Crypto Prop Firms" },
+  { hint: "best-indian-prop-firms", key: "indian", title: "Best Indian Prop Firms" },
+  { hint: "best-prediction-prop-firms", key: "prediction", title: "Best Prediction Prop Firms" },
+  { hint: "best-perps-prop-firms", key: "perps", title: "Best Perps Prop Firms" },
   { hint: "best-prop-firms-2026", key: "", title: "Best Prop Firms 2026" },
-  { hint: "best-indian-prop-firms", key: "", title: "Best Indian Prop Firms" },
   { hint: "fast-payout-prop-firms", key: "fast_payout", title: "Fast Payout Prop Firms" },
   { hint: "best-instant-funding-firms", key: "instant_funding", title: "Best Instant Funding Firms" },
   { hint: "best-hft-prop-firms", key: "hft", title: "Best HFT Prop Firms" },
-  { hint: "best-futures-prop-firms", key: "futures", title: "Best Futures Prop Firms" },
   { hint: "cheapest-prop-firms", key: "cheapest", title: "Cheapest Prop Firms" },
   { hint: "most-trusted-prop-firms", key: "trusted", title: "Most Trusted Prop Firms" },
   { hint: "beginner-friendly-firms", key: "beginner", title: "Beginner Friendly Firms" },
@@ -92,6 +100,11 @@ const state = {
 };
 const UX_DELAY_MS = 0;
 function rankVal(f = {}) {
+  const activeCat = bestCategory.key;
+  if (activeCat && f.categoryRankings && typeof f.categoryRankings === "object") {
+    const cr = Number(f.categoryRankings[activeCat]);
+    if (Number.isFinite(cr) && cr > 0) return cr;
+  }
   const r = Number(f.ranking);
   if (Number.isFinite(r) && r > 0) return r;
   const s = Number(f.sortOrder);
@@ -135,30 +148,23 @@ function ensureCardLayoutFixStyle() {
   const style = document.createElement("style");
   style.id = "rmpCardLayoutFix";
   style.textContent = [
-    ".container{max-width:1580px !important;padding-left:20px !important;padding-right:20px !important}",
+    ".container{max-width:1280px !important;padding-left:24px !important;padding-right:24px !important}",
     "#grid.grid{display:grid !important;grid-template-columns:repeat(3,minmax(0,1fr)) !important;gap:24px !important;align-items:stretch !important;padding:2px 0 !important}",
     "#grid.grid>*{min-width:0 !important}",
-    ".pf-card{width:100% !important;display:flex !important;flex-direction:column !important;height:100% !important;min-width:0 !important;margin:0 !important;box-sizing:border-box !important;overflow:hidden !important;background:#13131f !important;border:1px solid #2a2a3d !important;border-radius:16px !important;padding:22px !important;box-shadow:0 18px 36px rgba(0,0,0,.45) !important}",
+    ".pf-card{width:100% !important;display:flex !important;flex-direction:column !important;height:100% !important;min-width:0 !important;margin:0 !important;box-sizing:border-box !important;overflow:hidden !important}",
     ".pf-card *{min-width:0 !important}",
-    ".pf-logo{width:54px !important;height:54px !important;border-radius:12px !important;background:#1a1a2e !important;display:flex !important;align-items:center !important;justify-content:center !important;overflow:hidden !important;flex-shrink:0 !important;border:1px solid rgba(255,255,255,.08) !important}",
-    ".pf-logo img{width:100% !important;height:100% !important;object-fit:cover !important;display:block !important}",
     ".pf-tagline{min-height:40px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}",
     ".pf-details-grid{flex:1 1 auto}",
     ".pf-btn-row{margin-top:auto !important}",
     ".pf-stats-row{display:grid !important;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;align-items:start}",
-    ".pf-stat-item{min-width:0;gap:6px;display:flex !important;align-items:center !important}",
+    ".pf-stat-item{min-width:0;gap:6px}",
     ".pf-stat-item>div:last-child{min-width:0}",
     ".pf-stat-sep{display:none !important}",
-    ".pf-stat-icon{width:32px !important;height:32px !important;background:#1a1a2e !important;border-radius:8px !important;display:flex !important;align-items:center !important;justify-content:center !important;color:#7c3aed !important;flex-shrink:0 !important}",
-    ".pf-stat-icon svg{width:15px !important;height:15px !important;max-width:15px !important;max-height:15px !important;display:block !important}",
-    ".pf-tick{width:18px !important;height:18px !important;border-radius:50% !important;background:#6c47ff !important;display:flex !important;align-items:center !important;justify-content:center !important;box-shadow:0 0 12px rgba(108,71,255,.45) !important;flex-shrink:0 !important}",
-    ".pf-tick svg{width:10px !important;height:10px !important;max-width:10px !important;max-height:10px !important;display:block !important}",
     ".pf-stat-val{max-width:none !important;font-size:13px}",
     ".pf-stat-label{letter-spacing:.35px;line-height:1.15}",
     ".pf-tagline{overflow-wrap:anywhere}",
     ".pf-detail-row{display:grid!important;grid-template-columns:22px minmax(0,1fr)!important;grid-template-rows:auto auto;column-gap:7px!important;row-gap:2px!important;align-items:center!important}",
-    ".pf-detail-icon{grid-column:1;grid-row:1/3;width:22px !important;height:22px !important;background:#1a1a2e !important;border-radius:6px !important;display:flex !important;align-items:center !important;justify-content:center !important;color:#6c47ff !important;flex-shrink:0 !important}",
-    ".pf-detail-icon svg{width:11px !important;height:11px !important;max-width:11px !important;max-height:11px !important;display:block !important}",
+    ".pf-detail-icon{grid-column:1;grid-row:1/3}",
     ".pf-detail-label{grid-column:2;grid-row:1;min-width:0;white-space:normal!important;line-height:1.18;overflow-wrap:normal!important;word-break:normal!important}",
     ".pf-detail-val{grid-column:2;grid-row:2;min-width:0;max-width:none!important;margin-left:0!important;white-space:nowrap!important;overflow:hidden;text-overflow:ellipsis;line-height:1.25;overflow-wrap:normal!important;word-break:normal!important}",
     ".pf-firm-link,.pf-reviews-link{text-decoration:none}",
@@ -179,11 +185,13 @@ function slugify(text = "") {
 }
 
 function safeLogo(firm) {
-  const logo = String(firm?.logo || "").trim();
-  if (logo) {
+  const raw = String(firm?.logo || "").trim();
+  if (raw) {
+    const logo = raw.startsWith("assets/") ? `/${raw}` : raw;
     const isBase64 = /^data:image\/(?:png|jpeg|jpg|webp|svg\+xml);base64,[A-Za-z0-9+/=]{100,}$/.test(logo) && !logo.endsWith("jaWFlaI");
-    const isUrl = /^https?:\/\//i.test(logo) || (logo.startsWith("/assets/") && !logo.includes(" "));
-    if (isBase64 || isUrl) return logo;
+    const isUrl = /^https?:\/\//i.test(logo) || logo.startsWith("/assets/");
+    if (isBase64) return logo;
+    if (isUrl) return logo.includes(" ") ? encodeURI(logo) : logo;
   }
   return "";
 }
@@ -473,23 +481,24 @@ async function loadLiveReviewStats() {
 
   const approvedStatuses = ["Approved", "approved", "Published", "published", "Publish", "publish"];
   const seen = new Set();
-  for (const status of approvedStatuses) {
-    try {
-      const snap = await getDocs(query(collection(db, "reviews"), where("status", "==", status), limit(1200)));
-      snap.forEach((d) => {
-        if (seen.has(d.id)) return;
-        seen.add(d.id);
-        const row = d.data() || {};
-        const slug = slugify(row.firmSlug || row.firmName || row.firm || "");
-        if (!slug || map.has(slug)) return;
-        const cur = map.get(slug) || { count: 0, sum: 0 };
-        const rating = Number(row.rating ?? row.overallRating ?? 0);
-        cur.count += 1;
-        cur.sum += Number.isFinite(rating) ? rating : 0;
-        map.set(slug, cur);
-      });
-    } catch (_) {}
-  }
+  const reviewSnaps = await Promise.allSettled(
+    approvedStatuses.map((status) => getDocs(query(collection(db, "reviews"), where("status", "==", status), limit(1200))))
+  );
+  reviewSnaps.forEach((res) => {
+    if (res.status !== "fulfilled") return;
+    res.value.forEach((d) => {
+      if (seen.has(d.id)) return;
+      seen.add(d.id);
+      const row = d.data() || {};
+      const slug = slugify(row.firmSlug || row.firmName || row.firm || "");
+      if (!slug || map.has(slug)) return;
+      const cur = map.get(slug) || { count: 0, sum: 0 };
+      const rating = Number(row.rating ?? row.overallRating ?? 0);
+      cur.count += 1;
+      cur.sum += Number.isFinite(rating) ? rating : 0;
+      map.set(slug, cur);
+    });
+  });
 
   return map;
 }
@@ -589,7 +598,8 @@ function render() {
   const rows = state.filtered.slice(start, start + state.perPage);
 
   if (!rows.length) {
-    grid.innerHTML = '<div class="pf-empty">No firms found. Admin panel se firms add karo.</div>';
+    const catTitle = bestCategory.title ? `in ${bestCategory.title}` : "matching your filters";
+    grid.innerHTML = `<div class="pf-empty">No prop firms found ${escapeHtml(catTitle)}. Manage category assignments from the admin panel.</div>`;
     renderPagination();
     return;
   }
@@ -614,35 +624,14 @@ function render() {
     const details = cardDetails(f);
     const logoSrc = safeLogo(f);
     const initials = String(f.name || (isTradeBridges ? "Trade Bridges" : "TB")).split(/\s+/).map((w) => w[0]).join("").slice(0, 3).toUpperCase() || "TB";
-    const logoBlock = logoSrc ? `<img fetchpriority="low" src="${logoSrc}" alt="${escapeHtml(f.name)} logo" loading="lazy" decoding="async" width="120" height="120">` : `<span>${escapeHtml(initials)}</span>`;
-    const ratingBlock = reviewTotal > 0
-      ? `<div class="pf-rating-row"><span class="pf-rating-num">${hasVerifiedRating ? rating.toFixed(1) : "—"}</span><div class="pf-stars" aria-label="${hasVerifiedRating ? `${rating.toFixed(1)} out of 5` : "Not enough verified reviews yet"}">${hasVerifiedRating ? starsHtml(rating) : ""}</div><a class="pf-reviews pf-reviews-link" href="${cardReviewHref}">${escapeHtml(reviews)} reviews</a></div>`
-      : "";
-    const badgesBlock = `<div class="pf-badges">${f.verified ? '<span class="pf-badge pf-badge-verified">VERIFIED</span>' : ''}<span class="pf-badge pf-badge-market">${escapeHtml(badgeMarket)}</span></div>`;
-    const statItems = [];
-    if (stats.allocation && !/^(?:Not specified|Not mentioned|-)$/i.test(stats.allocation)) {
-      statItems.push(`<div class="pf-stat-item"><div class="pf-stat-icon">${ICONS.dollar}</div><div><div class="pf-stat-val">${escapeHtml(stats.allocation)}</div><div class="pf-stat-label">Allocation</div></div></div>`);
-    }
-    if (stats.leverage && !/^(?:Not specified|Not mentioned|-)$/i.test(stats.leverage)) {
-      statItems.push(`<div class="pf-stat-item"><div class="pf-stat-icon">${ICONS.scale}</div><div><div class="pf-stat-val">${escapeHtml(stats.leverage)}</div><div class="pf-stat-label">Leverage</div></div></div>`);
-    }
-    if (stats.profitSplit && !/^(?:Not specified|Not mentioned|-)$/i.test(stats.profitSplit)) {
-      statItems.push(`<div class="pf-stat-item"><div class="pf-stat-icon">${ICONS.clock}</div><div><div class="pf-stat-val">${escapeHtml(stats.profitSplit)}</div><div class="pf-stat-label">Profit Split</div></div></div>`);
-    }
-    const statsBlock = statItems.length
-      ? `<div class="pf-divider"></div><div class="pf-stats-row" style="${statItems.length < 3 ? 'display:flex;justify-content:center;gap:20px;' : ''}">${statItems.join('<div class="pf-stat-sep"></div>')}</div>`
-      : "";
-
-    const detailRows = details.filter((d) => d.val && !/^(?:Not specified|Not mentioned|-)$/i.test(d.val)).map((d) => `
+    const logoBlock = logoSrc ? `<img fetchpriority="low" src="${logoSrc}" alt="${escapeHtml(f.name)} logo" loading="lazy" decoding="async" width="120" height="120" onerror="this.outerHTML='<span>${escapeHtml(initials)}</span>'">` : `<span>${escapeHtml(initials)}</span>`;
+    const detailRows = details.map((d) => `
       <div class="pf-detail-row">
         <div class="pf-detail-icon">${ICONS[d.icon] || ICONS.shield}</div>
         <span class="pf-detail-label">${escapeHtml(d.label)}</span>
         <span class="pf-detail-val" title="${escapeHtml(d.val || "-")}">${escapeHtml(d.val || "-")}</span>
       </div>
     `).join("");
-    const detailsBlock = detailRows.length
-      ? `<div class="pf-divider"></div><div class="pf-details-grid">${detailRows}</div>`
-      : "";
 
     return `
       <div class="pf-card">
@@ -656,14 +645,38 @@ function render() {
                 <a class="pf-firm-name pf-firm-link" href="${cardDetailHref}">${escapeHtml(f.name)}</a>
                 ${hasAssurance ? `<div class="pf-tick-wrap"><div class="pf-tick">${ICONS.check}</div><div class="pf-tooltip"><span class="dot"></span>Payout Assurance Enabled</div></div>` : ""}
               </div>
-              ${ratingBlock}
+              <div class="pf-rating-row">
+                <span class="pf-rating-num">${hasVerifiedRating ? rating.toFixed(1) : "—"}</span>
+                <div class="pf-stars" aria-label="${hasVerifiedRating ? `${rating.toFixed(1)} out of 5` : "Not enough verified reviews yet"}">${hasVerifiedRating ? starsHtml(rating) : ""}</div>
+                <a class="pf-reviews pf-reviews-link" href="${cardReviewHref}">${escapeHtml(reviews)} reviews</a>
+              </div>
             </div>
           </div>
         </div>
-        ${badgesBlock}
+        <div class="pf-badges">
+          <span class="pf-badge pf-badge-verified">VERIFIED</span>
+          <span class="pf-badge pf-badge-market">${escapeHtml(badgeMarket)}</span>
+        </div>
         <div class="pf-tagline" title="${escapeHtml(fullBio)}">${bio}</div>
-        ${statsBlock}
-        ${detailsBlock}
+        <div class="pf-divider"></div>
+        <div class="pf-stats-row">
+          <div class="pf-stat-item">
+            <div class="pf-stat-icon">${ICONS.dollar}</div>
+            <div><div class="pf-stat-val">${escapeHtml(stats.allocation)}</div><div class="pf-stat-label">Allocation</div></div>
+          </div>
+          <div class="pf-stat-sep"></div>
+          <div class="pf-stat-item">
+            <div class="pf-stat-icon">${ICONS.scale}</div>
+            <div><div class="pf-stat-val">${escapeHtml(stats.leverage)}</div><div class="pf-stat-label">Leverage</div></div>
+          </div>
+          <div class="pf-stat-sep"></div>
+          <div class="pf-stat-item">
+            <div class="pf-stat-icon">${ICONS.clock}</div>
+            <div><div class="pf-stat-val">${escapeHtml(stats.profitSplit)}</div><div class="pf-stat-label">Profit Split</div></div>
+          </div>
+        </div>
+        <div class="pf-divider"></div>
+        <div class="pf-details-grid">${detailRows}</div>
         <div class="pf-divider"></div>
         <div class="pf-btn-row">
           <a class="pf-btn pf-btn-outline" href="${escapeHtml(buyHref || "#")}" target="_blank" rel="noopener noreferrer sponsored">View Firm</a>
@@ -673,6 +686,49 @@ function render() {
   }).join("");
 
   renderPagination();
+}
+
+let selectedMarket = (() => {
+  try {
+    const u = new URL(window.location.href);
+    return (u.searchParams.get("market") || u.searchParams.get("tag") || "all").toLowerCase().trim();
+  } catch (_) {
+    return "all";
+  }
+})();
+
+function bindMarketToggles() {
+  const container = document.getElementById("marketToggles");
+  if (!container) return;
+
+  const updateActive = () => {
+    container.querySelectorAll(".rmp-market-pill").forEach((btn) => {
+      const m = (btn.dataset.market || "all").toLowerCase();
+      const active =
+        m === selectedMarket ||
+        (selectedMarket === "cfds" && m === "cfd") ||
+        (selectedMarket === "perp" && m === "perps") ||
+        (selectedMarket === "prediction" && m === "predictions") ||
+        (selectedMarket === "india" && m === "indian");
+      btn.classList.toggle("is-active", Boolean(active));
+    });
+  };
+
+  updateActive();
+
+  container.addEventListener("click", (e) => {
+    const btn = e.target.closest(".rmp-market-pill");
+    if (!btn) return;
+    selectedMarket = (btn.dataset.market || "all").toLowerCase();
+    updateActive();
+    try {
+      const u = new URL(window.location.href);
+      if (selectedMarket === "all") u.searchParams.delete("market");
+      else u.searchParams.set("market", selectedMarket);
+      window.history.replaceState({}, "", u.toString());
+    } catch (_) {}
+    applyFilters();
+  });
 }
 
 function applyFilters() {
@@ -685,7 +741,29 @@ function applyFilters() {
     const bySearch = f.name.toLowerCase().includes(search);
     const byCountry = country === "all" || f.country === country;
     const byTag = tag === "all" || (f.tags || []).includes(tag);
-    return bySearch && byCountry && byTag;
+
+    let byMarket = true;
+    if (selectedMarket && selectedMarket !== "all") {
+      const allMarkets = (Array.isArray(f.markets) ? f.markets : []).map((m) => String(m).toLowerCase());
+      const allTags = (Array.isArray(f.tags) ? f.tags : []).map((t) => String(t).toLowerCase());
+      const hay = [...allMarkets, ...allTags, String(f.country || "").toLowerCase(), String(f.name || "").toLowerCase()].join(" ");
+
+      if (selectedMarket === "futures") {
+        byMarket = hay.includes("future");
+      } else if (selectedMarket === "cfd" || selectedMarket === "cfds") {
+        byMarket = hay.includes("cfd") || hay.includes("forex") || hay.includes("fx");
+      } else if (selectedMarket === "crypto") {
+        byMarket = hay.includes("crypto");
+      } else if (selectedMarket === "perps" || selectedMarket === "perp") {
+        byMarket = hay.includes("perp") || hay.includes("perpetual");
+      } else if (selectedMarket === "predictions" || selectedMarket === "prediction") {
+        byMarket = hay.includes("prediction") || hay.includes("forecast") || hay.includes("event");
+      } else if (selectedMarket === "indian" || selectedMarket === "india") {
+        byMarket = f.country === "India" || Boolean(f.bestRegions?.india) || hay.includes("india") || f.slug === "trade-bridges";
+      }
+    }
+
+    return bySearch && byCountry && byTag && byMarket;
   });
 
   if (sort === "followers") {
@@ -765,30 +843,36 @@ async function loadFilterOptions() {
 
 async function init() {
   bindFilters();
+  bindMarketToggles();
   ensureCardLayoutFixStyle();
   applyBestHeading();
   // The server cards remain available to crawlers, while visitors get the
   // animated card-shaped loading state until the live CMS data is ready.
   render();
-  const [, , firms, liveReviewStats] = await Promise.all([
-    wait(UX_DELAY_MS),
-    loadFilterOptions(),
-    getFirmsByType(listingType, { bestRegion, bestCategory: bestCategory.key }),
-    loadLiveReviewStats()
-  ]);
-  state.firms = firms.map((firm) => {
-    const key = slugify(firm.slug || firm.name || firm.id || "");
-    const live = liveReviewStats.get(key);
-    if (!live) return firm;
-    return {
-      ...firm,
-      reviewCount: live.count,
-      score: live.count ? Math.max(0, Math.min(5, live.sum / live.count)) : firm.score
-    };
-  });
+
+  const filterPromise = loadFilterOptions();
+  const liveStatsPromise = loadLiveReviewStats();
+
+  const firms = await getFirmsByType(listingType, { bestRegion, bestCategory: bestCategory.key });
+  state.firms = firms;
   state.filtered = [...state.firms];
   state.loading = false;
   applyFilters();
+
+  Promise.all([filterPromise, liveStatsPromise]).then(([, liveReviewStats]) => {
+    if (!liveReviewStats || liveReviewStats.size === 0) return;
+    let changed = false;
+    state.firms = state.firms.map((firm) => {
+      const key = slugify(firm.slug || firm.name || firm.id || "");
+      const live = liveReviewStats.get(key);
+      if (!live) return firm;
+      const nextScore = live.count ? Math.max(0, Math.min(5, live.sum / live.count)) : firm.score;
+      if (firm.reviewCount === live.count && firm.score === nextScore) return firm;
+      changed = true;
+      return { ...firm, reviewCount: live.count, score: nextScore };
+    });
+    if (changed) applyFilters();
+  }).catch(() => {});
 }
 
 document.addEventListener("DOMContentLoaded", init);
